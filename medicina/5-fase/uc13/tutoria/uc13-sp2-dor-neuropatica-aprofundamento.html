@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · SP2 — Dor Neuropática · Aprofundamento</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f; --purple:#c6b3ff;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 90px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:8px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:23px;margin:2px 0}
+  .sub{color:var(--mut);font-size:14px}
+
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;padding:10px 6px;margin:6px 0 8px;
+    background:rgba(13,20,29,.9);backdrop-filter:blur(8px);border-radius:12px}
+  .tab{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);
+    padding:8px 13px;border-radius:999px;font-size:13px;font-weight:700}
+  .tab.active{color:#04121a;background:linear-gradient(135deg,var(--tealo),var(--blue));border-color:transparent}
+  .view{display:none}
+  .view.active{display:block}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:16px;margin:2px 0 8px;color:#dfe9f4}
+  .panel h3{font-size:14px;margin:14px 0 4px;color:var(--tealo);letter-spacing:.02em}
+  .panel p,.panel li{color:#cdd9e6;font-size:13.9px}
+  .panel p{margin:6px 0}
+  .panel ul{margin:4px 0;padding-left:18px}
+  .panel li{margin:4px 0}
+  .k{color:#ffdf9e;font-weight:600}
+  .kb{color:#bcd6ff;font-weight:600}
+  .kg{color:#9be9c9;font-weight:600}
+  table.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  table.tbl th{background:#12222e;color:#bfe6dc}
+  .callout{border-left:3px solid var(--amber);background:#241d10;padding:9px 12px;border-radius:8px;margin:8px 0;font-size:13.4px;color:#ffe4b8}
+
+  /* questions */
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.i{background:#241b3a;color:#c6b3ff;border:1px solid #47376f}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .stem{font-size:14.7px;color:#eef3f9;margin:4px 0 10px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:14px;color:var(--ink);transition:.15s}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .lk{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}.opt.correct .lk{color:var(--green)}
+  .opt.wrong{border-color:var(--red);background:#331b1f}.opt.wrong .lk{color:var(--red)}
+  .opt.disabled{cursor:default}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+  .fb .trap b{color:#ffbf73}
+  .scorebar{position:sticky;top:56px;z-index:20;background:rgba(15,23,32,.86);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:9px 14px;margin:6px 0;display:flex;align-items:center;gap:12px}
+  .scorebar .val{font-weight:800}.scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:7px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+
+  /* mind map */
+  .mm-center{text-align:center;margin:6px 0 14px}
+  .mm-center .node{display:inline-block;background:linear-gradient(135deg,var(--teal),var(--blue));color:#04121a;font-weight:800;padding:10px 18px;border-radius:12px;font-size:16px}
+  .mm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .branch{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--card)}
+  .branch h4{margin:0 0 6px;font-size:13.6px;display:flex;align-items:center;gap:8px}
+  .branch h4 .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+  .branch ul{margin:4px 0 0;padding-left:16px}
+  .branch li{font-size:12.9px;color:#cdd9e6;margin:3px 0}
+  .b1 .dot{background:#12d3b0}.b2 .dot{background:#4c8dff}.b3 .dot{background:#ffb454}
+  .b4 .dot{background:#ff6b6b}.b5 .dot{background:#c6b3ff}.b6 .dot{background:#38d39f}
+  .b7 .dot{background:#ff9ecb}.b8 .dot{background:#7fd4e0}
+
+  /* flashcards */
+  .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .fc{perspective:1000px;height:170px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:13px;border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;justify-content:center}
+  .fc-front{background:linear-gradient(135deg,#15303f,#152030)}
+  .fc-back{background:linear-gradient(135deg,#123227,#152a30);transform:rotateY(180deg)}
+  .fc-front .qq{font-size:14px;font-weight:700;color:#eaf3fb}
+  .fc-front .hint{margin-top:8px;font-size:11px;color:var(--mut)}
+  .fc-back .aa{font-size:12.9px;color:#d7ecdf}
+  .fc-tag{font-size:10.5px;color:var(--tealo);font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+
+  /* feynman */
+  details.fy{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:2px 16px;margin:10px 0}
+  details.fy summary{cursor:pointer;font-weight:700;padding:13px 0;color:#eaf3fb;font-size:14.2px;list-style:none}
+  details.fy summary::-webkit-details-marker{display:none}
+  details.fy summary::before{content:"▸ ";color:var(--tealo)}
+  details.fy[open] summary::before{content:"▾ "}
+  details.fy .body{padding:2px 0 14px}
+  details.fy .body .lead{color:#cdd9e6;font-size:13.5px;margin:0 0 8px}
+  details.fy ul{margin:4px 0;padding-left:18px}
+  details.fy li{font-size:13.2px;color:#c6d4e2;margin:4px 0}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  @media(max-width:560px){.mm-grid{grid-template-columns:1fr}h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · UC XIII · 5º período</span>
+    <h1>SP2 — Dor Neuropática · <span style="color:var(--tealo)">Aprofundamento</span></h1>
+    <div class="sub">Você gabaritou o Modo Inicial — aqui a régua sobe. Resumo denso, 15 questões nível prova-final, mapa mental, 15 flashcards e roteiros Feynman.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-v="resumo">📖 Resumo</div>
+    <div class="tab" data-v="quiz">🧠 15 Questões</div>
+    <div class="tab" data-v="mapa">🗺️ Mapa mental</div>
+    <div class="tab" data-v="flash">🃏 Flashcards</div>
+    <div class="tab" data-v="fey">🎙️ Feynman</div>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section class="view active" id="resumo">
+    <div class="panel">
+      <h2>1 · Dor neuropática — o conceito</h2>
+      <p>Dor causada por <span class="k">lesão ou doença do sistema nervoso somatossensorial</span> (IASP). É crônica, <b>independe de estímulo nociceptivo ativo</b> e persiste mesmo tratando a causa de base. Distingue-se da <span class="kb">nociceptiva</span> (dano tecidual real, nociceptores) e da <span class="kb">nociplástica</span> (processamento alterado <i>sem</i> lesão neural/nociceptiva demonstrável — ex.: fibromialgia).</p>
+      <h3>Vocabulário que a prova adora</h3>
+      <table class="tbl">
+        <tr><th>Termo</th><th>Definição</th></tr>
+        <tr><td class="kg">Alodinia</td><td>Dor por estímulo que normalmente <b>não</b> dói (toque do lençol).</td></tr>
+        <tr><td class="kg">Hiperalgesia</td><td>Resposta <b>aumentada</b> a estímulo já doloroso.</td></tr>
+        <tr><td class="kg">Parestesia</td><td>Sensação anormal <b>não</b> dolorosa (formigamento, dormência).</td></tr>
+        <tr><td class="kg">Disestesia</td><td>Sensação anormal <b>desagradável</b> espontânea (queimação, choque).</td></tr>
+        <tr><td class="kg">Hiperpatia</td><td>Resposta explosiva/tardia a estímulos repetidos, com limiar aumentado.</td></tr>
+        <tr><td class="kg">Hipoestesia / anestesia</td><td>Redução / ausência de sensibilidade (sinais "negativos").</td></tr>
+      </table>
+      <div class="callout">Sinais <b>positivos</b> (dor, alodinia, disestesia) e <b>negativos</b> (hipoestesia, arreflexia) coexistem na dor neuropática.</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Mecanismos de sensibilização</h2>
+      <h3>Central (corno dorsal da medula)</h3>
+      <ul>
+        <li><span class="k">Wind-up / neurônios WDR</span>: estímulo repetido de fibras C → ↑ glutamato, substância P, CGRP → remoção do Mg²⁺ do <b>receptor NMDA</b> → ↑ Ca²⁺ → potenciação de longo prazo (LTP). AMPA dá a resposta rápida inicial.</li>
+        <li><span class="k">Falha de inibição</span>: perda dos interneurônios <b>GABA/glicina</b> → estímulos inócuos passam a doer (alodinia).</li>
+        <li><span class="k">Ativação glial</span>: astrócitos/micróglia liberam IL-1β e TNF-α → amplificam a transmissão.</li>
+        <li><span class="k">Reorganização cortical</span>: remapeamento somatossensorial → dor em áreas não lesadas (base da <b>dor fantasma</b>).</li>
+      </ul>
+      <h3>Periférica (nervo lesado / nociceptor)</h3>
+      <ul>
+        <li>Hiperexcitabilidade de membrana: ↑ canais <b>Na⁺/Ca²⁺</b> → disparos ectópicos → dor espontânea; ↓ K⁺ → descargas repetidas.</li>
+        <li><b>TRPV1</b> ativado por mediadores inflamatórios → hiperalgesia térmica (ao calor).</li>
+        <li><b>Sprouting</b> (brotamento) de fibras Aβ formando sinapses aberrantes com nociceptivos → Aβ passam a transmitir dor → <b>alodinia tátil</b>.</li>
+      </ul>
+      <table class="tbl">
+        <tr><th>Mecanismo alterado</th><th>Estratégia</th><th>Fármaco/recurso</th></tr>
+        <tr><td>Wind-up / NMDA</td><td>Antagonista NMDA</td><td>Cetamina, memantina</td></tr>
+        <tr><td>Hiperexcitabilidade</td><td>Gabapentinoide</td><td>Gabapentina, pregabalina</td></tr>
+        <tr><td>Falha de inibição</td><td>Reforço da via descendente</td><td>Amitriptilina, duloxetina</td></tr>
+        <tr><td>Reorganização cortical</td><td>Neuromodulação não farmacológica</td><td>TMS, terapia do espelho, fisioterapia</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Neuropatia diabética — fisiopatologia</h2>
+      <p>Complicação crônica <b>mais prevalente</b> do DM (~50% ao longo da vida), subdiagnosticada. Motor central: <span class="k">hiperglicemia crônica</span>, por quatro vias que somam:</p>
+      <ul>
+        <li><span class="kb">Poliol</span>: glicose →(aldose redutase)→ <b>sorbitol</b> → ↓ mio-inositol → ↓ bomba Na/K → acúmulo de Na⁺ → desmielinização e degeneração axonal.</li>
+        <li><span class="kb">Vascular / AGEs</span>: produtos de glicação avançada espessam a membrana basal → ↓ fluxo capilar → isquemia do nervo.</li>
+        <li><span class="kb">Inflamatória</span>: citocinas pró-inflamatórias → hipóxia/isquemia, regeneração deficiente.</li>
+        <li><span class="kb">Neurodegenerativa</span>: ↓ fatores neurotróficos (IGF-1, NGF) → degeneração axonal e apoptose.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Apresentações clínicas</h2>
+      <p><span class="k">Difusas</span> — <b>Polineuropatia simétrica distal (PSD)</b>: a mais comum, sensitiva, distal, em "bota e luva", pior à noite; fibras finas primeiro (queima/dor, ↓ térmica) e depois grossas (↓ vibratória/reflexos). <b>Autonômica</b>: taquicardia de repouso, hipotensão ortostática, ↓ variabilidade da FC, gastroparesia, constipação, bexiga neurogênica, <b>anidrose plantar</b> (pele seca) e <b>hipoglicemia despercebida</b>.</p>
+      <p><span class="k">Focais</span> — <b>Mononeuropatias</b> (ex.: III par craniano diabético, tipicamente <b>poupando a pupila</b>; túnel do carpo) e <b>radiculoplexopatias</b> (amiotrofia diabética — dor + fraqueza proximal, geralmente autolimitada em 6–12 meses).</p>
+      <div class="callout">Pupila <b>poupada</b> = III par isquêmico/diabético. Pupila <b>acometida</b> (midríase) = compressivo (aneurisma) → emergência.</div>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Avaliação e rastreio</h2>
+      <p>Diagnóstico <b>clínico</b> (≥ 2 testes/sinais alterados). Rastreio: <span class="k">DM2 no diagnóstico</span>, <span class="k">DM1 após 5 anos</span>, depois anual.</p>
+      <table class="tbl">
+        <tr><th>Teste</th><th>Fibra</th><th>O que avalia</th></tr>
+        <tr><td>Monofilamento 10 g (4 pontos)</td><td>Grossa (Aβ)</td><td>Sensibilidade protetora — ausência = risco de úlcera</td></tr>
+        <tr><td>Diapasão 128 Hz (hálux)</td><td>Grossa</td><td>Vibratória</td></tr>
+        <tr><td>Pin-prick / térmica</td><td>Fina (Aδ, C)</td><td>Dor / temperatura</td></tr>
+        <tr><td>Reflexo aquileu</td><td>Grossa</td><td>Comprometimento distal</td></tr>
+        <tr><td>ENMG</td><td>—</td><td><b>Confirmatório</b>, não rastreio de rotina</td></tr>
+      </table>
+      <p>Escores: ESN (sintomas), ECN/NDS (comprometimento), MNSI; classificação de risco <b>IWGDF</b>.</p>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Tratamento</h2>
+      <p><span class="k">Base:</span> controle glicêmico + fatores CV, ácido alfa-lipóico, atividade física, repor B12/D se déficit. <span class="k">Sintomático (dor):</span></p>
+      <ul>
+        <li><b>1ª linha:</b> gabapentinoides (pregabalina/gabapentina), IRSN (<b>duloxetina</b>/venlafaxina), ADT (amitriptilina/nortriptilina).</li>
+        <li><b>2ª linha:</b> tópicos — capsaicina 8%, lidocaína (dor periférica localizada).</li>
+        <li><b>3ª linha:</b> opioides fortes (uso criterioso).</li>
+      </ul>
+      <div class="callout"><b>Fora</b> da 1ª linha: AINEs (não tratam dor neuropática), ISRS (menos eficazes que ADT), corticoide, benzodiazepínico. Carbamazepina brilha na <b>neuralgia do trigêmeo</b>. Duloxetina é ótima quando há <b>depressão</b> associada.</div>
+    </div>
+
+    <div class="panel">
+      <h2>7 · Complicações graves e membro fantasma</h2>
+      <p><span class="k">Pé diabético</span>: perda da sensibilidade protetora → <b>trauma repetitivo indolor</b> → úlcera (em ponto de pressão, pulsos presentes = neuropática; acral e dolorosa com pulsos ausentes = isquêmica). Anidrose → pele seca/fissura. <b>Artropatia de Charcot</b>: pé quente/edemaciado, dor leve, RX inicial pode ser normal → conduta = <b>descarga e imobilização</b> (offloading). Evolução: osteomielite, amputação (~85% das amputações não traumáticas).</p>
+      <p><span class="k">Dor do membro fantasma</span> (dor neuropática): mecanismos <b>periférico</b> (neuroma → fibras C), <b>central medular</b> (disparos ectópicos + ↓ inibição) e <b>cortical</b> (reorganização). Dor pré-amputação é fator de risco. <b>Terapia do espelho</b> reduz a dor ao reverter a reorganização cortical.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="view" id="quiz">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/15</span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Reiniciar</button></div>
+    <div id="quizbox"></div>
+  </section>
+
+  <!-- ============ MAPA MENTAL ============ -->
+  <section class="view" id="mapa">
+    <div class="panel">
+      <div class="mm-center"><span class="node">DOR NEUROPÁTICA &amp; NEUROPATIA DIABÉTICA</span></div>
+      <div class="mm-grid">
+        <div class="branch b1"><h4><span class="dot"></span>Conceito</h4><ul>
+          <li>Lesão/doença do sistema somatossensorial</li>
+          <li>Crônica, independe de nocicepção</li>
+          <li>≠ nociceptiva / nociplástica</li>
+          <li>Positivos (alodinia) + negativos (hipoestesia)</li></ul></div>
+        <div class="branch b2"><h4><span class="dot"></span>Sensibilização central</h4><ul>
+          <li>Wind-up / WDR → NMDA / Ca²⁺ / LTP</li>
+          <li>Falha de inibição GABA/glicina</li>
+          <li>Ativação glial (IL-1β, TNF-α)</li>
+          <li>Reorganização cortical → dor fantasma</li></ul></div>
+        <div class="branch b3"><h4><span class="dot"></span>Sensibilização periférica</h4><ul>
+          <li>↑ Na⁺/Ca²⁺ → disparos ectópicos</li>
+          <li>TRPV1 → hiperalgesia térmica</li>
+          <li>Sprouting Aβ → alodinia tátil</li></ul></div>
+        <div class="branch b4"><h4><span class="dot"></span>Fisiopatologia ND (4 vias)</h4><ul>
+          <li>Poliol: sorbitol / ↓ mio-inositol / ↓ Na-K</li>
+          <li>Vascular: AGEs → isquemia</li>
+          <li>Inflamatória: citocinas</li>
+          <li>Neurodegenerativa: ↓ neurotrofinas</li></ul></div>
+        <div class="branch b5"><h4><span class="dot"></span>Apresentações</h4><ul>
+          <li>Difusa: PSD (bota e luva) — mais comum</li>
+          <li>Autonômica: taqui repouso, ortostática, gastroparesia, anidrose, hipoglicemia despercebida</li>
+          <li>Focal: mono (III par poupa pupila), amiotrofia</li></ul></div>
+        <div class="branch b6"><h4><span class="dot"></span>Rastreio / pé</h4><ul>
+          <li>DM2 no dx · DM1 5 anos · anual</li>
+          <li>Monofilamento 10g + diapasão 128Hz = grossa</li>
+          <li>Pin-prick/térmica = fina · ENMG confirma</li>
+          <li>Escores ESN/ECN/MNSI · IWGDF</li></ul></div>
+        <div class="branch b7"><h4><span class="dot"></span>Tratamento</h4><ul>
+          <li>Base: glicemia, álfa-lipóico, exercício</li>
+          <li>1ª: gabapentinoide, IRSN (duloxetina), ADT</li>
+          <li>2ª: tópicos (capsaicina/lidocaína) · 3ª: opioide</li>
+          <li>Fora: AINE, ISRS, corticoide</li></ul></div>
+        <div class="branch b8"><h4><span class="dot"></span>Complicações / fantasma</h4><ul>
+          <li>Úlcera neuropática (indolor, pressão, pulso +)</li>
+          <li>Charcot agudo → descarga/imobilização</li>
+          <li>Amputação (85% das não traumáticas)</li>
+          <li>Fantasma → terapia do espelho</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section class="view" id="flash">
+    <div class="panel" style="text-align:center"><p style="margin:0;color:var(--mut)">Clique no card para virar. Cubra a resposta e teste a memória ativa.</p></div>
+    <div class="fc-grid" id="fcbox"></div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section class="view" id="fey">
+    <div class="panel"><h2>Explique em voz alta, como se ensinasse alguém</h2>
+      <p>Fale cada tópico com suas palavras, sem jargão desnecessário. Só então abra o checklist e veja se cobriu os pontos-chave. O que você não consegue explicar simples, você ainda não domina.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">Aprofundamento · SP2 Dor Neuropática · construído a partir do quadro da tutoria, dos slides de Fisio (Prof.ª Verônica) e Farmaco, da síntese da veterana e das 2 APFs reais de SP2. Bibliografia: SBD 2023 · Harrison cap. 405 · Cecil cap. 216 · Tratado de MFC cap. 233.</div>
+</div>
+
+<script>
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.v).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ---------- questions ---------- */
+const QS=[
+ {d:"Difícil",fmt:"assinale a INCORRETA",obj:"Obj.1",stem:"Sobre a dor neuropática, assinale a alternativa <b>INCORRETA</b>:",
+  opts:["Decorre de lesão ou doença do sistema nervoso somatossensorial.",
+        "Pode persistir mesmo após o tratamento da causa de base.",
+        "Cursa com sinais sensitivos positivos (alodinia, disestesia) e negativos (hipoestesia).",
+        "É sempre acompanhada de lesão tecidual ativa e resposta inflamatória nociceptiva.",
+        "A dor do membro fantasma é um exemplo de dor neuropática."],
+  ans:3,why:"A questão pede a INCORRETA. A dor neuropática independe de lesão tecidual ativa/nocicepção — decorre da própria disfunção neural.",
+  trap:"Enunciado invertido: as outras 4 são verdadeiras. Sinais positivos e negativos coexistem."},
+
+ {d:"Difícil",fmt:"classificação",obj:"Obj.1",stem:"Três pacientes: <b>I</b> dor no hemicorpo após AVC talâmico; <b>II</b> dor difusa por fibromialgia; <b>III</b> gonartrose com dor ao carregar peso. As dores são, respectivamente:",
+  opts:["Neuropática, nociplástica e nociceptiva.",
+        "Nociplástica, neuropática e nociceptiva.",
+        "Neuropática, nociceptiva e nociplástica.",
+        "Nociceptiva, nociplástica e neuropática.",
+        "Neuropática, neuropática e nociplástica."],
+  ans:0,why:"AVC talâmico = dor neuropática central; fibromialgia = nociplástica (sem lesão neural/nociceptiva demonstrável); artrose = nociceptiva.",
+  trap:"Dor central pós-AVC é NEUROPÁTICA (há lesão do SNC), não nociplástica."},
+
+ {d:"Difícil",fmt:"mecanismo",obj:"Obj.1",stem:"Sobre a sensibilização central, assinale a correta:",
+  opts:["O wind-up ocorre nos nociceptores periféricos, independente do glutamato.",
+        "Depende da ativação do receptor NMDA após remoção do Mg²⁺ e influxo de Ca²⁺, gerando LTP.",
+        "A falha de inibição decorre do excesso de GABA e glicina.",
+        "A ativação glial reduz a transmissão dolorosa.",
+        "A reorganização cortical não se relaciona à dor fantasma."],
+  ans:1,why:"Wind-up nos neurônios WDR do corno dorsal: NMDA (sem o bloqueio do Mg²⁺) → ↑ Ca²⁺ → LTP → cronificação.",
+  trap:"Falha de inibição = PERDA de GABA/glicina; glia AMPLIFICA; reorganização cortical → dor fantasma."},
+
+ {d:"Difícil",fmt:"mecanismo",obj:"Obj.1",stem:"Paciente com neuropatia refere que o simples roçar da roupa provoca dor. O mecanismo <b>periférico</b> que melhor explica essa alodinia tátil é:",
+  opts:["Ativação de TRPV1 pelo calor.",
+        "Brotamento (sprouting) de fibras Aβ formando conexões aberrantes com neurônios nociceptivos.",
+        "Aumento do K⁺ intracelular estabilizando a membrana.",
+        "Bloqueio dos canais de Na⁺ voltagem-dependentes.",
+        "Redução da substância P e do CGRP."],
+  ans:1,why:"O sprouting de fibras Aβ (baixo limiar, tato) sobre vias nociceptivas faz o toque ser lido como dor → alodinia tátil (também há desinibição central).",
+  trap:"TRPV1 → hiperalgesia TÉRMICA, não tátil. ↓ Na⁺ e ↑ K⁺ estabilizam (o oposto do que ocorre)."},
+
+ {d:"Difícil",fmt:"proposições I–IV",obj:"Obj.1/4",stem:"Analise: <b>I.</b> Fibras Aβ conduzem tato, vibração e propriocepção. <b>II.</b> Fibras Aδ e C conduzem dor e temperatura. <b>III.</b> Monofilamento 10 g e diapasão 128 Hz avaliam fibras finas. <b>IV.</b> Pin-prick e sensibilidade térmica avaliam fibras finas. Estão corretas:",
+  opts:["Apenas I, II e IV.",
+        "Apenas I e II.",
+        "Apenas II, III e IV.",
+        "I, II, III e IV.",
+        "Apenas I e III."],
+  ans:0,why:"III é falsa: monofilamento e diapasão avaliam fibras GROSSAS (Aβ). I, II e IV corretas.",
+  trap:"Vibração/tato/monofilamento = fibra grossa; dor/temperatura = fibra fina."},
+
+ {d:"Difícil",fmt:"sequência",obj:"Obj.2",stem:"Assinale a sequência que descreve corretamente a <b>via do poliol</b> na neuropatia diabética:",
+  opts:["Glicose →(aldose redutase)→ sorbitol → ↓ mio-inositol → ↓ bomba Na/K → lesão axonal.",
+        "Glicose → frutose → ↑ mio-inositol → ↑ atividade da bomba Na/K.",
+        "Glicose → AGEs → deposição endotelial → espessamento da membrana basal.",
+        "Sorbitol → glicose → liberação de insulina → reparo axonal.",
+        "Glicose → lactato → acidose neuronal isolada."],
+  ans:0,why:"Poliol: aldose redutase converte glicose em sorbitol; queda de mio-inositol e da bomba Na/K → acúmulo de Na⁺ e degeneração axonal.",
+  trap:"A alternativa dos AGEs descreve a via VASCULAR, não a do poliol."},
+
+ {d:"Médio",fmt:"mecanismo",obj:"Obj.2",stem:"Sobre a via vascular da neuropatia diabética, assinale a correta:",
+  opts:["Os AGEs formam ligações cruzadas em proteínas, espessam a membrana basal e reduzem o fluxo capilar, isquemiando o nervo.",
+        "Os AGEs aumentam o fluxo sanguíneo neural, protegendo o axônio.",
+        "A via vascular ocorre independentemente da hiperglicemia.",
+        "É mediada exclusivamente por autoanticorpos antimielina.",
+        "Não tem relação com a microangiopatia diabética."],
+  ans:0,why:"AGEs → microangiopatia → ↓ perfusão do nervo → isquemia e degeneração. Soma-se ao poliol, à inflamação e à perda de neurotrofinas.",
+  trap:"AGEs pioram (não melhoram) a perfusão; a via depende da hiperglicemia."},
+
+ {d:"Difícil",fmt:"caso",obj:"Obj.3",stem:"<span class='cx'>Diabético de 60 anos, início súbito de diplopia e ptose à direita; ao exame, desvio do olho e <b>pupila preservada</b>, sem outros déficits.</span>Assinale a correta:",
+  opts:["Paralisia do III par de padrão diabético (isquêmico), que tipicamente poupa a pupila; difere da compressiva (aneurisma), que a acomete.",
+        "Trata-se sempre de midríase fixa por compressão do III par.",
+        "É uma manifestação de polineuropatia simétrica distal.",
+        "Indica necessariamente AVC de tronco encefálico.",
+        "Não guarda relação com o diabetes."],
+  ans:0,why:"A mononeuropatia diabética do III par é isquêmica e poupa as fibras pupilares periféricas → pupila normal. A compressiva (aneurisma de PComA) acomete a pupila.",
+  trap:"Pupila POUPADA = isquêmica/diabética; pupila ACOMETIDA = compressiva → investigar aneurisma (emergência)."},
+
+ {d:"Difícil",fmt:"associação",obj:"Obj.3",stem:"Sobre a neuropatia autonômica diabética, qual associação está <b>correta</b>?",
+  opts:["Hipoglicemia despercebida — perda da resposta contrarreguladora adrenérgica.",
+        "Gastroparesia — aceleração do esvaziamento gástrico.",
+        "Hipotensão ortostática — hiperatividade do barorreflexo.",
+        "Anidrose plantar — efeito protetor contra úlceras.",
+        "Taquicardia de repouso — aumento da variabilidade da FC."],
+  ans:0,why:"A disautonomia abole os sintomas adrenérgicos de alerta → hipoglicemia despercebida. Gastroparesia = lentificação; anidrose favorece úlcera.",
+  trap:"Autonômica cardíaca = taquicardia de repouso + ↓ variabilidade da FC + hipotensão ortostática."},
+
+ {d:"Médio",fmt:"rastreio",obj:"Obj.4",stem:"Sobre rastreio e diagnóstico da neuropatia periférica diabética, assinale a correta:",
+  opts:["No DM2 rastreia-se no diagnóstico; no DM1, após 5 anos; depois, anualmente.",
+        "No DM2 o rastreio começa apenas após 10 anos de doença.",
+        "HbA1c normal dispensa o exame dos pés.",
+        "A ENMG é o exame de rastreio inicial de rotina.",
+        "Um único teste alterado fecha o diagnóstico definitivo."],
+  ans:0,why:"DM2 no diagnóstico (já pode ter anos de hiperglicemia); DM1 após 5 anos; reavaliar anual. Diagnóstico clínico exige ≥ 2 sinais/testes alterados.",
+  trap:"ENMG é confirmatório, não rastreio; nunca dispensar o exame dos pés."},
+
+ {d:"Difícil",fmt:"comparação",obj:"Obj.6",stem:"Sobre úlceras do pé diabético, assinale a correta:",
+  opts:["A úlcera neuropática típica é indolor, em ponto de pressão plantar, com pulsos presentes; a isquêmica é dolorosa, acral, com pulsos ausentes.",
+        "A úlcera neuropática é dolorosa e de localização acral.",
+        "A úlcera isquêmica ocorre em áreas de pressão plantar com pulsos cheios.",
+        "Ambas são sempre indolores e de mesmo prognóstico.",
+        "A presença de pulsos exclui o diagnóstico de pé diabético."],
+  ans:0,why:"Neuropática: indolor, plantar (pressão), pulsos presentes. Isquêmica: dolorosa, acral (dedos/bordas), pulsos ausentes. Há formas neuroisquêmicas mistas.",
+  trap:"Pulsos presentes NÃO excluem pé diabético — a via neuropática dispensa isquemia."},
+
+ {d:"Difícil",fmt:"caso",obj:"Obj.6",stem:"<span class='cx'>Diabético com pé unilateral quente, edemaciado e eritematoso, dor leve, sem febre nem leucocitose; radiografia inicial normal.</span>Conduta e raciocínio corretos:",
+  opts:["Artropatia de Charcot aguda; descarga imediata e imobilização (gesso de contato total); considerar DDx com celulite/osteomielite.",
+        "Celulite; iniciar antibiótico e manter a deambulação com carga total.",
+        "TVP; anticoagulação plena imediata.",
+        "Crise de gota; colchicina e carga total.",
+        "Osteomielite; a radiografia normal já confirma o diagnóstico."],
+  ans:0,why:"Charcot agudo mimetiza infecção (pé quente/edemaciado), mas com dor leve e sem sinais sistêmicos. A medida que muda o prognóstico é o offloading precoce.",
+  trap:"RX normal NÃO exclui Charcot inicial; não manter carga — imobilizar."},
+
+ {d:"Difícil",fmt:"assinale a correta",obj:"Obj.5",stem:"Sobre o tratamento farmacológico da dor neuropática diabética, assinale a correta:",
+  opts:["Gabapentinoides, IRSN (duloxetina) e ADT são 1ª linha; capsaicina/lidocaína tópicas, 2ª linha; opioides fortes, 3ª linha.",
+        "Os AINEs são a primeira linha de tratamento.",
+        "A carbamazepina é a primeira escolha na polineuropatia diabética dolorosa difusa.",
+        "Os ISRS são mais eficazes que os ADT na dor neuropática.",
+        "O corticoide sistêmico é a base do tratamento sintomático."],
+  ans:0,why:"Escalonamento consagrado: 1ª linha gabapentinoide/IRSN/ADT; 2ª tópicos; 3ª opioides fortes.",
+  trap:"Carbamazepina = neuralgia do trigêmeo; AINE/ISRS/corticoide fora da 1ª linha da dor neuropática."},
+
+ {d:"Difícil",fmt:"associação",obj:"Obj.1/5",stem:"Ligando o mecanismo à estratégia de neuromodulação, a associação <b>correta</b> é:",
+  opts:["Wind-up / NMDA → antagonistas NMDA (cetamina, memantina).",
+        "Hiperexcitabilidade de canais → antagonistas NMDA.",
+        "Falha de inibição descendente → gabapentinoides.",
+        "Reorganização cortical → AINEs.",
+        "Ativação glial → bloqueio dos canais de Na⁺."],
+  ans:0,why:"NMDA/wind-up respondem a cetamina/memantina; hiperexcitabilidade → gabapentinoides; falha de inibição → ADT/duloxetina (reforçam a via descendente); cortical → TMS/espelho.",
+  trap:"Cada mecanismo tem seu alvo — não troque gabapentinoide com NMDA nem cortical com fármaco."},
+
+ {d:"Difícil",fmt:"assinale a correta",obj:"Obj.7",stem:"Sobre a dor do membro fantasma, assinale a correta:",
+  opts:["É dor neuropática; a dor pré-amputação é fator de risco; a terapia do espelho reduz a dor ao normalizar a reorganização cortical.",
+        "É dor nociceptiva somática do coto, sem participação central.",
+        "A terapia do espelho é contraindicada por piorar a reorganização cortical.",
+        "Ocorre em menos de 5% dos amputados e é sempre permanente.",
+        "Depende exclusivamente do neuroma, sem componente medular ou cortical."],
+  ans:0,why:"Mecanismos periférico (neuroma), medular (disparos ectópicos + ↓ inibição) e cortical (remapeamento). Muito frequente; a terapia do espelho ajuda.",
+  trap:"Não é nociceptiva nem puramente periférica; a terapia do espelho AJUDA."}
+];
+
+const st={ans:0,hit:0};
+const box=document.getElementById('quizbox');
+function renderQuiz(){
+ box.innerHTML='';st.ans=0;st.hit=0;
+ document.getElementById('hit').textContent=0;document.getElementById('fill').style.width='0%';
+ QS.forEach((q,i)=>{
+  const el=document.createElement('div');el.className='q';
+  let o='';q.opts.forEach((t,j)=>{o+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="lk">'+String.fromCharCode(65+j)+'</span><span>'+t+'</span></button>';});
+  el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill d">'+q.d+'</span><span class="pill i">'+q.fmt+'</span><span class="pill o">'+q.obj+'</span></div>'+
+   '<div class="stem">'+q.stem+'</div><div class="opts">'+o+'</div><div class="fb" id="fb'+i+'"></div>';
+  box.appendChild(el);
+ });
+ box.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+  const i=+b.dataset.i,j=+b.dataset.j,q=QS[i],p=b.closest('.q');if(p.dataset.done)return;p.dataset.done='1';
+  p.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+  const ok=j===q.ans,fb=document.getElementById('fb'+i);fb.className='fb show '+(ok?'ok':'no');
+  fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ Você marcou '+String.fromCharCode(65+j)+' — correta é '+String.fromCharCode(65+q.ans))+'</div><div>'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+  st.ans++;if(ok)st.hit++;document.getElementById('hit').textContent=st.hit;document.getElementById('fill').style.width=(st.ans/15*100)+'%';
+ }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+/* ---------- flashcards ---------- */
+const FC=[
+ ["Conceito","O que define dor neuropática?","Lesão ou doença do sistema nervoso somatossensorial (IASP). Crônica, independe de estímulo nociceptivo."],
+ ["Termos","Alodinia × hiperalgesia","Alodinia = dor por estímulo inócuo (toque). Hiperalgesia = resposta ↑ a estímulo já doloroso."],
+ ["Termos","Parestesia × disestesia","Parestesia = sensação anormal NÃO dolorosa (formigamento). Disestesia = sensação desagradável espontânea (queimação/choque)."],
+ ["Fibras","Fibras finas × grossas","Finas Aδ/C = dor e temperatura (acometidas cedo). Grossas Aβ = tato, vibração, propriocepção, reflexos."],
+ ["Central","4 mecanismos de sensibilização central","Wind-up/WDR (NMDA), falha de inibição GABA/glicina, ativação glial (IL-1β/TNF-α), reorganização cortical."],
+ ["Central","O que é wind-up?","Somação por estímulo repetido de fibras C; NMDA sem bloqueio do Mg²⁺ → ↑ Ca²⁺ → LTP → cronificação."],
+ ["Periférica","Por que surge alodinia tátil?","Sprouting de fibras Aβ sobre vias nociceptivas + desinibição central; TRPV1 dá hiperalgesia térmica."],
+ ["ND","As 4 vias da fisiopatologia da ND","Poliol (sorbitol), vascular (AGEs), inflamatória (citocinas), neurodegenerativa (↓ neurotrofinas)."],
+ ["ND","Via do poliol em uma linha","Glicose →(aldose redutase)→ sorbitol → ↓ mio-inositol → ↓ bomba Na/K → lesão axonal."],
+ ["Clínica","Forma mais comum de ND","Polineuropatia simétrica distal (PSD): sensitiva, distal, 'bota e luva', pior à noite."],
+ ["Autonômica","Manifestações autonômicas-chave","Taquicardia de repouso, hipotensão ortostática, gastroparesia, anidrose plantar, hipoglicemia despercebida."],
+ ["Rastreio","Quando e como rastrear","DM2 no dx, DM1 após 5 anos, depois anual. Monofilamento 10g + diapasão 128Hz (grossa); pin-prick/térmica (fina); ENMG confirma."],
+ ["Tratamento","1ª linha da dor neuropática","Gabapentinoides, IRSN (duloxetina), ADT. Fora: AINE, ISRS, corticoide. Carbamazepina → trigêmeo."],
+ ["Pé","Úlcera neuropática × Charcot agudo","Úlcera: indolor, plantar, pulsos presentes. Charcot agudo (quente, RX normal) → descarga e imobilização."],
+ ["Fantasma","Dor do membro fantasma","Dor neuropática: neuroma + disparos ectópicos + reorganização cortical. Tratar com terapia do espelho."]
+];
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{const d=document.createElement('div');d.className='fc';
+ d.innerHTML='<div class="fc-in"><div class="fc-face fc-front"><div class="fc-tag">'+c[0]+'</div><div class="qq">'+c[1]+'</div><div class="hint">clique para ver</div></div><div class="fc-face fc-back"><div class="fc-tag">Resposta</div><div class="aa">'+c[2]+'</div></div></div>';
+ d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);});
+
+/* ---------- feynman ---------- */
+const FY=[
+ ["Por que o diabético perde a sensibilidade térmica/dolorosa antes da vibratória?",
+  ["Fibras finas (Aδ e C) carregam dor e temperatura e são acometidas precocemente na ND.",
+   "Fibras grossas (Aβ) — vibração, tato, propriocepção — caem depois.",
+   "Por isso a fase inicial é dolorosa/hipersensível e a tardia é de perda sensitiva (anestesia em bota)."]],
+ ["Explique o wind-up e por que a dor 'cresce' com estímulos repetidos.",
+  ["Estímulo repetido de fibras C libera glutamato, substância P e CGRP.",
+   "O Mg²⁺ deixa o receptor NMDA → entra Ca²⁺ → potenciação de longo prazo (LTP).",
+   "Neurônios WDR passam a responder mais → dor amplificada e cronificação."]],
+ ["Como a perda de sensibilidade leva à úlcera e ao pé de Charcot?",
+  ["Sem sensibilidade protetora, traumas repetidos passam despercebidos → úlcera indolor em ponto de pressão.",
+   "Anidrose autonômica resseca a pele → fissuras (porta de entrada).",
+   "A neuropatia grave gera destruição neuro-osteoarticular (Charcot) com deformidade e risco de amputação."]],
+ ["Por que a duloxetina é uma boa escolha para a paciente com dor + tristeza?",
+  ["É IRSN: reforça as vias inibitórias descendentes (noradrenalina/serotonina) → analgesia.",
+   "É 1ª linha na dor neuropática diabética.",
+   "Trata simultaneamente os sintomas depressivos — dois alvos, um fármaco."]],
+ ["Explique a dor do membro fantasma e por que a terapia do espelho ajuda.",
+  ["É dor neuropática: neuroma (periférico) + disparos ectópicos e desinibição medular + reorganização cortical.",
+   "O córtex remapeia a área do membro perdido → dor referida ao fantasma.",
+   "O espelho recria o feedback visual do membro → ajuda a reverter a reorganização cortical e reduz a dor."]],
+ ["Explique as 4 vias da fisiopatologia da neuropatia diabética a partir da hiperglicemia.",
+  ["Poliol: sorbitol pela aldose redutase, ↓ mio-inositol e ↓ bomba Na/K → lesão axonal.",
+   "Vascular: AGEs espessam a membrana basal → isquemia do nervo.",
+   "Inflamatória: citocinas pró-inflamatórias pioram hipóxia e regeneração.",
+   "Neurodegenerativa: ↓ fatores neurotróficos → apoptose neuronal."]],
+ ["Diferencie dor nociceptiva, neuropática e nociplástica com um exemplo de cada.",
+  ["Nociceptiva: dano tecidual real ativa nociceptores — ex.: entorse, artrose.",
+   "Neuropática: lesão/doença do sistema somatossensorial — ex.: neuropatia diabética, dor fantasma, pós-AVC.",
+   "Nociplástica: processamento alterado sem lesão demonstrável — ex.: fibromialgia."]]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach((f,i)=>{const d=document.createElement('details');d.className='fy';
+ let li=f[1].map(x=>'<li>'+x+'</li>').join('');
+ d.innerHTML='<summary>'+(i+1)+'. '+f[0]+'</summary><div class="body"><p class="lead">Pontos que uma boa explicação cobre:</p><ul>'+li+'</ul></div>';
+ feybox.appendChild(d);});
+</script>
+</body>
+</html>

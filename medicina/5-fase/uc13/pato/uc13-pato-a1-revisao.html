@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pato A1 · Revisão Pré-Prova · 28/08 13h</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a2332; --muted:#5a6a7e;
+    --accent:#0e7490; --accent-soft:#e0f2f7;
+    --danger:#b91c1c; --danger-soft:#fee2e2;
+    --ok:#15803d; --ok-soft:#dcfce7;
+    --warn:#a16207; --warn-soft:#fef9c3;
+    --purple:#6d28d9; --purple-soft:#ede9fe;
+    --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;font-size:15px}
+  .wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px}
+  header{background:linear-gradient(135deg,#7c2d12,#9a3412);color:#fff;border-radius:16px;padding:22px 22px 18px;margin-bottom:18px}
+  header h1{margin:0 0 6px;font-size:22px}
+  header .sub{opacity:.93;font-size:14px}
+  .datebar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .datebar .pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  h2{font-size:18px;margin:30px 0 8px;display:flex;align-items:center;gap:8px}
+  h2 .n{background:#9a3412;color:#fff;border-radius:8px;min-width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  h3{font-size:15px;margin:16px 0 6px;color:#7c2d12}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .muted{color:var(--muted)}
+  .small{font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+  th{text-align:left;background:#fde8dd;color:#7c2d12;padding:6px 8px;border:1px solid var(--line);font-size:12.5px}
+  td{padding:5px 8px;border:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tblwrap{overflow-x:auto}
+  .tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600;margin-right:4px;white-space:nowrap}
+  .t-red{background:var(--danger-soft);color:var(--danger)}
+  .t-green{background:var(--ok-soft);color:var(--ok)}
+  .t-blue{background:var(--accent-soft);color:#0c4a5e}
+  .t-purple{background:var(--purple-soft);color:var(--purple)}
+  .t-yellow{background:var(--warn-soft);color:var(--warn)}
+  .trap{border-left:4px solid var(--danger);background:#fff;border-radius:10px;padding:9px 13px;margin:8px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px}
+  .trap .wrong{color:var(--danger);font-weight:600}
+  .trap .right{color:var(--ok);font-weight:600}
+  .caiu{border-left:4px solid var(--purple);background:#fff;border-radius:10px;padding:9px 13px;margin:8px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px}
+  .caiu b.q{color:var(--purple)}
+  details{border:1px solid var(--line);border-radius:10px;margin:7px 0;background:#fff}
+  summary{cursor:pointer;padding:9px 13px;font-weight:600;font-size:14px;list-style:none;display:flex;align-items:flex-start;gap:8px}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸";color:#9a3412;transition:.15s;flex:0 0 auto}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .inner{padding:2px 16px 11px;font-size:14px}
+  details .inner p{margin:5px 0}
+  ul{margin:6px 0;padding-left:20px}
+  li{margin:3px 0}
+  .flow{background:#fde8dd;border-radius:10px;padding:9px 13px;margin:8px 0;font-size:13.5px;font-weight:600;color:#7c2d12;overflow-x:auto}
+  .timebox{display:flex;align-items:center;gap:8px;background:var(--warn-soft);border:1px solid #e9d98a;border-radius:10px;padding:8px 13px;margin:10px 0;font-size:13.5px;font-weight:600;color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🔬 Patologia · A1 UC13 · hoje 13h</h1>
+  <div class="sub">Revisão pré-prova construída em cima das <b>3 provas de veteranos gabaritadas</b> + as 5 aulas da profª Verônica. Os boxes roxos mostram exatamente como cada tema já caiu.</div>
+  <div class="datebar">
+    <span class="pill">🕐 ~40 min de leitura</span>
+    <span class="pill">📊 Formato: 11–12 objetivas + 1–2 discursivas (casos → hipótese diagnóstica)</span>
+  </div>
+</header>
+
+<div class="timebox">⏱️ Se o tempo apertar: leia as seções na ordem <b>1 → 6 (Adrenal) → 8 (SNC) → 7 (Hipófise) → 9 (pegadinhas) → 10 (discursivas)</b>. Tireoide e inflamação você domina melhor.</div>
+
+<h2><span class="n">1</span> Onde estão os pontos — o que as 3 provas repetem</h2>
+<div class="card">
+  <p class="small muted" style="margin-top:0">As 3 provas de turmas diferentes reciclam MUITO. Frequência dos temas nas 3 provas (objetivas + casos):</p>
+  <div class="tblwrap">
+  <table>
+    <tr><th>Tema</th><th style="width:90px">Frequência</th><th>Como cobra</th></tr>
+    <tr><td><b>Hematomas intracranianos (epidural × subdural)</b></td><td>🔥 3/3, várias vezes</td><td>Caso clínico → diagnóstico; TC no caso; pegadinha epidural×subdural</td></tr>
+    <tr><td><b>Hipófise: adenomas, prolactinoma, acromegalia/gigantismo, hipopituitarismo</b></td><td>🔥 3/3, várias vezes</td><td>Assertivas + caso (prolactina alta, pós-radioterapia)</td></tr>
+    <tr><td><b>Adrenal: Waterhouse-Friderichsen, Addison, Cushing, insuf. 1ª×2ª</b></td><td>🔥 3/3</td><td>Caso (sepse meningocócica), assertivas, discursiva (Cushing)</td></tr>
+    <tr><td><b>Hidrocefalia (tipos + NPH)</b></td><td>🔥 3/3</td><td>Caso do idoso com tríade; assertivas por faixa etária</td></tr>
+    <tr><td><b>Defeitos do tubo neural</b></td><td>🔥 3/3</td><td>Assertivas — pegadinha oculta×meningocele×mielo</td></tr>
+    <tr><td><b>Tireoidites (Hashimoto, Graves, Quervain) + carcinomas da tireoide</b></td><td>🔥 3/3</td><td>Caso curto → diagnóstico (dolorosa pós-viral; vidro fosco; calcitonina)</td></tr>
+    <tr><td>Inflamação crônica (características, mediadores, granuloma)</td><td>2/3</td><td>Assertivas + discursiva (inflamação → neoplasia)</td></tr>
+    <tr><td>Diabetes insípido</td><td>2/3</td><td>Assertiva incorreta + caso (poliúria 10L, hipernatremia)</td></tr>
+    <tr><td>Feocromocitoma e Conn</td><td>2/3</td><td>Assertivas (tríade, zona errada) + discursiva (Conn)</td></tr>
+  </table>
+  </div>
+  <p class="small" style="margin-bottom:0"><b>Conclusão tática:</b> SNC traumático + hipófise + adrenal valem metade da prova. É neles que a revisão abaixo pesa a mão.</p>
+</div>
+
+<h2><span class="n">2</span> Inflamação crônica (aula 1) — o essencial</h2>
+<div class="card">
+  <ul style="margin-top:0">
+    <li><b>Definição-chave (cai em assertiva):</b> inflamação prolongada em que <b>inflamação ativa + destruição tecidual + tentativa de reparo ocorrem SIMULTANEAMENTE</b>. Pode vir depois de uma aguda que não curou OU começar insidiosa, sem fase aguda prévia.</li>
+    <li><b>Causa central:</b> persistência do agente lesivo (infecção persistente, agente químico, autoimunidade).</li>
+    <li><b>Células:</b> mononucleares — <b>macrófagos (a célula principal)</b>, linfócitos, plasmócitos. <span class="tag t-red">pegadinha</span> infiltrado predominante de neutrófilos = inflamação AGUDA.</li>
+    <li><b>Macrófagos:</b> M1 = dano (proteases, citocinas) · M2 = reparo → estimulam fibroblastos → <b>fibrose</b>. Acumulam por quimiotaxia, proliferação local e fator de inibição da migração.</li>
+    <li><b>Citocinas:</b> TNF-α (sustenta; anti-TNF na AR) · IL-1/IL-6 (febre, fase aguda) · IFN-γ (ativa macrófago → granuloma).</li>
+    <li><b>Padrões:</b> difusa (hepatite crônica — infiltrado linfoplasmocitário sem organização) × <b>granulomatosa</b>.</li>
+    <li><b>Granuloma:</b> macrófagos ativados (células epitelioides + células gigantes) cercados por linfócitos T. <b>Caseoso</b> = necrose central (TB) · <b>não caseoso</b> = sarcoidose, Crohn, hanseníase tuberculoide · corpo estranho = talco, sutura. Precisa de imunidade celular (Th1/IFN-γ) — imunossuprimido não forma granuloma.</li>
+    <li><b>Mediadores lipídicos (caiu!):</b> fosfolipase A2 libera ácido araquidônico → <b>COX</b> → prostaglandinas + <b>tromboxano (agregante plaquetário e VASOCONSTRITOR)</b> · <b>LOX</b> → leucotrienos (<b>quimiotaxia e ativação de neutrófilos</b>). COX-2 = induzida na inflamação.</li>
+  </ul>
+  <div class="caiu"><b class="q">Como caiu:</b> hepatite viral crônica com infiltrado linfocitário + fibrose = <b>inflamação crônica difusa</b> · assertivas corretas: "prolongada com destruição+reparo simultâneos", "pode surgir sem aguda prévia", "persistência do agente é o que mantém" (a errada: "infiltrado composto por neutrófilos") · "tromboxano é agregante plaquetário e vasoconstritor" = correta.</div>
+  <div class="caiu"><b class="q">Discursiva que caiu:</b> "como a inflamação crônica favorece transformação neoplásica (2 mecanismos)" → 1) ciclos contínuos de lesão-reparo = <b>proliferação celular persistente</b> (mais chance de erro/mutação); 2) células inflamatórias liberam <b>radicais livres/ROS que causam dano direto ao DNA</b>; + citocinas e fatores de crescimento alterando o microambiente. Exemplos: hepatite crônica→CHC, H. pylori→ca gástrico, DII→colorretal.</div>
+</div>
+
+<h2><span class="n">3</span> Padrões da inflamação aguda (caiu na prova A)</h2>
+<div class="card">
+  <div class="tblwrap">
+  <table>
+    <tr><th>Padrão</th><th>Chave</th></tr>
+    <tr><td><b>Serosa</b></td><td>Líquido pobre em células (bolha, derrames leves) — SEM necrose/bactéria</td></tr>
+    <tr><td><b>Fibrinosa</b></td><td>Exsudato rico em fibrina em cavidades (pericardite fibrinosa)</td></tr>
+    <tr><td><b>Purulenta (supurativa)</b></td><td><b>Bactérias piogênicas (S. aureus)</b> → exsudato de neutrófilos + debris + abscessos</td></tr>
+    <tr><td><b>Úlcera</b></td><td>Defeito escavado por necrose da superfície</td></tr>
+    <tr><td><b>Gangrena seca × úmida</b></td><td>Seca = isquemia prolongada, sem disseminação · úmida/gasosa = infecção sobreposta</td></tr>
+  </table>
+  </div>
+  <div class="caiu" style="margin-bottom:0"><b class="q">Como caiu:</b> "inflamação purulenta é frequentemente causada por bactérias piogênicas, como <b>S. aureus</b>, e caracteriza-se pela formação de exsudato rico em neutrófilos e debris celulares" = correta.</div>
+</div>
+<h2><span class="n">4</span> Tireoide (aula 2) — as 3 tireoidites</h2>
+<div class="card">
+  <div class="tblwrap">
+  <table>
+    <tr><th></th><th>Hashimoto</th><th>Graves</th><th>De Quervain (subaguda)</th></tr>
+    <tr><td><b>Mecanismo</b></td><td>Autoimune <b>destrutiva</b> — lesão principal por <b>linfócitos T citotóxicos</b> (anti-TPO/anti-Tg são marcadores, ação direta secundária)</td><td>Autoimune <b>estimuladora</b> — <b>TRAb imita o TSH</b> no receptor → hiperprodução contínua de T3/T4</td><td><b>Inflamatória pós-viral</b> (granulomatosa, células gigantes)</td></tr>
+    <tr><td><b>Clínica</b></td><td>Bócio difuso <b>INdolor</b> → hipotireoidismo (frio, ganho de peso, constipação, bradicardia); pode ter fase tireotóxica transitória (hashitoxicose)</td><td>Hipertireoidismo (perda de peso, taquicardia, calor) + bócio difuso indolor + <b>exoftalmia</b> + mixedema pré-tibial</td><td><b>DOR cervical anterior</b> irradiando p/ mandíbula/orelha + febre baixa pós-IVAS + <b>VHS elevado</b></td></tr>
+    <tr><td><b>Laboratório</b></td><td>TSH ↑, T4 ↓, <b>anti-TPO+</b></td><td>TSH suprimido, T3/T4 ↑, <b>TRAb+</b></td><td>Fase 1: TSH suprimido + T3/T4 ↑ (<b>liberação de hormônio PRÉ-FORMADO por destruição folicular</b> — não é produção!) → eutireoidiana → hipo transitória; regride em 6–8 sem</td></tr>
+    <tr><td><b>Histologia</b></td><td>Infiltrado linfocitário + <b>folículos linfoides com centros germinativos</b></td><td>Folículos pequenos com <b>pouco coloide</b> (consumo contínuo)</td><td>Granulomas + células gigantes</td></tr>
+    <tr><td><b>Extras</b></td><td>Mulheres 10:1; CTLA-4/HLA-DR; risco de <b>linfoma B</b> da tireoide</td><td>HLA-DR3; <b>tabagismo piora a oftalmopatia</b></td><td>Autolimitada; AINE ± corticoide</td></tr>
+  </table>
+  </div>
+  <div class="caiu"><b class="q">Como caiu (3 provas):</b> mulher com dor cervical anterior + febre baixa pós-quadro viral + tireoide dolorosa + TSH suprimido/T4↑ + VHS↑ = <b>Quervain</b> · mecanismo da tireotoxicose na Quervain = <b>"liberação de hormônios pré-formados por destruição das células foliculares"</b> · polifagia + perda de peso + bócio difuso + exoftalmia = <b>Graves</b> · Hashimoto correta: "fatores de risco = polimorfismos genéticos + ambientais (infecções virais, excesso OU deficiência de iodo)".</div>
+  <div class="trap">Pegadinhas de Hashimoto que caíram: <span class="wrong">"predomínio em homens"</span> (é mulher 10–20:1) · <span class="wrong">"resulta em hipertireoidismo primário persistente"</span> (evolui para HIPO; a tireotoxicose é transitória) · <span class="wrong">"causada primariamente por ação direta dos anti-TPO"</span> (a destruição é por <span class="right">células T</span>; anticorpos = marcadores).</div>
+</div>
+
+<h2><span class="n">5</span> Nódulos e carcinomas da tireoide</h2>
+<div class="card">
+  <div class="tblwrap">
+  <table>
+    <tr><th>Tumor</th><th>Chave clínica</th><th>Assinatura</th></tr>
+    <tr><td><b>Adenoma folicular</b></td><td>Nódulo solitário <b>encapsulado</b>, benigno, cresce devagar; pode ser <b>tóxico</b> (autônomo → hipertireoidismo)</td><td>Sem invasão capsular/vascular · <span class="tag t-red">pegadinha</span> "transformação maligna frequente" = FALSO (rara)</td></tr>
+    <tr><td><b>Ca papilífero</b></td><td><b>O mais comum</b>; nódulo indolor, eutireoidiano; jovem; radiação; <b>metástase LINFÁTICA cervical</b> (linfonodo palpável sugere!)</td><td><b>Núcleos em vidro fosco + fendas nucleares + corpos psamomatosos</b> · BRAF/RET-PTC · ótimo prognóstico</td></tr>
+    <tr><td><b>Ca folicular</b></td><td>&gt;40 anos, deficiência de iodo; nódulo firme</td><td>Metástase <b>HEMATOGÊNICA</b> (osso, pulmão, fígado) · diferencial com adenoma exige <b>invasão capsular/vascular</b></td></tr>
+    <tr><td><b>Ca medular</b></td><td>Células <b>parafoliculares (C)</b> → <b>calcitonina ↑</b> (+CEA); <b>diarreia</b>; 20–25% hereditário (<b>RET / NEM-2</b>)</td><td>Ninhos/trabéculas + <b>depósito de AMILOIDE</b> · <b>não responde a iodo radioativo</b></td></tr>
+    <tr><td><b>Ca anaplásico</b></td><td>Idoso, massa cervical de <b>crescimento rápido</b> e invasivo, disfagia/disfonia</td><td>Indiferenciado, TP53; pode vir de papilífero/folicular prévio; prognóstico péssimo</td></tr>
+  </table>
+  </div>
+  <div class="caiu"><b class="q">Como caiu (3 provas):</b> nódulo + <b>diarreia + calcitonina ↑</b> = medular · nódulo com <b>vidro fosco, fendas, psamoma</b> (caso com imagem de lâmina!) = papilífero · nódulo + disfagia + <b>linfonodo cervical</b> palpável = papilífero · assertiva incorreta sobre adenoma = "transformação maligna é frequente e representa a principal origem dos carcinomas".</div>
+  <p class="small" style="margin-bottom:0"><b>Paratireoide (rapidinho):</b> hiperpara <b>1º</b> = adenoma (85–95%) → PTH↑ + <b>hiperCAlcemia</b> (dor óssea, nefrolitíase, fadiga) · <b>2º</b> = resposta compensatória à hipocalcemia (DRC, deficiência de vit. D) · <b>3º</b> = secreção autônoma após 2º prolongado. PTH: ↑reabsorção óssea e renal de Ca + ativa vit. D (calcitriol) → absorção intestinal.</p>
+</div>
+
+<h2><span class="n">6</span> Adrenal (aula 3) — a que você sentiu dificuldade: atenção total aqui</h2>
+<div class="card">
+  <h3 style="margin-top:0">O mapa da glândula (decora isso que metade das questões se resolve)</h3>
+  <div class="flow">Córtex: GLOMERULOSA → aldosterona (renina-angiotensina) · FASCICULADA → cortisol (ACTH) · RETICULAR → andrógenos/DHEA (ACTH) &nbsp;|&nbsp; MEDULA → catecolaminas (simpático, células cromafins)</div>
+  <p class="small">ACTH vem da <b>POMC</b> (pró-opiomelanocortina), que também gera <b>MSH (melanotropina)</b> → por isso ACTH muito alto = <b>hiperpigmentação</b>. Cortisol faz feedback negativo em CRH e ACTH.</p>
+
+  <h3>Insuficiência adrenal — primária × secundária (caiu como assertivas na prova C!)</h3>
+  <div class="tblwrap">
+  <table>
+    <tr><th></th><th>Primária (Addison)</th><th>Secundária</th></tr>
+    <tr><td><b>Lesão</b></td><td>Adrenal destruída</td><td>Hipófise (↓ACTH) — ex.: corticoide crônico, adenoma, cirurgia, RT</td></tr>
+    <tr><td><b>Cortisol</b></td><td>↓</td><td>↓</td></tr>
+    <tr><td><b>ACTH</b></td><td><b>↑</b> (perda do feedback)</td><td><b>↓</b></td></tr>
+    <tr><td><b>Aldosterona</b></td><td><b>↓</b> (falta tudo: cortisol + aldo + andrógenos)</td><td><b>NORMAL</b> (regulada pela renina, não pelo ACTH)</td></tr>
+    <tr><td><b>Hipercalemia</b></td><td>SIM</td><td>NÃO</td></tr>
+    <tr><td><b>Hiperpigmentação</b></td><td>SIM (POMC/MSH ↑)</td><td>NÃO</td></tr>
+  </table>
+  </div>
+
+  <h3>Waterhouse-Friderichsen (caiu nas 3 provas!)</h3>
+  <ul>
+    <li><b>O que é:</b> insuficiência adrenal AGUDA por <b>hemorragia maciça bilateral</b> das adrenais. Causa nº 1: <b>Neisseria meningitidis</b> (sepse meningocócica).</li>
+    <li><b>Cadeia:</b> sepse → <b>CIVD</b> → necrose hemorrágica bilateral das adrenais → falência adrenal aguda → choque.</li>
+    <li><b>Quadro:</b> criança/adolescente com febre alta + <b>petéquias/púrpura fulminante</b> + <b>choque refratário a volume</b> + <b>hipoglicemia + hipoNAtremia + hiperCAlemia</b>.</li>
+    <li><b>Por que o choque é refratário:</b> sem cortisol → ↓expressão de receptores α1 → <b>não responde a catecolaminas</b>; sem aldosterona → ↓volemia. Tratamento: corticoide IV + volume + vasopressor + ceftriaxona empírica.</li>
+  </ul>
+  <div class="trap">Pegadinha que caiu: WF <span class="wrong">"cursa com hipernatremia e hipocalemia"</span> = FALSO. Insuficiência adrenal = <span class="right">hipoNAtremia + hiperCAlemia</span> (sem aldosterona: perde Na⁺, retém K⁺). Guarda o par certo — caiu como "assinale a incorreta".</div>
+
+  <h3>Addison (crônica)</h3>
+  <ul>
+    <li>Destruição lenta do córtex: <b>autoimune = causa nº 1</b>; TB e outras infecções granulomatosas; metástases; hemocromatose; cetoconazol.</li>
+    <li>Quadro: fraqueza/fadiga + <b>hiperpigmentação (áreas de atrito, gengiva, mucosas)</b> + hipotensão + náuseas/vômitos + hipoglicemia + hipoNa/hiperK + acidose leve.</li>
+    <li>Dx: cortisol matinal ↓ + <b>ACTH ↑</b> + teste da cortrosina (ACTH sintético) sem resposta. Tto: hidrocortisona + fludrocortisona; dobrar dose em estresse.</li>
+  </ul>
+  <div class="caiu"><b class="q">Como caiu:</b> TB prévia + fadiga + <b>hiperpigmentação de áreas de atrito</b> + hipotensão + hipoNa = <b>Addison</b> · assertivas corretas (prova C): primária = déficit de cortisol+aldo+andrógenos; hiperpigmentação da Addison = <b>↑POMC/melanotropina</b>; primária tem <b>ACTH elevado por perda do feedback</b>. Falsas: "secundária reduz aldosterona" e "secundária tem hiperpigmentação".</div>
+
+  <h3>Cushing (caiu objetiva + discursiva)</h3>
+  <ul>
+    <li><b>SÍNDROME</b> de Cushing = quadro do excesso de cortisol <b>de qualquer causa</b> · <b>DOENÇA</b> de Cushing = adenoma hipofisário produtor de <b>ACTH</b>. Não confunde — a prova cobra essa distinção.</li>
+    <li><b>ACTH-INdependente</b> (ACTH baixo): <b>iatrogênica (corticoide exógeno) = ~50% dos casos, a causa mais comum</b>; adenoma/carcinoma adrenal. <b>ACTH-dependente</b>: doença de Cushing (hipófise); ACTH ectópico (oat-cell pulmonar, carcinoide).</li>
+    <li><b>Clínica:</b> obesidade central + face em lua cheia + giba; extremidades finas; <b>estrias violáceas</b> (↓colágeno); pele fina/equimoses; miopatia proximal; osteoporose; <b>HAS</b>; DM/resistência insulínica; labilidade emocional; infecções; <b>hirsutismo/acne e irregularidade menstrual (formas ACTH-dependentes, pelos andrógenos)</b>.</li>
+    <li><b>Dx em 3 passos:</b> 1) confirmar hipercortisolismo (supressão com dexametasona 1mg / cortisol livre urinário 24h / cortisol salivar noturno) → 2) dosar <b>ACTH</b> (baixo = adrenal; normal/alto = hipófise ou ectópico) → 3) localizar (RM de hipófise / TC).</li>
+  </ul>
+  <div class="caiu"><b class="q">Discursiva que caiu (prova B):</b> mulher com Cushing — explicar a HAS: cortisol tem <b>efeito mineralocorticoide</b> (retenção de Na⁺ e água) e <b>aumenta a sensibilidade vascular às catecolaminas</b> → vasoconstrição + volume = hipertensão. Hirsutismo/acne: forma <b>ACTH-dependente</b> estimula também a zona reticular → <b>↑andrógenos adrenais</b>.</div>
+
+  <h3>Conn, feocromocitoma e carcinoma adrenal</h3>
+  <ul>
+    <li><b>Conn (hiperaldosteronismo 1º):</b> adenoma produtor de aldosterona (60–70%) ou hiperplasia bilateral → <b>HAS resistente + hipoCAlemia (fraqueza, cãibras, poliúria) + alcalose metabólica</b>. Rastreio: <b>relação aldosterona/renina ↑ (renina SUPRIMIDA)</b>. Tto: adrenalectomia (unilateral) ou espironolactona (bilateral).</li>
+    <li><b>Feocromocitoma:</b> tumor da <b>MEDULA</b> (células cromafins) produtor de catecolaminas → <b>tríade: HAS paroxística + sudorese + palpitações</b> (+cefaleia). ~70% esporádico; hereditário: <b>MEN-2 (RET)</b>, VHL, NF1. Dx: <b>metanefrinas</b> plasmáticas/urinárias. Histologia: <b>zellballen</b>. Tto: <b>alfabloqueio ANTES</b> (fenoxibenzamina) → depois beta → cirurgia.</li>
+    <li><b>Adenocarcinoma adrenal:</b> raro; TP53 (Li-Fraumeni), IGF2 (Beckwith-Wiedemann); pode ser funcionante (Cushing/Conn/virilização); massa &gt;4cm irregular; mitotano na doença avançada.</li>
+  </ul>
+  <div class="trap" style="margin-bottom:0">Pegadinha que caiu (prova B): feocromocitoma <span class="wrong">"tumor da zona glomerulosa produtor de aldosterona"</span> = FALSO — é da <span class="right">medula, produtor de catecolaminas</span> (aldosterona/glomerulosa = Conn). E o dx <span class="wrong">não é por biópsia</span> — é <span class="right">bioquímico (metanefrinas) + imagem</span>.</div>
+</div>
+<h2><span class="n">7</span> Hipófise (aula 4 — o SP que você está vendo agora)</h2>
+<div class="card">
+  <h3 style="margin-top:0">Adenomas hipofisários (PitNETs)</h3>
+  <ul>
+    <li><b>Funcionantes</b> (síndrome de hipersecreção) × <b>não funcionantes</b> (efeito de massa). <b>Micro &lt;10mm · macro ≥10mm</b>. <b>Prolactinoma = o funcionante mais comum.</b> Associação genética: <b>MEN-1</b> (tríade: paratireoide + pâncreas endócrino + hipófise).</li>
+    <li><b>Efeito de massa:</b> cefaleia · compressão do quiasma → <b>hemianopsia bitemporal</b> (fibras NASAIS da retina cruzadas) · compressão da hipófise normal → hipopituitarismo.</li>
+  </ul>
+
+  <h3>GH: gigantismo × acromegalia</h3>
+  <ul>
+    <li>GH ↑ <b>ANTES do fechamento das epífises = gigantismo</b> (crescimento linear via IGF-1 → condrócitos da placa) · <b>DEPOIS = acromegalia</b> (crescimento periosteal + partes moles: mãos, pés, mandíbula/prognatismo, macroglossia, visceromegalia, sudorese, apneia do sono, resistência insulínica/DM, HAS).</li>
+    <li><b>Diagnóstico: IGF-1 elevado + GH que NÃO suprime no teste de sobrecarga de glicose (TOTG) + RM de hipófise.</b></li>
+    <li>Tto: cirurgia <b>transesfenoidal</b>; análogos da somatostatina (octreotida); pegvisomanto; RT se refratário.</li>
+  </ul>
+  <div class="trap">Pegadinha que caiu (prova B, "incorreta"): <span class="wrong">"o diagnóstico pode ser confirmado pela dosagem isolada de GH basal em jejum"</span> — FALSO. GH é <span class="right">pulsátil</span>: confirma com <span class="right">IGF-1 + supressão com glicose</span>.</div>
+
+  <h3>Prolactinoma</h3>
+  <ul>
+    <li>Prolactina ↑ <b>inibe o GnRH</b> → ↓LH/FSH → hipogonadismo central. <b>Mulher:</b> amenorreia + galactorreia + infertilidade + osteopenia. <b>Homem:</b> ↓libido, disfunção erétil, ginecomastia, infertilidade (diagnóstico mais tardio → macro).</li>
+    <li>Excluir outras causas de hiperprolactinemia: <b>gestação, antidopaminérgicos (antipsicóticos), hipotireoidismo (TRH ↑), insuficiência renal, efeito de haste</b>.</li>
+    <li><b>Tratamento de 1ª escolha é FARMACOLÓGICO: agonista dopaminérgico (cabergolina/bromocriptina)</b> — reduz prolactina E o tumor; cirurgia só em refratários/compressão grave.</li>
+  </ul>
+
+  <h3>ADH: diabetes insípido</h3>
+  <ul>
+    <li><b>Central</b> = déficit de ADH (lesão hipotálamo-hipófise) · <b>Nefrogênico</b> = rim resistente ao ADH (lítio, doenças renais) · <b>Gestacional</b> = <b>vasopressinASE placentária</b> degradando ADH (raro).</li>
+    <li>Quadro: <b>poliúria hipotônica</b> (pode chegar a 18L/24h!) + polidipsia + <b>noctúria</b> (rim não concentra nem à noite) + hipernatremia/desidratação se não repõe água.</li>
+    <li><b>Teste da desmopressina:</b> urina concentra → central (responde ao análogo) · não concentra → nefrogênico. Tto: central = desmopressina · nefrogênico = tiazídico + restrição de sal.</li>
+  </ul>
+
+  <h3>Hipopituitarismo e sela vazia</h3>
+  <ul>
+    <li>Causas: tumores, cirurgia, <b>radioterapia craniana</b>, TCE, infiltrativas, <b>Sheehan</b> (necrose isquêmica pós-hemorragia obstétrica), <b>apoplexia hipofisária</b> (hemorragia/infarto agudo, geralmente em adenoma).</li>
+    <li>Clínica por eixo: ↓ACTH = insuf. adrenal secundária (fadiga, hipotensão, hipoglicemia) · ↓TSH = hipotireoidismo central · ↓LH/FSH = amenorreia/↓libido/disfunção erétil · ↓GH = baixa estatura (criança), dislipidemia/↓massa óssea (adulto).</li>
+    <li><b>Sela vazia (aracnoidocele intrasselar):</b> herniação do espaço subaracnóideo na sela → hipófise achatada; primária (defeito do diafragma da sela) ou secundária (pós-cirurgia/RT/apoplexia).</li>
+  </ul>
+  <div class="caiu" style="margin-bottom:0"><b class="q">Como caiu (2 provas!):</b> homem tratado com <b>radioterapia</b> (tumor de nasofaringe) há 10 anos → fadiga, ↓libido, disfunção erétil + <b>testosterona ↓ COM LH/FSH baixos</b> = <b>hipopituitarismo (hipogonadismo central) por dano hipofisário da RT</b> · homem infértil com prolactina ↑ + testosterona ↓ + LH/FSH ↓ = <b>hipogonadismo hipogonadotrófico secundário a prolactinoma</b> · mulher com amenorreia + galactorreia + prolactina ↑ + tumorzinho na RM = <b>prolactinoma</b>. A chave é olhar as gonadotrofinas: <b>periférico = LH/FSH ↑ · central = LH/FSH ↓/inapropriadamente normais</b>.</div>
+</div>
+
+<h2><span class="n">8</span> SNC (aula 5) — o tema favorito das provas</h2>
+<div class="card">
+  <h3 style="margin-top:0">Hematomas intracranianos — A TABELA da prova</h3>
+  <div class="tblwrap">
+  <table>
+    <tr><th></th><th>Epidural</th><th>Subdural</th><th>Subaracnóideo (HSA)</th><th>Intracerebral</th></tr>
+    <tr><td><b>Vaso</b></td><td><b>Artéria meníngea média</b> (trauma, ± fratura temporal)</td><td><b>Veias ponte</b></td><td>Pequenos vasos superficiais (trauma) ou <b>aneurisma</b> roto</td><td>Vasos do parênquima (alta energia, HAS)</td></tr>
+    <tr><td><b>Curso</b></td><td>RÁPIDO, arterial: <b>intervalo lúcido</b> → deterioração súbita</td><td>LENTO, venoso: dias a semanas, flutuante/insidioso</td><td>Súbito: <b>"pior cefaleia da vida"</b></td><td>Agudo</td></tr>
+    <tr><td><b>Paciente típico</b></td><td>Jovem + TCE (moto, queda, pancada temporal)</td><td><b>Idoso e/ou etilista crônico</b> (atrofia estira as veias ponte) — trauma pode ser LEVE ou nem lembrado</td><td>HAS, tabagista, esforço</td><td>Trauma grave, HAS</td></tr>
+    <tr><td><b>Clínica-chave</b></td><td>Lúcido → rebaixamento + <b>midríase unilateral fixa</b> (herniação uncal comprime o III)</td><td>Cefaleia + confusão + hemiparesia progressivas</td><td>Cefaleia explosiva + <b>rigidez de nuca</b> + vômitos; exame pode ser normal</td><td>Déficit focal + convulsão + rebaixamento</td></tr>
+    <tr><td><b>TC</b></td><td><b>BICONVEXA (lente)</b>, limitada pelas suturas</td><td><b>CRESCENTE (meia-lua)</b>, NÃO respeita suturas</td><td>Sangue em <b>cisternas da base e sulcos</b></td><td>Hiperdensidade no parênquima</td></tr>
+    <tr><td><b>Conduta</b></td><td>Craniotomia + drenagem urgente, controle da PIC</td><td>Cirurgia se sintomático</td><td>Suporte; craniectomia se preciso</td><td>Clínico ou cirurgia</td></tr>
+  </table>
+  </div>
+  <div class="caiu"><b class="q">Como caiu (TODAS as provas, várias questões):</b> jovem + colisão + lúcido depois piora + midríase = <b>epidural</b> · idoso 72a etilista + cefaleia arrastada + sonolência + déficit leve há semanas = <b>subdural</b> · etilista + queda leve + dias depois confusão/hemiparesia = <b>subdural</b> · "pior dor de cabeça da vida" + rigidez de nuca + sangue nas cisternas = <b>HSA</b>. Na discursiva da prova C o aluno respondeu subdural certo, mas a <b>TC anexada era biconvexa (epidural)</b> e a professora corrigiu — ela liga MUITO para a forma na TC: <b>lente = epidural · meia-lua = subdural</b>.</div>
+
+  <h3>Hidrocefalia</h3>
+  <ul>
+    <li><b>Obstrutiva (não comunicante):</b> bloqueio do fluxo no sistema ventricular — <b>aqueduto de Sylvius</b> é o local mais comum (estenose, tumor); Dandy-Walker (4º ventrículo cístico); Chiari. TC: dilatação <b>proximal à obstrução</b>.</li>
+    <li><b>Comunicante:</b> ↓reabsorção nas <b>granulações aracnóideas</b> — pós-meningite ou sangue no espaço subaracnóideo (HSA, hemorragia do parto em prematuros). TC: dilatação <b>tetraventricular</b>.</li>
+    <li><b>Pressão normal (NPH):</b> crônica do <b>idoso</b>, PIC normal — <b>tríade de Hakim: apraxia de marcha + incontinência urinária + demência</b> ("wet, wacky, wobbly").</li>
+    <li><b>Hipersecreção (rara):</b> papiloma de plexo coroide.</li>
+    <li><b>Clínica por idade:</b> lactente (fontanela aberta) = macrocefalia + fontanela tensa + <b>olhar em sol poente</b> + irritabilidade/letargia · criança maior/adulto = HIC: cefaleia matinal + <b>vômitos em jato</b> + <b>papiledema</b> + diplopia (VI par) · Tto: <b>derivação ventrículo-peritoneal</b>; ventriculostomia endoscópica do 3º ventrículo na obstrução do aqueduto.</li>
+  </ul>
+  <div class="caiu"><b class="q">Como caiu:</b> idoso com marcha difícil + incontinência + declínio cognitivo + ventrículos dilatados SEM aumento de PIC = <b>hidrocefalia de pressão normal</b> (caiu em 2 provas!) · assertivas: neonato "sol poente/irritabilidade/letargia" ✓ · NPH com "demência, incontinência, apraxia de marcha" ✓ · comunicante por meningite/HSA (complicações do parto) ✓.</div>
+
+  <h3>Defeitos do tubo neural</h3>
+  <ul>
+    <li>Fechamento do tubo neural = <b>3ª–4ª semana (~28º dia)</b>. Falha cranial = <b>anencefalia</b> · falha caudal = espinha bífida.</li>
+    <li><b>Oculta:</b> só defeito ósseo, SEM herniação — forma <b>mais leve e mais comum</b>, geralmente <b>assintomática</b>/achado incidental (tufo de pelos).</li>
+    <li><b>Meningocele:</b> hernia <b>SÓ meninges</b> (bolsa de LCR); medula fica no canal; déficit ausente/leve.</li>
+    <li><b>Mielomeningocele:</b> hernia <b>meninges + MEDULA</b> — a forma mais grave: paralisia/déficit sensitivo abaixo da lesão, bexiga neurogênica, e <b>associação com hidrocefalia + Arnold-Chiari tipo II</b>.</li>
+    <li>Risco: <b>deficiência de ácido fólico</b>, ácido valproico, genética. Rastreio pré-natal: USG + <b>alfafetoproteína (AFP)</b>.</li>
+  </ul>
+  <div class="trap">Pegadinhas que caíram: <span class="wrong">"meningocele associa-se frequentemente a hidrocefalia e Chiari II"</span> (é a <span class="right">MIELOmeningocele</span>) · <span class="wrong">"espinha bífida oculta é a forma mais grave"</span> (é a mais LEVE) · <span class="wrong">"todas as formas cursam com disfunção neurológica grave"</span> (oculta é assintomática) · "espinha bífida oculta passa despercebida ao nascimento, sem hérnia nem déficit" = <span class="right">CORRETA</span>.</div>
+
+  <h3>Tumores e lesões parenquimatosas (passada rápida — o que a prof destacou)</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Metastáticos = os mais frequentes no adulto</b> (pulmão, mama, melanoma, rim, TGI). Primários: <b>gliomas ~80% dos malignos primários</b>; <b>meningioma = o mais comum no geral, benigno</b>; schwannoma vestibular; adenoma hipofisário.</li>
+    <li>Gliomas: graus OMS I–II (baixo) × III–IV (alto: pleomorfismo, mitoses, <b>necrose + proliferação microvascular</b>). <b>Glioblastoma (grau IV) = o mais comum e agressivo do adulto</b> (tto: cirurgia debulking + RT + temozolomida). Oligodendroglioma: calcificações, <b>1p/19q</b> = melhor prognóstico. Clínica: cefaleia de HIC, <b>convulsões (mais em baixo grau)</b>, déficit focal. (Ela avisou em aula que NÃO cobra os subtipos de astrocitoma.)</li>
+    <li><b>Concussão</b> = disfunção transitória (&lt;6h), TC normal, repouso · <b>Contusão</b> = lesão focal golpe/contragolpe, hiperdensidade nos polos, pode piorar em horas-dias · <b>Lesão axonal difusa</b> = cisalhamento por aceleração ROTACIONAL (acidente de carro) → <b>coma prolongado SEM lesão focal evidente</b>, RM com micro-hemorragias na substância branca.</li>
+  </ul>
+</div>
+<h2><span class="n">9</span> As 10 pegadinhas pra levar na cabeça</h2>
+<div class="card">
+  <div class="trap">1 · TC <span class="right">biconvexa (lente) = EPIdural</span> · <span class="right">crescente (meia-lua) = SUBdural</span>. A professora corrigiu isso à caneta na prova de um veterano.</div>
+  <div class="trap">2 · <span class="right">Intervalo lúcido + midríase unilateral</span> = epidural (artéria) · <span class="right">idoso/etilista + curso arrastado</span> = subdural (veias ponte).</div>
+  <div class="trap">3 · Insuficiência adrenal = <span class="right">hipoNAtremia + hiperCAlemia</span> (nunca o contrário). Secundária: <span class="right">aldosterona NORMAL, sem hiperpigmentação, ACTH baixo</span>.</div>
+  <div class="trap">4 · Quervain: tireotoxicose por <span class="right">liberação de hormônio PRÉ-FORMADO (destruição)</span>, não por produção autônoma. É a tireoidite <span class="right">DOLOROSA + VHS alto + pós-viral</span>.</div>
+  <div class="trap">5 · Hashimoto: destruição por <span class="right">linfócitos T</span> (anti-TPO é marcador); mulheres 10:1; evolui pra <span class="right">HIPO</span>tireoidismo.</div>
+  <div class="trap">6 · GH: <span class="wrong">dosagem isolada de GH não confirma nada</span> (pulsátil) → <span class="right">IGF-1 + TOTG sem supressão</span>. Antes da epífise fechar = gigantismo; depois = acromegalia.</div>
+  <div class="trap">7 · Prolactinoma: 1ª linha é <span class="right">remédio (cabergolina)</span>, não cirurgia. Hipogonadismo central = <span class="right">LH/FSH baixos</span> (periférico = altos).</div>
+  <div class="trap">8 · <span class="wrong">Meningocele NÃO associa Chiari II/hidrocefalia</span> — isso é <span class="right">MIELOmeningocele</span>. Oculta = a mais leve e comum, assintomática.</div>
+  <div class="trap">9 · Feocromocitoma = <span class="right">MEDULA adrenal, catecolaminas, metanefrinas</span> (não é glomerulosa/aldosterona — isso é Conn: HAS + hipoK + renina suprimida).</div>
+  <div class="trap">10 · DI gestacional = <span class="right">vasopressinASE placentária</span> (enzima que degrada ADH). Cushing: <span class="right">síndrome = qualquer causa · doença = adenoma hipofisário de ACTH</span>; causa mais comum = <span class="right">iatrogênica (corticoide)</span>.</div>
+</div>
+
+<h2><span class="n">10</span> Discursivas prováveis — respostas-modelo em 3 linhas</h2>
+<div class="card">
+  <p class="small muted" style="margin-top:0">O padrão das 3 provas: casos clínicos pedindo <b>hipótese diagnóstica</b> (às vezes com lâmina/TC) e 1–2 "explique a fisiopatologia". Treina falar essas respostas:</p>
+
+  <details><summary>Caso: jovem + TCE + intervalo lúcido + piora súbita (± TC biconvexa)</summary><div class="inner"><p><b>Hematoma epidural.</b> Ruptura da <b>a. meníngea média</b> (trauma temporal) → sangramento arterial rápido entre osso e dura → HIC aguda → <b>herniação uncal</b> comprimindo o III par (midríase fixa ipsilateral) e o tronco. TC: coleção <b>biconvexa</b>. Conduta: craniotomia descompressiva + drenagem urgente.</p></div></details>
+
+  <details><summary>Caso: idoso/etilista + trauma leve + semanas de cefaleia/confusão/hemiparesia</summary><div class="inner"><p><b>Hematoma subdural.</b> Atrofia cerebral (idade/álcool) aumenta o espaço subdural e <b>estira as veias ponte</b>, que rompem com traumas leves → sangramento venoso lento entre dura e aracnoide → sintomas insidiosos e flutuantes. TC: coleção em <b>crescente</b> que não respeita suturas.</p></div></details>
+
+  <details><summary>Explique: por que a inflamação crônica favorece câncer? (cite 2 mecanismos)</summary><div class="inner"><p>1) <b>Proliferação compensatória persistente</b>: ciclos contínuos de lesão-reparo mantêm as células se dividindo, acumulando mutações. 2) <b>ROS/radicais livres</b> das células inflamatórias causam <b>dano direto ao DNA</b>. Somam-se citocinas/fatores de crescimento que remodelam o microambiente. Ex.: hepatite crônica → CHC; H. pylori → ca gástrico; DII → colorretal.</p></div></details>
+
+  <details><summary>Explique: HAS + hirsutismo/acne na síndrome de Cushing</summary><div class="inner"><p><b>HAS:</b> o cortisol em excesso tem <b>efeito mineralocorticoide</b> (retém Na⁺/água, expande volume) e <b>aumenta a sensibilidade vascular às catecolaminas</b> → vasoconstrição. <b>Hirsutismo/acne:</b> nas formas <b>ACTH-dependentes</b>, o ACTH estimula também a zona reticular → <b>excesso de andrógenos adrenais</b>.</p></div></details>
+
+  <details><summary>Caso: Graves × Hashimoto — mecanismos (caiu como "explique cada uma")</summary><div class="inner"><p><b>Graves:</b> autoanticorpo <b>TRAb liga-se ao receptor de TSH e o ESTIMULA continuamente</b> → hiperprodução de T3/T4, bócio difuso, TSH suprimido; exoftalmia por inflamação autoimune retro-orbitária (fibroblastos + glicosaminoglicanos). <b>Hashimoto:</b> autoimunidade <b>destrutiva</b> — linfócitos T citotóxicos destroem folículos (anti-TPO/anti-Tg como marcadores) → hipotireoidismo com TSH alto.</p></div></details>
+
+  <details><summary>Caso: HAS resistente + fraqueza/cãibras + hipocalemia + aldosterona ↑ com renina baixa</summary><div class="inner"><p><b>Hiperaldosteronismo primário (síndrome de Conn)</b> — adenoma adrenal ou hiperplasia bilateral secretando aldosterona de forma autônoma → retenção de Na⁺/água (HAS) + espoliação de K⁺ (fraqueza, cãibras, poliúria) + alcalose; a volemia alta <b>suprime a renina</b> (ARR elevado).</p></div></details>
+
+  <details><summary>Caso: sede intensa + poliúria ~10L/dia + urina diluída + hipernatremia</summary><div class="inner"><p><b>Diabetes insípido.</b> Falta de ADH (central) ou resistência renal (nefrogênico) → o túbulo coletor não reabsorve água livre → poliúria hipotônica + polidipsia; se a ingesta não acompanha → desidratação e hipernatremia. Diferenciar com <b>teste da desmopressina</b> (concentra = central).</p></div></details>
+
+  <details><summary>Caso: febre alta + púrpura + choque refratário em paciente com meningococo</summary><div class="inner"><p><b>Síndrome de Waterhouse-Friderichsen.</b> Sepse por <b>N. meningitidis</b> → CIVD → <b>necrose hemorrágica bilateral das adrenais</b> → queda aguda de cortisol (↓receptores α1 → não responde a vasopressor) e aldosterona (↓volemia, hipoNa/hiperK) → choque refratário. Tto: corticoide IV + volume + vasopressor + ceftriaxona.</p></div></details>
+
+  <details><summary>Casos-relâmpago de 1 linha (bateu → nomeia)</summary><div class="inner"><ul>
+    <li>Nódulo de tireoide + <b>vidro fosco/fendas/psamoma</b> → carcinoma papilífero.</li>
+    <li>Nódulo + <b>diarreia + calcitonina↑</b> (± NEM-2/RET) → carcinoma medular.</li>
+    <li>Massa cervical de <b>crescimento rápido em idoso</b> → carcinoma anaplásico.</li>
+    <li>Amenorreia + galactorreia + <b>prolactina↑</b> → prolactinoma.</li>
+    <li>Pós-<b>radioterapia</b> de cabeça/pescoço + testosterona↓ com <b>LH/FSH↓</b> → hipopituitarismo (hipogonadismo central).</li>
+    <li>"<b>Pior cefaleia da vida</b>" + rigidez de nuca → HSA (aneurisma).</li>
+    <li>Idoso: <b>marcha + incontinência + demência</b> com PIC normal → hidrocefalia de pressão normal.</li>
+    <li>Lactente: macrocefalia + <b>olhar em sol poente</b> → hidrocefalia.</li>
+    <li>Coma prolongado pós-acidente SEM lesão focal na TC → lesão axonal difusa.</li>
+    <li>TB antiga + <b>hiperpigmentação</b> + hipotensão + hipoNa/hiperK → Addison.</li>
+  </ul></div></details>
+
+  <p style="margin-bottom:0"><b>Última coisa antes de entrar:</b> respira, lê o caso até o fim (a resposta quase sempre está no par "curso da doença + 1 achado-assinatura") e cuidado com as questões de "assinale a INCORRETA" — as 3 provas adoram. Boa prova! 💪</p>
+</div>
+
+</div>
+</body>
+</html>

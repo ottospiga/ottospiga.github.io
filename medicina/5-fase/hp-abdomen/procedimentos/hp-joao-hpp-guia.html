@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HP · Prova do João (HPp) — Exame físico abdominal, abdome agudo, ascite, via biliar e endoscopia · Guia de estudo</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f; --purple:#c6b3ff;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .sub b{color:#dfe9f4}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul,.panel ol{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  .k3{color:#8ab8ff;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tscroll{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .exam{background:#2a161b;border:1px solid #6f2f36;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffc9cd;margin:8px 0}
+  .exam b{color:#fff}
+  .ok{background:#0f2a20;border:1px solid #1f5a41;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cdefdd;margin:8px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.4px;color:#cdd9e6}
+  .box b{color:#dfe9f4}
+  .tt{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:#cfe0ef}
+  .chip b{color:#fff}
+  .chip.hot{border-color:#6f2f36;background:#2a161b;color:#ffb9be}
+  .chip.warm{border-color:#6a5a26;background:#2b2113;color:#ffe1ad}
+  .chip.cool{border-color:#1c5a41;background:#123227;color:#7ff0c0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden;min-width:120px}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.a{background:#33301a;color:#ffdf9e;border:1px solid #6a5a26}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+  .qfilter{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .qfilter .chip{cursor:pointer}
+  .qfilter .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d}
+  details.gab{margin-top:10px;background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:6px 12px}
+  details.gab summary{cursor:pointer;font-weight:700;color:#8fe4d2;padding:6px 0}
+  details.gab p,details.gab li{font-size:13.4px;color:#cfe4f5}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+  .map li b{color:#ffd79e}
+
+  /* ---- deck de flashcards atômicos ---- */
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  .chips .chip{cursor:pointer}
+  .chips .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d;font-weight:700}
+  .fbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut);margin:2px 2px 8px}
+  .fbar b{color:var(--ink)}
+  #card{background:linear-gradient(135deg,#12324a,#151f2c);border:1px solid var(--line);border-radius:18px;min-height:300px;padding:26px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;box-shadow:var(--shadow);position:relative}
+  #card .cat{position:absolute;top:12px;left:14px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 9px;border-radius:6px;color:#fff;background:#244a5c}
+  #card .hint{position:absolute;bottom:10px;font-size:11.5px;color:#7f93a8}
+  #qFront{font-size:20px;font-weight:700;color:#eef3f9}
+  #back{display:none;width:100%}
+  #qTop{font-size:14px;color:var(--mut);font-weight:600;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed #3a4e60}
+  #resp{font-weight:800;color:var(--tealo);font-size:22px;line-height:1.35}
+  #why{color:#b9cbdd;font-size:13.5px;margin-top:12px}
+  .actions{display:flex;gap:10px;margin-top:14px}
+  .actions button{flex:1;border:none;border-radius:14px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+  #btnErrei{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  #btnAcertei{background:#123326;color:#7ff0c0;border:1px solid #1c5a41}
+  .hidden{display:none!important}
+  #fim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+  #fim h2{margin:0 0 8px;font-size:20px;color:#dfe9f4}
+  #fim button{margin-top:14px;border:none;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;background:var(--teal);color:#0c141d;font-family:inherit}
+  #fim button.sec{background:var(--card2);color:var(--ink);border:1px solid var(--line);margin-left:8px}
+
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  @media(max-width:520px){h1{font-size:19px}#qFront{font-size:18px}#resp{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · HP Manifestações Abdominais · Procedimentos (prof. João Diedrich)</span>
+    <h1>HPp — Exame físico abdominal, abdome agudo &amp; cia · <span style="color:var(--tealo)">Guia de estudo</span></h1>
+    <div class="sub">Formato v2: resumo denso (30–40 min) com os comentários da <b>prova antiga</b> → banco único de 48 questões (ENAMED + nível prova + as 26 da prova antiga comentadas + estilo do prof) → mapa mental, flashcards atômicos e Feynman. Fontes: slides <b>Exame Físico Abdominal</b> (Porto 8ª) e <b>Abdome Agudo I</b> (Sabiston 18ª) do João + prova antiga gabaritada; blocos sem slide (ascite/paracentese, via biliar, endoscopia) montados de Porto, Sabiston, Harrison e diretrizes — marcados <b>[extra]</b>.</div>
+    <div class="meta"><span class="chip hot"><b>Prova:</b> seg 31/08 · 18h</span><span class="chip"><b>Material:</b> 2 aulas (93 slides) + prova antiga (26 questões A–D, gabaritada)</span><span class="chip warm"><b>Prova antiga:</b> 19 de 26 respostas = B 👀</span><span class="chip cool"><b>Leitura:</b> ~35 min · depois questões</span></div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+    <div class="panel">
+      <h2>0 · Como a prova cobra (a prova antiga é o mapa)</h2>
+      <p>A prova antiga que chegou até você é uma <b>"Prova de Habilidades"</b> de <b>26 questões objetivas, A–D</b>, sem descritiva e sem caso clínico: perguntas de <b>uma linha</b> ("o sinal X indica…", "a principal causa de… é", "o exame de escolha é…"). Ela vem dividida em <b>5 blocos</b>: <span class="k2">Exame físico abdominal (Q1–6)</span> · <span class="k2">Ascite e paracentese (Q7–12)</span> · <span class="k2">Abdome agudo (Q13–18)</span> · <span class="k2">Patologias cirúrgicas benignas da via biliar (Q19–24)</span> · <span class="k2">Noções básicas de endoscopia (Q25–26)</span>.</p>
+      <div class="exam"><b>Dado curioso que vale ouro:</b> no gabarito, <b>19 das 26 respostas são "B"</b> (as outras: 1-A, 2-C, 4-C, 9-C, 14-C, 17-A). Não é para chutar B cegamente — mas se ele reaproveitar o mesmo banco, a alternativa correta costuma ser a mais "completa e técnica" das quatro, e os distratores são grosseiros (ex.: "Murphy → apendicite", "tríade de Charcot → dor, vômitos, diarreia"). Estude para reconhecer a certa em 5 segundos.</div>
+      <p><b>Cobertura dos seus slides:</b> os dois decks que você tem (<i>Exame Físico Abdominal</i>, do Porto, e <i>Abdome Agudo I</i>, do Sabiston) cobrem <b>direto</b> os blocos 1 e 3 e dão base para o 2. Os blocos 2, 4 e 5 (ascite/paracentese, via biliar, endoscopia) <b>não têm slide</b> — montei a partir de Porto, Sabiston, Harrison e diretrizes, no nível exato das 12 questões que caíram (marquei <b>[extra]</b>). Vale confirmar com um veterano se o João cobra esses 3 blocos na prova dele ou se eles vieram de outra professora do bloco — mas estude os 3 de qualquer jeito: são 12 de 26 questões e as perguntas são fáceis se você leu uma vez.</p>
+      <div class="note">📌 <b>Plano de leitura (35 min):</b> 1) exame físico (10 min) → 2) abdome agudo (10 min) → 3) ascite + via biliar + endoscopia (10 min) → 4) radar + decoreba (5 min). Depois vá direto para as questões — comece pelas 26 da prova antiga (Q21–Q46), depois as ENAMED. Flashcards nas brechas de segunda.</div>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Exame físico abdominal (slides do João, Porto 8ª ed.)</h2>
+      <h3>Antes de encostar no paciente</h3>
+      <p><b>Pré-exame:</b> informar sobre o exame, tranquilizar, empatia e respeito, cuidado com a exposição (expor do apêndice xifoide à sínfise púbica, cobrindo o resto) e <b>higiene das mãos</b> (técnica OMS: dorso e laterais/entre os dedos → polegares → unhas → punhos → enxugar com papel e fechar a torneira com ele). <b>Posicionamento:</b> decúbito dorsal, <b>sem travesseiro</b>, mãos ao longo do corpo, pernas descruzadas — e o examinador <b>sempre à DIREITA</b> do paciente (o slide grita "DIREITA!!" em vermelho: é pergunta de prova prática e teórica).</p>
+      <p><b>Avaliação global</b> ("o exame físico geral pode auxiliar a avaliação abdominal"): olhos — conjuntiva pálida = <b>anemia</b>, esclera amarela = <b>icterícia</b>; pele — icterícia comparada com a mão do examinador; cavidade oral — <b>monilíase</b> (candidose/"sapinho": imunossupressão, ATB, diabetes), <b>queilite angular</b> (deficiência de ferro/B2/B12, candidose), <b>glossite/língua geográfica/pilosa</b>, <b>erosões do esmalte dentário</b> (vômitos de repetição — bulimia, DRGE), <b>cáseo</b> amigdaliano.</p>
+
+      <h3>Topografia: 4 quadrantes e 9 regiões</h3>
+      <div class="grid2">
+        <div class="box"><b>Quadrantes</b> (linha média + linha transumbilical): QSD · QSE · QID · QIE. Serve para localizar a dor do abdome agudo (a tabela de causas por quadrante usa ESSA divisão).</div>
+        <div class="box"><b>9 regiões</b> (2 linhas hemiclaviculares + 2 horizontais): 1 hipocôndrio D · 2 epigástrio · 3 hipocôndrio E · 4 flanco D · 5 mesogástrio (umbilical) · 6 flanco E · 7 fossa ilíaca D · 8 hipogástrio · 9 fossa ilíaca E.</div>
+      </div>
+      <p><b>Relações anatômicas</b> que a prova gosta: hipocôndrio D = fígado/vesícula; epigástrio = estômago/pâncreas/aorta; hipocôndrio E = baço/cauda do pâncreas; flancos = cólons ascendente/descendente e rins; mesogástrio = delgado/aorta; FID = apêndice/ceco/ovário D; hipogástrio = bexiga/útero; FIE = sigmoide/ovário E.</p>
+
+      <h3>A ordem é I-A-P-P — e a ausculta vem ANTES de percutir e palpar</h3>
+      <p><b>Inspeção → Ausculta → Percussão → Palpação.</b> Diferente do resto do corpo, a ausculta é feita antes porque percussão e palpação estimulam o peristaltismo e alteram os ruídos. O slide ainda cita o <b>POCUS</b> (ultrassom à beira do leito) como "exame complementar" do exame físico. <span class="hl">[extra]</span> Se a prova perguntar "sequência correta do exame do abdome", a resposta é inspeção, ausculta, percussão, palpação.</p>
+
+      <h3>Inspeção</h3>
+      <ul>
+        <li><b>O que olhar:</b> forma/simetria, volume, herniações ou massas, cicatrizes (cirúrgicas ou não), lesões de pele, circulação colateral, peristaltismo visível.</li>
+        <li><b>Tipos de abdome:</b> globoso à custa de <b>panículo adiposo</b> × globoso à custa de <b>ascite</b> (umbigo apagado/protruso, pele lisa e brilhante, flancos abaulados em batráquio) × <b>escavado</b> (caquexia) <span class="hl">[extra: plano, em avental, pendular]</span>.</li>
+        <li><b>Sinais cutâneos:</b> <b>Cullen</b> = equimose <b>periumbilical</b> · <b>Gray-Turner</b> = equimose nos <b>flancos</b> — ambos sinalizam <b>hemorragia retroperitoneal</b> (pancreatite necro-hemorrágica, gravidez ectópica rota, AAA roto). <b>Herpes zóster</b> = vesículas em dermátomo, dor que simula abdome agudo (causa extra-abdominal!).</li>
+        <li><b>Circulação colateral:</b> veias dilatadas na parede. <b>"Cabeça de Medusa"</b> (veias radiando do umbigo) = hipertensão portal. <span class="hl">[extra]</span> Tipo <b>porta</b>: fluxo do umbigo para fora; tipo <b>cava inferior</b>: veias nos flancos com fluxo ascendente (obstrução da VCI); tipo cava superior: fluxo descendente no tórax/abdome superior.</li>
+        <li><b>Cicatrizes cirúrgicas (decore o mapa):</b> <b>Kocher</b> = subcostal D (colecistectomia aberta) · <b>McBurney</b> = FID oblíqua (apendicectomia) · <b>Pfannenstiel</b> = suprapúbica transversa (cesariana) · <b>mediana</b> epigástrica/hipogástrica (laparotomia; histerectomia) · <b>paramediana</b> · <b>flanco esquerdo</b> (cirurgia renal/lombotomia) · <b>inguinal</b> (hernioplastia).</li>
+        <li><b>Hérnias:</b> umbilical, incisional (sobre cicatriz), epigástrica, inguinal direta/indireta, femoral. <b>Diástase dos retos</b> = abaulamento mediano ao elevar a cabeça, sem anel herniário. Pedir a <b>manobra de Valsalva</b> (ou elevar a cabeça/tossir) para evidenciar hérnias e diástase.</li>
+      </ul>
+
+      <h3>Ausculta</h3>
+      <p>Diafragma do estetoscópio nos 4 quadrantes; ausculta também os <b>focos vasculares</b>: aorta (epigástrio), artérias renais (paraumbilical superior), ilíacas (paraumbilical inferior) e femorais (inguinal). <span class="hl">[extra]</span> RHA normais: 5–35/min; considerar ausentes só após 2 a 5 min sem ouvir nada.</p>
+      <div class="ok">✅ A tabela do slide, que é a tabela da prova: <b>RHA aumentados → diarreia/gastroenterite</b> · <b>peristaltismo de luta (RHA aumentados, metálicos, em salvas) → obstrução mecânica</b> · <b>"silêncio abdominal" → íleo adinâmico/paralítico</b> (pós-operatório, peritonite, hipocalemia) · <b>sopros → aneurismas e estenoses arteriais</b> (renal, mesentérica).</div>
+      <div class="exam"><b>Como caiu (Q6):</b> "ausculta abdominal com ausência de ruídos hidroaéreos pode sugerir" → <b>íleo paralítico</b>. Distratores: diarreia infecciosa (RHA aumentados), gastrite e hepatite (não mudam RHA).</div>
+
+      <h3>Percussão</h3>
+      <ul>
+        <li><b>Técnica:</b> mão esquerda espalmada delicadamente sobre o abdome; percute com o dedo indicador ou médio da mão direita sobre os dedos da mão esquerda (exceto o polegar). Sons: <b>timpânico</b> (gás — predominante no abdome normal) × <b>maciço</b> (víscera sólida, líquido, massa) × submaciço.</li>
+        <li><b>Hipertimpanismo → distensão gasosa</b> (obstrução, íleo, meteorismo). <b>Macicez móvel → líquido livre (ascite)</b>: maciço nos flancos em decúbito dorsal, que vira timpânico ao girar o paciente para o lado (o líquido migra). Precisa de ≥ ~1,5 L. <b>Piparote</b> (onda de líquido): a mão do ajudante na linha média, um peteleco num flanco e a onda é sentida no outro — só em grandes volumes. <span class="hl">[extra]</span> <b>Semicírculos de Skoda</b>: limite côncavo para cima entre timpanismo central e macicez nos flancos.</li>
+        <li><b>Hepatimetria:</b> percutir na linha hemiclavicular direita do tórax para baixo (sonoridade pulmonar → macicez hepática) e do abdome para cima (timpanismo → macicez). Normal: <b>6 a 12 cm na linha hemiclavicular direita</b> e <b>4 a 8 cm na linha esternal média</b>. Fígado grande = hepatomegalia; macicez que some = pneumoperitônio (sinal de Jobert, ver adiante).</li>
+        <li><b>Espaço de Traube</b> (baço): área timpânica no hipocôndrio esquerdo limitada pelo 6º EIC, linha axilar anterior e rebordo costal — <b>livre (timpânico) = normal</b>; <b>ocupado (maciço) = esplenomegalia</b> (ou derrame pleural E, estômago cheio).</li>
+        <li><b>Punho-percussão lombar (PPL / sinal de Giordano):</b> golpe com a borda ulnar da mão fechada na loja renal — dor = <b>pielonefrite, litíase/obstrução ureteral</b>.</li>
+      </ul>
+      <div class="exam"><b>Como caiu (Q4):</b> "macicez móvel à percussão sugere" → <b>ascite</b>. Meteorismo dá hipertimpanismo; massa sólida dá macicez FIXA; íleo paralítico dá distensão gasosa + silêncio.</div>
+
+      <h3>Palpação</h3>
+      <ul>
+        <li><b>Superficial:</b> compressão de ~<b>1 cm</b>, <b>unimanual</b>, dedos juntos e retos. Avalia: pontos dolorosos (pedir para o paciente apontar antes e deixar o ponto doloroso por último), integridade da parede, <b>contraturas musculares</b> (defesa voluntária × rigidez involuntária = peritonite).</li>
+        <li><b>Profunda:</b> ~<b>5 cm</b>, <b>bimanual</b> com mãos sobrepostas. Avalia visceromegalias e tumorações (massa pulsátil = aneurisma de aorta).</li>
+        <li><b>Pontos dolorosos:</b> xifoidiano · epigástrico · <b>cístico</b> (vesícula: junção do rebordo costal D com a borda lateral do reto abdominal / linha hemiclavicular) · esplênico · ureterais (superior paraumbilical, médio na linha bi-ilíaca) · <b>apendicular (McBurney</b>: terço lateral da linha umbigo–EIAS direita).</li>
+      </ul>
+      <div class="tscroll"><table>
+        <tr><th>Sinal</th><th>Como pesquisar</th><th>Positivo indica</th></tr>
+        <tr><td><b>Murphy</b></td><td>Compressão do ponto cístico durante inspiração profunda</td><td>Parada súbita da inspiração por dor → <b>colecistite aguda</b></td></tr>
+        <tr><td><b>Blumberg</b></td><td>Compressão lenta e profunda de McBurney seguida de <b>descompressão brusca</b></td><td>Dor à descompressão → <b>irritação peritoneal</b> (apendicite; se difuso = peritonite)</td></tr>
+        <tr><td><b>Rovsing</b></td><td>Compressão do <b>QIE</b> (cólon descendente, deslocando gás retrógrado)</td><td>Dor no <b>QID</b> → apendicite</td></tr>
+        <tr><td><b>Psoas</b></td><td>Extensão passiva da coxa direita (decúbito lateral E) ou flexão contra resistência</td><td>Dor → apendicite <b>retrocecal</b> (apêndice inflamado sobre o psoas)</td></tr>
+        <tr><td><b>Obturador</b></td><td>Rotação interna da coxa direita fletida</td><td>Dor hipogástrica → apendicite <b>pélvica</b> / abscesso pélvico</td></tr>
+        <tr><td><b>Courvoisier-Terrier</b></td><td>Vesícula <b>palpável, indolor</b>, em paciente <b>ictérico</b></td><td>Obstrução biliar <b>neoplásica</b> (cabeça de pâncreas/periampular) — não é cálculo</td></tr>
+        <tr><td><b>Giordano</b></td><td>Punho-percussão lombar</td><td>Pielonefrite / cálculo renal</td></tr>
+      </table></div>
+      <ul>
+        <li><b>Fígado — manobras:</b> <b>Lemos Torres</b> (mão esquerda na região lombar projetando o órgão para frente, mão direita espalmada palpa a borda na inspiração) e <b>Mathieu</b> ("em garra": examinador de frente para os pés do paciente, mãos juntas em garra sob o rebordo). <b>Fígado normal: NÃO palpável ou discretamente palpável na inspiração profunda</b> (borda fina, lisa, indolor, até ~1–2 cm do rebordo). Palpar a 5 cm do rebordo = hepatomegalia; ao nível do umbigo = hepatomegalia gigante.</li>
+        <li><b>Baço:</b> <b>geralmente NÃO palpável</b> (precisa crescer 2–3× para ser sentido). Pesquisa: Traube livre; manobra bimanual (mão esquerda na lombar, direita espalmada) e <b>manobra de Schuster</b> (decúbito lateral direito, perna esquerda fletida, braço esquerdo sobre a cabeça — o baço "cai" sobre a mão).</li>
+        <li><b>No abdome agudo</b> o slide manda incluir <b>exame ginecológico completo e toque retal</b> (Douglas doloroso, sangue, massas).</li>
+      </ul>
+      <div class="exam"><b>Como caiu (Q1, Q2, Q3, Q5):</b> Blumberg positivo → <b>irritação peritoneal</b> (não obstrução, ascite ou hepatomegalia) · fígado normal → <b>não palpável ou discretamente palpável na inspiração profunda</b> (não "5 cm abaixo do rebordo", não "sempre doloroso") · Murphy → <b>colecistite aguda</b> (não apendicite/pancreatite/perfuração) · Rovsing → <b>dor no QID à compressão do QIE</b> (não dor à descompressão — isso é Blumberg).</div>
+      <div class="warn">⚠️ <b>Pegadinha clássica:</b> Rovsing × Blumberg × Murphy. Rovsing = <i>comprime esquerda, dói direita</i>. Blumberg = <i>solta e dói</i>. Murphy = <i>inspira e trava</i>. E Psoas × Obturador: psoas = <i>estica a coxa</i> (retrocecal), obturador = <i>roda a coxa</i> (pélvica).</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Abdome agudo (slides do João, Sabiston 18ª ed.)</h2>
+      <h3>Definição e números do slide</h3>
+      <p><b>Sabiston:</b> "sinais e sintomas de dor e sensibilidade abdominal, uma manifestação clínica que, em geral, requer terapia cirúrgica de emergência". Dor abdominal = <b>18 a 42%</b> das queixas do pronto-socorro; <b>63%</b> dos pacientes têm mais de 65 anos; indicação cirúrgica em <b>15–30%</b> de quem procura a emergência; idosos e recém-natos = 10%. Causas (epidemiologia do slide): <b>etiologia desconhecida 41,3%</b> · ITU + litíase renal &gt;9% · apendicite + colecistite 7% · gastroenterite 6,9% · DIP 6,7%.</p>
+      <div class="note">📌 <b>Frases-lei do slide:</b> "diagnóstico precoce = diminuir morbimortalidade" · "anamnese detalhada + exame físico minucioso → <b>melhor que qualquer exame</b>" · "o diagnóstico é <b>clínico</b>; sintoma-guia: <b>DOR</b>" · "a <b>primeira avaliação</b> é a mais importante" · "analgesia subsequente pode alterar o exame físico" (por isso, avaliações <b>seriadas pelo mesmo médico</b>, observando progressão ou resolução). <span class="hl">[extra]</span> Na prática moderna, analgesia precoce com opioide <i>não</i> mascara o diagnóstico — mas na prova do João, marque o que o slide diz.</div>
+
+      <h3>Os 3 tipos de dor (base fisiológica que ele cobra)</h3>
+      <div class="tscroll"><table>
+        <tr><th></th><th>Visceral</th><th>Somática / parietal</th><th>Referida / irradiada</th></tr>
+        <tr><td>Fibras</td><td>Aferentes na parede dos órgãos, <b>não mielinizadas (C)</b></td><td><b>Mielinizadas</b>, com locais específicos na medula</td><td>Compartilham os mesmos circuitos neurais centrais</td></tr>
+        <tr><td>Estímulo</td><td><b>Distensão ou contração de vísceras ocas</b>, isquemia, inflamação</td><td>Irritação do <b>peritônio parietal</b></td><td>Origem intra-abdominal sentida em área distante (frênico → ombro) ou extra-abdominal manifesta no abdome (IAM, pneumonia)</td></tr>
+        <tr><td>Caráter</td><td>Surda, <b>localização imprecisa</b>, linha média (estômago/vesícula/pâncreas = epigástrio; delgado = periumbilical; cólon = hipogástrio), náuseas/sudorese</td><td><b>Constante, fixa, se acentua com movimentos</b> e tosse; paciente imóvel → <b>peritonite</b></td><td>Dor em local diferente da origem</td></tr>
+      </table></div>
+      <p>É a história da apendicite: começa visceral periumbilical (distensão do apêndice) e migra para a FID quando o peritônio parietal inflama (somática) — a "migração de Murphy" <span class="hl">[extra]</span>.</p>
+
+      <h3>Causas — as 3 tabelas do slide</h3>
+      <ul>
+        <li><b>Abdominais por sistema:</b> GI (apendicite, obstrução, perfuração intestinal, isquemia mesentérica, úlcera perfurada, diverticulite de Meckel, diverticulite do cólon, DII) · pâncreas/vias biliares/fígado/baço (pancreatite, colecistite, colangite, hepatite, abscesso hepático, ruptura esplênica, tumores hepáticos hemorrágicos) · peritoneal (<b>PBE</b>, peritonites secundárias) · urológica (cálculo ureteral, cistite, pielonefrite) · retroperitoneal (aneurisma de aorta, hemorragias) · ginecológica (cisto roto, ectópica, endometriose, torção, salpingite, rotura uterina) · parede (hematoma do reto abdominal).</li>
+        <li><b>Extra-abdominais</b> (o bloco que a prova adora): <b>torácicas</b> (IAM, pneumonia, infarto pulmonar, embolia, pneumotórax, pericardite, derrame pleural) · <b>hematológicas</b> (crise falciforme, leucemia aguda) · <b>neurológicas</b> (herpes zóster, tabes dorsal, compressão radicular) · <b>metabólicas</b> (cetoacidose diabética, porfiria, hiperlipoproteinemia, crise addisoniana) · <b>intoxicações</b> (abstinência de narcóticos, chumbo, picada de cobra/insetos) · etiologia desconhecida (fibromialgia).</li>
+        <li><b>Por localização:</b> <b>QSD</b> hepatite, pancreatite, colecistite, colelitíase, úlcera duodenal, abscesso hepático, hepatopatia com ICC, zóster, IAM, pericardite, apendicite retrocecal, pneumonia · <b>QSE</b> pancreatite, úlceras, IAM, pericardite, pneumonia, abscesso/infarto/ruptura esplênica · <b>QID</b> apendicite, obstrução, diverticulite, ectópica, endometriose, hérnia, DII, cólon irritável, litíase, adenite mesentérica, Meckel, torção de ovário, abscesso tubo-ovariano, abscesso de psoas · <b>QIE</b> os mesmos + DIP, sem apendicite · <b>Difusa</b> pancreatite, obstrução, apendicite inicial, infarto mesentérico, AAA roto, crise falcêmica.</li>
+      </ul>
+
+      <h3>História clínica dirigida</h3>
+      <p><b>Característica da dor</b> (a roda do slide): nova? intensidade? tipo? duração? fatores agravantes/atenuantes? sintomas associados? posição antálgica? <b>Sintomas associados:</b> febre, diarreia, constipação, hematúria, hemorragia digestiva. <b>Homens:</b> testículos e pênis (torção testicular simula dor abdominal). <b>Mulheres:</b> última menstruação, ciclos, antecedentes ginecológicos, corrimento (ectópica, DIP). <b>Hábitos:</b> álcool (pancreatite, úlcera) e drogas. <b>História de crises semelhantes</b>, <b>antecedentes cirúrgicos</b> (bridas!), comorbidades, <b>medicações contínuas</b> (AINE/corticoide → úlcera perfurada e resposta inflamatória mascarada; anticoagulante → hematoma). E duas perguntas-armadilha do slide: <b>"hemograma inalterado?"</b> (não exclui) e <b>"diminuição da dor"</b> (pode ser perfuração que aliviou a distensão — não é melhora).</p>
+
+      <h3>Exame físico do abdome agudo</h3>
+      <p><b>Geral:</b> estado geral, <b>icterícia</b>, <b>febre</b>, palidez, desidratação, <b>pressão arterial</b>, pulso, padrão respiratório, <b>nível de consciência</b> — os quatro em vermelho no slide são os marcadores de gravidade/etiologia (icterícia → via biliar; febre → inflamatório/infeccioso; PA e consciência → choque). <b>Abdome:</b> inspeção (<b>distensão, abaulamentos</b>, cicatrizes, hérnias, equimoses) · ausculta (RHA <b>ausentes</b>, <b>aumentados</b>, <b>metálicos</b>) · percussão (distensão gasosa, ascite, peritonite localizada ou difusa) · palpação (localização da dor, massas, visceromegalias, <b>massa pulsátil</b>, + exame ginecológico e toque retal).</p>
+      <h3>Os 8 epônimos do slide</h3>
+      <div class="tscroll"><table>
+        <tr><th>Sinal</th><th>Achado</th><th>Aponta para</th></tr>
+        <tr><td><b>Blumberg</b></td><td>Dor à descompressão brusca em McBurney</td><td>Irritação peritoneal (apendicite)</td></tr>
+        <tr><td><b>Rovsing</b></td><td>Compressão do QIE → dor no QID</td><td>Apendicite</td></tr>
+        <tr><td><b>Chutro</b></td><td>Desvio da cicatriz umbilical para a <b>direita</b> (contratura do reto)</td><td>Apendicite</td></tr>
+        <tr><td><b>Lenander</b></td><td>Diferença entre temperatura <b>retal e axilar &gt; 1 °C</b> (retal maior)</td><td>Apendicite / peritonite pélvica</td></tr>
+        <tr><td><b>Psoas</b></td><td>Dor à extensão da coxa D (ou flexão contra resistência)</td><td>Apendicite retrocecal, abscesso de psoas</td></tr>
+        <tr><td><b>Obturador</b></td><td>Dor à rotação interna da coxa fletida</td><td>Apendicite pélvica</td></tr>
+        <tr><td><b>Jobert</b></td><td><b>Timpanismo no hipocôndrio D</b> (desaparece a macicez hepática)</td><td><b>Pneumoperitônio</b> = perfuração de víscera oca</td></tr>
+        <tr><td><b>Murphy</b></td><td>Parada inspiratória à compressão do ponto cístico</td><td>Colecistite aguda</td></tr>
+      </table></div>
+
+      <h3>Exames complementares — princípios do slide</h3>
+      <ul>
+        <li>Direcionados para a suspeita clínica; <b>excesso de exames onera o sistema e atrasa o tratamento definitivo</b>; <b>antibiótico empírico = depois de coletar os exames iniciais</b> (culturas); <b>paciente instável = TEMPO!!!!</b> (não vai para tomografia — vai para o centro cirúrgico).</li>
+        <li><b>Laboratório básico:</b> hemograma completo, <b>amilase</b>, <b>β-HCG</b> (toda mulher em idade fértil), sumário de urina, eletrólitos, função renal. <b>Instabilidade / suspeita de abdome vascular:</b> gasometria arterial, <b>lactato</b>, culturas.</li>
+      </ul>
+
+      <h3>As 5 síndromes (diagnóstico sindrômico) — a tabela que mais rende questão</h3>
+      <div class="tscroll"><table>
+        <tr><th></th><th>Inflamatório</th><th>Perfurativo</th><th>Obstrutivo</th><th>Hemorrágico</th><th>Vascular</th></tr>
+        <tr><td>Dor</td><td><b>Localizada</b>, progressiva</td><td><b>Súbita e forte</b> (em facada), rigidez em tábua</td><td><b>Cólica</b> + distensão</td><td>Súbita, contínua (o slide diz "súbita e fraca" — o que domina é o choque)</td><td>Variável, <b>desproporcional ao exame</b> [extra]</td></tr>
+        <tr><td>Tempo de história</td><td>12–36 h</td><td><b>&lt; 12 h</b></td><td>24–72 h</td><td><b>&lt; 6 h</b></td><td>6 h a 7 dias</td></tr>
+        <tr><td>Parada de gases/fezes</td><td>+</td><td>+++</td><td><b>++++</b></td><td>+</td><td>+++</td></tr>
+        <tr><td>Vômitos</td><td>++</td><td>+</td><td><b>++++</b></td><td>+</td><td>++</td></tr>
+        <tr><td>Febre</td><td><b>+++</b></td><td>+</td><td>+</td><td>+</td><td>+</td></tr>
+        <tr><td>Anotações do slide</td><td>diverticulite: +40 anos, dor à esquerda</td><td>úlcera péptica inflamada</td><td>—</td><td>mulher jovem fértil = ectópica rota · idoso hipertenso = aneurisma roto · adenoma hepático sangrante</td><td>isquemia</td></tr>
+      </table></div>
+      <ul>
+        <li><b>A) Inflamatório:</b> apendicite (a causa <b>mais comum</b>), colecistite aguda, pancreatite aguda, diverticulite, DIP, abscessos. Imagem: RX de abdome agudo (alça sentinela em FID), ecografia, <b>TC de abdome com contraste VO e EV</b> (padrão-ouro).</li>
+        <li><b>B) Perfurativo:</b> úlcera péptica, neoplasia GI perfurada, divertículos do cólon, perfuração iatrogênica (endoscopia!). Imagem: RX de tórax/abdome em pé → <b>pneumoperitônio</b> (ar sob as cúpulas, a seta do slide), <b>TC com contraste</b>; a ecografia é menos útil. Clínica: dor súbita e intensa, <b>abdome em tábua</b>, Jobert.</li>
+        <li><b>C) Obstrutivo:</b> <b>brida</b> (mais comum no delgado — cirurgia prévia), neoplasia (mais comum no cólon), hérnia estrangulada, obstrução pilórica, intussuscepção. Clínica: cólica, distensão, vômitos, parada de gases e fezes, RHA metálicos/de luta. Imagem: RX (níveis hidroaéreos, "empilhamento de moedas", distensão de alças), <b>TC com contraste VO e EV</b>.</li>
+        <li><b>D) Hemorrágico (extraluminal):</b> gravidez ectópica rota, ruptura do baço, ruptura de aneurisma de aorta abdominal, cisto ovariano hemorrágico, necrose tumoral. Clínica: dor súbita + choque hipovolêmico + sinais de irritação peritoneal (sangue irrita). Imagem: <b>ecografia abdominal</b> (FAST — rápida, à beira do leito), TC se estável. Aqui o slide destaca a ECOGRAFIA em letra grande.</li>
+        <li><b>E) Vascular/isquêmico:</b> isquemia intestinal, trombose mesentérica, torção do omento, torção de pedículo de cisto ovariano, infarto esplênico. Clínica: dor intensa desproporcional ao exame, FA/idoso/aterosclerose, lactato alto, acidose. Imagem: <b>angioTC</b>.</li>
+      </ul>
+      <div class="exam"><b>Como caiu (Q13–Q18):</b> causa mais comum de abdome agudo inflamatório → <b>apendicite aguda</b> · dor súbita, intensa, com rigidez em tábua → <b>perfuração de víscera oca</b> · sinal de Cullen → <b>hemorragia retroperitoneal/pancreatite</b> · abdome agudo obstrutivo → <b>dor em cólica e distensão abdominal</b> · tríade de Charcot → <b>dor abdominal, febre, icterícia</b> · exame inicial mais importante na suspeita de abdome agudo → <b>ultrassonografia ou tomografia (dependendo do caso)</b> (não RM, não colonoscopia, não EDA).</div>
+      <div class="warn">⚠️ <b>Pegadinhas:</b> "rigidez em tábua" = perfurativo (não obstrutivo) · "cólica + distensão + vômitos ++++" = obstrutivo · "febre +++" = inflamatório · "&lt;6 h + choque + mulher fértil" = hemorrágico (ectópica) · "dor desproporcional + FA" = vascular · o exame inicial é USG/TC "dependendo do caso" — a alternativa com a ressalva é a certa; RM/colonoscopia/EDA nunca são o exame inicial no abdome agudo.</div>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Ascite e paracentese <span class="hl">[extra — sem slide do João; base: Porto, Harrison, AASLD/EASL; a aula ASCITE da Andrea aprofunda isto para terça]</span></h2>
+      <p><b>Ascite</b> = líquido livre na cavidade peritoneal. <b>Principal causa no mundo: cirrose hepática (~80–85%)</b>; depois neoplasia/carcinomatose (~10%), insuficiência cardíaca (3–5%), tuberculose peritoneal, síndrome nefrótica, pancreatite. <b>Semiologia:</b> abdome globoso em batráquio, umbigo protruso, <b>macicez móvel</b> (≥1,5 L), <b>piparote</b> (grandes volumes), semicírculos de Skoda; a USG detecta a partir de ~100 mL.</p>
+      <h3>Paracentese diagnóstica — quando, onde, o que dosar</h3>
+      <ul>
+        <li><b>Indicação:</b> <b>toda ascite de início recente (primeira avaliação)</b>, toda internação de cirrótico com ascite, e qualquer piora clínica (febre, dor abdominal, encefalopatia, hemorragia digestiva, piora renal) — para excluir <b>PBE</b>. Não é "só em ascite volumosa" nem "só em descompensados".</li>
+        <li><b>Local mais seguro:</b> <b>quadrante inferior esquerdo / flanco esquerdo</b> — dois a três dedos <b>medial e cefálico à espinha ilíaca anterossuperior esquerda</b> (parede mais fina, ceco é à direita, sigmoide móvel, longe dos vasos epigástricos inferiores). Alternativa clássica: linha média infraumbilical (2 cm abaixo do umbigo, avascular), mas menos usada hoje por bexiga/cicatrizes. Nunca em cicatriz, epigástrio, hipocôndrio ou sobre veias dilatadas. Esvaziar a bexiga antes; USG guiada quando disponível; técnica em <b>"Z"</b> para evitar vazamento.</li>
+        <li><b>Contraindicações:</b> CIVD, fibrinólise primária. <b>INR alto e plaquetopenia NÃO contraindicam</b> nem exigem correção rotineira (Harrison/AASLD).</li>
+        <li><b>Complicações:</b> a mais frequente imediata é <b>hemorragia/hematoma da parede</b> (lesão da artéria epigástrica inferior; hemoperitônio raro), vazamento persistente de líquido pelo orifício, infecção, perfuração de alça ou bexiga. Após paracentese de grande volume (&gt;5 L): <b>disfunção circulatória pós-paracentese</b> → repor <b>albumina 6–8 g por litro</b> retirado.</li>
+        <li><b>Análise do líquido:</b> celularidade com diferencial, proteína total, <b>albumina (para o GASA)</b>, cultura em frasco de hemocultura à beira do leito; conforme suspeita: glicose, LDH, amilase, citologia, ADA, bilirrubina.</li>
+      </ul>
+      <div class="tscroll"><table>
+        <tr><th>GASA / SAAG (albumina sérica − albumina da ascite)</th><th>≥ 1,1 g/dL = <b>hipertensão portal</b></th><th>&lt; 1,1 g/dL = sem hipertensão portal</th></tr>
+        <tr><td>Causas</td><td>Cirrose, hepatite alcoólica, IC/pericardite constritiva, Budd-Chiari, trombose portal, metástases hepáticas maciças</td><td>Carcinomatose peritoneal, TB peritoneal, síndrome nefrótica, ascite pancreática, serosites, obstrução/infarto intestinal</td></tr>
+        <tr><td>Proteína total da ascite</td><td>&lt;2,5 g/dL = cirrose · <b>≥2,5 = cardíaca</b> (ou Budd-Chiari)</td><td>Geralmente ≥2,5 (exceto nefrótica)</td></tr>
+      </table></div>
+      <div class="note">📌 <b>PBE (peritonite bacteriana espontânea):</b> <b>neutrófilos (PMN) ≥ 250 células/mm³</b> no líquido fecha o diagnóstico e já indica tratar (antes da cultura): <b>cefotaxima ou ceftriaxona</b> + <b>albumina 1,5 g/kg no D1 e 1 g/kg no D3</b> (previne síndrome hepatorrenal). Monobacteriana (E. coli, Klebsiella, pneumococo). Profilaxia secundária: norfloxacino. Suspeitar de peritonite <b>secundária</b> (cirúrgica) se polimicrobiana, proteína &gt;1 g/dL, glicose &lt;50 mg/dL, LDH alto → TC.</div>
+      <div class="exam"><b>Como caiu (Q7–Q12):</b> principal causa de ascite no mundo → <b>cirrose hepática</b> · GASA ≥1,1 → <b>ascite por hipertensão portal</b> · local mais seguro → <b>flanco esquerdo lateral</b> (o gabarito escolheu isso sobre "linha média infraumbilical") · principal complicação imediata → <b>hemorragia</b> (PBE não é complicação da punção; IRC e cirrose são absurdos) · paracentese diagnóstica indicada → <b>primeira avaliação da ascite</b> · PMN ≥250 → <b>PBE</b>.</div>
+      <div class="warn">⚠️ <b>Pegadinha:</b> GASA alto = hipertensão portal (não "ascite inflamatória"); ascite neoplásica/carcinomatose = GASA baixo. E o corte de PBE é <b>250 PMN</b> (não 500, não leucócitos totais).</div>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Patologias cirúrgicas benignas da via biliar <span class="hl">[extra — Sabiston/Schwartz, Tokyo Guidelines 2018]</span></h2>
+      <p>Anatomia em uma linha: vesícula → ducto <b>cístico</b> → junta-se ao hepático comum → <b>colédoco</b> → papila de Vater (com o Wirsung) no duodeno. Cálculo na <b>vesícula</b> = colelitíase; impactado no <b>cístico</b> = colecistite; no <b>colédoco</b> = coledocolitíase; colédoco obstruído + infecção = colangite; na papila = pancreatite biliar.</p>
+      <div class="tscroll"><table>
+        <tr><th></th><th>Colelitíase / cólica biliar</th><th>Colecistite aguda</th><th>Coledocolitíase</th><th>Colangite aguda</th></tr>
+        <tr><td>Causa</td><td>Cálculos (colesterol 75–80%; pigmentares: pretos = hemólise/cirrose, marrons = infecção/estase). <b>4F</b>: female, forty, fat, fertile</td><td><b>Litíase biliar em 90–95%</b> (cálculo impactado no cístico → distensão → inflamação → infecção secundária); alitiásica em críticos/UTI/NPT; enfisematosa em diabéticos</td><td>Cálculo no <b>ducto colédoco</b> (secundário, migrado da vesícula, em 10–15% dos litiásicos; primário = formado no ducto)</td><td>Obstrução biliar (cálculo &gt; estenose/tumor/prótese) + infecção ascendente (E. coli, Klebsiella, Enterococcus)</td></tr>
+        <tr><td>Clínica</td><td>Maioria (~80%) assintomática. Cólica biliar: dor HD/epigástrio pós-prandial (gordura), irradia dorso/escápula, <b>&lt;6 h</b>, náuseas, <b>sem febre</b>, Murphy negativo</td><td>Dor HD <b>&gt;6 h</b>, <b>febre</b>, <b>Murphy +</b>, leucocitose; vesícula palpável em 1/3; icterícia leve possível</td><td><b>Icterícia obstrutiva flutuante</b>, colúria, acolia, dor; ↑BD, FA, GGT; pode ser assintomática</td><td><b>Tríade de Charcot</b> (dor HD + febre com calafrios + icterícia; 50–70%) → <b>pêntade de Reynolds</b> (+ hipotensão + confusão mental) = grave</td></tr>
+        <tr><td>Exame de escolha</td><td><b>USG</b> (sensibilidade &gt;95%: cálculo com sombra acústica)</td><td><b>USG</b>: parede &gt;4 mm, líquido perivesicular, cálculo impactado, Murphy ultrassonográfico. Critérios de Tokyo (local + sistêmico + imagem)</td><td>USG vê dilatação (colédoco &gt;6 mm) mas o cálculo só em ~50% → <b>colangioRM</b> ou ecoendoscopia; CPRE se alta probabilidade</td><td>USG/TC (dilatação) + labs; hemoculturas</td></tr>
+        <tr><td>Tratamento</td><td>Sintomática → <b>colecistectomia videolaparoscópica eletiva</b>. Assintomática = observar (exceções: vesícula em porcelana, pólipo ≥1 cm, cálculo &gt;3 cm, anemia hemolítica)</td><td>Jejum, hidratação, analgesia, ATB (ceftriaxona + metronidazol / ampicilina-sulbactam) e <b>colecistectomia (preferencialmente laparoscópica) precoce</b> — idealmente &lt;72 h, até 7–10 dias; colecistostomia percutânea no paciente sem condição cirúrgica</td><td><b>CPRE com papilotomia</b> e extração + colecistectomia na mesma internação (ou exploração cirúrgica da via biliar)</td><td>ATB EV + <b>drenagem biliar (CPRE)</b> em 24–48 h; urgente se Reynolds; depois colecistectomia</td></tr>
+      </table></div>
+      <ul>
+        <li><b>Complicação mais comum da colelitíase = colecistite aguda</b> (depois: coledocolitíase, colangite, pancreatite biliar, íleo biliar (tríade de Rigler: pneumobilia + obstrução + cálculo ectópico), síndrome de Mirizzi (cálculo no infundíbulo comprimindo o hepático comum), fístula colecistoentérica, carcinoma de vesícula).</li>
+        <li><b>Charcot é da COLANGITE</b>, não da colecistite (colecistite não tem icterícia franca). Courvoisier-Terrier (vesícula palpável indolor + icterícia) = obstrução <b>neoplásica</b> distal, não litiásica.</li>
+        <li><b>Pancreatite biliar:</b> cálculos pequenos (&lt;5 mm) que migram; lipase/amilase &gt;3× o limite; colecistectomia na mesma internação se leve.</li>
+      </ul>
+      <div class="exam"><b>Como caiu (Q19–Q24):</b> principal causa de colecistite aguda → <b>litíase biliar</b> · coledocolitíase → <b>cálculo no ducto colédoco</b> · tríade de Charcot é típica de → <b>colangite aguda</b> (não colecistite) · exame de escolha inicial para a vesícula → <b>ultrassonografia</b> · complicação mais comum da colelitíase → <b>colecistite aguda</b> · tratamento padrão da colecistite aguda → <b>colecistectomia (preferencialmente laparoscópica)</b> — "antibiótico isolado" e "observação" são distratores.</div>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Noções básicas de endoscopia <span class="hl">[extra — SOBED/ASGE]</span></h2>
+      <ul>
+        <li><b>Endoscopia digestiva alta (EDA):</b> avalia <b>esôfago, estômago e duodeno</b> (até a 2ª porção/papila). Não avalia boca/faringe como objetivo (passa por elas) e não é "apenas estômago".</li>
+        <li><b>Indicações comuns:</b> <b>dispepsia/epigastralgia</b> (sobretudo &gt;40–45 anos ou com sinais de alarme: disfagia, odinofagia, perda de peso, anemia, vômitos persistentes, sangramento, massa palpável), DRGE refratária ou com alarme, <b>hemorragia digestiva alta</b> (urgência: EDA em &lt;24 h), pesquisa de <b>H. pylori</b> (teste da urease/biópsia), suspeita de doença celíaca (biópsia duodenal), rastreio de varizes no cirrótico, vigilância de Barrett, corpo estranho, ingestão de cáustico (após 12–24 h), terapêutica (hemostasia, ligadura de varizes, dilatação, polipectomia, gastrostomia).</li>
+        <li><b>Contraindicações:</b> suspeita de perfuração (abdome agudo perfurativo!), instabilidade hemodinâmica/respiratória não corrigida, IAM muito recente, recusa. Ou seja: <b>abdome agudo NÃO é indicação de EDA</b> — pode perfurar/piorar.</li>
+        <li><b>Preparo e técnica:</b> jejum de <b>6–8 h</b> para sólidos (2 h líquidos claros); anestesia tópica da orofaringe (lidocaína spray) + sedação (midazolam + fentanil ou propofol); <b>decúbito lateral esquerdo</b>, bocal; dura 5–15 min. Complicações raras (&lt;0,1–0,5%): perfuração, sangramento pós-biópsia, broncoaspiração, depressão cardiorrespiratória pela sedação.</li>
+        <li><b>Outros exames:</b> <b>colonoscopia</b> (cólon + íleo terminal; preparo com manitol/PEG e dieta; rastreio de CCR a partir dos 45–50 anos; polipectomia) · <b>CPRE</b> (colangiopancreatografia retrógrada endoscópica: acesso à papila com duodenoscópio — hoje quase só <b>terapêutica</b>: papilotomia e retirada de cálculo do colédoco, drenagem na colangite, próteses em estenoses; complicação principal: <b>pancreatite pós-CPRE</b> 3–5%) · <b>ecoendoscopia</b> (cálculo pequeno no colédoco, tumores pancreáticos) · cápsula endoscópica (delgado).</li>
+        <li>Classificações que aparecem em laudo: <b>Forrest</b> (sangramento de úlcera), <b>Los Angeles</b> (esofagite), <b>Sydney</b> (gastrite), <b>Paris</b> (lesões superficiais), <b>Boston</b> (preparo do cólon).</li>
+      </ul>
+      <div class="exam"><b>Como caiu (Q25–Q26):</b> a EDA avalia → <b>esôfago, estômago e duodeno</b> · indicação comum de EDA → <b>dispepsia/epigastralgia</b> (diarreia é colono; abdome agudo é contraindicação; colelitíase é USG).</div>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Radar de pegadinhas + decoreba de 60 segundos</h2>
+      <ul>
+        <li><b>Ordem do exame:</b> inspeção → <b>ausculta</b> → percussão → palpação (ausculta antes para não alterar RHA). Examinador à <b>direita</b>, paciente sem travesseiro.</li>
+        <li><b>Blumberg</b> = descompressão dolorosa = irritação peritoneal · <b>Rovsing</b> = comprime E, dói D · <b>Murphy</b> = trava a inspiração = colecistite · <b>Psoas</b> = estende a coxa (retrocecal) · <b>Obturador</b> = roda a coxa (pélvica) · <b>Jobert</b> = timpanismo hepático = pneumoperitônio · <b>Chutro</b> = umbigo desvia para a direita · <b>Lenander</b> = T retal − axilar &gt;1 °C · <b>Courvoisier</b> = vesícula palpável indolor + icterícia = tumor · <b>Giordano</b> = punho-percussão lombar = rim.</li>
+        <li><b>Cullen</b> = periumbilical · <b>Gray-Turner</b> = flancos → hemorragia retroperitoneal (pancreatite necro-hemorrágica, ectópica rota, AAA roto).</li>
+        <li><b>RHA ausentes</b> = íleo paralítico · <b>aumentados</b> = diarreia · <b>metálicos/de luta</b> = obstrução mecânica · <b>sopro</b> = aneurisma/estenose.</li>
+        <li><b>Macicez móvel</b> = ascite (≥1,5 L) · <b>hipertimpanismo</b> = gás · <b>Traube ocupado</b> = esplenomegalia · <b>hepatimetria</b> 6–12 cm (hemiclavicular D) e 4–8 cm (esternal).</li>
+        <li><b>Fígado normal:</b> não palpável ou borda discretamente palpável na inspiração profunda. <b>Baço normal:</b> não palpável. Manobras: Lemos Torres e Mathieu (fígado), Schuster (baço).</li>
+        <li><b>Palpação:</b> superficial 1 cm unimanual · profunda 5 cm bimanual.</li>
+        <li><b>Dor visceral</b> = fibras C não mielinizadas, imprecisa, distensão de víscera oca · <b>parietal</b> = mielinizadas, fixa, piora ao mover = peritonite · <b>referida</b> = mesmos circuitos centrais.</li>
+        <li><b>Síndromes:</b> inflamatório = apendicite, febre +++, 12–36 h · perfurativo = súbita/forte, tábua, &lt;12 h, pneumoperitônio · obstrutivo = cólica + distensão + vômitos/parada ++++, 24–72 h, brida · hemorrágico = &lt;6 h, choque, ectópica/AAA, ecografia · vascular = dor desproporcional, angioTC.</li>
+        <li><b>Exame inicial no abdome agudo:</b> USG ou TC conforme o caso (TC com contraste VO e EV é o padrão nos inflamatório/perfurativo/obstrutivo; eco no hemorrágico; angioTC no vascular). Instável = centro cirúrgico, não tomógrafo.</li>
+        <li><b>Ascite:</b> causa nº 1 cirrose · GASA ≥1,1 = hipertensão portal · PBE = PMN ≥250 → cefotaxima/ceftriaxona + albumina · paracentese em toda ascite nova/toda internação · local: QIE/flanco esquerdo · complicação imediata: hemorragia · &gt;5 L → albumina 6–8 g/L.</li>
+        <li><b>Via biliar:</b> colecistite = litíase (90–95%), Murphy +, febre, dor &gt;6 h, USG, colecistectomia VL precoce · coledocolitíase = cálculo no colédoco, icterícia flutuante, CPRE · colangite = Charcot (dor + febre + icterícia) / Reynolds (+ hipotensão + confusão), ATB + drenagem · complicação mais comum da colelitíase = colecistite aguda · 4F.</li>
+        <li><b>EDA:</b> esôfago + estômago + duodeno · indicação: dispepsia/alarme, HDA, H. pylori · contraindicação: perfuração · jejum 6–8 h · decúbito lateral E · CPRE = via biliar (terapêutica; pancreatite pós-CPRE).</li>
+      </ul>
+      <div class="ok">✅ <b>Se sobrar 1 minuto antes da prova:</b> repita em voz alta os 8 epônimos com o achado e a doença, a tabela das 5 síndromes com o tempo de história, e os 3 números da ascite (1,1 · 250 · 6–8 g/L). É onde estão 60% das questões.</div>
+    </div>
+
+  </section>
+
+  <!-- ============ QUESTÕES ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">0</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0">Q1–Q12: estilo <b>ENAMED</b> (caso curto + assinale a correta), dificuldade progressiva. Q13–Q20: <b>nível prova</b> (INCORRETA, proposições, associação). Q21–Q46: <b>as 26 questões reais da prova antiga</b>, na ordem, comentadas — é o melhor termômetro do estilo dele. Q47–Q48: bônus no estilo direto do prof. Use o filtro por tema para atacar o bloco fraco.</div>
+    <div class="qfilter" id="qfilter"></div>
+    <div id="quiz"></div>
+
+  </section>
+
+  <!-- ============ MAPA MENTAL ============ -->
+  <section id="mapa">
+    <div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>🧭 Prova antiga — o formato</summary><ul>
+        <li><b>26 objetivas A–D</b>, sem descritiva, perguntas de 1 linha · 5 blocos: exame físico (6) · ascite/paracentese (6) · abdome agudo (6) · via biliar (6) · endoscopia (2)</li>
+        <li><b>19/26 = B</b>; exceções: 1-A, 2-C, 4-C, 9-C, 14-C, 17-A · a certa é a mais completa/técnica; distratores grosseiros</li>
+        <li>Seus slides cobrem exame físico + abdome agudo; os outros 3 blocos = [extra] deste guia</li>
+      </ul></details>
+
+      <details><summary>🩺 Exame físico — preparo e topografia</summary><ul>
+        <li>Pré-exame: informar, tranquilizar, empatia, exposição cuidadosa, <b>higiene das mãos</b> (OMS)</li>
+        <li>Posição: decúbito dorsal, sem travesseiro, mãos ao longo do corpo, pernas descruzadas, examinador à <b>DIREITA</b></li>
+        <li>Avaliação global: conjuntiva pálida (anemia), esclera amarela (icterícia), monilíase, queilite angular, glossite/língua geográfica, erosões do esmalte (vômitos), cáseo</li>
+        <li>4 quadrantes (QSD/QSE/QID/QIE) · 9 regiões: hipocôndrios D/E, epigástrio, flancos D/E, mesogástrio, FID/FIE, hipogástrio</li>
+        <li>Ordem <b>I-A-P-P</b>: inspeção → ausculta → percussão → palpação (ausculta antes de mexer)</li>
+      </ul></details>
+
+      <details><summary>👀 Inspeção</summary><ul>
+        <li>Forma/simetria, volume, hérnias/massas, cicatrizes, lesões de pele, circulação colateral, peristaltismo visível</li>
+        <li>Globoso (panículo × <b>ascite</b>) · escavado · <b>Cullen</b> (periumbilical) e <b>Gray-Turner</b> (flancos) = hemorragia retroperitoneal · herpes zóster (dermátomo)</li>
+        <li>Circulação colateral: <b>cabeça de Medusa</b> = hipertensão portal · tipo cava = flancos, fluxo ascendente</li>
+        <li>Cicatrizes: <b>Kocher</b> (colecistectomia) · <b>McBurney</b> (apendicectomia) · <b>Pfannenstiel</b> (cesárea) · mediana (laparotomia/histerectomia) · flanco E (renal) · inguinal (hérnia)</li>
+        <li>Hérnias: umbilical, incisional, epigástrica, inguinal direta/indireta, femoral · diástase dos retos · <b>Valsalva</b> evidencia</li>
+      </ul></details>
+
+      <details><summary>🔊 Ausculta · 🥁 Percussão</summary><ul>
+        <li>RHA <b>aumentados</b> = diarreia · <b>de luta/metálicos</b> = obstrução mecânica · <b>ausentes</b> = íleo adinâmico · <b>sopros</b> = aneurisma/estenose (aorta, renais, ilíacas, femorais)</li>
+        <li>Percussão: mão E espalmada, dedo D percute sobre os dedos da E · timpânico (normal/gás) × maciço (sólido/líquido)</li>
+        <li><b>Hipertimpanismo</b> = gás · <b>macicez móvel</b> = ascite (≥1,5 L) · piparote = grande volume · Skoda</li>
+        <li><b>Hepatimetria</b>: 6–12 cm hemiclavicular D · 4–8 cm esternal · <b>Traube</b> livre = normal, ocupado = esplenomegalia · <b>Giordano</b> (PPL) = rim</li>
+      </ul></details>
+
+      <details><summary>✋ Palpação e sinais</summary><ul>
+        <li>Superficial: 1 cm, unimanual → pontos dolorosos, parede, contraturas · Profunda: 5 cm, bimanual → visceromegalias, tumores, massa pulsátil</li>
+        <li>Pontos: xifoidiano, epigástrico, <b>cístico</b>, esplênico, ureterais, <b>apendicular (McBurney)</b></li>
+        <li><b>Murphy</b> = colecistite · <b>Blumberg</b> = irritação peritoneal · <b>Rovsing</b> = comprime E, dói D · <b>Psoas</b> = estende coxa (retrocecal) · <b>Obturador</b> = roda coxa (pélvica) · <b>Courvoisier</b> = vesícula palpável indolor + icterícia (tumor)</li>
+        <li>Fígado: <b>Lemos Torres</b> (mão na lombar) e <b>Mathieu</b> (garra) · normal = não palpável/discreto na inspiração · Baço: não palpável, <b>Schuster</b></li>
+        <li>No abdome agudo: + exame ginecológico e toque retal</li>
+      </ul></details>
+
+      <details><summary>🚨 Abdome agudo — base</summary><ul>
+        <li>Sabiston: dor/sensibilidade que em geral requer cirurgia de emergência · 18–42% das queixas do PS · 63% &gt;65 a · cirurgia em 15–30% · etiologia desconhecida 41,3%</li>
+        <li>Diagnóstico <b>clínico</b>, sintoma-guia DOR, <b>primeira avaliação</b> é a mais importante, analgesia pode alterar o exame, avaliações seriadas pelo mesmo médico</li>
+        <li>Dor <b>visceral</b> (fibras C, víscera oca, imprecisa) · <b>parietal</b> (mielinizada, peritônio parietal, fixa, piora ao mover = peritonite) · <b>referida</b> (circuitos centrais compartilhados)</li>
+        <li>Causas abdominais por sistema · <b>extra-abdominais</b>: torácicas (IAM, pneumonia, pericardite), hematológicas (falciforme, leucemia), neurológicas (zóster, tabes), metabólicas (CAD, porfiria, Addison), intoxicações (chumbo, abstinência), fibromialgia</li>
+        <li>História: 8 perguntas da dor · sintomas associados · homens (testículo) · mulheres (DUM, ginecológico) · álcool/drogas · crises prévias · <b>cirurgias prévias</b> · medicações · 'hemograma inalterado?' · 'diminuição da dor'</li>
+        <li>Exame geral (vermelho): <b>icterícia, febre, PA, nível de consciência</b> · abdome: distensão, abaulamentos, RHA ausentes/aumentados/metálicos, massa pulsátil</li>
+        <li>Exames: dirigidos, excesso atrasa, ATB após coleta, <b>instável = TEMPO</b> · hemograma, amilase, β-HCG, urina, eletrólitos, função renal · instável/vascular: gasometria, lactato, culturas</li>
+      </ul></details>
+
+      <details><summary>🗂️ As 5 síndromes</summary><ul>
+        <li><b>Inflamatório</b>: localizada, 12–36 h, febre +++ · apendicite (nº 1), colecistite, pancreatite, diverticulite, DIP, abscessos · RX (alça sentinela), eco, <b>TC c/ contraste VO+EV</b></li>
+        <li><b>Perfurativo</b>: súbita e forte, &lt;12 h, tábua, Jobert · úlcera péptica, neoplasia, divertículos, iatrogênica · RX (pneumoperitônio), <b>TC</b></li>
+        <li><b>Obstrutivo</b>: cólica + distensão, 24–72 h, vômitos/parada ++++ · brida, neoplasia, hérnia estrangulada, pilórica, intussuscepção · RX (níveis), <b>TC</b></li>
+        <li><b>Hemorrágico</b>: &lt;6 h, choque · ectópica rota, baço, AAA, cisto ovariano, necrose tumoral · <b>ecografia</b> (FAST), TC</li>
+        <li><b>Vascular</b>: 6 h–7 d, dor desproporcional · isquemia/trombose mesentérica, torções, infarto esplênico · <b>angioTC</b></li>
+        <li>Epônimos: Blumberg, Rovsing, <b>Chutro</b> (umbigo → D), <b>Lenander</b> (T retal–axilar &gt;1 °C), Psoas, Obturador, <b>Jobert</b> (pneumoperitônio), Murphy</li>
+      </ul></details>
+
+      <details><summary>💧 Ascite & paracentese [extra]</summary><ul>
+        <li>Causa nº 1 <b>cirrose</b> (80–85%) → neoplasia → IC → TB → nefrótica · macicez móvel ≥1,5 L, piparote, Skoda, USG ≥100 mL</li>
+        <li>Paracentese diagnóstica: <b>toda ascite nova</b>, toda internação, piora clínica · local <b>QIE/flanco E</b> (medial e cefálico à EIAS) · técnica em Z · CI: CIVD, fibrinólise (INR/plaquetas não)</li>
+        <li>Complicação imediata: <b>hemorragia</b> · vazamento, infecção, perfuração · &gt;5 L → albumina 6–8 g/L</li>
+        <li><b>GASA ≥1,1</b> = hipertensão portal (cirrose, IC, Budd-Chiari) · &lt;1,1 = carcinomatose, TB, nefrótica, pancreática · proteína ≥2,5 = cardíaca</li>
+        <li><b>PBE: PMN ≥250</b> → cefotaxima/ceftriaxona + albumina 1,5 g/kg D1, 1 g/kg D3 · E. coli · secundária: polimicrobiana, proteína &gt;1, glicose &lt;50, LDH alto</li>
+      </ul></details>
+
+      <details><summary>🟡 Via biliar benigna [extra]</summary><ul>
+        <li><b>Colelitíase</b>: 4F, colesterol 75–80%, 80% assintomática (observar) · cólica biliar &lt;6 h sem febre · <b>USG</b> · sintomática → colecistectomia VL eletiva</li>
+        <li><b>Colecistite aguda</b>: cálculo no cístico 90–95% · dor &gt;6 h + febre + <b>Murphy</b> + leucocitose · USG parede &gt;4 mm/líquido · Tokyo · ATB + <b>colecistectomia VL precoce</b> (&lt;72 h) · alitiásica (UTI), enfisematosa (DM)</li>
+        <li><b>Coledocolitíase</b>: cálculo no colédoco · icterícia flutuante, colúria, acolia · FA/GGT/BD · colédoco &gt;6 mm · colangioRM/eco-endo · <b>CPRE + papilotomia</b> + colecistectomia</li>
+        <li><b>Colangite</b>: obstrução + infecção · <b>Charcot</b> (dor, febre, icterícia) · <b>Reynolds</b> (+ hipotensão, confusão) · ATB + <b>drenagem (CPRE)</b> 24–48 h</li>
+        <li>Complicação mais comum da colelitíase = <b>colecistite</b> · outras: pancreatite biliar, íleo biliar (Rigler), Mirizzi, fístula, câncer (porcelana) · Courvoisier = tumor</li>
+      </ul></details>
+
+      <details><summary>🔬 Endoscopia [extra]</summary><ul>
+        <li><b>EDA</b> = esôfago + estômago + duodeno (2ª porção) · indicações: dispepsia (&gt;40–45 a ou alarme), DRGE refratária, <b>HDA &lt;24 h</b>, H. pylori, celíaca, varizes, Barrett, corpo estranho, cáustico</li>
+        <li>Contraindicações: <b>perfuração</b>, instabilidade, IAM recente, recusa · jejum 6–8 h · decúbito lateral E · sedação + lidocaína · complicações &lt;0,5%</li>
+        <li>Colonoscopia (cólon + íleo; rastreio CCR 45–50 a) · <b>CPRE</b> (papilotomia, cálculo do colédoco, drenagem; pancreatite pós-CPRE 3–5%) · ecoendoscopia · cápsula</li>
+        <li>Classificações: Forrest (úlcera sangrante), Los Angeles (esofagite), Sydney (gastrite), Paris, Boston (preparo)</li>
+      </ul></details>
+
+    </div></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel">
+      <h2>Flashcards atômicos — 1 informação por cartão</h2>
+      <p class="src">Toque no cartão para virar (a pergunta continua visível). Marque ❌ Errei / ✅ Acertei; no fim, repita só as erradas até zerar. Teclado: espaço vira · 1 = errei · 2 = acertei.</p>
+      <div class="chips" id="chips"></div>
+      <div class="fbar"><span>Cartão <b id="pos">–</b></span><span>✅ <b id="nOk">0</b> · ❌ <b id="nErr">0</b></span></div>
+      <div id="card">
+        <span class="cat" id="cat"></span>
+        <div id="qFront"></div>
+        <div id="back"><div id="qTop"></div><div id="resp"></div><div id="why"></div></div>
+        <span class="hint" id="hint">toque para ver a resposta</span>
+      </div>
+      <div class="actions hidden" id="actions">
+        <button id="btnErrei">❌ Errei</button>
+        <button id="btnAcertei">✅ Acertei</button>
+      </div>
+      <div id="fim" class="hidden">
+        <h2 id="fimTitulo"></h2>
+        <div id="fimTexto" style="color:var(--mut);font-size:14.5px"></div>
+        <div><button id="btnErradas">Repetir só as que errei</button><button class="sec" id="btnReiniciar">Recomeçar</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Técnica de Feynman — explique em voz alta</h2><p class="src">Sem olhar o resumo. Se travar, é ali que está o buraco.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">HP · Manifestações Abdominais · Procedimentos (João) · guia v2 · gerado em 29/08/2026 · prova: seg 31/08, 18h · bons estudos, Otto 🚀</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ===== QUESTÕES =====
+   {lvl:"ENAMED"|"PROVA"|"ANTIGA", obj:"tema", stem:"html", opts:[...], ans:idx, why:"html", trap:"html"} */
+const QS=[
+{lvl:"ENAMED", obj:"Abdome agudo · apendicite", stem:"<span class='cx'>Homem, 22 anos, dor periumbilical há 18 h que migrou para a fossa ilíaca direita, anorexia, febre de 38 °C. Ao exame: dor à descompressão brusca em McBurney, dor na FID ao comprimir o quadrante inferior esquerdo e dor ao estender passivamente a coxa direita.</span> Os sinais descritos, em ordem, são:",
+ opts:["Rovsing, Blumberg e obturador.","Blumberg, Rovsing e psoas.","Murphy, Rovsing e psoas.","Blumberg, Chutro e obturador."],
+ ans:1,
+ why:"Dor à descompressão brusca = <b>Blumberg</b> (irritação peritoneal); compressão do QIE com dor no QID = <b>Rovsing</b>; dor à extensão da coxa = <b>psoas</b> (apêndice retrocecal em contato com o músculo). A migração periumbilical → FID é a transição da dor visceral (fibras C, imprecisa) para a parietal (peritônio inflamado, localizada).",
+ trap:"Obturador é ROTAÇÃO INTERNA da coxa fletida (apendicite pélvica), não extensão. Murphy é da vesícula. Chutro é o desvio do umbigo para a direita."},
+
+{lvl:"ENAMED", obj:"Exame físico · vesícula", stem:"<span class='cx'>Mulher, 45 anos, obesa, multípara, dor em hipocôndrio direito há 10 h após feijoada, febre 38,3 °C, náuseas. Ao comprimir o ponto cístico durante a inspiração profunda, ela interrompe a inspiração por dor.</span> O sinal e o diagnóstico mais provável são:",
+ opts:["Sinal de Courvoisier-Terrier — neoplasia periampular.","Sinal de Murphy — colecistite aguda.","Sinal de Blumberg — apendicite retrocecal.","Sinal de Jobert — úlcera perfurada."],
+ ans:1,
+ why:"Parada inspiratória à compressão do ponto cístico = <b>Murphy positivo</b>. Dor &gt;6 h + febre + Murphy em paciente 4F (female, forty, fat, fertile) = <b>colecistite aguda</b>, cuja causa em 90–95% é cálculo impactado no cístico. Exame de escolha: USG (parede &gt;4 mm, líquido perivesicular, cálculo).",
+ trap:"Courvoisier é vesícula palpável INDOLOR em paciente ictérico (tumor). Cólica biliar simples dura &lt;6 h e não tem febre — a febre e a duração fecham colecistite."},
+
+{lvl:"ENAMED", obj:"Abdome agudo · perfurativo", stem:"<span class='cx'>Homem, 58 anos, uso crônico de AINE, dor epigástrica súbita, 'em facada', há 4 h, que se tornou difusa. Ao exame: abdome imóvel, rigidez em tábua, dor à descompressão difusa e timpanismo à percussão do hipocôndrio direito no lugar da macicez hepática.</span> O sinal de percussão e o exame de imagem mais adequado são:",
+ opts:["Sinal de Giordano — ultrassonografia de vias urinárias.","Sinal de Jobert — radiografia de tórax/abdome em pé (pneumoperitônio) e TC com contraste.","Piparote — ecografia abdominal (FAST).","Macicez móvel — colonoscopia de urgência."],
+ ans:1,
+ why:"Desaparecimento da macicez hepática (timpanismo no HD) = <b>sinal de Jobert</b> = ar livre (pneumoperitônio) por <b>perfuração de víscera oca</b> (úlcera péptica em usuário de AINE). O RX em pé mostra ar sob as cúpulas; a TC com contraste é o exame mais sensível. Quadro: dor súbita e forte, &lt;12 h, abdome em tábua.",
+ trap:"Colonoscopia/EDA são CONTRAINDICADAS na suspeita de perfuração — insuflar ar piora tudo. Piparote é ascite; Giordano é rim."},
+
+{lvl:"ENAMED", obj:"Abdome agudo · obstrutivo", stem:"<span class='cx'>Mulher, 67 anos, laparotomia prévia por histerectomia, dor abdominal em cólica há 36 h, distensão, vômitos repetidos e parada de eliminação de gases e fezes. Ausculta: ruídos aumentados, metálicos, em salvas. RX em pé: níveis hidroaéreos e distensão de delgado.</span> Assinale a correta:",
+ opts:["Trata-se de abdome agudo inflamatório; a causa mais provável é diverticulite.","Trata-se de abdome agudo obstrutivo; a causa mais provável é brida (aderência pós-operatória).","Trata-se de íleo paralítico; os ruídos metálicos confirmam ausência de peristaltismo.","Trata-se de abdome agudo vascular; o exame indicado é a angioTC."],
+ ans:1,
+ why:"Cólica + distensão + vômitos ++++ + parada de gases/fezes ++++ + 24–72 h + RHA de luta (metálicos) = <b>síndrome obstrutiva</b>. Cirurgia abdominal prévia → <b>brida</b>, a causa mais comum de obstrução de delgado. Exame: RX de abdome agudo (níveis hidroaéreos, empilhamento de moedas) e TC com contraste VO e EV.",
+ trap:"Ruídos metálicos/de luta = obstrução MECÂNICA; no íleo paralítico o abdome é SILENCIOSO. Não confunda os dois pela distensão."},
+
+{lvl:"ENAMED", obj:"Abdome agudo · hemorrágico", stem:"<span class='cx'>Mulher, 28 anos, atraso menstrual de 6 semanas, dor hipogástrica súbita há 3 h, lipotimia, PA 80×50 mmHg, FC 128 bpm, palidez, dor à descompressão em hipogástrio.</span> A hipótese e o exame inicial são:",
+ opts:["Apendicite aguda — TC de abdome com contraste.","Gravidez ectópica rota (abdome agudo hemorrágico) — β-HCG e ecografia (FAST) à beira do leito.","DIP — cultura de secreção vaginal.","Torção de ovário — ressonância magnética de pelve."],
+ ans:1,
+ why:"'Mulher, jovem, fértil' + dor súbita &lt;6 h + choque = a anotação do próprio slide para o abdome agudo hemorrágico: <b>gravidez ectópica rota</b>. β-HCG em TODA mulher em idade fértil com dor abdominal; a ecografia (FAST) detecta líquido livre na hora, sem tirar a paciente instável do pronto-socorro.",
+ trap:"Paciente INSTÁVEL não vai ao tomógrafo ('instabilidade = TEMPO'): eco à beira do leito e centro cirúrgico. RM nunca é exame inicial de abdome agudo."},
+
+{lvl:"ENAMED", obj:"Abdome agudo · vascular", stem:"<span class='cx'>Homem, 76 anos, fibrilação atrial sem anticoagulação, dor abdominal difusa intensa há 8 h, vômitos e uma evacuação com sangue. Ao exame, o abdome é pouco doloroso à palpação, sem sinais de peritonite, contrastando com a intensidade da queixa. Lactato elevado e acidose metabólica.</span> A síndrome e o exame indicados são:",
+ opts:["Abdome agudo vascular/isquêmico (embolia mesentérica) — angiotomografia.","Abdome agudo inflamatório (diverticulite) — ecografia.","Abdome agudo obstrutivo (volvo) — radiografia simples.","Abdome agudo perfurativo — endoscopia digestiva alta."],
+ ans:0,
+ why:"Dor <b>desproporcional ao exame físico</b> + FA (fonte de êmbolo) + lactato/acidose = <b>isquemia mesentérica</b> (síndrome vascular: 6 h a 7 dias, dor variável). O slide destaca a <b>angioTC</b> como exame de imagem desta síndrome, e manda pedir gasometria, lactato e culturas na suspeita de abdome vascular.",
+ trap:"O abdome 'inocente' ao exame engana: o peritônio só inflama tarde, quando a alça já necrosou. Não espere sinais de peritonite para pensar em isquemia."},
+
+{lvl:"ENAMED", obj:"Ascite · PBE", stem:"<span class='cx'>Homem, 55 anos, cirrótico alcoólico com ascite conhecida, interna com febre baixa, dor abdominal difusa e confusão mental. Paracentese diagnóstica: 620 neutrófilos/mm³, proteína total 1,0 g/dL, GASA 1,6.</span> A conduta correta é:",
+ opts:["Aguardar a cultura do líquido para iniciar antibiótico, pois o diagnóstico exige isolamento do germe.","Iniciar cefotaxima/ceftriaxona imediatamente e associar albumina (1,5 g/kg no D1 e 1 g/kg no D3).","Solicitar TC de abdome e laparotomia exploradora por peritonite secundária.","Realizar paracentese de alívio de grande volume sem reposição de albumina."],
+ ans:1,
+ why:"<b>PMN ≥250/mm³</b> no líquido ascítico = <b>PBE</b> — trata-se na hora, sem esperar cultura (que é negativa em até 40%). Cefalosporina de 3ª geração + albumina (reduz síndrome hepatorrenal e mortalidade). GASA ≥1,1 e proteína baixa = ascite de hipertensão portal por cirrose, o cenário típico da PBE.",
+ trap:"Peritonite SECUNDÁRIA (cirúrgica) se suspeita quando o líquido é polimicrobiano, proteína &gt;1 g/dL, glicose &lt;50, LDH alto — não é o caso. E a punção de alívio &gt;5 L exige albumina 6–8 g/L."},
+
+{lvl:"ENAMED", obj:"Ascite · paracentese", stem:"<span class='cx'>Você vai fazer a primeira paracentese diagnóstica de um paciente com ascite de início recente, sem cicatrizes abdominais, bexiga esvaziada. INR 1,9 e plaquetas 70.000.</span> Assinale a correta:",
+ opts:["A punção está contraindicada até corrigir INR e plaquetas com plasma e concentrado de plaquetas.","O local de escolha é o epigástrio, pela ausência de vísceras sólidas.","O local mais seguro é o quadrante inferior esquerdo (flanco esquerdo), medial e cefálico à espinha ilíaca anterossuperior; INR e plaquetopenia não contraindicam.","A punção deve ser feita sobre a cicatriz umbilical, ponto mais fino da parede."],
+ ans:2,
+ why:"Local: <b>QIE/flanco esquerdo</b> (parede fina, longe do ceco e dos vasos epigástricos inferiores, sigmoide móvel). Coagulopatia do cirrótico <b>não</b> contraindica nem exige correção rotineira (AASLD/Harrison); só CIVD e fibrinólise contraindicam. Indicação: toda ascite nova (primeira avaliação).",
+ trap:"Epigástrio (aorta, estômago), cicatrizes (alças aderidas) e umbigo (veias dilatadas na hipertensão portal) são locais a EVITAR. Complicação imediata mais comum: hemorragia da parede."},
+
+{lvl:"ENAMED", obj:"Via biliar · colangite", stem:"<span class='cx'>Mulher, 62 anos, colelitíase conhecida, dor em hipocôndrio direito, febre com calafrios e icterícia há 2 dias; hoje evoluiu com PA 85×50 mmHg e desorientação. Bilirrubina direta 6 mg/dL, FA e GGT muito elevadas, colédoco de 12 mm à USG.</span> Diagnóstico e conduta:",
+ opts:["Colecistite aguda — colecistectomia laparoscópica de urgência.","Colangite aguda grave (pêntade de Reynolds) — antibiótico EV e drenagem biliar urgente por CPRE.","Hepatite viral aguda — sorologias e suporte.","Cólica biliar — analgesia e alta com colecistectomia eletiva."],
+ ans:1,
+ why:"Charcot (dor + febre + icterícia) + hipotensão + confusão = <b>pêntade de Reynolds</b> = colangite tóxica/grave. Obstrução (colédoco dilatado por cálculo) + infecção ascendente → precisa de ATB e <b>descompressão da via biliar</b> (CPRE com papilotomia) com urgência; colecistectomia fica para depois.",
+ trap:"Colecistite não dá icterícia franca nem colédoco dilatado; Charcot é da COLANGITE. Operar a vesícula sem desobstruir o colédoco não resolve a sepse."},
+
+{lvl:"ENAMED", obj:"Via biliar · coledocolitíase", stem:"<span class='cx'>Homem, 50 anos, episódios de icterícia flutuante com colúria e acolia fecal, dor em hipocôndrio direito, sem febre. Exames: bilirrubina direta 4 mg/dL, FA e GGT elevadas; USG com colelitíase e colédoco de 9 mm, sem cálculo visualizado no ducto.</span> Assinale a correta:",
+ opts:["A USG afasta coledocolitíase, pois não visualizou cálculo no colédoco.","A hipótese é coledocolitíase; a USG é pouco sensível para o cálculo no ducto, e a confirmação/tratamento pode ser feita por colangioRM/ecoendoscopia ou CPRE com papilotomia, seguida de colecistectomia.","O tratamento é colecistectomia isolada, que resolve a obstrução do colédoco.","O quadro é de síndrome de Courvoisier e indica tumor de cabeça de pâncreas."],
+ ans:1,
+ why:"Icterícia obstrutiva <b>flutuante</b> + colúria/acolia + padrão colestático (FA/GGT) + colédoco &gt;6 mm em litiásico = <b>coledocolitíase</b>. A USG vê a dilatação, mas só acha o cálculo ductal em ~50% → colangioRM/ecoendoscopia; CPRE terapêutica quando a probabilidade é alta. Depois, colecistectomia na mesma internação.",
+ trap:"Tirar a vesícula não tira o cálculo que já está no colédoco. Courvoisier exige vesícula palpável INDOLOR + icterícia progressiva (não flutuante)."},
+
+{lvl:"ENAMED", obj:"Exame físico · inspeção", stem:"<span class='cx'>Homem, 48 anos, etilista, abdome globoso com flancos abaulados, umbigo protruso, veias dilatadas irradiando do umbigo ('cabeça de Medusa'), macicez móvel presente, fígado não palpável e espaço de Traube ocupado.</span> Os achados indicam:",
+ opts:["Obstrução da veia cava inferior com ascite quilosa.","Hipertensão portal por cirrose, com ascite e esplenomegalia.","Insuficiência cardíaca direita com hepatomegalia congestiva.","Carcinomatose peritoneal com ascite de GASA baixo."],
+ ans:1,
+ why:"Cabeça de Medusa = circulação colateral tipo <b>porta</b> (recanalização da umbilical) → <b>hipertensão portal</b>; macicez móvel = ascite; Traube ocupado = <b>esplenomegalia</b> congestiva. Etilismo + fígado não palpável (cirrose atrófica) fecha o cenário — ascite de GASA ≥1,1.",
+ trap:"Na obstrução de cava inferior as veias ficam nos FLANCOS com fluxo ascendente, sem Medusa. IC daria hepatomegalia dolorosa e turgência jugular."},
+
+{lvl:"ENAMED", obj:"Abdome agudo · pancreatite", stem:"<span class='cx'>Homem, 40 anos, etilista, dor epigástrica intensa irradiada em faixa para o dorso há 2 dias, vômitos. Na inspeção: equimose periumbilical e nos flancos. Amilase 5× o limite.</span> Os sinais cutâneos e seu significado:",
+ opts:["Sinais de Cullen (periumbilical) e Gray-Turner (flancos) — hemorragia retroperitoneal por pancreatite necro-hemorrágica.","Sinal de Chutro e sinal de Lenander — apendicite complicada.","Circulação colateral tipo cava — trombose de veia cava inferior.","Sinal de Jobert — pneumoperitônio."],
+ ans:0,
+ why:"<b>Cullen</b> = equimose periumbilical; <b>Gray-Turner</b> = equimose nos flancos. Ambos traduzem sangue dissecando o retroperitônio (pancreatite necro-hemorrágica, ectópica rota, AAA roto). A prova antiga perguntou exatamente 'Cullen está associado a' → hemorragia retroperitoneal/pancreatite.",
+ trap:"Cullen NÃO é apendicite, colecistite nem ascite (os distratores da prova antiga). E a dor da pancreatite é epigástrica em faixa — não confundir com úlcera perfurada (tábua, Jobert)."},
+
+{lvl:"PROVA", obj:"Exame físico · sequência", stem:"Sobre o exame físico do abdome, assinale a alternativa <b>INCORRETA</b>:",
+ opts:["A sequência correta é inspeção, ausculta, percussão e palpação, porque percutir e palpar antes altera os ruídos hidroaéreos.","O examinador deve posicionar-se à direita do paciente, que fica em decúbito dorsal, sem travesseiro, com as mãos ao longo do corpo.","A palpação superficial é bimanual, com compressão de cerca de 5 cm, e avalia visceromegalias.","A hepatimetria normal é de 6 a 12 cm na linha hemiclavicular direita."],
+ ans:2,
+ why:"Inverteu tudo: a <b>superficial</b> é <b>unimanual</b>, ~<b>1 cm</b>, para pontos dolorosos, integridade da parede e contraturas; a <b>profunda</b> é <b>bimanual</b>, ~5 cm, para visceromegalias e tumorações. As demais são frases literais dos slides do Porto.",
+ trap:"Questão de INCORRETA: leia as 4; três estão certas e 'confortáveis'. O erro costuma estar num número trocado (1 × 5 cm) ou num adjetivo (uni × bimanual)."},
+
+{lvl:"PROVA", obj:"Abdome agudo · síndromes", stem:"Correlacione a síndrome de abdome agudo com o achado mais característico:<br>(1) Inflamatório · (2) Perfurativo · (3) Obstrutivo · (4) Hemorrágico · (5) Vascular<br>( ) dor desproporcional ao exame, fibrilação atrial, lactato alto · ( ) dor súbita 'em facada', abdome em tábua, pneumoperitônio · ( ) cólica, distensão, vômitos e parada de gases · ( ) febre alta, dor localizada progressiva de 12–36 h · ( ) choque em mulher jovem com atraso menstrual",
+ opts:["5 – 2 – 3 – 1 – 4","2 – 5 – 3 – 1 – 4","5 – 2 – 1 – 3 – 4","5 – 3 – 2 – 1 – 4"],
+ ans:0,
+ why:"Vascular = dor desproporcional/isquemia; perfurativo = súbita e forte, tábua, ar livre; obstrutivo = cólica + distensão + vômitos/parada ++++; inflamatório = febre +++, 12–36 h, localizada; hemorrágico = &lt;6 h, choque, ectópica rota/AAA.",
+ trap:"A tabela do slide é a base: tempo de história (&lt;6 h hemorrágico, &lt;12 h perfurativo, 12–36 h inflamatório, 24–72 h obstrutivo, 6 h–7 d vascular) resolve qualquer associação."},
+
+{lvl:"PROVA", obj:"Abdome agudo · causas extra-abdominais", stem:"Analise as proposições sobre causas <b>extra-abdominais</b> de dor abdominal, segundo a tabela da aula:<br>I. Infarto agudo do miocárdio, pneumonia e pericardite podem se manifestar como dor abdominal.<br>II. Cetoacidose diabética, porfiria e crise addisoniana são causas metabólicas.<br>III. Herpes zóster e tabes dorsal são causas neurológicas.<br>IV. Apendicite retrocecal é o exemplo clássico de causa extra-abdominal.<br>Estão corretas:",
+ opts:["I, II e III.","I e IV.","II, III e IV.","Todas."],
+ ans:0,
+ why:"I, II e III reproduzem a tabela de causas extra-abdominais do slide (torácicas, metabólicas, neurológicas; ainda: hematológicas — falciforme/leucemia; intoxicações — chumbo, abstinência de narcóticos, picadas). Apendicite retrocecal é causa ABDOMINAL (aparece na lista de QSD).",
+ trap:"'Extra-abdominal' = a origem está fora do abdome (tórax, metabolismo, nervo). Retrocecal é só uma posição anatômica do apêndice."},
+
+{lvl:"PROVA", obj:"Exame físico · percussão", stem:"Sobre a percussão do abdome, assinale a correta:",
+ opts:["O som predominante no abdome normal é maciço, pela presença das vísceras sólidas.","A macicez móvel indica massa sólida fixa, pois não muda com a posição do paciente.","O espaço de Traube ocupado (maciço) sugere esplenomegalia; livre (timpânico) é o normal.","A punho-percussão lombar dolorosa (Giordano) indica colecistite aguda."],
+ ans:2,
+ why:"Traube = área timpânica do hipocôndrio esquerdo (6º EIC, linha axilar anterior, rebordo costal): <b>livre = normal; ocupado = esplenomegalia</b> (ou derrame pleural E/estômago cheio). O abdome normal é predominantemente <b>timpânico</b>; macicez MÓVEL muda com a posição (líquido); Giordano é rim (pielonefrite/litíase).",
+ trap:"'Móvel' é a palavra-chave: líquido migra, massa não. E Giordano ≠ Murphy."},
+
+{lvl:"PROVA", obj:"Exame físico · epônimos", stem:"Associe o sinal ao seu significado:<br>(1) Jobert · (2) Chutro · (3) Lenander · (4) Courvoisier-Terrier<br>( ) vesícula palpável e indolor em paciente ictérico · ( ) desvio da cicatriz umbilical para a direita · ( ) timpanismo no hipocôndrio direito substituindo a macicez hepática · ( ) temperatura retal superior à axilar em mais de 1 °C",
+ opts:["4 – 2 – 1 – 3","1 – 2 – 4 – 3","4 – 3 – 1 – 2","2 – 4 – 1 – 3"],
+ ans:0,
+ why:"Courvoisier-Terrier = vesícula palpável indolor + icterícia (obstrução neoplásica distal); Chutro = umbigo desviado para a direita (contratura na apendicite); Jobert = pneumoperitônio (perde-se a macicez hepática); Lenander = diferença retal–axilar &gt;1 °C (apendicite/peritonite pélvica).",
+ trap:"Os 8 epônimos do slide de abdome agudo são Blumberg, Rovsing, Chutro, Lenander, Psoas, Obturador, Jobert e Murphy — os 'menos famosos' (Chutro, Lenander, Jobert) são justamente os que viram questão."},
+
+{lvl:"PROVA", obj:"Ascite · GASA", stem:"Sobre a análise do líquido ascítico, assinale a <b>INCORRETA</b>:",
+ opts:["GASA ≥ 1,1 g/dL indica ascite por hipertensão portal (cirrose, insuficiência cardíaca, Budd-Chiari).","Carcinomatose peritoneal e tuberculose peritoneal cursam tipicamente com GASA &lt; 1,1 g/dL.","Proteína total do líquido ≥ 2,5 g/dL em ascite de GASA alto sugere origem cardíaca.","Neutrófilos ≥ 500/mm³ são necessários para o diagnóstico de peritonite bacteriana espontânea."],
+ ans:3,
+ why:"O corte da PBE é <b>PMN ≥ 250/mm³</b> (não 500, não leucócitos totais). As outras três são a regra do GASA: ≥1,1 = hipertensão portal; &lt;1,1 = carcinomatose, TB, nefrótica, pancreática; proteína ≥2,5 diferencia ascite cardíaca (alta) da cirrótica (baixa).",
+ trap:"Questão de INCORRETA com número trocado: 250 é o número da PBE. Guarde o trio 1,1 · 250 · 6–8 g/L."},
+
+{lvl:"PROVA", obj:"Via biliar · colelitíase", stem:"Sobre a doença calculosa da vesícula e das vias biliares, assinale a correta:",
+ opts:["A maioria dos portadores de colelitíase é sintomática e deve ser operada ao diagnóstico.","A cólica biliar típica dura mais de 6 horas, cursa com febre e sinal de Murphy positivo.","A colecistite aguda é a complicação mais comum da colelitíase e decorre, em 90–95% dos casos, de cálculo impactado no ducto cístico.","O exame de escolha inicial para avaliar a vesícula é a tomografia computadorizada."],
+ ans:2,
+ why:"Cálculo impactado no <b>cístico</b> → distensão, inflamação e infecção secundária = colecistite aguda, a complicação mais frequente da colelitíase. A maioria (~80%) dos litiásicos é ASSINTOMÁTICA (observação); a cólica biliar dura &lt;6 h e não tem febre; o exame inicial de vesícula é a <b>USG</b> (sensibilidade &gt;95%).",
+ trap:"Duração &gt;6 h + febre + Murphy = a fronteira entre cólica biliar (só dor) e colecistite (inflamação). Cálculo no CÍSTICO = colecistite; no COLÉDOCO = coledocolitíase."},
+
+{lvl:"PROVA", obj:"Endoscopia · indicações", stem:"Sobre a endoscopia digestiva alta, analise:<br>I. Avalia esôfago, estômago e duodeno até a segunda porção.<br>II. É o exame inicial de escolha no abdome agudo perfurativo.<br>III. A hemorragia digestiva alta é indicação de EDA em até 24 horas.<br>IV. A CPRE é o procedimento endoscópico usado para retirar cálculos do colédoco por papilotomia.<br>Estão corretas:",
+ opts:["I, III e IV.","I e II.","II, III e IV.","I e IV apenas."],
+ ans:0,
+ why:"I: EDA = esôfago, estômago e duodeno. III: HDA é indicação de EDA precoce (&lt;24 h), diagnóstica e terapêutica. IV: CPRE = acesso à papila para papilotomia e extração de cálculo (também drenagem na colangite). II é FALSA: suspeita de perfuração é CONTRAINDICAÇÃO de endoscopia — o exame inicial é RX/TC.",
+ trap:"'Endoscopia no abdome agudo' é o distrator recorrente: na prova antiga apareceu como alternativa errada em 2 questões (Q18 e Q26)."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q1", stem:"<b>Prova antiga, Q1.</b> O sinal de Blumberg positivo indica:",
+ opts:["Irritação peritoneal","Obstrução intestinal","Ascite volumosa","Hepatomegalia"],
+ ans:0,
+ why:"Gabarito A. Blumberg = dor à <b>descompressão brusca</b> (classicamente em McBurney) = <b>irritação do peritônio parietal</b>: apendicite quando localizado, peritonite difusa quando generalizado.",
+ trap:"Uma das 7 questões cuja resposta NÃO é B. Obstrução dá cólica/distensão; ascite dá macicez móvel; hepatomegalia é achado de palpação/hepatimetria."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q2", stem:"<b>Prova antiga, Q2.</b> Na palpação hepática, o fígado normal geralmente é palpável:",
+ opts:["5 cm abaixo do rebordo costal direito","Ao nível da cicatriz umbilical","Não é palpável ou discretamente palpável na inspiração profunda","Sempre doloroso"],
+ ans:2,
+ why:"Gabarito C. O fígado normal <b>não é palpável ou é apenas discretamente palpável</b> (borda fina, lisa, indolor) na inspiração profunda — manobras de Lemos Torres e Mathieu. 5 cm abaixo do rebordo = hepatomegalia; ao nível do umbigo = hepatomegalia gigante.",
+ trap:"'Sempre' e 'doloroso' são palavras que quase sempre marcam alternativa errada em prova de semiologia."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q3", stem:"<b>Prova antiga, Q3.</b> O sinal de Murphy positivo está relacionado a:",
+ opts:["Apendicite","Colecistite aguda","Pancreatite","Perfuração gástrica"],
+ ans:1,
+ why:"Gabarito B. Murphy = interrupção da inspiração profunda por dor ao comprimir o <b>ponto cístico</b> → vesícula inflamada = <b>colecistite aguda</b>.",
+ trap:"Apendicite tem Blumberg/Rovsing/psoas/obturador; pancreatite tem Cullen/Gray-Turner; perfuração tem Jobert e abdome em tábua."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q4", stem:"<b>Prova antiga, Q4.</b> A presença de macicez móvel à percussão sugere:",
+ opts:["Meteorismo","Massa sólida","Ascite","Íleo paralítico"],
+ ans:2,
+ why:"Gabarito C. Macicez que muda de lugar quando o paciente gira = <b>líquido livre</b> na cavidade = ascite (≥ ~1,5 L). Meteorismo e íleo dão hipertimpanismo/distensão gasosa; massa sólida dá macicez FIXA.",
+ trap:"A palavra 'móvel' é o que separa líquido de massa."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q5", stem:"<b>Prova antiga, Q5.</b> O sinal de Rovsing é considerado positivo quando:",
+ opts:["Dor no flanco direito à palpação profunda","Dor no quadrante inferior direito à compressão do esquerdo","Dor à descompressão brusca","Dor à palpação hepática"],
+ ans:1,
+ why:"Gabarito B. Rovsing: comprime-se o <b>QIE</b> (deslocando gás pelo cólon de forma retrógrada) e o paciente sente dor no <b>QID</b> = apendicite.",
+ trap:"'Dor à descompressão brusca' é Blumberg — o distrator preferido para Rovsing."},
+
+{lvl:"ANTIGA", obj:"Exame físico · Q6", stem:"<b>Prova antiga, Q6.</b> A ausculta abdominal com ausência de ruídos hidroaéreos pode sugerir:",
+ opts:["Diarreia infecciosa","Íleo paralítico","Gastrite","Hepatite"],
+ ans:1,
+ why:"Gabarito B. 'Silêncio abdominal' = <b>íleo adinâmico/paralítico</b> (pós-operatório, peritonite, hipocalemia, opioides). Diarreia AUMENTA os ruídos; gastrite e hepatite não alteram a ausculta.",
+ trap:"Ausentes = íleo paralítico · aumentados = diarreia · metálicos/de luta = obstrução mecânica · sopro = aneurisma/estenose."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q7", stem:"<b>Prova antiga, Q7.</b> A principal causa de ascite no mundo é:",
+ opts:["Insuficiência cardíaca","Cirrose hepática","Tuberculose","Síndrome nefrótica"],
+ ans:1,
+ why:"Gabarito B. <b>Cirrose</b> responde por ~80–85% das ascites; depois neoplasias (~10%), IC (3–5%), TB peritoneal, nefrótica, pancreática.",
+ trap:"Tuberculose é a principal causa de ascite com GASA BAIXO em regiões endêmicas — mas não a principal causa geral."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q8", stem:"<b>Prova antiga, Q8.</b> O gradiente soro-ascítico de albumina (SAAG) ≥ 1,1 indica:",
+ opts:["Ascite inflamatória","Ascite por hipertensão portal","Ascite neoplásica","Infecção bacteriana"],
+ ans:1,
+ why:"Gabarito B. GASA/SAAG = albumina sérica − albumina do líquido. <b>≥1,1 g/dL = hipertensão portal</b> (cirrose, IC, Budd-Chiari, trombose portal); &lt;1,1 = carcinomatose, TB, nefrótica, pancreática.",
+ trap:"Neoplásica (carcinomatose) e inflamatória (TB, serosite) são GASA BAIXO. Infecção (PBE) se define por PMN, não por GASA."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q9", stem:"<b>Prova antiga, Q9.</b> O local mais seguro para paracentese é:",
+ opts:["Linha média infraumbilical","Hipocôndrio direito","Flanco esquerdo lateral","Epigástrio"],
+ ans:2,
+ why:"Gabarito C. <b>Quadrante inferior esquerdo / flanco esquerdo</b>: parede mais fina, ceco fica à direita, sigmoide é móvel, longe da artéria epigástrica inferior; é o local recomendado hoje (AASLD). A linha média infraumbilical é alternativa clássica, mas o gabarito dele escolheu o flanco esquerdo.",
+ trap:"Hipocôndrio D (fígado) e epigástrio (aorta/estômago) são absurdos. Se a prova nova trouxer só 'linha média infraumbilical' e 'fossa ilíaca esquerda', a esquerda continua sendo a mais segura."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q10", stem:"<b>Prova antiga, Q10.</b> A principal complicação imediata da paracentese é:",
+ opts:["Peritonite bacteriana espontânea","Hemorragia","Insuficiência renal crônica","Cirrose"],
+ ans:1,
+ why:"Gabarito B. <b>Sangramento</b> (hematoma de parede pela artéria epigástrica inferior; raramente hemoperitônio) é a complicação imediata mais relevante; depois vazamento persistente, infecção e perfuração de alça/bexiga. A disfunção circulatória pós-paracentese ocorre após grandes volumes (&gt;5 L sem albumina).",
+ trap:"PBE é o que a paracentese DIAGNOSTICA, não o que ela causa. IRC e cirrose são absurdos."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q11", stem:"<b>Prova antiga, Q11.</b> A paracentese diagnóstica está indicada em:",
+ opts:["Toda ascite de causa conhecida estável","Primeira avaliação de ascite","Apenas em ascite volumosa","Apenas em pacientes cirróticos descompensados"],
+ ans:1,
+ why:"Gabarito B. Toda ascite de <b>início recente (primeira avaliação)</b> deve ser puncionada para definir a causa (GASA, proteína) e excluir PBE; também em toda internação do cirrótico com ascite e em qualquer piora clínica.",
+ trap:"'Apenas' restringe demais; 'causa conhecida estável' é justamente quando NÃO precisa repetir."},
+
+{lvl:"ANTIGA", obj:"Ascite · Q12", stem:"<b>Prova antiga, Q12.</b> Contagem de neutrófilos no líquido ascítico ≥ 250 células/mm³ sugere:",
+ opts:["Ascite cardíaca","Peritonite bacteriana espontânea","Neoplasia","Cirrose compensada"],
+ ans:1,
+ why:"Gabarito B. <b>PMN ≥250/mm³</b> = PBE: iniciar cefotaxima/ceftriaxona + albumina sem esperar cultura.",
+ trap:"Neoplasia se investiga com citologia; cardíaca com proteína ≥2,5 e GASA alto."},
+
+{lvl:"ANTIGA", obj:"Abdome agudo · Q13", stem:"<b>Prova antiga, Q13.</b> A causa mais comum de abdome agudo inflamatório é:",
+ opts:["Pancreatite","Apendicite aguda","Colecistite","Diverticulite"],
+ ans:1,
+ why:"Gabarito B. <b>Apendicite aguda</b> é a causa mais comum de abdome agudo inflamatório (e de abdome agudo cirúrgico em geral); colecistite vem em segundo; diverticulite predomina acima dos 40 anos à esquerda.",
+ trap:"Na epidemiologia do slide 'apendicite + colecistite' somam 7% das dores abdominais do PS — mas entre as causas INFLAMATÓRIAS cirúrgicas, apendicite lidera."},
+
+{lvl:"ANTIGA", obj:"Abdome agudo · Q14", stem:"<b>Prova antiga, Q14.</b> Dor abdominal súbita, intensa, com rigidez em tábua sugere:",
+ opts:["Pancreatite","Obstrução intestinal","Perfuração de víscera oca","Hepatite"],
+ ans:2,
+ why:"Gabarito C. Súbita e forte + <b>abdome em tábua</b> (contratura involuntária por peritonite química) + história &lt;12 h = síndrome <b>perfurativa</b> (úlcera péptica é a causa mais comum). Confirma com RX em pé (pneumoperitônio) ou TC.",
+ trap:"Obstrução = cólica + distensão (não tábua). Pancreatite = dor em faixa, sem tábua típica."},
+
+{lvl:"ANTIGA", obj:"Abdome agudo · Q15", stem:"<b>Prova antiga, Q15.</b> O sinal de Cullen está associado a:",
+ opts:["Apendicite","Hemorragia retroperitoneal/pancreatite","Colecistite","Ascite"],
+ ans:1,
+ why:"Gabarito B. Cullen = equimose <b>periumbilical</b>; Gray-Turner = flancos. Ambos = sangue no retroperitônio: pancreatite necro-hemorrágica, gravidez ectópica rota, aneurisma roto.",
+ trap:"Os dois sinais estão no slide de inspeção do João, ao lado do herpes zóster — os três são 'inspeção que fecha diagnóstico'."},
+
+{lvl:"ANTIGA", obj:"Abdome agudo · Q16", stem:"<b>Prova antiga, Q16.</b> O abdome agudo obstrutivo apresenta tipicamente:",
+ opts:["Dor contínua leve","Dor em cólica e distensão abdominal","Apenas febre","Icterícia isolada"],
+ ans:1,
+ why:"Gabarito B. Obstrutivo = <b>cólica</b> (peristaltismo de luta contra o obstáculo) + <b>distensão</b> + vômitos e parada de gases/fezes ++++, história de 24–72 h. Causas: brida, neoplasia, hérnia estrangulada, obstrução pilórica, intussuscepção.",
+ trap:"Febre +++ é do inflamatório; icterícia aponta via biliar."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q17", stem:"<b>Prova antiga, Q17.</b> A tríade de Charcot inclui:",
+ opts:["Dor abdominal, febre, icterícia","Dor, vômitos, diarreia","Febre, ascite, encefalopatia","Dor, anemia, perda de peso"],
+ ans:0,
+ why:"Gabarito A. <b>Charcot</b> = dor em hipocôndrio direito + febre com calafrios + icterícia = <b>colangite aguda</b>. Somando hipotensão e confusão mental vira a <b>pêntade de Reynolds</b> (colangite grave).",
+ trap:"Segunda questão da prova com resposta A. Charcot é da colangite — a Q21 pergunta isso de novo."},
+
+{lvl:"ANTIGA", obj:"Abdome agudo · Q18", stem:"<b>Prova antiga, Q18.</b> Em suspeita de abdome agudo, o exame inicial mais importante é:",
+ opts:["Ressonância","Ultrassonografia ou tomografia computadorizada (dependendo do caso)","Colonoscopia","Endoscopia alta"],
+ ans:1,
+ why:"Gabarito B. A imagem inicial é <b>USG ou TC conforme a síndrome</b>: TC com contraste VO e EV para inflamatório/perfurativo/obstrutivo, ecografia para hemorrágico (FAST) e via biliar, angioTC para vascular. RM não é exame de urgência; endoscopias são contraindicadas na suspeita de perfuração.",
+ trap:"Lembre a frase do slide: anamnese + exame físico são 'melhores que qualquer exame' — mas quando a pergunta é 'exame inicial', a resposta é USG/TC."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q19", stem:"<b>Prova antiga, Q19.</b> A principal causa de colecistite aguda é:",
+ opts:["Infecção viral","Litíase biliar","Trauma","Tumor"],
+ ans:1,
+ why:"Gabarito B. 90–95% das colecistites são <b>litiásicas</b> (cálculo impactado no cístico). A alitiásica (5–10%) ocorre em pacientes críticos/UTI/NPT.",
+ trap:"A infecção é SECUNDÁRIA à obstrução — bactéria não é a causa primária."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q20", stem:"<b>Prova antiga, Q20.</b> A coledocolitíase é definida como:",
+ opts:["Cálculo na vesícula","Cálculo no ducto colédoco","Inflamação da vesícula","Infecção hepática"],
+ ans:1,
+ why:"Gabarito B. Cálculo na vesícula = colelitíase; no <b>colédoco</b> = coledocolitíase (icterícia flutuante, colúria, acolia; CPRE); inflamação da vesícula = colecistite.",
+ trap:"Pura nomenclatura: cole-LITÍASE (vesícula) × coledoco-LITÍASE (colédoco) × cole-CISTITE (inflamação)."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q21", stem:"<b>Prova antiga, Q21.</b> A tríade de Charcot é típica de:",
+ opts:["Colecistite","Colangite aguda","Pancreatite","Hepatite"],
+ ans:1,
+ why:"Gabarito B. Dor + febre + icterícia = obstrução da via biliar com infecção = <b>colangite aguda</b>. Tratamento: ATB + drenagem (CPRE).",
+ trap:"Colecistite não dá icterícia franca (o colédoco está livre). Pancreatite tem amilase/lipase. Hepatite tem transaminases altas."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q22", stem:"<b>Prova antiga, Q22.</b> O exame de escolha inicial para avaliação da vesícula biliar é:",
+ opts:["Tomografia computadorizada","Ultrassonografia","Ressonância magnética","PET-CT"],
+ ans:1,
+ why:"Gabarito B. <b>USG</b>: sensibilidade &gt;95% para cálculos (imagem hiperecoica com sombra acústica), avalia parede, líquido perivesicular, Murphy ultrassonográfico e calibre do colédoco. Barata, sem radiação, à beira do leito.",
+ trap:"TC é ruim para cálculo de colesterol (isodenso). ColangioRM entra quando a suspeita é cálculo no COLÉDOCO."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q23", stem:"<b>Prova antiga, Q23.</b> A complicação mais comum da colelitíase é:",
+ opts:["Hepatite","Colecistite aguda","Cirrose","Câncer"],
+ ans:1,
+ why:"Gabarito B. <b>Colecistite aguda</b> é a complicação mais frequente; depois coledocolitíase, colangite, pancreatite biliar, íleo biliar, Mirizzi. Câncer de vesícula é raro (risco em vesícula em porcelana/cálculo &gt;3 cm).",
+ trap:"Hepatite e cirrose não são complicações de cálculo."},
+
+{lvl:"ANTIGA", obj:"Via biliar · Q24", stem:"<b>Prova antiga, Q24.</b> O tratamento padrão da colecistite aguda é:",
+ opts:["Antibiótico isolado","Colecistectomia (preferencialmente laparoscópica)","Observação","Quimioterapia"],
+ ans:1,
+ why:"Gabarito B. Suporte (jejum, hidratação, analgesia) + antibiótico E <b>colecistectomia videolaparoscópica precoce</b> (idealmente &lt;72 h). Antibiótico isolado só como ponte; colecistostomia percutânea se sem condição cirúrgica.",
+ trap:"'Preferencialmente laparoscópica' é a alternativa mais completa — padrão do gabarito dele."},
+
+{lvl:"ANTIGA", obj:"Endoscopia · Q25", stem:"<b>Prova antiga, Q25.</b> A endoscopia digestiva alta avalia:",
+ opts:["Boca, faringe e esôfago","Esôfago, estômago e duodeno","Apenas estômago","Boca, esôfago e estômago"],
+ ans:1,
+ why:"Gabarito B. EDA = <b>esôfago, estômago e duodeno</b> (até a 2ª porção). Boca e faringe são apenas atravessadas.",
+ trap:"Duas alternativas incluem 'boca' e uma diz 'apenas' — as três erradas."},
+
+{lvl:"ANTIGA", obj:"Endoscopia · Q26", stem:"<b>Prova antiga, Q26.</b> Uma indicação comum de endoscopia digestiva alta é:",
+ opts:["Diarreia","Dispepsia/epigastralgia","Abdome agudo","Colelitíase"],
+ ans:1,
+ why:"Gabarito B. <b>Dispepsia/epigastralgia</b> (sobretudo com sinais de alarme ou &gt;40–45 anos), HDA, H. pylori, DRGE refratária, disfagia. Diarreia → colonoscopia; colelitíase → USG; abdome agudo (perfuração) → CONTRAINDICAÇÃO.",
+ trap:"Abdome agudo como 'indicação de EDA' é o distrator que reaparece (Q18)."},
+
+{lvl:"DIRETA", obj:"Exame físico · hepatimetria", stem:"A hepatimetria normal na linha hemiclavicular direita é de:",
+ opts:["2 a 4 cm","4 a 8 cm","6 a 12 cm","12 a 16 cm"],
+ ans:2,
+ why:"Slide do Porto: <b>6 a 12 cm na linha hemiclavicular direita</b> e <b>4 a 8 cm na linha esternal média</b>.",
+ trap:"4–8 é o valor da linha ESTERNAL — distrator perfeito para quem decorou só um número."},
+
+{lvl:"DIRETA", obj:"Abdome agudo · imagem", stem:"O exame de imagem de escolha no abdome agudo vascular/isquêmico é:",
+ opts:["Radiografia simples de abdome","Angiotomografia","Ecografia abdominal","Endoscopia digestiva alta"],
+ ans:1,
+ why:"Slide E) Abdome agudo vascular: RX de abdome agudo, <b>AngioTC</b> (em destaque), ecografia. A angioTC mostra a oclusão da mesentérica; RX é pouco sensível; a eco é o destaque do HEMORRÁGICO.",
+ trap:"Cada síndrome tem seu exame em letra grande no slide: TC com contraste VO+EV (inflamatório/perfurativo/obstrutivo), ecografia (hemorrágico), angioTC (vascular)."}
+];
+const LVL={ENAMED:'<span class="pill e">ENAMED</span>',PROVA:'<span class="pill d">Nível prova</span>',ANTIGA:'<span class="pill a">Prova antiga</span>',DIRETA:'<span class="pill a">Estilo do prof</span>'};
+let qFilter='all';
+const state={answered:0,hits:0};
+function buildQFilter(){
+  const objs=[...new Set(QS.map(q=>q.obj.split(' · ')[0]))];
+  const box=document.getElementById('qfilter');
+  box.innerHTML='<span class="chip'+(qFilter==='all'?' on':'')+'" data-k="all">Todas ('+QS.length+')</span>'+
+    objs.map(o=>'<span class="chip'+(qFilter===o?' on':'')+'" data-k="'+o+'">'+o+' ('+QS.filter(q=>q.obj.split(' · ')[0]===o).length+')</span>').join('');
+  box.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{qFilter=c.dataset.k;renderQuiz();});
+}
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  const list=QS.map((q,i)=>({q,i})).filter(x=>qFilter==='all'||x.q.obj.split(' · ')[0]===qFilter);
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  buildQFilter();
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i},n)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div>'+(LVL[q.lvl]||'')+'<span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div>'+(q.trap?'<div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>':'');
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+/* ===== FLASHCARDS (deck atômico) =====
+   CATS={key:{n:"nome",cor:"#hex"}} · CARDS=[{c:"key",q:"pergunta",a:"resposta curta",w:"1 linha de porquê (opcional)"}] */
+const CATS={
+ef:{n:"Exame físico",cor:"#0e7490"},
+aa:{n:"Abdome agudo",cor:"#b91c1c"},
+asc:{n:"Ascite & paracentese",cor:"#1d4ed8"},
+vb:{n:"Via biliar",cor:"#a16207"},
+endo:{n:"Endoscopia",cor:"#6d28d9"}
+};
+const CARDS=[
+{c:"ef",q:"Sequência correta do exame físico do abdome?",a:"Inspeção → ausculta → percussão → palpação",w:"Ausculta antes: percutir/palpar altera os RHA."},
+{c:"ef",q:"De que lado do paciente fica o examinador?",a:"À DIREITA",w:"Decúbito dorsal, sem travesseiro, pernas descruzadas."},
+{c:"ef",q:"Palpação superficial — profundidade e nº de mãos?",a:"~1 cm, unimanual"},
+{c:"ef",q:"Palpação profunda — profundidade e nº de mãos?",a:"~5 cm, bimanual (mãos sobrepostas)"},
+{c:"ef",q:"O que a palpação superficial avalia?",a:"Pontos dolorosos, integridade da parede, contraturas"},
+{c:"ef",q:"O que a palpação profunda avalia?",a:"Visceromegalias e tumorações"},
+{c:"ef",q:"Hepatimetria normal na linha hemiclavicular direita?",a:"6 a 12 cm"},
+{c:"ef",q:"Hepatimetria normal na linha esternal média?",a:"4 a 8 cm"},
+{c:"ef",q:"Fígado normal à palpação é…?",a:"Não palpável ou discretamente palpável na inspiração profunda"},
+{c:"ef",q:"Manobra de Lemos Torres — como é?",a:"Mão E na lombar projeta o fígado; mão D espalmada palpa a borda"},
+{c:"ef",q:"Manobra de Mathieu — como é?",a:"De frente para os pés, mãos em garra sob o rebordo"},
+{c:"ef",q:"Baço normal é palpável?",a:"Não (espaço de Traube livre)"},
+{c:"ef",q:"Espaço de Traube ocupado (maciço) indica?",a:"Esplenomegalia"},
+{c:"ef",q:"Manobra de Schuster serve para palpar o quê?",a:"Baço (decúbito lateral direito, perna E fletida)"},
+{c:"ef",q:"Macicez móvel à percussão indica?",a:"Ascite (líquido livre)",w:"Precisa de ~1,5 L."},
+{c:"ef",q:"Hipertimpanismo à percussão indica?",a:"Distensão gasosa"},
+{c:"ef",q:"Sinal do piparote pesquisa o quê?",a:"Ascite de grande volume (onda líquida)"},
+{c:"ef",q:"Punho-percussão lombar dolorosa (Giordano) sugere?",a:"Pielonefrite / litíase renal"},
+{c:"ef",q:"RHA ausentes ('silêncio abdominal') → ?",a:"Íleo adinâmico/paralítico"},
+{c:"ef",q:"RHA aumentados → ?",a:"Diarreia"},
+{c:"ef",q:"Peristaltismo de luta (RHA metálicos) → ?",a:"Obstrução mecânica"},
+{c:"ef",q:"Sopro abdominal → ?",a:"Aneurisma ou estenose arterial"},
+{c:"ef",q:"Sinal de Murphy positivo indica?",a:"Colecistite aguda",w:"Parada da inspiração ao comprimir o ponto cístico."},
+{c:"ef",q:"Sinal de Blumberg positivo indica?",a:"Irritação peritoneal",w:"Dor à descompressão brusca."},
+{c:"ef",q:"Sinal de Rovsing — como é?",a:"Comprime QIE → dói no QID (apendicite)"},
+{c:"ef",q:"Sinal do psoas — manobra e o que indica?",a:"Extensão da coxa D → apendicite retrocecal"},
+{c:"ef",q:"Sinal do obturador — manobra e o que indica?",a:"Rotação interna da coxa fletida → apendicite pélvica"},
+{c:"ef",q:"Sinal de Courvoisier-Terrier?",a:"Vesícula palpável indolor + icterícia = tumor periampular"},
+{c:"ef",q:"Sinal de Cullen — onde e o que indica?",a:"Equimose periumbilical → hemorragia retroperitoneal/pancreatite"},
+{c:"ef",q:"Sinal de Gray-Turner — onde?",a:"Equimose nos flancos (hemorragia retroperitoneal)"},
+{c:"ef",q:"'Cabeça de Medusa' indica?",a:"Hipertensão portal (circulação colateral tipo porta)"},
+{c:"ef",q:"Cicatriz de Kocher — onde e de quê?",a:"Subcostal direita — colecistectomia"},
+{c:"ef",q:"Cicatriz de McBurney — de quê?",a:"Apendicectomia (FID)"},
+{c:"ef",q:"Cicatriz de Pfannenstiel — de quê?",a:"Cesariana (suprapúbica transversa)"},
+{c:"ef",q:"Cicatriz de flanco esquerdo geralmente indica?",a:"Cirurgia renal"},
+{c:"ef",q:"Manobra de Valsalva no exame do abdome serve para?",a:"Evidenciar hérnias e diástase dos retos"},
+{c:"ef",q:"Ponto de McBurney fica onde?",a:"Terço lateral da linha umbigo–EIAS direita"},
+{c:"ef",q:"Região 5 das 9 regiões do abdome?",a:"Mesogástrio (umbilical)"},
+{c:"ef",q:"Erosões do esmalte dentário sugerem?",a:"Vômitos de repetição (bulimia/DRGE)"},
+{c:"ef",q:"Conjuntiva pálida indica?",a:"Anemia"},
+{c:"aa",q:"Definição de abdome agudo (Sabiston)?",a:"Dor/sensibilidade abdominal que em geral requer cirurgia de emergência"},
+{c:"aa",q:"Dor abdominal = quantos % das queixas do PS?",a:"18 a 42%"},
+{c:"aa",q:"Indicação cirúrgica em quantos % das dores abdominais do PS?",a:"15 a 30%"},
+{c:"aa",q:"Causa mais frequente de dor abdominal no PS (epidemiologia do slide)?",a:"Etiologia desconhecida (41,3%)"},
+{c:"aa",q:"Sintoma-guia do abdome agudo?",a:"DOR (diagnóstico é clínico)"},
+{c:"aa",q:"Qual avaliação é 'a mais importante' no abdome agudo?",a:"A primeira",w:"Depois: avaliações seriadas pelo mesmo médico."},
+{c:"aa",q:"Dor visceral — fibras e estímulo?",a:"Fibras C não mielinizadas; distensão/contração de víscera oca"},
+{c:"aa",q:"Dor visceral — localização?",a:"Imprecisa, linha média"},
+{c:"aa",q:"Dor parietal/somática — origem e caráter?",a:"Peritônio parietal; constante, fixa, piora ao mover"},
+{c:"aa",q:"Dor parietal difusa = ?",a:"Peritonite"},
+{c:"aa",q:"Dor referida — mecanismo?",a:"Circuitos neurais centrais compartilhados"},
+{c:"aa",q:"Causa mais comum de abdome agudo inflamatório?",a:"Apendicite aguda"},
+{c:"aa",q:"Causa mais comum de abdome agudo obstrutivo (delgado)?",a:"Brida (aderência pós-operatória)"},
+{c:"aa",q:"Causa mais comum de abdome agudo perfurativo?",a:"Úlcera péptica"},
+{c:"aa",q:"Exemplos de abdome agudo hemorrágico?",a:"Ectópica rota, ruptura de baço, AAA roto, cisto ovariano"},
+{c:"aa",q:"Exemplos de abdome agudo vascular?",a:"Isquemia intestinal, trombose mesentérica, torção de omento/ovário"},
+{c:"aa",q:"Tempo de história típico — perfurativo?",a:"< 12 h"},
+{c:"aa",q:"Tempo de história típico — hemorrágico?",a:"< 6 h"},
+{c:"aa",q:"Tempo de história típico — inflamatório?",a:"12 a 36 h"},
+{c:"aa",q:"Tempo de história típico — obstrutivo?",a:"24 a 72 h"},
+{c:"aa",q:"Tempo de história típico — vascular?",a:"6 h a 7 dias"},
+{c:"aa",q:"Síndrome com febre +++?",a:"Inflamatório"},
+{c:"aa",q:"Síndrome com vômitos e parada de gases ++++?",a:"Obstrutivo"},
+{c:"aa",q:"Dor súbita e forte + rigidez em tábua = ?",a:"Perfurativo (perfuração de víscera oca)"},
+{c:"aa",q:"Dor em cólica + distensão = ?",a:"Obstrutivo"},
+{c:"aa",q:"Imagem de escolha: inflamatório/perfurativo/obstrutivo?",a:"TC de abdome com contraste VO e EV"},
+{c:"aa",q:"Imagem em destaque no abdome agudo hemorrágico?",a:"Ecografia abdominal (FAST)"},
+{c:"aa",q:"Imagem de escolha no abdome agudo vascular?",a:"AngioTC"},
+{c:"aa",q:"RX de abdome agudo: 'alça sentinela em FID' sugere?",a:"Apendicite (inflamatório)"},
+{c:"aa",q:"RX de tórax em pé com ar sob as cúpulas = ?",a:"Pneumoperitônio (perfuração)"},
+{c:"aa",q:"Sinal de Jobert?",a:"Timpanismo no HD (some a macicez hepática) = pneumoperitônio"},
+{c:"aa",q:"Sinal de Chutro?",a:"Umbigo desviado para a direita (apendicite)"},
+{c:"aa",q:"Sinal de Lenander?",a:"Temperatura retal > axilar em mais de 1 °C"},
+{c:"aa",q:"Laboratório básico do abdome agudo (slide)?",a:"Hemograma, amilase, β-HCG, urina, eletrólitos, função renal"},
+{c:"aa",q:"Exames extras se instável/suspeita vascular?",a:"Gasometria, lactato, culturas"},
+{c:"aa",q:"Antibiótico empírico deve ser dado quando?",a:"Após coleta dos exames iniciais (culturas)"},
+{c:"aa",q:"Paciente instável com abdome agudo = ?",a:"TEMPO — centro cirúrgico, não tomografia"},
+{c:"aa",q:"Causas torácicas de dor abdominal (extra-abdominais)?",a:"IAM, pneumonia, embolia, pericardite, pneumotórax"},
+{c:"aa",q:"Causas metabólicas de dor abdominal?",a:"Cetoacidose, porfiria, crise addisoniana, hiperlipoproteinemia"},
+{c:"aa",q:"Intoxicação clássica que simula abdome agudo?",a:"Chumbo (saturnismo)"},
+{c:"aa",q:"'Mulher jovem fértil + dor súbita + choque' = ?",a:"Gravidez ectópica rota"},
+{c:"aa",q:"'Idoso hipertenso + dor súbita + massa pulsátil' = ?",a:"Aneurisma de aorta roto"},
+{c:"aa",q:"Sintomas associados a perguntar (slide)?",a:"Febre, diarreia, constipação, hematúria, hemorragia digestiva"},
+{c:"aa",q:"O que incluir no exame físico do abdome agudo além do abdome?",a:"Exame ginecológico completo e toque retal"},
+{c:"asc",q:"Principal causa de ascite no mundo?",a:"Cirrose hepática (~80%)"},
+{c:"asc",q:"GASA ≥ 1,1 g/dL indica?",a:"Hipertensão portal"},
+{c:"asc",q:"GASA < 1,1 — exemplos?",a:"Carcinomatose, TB peritoneal, nefrótica, pancreática"},
+{c:"asc",q:"Proteína total da ascite ≥ 2,5 g/dL com GASA alto sugere?",a:"Ascite cardíaca"},
+{c:"asc",q:"Corte de neutrófilos para PBE?",a:"≥ 250 PMN/mm³"},
+{c:"asc",q:"Tratamento da PBE?",a:"Cefotaxima/ceftriaxona + albumina 1,5 g/kg D1 e 1 g/kg D3"},
+{c:"asc",q:"Germe mais comum da PBE?",a:"E. coli (monobacteriana)"},
+{c:"asc",q:"Quando fazer paracentese diagnóstica?",a:"Toda ascite nova (1ª avaliação), toda internação, piora clínica"},
+{c:"asc",q:"Local mais seguro para paracentese?",a:"Quadrante inferior esquerdo (flanco esquerdo)"},
+{c:"asc",q:"Referência anatômica do local da paracentese?",a:"2–3 dedos medial e cefálico à EIAS esquerda"},
+{c:"asc",q:"Principal complicação imediata da paracentese?",a:"Hemorragia (hematoma de parede)"},
+{c:"asc",q:"Contraindicações reais da paracentese?",a:"CIVD e fibrinólise",w:"INR alto/plaquetopenia NÃO contraindicam."},
+{c:"asc",q:"Paracentese > 5 L exige?",a:"Albumina 6–8 g por litro retirado"},
+{c:"asc",q:"Exames mínimos no líquido ascítico?",a:"Celularidade, proteína total, albumina, cultura"},
+{c:"asc",q:"Volume mínimo para macicez móvel?",a:"~1,5 L",w:"USG detecta a partir de ~100 mL."},
+{c:"asc",q:"Técnica que evita vazamento na paracentese?",a:"Trajeto em Z"},
+{c:"vb",q:"Principal causa de colecistite aguda?",a:"Litíase biliar (cálculo no cístico, 90–95%)"},
+{c:"vb",q:"Complicação mais comum da colelitíase?",a:"Colecistite aguda"},
+{c:"vb",q:"Coledocolitíase = cálculo onde?",a:"No ducto colédoco"},
+{c:"vb",q:"Tríade de Charcot?",a:"Dor abdominal + febre + icterícia"},
+{c:"vb",q:"Tríade de Charcot é típica de?",a:"Colangite aguda"},
+{c:"vb",q:"Pêntade de Reynolds = Charcot + ?",a:"Hipotensão + confusão mental"},
+{c:"vb",q:"Exame de escolha inicial para a vesícula?",a:"Ultrassonografia"},
+{c:"vb",q:"Tratamento padrão da colecistite aguda?",a:"Colecistectomia (preferencialmente laparoscópica) precoce"},
+{c:"vb",q:"Tratamento da coledocolitíase?",a:"CPRE com papilotomia + colecistectomia"},
+{c:"vb",q:"Tratamento da colangite aguda?",a:"Antibiótico EV + drenagem biliar (CPRE)"},
+{c:"vb",q:"Cólica biliar dura quanto e tem febre?",a:"< 6 h, sem febre"},
+{c:"vb",q:"Colecistite: duração da dor e sinal?",a:"> 6 h, febre, Murphy positivo"},
+{c:"vb",q:"USG na colecistite — achados?",a:"Parede > 4 mm, líquido perivesicular, cálculo, Murphy US"},
+{c:"vb",q:"Colédoco dilatado à USG = maior que?",a:"6 mm"},
+{c:"vb",q:"Os 4F da colelitíase?",a:"Female, forty, fat, fertile"},
+{c:"vb",q:"Tipo de cálculo biliar mais comum?",a:"Colesterol (75–80%)"},
+{c:"vb",q:"Colelitíase assintomática — conduta?",a:"Observação (exceto porcelana, pólipo ≥1 cm, cálculo >3 cm)"},
+{c:"vb",q:"Icterícia flutuante + colúria + acolia = ?",a:"Coledocolitíase"},
+{c:"vb",q:"Colecistite alitiásica ocorre em quem?",a:"Pacientes críticos/UTI/NPT"},
+{c:"endo",q:"A EDA avalia quais órgãos?",a:"Esôfago, estômago e duodeno"},
+{c:"endo",q:"Indicação comum de EDA?",a:"Dispepsia/epigastralgia (alarme ou >40–45 anos)"},
+{c:"endo",q:"Sinais de alarme na dispepsia?",a:"Disfagia, perda de peso, anemia, vômitos, sangramento"},
+{c:"endo",q:"HDA: EDA em quanto tempo?",a:"Até 24 h"},
+{c:"endo",q:"Contraindicação clássica de EDA?",a:"Suspeita de perfuração (abdome agudo perfurativo)"},
+{c:"endo",q:"Jejum para EDA?",a:"6–8 h sólidos (2 h líquidos claros)"},
+{c:"endo",q:"Posição do paciente na EDA?",a:"Decúbito lateral esquerdo"},
+{c:"endo",q:"Complicação principal da CPRE?",a:"Pancreatite pós-CPRE (3–5%)"},
+{c:"endo",q:"CPRE serve para?",a:"Papilotomia/retirada de cálculo do colédoco, drenagem biliar"},
+{c:"endo",q:"Colonoscopia avalia?",a:"Cólon e íleo terminal"},
+{c:"endo",q:"Classificação de Forrest classifica?",a:"Sangramento de úlcera péptica"},
+{c:"endo",q:"Classificação de Los Angeles classifica?",a:"Esofagite erosiva"}
+];
+let filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],virado=false;
+const $=id=>document.getElementById(id);
+function buildChips(){
+  const chips=[["all","Todas ("+CARDS.length+")"]].concat(Object.keys(CATS).map(k=>[k,CATS[k].n+" ("+CARDS.filter(c=>c.c===k).length+")"]));
+  $("chips").innerHTML=chips.map(([k,n])=>'<span class="chip'+(k===filtro?" on":"")+'" data-k="'+k+'">'+n+'</span>').join("");
+  document.querySelectorAll("#chips .chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;start();});
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function start(soErradas){
+  const base=soErradas?erradas.slice():CARDS.filter(c=>filtro==="all"||c.c===filtro);
+  fila=shuffle(base.slice());idx=0;ok=0;err=0;erradas=[];
+  $("fim").classList.add("hidden");$("card").style.display="flex";
+  buildChips();mostra();
+}
+function mostra(){
+  virado=false;
+  if(idx>=fila.length){return fim();}
+  const c=fila[idx];
+  $("cat").textContent=CATS[c.c].n;$("cat").style.background=CATS[c.c].cor;
+  $("qFront").textContent=c.q;
+  $("qTop").textContent=c.q;
+  $("resp").textContent=c.a;
+  $("why").textContent=c.w||"";$("why").style.display=c.w?"block":"none";
+  $("qFront").style.display="block";$("back").style.display="none";
+  $("hint").textContent="toque para ver a resposta";
+  $("actions").classList.add("hidden");
+  $("pos").textContent=(idx+1)+" / "+fila.length;
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+}
+function vira(){
+  if(virado)return;virado=true;
+  $("qFront").style.display="none";$("back").style.display="block";
+  $("hint").textContent="acertou? marca embaixo 👇";
+  $("actions").classList.remove("hidden");
+}
+function responde(acertou){
+  if(!virado)return;
+  if(acertou){ok++;}else{err++;erradas.push(fila[idx]);}
+  idx++;mostra();
+}
+function fim(){
+  $("card").style.display="none";$("actions").classList.add("hidden");
+  $("fim").classList.remove("hidden");
+  const total=ok+err;
+  $("fimTitulo").textContent=err===0?"🏆 Zerou!":"Rodada: "+ok+"/"+total;
+  $("fimTexto").textContent=err===0?"Tudo certo nessa leva.":err+" para repetir — vai nelas até zerar.";
+  $("btnErradas").style.display=err?"inline-block":"none";
+}
+$("card").onclick=vira;
+$("btnAcertei").onclick=()=>responde(true);
+$("btnErrei").onclick=()=>responde(false);
+$("btnErradas").onclick=()=>start(true);
+$("btnReiniciar").onclick=()=>start(false);
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById('flash').classList.contains('active'))return;
+  if(e.code==="Space"){e.preventDefault();vira();}
+  if(e.key==="1"&&virado)responde(false);
+  if(e.key==="2"&&virado)responde(true);
+});
+buildChips();start();
+
+/* ===== FEYNMAN ===== */
+const FY=[
+["1 · Examine um abdome em voz alta, do começo ao fim","Narre para um colega de 2ª fase: como você prepara o paciente (posição, lado, mãos), a ordem I-A-P-P e POR QUE a ausculta vem antes, o que procura na inspeção (tipos de abdome, Cullen/Gray-Turner, Medusa, as 7 cicatrizes, hérnias/Valsalva), o que cada padrão de RHA significa, como faz a hepatimetria (números!) e o Traube, e a diferença entre palpação superficial e profunda. Termine explicando como você palpa fígado (Lemos Torres, Mathieu) e baço (Schuster) e o que é 'normal' em cada um."],
+["2 · Os 10 sinais em 60 segundos","Sem olhar: Murphy, Blumberg, Rovsing, Psoas, Obturador, Chutro, Lenander, Jobert, Courvoisier-Terrier, Giordano. Para cada um: como pesquisa + o que indica + qual o distrator clássico na prova (ex.: Rovsing × Blumberg). Se travar em Chutro/Lenander/Jobert, volte ao slide de epônimos."],
+["3 · Por que a apendicite começa no umbigo e termina na FID?","Explique os 3 tipos de dor abdominal (fibras, estímulo, caráter) usando a apendicite como fio condutor: distensão do apêndice → dor visceral imprecisa periumbilical → peritônio parietal inflamado → dor somática localizada, fixa, que piora ao mover → Blumberg. Depois dê um exemplo de dor referida (irritação frênica → ombro) e um de causa extra-abdominal que engana (IAM inferior, zóster, cetoacidose)."],
+["4 · Cinco pacientes, cinco síndromes","Invente um caso de 2 linhas para cada síndrome de abdome agudo (inflamatório, perfurativo, obstrutivo, hemorrágico, vascular) com: tempo de história, caráter da dor, o achado de exame que fecha (febre +++, tábua/Jobert, cólica + RHA metálicos, choque, dor desproporcional), a causa mais comum e o exame de imagem em letra grande do slide. Feche com a regra do instável: 'instabilidade = TEMPO'."],
+["5 · Paracentese do zero","Um cirrótico com ascite nova chega com febre baixa. Diga: por que puncionar (indicações), onde e como (referência anatômica, técnica em Z, o que NÃO contraindica), o que pedir no líquido, como interpretar GASA (≥1,1 × <1,1 com 3 causas de cada) e proteína total, o corte da PBE e o tratamento completo (antibiótico + albumina com doses), e o que fazer se retirar 6 L."],
+["6 · Cálculo em cada lugar da via biliar","Percorra o caminho do cálculo: vesícula (colelitíase: 4F, assintomática × cólica biliar <6 h) → cístico (colecistite: >6 h, febre, Murphy, USG, colecistectomia VL precoce) → colédoco (coledocolitíase: icterícia flutuante, colédoco >6 mm, CPRE) → colédoco obstruído + infecção (colangite: Charcot → Reynolds, ATB + drenagem) → papila (pancreatite biliar). Em cada parada diga o exame de escolha e a conduta. Depois explique por que Charcot NÃO é colecistite e por que Courvoisier NÃO é cálculo."],
+["7 · EDA: o que vê, quando pede, quando NÃO pede","Explique o que a EDA alcança (esôfago, estômago, duodeno), 5 indicações comuns (dispepsia com alarme/>45 a, HDA, H. pylori, DRGE refratária, disfagia), o preparo (jejum, sedação, decúbito lateral E) e as contraindicações — em especial por que 'abdome agudo' é distrator errado. Feche diferenciando EDA × colonoscopia × CPRE (o que cada uma vê e trata)."]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{const p=document.createElement('div');p.className='panel';p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';feybox.appendChild(p);});
+</script>
+</body>
+</html>

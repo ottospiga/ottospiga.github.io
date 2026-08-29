@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicina · UNIFEBE · 5º período</title>
+  <style>
+    :root{
+      --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+      --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --blue:#4c8dff;
+      --amber:#ffb454; --green:#38d39f; --purple:#c6b3ff;
+      --shadow:0 6px 24px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    [hidden]{display:none!important}
+    body{
+      background:var(--bg); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      padding:24px 16px 40px; display:flex; justify-content:center;
+    }
+    main{width:100%; max-width:860px}
+    .topnav{display:flex; gap:18px; margin-bottom:20px; font-size:14px}
+    .topnav a{color:var(--blue); text-decoration:none}
+    .topnav a:hover{text-decoration:underline}
+    .kicker{color:var(--tealo); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase}
+    h1{font-size:clamp(26px,6vw,36px); margin:6px 0 2px}
+    .sub{color:var(--mut); font-size:15px; margin-bottom:18px}
+    #busca{
+      width:100%; padding:12px 14px; margin-bottom:8px;
+      background:var(--card); color:var(--ink);
+      border:1px solid var(--line); border-radius:12px; font-size:15px; outline:none;
+    }
+    #busca:focus{border-color:var(--tealo)}
+    #busca::placeholder{color:var(--mut)}
+    #vazio{color:var(--mut); margin:18px 2px}
+    section.uc{margin-top:26px}
+    section.uc>h2{
+      font-size:20px; color:var(--tealo); padding-bottom:8px;
+      border-bottom:1px solid var(--line); margin-bottom:6px;
+    }
+    .materia{margin-top:14px}
+    .materia>h3{font-size:14px; color:var(--mut); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px}
+    .cards{display:grid; gap:12px}
+    @media(min-width:700px){.cards{grid-template-columns:1fr 1fr}}
+    .card{
+      display:flex; flex-direction:column; gap:10px;
+      background:var(--card); border:1px solid var(--line); border-radius:14px;
+      padding:16px 18px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow);
+      transition:transform .12s ease, border-color .12s ease;
+    }
+    .card:hover{transform:translateY(-2px); border-color:var(--mut)}
+    .titulo{font-weight:600; font-size:15px; line-height:1.45}
+    .meta{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:auto}
+    .badge{font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap}
+    .b-guia-sp{color:var(--tealo); background:rgba(18,211,176,.12); border:1px solid rgba(18,211,176,.35)}
+    .b-guia-prova{color:var(--blue); background:rgba(76,141,255,.12); border:1px solid rgba(76,141,255,.35)}
+    .b-flashcards{color:var(--purple); background:rgba(198,179,255,.12); border:1px solid rgba(198,179,255,.35)}
+    .b-banco{color:var(--amber); background:rgba(255,180,84,.12); border:1px solid rgba(255,180,84,.35)}
+    .b-simulado{color:var(--green); background:rgba(56,211,159,.12); border:1px solid rgba(56,211,159,.35)}
+    .data{color:var(--mut); font-size:13px}
+    .abrir{color:var(--tealo); font-weight:600; font-size:13px; margin-left:auto; white-space:nowrap}
+    footer{margin-top:34px; color:var(--mut); font-size:13px}
+  </style>
+</head>
+<body>
+<main>
+  <nav class="topnav"><a href="../index.html">← Início</a><a href="../coisas/cv/index.html">CV</a></nav>
+  <p class="kicker">Medicina · UNIFEBE · 5º período</p>
+  <h1>Medicina</h1>
+  <p class="sub">Guias de estudo por UC e matéria. Clique num card para abrir.</p>
+  <input id="busca" type="search" placeholder="buscar guia… (título, matéria, tipo)" autocomplete="off">
+  <p id="vazio" hidden>Nenhum guia encontrado.</p>
+  <section class="uc">
+    <h2>UC13</h2>
+    <div class="materia">
+      <h3>Tutoria</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp1-dor-modo-inicial-v2.html" data-q="uc xiii · sp1 — dor · modo inicial v2 tutoria uc13 guia-sp guia de sp 28/07/2026">
+          <span class="titulo">UC XIII · SP1 — Dor · Modo Inicial v2</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">28/07/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp1-dor-aprofundamento.html" data-q="uc xiii · sp1 dor · aprofundamento tutoria uc13 guia-sp guia de sp 28/07/2026">
+          <span class="titulo">UC XIII · SP1 Dor · Aprofundamento</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">28/07/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-modo-inicial.html" data-q="uc13 · sp2 — dor neuropatica · modo inicial tutoria uc13 guia-sp guia de sp 04/08/2026">
+          <span class="titulo">UC13 · SP2 — Dor Neuropática · Modo Inicial</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">04/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-aprofundamento.html" data-q="uc13 · sp2 — dor neuropatica · aprofundamento tutoria uc13 guia-sp guia de sp 04/08/2026">
+          <span class="titulo">UC13 · SP2 — Dor Neuropática · Aprofundamento</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">04/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp3-dor-cronica-modo-inicial.html" data-q="uc13 · sp3 — dor cronica: fibromialgia &amp; miofascial · modo inicial tutoria uc13 guia-sp guia de sp 10/08/2026">
+          <span class="titulo">UC13 · SP3 — Dor Crônica: Fibromialgia &amp; Miofascial · Modo Inicial</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">10/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp3-dor-cronica-aprofundamento.html" data-q="uc13 · sp3 — dor cronica: fm &amp; miofascial · aprofundamento tutoria uc13 guia-sp guia de sp 10/08/2026">
+          <span class="titulo">UC13 · SP3 — Dor Crônica: FM &amp; Miofascial · Aprofundamento</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">10/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp4-dor-visceral.html" data-q="uc13 · sp4 — dor visceral &amp; nefrolitiase · guia de estudo tutoria uc13 guia-sp guia de sp 16/08/2026">
+          <span class="titulo">UC13 · SP4 — Dor Visceral &amp; Nefrolitíase · Guia de Estudo</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">16/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/tutoria/uc13-sp5-dor-neoplasica.html" data-q="uc13 · sp5 — dor neoplasica, opioides &amp; cefaleias · guia de estudo tutoria uc13 guia-sp guia de sp 24/08/2026">
+          <span class="titulo">UC13 · SP5 — Dor Neoplásica, Opioides &amp; Cefaleias · Guia de Estudo</span>
+          <span class="meta">
+            <span class="badge b-guia-sp">guia de SP</span>
+            <span class="data">24/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="materia">
+      <h3>Anatomia + Fisiologia</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/uc13/anato-fisio/revisao-relampago-a1-anato-fisio.html" data-q="revisao-relampago · a1 anato seccional + fisio · 27/08 anatomia + fisiologia uc13 guia-prova guia de prova 26/08/2026">
+          <span class="titulo">Revisão-Relâmpago · A1 Anato Seccional + Fisio · 27/08</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">26/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="materia">
+      <h3>Patologia</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/uc13/pato/uc13-pato-a1-revisao.html" data-q="pato a1 · revisao pre-prova · 28/08 13h patologia uc13 guia-prova guia de prova 28/08/2026">
+          <span class="titulo">Pato A1 · Revisão Pré-Prova · 28/08 13h</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">28/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="materia">
+      <h3>Farmacologia</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-a1-estrategia.html" data-q="farmaco a1 · estrategia de guerra · 04/09 farmacologia uc13 guia-prova guia de prova 22/08/2026">
+          <span class="titulo">Farmaco A1 · Estratégia de Guerra · 04/09</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">22/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-banco-vania.html" data-q="banco vania · farmaco uc13 · questoes reais t5–t11 farmacologia uc13 banco banco de questoes 21/08/2026">
+          <span class="titulo">Banco Vânia · Farmaco UC13 · questões reais T5–T11</span>
+          <span class="meta">
+            <span class="badge b-banco">banco de questões</span>
+            <span class="data">21/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-flashcards-posologia.html" data-q="flashcards farmaco a1 · v3 atomico farmacologia uc13 flashcards flashcards 21/08/2026">
+          <span class="titulo">Flashcards Farmaco A1 · v3 atômico</span>
+          <span class="meta">
+            <span class="badge b-flashcards">flashcards</span>
+            <span class="data">21/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-simuladao-vania.html" data-q="simuladao vania · farmaco uc13 · a1 04/09 farmacologia uc13 simulado simulado 29/08/2026">
+          <span class="titulo">Simuladão Vânia · Farmaco UC13 · A1 04/09</span>
+          <span class="meta">
+            <span class="badge b-simulado">simulado</span>
+            <span class="data">29/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="materia">
+      <h3>Laboratório</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/uc13/lab/uc13-lab-a1-guia.html" data-q="uc13 · laboratorio (praticas funcionais) — guia de estudo a1 laboratorio uc13 guia-prova guia de prova 29/08/2026">
+          <span class="titulo">UC13 · Laboratório (Práticas Funcionais) — Guia de estudo A1</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">29/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="uc">
+    <h2>HP Manifestações Abdominais</h2>
+    <div class="materia">
+      <h3>Procedimentos</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/hp-abdomen/procedimentos/hp-joao-hpp-guia.html" data-q="hp · prova do joao (hpp) — exame fisico abdominal, abdome agudo, ascite, via biliar e endoscopia · guia de estudo procedimentos hp manifestacoes abdominais guia-prova guia de prova 29/08/2026">
+          <span class="titulo">HP · Prova do João (HPp) — Exame físico abdominal, abdome agudo, ascite, via biliar e endoscopia · Guia de estudo</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">29/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="materia">
+      <h3>Clínica</h3>
+      <div class="cards">
+        <a class="card" href="5-fase/hp-abdomen/clinica/hp-andrea-hpc-guia.html" data-q="hpc · andrea — hepatites, dhgna, cirrose e ascite · guia de estudo clinica hp manifestacoes abdominais guia-prova guia de prova 29/08/2026">
+          <span class="titulo">HPc · Andrea — Hepatites, DHGNA, Cirrose e Ascite · Guia de estudo</span>
+          <span class="meta">
+            <span class="badge b-guia-prova">guia de prova</span>
+            <span class="data">29/08/2026</span>
+            <span class="abrir">abrir →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <footer>atualizado em 29/08/2026 · 17 guias</footer>
+</main>
+<script>
+  var busca = document.getElementById('busca');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function norm(s){
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  busca.addEventListener('input', function(){
+    var q = norm(busca.value.trim());
+    cards.forEach(function(c){ c.hidden = q !== '' && c.getAttribute('data-q').indexOf(q) === -1; });
+    document.querySelectorAll('.materia').forEach(function(m){
+      m.hidden = !m.querySelector('.card:not([hidden])');
+    });
+    document.querySelectorAll('section.uc').forEach(function(s){
+      s.hidden = !s.querySelector('.materia:not([hidden])');
+    });
+    document.getElementById('vazio').hidden = cards.some(function(c){ return !c.hidden; });
+  });
+</script>
+</body>
+</html>

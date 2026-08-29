@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC XIII · SP1 — Dor · Modo Inicial v2</title>
+<style>
+:root{
+  --cream:#f7f4ed; --cream2:#fffdf8; --ink:#1a2b33; --ink2:#4a5c66;
+  --teal:#125e5c; --teal2:#0d4644; --blue:#1d4e6f; --line:#ddd5c6;
+  --ok:#1c6f52; --okbg:#eaf4ef; --bad:#9c3527; --badbg:#faeeec;
+  --warn:#8a6a1f; --warnbg:#fbf4e2;
+}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.62}
+.wrap{max-width:880px;margin:0 auto;padding:0 18px 80px}
+header{background:var(--teal2);color:#eef6f4;padding:30px 18px 26px;margin-bottom:26px;border-bottom:4px solid #0a3634}
+.hd{max-width:880px;margin:0 auto}
+.kicker{font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;opacity:.72;margin-bottom:9px}
+h1{font-family:Iowan Old Style,Palatino,Georgia,serif;font-size:29px;line-height:1.2;margin:0 0 8px;font-weight:600}
+.sub{font-size:14.5px;opacity:.86;max-width:660px}
+.badges{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px}
+.badge{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+  padding:3.5px 10px;border-radius:20px;font-size:11.5px;letter-spacing:.04em}
+.dash{background:var(--cream2);border:1px solid var(--line);border-radius:10px;padding:16px 18px;
+  margin-bottom:18px;display:flex;flex-wrap:wrap;gap:22px;align-items:center}
+.stat{display:flex;flex-direction:column;min-width:74px}
+.stat b{font-family:Iowan Old Style,Georgia,serif;font-size:23px;line-height:1.1;color:var(--teal)}
+.stat span{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink2);margin-top:3px}
+.barwrap{flex:1;min-width:150px}
+.bar{height:7px;background:#e6e0d3;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),#2a8a80);
+  border-radius:6px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.barlbl{font-size:11.5px;color:var(--ink2);margin-bottom:6px}
+.lock{font-size:12.5px;color:var(--warn);background:var(--warnbg);border:1px solid #ecdcb4;
+  border-radius:7px;padding:10px 14px;margin-bottom:26px}
+.srule{display:flex;align-items:center;gap:13px;margin:34px 0 18px}
+.srule span{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
+.srule:before,.srule:after{content:"";height:1px;background:var(--line);flex:1}
+.srule:before{max-width:14px}
+.q{background:var(--cream2);border:1px solid var(--line);border-radius:11px;padding:22px 21px;margin-bottom:17px}
+.qtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:13px;flex-wrap:wrap}
+.qnum{font-family:Iowan Old Style,Georgia,serif;font-size:14px;color:var(--teal);font-weight:600;letter-spacing:.03em}
+.qtag{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink2);
+  border:1px solid var(--line);border-radius:14px;padding:2.5px 9px;background:#f2ede1}
+.stem{margin-bottom:16px}
+.stem p{margin:0 0 10px}
+.stem .ctx{background:#f3efe4;border-left:3px solid #c9bda2;padding:12px 14px;
+  border-radius:0 7px 7px 0;font-size:15.2px;margin-bottom:13px}
+.ask{font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;background:#fff;
+  border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit;color:inherit;
+  cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--teal);background:#f6fbfa}
+.opt:disabled{cursor:default}
+.opt .k{font-family:Iowan Old Style,Georgia,serif;font-weight:700;color:var(--teal);
+  min-width:19px;font-size:15px;padding-top:1px}
+.opt .t{flex:1;font-size:15.2px;line-height:1.55}
+.opt.picked{border-width:2px;padding:11px 13px}
+.opt.right{border-color:var(--ok);background:var(--okbg)} .opt.right .k{color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)} .opt.wrong .k{color:var(--bad)}
+.opt .mk{display:block;font-size:12.5px;font-weight:700;margin-top:5px}
+.opt.right .mk{color:var(--ok)} .opt.wrong .mk{color:var(--bad)}
+.opt .why{display:block;font-size:13.4px;color:var(--ink2);margin-top:7px;padding-top:7px;
+  border-top:1px dashed #ddd6c8;line-height:1.5}
+.props{list-style:none;padding:0;margin:0 0 16px}
+.props li{display:flex;gap:11px;padding:9px 0;border-bottom:1px dotted #e2dbcc;font-size:15.2px}
+.props li:last-child{border-bottom:none}
+.props .rn{font-family:Iowan Old Style,Georgia,serif;font-weight:700;color:var(--blue);min-width:26px}
+.props li.pv .rn:after{content:" V";color:var(--ok)}
+.props li.pf .rn:after{content:" F";color:var(--bad)}
+.wt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+  background:#e9f0f5;border:1px solid #cfdde6;border-radius:14px;padding:2.5px 9px}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:8px;padding:12px 13px;
+  font:inherit;font-size:15.2px;background:#fff;color:inherit;resize:vertical;line-height:1.55}
+textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(18,94,92,.09)}
+textarea:disabled{background:#f7f4ed;color:var(--ink2)}
+.btn{margin-top:11px;background:var(--teal);color:#fff;border:none;border-radius:7px;padding:10px 19px;
+  font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--teal2)} .btn:disabled{background:#b9b2a4;cursor:default}
+.hint{font-size:12.5px;color:var(--ink2);margin-top:8px}
+.rev{margin-top:16px;padding-top:15px;border-top:2px solid var(--line);display:none}
+.rev.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.revh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2);margin-bottom:9px}
+.verdict{font-family:Iowan Old Style,Georgia,serif;font-size:16px;font-weight:600;margin-bottom:11px}
+.verdict.v-ok{color:var(--ok)} .verdict.v-bad{color:var(--bad)}
+.exp{background:#f3efe4;border-radius:8px;padding:14px 15px;font-size:14.6px;line-height:1.6}
+.exp ul{margin:8px 0 0;padding-left:19px} .exp li{margin-bottom:7px}
+.concept{margin-top:12px;font-size:13.6px;background:#e9f0f5;border-left:3px solid var(--blue);
+  padding:11px 13px;border-radius:0 7px 7px 0}
+.concept b{color:var(--blue);letter-spacing:.03em}
+.flag{margin-top:10px;font-size:13.4px;background:var(--warnbg);border-left:3px solid #c9a94e;
+  padding:11px 13px;border-radius:0 7px 7px 0}
+.flag b{color:var(--warn)}
+.selfg{margin-top:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.selfg .lbl{font-size:12.5px;color:var(--ink2);margin-right:3px}
+.sb{border:1px solid var(--line);background:#fff;border-radius:16px;padding:5px 13px;font:inherit;
+  font-size:13px;cursor:pointer;color:var(--ink2)}
+.sb:hover{border-color:var(--teal);color:var(--teal)}
+.sb.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+details.div{margin-top:34px;background:var(--cream2);border:1px solid #e0c98f;border-radius:11px;padding:0}
+details.div summary{cursor:pointer;padding:17px 20px;font-family:Iowan Old Style,Georgia,serif;
+  font-size:16.5px;font-weight:600;color:#7a5c14;list-style:none}
+details.div summary::-webkit-details-marker{display:none}
+details.div summary:before{content:"▸ ";color:#c9a94e}
+details.div[open] summary:before{content:"▾ "}
+details.div .body{padding:0 20px 20px;font-size:14.6px}
+.dvi{border-top:1px solid #ece2c8;padding:14px 0 4px}
+.dvi h4{margin:0 0 6px;font-size:14.5px;color:var(--teal2)}
+.dvi p{margin:0 0 7px}
+.dvi .pf{color:var(--bad);font-weight:600} .dvi .pv{color:var(--ok);font-weight:600}
+footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-size:13.2px;color:var(--ink2)}
+footer b{color:var(--ink)}
+@media(max-width:600px){
+  h1{font-size:23px} header{padding:24px 16px 22px}
+  .q{padding:18px 15px} .dash{gap:15px;padding:14px}
+  .stat b{font-size:20px} body{font-size:15.4px}
+  .opt .t,.stem .ctx,.props li{font-size:14.7px}
+}
+</style>
+</head>
+<body>
+
+<header><div class="hd">
+  <div class="kicker">UNIFEBE · Medicina · 5ª fase · UC XIII</div>
+  <h1>SP1 — Dor</h1>
+  <div class="sub">Modo Inicial · versão 2, recalibrada pela aula da Prof.ª Maria Verônica Dávila. Alternativas A–E, como na APF real e nos quizzes da própria professora. Gabarito trancado até você responder.</div>
+  <div class="badges">
+    <span class="badge">5 objetivas ENAMED</span>
+    <span class="badge">1 surpresa · formato da professora</span>
+    <span class="badge">1 proposições I–V</span>
+    <span class="badge">3 descritivas</span>
+    <span class="badge">A–E</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+
+  <div class="dash">
+    <div class="stat"><b id="sObj">0/7</b><span>Objetivas</span></div>
+    <div class="stat"><b id="sDesc">0/3</b><span>Descritivas</span></div>
+    <div class="barwrap">
+      <div class="barlbl"><span id="sProg">0</span> de 10 respondidas</div>
+      <div class="bar"><i id="sBar"></i></div>
+    </div>
+  </div>
+
+  <div class="lock" id="lockmsg">
+    No fim da página há um painel com as <b>divergências entre a síntese de veterano e a aula da professora</b> — é onde você mais arriscaria perder ponto. Abra só depois de responder: ele revela parte dos gabaritos.
+  </div>
+
+  <div class="srule"><span>Parte I · Objetivas</span></div>
+  <div id="objHost"></div>
+
+  <div class="srule"><span>Parte II · Descritivas · estilo UNIFEBE</span></div>
+  <div id="descHost"></div>
+
+  <details class="div">
+    <summary>Divergências: síntese de veterano × aula da professora — abrir depois de responder</summary>
+    <div class="body">
+      <p style="margin-top:0">Comparei a <i>Tutoria UC13</i> (síntese de veterano) com a aula da Prof.ª Maria Verônica Dávila e com o <i>UC13_SP1-Tuto.pdf</i>. Nos pontos abaixo eles não batem. Onde há conflito, <b>vale o que a professora ensinou</b> — é ela quem corrige.</p>
+
+      <div class="dvi">
+        <h4>1. Velocidade das fibras Aδ</h4>
+        <p>Síntese de veterano: <span class="pf">12–30 m/s</span>. Aula da professora, tabela de fibras: <span class="pv">5 a 30 m/s</span>. Use 5–30. Ela também dá os tempos: primeira dor em 0,1 s após o estímulo, segunda dor após 1 s ou mais.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>2. Ordem das etapas da nocicepção</h4>
+        <p>Síntese de veterano e a maioria dos livros: transdução → transmissão → <b>modulação</b> → <b>percepção</b>. O slide da professora lista: transdução → transmissão → <b>percepção</b> → <b>modulação</b> — e o deck dela segue essa ordem, com modulação por último, nos slides 47 a 62. <b>Na prova dela, use a ordem dela.</b> Se a questão for aberta, citar as quatro etapas corretamente nomeadas já garante o ponto.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>3. Dor nociplástica não é uma quarta categoria fisiopatológica</h4>
+        <p>A síntese de veterano lista quatro: nociceptiva, neuropática, mista e nociplástica. A professora usa <span class="pv">três</span> — nociceptiva (somática ou visceral), neuropática e mista — e encaixa a nociplástica <i>dentro</i> da mista. O objetivo de aprendizagem do SP1 também fala em "nociceptiva, neuropática e mista". Nociplástica é assunto do <b>SP3</b>. Não invente uma quarta coluna na prova do SP1.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>4. Ela classifica a dor em cinco eixos, não três</h4>
+        <p>A síntese usa três eixos (fisiopatológico, temporal, origem). A professora usa <b>cinco</b>: tempo-duração · intensidade · origem · padrão de distribuição/percepção · fisiopatologia. Referida e irradiada entram no eixo "padrão de distribuição/percepção", não em "origem".</p>
+      </div>
+
+      <div class="dvi">
+        <h4>5. Corte temporal da dor crônica</h4>
+        <p>A síntese fixa em "&gt; 3 meses (90 dias)". A professora é mais cautelosa: dor crônica &gt; 3 meses, <i>"alguns consideram esse limite 6 meses"</i>; e para a aguda, <i>"não há um limite preciso estabelecido na literatura mundial, variando entre 3 a 6 meses"</i>. Em questão fechada, 3 meses é a resposta; mas 120 dias nunca é corte de nada — foi distrator na APF.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>6. O que a síntese de veterano simplesmente não tem</h4>
+        <p>A professora dedicou cerca de 15 slides à <b>modulação endógena da dor</b>, e a síntese cobre apenas metade disso. Falta lá inteiramente:</p>
+        <p>• <b>Via descendente de analgesia</b> (sistema supraespinhal/supra-segmentar), com as quatro origens: hipotálamo/núcleos periventriculares (encefalinas) → mesencéfalo/substância cinzenta periaquedutal → núcleo magno da rafe (serotoninérgico) → núcleo cerúleo, na ponte (noradrenérgico).<br>
+        • Ação <b>pré-sináptica</b> (reduz liberação de glutamato e substância P; receptores opioides μ, δ, κ: ↓adenilato ciclase → ↓cAMP, ↑abertura de K⁺ → hiperpolarização, ↓entrada de Ca²⁺) e <b>pós-sináptica</b> (↑K⁺, receptores 5-HT1 e α2).<br>
+        • A tabela <b>teoria do portão clássica × revisada</b>.<br>
+        • A tabela de neurotransmissores: excitatórios — glutamato, substância P, neurocinina, CGRP; inibitórios — GABA, β-endorfina, met e leu-encefalina, serotonina, noradrenalina.<br>
+        • Receptores: glutamato em NMDA, AMPA e cainato (os dois últimos, não-NMDA); substância P em NK1.<br>
+        • Regiões encefálicas: núcleo talâmico VPM → córtex somatossensorial, ínsula e cingulado anterior; núcleos talâmicos mediais e intratalâmicos para o componente afetivo; SCP, formação reticular, hipotálamo, sistema límbico.<br>
+        • Ligação com terapêutica: SSRI e SNRI agem justamente reforçando a via descendente.</p>
+        <p>Se você estudar só pela síntese, entra na tutoria sem esse bloco — e ele é o mais denso da aula dela.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>7. Detalhes de trajeto em que a síntese vai além do slide</h4>
+        <p>A síntese afirma "lemnisco espinhal" para o neoespinotalâmico, "lemnisco lateral" para o paleoespinotalâmico e um <b>neurônio de 4ª ordem</b> até o giro pós-central. Os slides da professora não mencionam lemniscos nem o quarto neurônio: ela diz que o paleoespinotalâmico ascende ao tronco cerebral (formação reticular) e à substância cinzenta ao redor do aqueduto de Sylvius. Não são contradições, mas são acréscimos que ela não cobrou — não construa sua resposta em cima deles.</p>
+      </div>
+
+      <div class="dvi">
+        <h4>8. Formato: ela usa cinco alternativas</h4>
+        <p>Os quizzes do próprio deck (slides 69 a 74) e a APF de 18/02/2026 usam <b>A a E</b>, com opções do tipo "As alternativas A e B estão corretas" e "As alternativas A, B e C estão corretas". Por isso esta versão do widget abandonou o A–D. Os três casos clínicos dela (slides 65 a 67) são curtos, de três a quatro linhas — exatamente o calibre de mini-contexto usado aqui.</p>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    <b>Fontes, em ordem de prioridade:</b> aula <i>UC 13 Aula 1 – Dor</i>, Prof.ª Maria Verônica Dávila, 74 slides, lida integralmente · objetivos de aprendizagem do SP1 · <i>UC13_SP1-Tuto.pdf</i> · <i>Tutoria UC13</i> (síntese de veterano, seção SP1) · calibragem de formato pela APF SP1 – UC XIII de 18/02/2026 e pelos quizzes do próprio deck.<br><br>
+    <b>Bibliografia que ela indicou:</b> Guyton &amp; Hall · Costanzo · Silverthorn · Goldman-Cecil · Robbins &amp; Cotran · Manual de avaliação e tratamento da dor (EDUEPA, 2020) · e, no slide de bibliografia da tutoria, artigos sobre a teoria do portão, Harrison cap. 1, Gusso cap. 102 e 103, Porto Prática Clínica cap. 15 e Porto Exame Clínico, capítulo de dor.
+  </footer>
+</div>
+
+<script>
+const OBJ = [
+{
+  n:"Questão 1", tag:"ENAMED",
+  ctx:"Homem de 34 anos, marceneiro, encosta acidentalmente o antebraço na lâmina aquecida de uma serra. Retira o membro em cerca de um décimo de segundo, referindo dor “em pontada”, muito bem localizada. Após cerca de um segundo instala-se, no mesmo local, uma dor “em queimação”, difusa e de limites imprecisos, que aumenta lentamente por vários minutos.",
+  ask:"Sobre as fibras responsáveis, respectivamente, pelo primeiro e pelo segundo componente doloroso, assinale a alternativa correta:",
+  opts:[
+    {k:"A",t:"Fibras Aδ, mielinizadas, de 5 a 30 m/s, que compõem o trato neoespinotalâmico; e fibras C, amielínicas, de 0,5 a 2 m/s, que compõem o trato paleoespinotalâmico.",
+     why:"Correta. A primeira dor surge cerca de 0,1 s após o estímulo, é em pontada e bem localizada, conduzida por fibras Aδ mielinizadas, de nociceptores mecânicos ou térmicos, formando o trato neoespinotalâmico. A segunda dor surge após 1 s ou mais, é em queimação, contínua e mal localizada, conduzida por fibras C amielínicas de nociceptores polimodais, formando o paleoespinotalâmico. É o sistema duplo de inervação para a dor."},
+    {k:"B",t:"Fibras C, amielínicas, de 0,5 a 2 m/s; e fibras Aδ, mielinizadas, de 5 a 30 m/s.",
+     why:"Errada — a ordem está invertida. O componente que aparece primeiro é obrigatoriamente o de condução mais rápida. Fibra que conduz a 0,5 m/s não pode gerar dor em 0,1 s."},
+    {k:"C",t:"Fibras Aδ, mielinizadas, de 12 a 30 m/s; e fibras C, amielínicas, de 0,5 a 2 m/s.",
+     why:"Distrator de número — e o mais perigoso da questão, porque tudo o mais está certo. A tabela de fibras da aula dá 5 a 30 m/s para as Aδ, não 12 a 30. O valor 12–30 aparece em sínteses de veterano, mas não é o número da professora."},
+    {k:"D",t:"Fibras Aβ, mielinizadas grossas; e fibras Aδ, mielinizadas finas.",
+     why:"Errada. As fibras Aα e Aβ são grossas, não nociceptivas, e conduzem tato, pressão, posição e vibração. Elas participam da dor apenas fechando o portão medular — não transmitem estímulo nociceptivo."},
+    {k:"E",t:"Fibras Aδ, amielínicas, de condução rápida; e fibras C, mielinizadas, de condução lenta.",
+     why:"Errada: a mielinização está trocada. Aδ são mielinizadas — é justamente a mielina que explica a condução rápida. C são amielínicas, e é a ausência de mielina que explica a lentidão."}
+  ],
+  correct:"A",
+  concept:"Sistema duplo de inervação para a dor. Aδ: mecânicos/térmicos, mielinizadas, 5–30 m/s, primeira dor em 0,1 s, pontual e bem localizada, neoespinotalâmico, glutamato. C: polimodais, amielínicas, 0,5–2 m/s, segunda dor após 1 s, contínua e mal localizada, paleoespinotalâmico, substância P."
+},
+{
+  n:"Questão 2", tag:"ENAMED",
+  ctx:"Mulher de 62 anos, hipertensa e tabagista, chega à emergência com dor retroesternal em aperto, de início súbito há 40 minutos, com náuseas e sudorese, e refere também dor na face interna do braço esquerdo. O eletrocardiograma mostra supradesnivelamento do segmento ST.",
+  ask:"Quanto ao padrão de distribuição/percepção, a dor no braço esquerdo é classificada como e explicada por:",
+  opts:[
+    {k:"A",t:"Dor irradiada, por compressão direta do plexo braquial decorrente da isquemia miocárdica.",
+     why:"Errada nas duas partes. Dor irradiada segue o trajeto de uma raiz nervosa ou de um nervo cuja estimulação gera a dor — é a dor radicular. E não existe compressão do plexo braquial no infarto; o mecanismo é de convergência na medula, não compressivo."},
+    {k:"B",t:"Dor referida, por convergência de aferentes viscerais e somáticos no mesmo segmento espinal, correspondendo o território doloroso ao dermátomo T1.",
+     why:"Correta. Na dor referida a dor é sentida em local adjacente ou distante da lesão, mas nos músculos e na pele do mesmo dermátomo do órgão lesado, restringindo-se em geral a um mesmo segmento espinal. A face interna do braço corresponde a T1 — é o exemplo clássico do infarto agudo do miocárdio, citado tanto na aula quanto na síntese."},
+    {k:"C",t:"Dor neuropática, por lesão das fibras aferentes cardíacas com geração de impulsos nervosos ectópicos.",
+     why:"Errada. Dor neuropática exige lesão ou disfunção do próprio sistema nervoso somatossensorial, com alteração de canais iônicos — sobretudo de sódio — e impulsos ectópicos. Aqui o sistema nervoso está íntegro: há estímulo nociceptivo visceral por isquemia."},
+    {k:"D",t:"Dor somática superficial, uma vez que o paciente localiza a dor na pele do braço.",
+     why:"Errada. O fato de o paciente apontar a pele não faz a dor ser somática superficial: a origem é visceral, cardíaca. O que ocorre é projeção do território doloroso para o dermátomo correspondente. Confundir onde a dor é sentida com onde a dor nasce é exatamente o erro que a questão testa."},
+    {k:"E",t:"Dor referida, porque a dor percorre o trajeto do nervo ulnar até a face interna do braço.",
+     why:"Errada, e é o distrator mais sutil: acerta o nome mas erra o mecanismo, descrevendo dor irradiada. Se seguisse o trajeto de um nervo conhecido, seria irradiada, não referida. Na referida não há nervo a percorrer — há dermátomo compartilhado."}
+  ],
+  correct:"B",
+  concept:"Na aula, referida e irradiada pertencem ao eixo “padrão de distribuição/percepção”, não ao eixo “origem”. Referida: mesmo dermátomo, por convergência de aferentes, típica de vísceras e tecidos profundos. Irradiada: segue o trajeto anatômico de raiz ou nervo — ciatalgia por hérnia de disco."
+},
+{
+  n:"Questão 3", tag:"ENAMED",
+  ctx:"Corredor de 28 anos torce o tornozelo no quilômetro 30 de uma maratona e, apesar do entorse, completa a prova referindo dor mínima. Cerca de vinte minutos após cruzar a linha de chegada, instala-se dor intensa no tornozelo, que o impede de apoiar o pé.",
+  ask:"O mecanismo que melhor explica a analgesia durante a prova é:",
+  opts:[
+    {k:"A",t:"Teoria do portão clássica: as fibras Aβ do próprio tornozelo edemaciado excitaram interneurônios inibitórios da lâmina II, liberando GABA.",
+     why:"Errada como melhor explicação. O portão clássico é segmentar e depende de estímulo tátil ou pressórico local mantido — esfregar a área, TENS. Não explica analgesia sustentada por horas durante esforço intenso, nem o retorno da dor após o repouso."},
+    {k:"B",t:"Via descendente de analgesia: hipotálamo e substância cinzenta periaquedutal ativam o núcleo magno da rafe, serotoninérgico, e o núcleo cerúleo, noradrenérgico, que liberam na medula opioides endógenos, serotonina e noradrenalina.",
+     why:"Correta. É o sistema supraespinhal/supra-segmentar, ativado justamente em situações de dor intensa, estresse ou exercício, quando o SNC aumenta a liberação dessas substâncias. As quatro origens são hipotálamo (núcleos periventriculares, encefalinas), mesencéfalo (substância cinzenta periaquedutal), núcleo magno da rafe (serotoninérgico) e núcleo cerúleo, na ponte (noradrenérgico). É a chamada analgesia induzida por estresse."},
+    {k:"C",t:"Sensibilização periférica por prostaglandinas e bradicinina liberadas no foco do entorse.",
+     why:"Errada, e com o sinal invertido: a sensibilização periférica REDUZ o limiar dos nociceptores e AUMENTA a dor. É o que explica a dor após a prova, não a ausência de dor durante."},
+    {k:"D",t:"Bloqueio dos canais de sódio das fibras Aδ e C pelo aumento da temperatura corporal durante o exercício.",
+     why:"Errada. Não há tal mecanismo. Bloqueio de canais de sódio é o modo de ação de anestésicos locais e de anticonvulsivantes usados na dor neuropática, e não um efeito fisiológico da hipertermia do esforço."},
+    {k:"E",t:"Aumento da liberação de substância P sobre receptores NK1 no corno dorsal, saturando a transmissão nociceptiva.",
+     why:"Errada. A substância P é excitatória e sua ligação ao receptor NK1 nos neurônios nociceptivos do corno dorsal FACILITA a dor. Não existe analgesia por saturação de NK1."}
+  ],
+  correct:"B",
+  concept:"Os dois mecanismos de modulação endógena da aula: (1) espinhal/segmentar — teoria do portão, interneurônios inibitórios da lâmina II, GABA e encefalinas; (2) supraespinhal/supra-segmentar — via descendente de analgesia, com opioides endógenos, serotonina e noradrenalina, agindo pré e pós-sinapticamente. É este segundo bloco que a síntese de veterano não cobre."
+},
+{
+  n:"Questão 4", tag:"ENAMED",
+  ctx:"Homem de 66 anos com neoplasia de próstata e metástases ósseas em coluna lombar refere dor profunda “em peso” na região lombar, contínua, e simultaneamente dor em queimação com choques no membro inferior direito, acompanhada de formigamento e dormência no mesmo território.",
+  ask:"Quanto à fisiopatologia, essa dor é classificada como:",
+  opts:[
+    {k:"A",t:"Nociceptiva somática profunda, pois a invasão neoplásica óssea ativa nociceptores do periósteo.",
+     why:"Errada por ser incompleta. A invasão óssea de fato gera dor nociceptiva somática profunda e explica a dor “em peso”. Mas deixa de fora a queimação, os choques, o formigamento e a dormência, que são descritores neuropáticos e exigem outro mecanismo."},
+    {k:"B",t:"Neuropática, pois queimação, choque, formigamento e dormência são descritores específicos de lesão do sistema somatossensorial.",
+     why:"Errada, também por incompletude — e ilustra a limitação dos descritores clínicos isolados, que é objetivo explícito do SP1. Os descritores apontam o componente neuropático, mas não autorizam descartar o componente nociceptivo que coexiste na mesma região."},
+    {k:"C",t:"Mista, pela sobreposição, na mesma área do corpo, de mecanismo nociceptivo — estímulo excessivo dos nociceptores pela invasão óssea — e neuropático — destruição ou compressão de fibras nociceptivas.",
+     why:"Correta. A aula define dor mista como associação de características nociceptivas e neuropáticas em pacientes com sobreposição substancial de sintomas na mesma área do corpo, persistente e com sintomas associados como formigamento ou dormência. Neoplasias malignas e herpes-zóster são os dois exemplos citados: a dor decorre tanto do estímulo excessivo dos nociceptores quanto da destruição das fibras nociceptivas."},
+    {k:"D",t:"Nociplástica, por sensibilização central com expansão dos campos receptivos e resposta neural amplificada.",
+     why:"Errada em duas frentes. Não há aqui sensibilização central sem lesão: existe lesão tecidual e neural demonstrada. E, na classificação fisiopatológica usada na aula, nociplástica não figura como categoria própria do SP1 — aparece contida na mista. O protótipo nociplástico é a fibromialgia, assunto do SP3."},
+    {k:"E",t:"Visceral, dado que a origem primária é um órgão interno, a próstata.",
+     why:"Errada. O tumor primário ser visceral não torna visceral a dor descrita: a dor aqui nasce de osso e de tecido nervoso, não da distensão ou isquemia de uma víscera. Dor visceral é mal localizada, profunda, opressiva e constritiva, com náuseas e sudorese associadas — não é o quadro."}
+  ],
+  correct:"C",
+  concept:"A classificação fisiopatológica da aula tem três categorias: nociceptiva (somática ou visceral), neuropática e mista. Mista = sobreposição na mesma área. Exemplos canônicos: neoplasia maligna e herpes-zóster/neuralgia pós-herpética. Descritores clínicos sugerem mecanismo, mas não bastam para excluir mecanismos coexistentes."
+},
+{
+  n:"Questão 5", tag:"ENAMED",
+  ctx:"Homem de 24 anos torce o tornozelo durante uma partida de futebol. Minutos depois apresenta dor localizada e latejante, que piora nitidamente ao toque leve e ao movimento. O local está edemaciado e hiperemiado.",
+  ask:"Sobre o mecanismo da piora da dor ao toque leve nesse contexto, assinale a alternativa correta:",
+  opts:[
+    {k:"A",t:"Prostaglandinas, bradicinina, serotonina e histamina estimulam diretamente os nociceptores e modificam sua sensibilidade a outros mediadores, reduzindo o limiar — sensibilização periférica.",
+     why:"Correta. A aula é explícita: os compostos químicos que excitam nociceptores — bradicinina, serotonina, histamina, acetilcolina, prostaglandinas, enzimas proteolíticas — têm dupla ação, estimular diretamente o nociceptor e modificar sua sensibilidade frente a outros mediadores. Essa segunda ação é a sensibilização periférica, que baixa o limiar e faz com que estímulos antes inócuos passem a doer no foco inflamado."},
+    {k:"B",t:"Liberação de GABA e encefalinas pelos interneurônios da lâmina II, com abertura do portão medular.",
+     why:"Errada e autocontraditória. GABA e encefalinas são inibitórios e FECHAM o portão, produzindo analgesia. Não há como sua liberação explicar aumento de dor."},
+    {k:"C",t:"Lesão axonal com redistribuição de canais de sódio e geração de impulsos ectópicos nas fibras finas.",
+     why:"Errada. Esse é o mecanismo da dor neuropática. No entorse agudo com edema e hiperemia há inflamação e dor nociceptiva, sem lesão do sistema nervoso somatossensorial."},
+    {k:"D",t:"Sensibilização central, com aumento da atividade espontânea dos neurônios medulares e expansão dos campos receptivos.",
+     why:"Errada para um quadro instalado em minutos. Sensibilização central é fenômeno de manutenção, ligado à dor crônica e à nociplástica. Aqui o mecanismo dominante e imediato é periférico, no foco inflamatório."},
+    {k:"E",t:"Ativação de fibras Aβ pelo toque, que ao excitarem interneurônios inibitórios amplificam a transmissão nociceptiva.",
+     why:"Errada, com o efeito invertido. A ativação de Aβ excita interneurônios inibitórios e REDUZ a transmissão nociceptiva — é o próprio fundamento do alívio pelo esfregar e do TENS."}
+  ],
+  correct:"A",
+  concept:"Sensibilização periférica: mediadores inflamatórios baixam o limiar dos nociceptores, gerando hiperalgesia e alodínia no território inflamado. A dor de origem inflamatória é uma dor nociceptiva. Etapas da transdução: abertura de canais iônicos → influxo de Na⁺ → despolarização → liberação de neurotransmissor."
+},
+{
+  n:"Questão 6", tag:"Surpresa · formato do quiz da professora",
+  ctx:null,
+  ask:"Participam da modulação inibitória endógena da dor, como neurotransmissores:",
+  opts:[
+    {k:"A",t:"GABA.",
+     why:"Verdadeira, mas incompleta. O GABA é o neurotransmissor inibitório liberado pelos interneurônios intrínsecos da substância gelatinosa, lâmina II, no sistema espinhal/segmentar — a teoria do portão."},
+    {k:"B",t:"Serotonina e noradrenalina.",
+     why:"Verdadeira, mas incompleta. São as monoaminas inibitórias da via descendente: serotonina do núcleo magno da rafe e noradrenalina do núcleo cerúleo. Atuam em receptores pré e pós-sinápticos reduzindo a transmissão nociceptiva — e é por isso que SSRI e SNRI têm lugar no tratamento da dor."},
+    {k:"C",t:"Met-encefalina e β-endorfina.",
+     why:"Verdadeira, mas incompleta. São os opioides endógenos, neuropeptídios inibitórios da tabela da aula, ao lado da leu-encefalina. Ligam-se a receptores opioides μ, δ e κ e inibem a dor."},
+    {k:"D",t:"As alternativas A e B estão corretas.",
+     why:"Incompleta. A e B são de fato corretas, mas deixam de fora os opioides endógenos da alternativa C, que também são inibitórios."},
+    {k:"E",t:"As alternativas A, B e C estão corretas.",
+     why:"Correta. Na tabela de neurotransmissores da aula, a coluna dos inibitórios reúne GABA entre os aminoácidos; β-endorfina, leu-encefalina e met-encefalina entre os neuropeptídios; e serotonina e noradrenalina entre as monoaminas. Todas as três alternativas anteriores estão, portanto, corretas."}
+  ],
+  correct:"E",
+  concept:"Tabela de neurotransmissores da dor. Excitatórios: glutamato (aminoácido); substância P, neurocinina e CGRP (neuropeptídios). Inibitórios: GABA (aminoácido); β-endorfina, leu e met-encefalina (neuropeptídios); serotonina e noradrenalina (monoaminas). Este é o formato de alternativa que a própria professora usa nos quizzes do deck."
+},
+{
+  n:"Questão 7", tag:"Proposições I–V",
+  ctx:null,
+  ask:"Analise as proposições a seguir sobre modulação da dor e vias ascendentes:",
+  props:[
+    {r:"I",t:"Na teoria do portão clássica, a ativação de fibras Aβ por estímulos inócuos como o toque estimula interneurônios inibitórios da lâmina II, que liberam GABA e encefalinas e reduzem o sinal nociceptivo.",v:true},
+    {r:"II",t:"Na teoria do portão revisada, o portão também é regulado por vias descendentes vindas do tronco encefálico e de centros corticais, que liberam opioides endógenos e neurotransmissores não opioides como serotonina, noradrenalina, GABA e glicina.",v:true},
+    {r:"III",t:"O trato neoespinotalâmico conduz especialmente a dor somática bem localizada, enquanto o paleoespinotalâmico conduz especialmente a dor visceral, de localização precária.",v:true},
+    {r:"IV",t:"A ativação das fibras finas Aδ e C fecha o portão medular, por estimular os interneurônios inibitórios da substância gelatinosa.",v:false},
+    {r:"V",t:"A estimulação elétrica transcutânea (TENS) produz analgesia por ativar fibras Aβ e fechar o portão.",v:true}
+  ],
+  ask2:"Assinale a alternativa correta:",
+  opts:[
+    {k:"A",t:"Apenas I, II e V estão corretas.",
+     why:"Errada por excluir indevidamente a proposição III, que é verdadeira e reproduz literalmente a distinção feita na aula entre os dois tratos: o neoespinotalâmico para a dor somática bem localizada, o paleoespinotalâmico para a dor visceral de localização precária."},
+    {k:"B",t:"Apenas I, II, III e V estão corretas.",
+     why:"Correta. I descreve o portão clássico com os mediadores certos; II descreve a versão revisada, com modulação descendente; III reproduz a distinção funcional entre os tratos; V traz a aplicação terapêutica do portão. Apenas a IV está invertida."},
+    {k:"C",t:"Apenas III, IV e V estão corretas.",
+     why:"Errada. Mantém a proposição IV, que está invertida, e descarta I e II, ambas verdadeiras e centrais no conteúdo de modulação."},
+    {k:"D",t:"Apenas II e IV estão corretas.",
+     why:"Errada. Preserva a única proposição falsa do conjunto e descarta três verdadeiras."},
+    {k:"E",t:"Todas estão corretas.",
+     why:"Errada. A proposição IV inverte o mecanismo: as fibras finas Aδ e C ABREM o portão, porque inibem os interneurônios inibitórios — inibem a inibição. Quem fecha o portão são as fibras grossas Aβ."}
+  ],
+  correct:"B",
+  concept:"O erro da proposição IV é a inversão mais cobrada do tema. Fibras finas (Aδ, C) abrem o portão inibindo a inibição; fibras grossas (Aβ) fecham o portão excitando os interneurônios inibitórios. Aplicações do portão: esfregar a área dolorida e TENS. Aplicações da via descendente: placebo, acupuntura, exercício físico, estresse analgésico."
+}
+];
+
+const DESC = [
+{
+  n:"Descritiva 1", w:"33,3%",
+  ask:"A aula descreve dois mecanismos de modulação endógena da dor. Cite-os, indicando para cada um o local de ação e os principais neurotransmissores envolvidos.",
+  exp:[
+    "<b>1. Sistema espinhal / segmentar — teoria do portão de Melzack e Wall (1965).</b> Local: corno dorsal da medula espinhal, na substância gelatinosa, lâmina II. Constituído por interneurônios inibitórios intrínsecos. Neurotransmissores: <b>GABA</b> e encefalinas. As fibras grossas Aβ, não nociceptivas, excitam esses interneurônios e fecham o portão; as fibras finas Aδ e C inibem a inibição e abrem o portão. Exemplos clínicos: esfregar a área dolorida, TENS.",
+    "<b>2. Sistema supraespinhal / supra-segmentar — via descendente de analgesia.</b> Local: fibras descendentes do encéfalo e tronco encefálico que reduzem a transmissão no corno dorsal. Neurotransmissores: <b>opioides endógenos</b> (encefalinas, endorfinas, dinorfinas), <b>serotonina</b> e <b>noradrenalina</b>. Origens: hipotálamo/núcleos periventriculares (encefalinas), mesencéfalo/substância cinzenta periaquedutal, núcleo magno da rafe (serotoninérgico) e núcleo cerúleo, na ponte (noradrenérgico). Age em dois níveis: pré-sináptico, reduzindo a liberação de glutamato e substância P; e pós-sináptico, hiperpolarizando o neurônio de segunda ordem. Exemplos clínicos: placebo, acupuntura, exercício físico, estresse analgésico — e, na terapêutica, SSRI e SNRI.",
+    "<i>Resposta mínima que garante o ponto:</i> nomear os dois sistemas, dizer que um age na lâmina II com GABA e o outro desce do tronco encefálico com opioides endógenos, serotonina e noradrenalina."
+  ],
+  concept:"Este é o bloco mais denso da aula, cerca de 15 slides, e é justamente o que a síntese de veterano não cobre. Se cair descritiva de modulação, é aqui.",
+  flag:null
+},
+{
+  n:"Descritiva 2", w:"33,3%",
+  ask:"Diferencie dor referida de dor irradiada e cite um exemplo clínico de cada.",
+  exp:[
+    "<b>Dor referida:</b> dor sentida em local adjacente ou distante do sítio da lesão, situada nos músculos e na pele do <b>mesmo dermátomo</b> do órgão lesado, por convergência de aferentes; restringe-se em geral a um mesmo segmento espinal e decorre com frequência de lesão em tecidos profundos — músculos, articulações, vísceras. Não segue o trajeto de um nervo. Aumenta com a intensidade e a duração da estimulação nociva.",
+    "<b>Exemplo:</b> dor na face interna do braço, dermátomo T1, no infarto agudo do miocárdio.",
+    "<b>Dor irradiada:</b> dor sentida à distância de sua origem, porém em estruturas inervadas pela <b>raiz nervosa ou pelo nervo</b> cuja estimulação é responsável pela dor; segue o trajeto anatômico dessa raiz ou nervo. Chamada dor radicular quando produzida por estiramento, torção, compressão ou irritação de uma raiz espinhal.",
+    "<b>Exemplo:</b> ciatalgia por hérnia de disco lombar, com irradiação para a perna."
+  ],
+  concept:"Na aula, as duas compõem o eixo “padrão de distribuição/percepção”. O discriminador é o substrato anatômico: dermátomo compartilhado por convergência (referida) versus trajeto de raiz ou nervo (irradiada). No decálogo, ambas entram no atributo “irradiação”.",
+  flag:null
+},
+{
+  n:"Descritiva 3", w:"33,4%",
+  ask:"Cite as quatro etapas da nocicepção e nomeie o principal neurotransmissor liberado pelas fibras Aδ e pelas fibras C na medula espinhal.",
+  exp:[
+    "<b>Etapas:</b> <b>transdução</b> — conversão do estímulo nocivo em potencial elétrico despolarizante no nociceptor, por abertura de canais iônicos, influxo de Na⁺, despolarização e liberação de neurotransmissor; <b>transmissão</b> — condução do impulso pelas fibras Aδ e C até o corno dorsal, onde ocorre a sinapse com o neurônio de segunda ordem; <b>percepção</b> — integração consciente no córtex somatossensorial, ínsula e cingulado anterior, com o componente afetivo pelos núcleos talâmicos mediais e sistema límbico; <b>modulação</b> — mecanismos que atenuam ou amplificam o impulso, tendo o corno posterior da medula como local mais importante.",
+    "<b>Neurotransmissores:</b> fibras <b>Aδ</b> — via neoespinotalâmica — liberam <b>glutamato</b>, que atua em receptores NMDA, AMPA e cainato. Fibras <b>C</b> — via paleoespinotalâmica — liberam <b>substância P</b>, que atua no receptor NK1 dos neurônios nociceptivos do corno dorsal."
+  ],
+  concept:"A questão 4 da APF de 18/02/2026 foi exatamente isto, em forma de mapa mental com neurônio, neurotransmissor e região anatômica. Vale treinar desenhando: pele → fibra Aδ ou C → gânglio da raiz dorsal (1º neurônio) → corno dorsal, lâmina I para Aδ e lâminas II-III-V para C (2º neurônio) → decussa → trato espinotalâmico → tálamo, VPM (3º neurônio) → córtex somatossensorial, giro pós-central.",
+  flag:"Atenção à ordem. O slide da professora lista transdução → transmissão → <b>percepção</b> → <b>modulação</b>, e o deck segue essa sequência. A síntese de veterano e a maioria dos livros invertem as duas últimas: transdução → transmissão → modulação → percepção. <b>Na prova dela, use a ordem dela.</b>"
+}
+];
+
+let objAns = 0, descAns = 0;
+
+function refresh(){
+  document.getElementById('sObj').textContent = objAns + '/7';
+  document.getElementById('sDesc').textContent = descAns + '/3';
+  const tot = objAns + descAns;
+  document.getElementById('sProg').textContent = tot;
+  document.getElementById('sBar').style.width = (tot/10*100) + '%';
+  if(tot === 10){
+    const l = document.getElementById('lockmsg');
+    l.innerHTML = 'Dez de dez respondidas. Abra agora o painel de <b>divergências</b> no fim da página — e mande suas respostas no chat para eu ativar o <b>Modo Aprofundamento</b>: resumo definitivo, 15 questões mais difíceis, mapa mental, 15 flashcards e tópicos de Feynman.';
+    l.style.cssText = 'font-size:13px;color:#1c6f52;background:#eaf4ef;border:1px solid #bfdfd0;border-radius:7px;padding:11px 14px;margin-bottom:26px';
+  }
+}
+
+const oh = document.getElementById('objHost');
+OBJ.forEach((q, qi) => {
+  const card = document.createElement('div');
+  card.className = 'q';
+  let html = '<div class="qtop"><span class="qnum">' + q.n + '</span><span class="qtag">' + q.tag + '</span></div><div class="stem">';
+  if(q.ctx) html += '<div class="ctx">' + q.ctx + '</div>';
+  html += '<p class="ask">' + q.ask + '</p>';
+  if(q.props){
+    html += '<ul class="props">';
+    q.props.forEach((p, pi) => {
+      html += '<li id="p' + qi + '_' + pi + '"><span class="rn">' + p.r + '.</span><span>' + p.t + '</span></li>';
+    });
+    html += '</ul><p class="ask">' + q.ask2 + '</p>';
+  }
+  html += '</div><div class="opts" id="op' + qi + '"></div><div class="rev" id="rv' + qi + '"></div>';
+  card.innerHTML = html;
+  oh.appendChild(card);
+
+  const box = card.querySelector('#op' + qi);
+  q.opts.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = '<span class="k">' + o.k + ')</span><span class="t">' + o.t + '</span>';
+    b.onclick = () => answerObj(qi, o.k);
+    box.appendChild(b);
+  });
+});
+
+function answerObj(qi, pick){
+  const q = OBJ[qi];
+  const btns = document.getElementById('op' + qi).querySelectorAll('.opt');
+  const right = pick === q.correct;
+
+  btns.forEach((b, bi) => {
+    const o = q.opts[bi];
+    b.disabled = true;
+    const isRight = o.k === q.correct;
+    const isPick = o.k === pick;
+    if(isRight) b.classList.add('right');
+    else if(isPick) b.classList.add('wrong');
+    if(isPick) b.classList.add('picked');
+    let mk = '';
+    if(isRight && isPick) mk = 'sua resposta · correta';
+    else if(isRight) mk = 'correta';
+    else if(isPick) mk = 'sua resposta · incorreta';
+    b.querySelector('.t').innerHTML +=
+      (mk ? '<span class="mk">' + mk + '</span>' : '') + '<span class="why">' + o.why + '</span>';
+  });
+
+  if(q.props){
+    q.props.forEach((p, pi) => {
+      document.getElementById('p' + qi + '_' + pi).classList.add(p.v ? 'pv' : 'pf');
+    });
+  }
+
+  const rv = document.getElementById('rv' + qi);
+  rv.innerHTML = '<div class="revh">Gabarito e comentário</div>'
+    + '<div class="verdict ' + (right ? 'v-ok' : 'v-bad') + '">'
+    + (right ? 'Você acertou. Alternativa ' + q.correct + '.' : 'Você marcou ' + pick + '. A correta é ' + q.correct + '.')
+    + '</div><div class="concept"><b>Conceito testado</b><br>' + q.concept + '</div>';
+  rv.classList.add('on');
+
+  objAns++;
+  refresh();
+}
+
+const dh = document.getElementById('descHost');
+DESC.forEach((d, di) => {
+  const card = document.createElement('div');
+  card.className = 'q';
+  card.innerHTML =
+    '<div class="qtop"><span class="qnum">' + d.n + '</span><span class="wt">peso ' + d.w + '</span></div>'
+    + '<div class="stem"><p class="ask">' + d.ask + '</p></div>'
+    + '<textarea id="ta' + di + '" placeholder="Escreva sua resposta em 1 a 4 frases, com fato preciso e sem floreio…"></textarea>'
+    + '<button class="btn" id="db' + di + '">Confirmar resposta</button>'
+    + '<div class="hint">O padrão esperado só aparece depois que você confirmar.</div>'
+    + '<div class="rev" id="dr' + di + '"></div>';
+  dh.appendChild(card);
+
+  card.querySelector('#db' + di).onclick = () => {
+    const ta = document.getElementById('ta' + di);
+    if(ta.value.trim().length < 12){
+      ta.focus();
+      ta.style.borderColor = '#9c3527';
+      setTimeout(() => { ta.style.borderColor = ''; }, 1400);
+      return;
+    }
+    ta.disabled = true;
+    card.querySelector('#db' + di).disabled = true;
+    const hint = card.querySelector('.hint');
+    if(hint) hint.remove();
+
+    const rv = document.getElementById('dr' + di);
+    let h = '<div class="revh">Padrão de resposta esperado</div><div class="exp"><ul>';
+    d.exp.forEach(e => { h += '<li>' + e + '</li>'; });
+    h += '</ul></div>';
+    if(d.flag) h += '<div class="flag"><b>Divergência de fonte</b><br>' + d.flag + '</div>';
+    h += '<div class="concept"><b>Observação</b><br>' + d.concept + '</div>'
+      + '<div class="selfg"><span class="lbl">Autoavaliação:</span>'
+      + '<button class="sb">Acertei</button><button class="sb">Parcial</button><button class="sb">Errei</button></div>';
+    rv.innerHTML = h;
+    rv.classList.add('on');
+
+    rv.querySelectorAll('.sb').forEach(sb => {
+      sb.onclick = () => {
+        rv.querySelectorAll('.sb').forEach(x => x.classList.remove('on'));
+        sb.classList.add('on');
+      };
+    });
+
+    descAns++;
+    refresh();
+  };
+});
+
+refresh();
+</script>
+</body>
+</html>

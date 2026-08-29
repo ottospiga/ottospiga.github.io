@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · SP5 — Dor Neoplásica, Opioides &amp; Cefaleias · Guia de Estudo</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:170px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIII</span>
+    <h1>SP5 — Dor Neoplásica, Opioides & Cefaleias · <span style="color:var(--tealo)">Guia de estudo</span></h1>
+    <div class="sub">Formato v2: resumo denso primeiro → banco único de 25 questões (10 ENAMED + 15 nível prova) + descritiva com pesos → mapa mental, flashcards e Feynman. Fontes: aula da Verônica (Fisio · Dor crônica/oncológica), aula + caderno de Opioides da Vânia (Ana&Lou), resumo da veterana e do colega (Sp5), artigos "três T's" e Recomendações SBED, Goldman-Cecil, Harrison, Porto, INCA. Fechamento + APF: 26/08.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+
+    <div class="panel">
+      <h2>0 · Os 6 objetivos do quadro (abertura 19/08)</h2>
+      <p><span class="k2">①</span> Caracterizar a dor neoplásica: aspectos fisiopatológicos, clínicos e biopsicossociais · <span class="k2">②</span> Escada Analgésica da OMS e princípios da farmacoterapia · <span class="k2">③</span> Tratamentos adjuvantes além da escada: procedimentos invasivos e não invasivos na dor crônica · <span class="k2">④</span> Opioides no dia a dia: como prescrever, doses, efeitos colaterais, intoxicação, transição EV↔VO · <span class="k2">⑤</span> Cefaleia: primárias × secundárias · <span class="k2">⑥</span> Cefaleias primárias: tipos, etiopatogenia, clínica e tratamento (crise e profilaxia, farmacológico e não).</p>
+      <p class="src">No quadro, o rabisco da tutora: "Dor Neoplásica → visceral → neuropática", a escada com degraus 3–4 e a nota "opioide na oncologia: oral / EV". Bibliografia do slide: Goldman-Cecil 26ª · Porto&Porto cap. 6 · Tratado de MFC · Harrison · <b>Consenso Brasileiro sobre Manejo da Dor Relacionada ao Câncer</b> · <b>Recommendations for the use of opioids in Brazil: Part I</b> (este último está na pasta Farmaco/SP5).</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Base: dor crônica e sensibilização (aula 5 da Verônica)</h2>
+      <p>Caso de abertura da aula: <i>paciente com câncer metastático em uso de morfina com dor persistente, crises súbitas e <b>piora da dor mesmo após aumento da dose</b></i> — as três pontas do novelo desta SP (dor basal, dor irruptiva e hiperalgesia por opioide).</p>
+      <ul>
+        <li><b>Dor crônica</b> = persiste <b>&gt; 3 meses</b>, OU além do tempo esperado de cicatrização, OU associada a doença crônica sem resolução. Não é "dor aguda prolongada": é <span class="hl">entidade neurológica própria</span>, com perda do caráter de alerta, comprometimento funcional e impacto físico-emocional-social.</li>
+        <li><b>Sensibilização periférica:</b> lesão tecidual → ↓limiar dos nociceptores → fibras Aδ e C hiperexcitáveis → <b>hiperalgesia</b> local.</li>
+        <li><b>Sensibilização central:</b> estímulo persistente (↑glutamato + substância P) → ativação de <b>receptores NMDA</b> no corno dorsal → neurônios hiperexcitáveis → hiperalgesia + <b>alodinia</b>.</li>
+        <li><span class="hl">Novidade da aula 5 — a GLIA entra no jogo:</span> estímulo doloroso ativa <b>astrócitos e micróglia</b> no corno dorsal → ↑expressão de <b>TLR2/TLR4</b> → liberação de citocinas pró-inflamatórias (<b>TNF-α, IL-1β</b>) → ↑liberação e ↓recaptação de glutamato → amplificação nociceptiva e MANUTENÇÃO da dor crônica.</li>
+        <li><b>Consequências sistêmicas:</b> autonômicas (↑simpático → HAS, taquicardia) + endócrinas (disfunção do eixo hipotálamo-hipófise-gonadal → <b>↓testosterona</b>, ↓libido). Clínica: fadiga, distúrbio do sono, perda de apetite, ansiedade/depressão, isolamento; histórico típico de tratamentos falhos, múltiplos exames e polifarmácia.</li>
+        <li>Vias descendentes de modulação (recap): substância cinzenta periaquedutal, núcleo magno da rafe, locus coeruleus — serotonina, noradrenalina, endorfinas → é onde agem antidepressivos, opioides e neuromoduladores.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Dor neoplásica — fisiopatologia e clínica (objetivo ①)</h2>
+      <p>A dor oncológica é <b>multifatorial</b> (ativação nociceptiva por lesão tecidual + lesão/compressão neural + sensibilização central + efeitos do tratamento) e por isso é tipicamente <span class="hl">MISTA: nociceptiva + neuropática</span>. No CID-11, subdivide-se em <b>visceral, óssea ou neuropática</b> (o esquema do quadro!). Prevalência: <b>30–50%</b> dos pacientes em tratamento · <b>60–90%</b> na doença avançada.</p>
+      <h3>Causas (INCA, com os % da aula)</h3>
+      <table>
+        <tr><th>Causa</th><th>Freq.</th><th>Mecanismos</th></tr>
+        <tr><td><b>Crescimento do tumor</b></td><td><b>46–92%</b></td><td>Infiltração tecidual (inflamação, hipóxia, necrose) · compressão neural (raízes, medula) · obstrução de víscera oca (cólica/peso, mal localizada, referida — a dor visceral da SP4!) · oclusão vascular/linfática (isquemia, claudicação, linfangite) · ulceração de mucosa/tegumento</td></tr>
+        <tr><td><b>Metástases</b></td><td>—</td><td><b>Óssea = fonte MAIS COMUM de dor tumoral</b> (mama, próstata, pulmão, mieloma múltiplo) · medular (compressão vertebral → dor axial) · visceral (distensão de cápsula hepática/pleura)</td></tr>
+        <tr><td>Condições sistêmicas/complicações</td><td>10–20%</td><td>Ex.: síndromes paraneoplásicas, imobilidade, escaras</td></tr>
+        <tr><td><b>Tratamento antitumoral</b></td><td>15–25%</td><td><b>QT:</b> neuropatia periférica (platinas, taxanos, alcaloides da vinca), mucosite · <b>RT:</b> mucosite, esofagite, retite actínica, radiodermite, mielopatia e fibrose actínica de plexo (braquial/lombar) · <b>cirurgia:</b> pós-toracotomia, pós-mastectomia, dor fantasma · <b>corticoterapia:</b> pseudorreumatismo</td></tr>
+      </table>
+      <h3>A dor óssea metastática por dentro (slide que ela detalhou)</h3>
+      <ul>
+        <li>Osso = <b>3º sítio</b> mais frequente de metástase (após pulmão e fígado).</li>
+        <li>Cascata: célula tumoral libera <b>endotelina</b> → estimula <b>osteoblastos</b> → osteoblasto ativado libera <b>RANKL</b> → matura <b>osteoclastos</b> → destruição óssea; osteoclastos liberam <b>ATP e H⁺</b> (acidificação) → ativam <b>P2X, TRPV1 e ASIC3</b> nas fibras nervosas do osso → DOR. Em paralelo, tumor/estroma/células imunes secretam endotelina, prostaglandinas, bradicinina e citocinas que sensibilizam nociceptores.</li>
+        <li>É por isso que o tratamento da dor óssea vai além do opioide: AINE/corticoide (mediadores), <b>radioterapia antálgica</b>, radiofármacos, bifosfonatos/denosumabe (freiam o eixo RANKL — não citados nas fontes locais, mas cobrados em prova de residência).</li>
+      </ul>
+      <h3>Dor neuropática no câncer</h3>
+      <p>Por infiltração tumoral de nervos, compressão radicular, lesão de plexos ou <b>neuropatia induzida por QT</b>. Clínica: queimação, choque, formigamento, alodinia. Tratamento inclui gabapentinoides, tricíclicos e opioides (a dor mista responde parcialmente ao opioide — daí os adjuvantes).</p>
+      <h3>Dimensão biopsicossocial — "dor total"</h3>
+      <p>Conceito de Cicely Saunders (cuidados paliativos): a dor do câncer soma componente <b>físico + emocional (medo, depressão) + social (isolamento, finanças, papel familiar) + espiritual (sentido, morte)</b>. Por isso a avaliação é multidimensional (LIIDERAMCA + escalas + impacto funcional/sono/humor) e o tratamento é de equipe — remédio sozinho não resolve dor total. Barreiras clássicas ao controle: mitos do paciente e do médico ("morfina vicia", "morfina = fim da vida", medo de depressão respiratória) → subtratamento persistente.</p>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Dor irruptiva oncológica (breakthrough — BTcP)</h2>
+      <ul>
+        <li><b>Definição:</b> exacerbação súbita e <b>transitória</b> da dor que ocorre <span class="hl">sobre uma dor basal controlada</span>, apesar do uso regular de opioide.</li>
+        <li><b>Assinatura clínica (decore os números):</b> pico em <b>&lt; 3 minutos</b> · intensidade máxima · duração <b>15–60 min</b> · <b>1–4 episódios/dia</b>.</li>
+        <li><b>Classificação:</b> <b>espontânea</b> (sem gatilho) × <b>incidental</b> — previsível (movimento, tosse, curativo) ou imprevisível.</li>
+        <li>Prevalência: 50–70% em tratamento ativo · 70–95% na doença avançada; mais em TGI, urogenital, pulmão, mama, pâncreas, cabeça/pescoço e <b>metástases ósseas/mieloma</b>.</li>
+        <li>Fisiopatologia: geralmente o MESMO mecanismo da dor de base (somática, visceral ou neuropática) — destruição óssea, infiltração nervosa, distensão visceral.</li>
+        <li><b>Tratamento (princípio de ouro):</b> dor basal = opioide de <b>ação prolongada</b> em horário fixo · crise = <b>resgate de ação rápida</b>. Problema: morfina VO de liberação imediata demora 30–60 min — a crise já passou. Solução moderna: <span class="hl">fentanil transmucoso/sublingual</span> (ex.: Abstral®) — 100× mais potente que morfina, altíssima lipossolubilidade, cruza a BHE em minutos.</li>
+      </ul>
+      <div class="warn"><b>Pegadinha de definição:</b> só é BTcP se a dor DE BASE estiver <b>controlada</b>. Dor mal controlada o dia inteiro que "pica" à noite = titulação insuficiente da dor basal (a conduta é subir a dose fixa), NÃO é dor irruptiva (a conduta seria resgate). A banca troca essas duas condutas.</div>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Escada Analgésica da OMS + princípios (objetivo ②)</h2>
+      <table>
+        <tr><th>Degrau</th><th>Dor (EVA)</th><th>Prescrição</th></tr>
+        <tr><td><b>1º</b></td><td>Leve (1–3)</td><td>Não opioide: dipirona, paracetamol, AINE <b>± adjuvante</b></td></tr>
+        <tr><td><b>2º</b></td><td>Moderada (4–6)</td><td><b>Opioide fraco</b> (codeína, tramadol, di-hidrocodeína) <b>+ não opioide ± adjuvante</b></td></tr>
+        <tr><td><b>3º</b></td><td>Intensa (7–10)</td><td><b>Opioide forte</b> (morfina, oxicodona, metadona, fentanil) <b>+ não opioide ± adjuvante</b></td></tr>
+        <tr><td><b>"4º"</b></td><td>Refratária</td><td><b>Degrau intervencionista</b> (proposto — SBED/Recomendações): bloqueios, neurólise, analgesia espinhal — era o degrau extra rabiscado no quadro</td></tr>
+      </table>
+      <ul>
+        <li>A escada alivia <b>até ~80%</b> das dores oncológicas (INCA). O degrau reflete a INTENSIDADE atual: dor 8/10 de entrada → <span class="hl">começa direto no 3º degrau</span> ("elevador", não escada) — não precisa "passar" pelos degraus.</li>
+        <li><b>Princípios (mnemônico "boca-relógio-escada-indivíduo-detalhes"):</b> ① <b>pela boca</b> (VO sempre que possível — autonomia e conforto) · ② <b>pelo relógio</b> (horário FIXO conforme a duração de ação, nunca só "se dor", sem esquecer o resgate para a irruptiva) · ③ <b>pela escada/intensidade</b> · ④ <b>para o indivíduo</b> (dose certa = a que alivia com o mínimo de efeitos) · ⑤ <b>com adjuvantes</b> · ⑥ <b>atenção aos detalhes</b> (educação do paciente, monitorar efeitos, adaptar à rotina).</li>
+        <li><span class="hl">Nota da Vânia (caderno):</span> os opioides atendem bem à "boca", mas atendem MAL ao "relógio" — a tolerância encurta o efeito e força ajustes; e o "para o indivíduo" é crítico porque a resposta depende do metabolismo (CYP2D6!). Pela OMS, opioide só entra da dor moderada para cima; e no câncer eles são <b>primeira escolha</b> (exceção à regra "última opção").</li>
+        <li>Dor leve trata-se com não opioide; e o não opioide (dipirona/AINE/paracetamol) <b>continua junto</b> nos degraus 2 e 3 (poupador de opioide — agem em pontos diferentes da via nociceptiva).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Adjuvantes e procedimentos (objetivo ③)</h2>
+      <h3>Farmacológicos adjuvantes</h3>
+      <p><b>Antidepressivos</b> (amitriptilina/nortriptilina; duloxetina/venlafaxina) e <b>anticonvulsivantes</b> (gabapentina, pregabalina, carbamazepina) → componente neuropático · <b>relaxantes musculares</b> (ciclobenzaprina, baclofeno) → musculoesquelético · <b>corticoide</b> (dexametasona) → dor por inflamação/compressão tumoral, compressão medular, hipertensão intracraniana, dor óssea · canabinoides (onde regulamentado).</p>
+      <h3>Não invasivos</h3>
+      <p>Radioterapia antálgica (<b>alívio em até 90%</b> — metástase óssea dolorosa, compressão medular, tumor localmente avançado) · quimioterapia antálgica (tumores responsivos: leptomeníngea/metástases intracranianas, hepáticas múltiplas, colorretal, pâncreas, cabeça e pescoço) · <b>radiofármacos</b> (estrôncio-89, samário-153 — concentram-se em áreas de alta atividade OSTEOBLÁSTICA) · fisioterapia, TENS, acupuntura, termoterapia, massagem · TCC (↓catastrofização), mindfulness, relaxamento/biofeedback.</p>
+      <h3>Invasivos (o "4º degrau")</h3>
+      <p><b>Bloqueios</b> de nervos periféricos (lidocaína/bupivacaína ± corticoide) e <b>simpáticos</b> — gânglio estrelado; <span class="hl">bloqueio/neurólise do plexo celíaco = clássico da dor do CÂNCER DE PÂNCREAS</span> · rizotomia/neurólise química ou por radiofrequência · <b>neuromodulação</b> (estimulação medular, de nervo periférico, cerebral profunda) · <b>bombas de infusão intratecal</b> de opioide/anestésico · cirurgia: descompressão (causa compressiva clara); cordotomia/simpatectomia = ablativas raras, últimas opções.</p>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Opioides — farmacologia essencial (aula da Vânia)</h2>
+      <h3>Nomes e receptores</h3>
+      <ul>
+        <li><b>Opiáceo</b> = composto do ópio (Papaver somniferum) · <b>opioide</b> = qualquer substância com essas propriedades · endorfinas = opioides endógenos (β-endorfina) · "narcótico" = termo antigo (narkotikos, estupor).</li>
+        <li>Receptores <b>MOR (µ), DOR (δ), KOR (κ)</b> — família rodopsina de GPCR (homologia 55–58%); presentes em SNC, periferia, macrófagos/micróglia, astrócitos e TGI. σ (sigma): <b>não é receptor opioide verdadeiro</b> (naloxona não reverte; provável receptor de fenciclidina).</li>
+        <li><b>µ tipo 1</b> = medula/encéfalo → analgesia supraespinhal, euforia, miose, e no tronco: <span class="hl">depressão respiratória</span> · <b>µ tipo 2</b> = fibras do TGI e bexiga → ↓motilidade (constipação) e retenção urinária · <b>κ</b> = analgesia espinhal + região mesolímbica → sedação, miose, <b>disforia, despersonalização, alucinações</b> · δ = modula µ, analgesia, humor.</li>
+        <li><span class="hl">Nota da aula:</span> nenhum fármaco é exclusivo do µ — todos tocam os demais receptores; todo efeito (bom e ruim) pode ocorrer com qualquer opioide, em graus variados.</li>
+      </ul>
+      <h3>Mecanismo (Gi/Go) — o tripé</h3>
+      <p>① Inibe a <b>adenilato ciclase</b> → ↓AMPc → ↓PKA · ② <b>fecha canais de Ca²⁺</b> pré-sinápticos → menos exocitose de neurotransmissor (glutamato, substância P, CGRP) · ③ <b>abre canais de K⁺</b> pós-sinápticos → hiperpolarização. Resultado: depressão da via nociceptiva — e os opioides ainda <b>potencializam as vias inibitórias descendentes</b> (5-HT/NA). AINEs agem na ponta inflamatória; opioides, na transmissão — por isso a associação da escada faz sentido.</p>
+      <h3>Tolerância molecular (por que "pelo relógio" falha)</h3>
+      <p>Uso repetido → subunidades βγ ativam <b>GRK</b> → fosforilação do MOR → liga <b>β-arrestina</b> → desacopla da proteína G e <b>internaliza o receptor</b>. Analogia da aula: "dia 1: 10 receptores; dia 2: 8; dia 3: 6" → mesma dose, menos efeito → precisa titular para cima. Tolerância = ↓efeito máximo/curva desviada à direita; reverte em semanas após suspender.</p>
+      <h3>Farmacocinética que cai em prova</h3>
+      <ul>
+        <li>Lipossolúveis, bem absorvidos (SC, TD, IM, mucosas, VO); <b>extenso metabolismo de 1ª passagem</b> → <span class="hl">dose VO ≫ dose parenteral</span> (a base da conversão ×3 da morfina).</li>
+        <li>Reservatórios: músculo (volume) e <b>tecido adiposo</b> (fentanil, metadona — acúmulo em infusão/uso contínuo).</li>
+        <li><b>Morfina:</b> conjugação com ácido glicurônico → <b>M6G</b> (ATIVO, 2–4× mais potente — acúmulo na insuficiência renal = sedação + depressão respiratória) e <b>M3G</b> (sem analgesia, <b>neuroexcitatório/convulsivante</b>, pode causar hiperalgesia). Via CYP3A4 → normorfina (inativa). Excreção renal/biliar.</li>
+        <li><b>Codeína = pró-fármaco:</b> só funciona virando morfina pela <b>CYP2D6</b>; metabolizador lento ou inibidor de CYP2D6 (fluoxetina, paroxetina) = SEM analgesia; metabolizador ultrarrápido = toxicidade. Pela CYP3A4 vira norcodeína (inativa).</li>
+        <li>CYP2D6/3A4 também metabolizam oxicodona, hidrocodona e tramadol. Heroína → 6-MAM → morfina (cruza fácil a BHE).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>7 · Opioides fármaco a fármaco (doses da aula — Vânia cobra ISSO)</h2>
+      <table>
+        <tr><th>Fármaco</th><th>Dose inicial/titulação</th><th>Marca registrada de prova</th></tr>
+        <tr><td><b>Codeína</b> (fraco)</td><td>15–30 mg 4/6h · <b>máx 240 mg/d</b></td><td>Pró-fármaco (CYP2D6→morfina); NÃO usar em disfunção renal; <b>contraindicada &lt;12 anos (dor ou tosse!)</b> e &lt;18 anos pós-amigdalectomia; broncoespasmo; SUS</td></tr>
+        <tr><td><b>Tramadol</b> (fraco "híbrido")</td><td>50–100 mg 4–6h (LC 12/12) · <b>máx 400 mg/d</b></td><td>µ fraco + ↓recaptação de NA + ↑liberação de 5-HT → <span class="hl">síndrome serotoninérgica</span> (NÃO associar a antidepressivo!); "febre" que não cede a antitérmico em usuário de tramadol = serotoninérgica (só esfriamento físico); ↓limiar convulsivo; pico 45 min; ajustar na IR; contraind. &lt;12 anos</td></tr>
+        <tr><td><b>Morfina</b> (forte, referência)</td><td><b>5–10 mg VO 3–4h</b> (titulação, liberação imediata); depois converter p/ liberação estendida</td><td>Hidrofílica; SUS (VO e parenteral); <b>M6G/M3G acumulam na IR</b> (sedação/depressão resp. ou neuroexcitação); libera histamina (prurido, broncoespasmo); VO, retal, IM, IV, SC, epidural</td></tr>
+        <tr><td><b>Oxicodona</b> (forte)</td><td>5–20 mg VO (LC 12/12h; comum começar com 10 mg 12/12)</td><td>Migração natural do tramadol; menos histamina/náusea que morfina; CYP2D6/3A4 (noroxicodona); só VO no Brasil</td></tr>
+        <tr><td><b>Metadona</b> (forte)</td><td>2,5–10 mg VO 8–12h (dor) · desintoxicação: 15–30 mg/d, máx sugerido 40</td><td><b>Meia-vida LONGA e variável</b> → acúmulo/superdosagem, difícil titular (adiposo); sem metabólitos ativos; multi-CYP = interações; <span class="hl">prolonga QTc (torsades)</span>; escolha para <b>dependência química de opioides</b>; conversão equianalgésica varia drasticamente (2,5:1 a 16:1) — rotação em ~3 dias reduzindo 1/3 por vez</td></tr>
+        <tr><td><b>Fentanil</b> (forte)</td><td>Adesivo TD <b>12–25 µg/h a cada 72h</b> · IV hospitalar</td><td><b>100× a morfina</b>, muito lipofílico (BHE em minutos); <b>sem metabólitos ativos → opção na insuficiência renal</b> (com cautela); menos histamina/constipação; transmucoso/SL para BTcP; acumula no adiposo; 25 µg/h ≈ 50–60 mg/d de morfina VO</td></tr>
+        <tr><td><b>Meperidina (petidina)</b></td><td>Parenteral, efeito curto (2–4h)</td><td><span class="hl">NÃO é 1ª linha e NÃO serve para dor crônica</span>: metabólito <b>normeperidina</b> acumula na IR e CONVULSA — e a <b>naloxona NÃO reverte</b> (pode piorar a convulsão). Evitar em idoso, IR, hepatopata</td></tr>
+        <tr><td><b>Tapentadol</b></td><td>50 mg 12/12h (LP)</td><td>µ + inibição de recaptação de NA; bom em dor mista/neuropática; glicuronidação (sem CYP relevante); risco de convulsão/serotoninérgica em predispostos</td></tr>
+        <tr><td><b>Hidromorfona</b></td><td>OROS 8 mg 24/24h</td><td><b>Não disponível no Brasil</b> (pegadinha de tabela); H6G/H3G renais</td></tr>
+        <tr><td><b>Naloxona</b> (antagonista)</td><td>IV titulada</td><td>Reverte depressão respiratória/anestesia; NÃO reverte normeperidina; em paliativo, titular devagar (não "acordar" a dor + abstinência)</td></tr>
+        <tr><td><b>Naltrexona</b> (antagonista)</td><td>VO, baixas doses</td><td>Compulsões/dependência (associada à bupropiona; no SUS, separadas) — bloqueia recompensa (↓dopamina)</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>8 · Prescrever na prática: titulação, resgate, conversões, rotação, retirada (objetivo ④)</h2>
+      <h3>Antes de começar (SBED/Recomendações Part I)</h3>
+      <p>Documentação completa: avaliação da dor, quadro clínico, história psicossocial e psiquiátrica, risco de abuso (ferramentas: SOAPP, ORT, DIRE, CAGE-AID) + <b>termo de consentimento informado</b> (Portaria ANVISA 859/2002) com compromisso de <b>devolver opioides não utilizados</b>. Receituário (recap SP4): fortes = Notificação A amarela · fracos = controle especial branca 2 vias.</p>
+      <h3>Os três "T's" (artigo da aula — Rev Bras Anestesiol 2016)</h3>
+      <p><b>Titulação (teste)</b>: começar com a MENOR dose preconizada e subir devagar ("start low, go slow") até analgesia efetiva com efeitos toleráveis · <b>ajusTes (individualização)</b>: tipo de dor, comorbidades, fatores psicossociais/farmacogenômicos · <b>Transição (redução gradual)</b>: nunca parar abruptamente.</p>
+      <h3>Titulação e resgate (números para decorar)</h3>
+      <ul>
+        <li>Titular com opioide de <b>ação curta</b> (morfina LI 5–10 mg VO 3–4h) até analgesia efetiva; meta de efetividade: <b>redução de 30–50% da dor</b> ou ganho de qualidade de vida (SBED). Depois, converter a dose total para formulação de <b>liberação prolongada</b>.</li>
+        <li><b>Dose de resgate = 10% da dose TOTAL de 24h</b>, podendo repetir a cada 1h (veterana/INCA). Reajuste: nova dose diária = dose de 24h + resgates usados ÷ nº de tomadas.</li>
+        <li>Sempre juntos na prescrição: <span class="hl">laxante profilático</span> (a constipação NÃO desenvolve tolerância) + <b>antiemético</b> nos primeiros dias (náusea tem tolerância em 5–10 dias) + orientar sedação transitória (3–5 dias).</li>
+      </ul>
+      <h3>Conversões — a tabela da aula (equianalgesia, referência morfina 30 mg VO)</h3>
+      <table>
+        <tr><th>Fármaco</th><th>= morfina 30 mg VO</th><th>Conversão EV × VO</th></tr>
+        <tr><td>Morfina</td><td>30 mg VO</td><td><b>10 mg EV = 30 mg VO → VO→EV: ÷3 · EV→VO: ×3</b></td></tr>
+        <tr><td>Codeína</td><td>200 mg VO</td><td>—</td></tr>
+        <tr><td>Tramadol</td><td>150 mg VO</td><td>100 mg EV ≈ 120 mg VO</td></tr>
+        <tr><td>Oxicodona</td><td>20 mg VO</td><td>só VO no Brasil</td></tr>
+        <tr><td>Metadona</td><td>4 mg VO</td><td>razão variável — converter com especialista</td></tr>
+        <tr><td>Fentanil</td><td>TD 12,5 µg/h</td><td>0,1 mg EV ≈ morfina 10 mg EV; adesivo 25 µg/h/72h ≈ morfina 50 mg VO/dia</td></tr>
+        <tr><td>Hidromorfona</td><td>7,5 mg</td><td>indisponível no Brasil</td></tr>
+      </table>
+      <p class="src">Exemplo-modelo (cai em descritiva): morfina 60 mg VO/dia → paciente em jejum/íleo → 60 ÷ 3 = <b>20 mg EV/dia</b> (bomba ou dividida 4/4h) · resgate VO seria 6 mg (10%). Voltou a comer: 20 × 3 = 60 mg VO/dia.</p>
+      <h3>Rotação de opioides (SBED)</h3>
+      <ul>
+        <li><b>Razões:</b> tolerância (dose subindo sem alívio), efeitos adversos intoleráveis, impossibilidade de atingir concentração adequada, custo, OIH.</li>
+        <li><b>Como:</b> calcular a dose equianalgésica e <span class="hl">REDUZIR 25–50%</span> ao trocar (tolerância cruzada INCOMPLETA — as tabelas "dão doses maiores que o necessário"); exceção: metadona (razão 2,5:1 a 16:1 conforme a dose prévia — transição em ~3 dias, trocando 1/3 por vez). Sucesso em 75–90% dos pacientes com câncer.</li>
+      </ul>
+      <h3>Retirada (desmame)</h3>
+      <p><b>Lenta: 10% da dose total/dia por SEMANA</b> · rápida: 25–50% a cada 2–3 dias ("quarteamento" — nota da aula: 10% primeiro, depois 25% por semana). Retirada mais prolongada se ansiedade, dependência ou doença cardiorrespiratória; manter/subir a dose se surgir abstinência, dor ou perda de qualidade de vida; <span class="hl">evitar sedativos — especialmente BENZODIAZEPÍNICOS</span> — durante o desmame; pode levar de 2–3 semanas a 3–4 meses. Na gestação, retirada aguda = risco de aborto/parto prematuro. Dependência química (uso recreativo): desmame com <b>metadona</b>.</p>
+    </div>
+
+    <div class="panel">
+      <h2>9 · Efeitos colaterais, tolerância, intoxicação e abstinência</h2>
+      <h3>Agudo × crônico (tabela Katzung 31-4 do slide)</h3>
+      <table>
+        <tr><th>Uso AGUDO</th><th>Uso CRÔNICO</th></tr>
+        <tr><td><b>Depressão respiratória</b> (principal causa de óbito) · sedação/sonolência · náuseas e vômitos (TODOS estimulam o centro do vômito → antiemético junto no hospital) · <b>prurido/urticária</b> (histamina, sobretudo IV — orofacial) · <b>constipação</b> · <b>retenção urinária</b> (µ2 na bexiga — critério de alta pós-procedimento: urinar!) · miose · delírio · mioclonia · convulsões (suscetíveis)</td><td>Hipogonadismo · imunossupressão · ↑apetite · ↑GH · efeitos de abstinência · <b>tolerância e dependência</b> · abuso/adição · <span class="hl">HIPERALGESIA induzida por opioide</span> · prejuízo ao dirigir. (Nota da aula: hipogonadismo/imunossupressão são menos prioritários para a prova)</td></tr>
+      </table>
+      <h3>Graus de tolerância (tabela Goodman & Gilman — slide 42)</h3>
+      <table>
+        <tr><th>Tolerância ALTA</th><th>Moderada</th><th>Mínima ou NENHUMA</th></tr>
+        <tr><td>Analgesia · euforia/disforia · embotamento · sedação · <b>depressão respiratória</b> · antidiurese · náuseas/vômitos · supressão da tosse</td><td>Bradicardia</td><td><b>MIOSE · CONSTIPAÇÃO · CONVULSÕES</b></td></tr>
+      </table>
+      <p>Fala da Vânia que explica: os receptores <b>µ2 do intestino NÃO sofrem internalização</b> — quanto mais morfina, PIOR a constipação (laxante sempre); miose persiste (dificulta enxergar no escuro); convulsão: apareceu uma vez → não usar mais o opioide.</p>
+      <h3>Hiperalgesia induzida por opioide (OIH) × tolerância — o caso da Verônica</h3>
+      <table>
+        <tr><th></th><th>Tolerância</th><th>OIH</th></tr>
+        <tr><td>O que acontece</td><td>Opioide "perde efeito" — precisa de MAIS dose p/ o MESMO alívio</td><td>Opioide <b>piora a dor</b>: mais dose = mais dor, dor mais DIFUSA, sensibilidade aumentada</td></tr>
+        <tr><td>Mecanismo</td><td>GRK/β-arrestina → internalização do receptor</td><td>Ativação NMDA + ↑glutamato/subst. P + <b>glia/neuroinflamação</b> + ↓inibição descendente → sensibilização central</td></tr>
+        <tr><td>Conduta</td><td>Titular/ajustar dose</td><td><span class="hl">REDUZIR ou ROTACIONAR o opioide</span> (aumentar dose piora!)</td></tr>
+      </table>
+      <h3>Intoxicação aguda</h3>
+      <p>Tríade clássica: <b>miose puntiforme + depressão respiratória (bradipneia) + rebaixamento/sedação</b>; ainda: hipotensão, taquicardia, alucinações, rubor, prurido, boca seca. Conduta: suporte de via aérea/ventilação + <b>NALOXONA IV titulada</b> (meia-vida curta — repetir/infusão). Lembretes: não reverte normeperidina; no paciente paliativo titular em doses baixas.</p>
+      <h3>Abstinência (fases da aula)</h3>
+      <table>
+        <tr><th>Fase</th><th>Tempo</th><th>Marcas</th></tr>
+        <tr><td>Antecipatória</td><td>3–4h</td><td>Medo de ficar sem, busca, fissura, ansiedade (pede o remédio antes da hora)</td></tr>
+        <tr><td>Inicial</td><td>8–10h</td><td>Ansiedade, inquietação, bocejos, espirros, sudorese, lacrimejamento, rinorreia, <b>MIDRÍASE</b></td></tr>
+        <tr><td>Total</td><td>1–3 dias</td><td>Tremor, piloereção, vômitos, <b>diarreia</b>, espasmos/dor muscular, ↑PA, taquicardia, febre, calafrios</td></tr>
+        <tr><td>Tardia</td><td>até 6 meses</td><td>Hipotensão, bradicardia, anergia, inapetência, insônia, fissura</td></tr>
+      </table>
+      <div class="warn"><b>Pegadinha visual:</b> intoxicação = <b>MIOSE</b> + bradipneia + sedação · abstinência = <b>MIDRÍASE</b> + diarreia + piloereção + agitação. Pupila é o divisor de águas. E dependência física ≠ adição: adição é doença do circuito de recompensa (dopamina/saliência — opioide inibe o GABA que segurava a fibra dopaminérgica → dopamina em excesso).</div>
+      <h3>Gestação (tabela do slide 32)</h3>
+      <p>Categoria <b>B</b>: morfina, metadona, fentanil, meperidina, hidromorfona, oxicodona · categoria <b>C</b>: <b>codeína e tramadol</b>. <span class="hl">Contraintuitivo e adorado por bancas: os FORTES são B; os fracos são C</span> (e AINEs no 3º trimestre são D — SP4). Cuidado com dose (depressão respiratória fetal) e com retirada aguda (aborto/prematuridade).</p>
+    </div>
+
+    <div class="panel">
+      <h2>10 · Cefaleia: primária × secundária (objetivo ⑤)</h2>
+      <p><b>Primária</b> = a dor É a doença, sem alteração estrutural/metabólica subjacente (migrânea, tensional, trigêmino-autonômicas/salvas). <b>Secundária</b> = sintoma de outra condição — e é aqui que mora o risco de vida.</p>
+      <h3>Red flags (veterana + SNNOOP10) — quando investigar com imagem</h3>
+      <ul>
+        <li><b>Início súbito "em trovoada"/pior dor da vida</b> (→ hemorragia subaracnóidea) · <b>início após os 50 anos</b> · <b>mudança de padrão</b> ou progressão rápida · <b>febre + rigidez de nuca</b> (meningite) · <b>déficit neurológico focal / convulsão / papiledema</b> · trauma craniano recente · <b>anticoagulados</b> · <b>imunossupressão/HIV</b> · <span class="hl">história de CÂNCER (cefaleia nova = metástase até prova em contrário)</span> · gestação/puerpério · piora com Valsalva/esforço ou mudança postural · despertar noturno pela dor · uso excessivo de analgésicos.</li>
+        <li>Exame de entrada na urgência: <b>TC de crânio</b> (padrão-ouro da veterana p/ triagem; HSA = TC sem contraste — se normal e suspeita persistir, líquor). Suspeita de lesão estrutural/HIC: TC com contraste ou RM; se negativa e quadro sugestivo, exame do líquor.</li>
+      </ul>
+      <h3>Secundárias que a prova ama</h3>
+      <table>
+        <tr><th>Causa</th><th>Assinatura</th></tr>
+        <tr><td><b>Hemorragia subaracnóidea</b></td><td>Thunderclap: máxima em segundos-minutos, "pior da vida", rigidez de nuca, pode rebaixar → TC já!</td></tr>
+        <tr><td><b>Hipertensão intracraniana</b> (tumor/metástase)</td><td>Intensa, contínua, <b>MATINAL e progressiva</b>, vômitos <b>em jato</b>, papiledema, paralisia do VI par, piora ao deitar/Valsalva</td></tr>
+        <tr><td><b>Meningite/encefalite</b></td><td>Febre + rigidez de nuca + fotofobia ± alteração de consciência</td></tr>
+        <tr><td><b>Arterite temporal (células gigantes)</b></td><td>Idoso &gt;60, frontotemporal, artéria espessada/dolorosa, <b>claudicação de mandíbula</b>, sintomas gerais, polimialgia reumática, <b>VHS muito alto</b> → corticoide EM ALTA DOSE já (risco: amaurose)</td></tr>
+        <tr><td>Glaucoma agudo</td><td>Dor ocular/periorbitária + olho vermelho + midríase média fixa + halos</td></tr>
+        <tr><td><b>Cefaleia por uso excessivo de analgésicos (MOH)</b></td><td>Cefaleia ≥15 d/mês em quem usa <b>analgésico simples ≥15 d/mês</b> ou <b>triptano/opioide/combinado ≥10 d/mês</b> por &gt;3 meses — trata retirando o analgésico + profilaxia</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>11 · Cefaleias primárias (objetivo ⑥) — as três grandes</h2>
+      <table>
+        <tr><th></th><th>Migrânea</th><th>Tensional</th><th>Em salvas (cluster)</th></tr>
+        <tr><td>Quem</td><td>Mulher 3:1, história familiar</td><td>A mais prevalente de todas</td><td><b>Homem</b> jovem/adulto, tabagista</td></tr>
+        <tr><td>Dor</td><td><b>Unilateral, PULSÁTIL, moderada-forte</b></td><td><b>Bilateral, em pressão/aperto ("capacete")</b>, leve-moderada</td><td>Unilateral <b>orbitária/supraorbitária/temporal, EXCRUCIANTE</b>, em facada</td></tr>
+        <tr><td>Duração</td><td><b>4–72 h</b> (≥5 crises p/ diagnóstico)</td><td>30 min–7 dias</td><td><b>15–180 min</b>, 1×/2 dias até 8×/dia, em salvas (semanas), muitas vezes NOTURNA e sazonal</td></tr>
+        <tr><td>Acompanha</td><td>Náusea/vômito OU foto+fonofobia; <b>piora com atividade</b> (paciente quer ficar QUIETO no escuro); ± aura (5–60 min, visual+)</td><td>SEM náusea; no máx foto OU fonofobia; <b>não piora com atividade</b></td><td><b>Autonômicos ipsilaterais:</b> lacrimejamento, hiperemia, rinorreia/congestão, ptose, miose (Horner parcial), sudorese; <b>AGITAÇÃO psicomotora</b> (anda de um lado a outro)</td></tr>
+        <tr><td>Crise</td><td>Leve: AINE/dipirona · mod-grave: <b>TRIPTANO</b> (suma/nara/zolmi) ± AINE + antiemético (metoclopramida). <span class="hl">NUNCA opioide</span></td><td>Analgésico simples/AINE, relaxamento</td><td><b>O₂ 100% 12–15 L/min por 15–20 min em máscara + SUMATRIPTANO SC 6 mg</b> (ou intranasal)</td></tr>
+        <tr><td>Profilaxia</td><td>Se ≥4 crises/mês, incapacitante ou risco de MOH: <b>propranolol/metoprolol · amitriptilina · topiramato · valproato (NÃO em mulher fértil sem contracepção) · flunarizina · candesartana</b>; crônica/refratária: toxina botulínica, anti-CGRP</td><td>Amitriptilina; manejo de estresse/postura</td><td><b>VERAPAMIL</b> (1ª linha — monitorar ECG) + corticoide como "ponte" no início da salva; alternativa: lítio</td></tr>
+        <tr><td>Contra quem escorrega</td><td>Triptano é contraindicado em <b>coronariopatia/AVC/HAS não controlada e na migrânea HEMIPLÉGICA</b></td><td>Diagnóstico é clínico; exames normais</td><td>Sempre excluir secundária na 1ª salva (RM); dor curta demais p/ triptano VO</td></tr>
+      </table>
+      <h3>Fisiopatologia da migrânea — versão de prova</h3>
+      <ul>
+        <li>Modelo atual: disfunção neurovascular com <b>ativação do sistema TRIGEMINOVASCULAR</b> → liberação de <b>CGRP</b> e neuropeptídeos → inflamação neurogênica e vasodilatação secundária + sensibilização central (alodinia do couro cabeludo). A <b>aura</b> = <b>depressão alastrante cortical</b> (onda de despolarização a ~3 mm/min, típico escotoma cintilante que "cresce").</li>
+        <li><span class="hl">A teoria puramente VASCULAR ("dilatação das artérias cranianas causa a dor") está SUPERADA</span> — é o que o resumo antigo diz, e é distrator clássico (ver Divergências).</li>
+        <li>Gatilhos: jejum, privação/excesso de sono, estresse (e o "relaxamento pós-estresse"), álcool/vinho, queijos/embutidos, menstruação. Não farmacológico: higiene do sono, refeições regulares, exercício aeróbico, diário de cefaleia, manejo de estresse.</li>
+        <li>4 fases: pródromo (bocejos, fome, humor) → aura → dor → pósdromo ("ressaca").</li>
+      </ul>
+      <div class="warn"><b>Duas pegadinhas de conduta:</b> ① opioide NÃO entra em migrânea (cronifica + MOH) — e analgésico comum ≥15 d/mês ou triptano ≥10 d/mês = fabricando cefaleia por uso excessivo; a saída é PROFILAXIA. ② Na cefaleia em salvas o paciente fica AGITADO (na migrânea, quieto no escuro) — bancas trocam os comportamentos, igual fizeram com cólica renal × peritonite.</div>
+    </div>
+
+    <div class="panel">
+      <h2>12 · Divergências fonte × fonte (as "venlafaxinas" da SP5)</h2>
+      <div class="divg"><b>① Fisiopatologia da migrânea:</b> o resumo da veterana/colega traz <i>"o mecanismo envolve dilatação das artérias cranianas"</i> — teoria vascular dos anos 80, hoje SUPERADA. Harrison/ICHD-3: sistema trigeminovascular + CGRP + depressão alastrante cortical (aura). Em questão conceitual, marque a versão moderna; a vasodilatação é fenômeno secundário, não a causa.</div>
+      <div class="divg"><b>② Slide 42 da Vânia (tolerância):</b> a FRASE sob a tabela diz "tolerância moderada (constipação, vômitos, analgesia e sedação)". A PRÓPRIA TABELA (Goodman & Gilman) e a fala dela em aula dizem outra coisa: <b>constipação, miose e convulsões = tolerância mínima/NENHUMA</b> (µ2 do intestino não internaliza — "quanto mais morfina, pior a constipação"); analgesia, náuseas, sedação e depressão respiratória = tolerância ALTA; bradicardia = moderada. Vale a tabela + a fala; a frase é um cochilo do slide.</div>
+      <div class="divg"><b>③ Dose de resgate:</b> veterana/INCA: <b>10% da dose de 24h</b>, até de 1/1h. Literatura clássica de paliativos: 1/6 da dose diária (~16%). Faixa real: 10–17%. Para a APF/prova, use <b>10%</b> (é a fonte da tutoria); se a questão citar "1/6", também está certa.</div>
+      <div class="divg"><b>④ Doses iniciais variam por diretriz</b> (tabela do artigo dos 3 T's): morfina LI 5–10 mg 4–6h (Canadá, máx 40 mg/d) × 10 mg 4/4h (Veteranos/EUA); oxicodona 5 mg 4–6h × 10 mg 12/12h (LC). Não existe consenso universal — por isso titulação individual. Para prova: <b>morfina 5–10 mg VO como dose inicial de titulação</b> (o número da aula).</div>
+      <div class="divg"><b>⑤ Equianalgesia:</b> a tabela "Brasil" da aula (morfina 30 = codeína 200 = tramadol 150 = oxicodona 20 = metadona 4 = fentanil TD 12,5 µg/h) difere da tabela do Katzung no mesmo deck (codeína 130 mg, tramadol 100 mg). Na prova da Vânia, use a tabela "Equivalência para opioides disponíveis no Brasil" — foi a que ela destacou. Conceito imutável: morfina EV = VO ÷ 3.</div>
+      <div class="divg"><b>⑥ Cefaleia em salvas — "tratamento crônico com ergotamina":</b> assim está no resumo da veterana; na literatura atual a ergotamina é no máximo opção abortiva/de transição. Profilaxia de verdade = <b>verapamil</b> (+ corticoide de ponte no início da salva). Crise = O₂ 100% + sumatriptano SC.</div>
+      <div class="divg"><b>⑦ Meperidina:</b> ainda popular em PS brasileiro, mas a aula é taxativa: não é 1ª linha, não serve para dor crônica, normeperidina convulsa na IR e <b>naloxona não reverte</b>. Se aparecer como alternativa "correta" de analgesia de rotina, é distrator.</div>
+      <div class="divg"><b>⑧ Fentanil TD:</b> slide da equivalência: 12,5 µg/h ≈ morfina 30 mg VO/d; caderno Ana&Lou: 25 µg/h ≈ 50 mg/d. Coerentes entre si (regra prática: µg/h × ~2 ≈ mg de morfina VO/dia); guarde "25 µg/h ≈ 50–60 mg/d".</div>
+      <div class="divg"><b>⑨ Pendências de material:</b> não apareceu material específico de CEFALEIA dos professores (a aula 5 da Fisio cobriu dor crônica/oncológica) — a seção 10–11 foi construída por Harrison/ICHD-3/Porto (bibliografia do slide) + resumo da veterana. Tutoria/ segue sem resumo de colega da SP4 (Sp5.pdf chegou; Sp4 não).</div>
+    </div>
+
+    <div class="panel">
+      <h2>Fontes deste guia</h2>
+      <ul class="src">
+        <li>Fotos do quadro da abertura (objetivos + bibliografia + rabiscos da escada).</li>
+        <li><b>Fisio:</b> UC 13 Aula 5 — Dor crônica/Dor oncológica (prof.ª Maria Verônica, 44 slides) — <code>Fisio/UC 13 Aula 5- Dor crônica.pdf</code> (base INCA — Cuidados Paliativos Oncológicos).</li>
+        <li><b>Farmaco (Vânia):</b> Aula Analgésicos Opiáceos 2026 (45 slides, base Goodman&Gilman + Katzung) + caderno da Ana&Lou <code>Farmaco/ana&lou/Analgesicos_Opioides_Completo.docx</code> + artigos da pasta SP5: <i>os três T's</i> (Rev Bras Anestesiol 2016) e <i>Recommendations for the use of opioids in Brazil: Part I</i> (Rev Dor 2013/SBED).</li>
+        <li><b>Tutoria:</b> resumo da veterana (Danielli — doc Tutoria UC13, seção SP5) + resumo do colega <code>Tutoria/Sp5.pdf</code> (conteúdo equivalente).</li>
+        <li>Consenso Brasileiro sobre Manejo da Dor Relacionada ao Câncer (Wiermann et al., 2014 — citado na aula) · Goldman-Cecil 26ª · Harrison · Porto&Porto cap. 6 · ICHD-3 (critérios de cefaleia).</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ============ QUESTÕES ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">25</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0">Q1–Q10: estilo <b>ENAMED</b> (caso curto + "assinale a correta"), dificuldade progressiva. Q11–Q25: <b>nível prova final</b> — INCORRETA, proposições, associação de colunas e casos complexos. No fim, a <b>descritiva integrativa</b> com roteiro de correção por pesos.</div>
+    <div id="quiz"></div>
+
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D</div><span class="pill d">Descritiva integrativa</span><span class="pill o">Todos os objetivos · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 62 anos, adenocarcinoma de próstata com metástases ósseas em coluna lombar e bacia. Dor lombar contínua 8/10, em peso, com episódios súbitos de dor lancinante ao levantar-se (pico em ~2 min, duração ~30 min, 2–3×/dia) e queimação com formigamento na face anterior da coxa direita. Em uso de dipirona 1 g 6/6 h + codeína 30 mg 4/4 h, sem alívio adequado. Emagrecido, desanimado, dorme mal, parou de ir à igreja e diz temer "morrer sofrendo".</span>
+        Responda por itens (pesos entre parênteses):
+        <br><b>a)</b> Caracterize a dor deste paciente: classifique os componentes presentes (com o mecanismo de cada um, incluindo o da dor óssea metastática), identifique e classifique os episódios súbitos, e aponte a dimensão biopsicossocial do caso. <b>(20)</b>
+        <br><b>b)</b> A prescrição atual está em qual degrau da escada da OMS? Justifique por que está insuficiente e reescreva o esquema analgésico aplicando os princípios da OMS (fármacos, doses iniciais, intervalos, resgate e as duas prescrições "de proteção" que nunca podem faltar). <b>(25)</b>
+        <br><b>c)</b> Após titulação, ele estabiliza com morfina 60 mg VO/dia. Calcule a dose de resgate e, diante de um íleo com jejum absoluto, faça a transição para a via endovenosa (explique o racional farmacocinético da conversão). Na alta, faça o caminho de volta. <b>(20)</b>
+        <br><b>d)</b> No 4º dia, a família nota sonolência intensa; FR 7 irpm, pupilas puntiformes, creatinina subiu de 1,1 para 2,4 mg/dL. Explique o que aconteceu (inclua o metabólito responsável), a conduta imediata e duas estratégias para reintroduzir analgesia com mais segurança. Diferencie este quadro de uma síndrome de abstinência. <b>(20)</b>
+        <br><b>e)</b> Um mês depois, queixa-se de cefaleia nova, diária, progressiva, pior de madrugada/manhã, com vômitos em jato. Cite os sinais de alarme presentes, a principal hipótese e a conduta — e diga por que este quadro NÃO deve ser manejado como cefaleia primária. <b>(15)</b>
+      </div>
+      <button class="btn" onclick="document.getElementById('rot').style.display=(document.getElementById('rot').style.display==='block'?'none':'block')">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot" style="display:none;margin-top:12px">
+        <table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pontos</th></tr>
+          <tr><td><b>a</b> (20)</td><td>Dor oncológica = <b>MISTA</b> (4): componente <b>nociceptivo somático ósseo</b> — metástase = fonte mais comum; cascata endotelina → osteoblasto → RANKL → osteoclasto → ATP/H⁺ → P2X/TRPV1/ASIC3 (4) · componente <b>neuropático</b> por compressão radicular lombar (queimação/formigamento em território — L2-L3) (3) · episódios súbitos = <b>dor irruptiva/BTcP incidental previsível</b> (gatilho: movimento; pico &lt;3 min, 15–60 min, 1–4×/d) SOBRE dor basal — aqui a basal nem está controlada ainda (4) · dimensão biopsicossocial/"dor total": física + emocional (medo de morrer sofrendo, humor) + social (isolamento) + espiritual (afastou-se da igreja) → avaliação multidimensional e equipe/cuidados paliativos (5)</td><td>20</td></tr>
+          <tr><td><b>b</b> (25)</td><td>Esquema atual = <b>2º degrau</b> (opioide fraco + não opioide) (3) · insuficiente: dor 8/10 = intensa → indicação de <b>3º degrau</b>; codeína ainda depende de CYP2D6 e tem teto 240 mg/d (4) · nova prescrição: suspender codeína; <b>morfina LI 5–10 mg VO 4/4 h</b> titulando (pelo relógio) + manter dipirona (não opioide segue junto) + <b>adjuvante para o componente neuropático</b> (amitriptilina OU gabapentinoide; corticoide/dexametasona é aceito pela compressão) (8) · <b>resgate 10% da dose de 24 h até 1/1 h</b> para a BTcP (3) · proteções obrigatórias: <b>laxante profilático</b> (constipação não tolera) + <b>antiemético</b> nos primeiros dias (3) · princípios citados nominalmente: boca, relógio, escada, indivíduo, adjuvantes, detalhes (2) · citar radioterapia antálgica/avaliação de bifosfonato como plano para a dor óssea (2)</td><td>25</td></tr>
+          <tr><td><b>c</b> (20)</td><td>Resgate = 10% de 60 mg = <b>6 mg VO por episódio</b> (até 1/1 h) (5) · VO→EV: morfina EV = VO ÷ 3 → <b>20 mg EV/24 h</b> (bomba contínua ou ~3,3 mg 4/4 h), com resgate EV ~2 mg (10%) (7) · racional: metabolismo de <b>1ª passagem</b> hepática reduz a biodisponibilidade oral — parenteral exige ~1/3 da dose (4) · volta: EV ×3 → 60 mg VO/dia, de preferência já em liberação prolongada 12/12 h + resgate LI (4)</td><td>20</td></tr>
+          <tr><td><b>d</b> (20)</td><td>Diagnóstico: <b>intoxicação opioide</b> — tríade miose + depressão respiratória + sedação (4) · causa: <b>LRA → acúmulo de M6G</b> (metabólito ATIVO, 2–4× mais potente; M3G = neuroexcitatório) — morfina é de eliminação renal (5) · conduta: suspender opioide, suporte ventilatório, <b>naloxona IV titulada em doses baixas</b> (meia-vida curta → repetir; em paliativo, devagar para não precipitar dor/abstinência) (5) · reintrodução segura: rotação para opioide <b>sem metabólito ativo renal</b> — FENTANIL (ou metadona, com cautela/QTc) — e/ou redução de 25–50% da dose equianalgésica (tolerância cruzada incompleta) (4) · abstinência seria o OPOSTO: midríase, diarreia, piloereção, agitação, dor — não sedação com miose (2)</td><td>20</td></tr>
+          <tr><td><b>e</b> (15)</td><td>Red flags: <b>câncer conhecido</b> + cefaleia NOVA/mudança de padrão + progressiva + <b>padrão de HIC</b> (matinal, vômitos em jato) ± idade &gt;50 (5) · hipótese: <b>metástase cerebral com hipertensão intracraniana</b> (3) · conduta: neuroimagem urgente (TC com contraste/RM; líquor só se imagem negativa e suspeita de outra causa — nunca punção antes da imagem com HIC) + <b>dexametasona</b> para edema/HIC (4) · não é primária: primária exige ausência de doença estrutural — aqui há causa presumível até prova em contrário; tratar como migrânea/tensional atrasaria o diagnóstico (3)</td><td>15</td></tr>
+        </table>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto para a APF · 60–79 = revisar os itens perdidos no Resumo · &lt; 60 = refazer o Resumo inteiro + flashcards antes de reatacar. Quarta 26/08: fechamento da SP5 + APF — e é a última antes do A1.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAPA ============ -->
+  <section id="mapa">
+    <div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+
+      <details><summary>🧠 Dor crônica & sensibilização (base)</summary><ul>
+        <li>&gt;3 meses / além da cicatrização / doença crônica · entidade própria, sem função de alerta</li>
+        <li>Periférica: ↓limiar de nociceptores (Aδ/C) → hiperalgesia · Central: glutamato + subst. P → NMDA → hiperexcitável → alodinia</li>
+        <li>GLIA: astrócitos/micróglia → TLR2/4 → TNF-α, IL-1β → ↑glutamato/↓recaptação → mantém a dor</li>
+        <li>Consequências: ↑simpático (HAS, taqui) + endócrino (↓testosterona) + fadiga/sono/humor/isolamento</li>
+        <li>Modulação descendente: PAG, rafe, locus coeruleus (5-HT/NA/endorfina) → alvo de ADT/opioide</li>
+      </ul></details>
+
+      <details><summary>🎗️ Dor oncológica</summary><ul>
+        <li>Multifatorial e MISTA (nociceptiva + neuropática) · CID-11: visceral, óssea, neuropática</li>
+        <li>Prevalência: 30–50% tratamento · 60–90% avançada · sempre avaliar dor TOTAL (física+emocional+social+espiritual)</li>
+        <li>Causas: tumor 46–92% (infiltração, compressão, obstrução) · metástases (ÓSSEA = + comum: mama/próstata/pulmão/mieloma) · sistêmicas 10–20% · tratamento 15–25% (QT neuropatia platinas/taxanos/vincas; RT fibrose/mielopatia; cirurgia fantasma; corticoide pseudorreumatismo)</li>
+        <li>Dor óssea: endotelina → osteoblasto → RANKL → osteoclasto → ATP/H⁺ → P2X/TRPV1/ASIC3</li>
+      </ul></details>
+
+      <details><summary>⚡ Dor irruptiva (BTcP)</summary><ul>
+        <li>Exacerbação transitória SOBRE dor basal CONTROLADA · pico &lt;3 min · 15–60 min · 1–4×/dia</li>
+        <li>Espontânea × incidental (previsível: movimento/tosse · imprevisível)</li>
+        <li>Tratar: basal com longa ação fixa + resgate de ação RÁPIDA (fentanil transmucoso/SL: 100× morfina, BHE em minutos)</li>
+        <li>Basal descontrolada ≠ BTcP → lá a conduta é subir a dose fixa</li>
+      </ul></details>
+
+      <details><summary>🪜 Escada da OMS + princípios</summary><ul>
+        <li>1º leve (1–3): não opioide ± adj · 2º moderada (4–6): fraco + não opioide ± adj · 3º intensa (7–10): forte + não opioide ± adj · "4º": intervencionista (SBED)</li>
+        <li>Alivia ~80% · dor 8/10 de cara = degrau 3 DIRETO (elevador)</li>
+        <li>Princípios: boca · relógio (fixo + resgate) · escada · indivíduo · adjuvantes · detalhes</li>
+        <li>Vânia: opioides falham no "relógio" (tolerância) e no "indivíduo" (CYP2D6); no câncer são 1ª escolha</li>
+      </ul></details>
+
+      <details><summary>💊 Opioides — farmacologia</summary><ul>
+        <li>Receptores: µ1 (analgesia/depressão resp.) · µ2 (TGI/bexiga: constipação, retenção) · κ (mesolímbico: disforia/alucinação/miose) · δ (modula) · σ (não-opioide, PCP)</li>
+        <li>Gi/Go: ↓AC/AMPc + fecha Ca²⁺ pré + abre K⁺ pós → hiperpolariza; potencializa via descendente</li>
+        <li>Tolerância: GRK → β-arrestina → internalização ("10 → 8 → 6 receptores")</li>
+        <li>Morfina: M6G ativo (acumula na IR!) · M3G convulsivante · codeína = pró-fármaco CYP2D6 · fentanil sem metabólito ativo (opção na IR) · metadona QTc/multi-CYP/difícil titular · meperidina→normeperidina convulsa (naloxona NÃO reverte)</li>
+        <li>Gestação: fortes = B · codeína/tramadol = C</li>
+      </ul></details>
+
+      <details><summary>📋 Prescrição na prática</summary><ul>
+        <li>3 T's: Titulação (teste, start low go slow) · ajusTes (individualizar; SOAPP/ORT/CAGE-AID) · Transição (desmame)</li>
+        <li>Titular com LI (morfina 5–10 mg VO 4/4h) → meta ↓30–50% da dor → passar p/ liberação prolongada</li>
+        <li>Resgate = 10% da dose de 24h (até 1/1h) · reajuste = 24h + resgates ÷ tomadas</li>
+        <li>Conversão: morfina EV = VO ÷ 3 (10 EV = 30 VO) · fentanil TD 25 µg/h ≈ 50–60 mg/d morfina VO · equianalgesia: 30 morfina = 200 codeína = 150 tramadol = 20 oxicodona = 4 metadona</li>
+        <li>Rotação: equianalgésica − 25–50% (tolerância cruzada incompleta) · metadona: razão variável, 1/3 a cada dia</li>
+        <li>Retirada: 10%/semana (lenta) · 25–50% a cada 2–3 d (rápida) · sem BZD · dependência → metadona</li>
+        <li>Sempre: laxante + antiemético + termo de consentimento (ANVISA 859/2002) + Notificação A</li>
+      </ul></details>
+
+      <details><summary>⚠️ Efeitos, intoxicação, abstinência</summary><ul>
+        <li>Agudo: depressão respiratória, náusea/vômito, prurido (histamina), constipação, retenção urinária, miose, sedação, mioclonia · Crônico: tolerância, dependência, HIPERALGESIA, hipogonadismo, imunossupressão</li>
+        <li>Tolerância: ALTA (analgesia, náusea, sedação, depressão resp.) · moderada (bradicardia) · NENHUMA (miose, constipação, convulsões) → laxante eterno</li>
+        <li>OIH ≠ tolerância: mais dose = MAIS dor (NMDA/glia) → reduzir/rotacionar</li>
+        <li>Intoxicação: MIOSE + bradipneia + coma → naloxona titulada · Abstinência: MIDRÍASE + diarreia + piloereção + agitação (fases: antecipatória 3–4h · inicial 8–10h · total 1–3d · tardia 6m)</li>
+        <li>Adição = circuito de recompensa (opioide inibe GABA → dopamina solta) · naltrexona+bupropiona p/ compulsões</li>
+      </ul></details>
+
+      <details><summary>🤕 Cefaleias</summary><ul>
+        <li>Primária = a dor é a doença · Secundária = sintoma (TC de crânio na triagem)</li>
+        <li>Red flags: trovoada, &gt;50 anos, padrão novo, febre+nuca, déficit/papiledema, CÂNCER, anticoagulado, imunossuprimido, gestante, Valsalva, matinal progressiva</li>
+        <li>Migrânea: 4–72h, unilateral pulsátil, náusea/foto+fono, piora atividade, aura 5–60min · crise: AINE→triptano+antiemético (NUNCA opioide) · profilaxia (≥4/mês): propranolol, amitriptilina, topiramato, valproato (não fértil), flunarizina · fisiopat: trigeminovascular + CGRP + depressão alastrante</li>
+        <li>Tensional: bilateral, aperto, sem náusea, não piora atividade · AINE na crise, amitriptilina profilaxia</li>
+        <li>Salvas: homem, 15–180min, noturna, autonômicos ipsilaterais + AGITAÇÃO · crise: O₂ 100% 12–15L + sumatriptano SC · profilaxia: verapamil (+corticoide ponte)</li>
+        <li>MOH: analgésico ≥15 d/mês ou triptano/opioide ≥10 d/mês → retirar + profilaxia · HIC: matinal + vômito em jato + papiledema · arterite temporal: idoso, VHS↑, claudicação mandíbula → corticoide já</li>
+      </ul></details>
+
+    </div></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel"><h2>Flashcards — clique para virar</h2><div class="fcgrid" id="fcbox"></div></div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Técnica de Feynman — explique em voz alta</h2><p class="src">Sem olhar o resumo. Se travar, é ali que está o buraco.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">UC13 · SP5 — Dor neoplásica, opioides & cefaleias · guia v2 · gerado em 24/08/2026 · fechamento + APF: 26/08/2026 (última antes do A1!) · bons estudos, Otto 🚀</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+const QS=[
+ {lvl:"ENAMED", obj:"Obj ① · Dor neoplásica", stem:"<span class='cx'>Mulher, 54 anos, câncer de mama com metástases em coluna lombar. Refere dor lombar contínua, em peso, profunda, e há 2 semanas queimação com choques descendo pela face posterior da perna esquerda, com formigamento.</span> Sobre a dor desta paciente, assinale a correta:",
+  opts:["É puramente nociceptiva somática, pois a causa é óssea.",
+  "É dor mista — componente nociceptivo (destruição óssea metastática) somado a componente neuropático (compressão/infiltração radicular) — o padrão mais típico da dor oncológica.",
+  "É dor nociplástica, pois não há lesão estrutural demonstrável.",
+  "É dor psicogênica agravada pelo diagnóstico oncológico.",
+  "É dor visceral pura referida ao membro inferior."],
+  ans:1,
+  why:"A dor no câncer é multifatorial (lesão tecidual + lesão/compressão neural + sensibilização central + efeitos do tratamento) e por isso frequentemente MISTA: aqui, o 'peso' contínuo é a dor óssea nociceptiva (metástase = fonte MAIS comum de dor tumoral; mama/próstata/pulmão/mieloma) e a queimação/choque em trajeto é o componente neuropático radicular. No CID-11: visceral, óssea ou neuropática — o esquema que a tutora rabiscou no quadro.",
+  trap:"'Tem lesão óssea → é só nociceptiva' ignora o nervo comprimido do lado. Reconhecer a mistura muda a prescrição: opioide PARA a nociceptiva + adjuvante (tricíclico/gabapentinoide) PARA a neuropática."},
+
+ {lvl:"ENAMED", obj:"Obj ① · Dor irruptiva", stem:"<span class='cx'>Homem, 60 anos, câncer de pulmão com metástases ósseas, em morfina de liberação prolongada com dor basal bem controlada (EVA 2). Ao tossir ou levantar da cama, apresenta dor lancinante que atinge o máximo em ~2 minutos, dura ~30 minutos e ocorre 2–3×/dia.</span> O diagnóstico e a conduta são:",
+  opts:["Tolerância à morfina — dobrar a dose de liberação prolongada.",
+  "Dor irruptiva (breakthrough) do tipo incidental previsível — manter a dose basal e prescrever resgate com opioide de ação rápida (ideal: fentanil transmucoso/SL) para as crises.",
+  "Dependência psíquica — reduzir progressivamente o opioide.",
+  "Dor neuropática nova — substituir morfina por gabapentina.",
+  "Abstinência entre doses — encurtar o intervalo da liberação prolongada."],
+  ans:1,
+  why:"Assinatura completa de BTcP: exacerbação transitória (pico <3 min, duração 15–60 min, 1–4 episódios/dia) SOBRE dor basal CONTROLADA — e com gatilho de movimento/tosse = incidental PREVISÍVEL. Princípio do manejo (Verônica): basal = longa ação fixa; crise = resgate de ação rápida. Morfina VO LI demora 30–60 min (a crise já passou) → fentanil transmucoso/SL (Abstral): 100× a morfina, lipossolúvel, BHE em minutos.",
+  trap:"A pegadinha é o pré-requisito: se a dor BASAL estivesse descontrolada o dia inteiro, a conduta seria subir a dose FIXA (titulação insuficiente) — não resgate. Basal controlada + picos = resgate; basal ruim = retitular."},
+
+ {lvl:"ENAMED", obj:"Obj ② · Escada da OMS", stem:"<span class='cx'>Paciente oncológico, virgem de opioides, chega com dor óssea EVA 9/10.</span> Segundo a Escada Analgésica da OMS, a conduta correta é:",
+  opts:["Iniciar obrigatoriamente pelo 1º degrau e progredir a cada 48–72 h se não houver resposta.",
+  "Iniciar codeína, pois todo opioide deve começar pelo fraco.",
+  "Iniciar diretamente no 3º degrau — opioide forte (ex.: morfina) titulado, MANTENDO o analgésico não opioide e considerando adjuvante — porque o degrau é definido pela INTENSIDADE atual da dor.",
+  "Prescrever apenas AINE em dose máxima, reservando opioides para a fase terminal.",
+  "Encaminhar direto ao degrau intervencionista (bloqueio)."],
+  ans:2,
+  why:"A escada se sobe pela intensidade: leve (1–3) = não opioide; moderada (4–6) = fraco + não opioide; intensa (7–10) = FORTE + não opioide ± adjuvante. Dor 9/10 de entrada = 3º degrau direto (conceito 'elevador'). O não opioide (dipirona/AINE) permanece junto (poupador de opioide, age em outro ponto da via) e o modelo alivia até ~80% das dores oncológicas.",
+  trap:"'Tem que passar por todos os degraus' é o erro clássico — condena o paciente a dias de dor intensa. E note a exceção que a Vânia frisou: opioide costuma ser 'última opção' na dor em geral, MAS é PRIMEIRA escolha na dor oncológica."},
+
+ {lvl:"ENAMED", obj:"Obj ② · Princípios OMS", stem:"Sobre os princípios de farmacoterapia da dor da OMS, assinale a correta:",
+  opts:["'Pelo relógio' significa prescrever analgesia apenas 'se dor', para reduzir o risco de dependência.",
+  "A via de escolha é a endovenosa, por garantir biodisponibilidade total.",
+  "A analgesia deve ser dada em horários FIXOS conforme a duração de ação de cada fármaco, sem esquecer a medicação de resgate para a dor irruptiva — e por via ORAL sempre que possível.",
+  "A dose correta de opioide é padronizada por peso, igual para todos os pacientes.",
+  "Adjuvantes só podem ser usados no 1º degrau."],
+  ans:2,
+  why:"Os princípios: pela BOCA (autonomia/conforto), pelo RELÓGIO (fixo, conforme duração de ação, + resgate para irruptiva), pela ESCADA/intensidade, para o INDIVÍDUO (dose que alivia com mínimo de efeitos), com ADJUVANTES (em qualquer degrau), atenção aos DETALHES (educação, monitorização). Prescrever 'se dor' deixa o paciente oscilar entre dor e pico de efeito.",
+  trap:"Nota da Vânia que pode virar questão: os opioides atendem bem à 'boca', mas atendem MAL ao 'relógio' — a tolerância vai encurtando o efeito e exigindo ajuste; e o 'para o indivíduo' depende do metabolismo (CYP2D6). Decorar princípio + limitação."},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Titulação", stem:"<span class='cx'>Iniciando opioide forte para dor oncológica intensa em paciente virgem de opioide, com via oral disponível.</span> A prescrição inicial mais adequada é:",
+  opts:["Fentanil transdérmico 25 µg/h desde o início, pela comodidade posológica.",
+  "Morfina de liberação imediata 5–10 mg VO a cada 4 h (pelo relógio), com resgate de 10% da dose diária até de 1/1 h se dor, MAIS laxante profilático e antiemético nos primeiros dias.",
+  "Morfina de liberação prolongada 60 mg 12/12 h de entrada.",
+  "Meperidina IM 6/6 h por ter início rápido.",
+  "Codeína 60 mg 4/4 h (dose máxima de 480 mg/dia)."],
+  ans:1,
+  why:"Titulação = 'start low, go slow' (3 T's): começar com a MENOR dose de opioide de AÇÃO CURTA (morfina LI 5–10 mg VO 3–4 h), subir até analgesia efetiva (meta SBED: reduzir 30–50% da dor) e só então converter o total para liberação prolongada. Resgate = 10% da dose de 24 h. E o pacote de proteção obrigatório: laxante (constipação não tolera) + antiemético (náusea tolera em 5–10 dias).",
+  trap:"Duas iscas técnicas: fentanil TD não serve para titular virgem de opioide (efeito demora, ajuste lento, risco de acúmulo) e o teto da codeína é 240 mg/d — 480 é o dobro. Meperidina: nunca rotina (normeperidina)."},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Transição VO→EV", stem:"<span class='cx'>Paciente com morfina 90 mg VO/dia bem titulada evolui com vômitos incoercíveis e jejum absoluto. Você vai converter a analgesia para via endovenosa.</span> A dose diária de morfina EV é aproximadamente:",
+  opts:["90 mg EV/dia — a dose não muda com a via.",
+  "45 mg EV/dia (metade).",
+  "30 mg EV/dia — a dose oral dividida por 3, porque a via parenteral não sofre o metabolismo de primeira passagem.",
+  "270 mg EV/dia (o triplo).",
+  "9 mg EV/dia (10%)."],
+  ans:2,
+  why:"Tabela de conversão da aula: morfina 10 mg EV = 30 mg VO → VO→EV divide por 3 (90 ÷ 3 = 30 mg/dia, em infusão contínua ou dividida 4/4 h, com resgate EV ~10%). O racional: por VO a morfina sofre extenso metabolismo de 1ª passagem hepática (baixa biodisponibilidade) — parenteral entrega tudo. Na volta para VO: multiplica por 3.",
+  trap:"Quem esquece a 1ª passagem mantém 90 mg EV = TRIPLICA a dose efetiva → depressão respiratória iatrogênica. O sentido da conta salva vidas: VO→EV divide; EV→VO multiplica. (10% é a dose de RESGATE, não a conversão — distrator E.)"},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Efeitos colaterais", stem:"<span class='cx'>Paciente em uso de morfina há 4 meses, com dor bem controlada, queixa-se de constipação intensa persistente. A náusea que tinha nas primeiras semanas desapareceu.</span> Assinale a correta:",
+  opts:["A constipação também desenvolverá tolerância em breve — orientar paciência.",
+  "A constipação praticamente NÃO desenvolve tolerância (os receptores µ2 do intestino não internalizam) — laxante profilático deve acompanhar o opioide do início ao fim; a náusea, ao contrário, tolera em 5–10 dias.",
+  "A constipação indica intoxicação — administrar naloxona.",
+  "Deve-se trocar morfina por codeína, que não constipa.",
+  "Suspender o opioide definitivamente."],
+  ans:1,
+  why:"Tabela de graus de tolerância (G&G, slide 42): ALTA para analgesia, euforia, sedação, náuseas/vômitos e depressão respiratória; moderada para bradicardia; MÍNIMA/NENHUMA para miose, CONSTIPAÇÃO e convulsões. A fala da Vânia explica o porquê: os µ2 do TGI não sofrem invaginação — 'quanto mais morfina, pior a constipação'. Por isso laxante entra JUNTO na prescrição, para sempre.",
+  trap:"A frase digitada sob a tabela no slide ('tolerância moderada: constipação...') contradiz a própria tabela — vale a TABELA + a fala da aula. E codeína constipa igual (é pró-fármaco de morfina!)."},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Codeína/CYP2D6", stem:"<span class='cx'>Mulher, 45 anos, em uso de fluoxetina por depressão, recebe codeína 30 mg 4/4 h para dor moderada e retorna dizendo que 'o remédio não fez NADA'.</span> A explicação farmacológica mais provável é:",
+  opts:["Desenvolveu tolerância após as primeiras doses.",
+  "A codeína é pró-fármaco que precisa da CYP2D6 para virar morfina — a fluoxetina inibe a CYP2D6 (mesmo efeito de um metabolizador lento), bloqueando a ativação e a analgesia.",
+  "A dipirona associada antagonizou o receptor µ.",
+  "Trata-se de dependência antecipatória.",
+  "A codeína só funciona por via parenteral."],
+  ans:1,
+  why:"Codeína age 'emprestando' o efeito da morfina que ela vira via CYP2D6 (O-demetilação); pela CYP3A4 vira norcodeína, inativa. Metabolizador lento OU inibidor de CYP2D6 (fluoxetina, paroxetina) = sem conversão = sem analgesia. No extremo oposto, o ultrarrápido intoxica — daí as contraindicações em crianças (<12 anos para dor OU tosse; <18 pós-amigdalectomia).",
+  trap:"É a cara da Vânia: 'para o indivíduo' da OMS + farmacogenética. Se o paciente 'não responde' a codeína/tramadol (ambos dependem de CYP2D6), a resposta certa não é dobrar a dose — é entender o metabolismo e trocar de fármaco."},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Intoxicação", stem:"<span class='cx'>Enfermagem chama: paciente em opioide EV está com FR 7 irpm, sonolento (só desperta a estímulo doloroso), pupilas puntiformes e SpO2 86%.</span> A conduta imediata é:",
+  opts:["Flumazenil IV em bolus.",
+  "Suporte de via aérea/ventilação + NALOXONA IV em doses tituladas, lembrando que sua meia-vida é curta e pode ser preciso repetir ou manter infusão.",
+  "Naltrexona VO e observação.",
+  "Aguardar o efeito passar, pois miose é achado esperado do uso terapêutico.",
+  "Administrar mais um bolus do opioide para tratar a agitação ao despertar."],
+  ans:1,
+  why:"Tríade da intoxicação opioide: MIOSE + depressão respiratória + rebaixamento (± hipotensão, rubor, prurido). Naloxona = antagonista de escolha, IV, TITULADA (no paciente em uso terapêutico/paliativo, doses baixas fracionadas para reverter a depressão respiratória sem 'ligar' a dor e a abstinência de uma vez); meia-vida curta → revigiar e repetir.",
+  trap:"Flumazenil é antídoto de BENZODIAZEPÍNICO. E a exceção da aula: naloxona NÃO reverte a toxicidade da NORMEPERIDINA (pode até piorar convulsão) — se a questão citar meperidina, mude o raciocínio."},
+
+ {lvl:"ENAMED", obj:"Obj ⑤ · Red flags", stem:"<span class='cx'>Homem, 58 anos, chega à emergência com cefaleia holocraniana de início SÚBITO há 40 minutos, 'a pior dor da minha vida', máxima em segundos, com náuseas e rigidez de nuca.</span> A conduta correta é:",
+  opts:["Sumatriptano SC, pois o quadro é de migrânea grave.",
+  "Analgesia + alta com orientação de retorno.",
+  "TC de crânio SEM contraste imediata (suspeita de hemorragia subaracnóidea); se normal e a suspeita persistir, punção lombar.",
+  "Ressonância magnética eletiva ambulatorial.",
+  "Punção lombar imediata, antes de qualquer imagem."],
+  ans:2,
+  why:"Cefaleia 'em trovoada' (thunderclap: máxima em <1 min) + pior da vida + rigidez de nuca = HSA até prova em contrário → TC sem contraste JÁ (sensibilidade altíssima nas primeiras horas); se vier normal e a clínica gritar, líquor procurando xantocromia. É o protótipo de cefaleia SECUNDÁRIA — red flags: súbita, >50 anos, padrão novo, febre+nuca, déficit focal/papiledema, câncer, anticoagulação, imunossupressão, gestação.",
+  trap:"Duas armadilhas letais: tratar como primária (triptano em possível HSA!) e punção ANTES da imagem (risco de herniação se houver hipertensão intracraniana). Primeiro a foto, depois a agulha."},
+
+ {lvl:"Prova", obj:"Obj ① · Fisiopatologia", stem:"Sobre a fisiopatologia da dor oncológica, assinale a INCORRETA:",
+  opts:["Na dor óssea metastática, células tumorais liberam endotelina, que ativa osteoblastos a liberar RANKL, maturando osteoclastos; estes acidificam o meio (ATP/H⁺) e ativam P2X, TRPV1 e ASIC3 nas fibras nervosas do osso.",
+  "A metástase óssea é causa RARA de dor no câncer, superada em muito pelas síndromes paraneoplásicas.",
+  "A obstrução de víscera oca pelo tumor gera dor difusa tipo cólica/peso, mal localizada e referida à distância — a dor visceral estudada na SP4.",
+  "Platinas, taxanos e alcaloides da vinca são quimioterápicos classicamente associados a neuropatia periférica dolorosa.",
+  "A dor oncológica costuma combinar mecanismos nociceptivos e neuropáticos (dor mista)."],
+  ans:1,
+  why:"É o contrário: a metástase ÓSSEA é a fonte MAIS COMUM de dor relacionada ao tumor (mama, próstata, pulmão, mieloma; osso = 3º sítio de metástase após pulmão e fígado). Síndromes paraneoplásicas são causa minoritária. As demais alternativas são literais da aula da Verônica (cascata endotelina→RANKL→osteoclasto→acidificação→P2X/TRPV1/ASIC3) e do INCA.",
+  trap:"A cascata da alternativa A parece 'decoreba de bioquímica', mas é slide da aula — e explica por que RT antálgica, radiofármacos e antirreabsortivos funcionam na dor óssea. Se cair 'por que osso dói?', a resposta é acidificação + mediadores, não 'fratura'."},
+
+ {lvl:"Prova", obj:"Obj ① · Sensibilização", stem:"Julgue as proposições sobre dor crônica (aula 5 da Fisio):<br>I. A ativação de astrócitos e micróglia no corno dorsal, via receptores TLR2/TLR4, libera TNF-α e IL-1β, que aumentam a liberação e reduzem a recaptação de glutamato — amplificando e mantendo a dor.<br>II. Na sensibilização central, o excesso de glutamato e substância P ativa receptores NMDA, tornando os neurônios do corno dorsal hiperexcitáveis (hiperalgesia e alodinia).<br>III. A dor crônica é apenas o prolongamento temporal da dor aguda, sem alterações próprias do sistema nervoso.<br>IV. A dor crônica cursa com hiperatividade simpática (hipertensão, taquicardia) e disfunção endócrina do eixo hipotálamo-hipófise-gonadal, com queda de testosterona.",
+  opts:["Apenas I e II.","Apenas I, II e IV.","Apenas II, III e IV.","Apenas I e IV.","Todas corretas."],
+  ans:1,
+  why:"I, II e IV são o esqueleto da aula: sensibilização periférica/central + o papel NOVO da glia (TLR2/4 → citocinas → mais glutamato) + consequências autonômicas e endócrinas. A III nega a tese central: dor crônica é entidade neurológica PRÓPRIA — perdeu a função de alerta e envolve reorganização do processamento.",
+  trap:"A glia é a novidade que diferencia quem leu a aula 5: se aparecer 'células não neuronais participam da dor crônica?', a resposta é SIM (astrócito/micróglia, TLR, TNF-α/IL-1β) — e é também parte do mecanismo da hiperalgesia por opioide."},
+
+ {lvl:"Prova", obj:"Obj ④ · Receptores", stem:"Associe o receptor às suas marcas (aula da Vânia): <br>1. Analgesia supraespinhal, euforia e — no tronco encefálico — depressão respiratória.<br>2. Fibras do TGI e bexiga: constipação e retenção urinária.<br>3. Analgesia espinhal com sedação, miose e efeitos mesolímbicos: disforia, despersonalização, alucinações.<br>4. Não é receptor opioide verdadeiro; seus efeitos (disforia, midríase) NÃO são revertidos pela naloxona.",
+  opts:["1-µ2 · 2-µ1 · 3-σ · 4-κ",
+  "1-µ1 · 2-µ2 · 3-κ · 4-σ",
+  "1-κ · 2-µ2 · 3-µ1 · 4-δ",
+  "1-µ1 · 2-δ · 3-κ · 4-µ2",
+  "1-δ · 2-µ2 · 3-σ · 4-κ"],
+  ans:1,
+  why:"µ1 = SNC (analgesia supraespinhal, euforia; ponte/bulbo → depressão respiratória e bradicardia); µ2 = TGI/bexiga (constipação, retenção — e não internalizam!); κ = analgesia espinhal + sedação/miose + mesolímbico (disforia, alucinação); σ = provável receptor de fenciclidina, não revertido por naloxona. δ modula o µ e o humor.",
+  trap:"Duas iscas de detalhe: 'nenhum fármaco é exclusivo do µ' (todos tocam os demais → qualquer opioide pode dar qualquer efeito) e o σ 'opioide de mentira' — se a questão disser que naloxona reverte TUDO, está errada duas vezes (σ e normeperidina)."},
+
+ {lvl:"Prova", obj:"Obj ①④ · OIH", stem:"<span class='cx'>Paciente oncológico em morfina com doses crescentes nas últimas 3 semanas. A cada aumento, a dor PIORA: ficou mais difusa, e agora até o toque leve das cobertas incomoda (alodinia).</span> Assinale a correta:",
+  opts:["É tolerância farmacológica clássica — acelerar os aumentos de dose.",
+  "É hiperalgesia induzida por opioides (OIH): sensibilização central paradoxal (ativação NMDA, ↑glutamato/substância P, neuroinflamação glial, ↓inibição descendente) — a conduta é REDUZIR a dose ou ROTACIONAR o opioide.",
+  "É adição — suspender imediatamente todo opioide sem desmame.",
+  "É abstinência — encurtar os intervalos.",
+  "É progressão inevitável da doença — apenas sedar."],
+  ans:1,
+  why:"O caso de abertura da aula da Verônica. OIH: uso prolongado AUMENTA a sensibilidade à dor — piora com aumento de dose, dor mais DIFUSA, alodinia. Mecanismo = o mesmo circuito da sensibilização central (NMDA + glutamato/subst. P + glia + perda de inibição descendente). Conduta: reduzir ou rotacionar (às vezes adicionar antagonista NMDA). Tolerância é diferente: o opioide 'perde efeito' e a dose maior AINDA alivia.",
+  trap:"O divisor: na TOLERÂNCIA, subir a dose melhora; na OIH, subir PIORA. Confundir os dois cria a espiral 'mais dor → mais morfina → mais dor'. Terceiro conceito no mesmo balaio: dependência física (abstinência ao parar) ≠ adição (comportamento compulsivo, circuito de recompensa)."},
+
+ {lvl:"Prova", obj:"Obj ④ · Fármacos", stem:"Sobre opioides específicos, assinale a INCORRETA:",
+  opts:["O fentanil não tem metabólitos ativos e é opção (com cautela) na insuficiência renal; é ~100× mais potente que a morfina e muito lipofílico.",
+  "A morfina forma M6G (ativo, 2–4× mais potente — acúmulo renal causa sedação e depressão respiratória) e M3G (neuroexcitatório, convulsivante, associado a hiperalgesia).",
+  "A metadona tem meia-vida longa e variável, múltiplas interações via CYP e risco de prolongamento do QTc (torsades) — sua conversão equianalgésica varia drasticamente.",
+  "A meperidina é excelente escolha para dor crônica do idoso com disfunção renal, por seu metabólito de perfil seguro.",
+  "A oxicodona é a 'migração' natural de quem não controla mais a dor com tramadol, com menor liberação de histamina e náusea que a morfina."],
+  ans:3,
+  why:"Meperidina é exatamente o ANTI-exemplo da aula: efeito curto (2–4 h), metabólito NORMEPERIDINA que acumula na insuficiência renal e CONVULSA, naloxona não reverte (pode piorar), contraindicada em idosos, nefropatas, hepatopatas e dor crônica — 'não é opioide de primeira linha'. As demais são pérolas literais (fentanil na IR; M6G/M3G; metadona QTc; oxicodona pós-tramadol).",
+  trap:"Meperidina (Dolantina) ainda circula em muito PS brasileiro — a banca adora vesti-la de alternativa 'prática'. Na prova da Vânia: meperidina de rotina = errado, sempre."},
+
+ {lvl:"Prova", obj:"Obj ④ · Tramadol", stem:"<span class='cx'>Pós-operatório, paciente em tramadol 100 mg 6/6 h e sertralina de uso crônico. Apresenta 'febre' de 38,7 °C com agitação, sudorese profusa, tremores e dor no peito. Dipirona NÃO reduz a temperatura. Sem foco infeccioso evidente.</span> A principal hipótese e conduta são:",
+  opts:["Infecção de sítio cirúrgico — iniciar antibiótico empírico e manter tramadol.",
+  "Síndrome serotoninérgica por tramadol (µ fraco + inibidor de recaptação de NA + liberador de 5-HT) potencializado pela sertralina — suspender o tramadol e usar RESFRIAMENTO FÍSICO; antitérmico não resolve essa hipertermia.",
+  "Reação à dipirona — trocar por paracetamol.",
+  "Dengue — solicitar NS1.",
+  "Abstinência de opioide — aumentar o tramadol."],
+  ans:1,
+  why:"Caso clínico discutido em aula (caderno Ana&Lou): tramadol aumenta serotonina — com ISRS/IRSN pode precipitar síndrome serotoninérgica (hipertermia, agitação, sudorese, tremor/mioclonia). O truque diagnóstico da Vânia: se o antitérmico NÃO derruba a temperatura, pense em serotoninérgica (o termostato não está 'com febre' — é produção de calor); só medidas físicas resfriam. Conduta: suspender o serotoninérgico + suporte.",
+  trap:"'Tramadol NÃO deve ser associado a antidepressivos' — frase dela. Bônus de prova: tramadol também ↓limiar convulsivo, tem teto de 400 mg/d e depende de CYP2D6 (resposta heterogênea)."},
+
+ {lvl:"Prova", obj:"Obj ④ · Rotação", stem:"<span class='cx'>Paciente com morfina 120 mg VO/dia desenvolve mioclonia e sedação intoleráveis apesar de boa analgesia. Optou-se por rotação para oxicodona (equianalgesia: morfina 30 mg VO ≈ oxicodona 20 mg VO).</span> A prescrição inicial correta da oxicodona é:",
+  opts:["80 mg/dia — a dose equianalgésica exata calculada.",
+  "40–60 mg/dia — a dose equianalgésica (80 mg) REDUZIDA em 25–50%, porque a tolerância cruzada entre opioides é incompleta.",
+  "120 mg/dia — manter o número da morfina.",
+  "10 mg/dia, recomeçando a titulação do zero absoluto.",
+  "Qualquer dose, desde que associada a naloxona."],
+  ans:1,
+  why:"Rotação (SBED): indicada por efeitos intoleráveis, tolerância, OIH ou falha. Cálculo: 120 mg morfina × (20/30) = 80 mg de oxicodona equianalgésica → REDUZIR 25–50% (tolerância cruzada incompleta — as tabelas 'fornecem doses maiores que o necessário') → iniciar 40–60 mg/d com resgate, e retitular. Sucesso em 75–90% dos pacientes com câncer. Exceção que complica: METADONA (razão 2,5:1 a 16:1 conforme a dose prévia; transição em ~3 dias trocando 1/3 por vez).",
+  trap:"Aplicar a tabela 'seca' (80 mg) superdosa o paciente recém-trocado — o receptor novo não carrega toda a tolerância do antigo. Regra de bolso para descritiva: equianalgésica − 25–50%."},
+
+ {lvl:"Prova", obj:"Obj ④ · Gestação/particularidades", stem:"Sobre opioides em populações especiais, assinale a INCORRETA:",
+  opts:["Na classificação de risco gestacional dos opioides, morfina, metadona, fentanil, meperidina e oxicodona são categoria B.",
+  "Codeína e tramadol — os opioides 'fracos' — são categoria B, sendo por isso os preferidos na gestação.",
+  "A retirada aguda de opioides na gestação traz risco de aborto e parto prematuro — o desmame deve ser gradual.",
+  "O uso de opioides na gestação exige atenção à dose pelo risco de depressão respiratória fetal/neonatal.",
+  "A hidromorfona não está disponível no Brasil."],
+  ans:1,
+  why:"Tabela do slide 32: categoria B = morfina, metadona, fentanil, meperidina, hidromorfona, oxicodona; categoria C = CODEÍNA e TRAMADOL. O contraintuitivo perfeito para prova: os opioides FORTES são B; os fracos são C (e os AINEs, lembrando a SP4, viram D no 3º trimestre). As demais alternativas são corretas (retirada aguda na gestação = risco fetal; depressão respiratória neonatal; hidromorfona ausente no Brasil).",
+  trap:"O reflexo 'fraco = mais seguro' falha duas vezes na gestante: categoria pior E dependência de CYP2D6 (codeína na lactante pode intoxicar o bebê do metabolizador ultrarrápido). Guarde o par B-fortes / C-fracos."},
+
+ {lvl:"Prova", obj:"Obj ④ · Intox × abstinência", stem:"Associe cada quadro clínico: <br>1. Miose puntiforme + FR 6 + sonolência profunda.<br>2. Midríase + piloereção + diarreia + dores musculares + PA e FC elevadas, 2 dias após suspensão abrupta.<br>3. Pede a medicação 1 hora antes do horário, ansioso, com medo de ficar sem — 3–4 h após a última dose.<br>4. Hipotensão, bradicardia, anergia, insônia e fissura arrastadas por meses.",
+  opts:["1-abstinência total · 2-intoxicação · 3-fase tardia · 4-fase antecipatória",
+  "1-intoxicação · 2-abstinência (fase total) · 3-abstinência antecipatória · 4-abstinência tardia",
+  "1-intoxicação · 2-fase inicial · 3-fase total · 4-fase antecipatória",
+  "1-abstinência inicial · 2-intoxicação · 3-fase antecipatória · 4-fase total",
+  "1-intoxicação · 2-fase total · 3-fase tardia · 4-fase inicial"],
+  ans:1,
+  why:"Intoxicação = MIOSE + depressão respiratória + rebaixamento (naloxona!). Abstinência = o espelho: MIDRÍASE, piloereção ('cold turkey'), diarreia, dores, hipertensão/taquicardia — fases da aula: antecipatória (3–4 h: fissura, busca), inicial (8–10 h: bocejos, rinorreia, lacrimejamento, midríase), total (1–3 dias: o pacote completo), tardia (até 6 meses: hipotensão, anergia, insônia, fissura).",
+  trap:"A pupila decide em 1 segundo: miose = intoxicado; midríase = em falta. E 'pedir antes da hora' não é manha — é a fase ANTECIPATÓRIA da abstinência descrita em aula (medo de ficar sem)."},
+
+ {lvl:"Prova", obj:"Obj ④ · Desmame", stem:"<span class='cx'>Paciente usou opioide forte por 6 meses para dor oncológica; após radioterapia antálgica eficaz, a dor resolveu e decidiu-se retirar o opioide.</span> Assinale a correta:",
+  opts:["Suspender abruptamente — sem dor, não há razão para manter nenhuma dose.",
+  "Desmame gradual: na retirada lenta, reduzir ~10% da dose total diária por SEMANA (ou 25–50% a cada 2–3 dias na rápida), evitando SEDATIVOS/benzodiazepínicos no processo; se surgir abstinência ou dor, manter/subir a dose e ir mais devagar.",
+  "Prescrever naloxona diária para 'lavar' os receptores.",
+  "Reduzir 50% ao dia, completando a retirada em 48 h.",
+  "Associar benzodiazepínico para a ansiedade e cortar o opioide no mesmo dia."],
+  ans:1,
+  why:"Dependência FÍSICA acompanha o uso continuado — retirada abrupta = síndrome de abstinência. Esquema da aula/SBED: lenta 10%/semana; rápida 25–50% a cada 2–3 dias ('quarteamento'); mais devagar em ansiosos, dependentes e cardiorrespiratórios; pode levar de 2–3 semanas a 3–4 meses; EVITAR benzodiazepínicos e sedativos. Dependência química (uso recreativo): desmame ancorado em METADONA (longa ação).",
+  trap:"Duas iscas: naloxona é para INTOXICAÇÃO (jogá-la em usuário crônico = abstinência instantânea) e o BZD 'para ajudar' é justamente o que a recomendação manda evitar durante a retirada."},
+
+ {lvl:"Prova", obj:"Obj ③ · Intervencionista", stem:"<span class='cx'>Homem, 66 anos, adenocarcinoma de PÂNCREAS irressecável, dor epigástrica em faixa referida ao dorso, EVA 9, refratária a morfina em doses altas + adjuvantes (já com efeitos adversos limitantes).</span> O procedimento com melhor indicação é:",
+  opts:["Bloqueio do gânglio estrelado.",
+  "Bloqueio/neurólise do PLEXO CELÍACO — o bloqueio simpático clássico para dor do câncer pancreático e de andar superior do abdome, dentro do 'degrau intervencionista' da escada.",
+  "Cordotomia bilateral de entrada.",
+  "TENS domiciliar.",
+  "Aumentar a morfina indefinidamente, pois opioide não tem teto."],
+  ans:1,
+  why:"Dor visceral do andar superior do abdome (pâncreas!) viaja pelos aferentes simpáticos que passam pelo plexo celíaco — a neurólise (álcool/fenol) ou bloqueio ali é O exemplo clássico de tratamento intervencionista na dor oncológica (o 4º degrau proposto pela SBED). Gânglio estrelado = simpático cervicotorácico (face/MMSS); cordotomia = ablativa rara, última linha; TENS não resolve dor visceral refratária.",
+  trap:"'Opioide não tem teto' é verdade FARMACOLÓGICA (agonista pleno), mas é falsa como conduta: o teto CLÍNICO são os efeitos adversos — quando eles chegam antes da analgesia, a resposta é adjuvante, rotação ou PROCEDIMENTO, não mais dose. Amarre o par pâncreas→celíaco com o dorso→T5–T9 da SP4."},
+
+ {lvl:"Prova", obj:"Obj ③ · Recursos antálgicos", stem:"Julgue as proposições sobre recursos auxiliares na dor oncológica:<br>I. A radioterapia antálgica alivia significativamente a dor em até ~90% dos pacientes com metástases ósseas dolorosas, e também se aplica à compressão medular e a tumores localmente avançados.<br>II. Estrôncio-89 e samário-153 são radiofármacos que se concentram em áreas de alta atividade OSTEOBLÁSTICA, tratando a dor óssea metastática multifocal.<br>III. A dexametasona é adjuvante útil na dor por compressão medular, hipertensão intracraniana e dor óssea (reduz edema e inflamação peritumoral).<br>IV. A quimioterapia nunca tem papel analgésico, pois seu efeito é exclusivamente antitumoral.",
+  opts:["Apenas I e II.","Apenas I, II e III.","Apenas II, III e IV.","Apenas I e III.","Todas corretas."],
+  ans:1,
+  why:"I, II e III são slides da aula. A IV é falsa: em tumores RESPONSIVOS, a quimioterapia antálgica dá excelente alívio prolongado — doença leptomeníngea/metástases intracranianas, hepáticas múltiplas, colorretal, pâncreas, cabeça e pescoço. Tratar a CAUSA da dor (massa, inflamação, osso) é analgesia também.",
+  trap:"'Radiofármaco vai para onde o osso está CONSTRUINDO' (osteoblástico — típico de próstata) é o detalhe que derruba: quem marcar 'osteolítica' erra. E a dexametasona é o adjuvante-coringa do paliativo: medular + HIC + óssea + náusea."},
+
+ {lvl:"Prova", obj:"Obj ⑤⑥ · Migrânea", stem:"<span class='cx'>Mulher, 29 anos, crises recorrentes (≥5) de cefaleia unilateral PULSÁTIL, forte, com náuseas, fotofobia e fonofobia, durando 6–24 h, que pioram ao subir escadas e a obrigam a se deitar no escuro. Em ~1/3 das vezes, 20 minutos antes da dor vê pontos brilhantes em zigue-zague que crescem no campo visual e somem em meia hora.</span> Assinale a correta:",
+  opts:["Trata-se de cefaleia tensional com aura atípica.",
+  "Trata-se de migrânea COM aura; a fisiopatologia atual envolve o sistema trigeminovascular com liberação de CGRP e, na aura, a depressão alastrante cortical — a antiga teoria da 'dilatação arterial' como causa primária está superada.",
+  "Trata-se de cefaleia em salvas, pela unilateralidade.",
+  "O mecanismo central e primário é a vasodilatação das artérias cranianas, como classicamente descrito.",
+  "A aura visual de 20–30 minutos exige TC imediata em toda crise."],
+  ans:1,
+  why:"Critérios ICHD-3 cravados: ≥5 crises, 4–72 h, ≥2 de {unilateral, pulsátil, moderada-forte, piora com atividade} + ≥1 de {náusea/vômito, foto+fonofobia} — e aura típica (sintomas visuais positivos, 5–60 min, reversíveis, precedendo a dor). Fisiopatologia de prova: ativação trigeminovascular + CGRP + inflamação neurogênica; aura = depressão alastrante cortical (~3 mm/min). A vasodilatação é epifenômeno.",
+  trap:"A alternativa D é a divergência desta SP: o resumo antigo (veterana) ainda traz 'dilatação das artérias' — distrator perfeito. Aura típica recorrente com padrão estereotipado NÃO exige imagem a cada crise; red flag seria aura nova, prolongada (>60 min) ou com déficit."},
+
+ {lvl:"Prova", obj:"Obj ⑥ · Salvas", stem:"<span class='cx'>Homem, 34 anos, tabagista, há 2 semanas acorda ~2h da manhã com dor EXCRUCIANTE periorbitária direita, em facada, durando 45–60 min, acompanhada de lacrimejamento, hiperemia conjuntival, congestão nasal e ptose discreta à direita. Durante a crise anda de um lado para o outro, inquieto. Crises 1–2×/dia, sempre do mesmo lado.</span> Diagnóstico e tratamento da CRISE:",
+  opts:["Migrânea sem aura — triptano VO e repouso no escuro.",
+  "Cefaleia em salvas — OXIGÊNIO 100% em máscara (12–15 L/min por 15–20 min) + sumatriptano SUBCUTÂNEO; profilaxia com verapamil (ECG seriado) ± corticoide de 'ponte' no início da salva.",
+  "Cefaleia tensional grave — relaxante muscular.",
+  "Neuralgia do trigêmeo — carbamazepina em dose plena na crise.",
+  "Sinusite aguda — antibiótico e descongestionante."],
+  ans:1,
+  why:"Tudo aponta para cluster: homem, dor unilateral orbitária lancinante de 15–180 min, em salvas (frequentemente noturnas, 1×/2 dias a 8×/dia), sintomas AUTONÔMICOS ipsilaterais (lacrimejamento, rinorreia/congestão, ptose/miose — Horner parcial) e AGITAÇÃO psicomotora. Crise: O₂ 100% de alto fluxo + sumatriptano SC 6 mg (VO não dá tempo — a crise é curta). Profilaxia: VERAPAMIL em 1ª linha, com corticoide de transição no início da salva.",
+  trap:"Comportamento é o divisor com a migrânea: migranoso quer ficar QUIETO no escuro; o de salvas ANDA agitado (mesma lógica do inquieto×imóvel da SP4). E a veterana traz 'crônico: ergotamina' — desatualizado: profilaxia moderna = verapamil."},
+
+ {lvl:"Prova", obj:"Obj ⑤⑥ · MOH/profilaxia", stem:"<span class='cx'>Mulher, 41 anos, migranosa desde a adolescência, hoje com cefaleia em 20 dias/mês. Usa analgésico comum + cafeína em 18 dias/mês há mais de 6 meses. Exame neurológico normal.</span> Assinale a correta:",
+  opts:["Aumentar o analgésico para uso diário fixo, 'pelo relógio', como na dor oncológica.",
+  "Quadro típico de cefaleia por uso excessivo de analgésicos (≥15 dias/mês de analgésico simples — ou ≥10 dias/mês de triptano/opioide/combinado — por >3 meses) sobreposta à migrânea: a conduta é RETIRAR o analgésico em excesso e INICIAR PROFILAXIA (ex.: propranolol, amitriptilina, topiramato — escolhida pelo perfil), com diário de cefaleia e medidas não farmacológicas.",
+  "Introduzir tramadol para as crises, por ser mais potente.",
+  "Prescrever triptano para uso diário contínuo.",
+  "Solicitar TC de crânio urgente antes de qualquer mudança, pois o quadro é de alarme."],
+  ans:1,
+  why:"Migrânea que 'cronificou' + analgésico ≥15 d/mês = cefaleia por uso excessivo de medicação (MOH) — o remédio virou combustível. Tratamento: retirada do analgésico em excesso + profilaxia de migrânea (indicada quando ≥4 crises/mês, crises incapacitantes ou risco de MOH): betabloqueador (propranolol), amitriptilina, topiramato, valproato (NÃO em mulher fértil sem contracepção), flunarizina, candesartana; casos crônicos refratários: toxina botulínica/anti-CGRP.",
+  trap:"Duas transposições erradas que a banca adora: 'pelo relógio' é princípio de dor ONCOLÓGICA (não de cefaleia primária!) e OPIOIDE não entra em migrânea (cronifica e vicia o padrão). Sem red flag e com exame normal, imagem não é o primeiro passo — mudar o tratamento é."}
+];
+
+const state={answered:0,hits:0};
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=QS.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  QS.forEach((q,i)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    const lvlPill=(q.lvl==='ENAMED')?'<span class="pill e">ENAMED</span>':'<span class="pill d">Nível prova</span>';
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div>'+lvlPill+'<span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/QS.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+const FC=[
+ ["Dor oncológica — por que é MISTA?","Multifatorial: lesão tecidual (nociceptiva) + lesão/compressão neural (neuropática) + sensibilização central + efeitos do tratamento. CID-11: visceral, óssea ou neuropática. Prevalência: 30–50% em tratamento · 60–90% avançada"],
+ ["Causas da dor no câncer (com %)","Crescimento do tumor 46–92% (infiltração, compressão neural, obstrução de víscera) · METÁSTASES (óssea = fonte + comum: mama/próstata/pulmão/mieloma) · sistêmicas 10–20% · TRATAMENTO 15–25%: QT (neuropatia: platinas/taxanos/vincas, mucosite), RT (fibrose/mielopatia actínica), cirurgia (fantasma), corticoide (pseudorreumatismo)"],
+ ["Dor óssea metastática — a cascata","Tumor libera ENDOTELINA → osteoblasto ativado libera RANKL → matura OSTEOCLASTO → destruição óssea + liberação de ATP e H⁺ (acidificação) → ativa P2X, TRPV1, ASIC3 nas fibras do osso → DOR. Osso = 3º sítio de metástase (após pulmão e fígado)"],
+ ["BTcP (dor irruptiva) — números e conduta","Sobre dor basal CONTROLADA: pico <3 min · dura 15–60 min · 1–4×/dia · espontânea × incidental (previsível/imprevisível). Conduta: basal = longa ação fixa; crise = resgate de ação RÁPIDA (fentanil transmucoso/SL — 100× morfina). Basal descontrolada ≠ BTcP → subir dose fixa"],
+ ["Escada da OMS — degraus e princípios","1º leve (1–3): não opioide ± adj · 2º moderada (4–6): FRACO + não opioide ± adj · 3º intensa (7–10): FORTE + não opioide ± adj · '4º' intervencionista (SBED). Dor 8/10 = degrau 3 DIRETO. Princípios: boca · relógio (fixo + resgate) · escada · indivíduo · adjuvantes · detalhes. Alivia ~80%"],
+ ["Titulação + resgate (números)","Morfina LI 5–10 mg VO 4/4 h → titular até ↓30–50% da dor → converter p/ liberação prolongada. RESGATE = 10% da dose de 24 h, até 1/1 h. Reajuste: 24 h + resgates ÷ tomadas. SEMPRE: laxante + antiemético (primeiros dias). 3 T's: Titulação (teste) · ajusTes · Transição"],
+ ["Conversões que caem em prova","Morfina EV = VO ÷ 3 (10 EV = 30 VO) · equianalgesia (ref. morfina 30 VO): codeína 200 · tramadol 150 · oxicodona 20 · metadona 4 · fentanil TD 12,5 µg/h · hidromorfona 7,5 (não há no Brasil) · fentanil 25 µg/h/72h ≈ morfina 50–60 mg VO/dia"],
+ ["Doses iniciais + tetos","Codeína 15–30 mg 4–6 h (MÁX 240/d) · tramadol 50–100 mg 4–6 h (MÁX 400/d) · morfina 5–10 mg 3–4 h (sem teto farmacológico) · metadona 2,5–10 mg 8–12 h · oxicodona 10–20 mg 12/12 · fentanil TD 12–25 µg/h 72 h"],
+ ["Receptores opioides","µ1 = analgesia supraespinhal, euforia, DEPRESSÃO RESPIRATÓRIA (tronco) · µ2 = TGI/bexiga: constipação + retenção (NÃO internalizam!) · κ = analgesia espinhal, sedação, miose, mesolímbico (disforia/alucinação) · δ = modula µ/humor · σ = NÃO é opioide verdadeiro (fenciclidina; naloxona não reverte)"],
+ ["Mecanismo (Gi/Go) — o tripé","① ↓adenilato ciclase → ↓AMPc/PKA · ② fecha Ca²⁺ pré-sináptico → ↓liberação de neurotransmissor · ③ abre K⁺ pós-sináptico → hiperpolarização. + potencializam vias inibitórias descendentes (5-HT/NA). Tolerância molecular: GRK → β-arrestina → INTERNALIZAÇÃO do receptor ('10→8→6')"],
+ ["Morfina: M6G × M3G","Conjugação glicurônica: M6G = ATIVO, 2–4× mais potente → acúmulo na INSUFICIÊNCIA RENAL = sedação + depressão respiratória · M3G = sem analgesia, NEUROEXCITATÓRIO (convulsão, hiperalgesia). Por isso na IR: rotacionar p/ FENTANIL (sem metabólitos ativos) ou metadona"],
+ ["Codeína = pró-fármaco","Só analgesia ao virar MORFINA via CYP2D6. Metabolizador lento ou inibidor (fluoxetina/paroxetina) = SEM efeito · ultrarrápido = intoxica. Contraindicada: <12 anos (dor OU tosse), <18 pós-amigdalectomia, disfunção renal, lactante. Máx 240 mg/d"],
+ ["Tramadol — o híbrido perigoso","µ fraco + ↓recaptação NA + ↑liberação 5-HT → SÍNDROME SEROTONINÉRGICA (nunca com antidepressivo!): 'febre' que não cede a antitérmico = só resfriamento físico · ↓limiar convulsivo · máx 400 mg/d · pico 45 min · ajustar na IR"],
+ ["Metadona & meperidina — os especiais","METADONA: meia-vida longa/variável (acúmulo!), multi-CYP, QTc/torsades, difícil titular, SEM metabólitos ativos; escolha p/ DEPENDÊNCIA química; equianalgesia variável (2,5:1–16:1). MEPERIDINA: nunca 1ª linha/dor crônica — normeperidina CONVULSA na IR e NALOXONA NÃO REVERTE"],
+ ["Graus de tolerância (G&G)","ALTA: analgesia, euforia, sedação, DEPRESSÃO RESPIRATÓRIA, náuseas/vômitos, antidiurese, supressão da tosse · MODERADA: bradicardia · MÍNIMA/NENHUMA: MIOSE, CONSTIPAÇÃO, CONVULSÕES → laxante para sempre; náusea passa em 5–10 dias"],
+ ["OIH × tolerância × dependência × adição","TOLERÂNCIA: perde efeito → mais dose resolve · OIH: mais dose = MAIS dor, difusa, alodinia (NMDA/glia/↓inibição descendente) → REDUZIR/ROTACIONAR · DEPENDÊNCIA física: abstinência ao parar · ADIÇÃO: doença do circuito de recompensa (opioide inibe GABA → dopamina solta)"],
+ ["Intoxicação × abstinência","INTOXICAÇÃO: MIOSE + bradipneia + rebaixamento → naloxona IV titulada (meia-vida curta; não reverte normeperidina) · ABSTINÊNCIA: MIDRÍASE + piloereção + diarreia + dor + ↑PA/FC — fases: antecipatória 3–4 h · inicial 8–10 h · TOTAL 1–3 d · tardia até 6 m. A pupila decide!"],
+ ["Desmame + gestação","Retirada LENTA: 10%/semana · rápida: 25–50% a cada 2–3 d · SEM benzodiazepínico · dependência química → METADONA · gestação: retirada aguda = risco de aborto/prematuro · categorias: FORTES = B (morfina, metadona, fentanil, oxicodona) · fracos = C (codeína, tramadol)!"],
+ ["Adjuvantes & 4º degrau","ADT/IRSN + gabapentinoides (neuropático) · dexametasona (compressão medular, HIC, óssea) · RT antálgica (até 90% de alívio!) · radiofármacos Sr-89/Sm-153 (osteoBLÁSTICA) · QT antálgica (responsivos) · PÂNCREAS → bloqueio/neurólise do PLEXO CELÍACO · neuromodulação · bomba intratecal · cordotomia = rara/última"],
+ ["Cefaleias: red flags + as 3 primárias","Red flags: trovoada, >50 a, padrão novo, febre+nuca, déficit/papiledema, CÂNCER, anticoagulado, imunossuprimido, matinal progressiva+vômito em jato (HIC) → TC. MIGRÂNEA: 4–72 h, unilateral pulsátil, náusea/foto+fono, quieto no escuro → crise: AINE/triptano (nunca opioide); profilaxia ≥4/mês: propranolol, amitriptilina, topiramato, flunarizina · TENSIONAL: bilateral, aperto, sem náusea → AINE; amitriptilina · SALVAS: homem, 15–180 min, autonômicos + AGITAÇÃO → O₂ 100% + suma SC; verapamil. MOH: analgésico ≥15 d/mês ou triptano/opioide ≥10 d/mês"]
+];
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back">'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+
+const FY=[
+ ["1 · Por que a dor do câncer é diferente das outras dores da UC?","Explique para um colega de 3ª fase: os 3 rótulos do CID-11 (visceral, óssea, neuropática) no MESMO paciente, a cascata da metástase óssea (endotelina→RANKL→osteoclasto→ácido→TRPV1) e por que 'dor total' inclui o medo, a família e a fé. Feche respondendo: por que opioide aqui é 1ª escolha se em todo o resto do semestre ele foi 'última opção'?"],
+ ["2 · Suba a escada em voz alta","Um paciente com EVA 5 e outro com EVA 9 chegam juntos. Monte a prescrição de cada um citando degrau, fármacos e os 6 princípios (boca, relógio, escada, indivíduo, adjuvantes, detalhes). Onde entra o 4º degrau? E por que o não opioide NUNCA sai da receita?"],
+ ["3 · A receita completa da morfina","De cabeça, como plantonista: morfina LI 5–10 mg VO 4/4 h + resgate (quanto? 10% de 24 h) + laxante (por quê? µ2 não internaliza) + antiemético (por quanto tempo? 5–10 dias) + o que monitorar. Depois responda o telefonema da enfermagem: 'posso dar o resgate de novo? Faz só 1 hora.'"],
+ ["4 · O jogo das conversões","Paciente com morfina 90 mg VO/d entra em jejum: quanto de EV? (÷3 = 30) Voltou a comer: quanto VO? (×3) Vai trocar por oxicodona por mioclonia: calcule a equianalgésica (30:20) e explique por que corta 25–50%. E o adesivo de fentanil 25 µg/h vale quantos mg de morfina oral?"],
+ ["5 · Tolerância, OIH, dependência e adição — 4 palavras que a banca mistura","Defina cada uma com seu mecanismo (internalização do receptor · NMDA/glia · adaptação física · circuito de recompensa/dopamina-GABA) e a conduta que cada uma pede (subir dose · reduzir/rotacionar · desmame gradual · metadona/naltrexona). Uma frase para cada."],
+ ["6 · Miose ou midríase? O plantão decide em segundos","Descreva os dois pacientes: o intoxicado (miose + FR 7 + sonolência → naloxona titulada, e por que titulada) e o em abstinência (midríase + diarreia + piloereção + 'me dá o remédio adiantado' → fases da síndrome, desmame 10%/semana, por que sem BZD). Inclua a exceção da meperidina."],
+ ["7 · Triagem de cefaleia em 3 minutos","Simule 3 pacientes: ① trovoada com rigidez de nuca (o que fazer primeiro e o que NUNCA fazer antes da imagem?) ② mulher com crises pulsáteis + aura que usa analgésico 18 d/mês (diagnóstico duplo + as 2 condutas) ③ homem que acorda de madrugada com dor no olho, lacrimejando e andando pela casa (crise: O₂ + quê? profilaxia: qual?). Termine diferenciando primária × secundária em uma frase."]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{
+  const p=document.createElement('div');p.className='panel';
+  p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';
+  feybox.appendChild(p);
+});
+</script>
+</body>
+</html>

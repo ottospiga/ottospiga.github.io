@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simuladão Vânia · Farmaco UC13 · A1 04/09</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f; --purple:#c6b3ff;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .sub b{color:#dfe9f4}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:rgba(15,23,32,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px 10px;margin:10px 0}
+  .tabs .lbl{font-size:12.5px;color:var(--mut)}
+  .tabs .val{font-weight:800;font-size:13.5px;color:#fff}
+  .tabs .sp{flex:1}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul,.panel ol{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  .k3{color:#8ab8ff;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tscroll{overflow-x:auto}
+  .lac{display:inline-block;background:#33301a;color:#ffdf9e;border:1px solid #6a5a26;border-radius:6px;padding:0 7px;font-weight:800}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .exam{background:#2a161b;border:1px solid #6f2f36;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffc9cd;margin:8px 0}
+  .exam b{color:#fff}
+  .ok{background:#0f2a20;border:1px solid #1f5a41;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cdefdd;margin:8px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.4px;color:#cdd9e6}
+  .box b{color:#dfe9f4}
+  .tt{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:#cfe0ef}
+  .chip b{color:#fff}
+  .chip.hot{border-color:#6f2f36;background:#2a161b;color:#ffb9be}
+  .chip.warm{border-color:#6a5a26;background:#2b2113;color:#ffe1ad}
+  .chip.cool{border-color:#1c5a41;background:#123227;color:#7ff0c0}
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden;min-width:120px}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit}
+  .btn:hover{border-color:#3b5670}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#0c141d;font-weight:800;font-size:14px;padding:10px 18px}
+  .btn.primary:hover{background:var(--tealo)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));min-width:30px;height:30px;padding:0 8px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 auto}
+  .qnum.d{background:linear-gradient(135deg,#a3455a,#6f2f36)}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.a{background:#33301a;color:#ffdf9e;border:1px solid #6a5a26}
+  .pill.g{background:#123227;color:#7ff0c0;border:1px solid #1c5a41}
+  .pill.p{background:#231d33;color:#d6c6ff;border:1px solid #4c3a6b}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .stem ol.rom{margin:8px 0 4px;padding-left:0;list-style:none}
+  .stem ol.rom li{margin:6px 0;padding-left:34px;position:relative;font-size:14px;color:#dfe9f4}
+  .stem ol.rom li > b.n{position:absolute;left:0;top:0;color:#8ab8ff}
+  .stem .porque{display:block;text-align:center;font-weight:800;color:#ffd79e;letter-spacing:.12em;margin:6px 0}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit;line-height:1.5}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.sel{border-color:var(--blue);background:#182a44}
+  .opt.sel .k{color:#8ab8ff}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb.blank{background:#2b2113;border:1px solid #6a5a26}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+  .fb .src{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#8aa0b5;font-size:12.5px}
+  .fb .src b{color:#b9cbdd}
+  textarea{width:100%;min-height:150px;background:#0f1a24;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-family:inherit;font-size:14px;line-height:1.5;resize:vertical}
+  textarea:focus{outline:none;border-color:#3b5670}
+  .qdmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:4px}
+  .model{display:none;margin-top:12px}
+  .model.show{display:block}
+  .model .mtitle{font-weight:800;color:#8fe4d2;margin-bottom:4px}
+  .model .mtext{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.6px;color:#cfe4f5}
+  .model .mtext p{margin:6px 0}
+  .chk{margin-top:10px;background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .chk .ctitle{font-weight:700;color:#dfe9f4;font-size:13.5px;margin-bottom:6px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .chk label{display:flex;gap:9px;align-items:flex-start;font-size:13.4px;color:#cdd9e6;padding:5px 0;border-top:1px dashed #2a3a4d;cursor:pointer}
+  .chk label:first-of-type{border-top:none}
+  .chk input{margin-top:3px;flex:0 0 auto}
+  .chk .w{margin-left:auto;color:var(--mut);font-size:12px;white-space:nowrap}
+  .chk .gate{color:#ffd79e;font-weight:700}
+  .chk label.off{opacity:.45}
+  .blockh{display:flex;align-items:center;gap:10px;margin:22px 0 4px}
+  .blockh h2{font-size:17px;margin:0;color:#dfe9f4}
+  .blockh .line{flex:1;height:1px;background:var(--line)}
+  .hidden{display:none!important}
+  .radar table td:first-child{white-space:nowrap}
+  .st-ok{color:var(--green);font-weight:700}
+  .st-no{color:var(--red);font-weight:700}
+  .st-bl{color:var(--amber);font-weight:700}
+  .gabgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;margin:8px 0}
+  .gabgrid .g{background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:12.5px;text-align:center}
+  .gabgrid .g b{display:block;font-size:13px}
+  .gabgrid .g.ok{border-color:#1f5a41;background:#0f2a20}
+  .gabgrid .g.no{border-color:#5a2b31;background:#2a1a1d}
+  .gabgrid .g.bl{border-color:#6a5a26;background:#2b2113}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src a{color:#7fb2e8}
+  .jump{position:fixed;right:14px;bottom:14px;z-index:40}
+  @media(max-width:520px){h1{font-size:19px}.tabs .lbl{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UC13 · Farmacologia · profª Vânia · simulado inédito</span>
+    <h1>Simuladão Vânia — A1 (sexta 04/09, 8h20)</h1>
+    <div class="sub"><b>18 objetivas</b> (0,4 cada = 7,2) + <b>5 QDs</b> (2,8) · <b>tempo sugerido: 90 min</b> · responda TUDO sem consultar nada e só depois clique em <b>Corrigir</b>. Pesos iguais aos da prova dela: AINEs 35% · opioides 26% · corticoides 22% · neuropática + canabinoides 17%.</div>
+    <div class="meta">
+      <span class="chip cool"><b>6</b> AINEs + 2 QDs</span>
+      <span class="chip"><b>4</b> corticoides + 1 QD</span>
+      <span class="chip"><b>3</b> neuropática/CB + 1 QD</span>
+      <span class="chip"><b>5</b> opioides + 1 QD</span>
+      <span class="chip warm">5 formatos dela: I–V · asserção-razão · caso→dose · correlacione · tabela/esquema</span>
+    </div>
+  </header>
+
+  <div class="tabs" id="bar">
+    <span class="lbl">Objetivas</span><span class="val" id="pObj">0/18</span>
+    <span class="lbl">QDs escritas</span><span class="val" id="pQd">0/5</span>
+    <span class="lbl">⏱</span><span class="val" id="clock">00:00</span>
+    <span class="sp"></span>
+    <button class="btn" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <button class="btn primary" id="btnCorrigir">Corrigir</button>
+  </div>
+
+  <div class="panel" id="intro">
+    <h2>Como usar (modo prova)</h2>
+    <ul>
+      <li>Marque UMA alternativa por questão (pode trocar até corrigir). <b>Não há feedback imediato</b> — igual à prova.</li>
+      <li>Nas QDs, escreva como responderia no papel: <span class="hl">fármaco + DOSE + posologia + via (+ horário/duração)</span> e o <span class="hl">porquê</span>. Depois de corrigir, aparecem a resposta-modelo e um checklist com pesos para você se autoavaliar.</li>
+      <li><span class="exam" style="display:inline-block;padding:4px 9px">Regra dela: <b>dose/fármaco errado = ZERO na QD</b> — o checklist tem itens-"trava" que zeram a parte correspondente.</span></li>
+      <li>Ao corrigir: nota (objetivas 0,4 cada + QDs autoavaliadas), gabarito comentado (porquê + pegadinha + <i>onde ela falou isso</i>) e o <b>Radar de pegadinhas</b> no fim.</li>
+      <li>Suas respostas ficam salvas neste navegador (recarregar não perde). <b>Refazer</b> apaga tudo.</li>
+    </ul>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="panel" id="endpanel">
+    <h2>Terminou?</h2>
+    <p>Confira se todas as 18 objetivas estão marcadas e as 5 QDs escritas. Depois clique em Corrigir — a nota e o gabarito comentado aparecem logo abaixo, e cada questão ganha o comentário dela.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn primary" id="btnCorrigir2">Corrigir simulado</button>
+      <button class="btn" id="btnRefazer">Refazer do zero</button>
+    </div>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+  <div class="foot">Simuladão inédito montado a partir das aulas gravadas SP1–SP5 (2026), dos slides, das tabelas de posologia e do estilo das provas T5–T11 · nenhuma questão do Banco Vânia foi repetida · doses conforme o que ela FALOU (fala &gt; livro)</div>
+</div>
+
+<script>
+/* =========================================================
+   DADOS — 18 objetivas
+   {id, bloco, fmt, stem(html), opts[5], ans(idx), why, trap, src, radar}
+   ========================================================= */
+const BL={aine:{n:'AINEs',cls:'g'},cort:{n:'Corticoides',cls:'a'},neuro:{n:'Neuropática & CB',cls:'p'},opi:{n:'Opioides',cls:'e'}};
+const FMT={iv:'Sentenças I–V',ar:'Asserção-razão',caso:'Caso → fármaco/dose',corr:'Correlacione',tab:'Tabela/esquema'};
+const AR_OPTS=['As asserções I e II são verdadeiras, e a II justifica a I','As asserções I e II são verdadeiras, mas a II NÃO justifica a I','A asserção I é verdadeira e a II é falsa','A asserção I é falsa e a II é verdadeira','As asserções I e II são falsas'];
+
+const OBJ=[
+/* ---------------- AINEs ---------------- */
+{id:1,bloco:'aine',fmt:'tab',
+stem:`A tabela abaixo reconstrói o esquema da via do ácido araquidônico desenhado em aula (SP1/SP3). Complete as lacunas <span class="lac">(a)</span>–<span class="lac">(e)</span>:
+<div class="tscroll"><table>
+<tr><th>Etapa</th><th>Enzima / mediador</th><th>Quem bloqueia</th><th>Consequência cobrada em aula</th></tr>
+<tr><td>Fosfolipídio de membrana → ácido araquidônico</td><td><span class="lac">(a)</span></td><td>Corticoide, via ↑ <span class="lac">(b)</span></td><td>Corta COX <b>e</b> LOX → escolha na inflamação do trato respiratório INFERIOR</td></tr>
+<tr><td>AA → prostaglandinas / TXA2</td><td>COX-1 (constitutiva) e COX-2 (induzível; constitutiva em endotélio e rim)</td><td>AINEs (reversíveis; AAS irreversível)</td><td><span class="lac">(c)</span></td></tr>
+<tr><td>AA → leucotrienos</td><td><span class="lac">(d)</span> (concentrada no pulmão)</td><td>Nenhum AINE</td><td>Com a COX bloqueada sobra AA → leucotrienos → broncoconstrição + muco (asma/pneumonia pioram)</td></tr>
+<tr><td>Plaqueta (anucleada)</td><td>COX-1 → TXA2</td><td>AAS 100 mg (efeito 7–10 dias)</td><td><span class="lac">(e)</span></td></tr>
+</table></div>`,
+opts:[
+`(a) fosfolipase A2 · (b) lipocortina-1 (anexina A1) · (c) inibir COX-2 = efeito terapêutico; inibir COX-1 = dano gástrico e antiagregação · (d) 5-lipoxigenase · (e) o coxibe preserva o TXA2 plaquetário e derruba a PGI2 endotelial → risco trombótico`,
+`(a) fosfolipase C · (b) lipocortina-1 · (c) inibir COX-2 = efeito terapêutico; inibir COX-1 = dano gástrico · (d) 5-lipoxigenase · (e) o coxibe preserva o TXA2 e derruba a PGI2 → risco trombótico`,
+`(a) fosfolipase A2 · (b) COX-3 · (c) inibir COX-1 = efeito anti-inflamatório; inibir COX-2 = dano gástrico · (d) 5-lipoxigenase · (e) o coxibe preserva o TXA2 e derruba a PGI2 → risco trombótico`,
+`(a) fosfolipase A2 · (b) lipocortina-1 · (c) inibir COX-2 = efeito terapêutico; inibir COX-1 = dano gástrico · (d) COX-3 · (e) o coxibe inibe o TXA2 plaquetário → sangramento`,
+`(a) fosfolipase A2 · (b) lipocortina-1 · (c) inibir COX-2 = efeito terapêutico; inibir COX-1 = dano gástrico · (d) 5-lipoxigenase · (e) o AAS em dose baixa inibe preferencialmente a PGI2 endotelial → efeito antitrombótico`],
+ans:0,
+why:`A cascata que ela repete em todas as aulas: <b>PLA2</b> libera o AA; o corticoide não age na COX diretamente — ele aumenta a <b>lipocortina-1 (anexina A1)</b>, que inibe a PLA2 e por isso corta COX <i>e</i> LOX (por isso é o anti-inflamatório do pulmão). Nos AINEs, o efeito terapêutico vem da COX-2 e os efeitos adversos gástricos/plaquetários da COX-1. A LOX é a <b>5-lipoxigenase</b> ("LOX ≈ pulmão"). Na plaqueta anucleada só existe COX-1 → TXA2; o coxibe não a toca (TXA2 preservado) mas derruba a PGI2 do endotélio → balanço pró-trombótico.`,
+trap:`(d) "COX-3" não é a enzima dos leucotrienos — é a variante da COX-1 no SNC (terminologia dela para o alvo de dipirona/paracetamol). (e) "coxibe inibe TXA2 → sangramento" inverte o balanço; e o AAS baixo inibe a COX-1 <i>plaquetária</i>, não a PGI2.`,
+src:`SP1 (aula gravada): "LOX ≈ pulmão → AINE desvia AA → leucotrienos → pulmão = corticoide"; figura ACS Omega 2023 (slides AINEs 3–4: esteroides bloqueiam PLA2, AINEs a COX, COX-3 = splicing da COX-1); SP3: "↑lipocortina-1 → inibe PLA2 (COX e LOX)"; SP4: balanço TXA2×PGI2.`,
+radar:'Esquema da via do AA: COX-3 fora de lugar / balanço TXA2×PGI2 invertido'},
+
+{id:2,bloco:'aine',fmt:'iv',
+stem:`<span class="cx">Pai leva o filho de 9 anos (30 kg) com febre de 38,6 °C por otite média em tratamento com amoxicilina. O próprio pai se queixa de "dor de cabeça" e está com PA 160×100 mmHg.</span>Sobre os analgésicos de ação central e o manejo da febre, julgue as sentenças:
+<ol class="rom">
+<li><b class="n">I.</b> Para o pai, dipirona 500 mg VO é a escolha racional: além de analgésica, sua hipotensão — efeito adverso nº 1 — vira recurso terapêutico no hipertenso, enquanto os AINEs clássicos elevam a PA.</li>
+<li><b class="n">II.</b> Se a febre da criança fosse de etiologia desconhecida, o ibuprofeno seria a 1ª escolha, por ter registro em bula para febre e por sua antiagregação ser reversível.</li>
+<li><b class="n">III.</b> O paracetamol estabiliza a febre já na 1ª hora, mas a queda visível leva ~2–3 h; orienta-se não repetir nem alternar antitérmico nesse intervalo (hipotermia). Dose eficaz a partir de 300 mg; usual 500 mg 6/6 h; teto 4 g/dia no agudo e 2 g/dia se uso crônico.</li>
+<li><b class="n">IV.</b> Dipirona 1 g é dose de ataque analgésica para dor intensa; como antitérmico usa-se 500 mg apenas se T ≥ 38 °C; pode ser usada na gestante.</li>
+<li><b class="n">V.</b> A agranulocitose por dipirona é dose-dependente, surge apenas após semanas de uso contínuo e se manifesta por febre + úlceras de mucosa; após a recuperação, o fármaco pode ser reintroduzido em dose menor.</li>
+</ol>Estão corretas:`,
+opts:[
+`I, II, III e IV`,
+`I, II e III`,
+`III, IV e V`,
+`I, III e IV`,
+`II e V`
+],
+ans:3,
+why:`<b>I</b> é fala literal da SP1 (e gabarito de QD da PM: "cefaleia no hipertenso → dipirona"). <b>III</b> reúne as leis do paracetamol: ≥300 mg já é efetivo, 500 mg 6/6 h, LENTO (não alternar → hipotermia), teto 2 g crônico/4 g agudo. <b>IV</b>: 1 g = ataque analgésico; antitérmico só se >38 °C (senão hipotermia); gestante pode.`,
+trap:`<b>II</b>: ter registro em bula para febre (paracetamol, dipirona, ibuprofeno) NÃO faz do ibuprofeno a escolha em febre de origem desconhecida — desde 2023 a orientação é NÃO usar (dengue → antiagregação → hemorragia). <b>V</b>: agranulocitose é imunoalérgica, NÃO dose-dependente, pode ocorrer a qualquer momento (inclusive logo após parar) e quem teve <b>nunca mais</b> usa dipirona.`,
+src:`SP1 (aula gravada): "dipirona 500 mg 6/6 h (ataque 1 g), antitérmico só se >38 °C, hipotensão = EA nº 1 (recurso no hipertenso)", "paracetamol ≥300 mg efetivo, teto 2 g/4 g, lento, não alternar", "2023: não usar ibuprofeno em febre desconhecida"; slide dipirona (agranulocitose: "não dose-dependente, a qualquer momento, inclusive logo após interrupção").`,
+radar:'Registro em bula ≠ escolha (ibuprofeno em febre desconhecida) · agranulocitose "dose-dependente"'},
+
+{id:3,bloco:'aine',fmt:'caso',
+stem:`<span class="cx">Homem, 46 anos, 92 kg, crise de gota no hálux (dor 8/10, edema, calor), sem gastrite/úlcera, sem cardiopatia, função renal normal. Chega à UBS pedindo "uma injeção".</span>Segundo o que ela falou sobre o AINE parenteral padronizado na rede pública para processos agudos intensos, a prescrição correta é:`,
+opts:[
+`Cetorolaco 10 mg SL 6/6 h por 10 dias`,
+`Diclofenaco sódico 150 mg IM 12/12 h por 5 dias`,
+`Cetoprofeno 100 mg IM agora (máx. 300 mg/dia), seguido de 50–75 mg VO 3–4×/dia, tomado longe das refeições`,
+`Etoricoxibe 90 mg VO 1×/dia por 7 dias, com receita retida`,
+`Dipirona 1 g IM agora + prednisona 20 mg VO 1×/dia por 7 dias`
+],
+ans:2,
+why:`Gota = processo inflamatório agudo intenso osteoarticular → precisa de ANTI-INFLAMATÓRIO. Na fala dela, o AINE parenteral do SUS é o <b>cetoprofeno</b> ("gota na UBS → cetoprofeno IM"), 100 mg/ampola, máximo 300 mg/dia; a manutenção VO é 50–75 mg 3–4×/dia. Detalhe de bula que ela adora: é o ÚNICO AINE cuja absorção cai com alimentos → tomar longe das refeições (jejum).`,
+trap:`<b>B</b>: frase boa, número errado — a ampola é 75 mg e >150 mg/dia é risco renal. <b>C</b>: cetorolaco é "o top em analgesia" mas ≤5 dias (e não é o anti-inflamatório de escolha da gota). <b>D</b>: coxibe é privado, receita retida — não é "injeção da UBS". <b>E</b>: dipirona NÃO é anti-inflamatória e o corticoide fica para quando o AINE não serve.`,
+src:`SP4 (aula gravada): "cetoprofeno SUS parenteral (gota UBS IM)", "comida: exceções AAS (almoço) e CETOPROFENO (longe das refeições)"; slide cetoprofeno: "alimentos diminuem absorção; 50–75 mg 3–4×/dia (máx 300 mg/d); IV 100 mg"; slide diclofenaco: ">150 mg/d risco renal"; T9 Q6 (cetoprofeno 100 mg/2 mL IM na gota = V).`,
+radar:'Dose inflada na alternativa "bonita" (diclofenaco 150 mg IM) · cetorolaco >5 dias'},
+
+{id:4,bloco:'aine',fmt:'ar',
+stem:`<ol class="rom">
+<li><b class="n">I.</b> Em hipertenso controlado com enalapril + hidroclorotiazida, o uso crônico de um AINE clássico (ex.: diclofenaco 50 mg 8/8 h por semanas) costuma "descompensar" a pressão e pode culminar em lesão renal — a chamada tripla agressão (<i>triple whammy</i>).</li>
+</ol><span class="porque">PORQUE</span><ol class="rom">
+<li><b class="n">II.</b> Os AINEs não seletivos inibem a COX-1 da mucosa gástrica, reduzindo a PGE2 responsável pela produção de muco e bicarbonato.</li>
+</ol>Assinale:`,
+opts:AR_OPTS,ans:1,
+why:`As duas frases são verdadeiras, mas a II fala do ESTÔMAGO e não explica a I. A falha do anti-hipertensivo e a lesão renal vêm da <b>COX-2 constitutiva do rim</b>: sem PGE2/PGI2 a arteríola perde a vasodilatação compensatória (vasoconstrição por angiotensina II/noradrenalina fica sem oposição) e o rim retém Na⁺/água → ↑PA, edema, hipercalemia, ↓TFG. IECA (dilata a eferente) + diurético (hipovolemia) + AINE (contrai a aferente) = tripla agressão.`,
+trap:`O padrão dela: as duas proposições certas, mas a "razão" pertence a outro efeito adverso. Julgue cada frase isolada e SÓ depois pergunte "isso explica aquilo?". Quem marca A por reflexo perde a questão.`,
+src:`SP4 (aula gravada): "AINE crônico → falha do anti-hipertensivo", "lesão renal crônica IRREVERSÍVEL"; slides renal (J Bras Nefrol 2019; figura Katzung: doenças com ↑vasoconstritores + diuréticos → AINE deixa a vasoconstrição sem oposição); pegadinha registrada nas provas: "AINE + IECA + diurético = triple whammy".`,
+radar:'Asserção-razão: as duas V, mas a II não justifica (razão gástrica para efeito renal)'},
+
+{id:5,bloco:'aine',fmt:'corr',
+stem:`Correlacione o AINE (coluna 1) com a característica destacada em aula (coluna 2):
+<div class="grid2"><div class="box"><b>Coluna 1</b><br>1. Cetoprofeno<br>2. Piroxicam<br>3. Ácido mefenâmico<br>4. Nimesulida<br>5. Diclofenaco</div>
+<div class="box"><b>Coluna 2</b><br><b>A.</b> Quatro sais (sódico EV/IM, potássico VO, resinato em gotas, colestiramina 75 mg 12/12 h) e alergia cruzada com AAS na bula<br><b>B.</b> Único AINE cuja absorção cai com alimentos → tomar longe das refeições; apresentação IM/IV hospitalar<br><b>C.</b> Apresentação sublingual de início rápido (~10 min), 20 mg 1×/dia, tratamento máximo de 14 dias<br><b>D.</b> Diarreia como efeito adverso que obriga a interromper; contraindicado &lt;14 anos; dismenorreia primária<br><b>E.</b> Contraindicada &lt;12 anos por hepatotoxicidade; "fica depositada" nos tecidos moles (faringite) — 100 mg 12/12 h</div></div>`,
+opts:[
+`1D · 2C · 3B · 4E · 5A`,
+`1C · 2B · 3D · 4E · 5A`,
+`1B · 2C · 3E · 4D · 5A`,
+`1B · 2A · 3D · 4E · 5C`,
+`1B · 2C · 3D · 4E · 5A`
+],
+ans:4,
+why:`Cetoprofeno–jejum/IM (B); piroxicam–SL rápido, 20 mg 1×/dia, máx 14 dias (C); mefenâmico–diarreia grave → interromper, &lt;14 anos, dismenorreia (D); nimesulida–&lt;12 anos hepatotoxicidade, tecidos moles/faringite 100 mg 12/12 h (E); diclofenaco–4 sais + alergia cruzada com AAS (A).`,
+trap:`As trocas 3↔4 (quem é &lt;12 e quem é &lt;14 anos; diarreia é do mefenâmico, transaminases da nimesulida) e 2↔5 (o SL de 10 min é o piroxicam; os 4 sais são do diclofenaco). Decore os pares exclusivos — ela cobra "característica específica de alguns AINEs".`,
+src:`SP4 (aula gravada): "piroxicam SL ~10 min", "diclofenaco 4 sais (colestiramina 75 mg 12/12)", "nimesulida CI &lt;12 anos = hepatotoxicidade", "cetoprofeno longe das refeições"; slides: piroxicam/tenoxicam "máx 14 dias"; mefenâmico "diarreia grave → interromper; CI &lt;14 anos"; diclofenaco "CI alergia a AAS".`,
+radar:'Correlacione: idade-limite (<12 nimesulida × <14 mefenâmico) e nicho exclusivo de cada AINE'},
+
+{id:6,bloco:'aine',fmt:'iv',
+stem:`Sobre indicações de bula, doses e efeitos adversos dos AINEs (aviso dela: "não está na bula — vou dar na prova"), julgue:
+<ol class="rom">
+<li><b class="n">I.</b> Cetorolaco 10 mg SL 6/6 h (máx. 40 mg/dia), por até 5 dias, é "o top em analgesia" para dor aguda intensa (fratura, pós-operatório); contraindicado em doença renal, úlcera e gestação (categoria D).</li>
+<li><b class="n">II.</b> Em rim que já depende de prostaglandinas (idoso, IC, cirrose, desidratação, IECA + diurético), o AINE retira a vasodilatação compensatória de PGE2/PGI2 da arteríola e precipita lesão renal aguda; a lesão do uso crônico é irreversível.</li>
+<li><b class="n">III.</b> Cefaleia é efeito adverso raro dos AINEs; no paciente com enxaqueca crônica que usa AINE todo dia, aumenta-se a dose para controlar a cefaleia de rebote.</li>
+<li><b class="n">IV.</b> Os coxibes poupam o rim porque a COX-2 renal é apenas induzível — por isso são a opção anti-inflamatória para o nefropata.</li>
+<li><b class="n">V.</b> Nimesulida 100 mg 12/12 h por 3–5 dias é a 1ª linha da faringoamigdalite em adulto com gastrite leve (preferencial COX-2, deposita-se no tecido); em criança de 10 anos, a alternativa com registro pediátrico é o ibuprofeno.</li>
+</ol>Estão corretas:`,
+opts:[`I, II, III e V`,`II, IV e V`,`I, II e V`,`I e V`,`I, II, IV e V`],
+ans:2,
+why:`<b>I</b>: cetorolaco = analgésico potente de curto prazo (10 mg 6/6 h, máx 40 mg/d, ≤5 dias), CI renal/úlcera, categoria D. <b>II</b>: é a fisiopatologia renal que ela desenha (arteríola sem vasodilatação compensatória) + "lesão renal crônica é irreversível". <b>V</b>: nimesulida é preferencial COX-2 e "fica depositada" na garganta, 100 mg 12/12 h; abaixo de 12 anos é proibida → ibuprofeno tem registro pediátrico.`,
+trap:`<b>III</b>: cefaleia é efeito adverso de QUASE TODO AINE — e em enxaqueca crônica por uso diário a conduta é o oposto: suspender e "desintoxicar" por 2–3 dias. <b>IV</b>: a COX-2 é CONSTITUTIVA no rim (e no endotélio) — o coxibe poupa o estômago, NÃO o rim; nefropata não usa AINE nenhum.`,
+src:`SP4 (aula gravada): "cetorolaco = o TOP em analgesia", "cefaleia = EA de quase todo AINE — enxaqueca crônica → desintoxicar 2–3 d", "lesão renal crônica IRREVERSÍVEL"; slide cetorolaco (10 mg 6/6 h, máx 40 mg, CI renal, Cat D); slide eicosanoides ("COX-2 constitutiva no rim"); slide nimesulida (<12 anos); Ativ. T11 oficial ("o dano renal vem da COX-2").`,
+radar:'Coxibe "poupa o rim" · cefaleia como EA "raro" de AINE'},
+
+/* ---------------- CORTICOIDES ---------------- */
+{id:7,bloco:'cort',fmt:'caso',
+stem:`<span class="cx">J., 6 anos, 22 kg, asma com 3 crises nos últimos 2 meses (a última tratada no PA com corticoide sistêmico). A mãe pergunta: "o que dar para ela não ter mais crise?"</span>A prescrição de MANUTENÇÃO correta é:`,
+opts:[
+`Budesonida nasal 50 mcg em cada narina 1×/dia, iniciada antes da primavera`,
+`Prednisolona 5 mg VO 1×/dia pela manhã, contínua por 6 meses`,
+`Budesonida inalatória 200 mcg 12/12 h em aerossol dosimetrado ("bombinha") com espaçador; enxaguar a boca, cuspir e beber água após cada uso`,
+`Beclometasona em inalador de pó seco 400 mcg 1×/dia, sem espaçador`,
+`Dexametasona 4 mg IM a cada 30 dias (depósito) para reduzir as crises`
+],
+ans:2,
+why:`Corticoide inalatório é O medicamento de manutenção/profilaxia da asma: age nas células de 1ª linha da via aérea, ↓citocinas/mastócitos e AUMENTA o limiar ao alérgeno — previne a crise (a crise instalada é sistêmico). Dose pediátrica de budesonida: 100–400 mcg/dia (200 mcg 2×/dia foi exatamente o caso da atividade em sala). Criança/idoso/DPOC não têm força inspiratória → bombinha + ESPAÇADOR; pó seco só para adulto capaz. Sempre: enxaguar → cuspir → beber água (candidíase, rouquidão).`,
+trap:`<b>B</b>: sistêmico crônico não é profilaxia de asma — só supressão de eixo + efeitos adversos. <b>C</b>: nasal é para RINITE (dose 50–100 mcg/narina), não chega ao brônquio. <b>D</b>: inalador de pó exige força inspiratória (só adulto). <b>E</b>: depósito IM não previne crise e suprime o eixo por 30 dias.`,
+src:`SP3 (aula gravada): "inalatórios: beclometasona/budesonida (SUS), pó seco só adulto capaz, bombinha + ESPAÇADOR (criança/idoso/DPOC), enxaguar → cuspir → água, asma 100–1000 mcg, previne crise (crise = sistêmico)"; slide GINA (budesonida criança 100–200 / 200–400 mcg); caso da atividade em sala (J.S., 5 anos, budesonida 200 mcg 2×/dia + espaçador).`,
+radar:'Manutenção (inalatório + espaçador) × crise (sistêmico) · via nasal ≠ inalatória'},
+
+{id:8,bloco:'cort',fmt:'iv',
+stem:`Sobre farmacocinética, potência e efeitos agudos dos glicocorticoides, julgue:
+<ol class="rom">
+<li><b class="n">I.</b> Dose fracionada ao longo do dia suprime mais o eixo HHA do que dose única matinal; por isso a bula orienta tomar até ~10 h — e essa orientação reduz a supressão do eixo, NÃO os efeitos adversos periféricos.</li>
+<li><b class="n">II.</b> Prednisolona 20 mg/dia pode causar edema e perda urinária de potássio já nos primeiros dias (efeito mineralocorticoide rápido); dexametasona 3 mg/dia — dose anti-inflamatória equivalente (5 mg de prednisolona ≈ 0,75 mg de dexa) — praticamente não retém sódio.</li>
+<li><b class="n">III.</b> Os glicocorticoides circulam ligados à albumina (95%) e a longa meia-vida plasmática (&gt;30 h) da dexametasona explica sua duração de ação.</li>
+<li><b class="n">IV.</b> Após dose oral, o pico plasmático ocorre em 30–90 min, mas a resposta anti-inflamatória só é confiável após ~12 h, porque depende de transcrição gênica (↑lipocortina-1, ↓COX-2, ↓citocinas).</li>
+<li><b class="n">V.</b> Efeitos agudos incluem hiperglicemia, insônia/irritabilidade, edema e rubor de face-colo-pescoço; no diabético insulinizado deve-se REDUZIR a dose de insulina durante o curso, para evitar hipoglicemia.</li>
+</ol>Estão corretas:`,
+opts:[`I, II, III e IV`,`II, IV e V`,`I e IV`,`I, II e IV`,`I, II, IV e V`],
+ans:3,
+why:`<b>I</b> é a correção da atividade em sala ("tomar de manhã não é para evitar efeitos adversos, é para poupar o eixo"). <b>II</b>: predniso(lo)na tem mineralocorticoide "rápido e excreta K"; dexa/beta quase nada; potência ~20–30× (5 mg predni ≈ &lt;1 mg dexa). <b>IV</b>: "nimesulida em 3 h você sente; corticoide não" — efeito começa em 4–6 h e é confiável 12 h+.`,
+trap:`<b>III</b>: a proteína é a <b>TRANSCORTINA</b> (CBG), não albumina; a meia-vida PLASMÁTICA é curta (dexa ~4 h) — o que é longa é a meia-vida BIOLÓGICA (36–54 h, tempo dentro da célula alterando transcrição). <b>V</b>: no diabético insulinizado a orientação é AUMENTAR a insulina (hiperglicemia por gliconeogênese + resistência).`,
+src:`SP3 (aula gravada): "manhã ≤10 h mimetiza pico", "t½ BIOLÓGICA ≠ plasmática", "TRANSCORTINA", "efeito demora (4–6 h; confiável 12 h+)", "mineralo: predniso(lo)na RÁPIDO + EXCRETA K; dexa baixo", "5 mg predni ≈ &lt;1 mg dexa", "EAs agudos: hiperglicemia, edema, psiquiátricos, rubor face-colo-pescoço"; slides Table 1 (t½ plasm. dexa 4 h; biológica 36–54 h) e tabela Katzung (dexa 0,75 mg ≡ 5 mg prednisona); tabela dos colegas: "paciente com insulina: orientar aumentar as doses".`,
+radar:'Albumina × transcortina · t½ plasmática × biológica · efeito "imediato" do corticoide'},
+
+{id:9,bloco:'cort',fmt:'ar',
+stem:`<ol class="rom">
+<li><b class="n">I.</b> Em paciente com lúpus em prednisona 60 mg/dia há 8 meses, a "retirada" significa reduzir lentamente (ex.: ~10% por semana) até a MENOR dose que mantenha a remissão, voltando à dose anterior se a doença recrudescer, e dosar ACTH quando se pretender suspender por completo.</li>
+</ol><span class="porque">PORQUE</span><ol class="rom">
+<li><b class="n">II.</b> O glicocorticoide exógeno suprime CRH e ACTH e atrofia as zonas fasciculada e reticular do córtex adrenal; a aldosterona é poupada porque a zona glomerulosa continua sendo estimulada pelo ACTH.</li>
+</ol>Assinale:`,
+opts:AR_OPTS,ans:2,
+why:`<b>I</b> é o esquema de retirada COM doença de base dos slides (10%/semana; recrudesceu → volta; até o teste de ACTH normal) somado à fala dela ("retirada com doença de base = menor dose de remissão"; "~5 mg → dosar ACTH"). <b>II</b> começa certa (supressão CRH/ACTH, atrofia de corticotrofos e da fasciculada/reticular) mas termina errada: a aldosterona é preservada porque depende do <b>sistema renina-angiotensina-aldosterona</b>, NÃO do ACTH — é exatamente por isso que a supressão do eixo não vira crise de sal/aldosterona.`,
+trap:`Uma cláusula final derruba a asserção inteira (o mesmo truque de "hormônio LIBERADOR de corticotrofina" no lugar de ACTH). Leia até o fim antes de julgar "verdadeira".`,
+src:`Slides SP3: "Esquema de retirada — terapia crônica com doença de base: 10% a cada semana; se recrudescer, retornar à dose anterior; até o teste do ACTH ser normal"; figura do eixo: "secreção de aldosterona é preservada (depende do sistema renina-angiotensina-aldosterona)"; SP3 (aula gravada): "retirada: ≤10–15 d direto; senão desmame; ~5 mg → ACTH".`,
+radar:'Aldosterona "poupada pelo ACTH" (é o SRAA) · retirada = menor dose de remissão'},
+
+{id:10,bloco:'cort',fmt:'corr',
+stem:`Correlacione o esquema/dose (coluna 1) com a descrição dada em aula (coluna 2):
+<div class="grid2"><div class="box"><b>Coluna 1</b><br>1. Pulsoterapia<br>2. Dias alternados<br>3. Dose fisiológica (reposição)<br>4. Dose imunossupressora<br>5. Profilaxia da rinite sazonal</div>
+<div class="box"><b>Coluna 2</b><br><b>A.</b> Prednisona ~5–7,5 mg/dia — equivale aos 20–30 mg de cortisol secretados por dia; ao chegar perto dela na retirada, dosa-se ACTH<br><b>B.</b> Metilprednisolona 500–1000 mg IV/dia por 3–5 dias: choque de dose para deter doença autoimune em órgão vital — não tem relação com poupar o eixo<br><b>C.</b> Dobro da dose diária em dias intercalados, com corticoide de ação intermediária (prednisona/prednisolona), após controle da doença; poupa o eixo, mas os efeitos adversos oscilam e nem todo paciente tolera<br><b>D.</b> Prednisona 1 mg/kg/dia (≈40–60 mg no adulto): a diferença para a dose anti-inflamatória (5–20 mg) é SÓ a dose<br><b>E.</b> Budesonida/beclometasona 50–100 mcg por narina, iniciada antes da exposição ao pólen — ↑limiar ao alérgeno; corticoide sistêmico não é profilaxia</div></div>`,
+opts:[
+`1B · 2D · 3A · 4C · 5E`,
+`1C · 2B · 3A · 4D · 5E`,
+`1B · 2C · 3D · 4A · 5E`,
+`1B · 2C · 3A · 4D · 5E`,
+`1E · 2C · 3A · 4D · 5B`
+],
+ans:3,
+why:`Pulsoterapia = metilprednisolona ~1 g IV (urgência autoimune) (B); dias alternados = dobro da dose dia sim/dia não, GC intermediário, poupa eixo mas EAs oscilantes (C); fisiológica = 5–7,5 mg prednisona ≈ 20–30 mg cortisol/dia (A); imunossupressora = 1 mg/kg (D); rinite = nasal 50–100 mcg/narina antes da exposição (E).`,
+trap:`1↔2 é a troca que ela previu ("dei os dois em sequência para não confundirem"): pulsoterapia NÃO poupa eixo; dias alternados sim. 3↔4: fisiológica é a dose que o corpo produz (5–7,5 mg), não a de 1 mg/kg.`,
+src:`SP3 (aula gravada): "anti-inflamatório × imunossupressor = SÓ DOSE (5–20 / ~40 / 1 mg/kg)", "pulsoterapia (metilprednisolona IV ~1 g, urgência autoimune) ≠ dias alternados (poupa eixo; EAs oscilantes)", "antialérgico = PROFILAXIA (nasal 50–100 mcg/narina)"; slides: "secreção média 20–30 mg cortisona/dia = 5–7,5 mg prednisona"; "pulsoterapia 500–1000 mg metilprednisolona, 3–5 pulsos".`,
+radar:'Pulsoterapia × dias alternados (quem poupa o eixo) · dose fisiológica × imunossupressora'},
+
+/* ---------------- NEUROPÁTICA / CANABINOIDES ---------------- */
+{id:11,bloco:'neuro',fmt:'caso',
+stem:`<span class="cx">Homem, 74 anos, neuralgia pós-herpética torácica há 4 meses (queimação + alodinia). Bloqueio de ramo esquerdo e infarto prévio; ClCr 40 mL/min; usa hidroclorotiazida e AAS 100 mg. Atendido em ambulatório de dor com acesso ao componente especializado.</span>A prescrição INICIAL mais adequada é:`,
+opts:[
+`Amitriptilina 75 mg VO à noite`,
+`Pregabalina 75 mg VO 12/12 h, titulando até a faixa de 300–600 mg/dia, com dose reduzida pela função renal`,
+`Gabapentina 900 mg VO em dose única à noite, para facilitar a adesão`,
+`Carbamazepina 600 mg VO à noite, em monoterapia`,
+`Duloxetina 60 mg VO à noite`],
+ans:1,
+why:`Pós-herpética = 1ª linha gabapentinoide; o tricíclico está contraindicado em idoso cardiopata (algoritmo: "TCA contraindication / elderly / cardiac abnormality → gabapentin/pregabalin"). Pregabalina: dose inicial 75 mg 2×/dia (2 tomadas — "o SUS preferiu a pregabalina por ser 2×"), faixa 300–600 mg/dia, eliminação renal inalterada → reduzir na IR.`,
+trap:`<b>C</b>: o transportador intestinal é SATURÁVEL — 900 mg de uma vez "não levanta" e não se fraciona em dose única (gabapentina é 3×/dia). <b>D</b>: carbamazepina é trigêmeo/refratário; 600 mg é dose de monoterapia do trigêmeo e, com hidroclorotiazida, soma hiponatremia. <b>E</b>: duloxetina é pela MANHÃ (insônia) — e não é 1ª linha de pós-herpética. <b>A</b>: cardiopata/idoso + 75 mg de cara = anticolinérgico/arritmia.`,
+src:`SP2 (aula gravada): "gabapentina/pregabalina: transportador SATURÁVEL → fracionar (3×/2× — SUS preferiu pregabalina), renal inalterada", "ninguém começa gabapentina com 900 — não levanta", "duloxetina 60–120 MANHÃ", faixas; slides: algoritmo da dor neuropática periférica (TCA CI em idoso/cardiopata → gabapentinoide), tabela de doses (pregabalina 75–150 mg/d em 2 doses → 150–600), NICE ("reduced dose in renal impairment").`,
+radar:'Gabapentina em dose única (transportador saturável) · duloxetina à noite · ADT no cardiopata'},
+
+{id:12,bloco:'neuro',fmt:'iv',
+stem:`Sobre o manejo prático da dor neuropática e os canabinoides (aula SP2, 2026), julgue:
+<ol class="rom">
+<li><b class="n">I.</b> Na dor neuropática não há prostaglandina nem citocina em jogo; por isso AINE e corticoide não adiantam — a dipirona só entra como adjuvante na agudização, pelos metabólitos que bloqueiam NMDA e ativam 5-HT1 na medula.</li>
+<li><b class="n">II.</b> Carbamazepina: fornecida pelo SUS, tomada à noite, indutora da CYP3A4 (inclusive do próprio metabolismo — autoindução); em monoterapia para trigêmeo usa-se ≥600 mg/dia (600–1200), mas em associação a gabapentinoide/antidepressivo bastam ~100–200 mg à noite.</li>
+<li><b class="n">III.</b> Diante de intolerância à amitriptilina, a conduta é trocar imediatamente de classe (gabapentinoide), pois quem não tolera um tricíclico não tolera nortriptilina nem imipramina.</li>
+<li><b class="n">IV.</b> A evidência na dor sustenta-se na combinação THC + CBD; a via oral tem biodisponibilidade baixa (5–20%, degradação no TGI + 1ª passagem) — o ideal seriam 3–4 tomadas/dia, mas por custo os pacientes usam 2 e ficam subdosados.</li>
+<li><b class="n">V.</b> Produto de Cannabis com THC ≤0,2% dispensa a notificação amarela (receita de controle especial); com THC &gt;0,2% exige Notificação de Receita "A" (amarela, controlada pela Polícia Federal, médico cadastrado); em ambos, o TCLE é assinado em duas vias e uma fica arquivada com o prescritor.</li>
+</ol>Estão corretas:`,
+opts:[`I, II e V`,`I, II, IV e V`,`II, III e IV`,`I, IV e V`,`I, II, III, IV e V`],
+ans:1,
+why:`<b>I</b>: "sem citocina/PG → AINE e corticoide NÃO adiantam"; dipirona vira "analgésico de medula" (NMDA + 5-HT1) na agudização. <b>II</b>: carbamazepina SUS, à noite, indutora + autoindução; mono ≥600 (600–1200); associada ~100–200 à noite. <b>IV</b>: "SÓ a combinação tem evidência"; oral 5–20%; subdose por custo. <b>V</b>: Art. 37 da RDC (≤0,2% → receita de controle especial; &gt;0,2% → Notificação A) + Art. 38 (TCLE em 2 vias, uma arquivada pelo prescritor).`,
+trap:`<b>III</b> inverte o protocolo dela: falha OU intolerância → tenta-se OUTRO fármaco DA MESMA classe (até 3×) antes de mudar de classe — "intolerância à amitriptilina não prediz intolerância à nortriptilina" (afinidades e metabolização polimórfica diferentes).`,
+src:`SP2 (aula gravada): "sem citocina/PG → AINE e corticoide NÃO adiantam"; SP4: "dipirona → adjuvante em neuropática agudizada (NMDA + 5-HT1)"; SP2: "carbamazepina: SUS, À NOITE, indutora + autoindução, mono ≥600, associada ~100–200 à noite", "troca: MESMO grupo até 3×", "SÓ combinação tem evidência", "baixa biodisponibilidade oral (subdose por custo)", "TCLE no prontuário"; slides RDC 327/2019 + RDC 1.015/2026 (Art. 37 §1º e §2º; Art. 38 §2º); slide Mevatyl (biodisponibilidade oral 5–20%).`,
+radar:'Troca de classe imediata (é mesma classe até 3×) · CBD isolado "tem evidência"'},
+
+{id:13,bloco:'neuro',fmt:'tab',
+stem:`Complete a tabela-síntese da SP2 (aviso dela: "vocês serão cobrados pelas FAIXAS terapêuticas"):
+<div class="tscroll"><table>
+<tr><th>Fármaco</th><th>Faixa terapêutica (mg/dia)</th><th>Fracionamento / horário</th><th>Efeito adverso-assinatura</th></tr>
+<tr><td>Gabapentina</td><td><span class="lac">(a)</span></td><td>3×/dia (transportador saturável)</td><td>Edema de MMII, constipação</td></tr>
+<tr><td>Pregabalina</td><td>300–600</td><td><span class="lac">(b)</span></td><td><span class="lac">(c)</span></td></tr>
+<tr><td>Duloxetina</td><td>60–120</td><td>1×/dia — <span class="lac">(d)</span></td><td>Insônia, náusea</td></tr>
+<tr><td>Amitriptilina</td><td><span class="lac">(e)</span></td><td>1×/dia à noite</td><td>Xerostomia, retenção urinária, hipotensão postural</td></tr>
+</table></div>`,
+opts:[
+`(a) 1800–3600 · (b) 3×/dia · (c) ganho de peso · (d) pela manhã · (e) 150–300`,
+`(a) 300–900 · (b) 2×/dia · (c) ganho de peso · (d) à noite · (e) 75–150`,
+`(a) 900–3600 · (b) 1×/dia · (c) hiponatremia · (d) pela manhã · (e) 10–25`,
+`(a) 900–3600 · (b) 2×/dia · (c) diplopia e ataxia · (d) à noite · (e) 75–150`,
+`(a) 900–3600 · (b) 2×/dia · (c) ganho de peso · (d) pela manhã · (e) 75–150 (maioria &gt;100)`
+],
+ans:4,
+why:`As FAIXAS ditadas em aula: gabapentina 900–3600 (3×/dia), pregabalina 300–600 (2×/dia; EA-assinatura = GANHO DE PESO), duloxetina 60–120 pela MANHÃ (insônia), tricíclicos 75–150 (maioria acima de 100), à noite. Gabapentina fica com edema de MMII/constipação.`,
+trap:`(e) "10–25" é dose de INÍCIO (titulação), não a faixa — ela avisou que cobra faixa, não titulação. (c) hiponatremia e diplopia/ataxia são de carbamazepina/oxcarbazepina. (b) pregabalina 1×/dia não existe (transportador saturável).`,
+src:`SP2 (aula gravada): "FAIXAS: tricíclicos 75–150 (maioria &gt;100) · duloxetina 60–120 MANHÃ · gabapentina 900–3600 · pregabalina 300–600", "EA: gabapentina edema MMII/constipação; pregabalina GANHO DE PESO", "fracionar (3×/2×)"; slides: gabapentina "900 mg/d em 3 doses → 3600", pregabalina "ganho de peso", ADA 2017 (pregabalina ganho de peso). Divergência anotada: o slide diz pregabalina "em três tomadas"; a fala dela e as tabelas dizem 2×/dia.`,
+radar:'Dose de titulação no lugar da faixa · EA de carbamazepina atribuído a gabapentinoide'},
+
+/* ---------------- OPIOIDES ---------------- */
+{id:14,bloco:'opi',fmt:'caso',
+stem:`<span class="cx">Mulher, 34 anos, alta hospitalar após colecistectomia videolaparoscópica, dor moderada (EVA 5) que não cedeu com dipirona. Usa amitriptilina 25 mg à noite (profilaxia de enxaqueca). Vai retirar os medicamentos na farmácia do SUS.</span>A prescrição mais adequada é:`,
+opts:[
+`Tramadol 50 mg VO 6/6 h por 5 dias`,
+`Codeína 30 mg VO 6/6 h por 3–5 dias + dipirona 500 mg VO 6/6 h (prescritos como itens separados)`,
+`Codeína 30 mg + paracetamol 500 mg em comprimido combinado, 6/6 h`,
+`Morfina 10 mg VO 4/4 h por 5 dias`,
+`Oxicodona 10 mg VO 12/12 h por 5 dias`],
+ans:1,
+why:`Dor moderada = degrau 2 da OMS → opioide FRACO + analgésico simples. Codeína 15–30 mg 4/4–6/6 h. No SUS só existem os opioides ISOLADOS (codeína, tramadol, morfina) — os combinados opioide + AINE/paracetamol são da rede privada → prescreve-se codeína E dipirona separadas. O tramadol libera serotonina: com antidepressivo (tricíclico/IRSN/ISRS) sobe o risco de síndrome serotoninérgica ("evitar uso concomitante" na tabela do NICE) — havendo alternativa, evita-se.`,
+trap:`<b>C</b>: combinado (Tylex-like) = privada, não tem no SUS. <b>A</b>: tramadol + antidepressivo é a pegadinha serotoninérgica dela (não é contraindicação absoluta, mas com codeína disponível não se escolhe). <b>D/E</b>: opioides fortes para dor moderada — e oxicodona é privada (oncológico/rotação).`,
+src:`SP5 (aula gravada): "fracos: tramadol/codeína (moderada)", "combinados opioide+AINE = privada; SUS só isolados (codeína, tramadol, morfina)", "tramadol → síndrome serotoninérgica", "oxicodona: oncológico/rotação (privada)"; slide codeína (15, 30 mg a cada 4 ou 6 h); slide escada OMS; slide NICE (ADT/IRSN: "avoid concurrent use of tramadol"); Banco: T8 QD (tramadol 50 mg 6/6 h domiciliar) e T11 (zoster moderado → codeína).`,
+radar:'Combinado opioide+analgésico no SUS · tramadol com antidepressivo'},
+
+{id:15,bloco:'opi',fmt:'iv',
+stem:`Sobre a farmacocinética dos opioides (aula SP5, 21/08), julgue:
+<ol class="rom">
+<li><b class="n">I.</b> A morfina sofre extenso efeito de primeira passagem: por via oral a dose precisa ser várias vezes maior que a IV (na aula, ~5 mg VO ≈ 1 mg IV) — mas isso não impede que seja o opioide forte VO de referência do SUS.</li>
+<li><b class="n">II.</b> Metadona e fentanila são lipofílicas e se depositam no tecido adiposo; por isso a titulação parte de doses baixas — o equilíbrio só se estabelece após 3–5 dias e doses repetidas se acumulam.</li>
+<li><b class="n">III.</b> A morfina é ativada pela CYP2D6; inibidores dessa enzima (fluoxetina) reduzem sua analgesia, como ocorre com a codeína.</li>
+<li><b class="n">IV.</b> Quando a tolerância leva à dose-teto, a estratégia é encurtar o intervalo entre as doses (ou infusão contínua no oncológico terminal) — possível porque a depressão respiratória também sofre tolerância.</li>
+<li><b class="n">V.</b> M3G e M6G têm capacidade limitada de atravessar a BHE, mas entram na barreira inflamada (meningite/trauma); o acúmulo de M3G explica a convulsão e o de M6G (2–4× mais potente que a morfina) a sedação/depressão respiratória.</li>
+</ol>Estão corretas:`,
+opts:[`I, II e III`,`II, III e IV`,`I, II e IV`,`I, III, IV e V`,`I, II, IV e V`],
+ans:4,
+why:`<b>I</b>: 1ª passagem → "dose VO &gt; parenteral" (slide) e "5 mg VO ≈ 1 mg IV" (fala; a tabela do Katzung traz 30:10). <b>II</b>: "depósito adiposo: METADONA e FENTANILA → titular do baixo (satura em 3–5 d)". <b>IV</b>: tolerância diária (β-arrestina) → sobe dose → teto → ENCURTA posologia → bomba de infusão; "depressão respiratória TAMBÉM tolera". <b>V</b>: M3G convulsivante / M6G analgésico; capacidade limitada de permear a BHE; "M3G entra na BHE inflamada".`,
+trap:`<b>III</b>: a morfina NÃO passa por CYP para agir — é conjugada (UGT) em M3G/M6G; a CYP3A4 só gera normorfina INATIVA. Inibidor/indutor de CYP não muda sua biodisponibilidade (gabarito em vermelho da PM T5). Quem é ativada pela 2D6 é a CODEÍNA.`,
+src:`SP5 (aula gravada): "morfina VO 5 mg ≈ 1 mg IV", "depósito adiposo: METADONA e FENTANILA → titular do baixo (satura em 3–5 d)", "morfina via 3A4 = INATIVO; conjugação → M3G (convulsivante)/M6G (analgésico); M3G entra na BHE INFLAMADA", "tolerância → sobe dose → teto → ENCURTA posologia; oncológico terminal = bomba de infusão", "depressão respiratória TAMBÉM tolera"; slides: absorção ("dose VO &gt; parenteral"), distribuição ("tecido adiposo – fentanila"), metabolismo (M3G/M6G "capacidade limitada de permear BHE"), quadro morfina (M6G 2–4× mais potente).`,
+radar:'Morfina "ativada pela CYP2D6" (é conjugação/UGT) · quem convulsiona é M3G'},
+
+{id:16,bloco:'opi',fmt:'ar',
+stem:`<ol class="rom">
+<li><b class="n">I.</b> A naltrexona VO (na rede privada associada à bupropiona; no SUS as duas separadas) é usada para manter a abstinência no dependente já desintoxicado e em compulsões em geral (comida, drogas), enquanto a naloxona fica restrita, no Brasil, à depressão respiratória e à reversão pós-anestésica.</li>
+</ol><span class="porque">PORQUE</span><ol class="rom">
+<li><b class="n">II.</b> Ao bloquear os receptores opioides (μ/κ) das fibras GABAérgicas do núcleo accumbens — inclusive para as endorfinas —, a naltrexona impede a DESINIBIÇÃO da fibra dopaminérgica e o pico de dopamina que consolida a recompensa/saliência.</li>
+</ol>Assinale:`,
+opts:AR_OPTS,ans:0,
+why:`As duas são verdadeiras e a II é exatamente o mecanismo que justifica o uso da naltrexona: o opioide se liga ao receptor da fibra GABAérgica → menos GABA → a fibra dopaminérgica fica "livre" (DESINIBIÇÃO) → jorro de dopamina no accumbens = recompensa. A naltrexona (antagonista VO, longa) bloqueia esse receptor — inclusive para as endorfinas — e corta o prazer da compulsão; por isso serve a compulsões em geral e vem combinada com bupropiona (Contrave) na rede privada.`,
+trap:`Se a razão dissesse "impede a ESTIMULAÇÃO da fibra dopaminérgica" seria FALSA — aviso literal dela: "nunca falem estimulação — é desinibição (cocaína é estimulação direta)". E se dissesse "receptor na fibra dopaminérgica" também: o receptor opioide está na fibra GABA.`,
+src:`SP5 (aula gravada): "naltrexona: VO, compulsões em geral, associada à BUPROPIONA (Contrave; SUS separados); bloqueia μ/κ das fibras GABA (até endorfinas)", "DESINIBIÇÃO dopaminérgica (não 'estimulação'; cocaína = estimulação direta)", "naloxona: Brasil = EXCLUSIVA p/ depressão respiratória + reversão pós-anestésica"; slides: figura CNSforum (mecanismo de dependência), "dopamina sinaliza a saliência".`,
+radar:'"Estimulação" × DESINIBIÇÃO dopaminérgica · naloxona × naltrexona'},
+
+{id:17,bloco:'opi',fmt:'corr',
+stem:`Correlacione o fármaco (coluna 1) com o perfil de uso descrito em aula (coluna 2):
+<div class="grid2"><div class="box"><b>Coluna 1</b><br>1. Meperidina<br>2. Fentanila<br>3. Oxicodona<br>4. Metadona<br>5. Naloxona</div>
+<div class="box"><b>Coluna 2</b><br><b>A.</b> VO na rede privada, em oncológicos e na rotação de opioides; metabolizada por CYP2D6 e 3A4<br><b>B.</b> Somente IV hospitalar, ação curta (2–4 h) → pós-operatório imediato; metabólito normeperidina convulsivante, não revertido por naloxona<br><b>C.</b> Equilíbrio no ~4º dia (depósito adiposo), t½ longa; na dependência, dose por tabela de equivalência (~15–30 mg/dia), entrega supervisionada e redução semanal<br><b>D.</b> No Brasil, exclusiva para depressão respiratória por opioide e reversão pós-anestésica (nos EUA/Canadá, crise do fentanil)<br><b>E.</b> Anestesia balanceada, sedação do intubado em UTI (exige desmame após dias) e adesivo transdérmico de 72 h (25 mcg/h ≈ 50 mg/dia de morfina VO)</div></div>`,
+opts:[
+`1B · 2E · 3C · 4A · 5D`,
+`1E · 2B · 3A · 4C · 5D`,
+`1B · 2E · 3A · 4C · 5D`,
+`1B · 2A · 3E · 4C · 5D`,
+`1B · 2E · 3A · 4D · 5C`
+],
+ans:2,
+why:`Meperidina = só IV hospitalar, curta → pós-op imediato (normeperidina convulsiva; naloxona não reverte) (B). Fentanila = anestesia balanceada + UTI intubado (desmame) + adesivo 72 h (E). Oxicodona = VO privada, oncológico/rotação, 2D6 + 3A4 (A). Metadona = equilíbrio ~4º dia, tabela de equivalência 15–30 mg, supervisionada, redução semanal (C). Naloxona = exclusiva depressão respiratória/reversão anestésica (D).`,
+trap:`1↔2 (quem é "curta para pós-op imediato" é a meperidina; a fentanila é UTI/anestesia/adesivo) e 3↔4 (equilíbrio no 4º dia e tabela de equivalência são da metadona). 5: naloxona ≠ naltrexona (esta é VO para dependência/compulsão).`,
+src:`SP5 (aula gravada): "meperidina: SÓ IV hospitalar, CURTA → pós-op IMEDIATO", "fentanila: anestesia balanceada + UTI intubado (desmame) + adesivo 72 h", "oxicodona: oncológico/rotação (privada)", "metadona: equilíbrio ~4º dia; dependência = dose por TABELA DE EQUIVALÊNCIA (15–30 mg), entrega supervisionada, redução semanal", "naloxona: Brasil = EXCLUSIVA p/ depressão respiratória + reversão pós-anestésica; EUA/Canadá crise do fentanil"; slides: quadro de opioides (meperidina 2–4 h; normeperidina; fentanila 25 mcg/h 72 h = morfina 50 mg/24 h; oxicodona 2D6/3A4), metadona 15–30 mg/d (máx 40).`,
+radar:'Correlacione: meperidina × fentanila (curta/pós-op × UTI/adesivo) · metadona × oxicodona'},
+
+{id:18,bloco:'opi',fmt:'tab',
+stem:`Complete a tabela "efeito adverso → sofre tolerância? → conduta" construída na SP5:
+<div class="tscroll"><table>
+<tr><th>Efeito adverso</th><th>Sofre tolerância?</th><th>Conduta / observação de aula</th></tr>
+<tr><td>Náusea/vômito (zona quimiorreceptora)</td><td>Sim (alta)</td><td><span class="lac">(a)</span></td></tr>
+<tr><td>Constipação (μ2, trato GI)</td><td><span class="lac">(b)</span></td><td>Laxante desde o início; no fim, "lavagem intestinal"</td></tr>
+<tr><td>Depressão respiratória (μ1, tronco)</td><td><span class="lac">(c)</span></td><td>Por isso o oncológico chega a doses que "de cara matariam"</td></tr>
+<tr><td>Prurido orofacial (histamina)</td><td>—</td><td><span class="lac">(d)</span></td></tr>
+<tr><td>Convulsão (M3G)</td><td>Não</td><td><span class="lac">(e)</span></td></tr>
+</table></div>`,
+opts:[
+`(a) antiemético preventivo · (b) sim (moderada) · (c) sim · (d) pior por via oral · (e) suspender e nunca mais usar`,
+`(a) antiemético apenas se vomitar · (b) sim (alta) · (c) não · (d) pior por via oral · (e) reduzir a dose e manter`,
+`(a) antiemético preventivo · (b) não · (c) não — por isso a dose nunca sobe · (d) pior por via parenteral · (e) trocar por outro opioide`,
+`(a) antiemético preventivo sempre que o opioide é usado no hospital · (b) não · (c) sim (alta) · (d) pior por via parenteral · (e) suspender e nunca mais usar opioide`,
+`(a) antiemético apenas se vomitar · (b) não · (c) sim · (d) pior por via parenteral · (e) naloxona IV e manter o opioide`
+],
+ans:3,
+why:`Náusea: todo opioide estimula a zona quimiorreceptora → no hospital SEMPRE antiemético junto (e ela tolera). Constipação: NÃO tolera (μ2 do intestino não invagina) → laxante desde o 1º dia; termina em lavagem intestinal. Depressão respiratória: TOLERA ("20 mg de cara mata; após 6 semanas, tranquilo") — é isso que permite escalar dose. Prurido orofacial: histamina, pior no uso parenteral. Convulsão: não tolera — "convulsionou → nunca mais" (salvo problema de permeabilidade da BHE).`,
+trap:`(c) "não tolera" é a pegadinha fina da SP5 — a depressão respiratória TAMBÉM tolera; o que NÃO tolera é a tríade constipação + miose + convulsão. (e) naloxona não é conduta para convulsão por metabólito (e não reverte normeperidina).`,
+src:`SP5 (aula gravada): "μ1 = SNC · μ2 = trato GI", "depressão respiratória TAMBÉM tolera", "NÃO toleram: constipação (lavagem intestinal no fim), miose, CONVULSÃO ('convulsionou → nunca mais')", "náusea → SEMPRE antiemético no hospital", "prurido OROFACIAL pior parenteral (histamina)"; slide Katzung "graus de tolerância" (alto: depressão respiratória, náuseas; mínimo/nenhum: miose, constipação, convulsões).`,
+radar:'Depressão respiratória "não tolera" · tríade que não tolera (constipação, miose, convulsão)'}
+];
+
+/* =========================================================
+   DADOS — 5 QDs
+   {id, bloco, pts, stem, model(html), check:[{t,w,g,gate}]}
+   gate=true dentro de um grupo g: se desmarcado, zera o grupo (regra "dose errada = zero")
+   ========================================================= */
+const QD=[
+{id:1,bloco:'aine',pts:0.5,
+stem:`<span class="cx">(a) L., 19 anos, dismenorreia primária (cólica intensa nos 2 primeiros dias do ciclo), sem comorbidades. (b) M., 27 anos, mesma queixa, mas com úlcera duodenal em tratamento e alergia ao AAS.</span>Prescreva para cada uma — <b>fármaco, dose, posologia, via e duração</b> — e justifique em uma linha a diferença de escolha.`,
+model:`<p><b>(a) Ácido mefenâmico</b> (Ponstan) <b>500 mg VO</b> ao início da dor, depois <b>250 mg 6/6 h</b> (slide/Katzung: 250 mg de 4/4 h), <b>por até 3–5 dias</b> (só nos dias de dor; máx. 5–7 dias). Fenamato com indicação de bula para dismenorreia primária/dor pélvica de origem prostaglandínica (PGE2/PGF2α uterinas); não seletivo. Orientar: se DIARREIA importante → interromper; contraindicado &lt;14 anos e em úlcera.</p>
+<p><b>(b) Dipirona 500 mg–1 g VO 6/6 h</b> nos dias de dor (1 g = ataque para dor intensa). Analgésico de ação central (COX-3/NMDA/5-HT1) + <b>espasmolítico</b> (pirazolônico); não inibe a COX-1 periférica → poupa a mucosa (úlcera) e <b>não tem reatividade cruzada com AAS</b> — ao contrário de diclofenaco, mefenâmico e oxicams (bula: "CI em alergia a AAS"). Alternativa aceitável: paracetamol 500–750 mg 6/6 h (sem efeito espasmolítico).</p>
+<p><b>Uma linha:</b> em (a) a dor é prostaglandínica → AINE com indicação de bula para dismenorreia; em (b) úlcera + alergia a AAS vetam os AINEs clássicos → analgésico central que não mexe em COX-1 nem cruza com AAS.</p>
+<p class="src"><b>Onde ela falou:</b> SP4 — "mefenâmico: cólica espasmo × inflamatória (endometriose/dismenorreia)", "dipirona = espasmolítico, hipotensão EA nº 1"; slides mefenâmico (250 mg 4/4 h; dismenorreia primária; diarreia → interromper; CI &lt;14 a) e dipirona (analgésico, antipirético e ESPASMOLÍTICO; 500–1000 mg 6/6 h); diclofenaco/oxicams "CI alergia a AAS". Divergência: o Banco cita "500 mg 8/8 h" para o mefenâmico — a bula é 500 mg inicial → 250 mg 6/6 h; o slide, 250 mg 4/4 h. Qualquer uma dessas é aceitável; "100 mg 2×/dia" (T11) é errado.</p>`,
+check:[
+{t:'(a) Fármaco certo: ácido mefenâmico',w:0.05,g:'a',gate:true},
+{t:'(a) DOSE/POSOLOGIA certas: 500 mg → 250 mg 6/6 h, ou 250 mg 4/4–6/6 h, ou 500 mg 8/8 h — VO, 3–5 dias (dose errada = zera a parte a)',w:0.15,g:'a',gate:true},
+{t:'(a) Justificou: dismenorreia primária = indicação de bula do fenamato (PG uterina) ± aviso diarreia/CI <14 anos',w:0.05,g:'a'},
+{t:'(b) Fármaco certo: dipirona (aceito paracetamol com justificativa — sem espasmolítico)',w:0.05,g:'b',gate:true},
+{t:'(b) DOSE/POSOLOGIA certas: 500 mg–1 g VO 6/6 h (paracetamol 500–750 mg 6/6 h)',w:0.1,g:'b',gate:true},
+{t:'(b) Justificou: úlcera → não inibe COX-1 periférica; alergia a AAS → AINEs clássicos (diclofenaco, mefenâmico, oxicams) têm reatividade cruzada; dipirona é espasmolítica',w:0.1,g:'b'}
+]},
+
+{id:2,bloco:'cort',pts:0.6,
+stem:`<span class="cx">H., 52 anos, 70 kg, pneumonia comunitária em tratamento ambulatorial com amoxicilina-clavulanato. Febre 38,7 °C, dor torácica pleurítica e sibilos.</span>Prescreva o <b>antitérmico</b> e o <b>anti-inflamatório</b> (fármaco, dose, posologia, via, horário, duração e como suspender) e explique: (i) por que NÃO usar ibuprofeno/nimesulida; (ii) por que a escolha entre prednisona e prednisolona.`,
+model:`<p><b>Antitérmico: dipirona 500 mg VO 6/6 h se T ≥ 38 °C</b> (ou dor). Ação central (COX-3), sem inibir a COX periférica; se febre baixa não usar (hipotermia). Paracetamol 500–750 mg 6/6 h também é aceitável (mais lento).</p>
+<p><b>Anti-inflamatório: prednisoLONA 20 mg VO 1×/dia pela manhã (até ~10 h, após o café), por 5 dias, suspensão de uma vez</b> (curso &lt;7–14 dias não exige desmame). Faixa anti-inflamatória: 5–20 mg (ela gabaritou 5 mg para bronquite aguda de 5 dias e 20 mg para AR; a associação oficial da pneumonia no AVA é antibiótico + dipirona + prednisolona). 1 mg/kg seria dose imunossupressora — errado aqui.</p>
+<p><b>(i) Por que não AINE:</b> a inflamação é no trato respiratório INFERIOR. O AINE bloqueia a COX, sobra ácido araquidônico para a LOX (concentrada no pulmão) → mais leucotrienos → broncoconstrição, muco, quimiotaxia → piora (asma/pneumonia). O corticoide ↑lipocortina-1 → inibe a PLA2 → corta COX <b>e</b> LOX (bloqueia a cascata inteira). Bônus: ibuprofeno/nimesulida ainda tiram plaqueta/rim e não resolvem a LOX.</p>
+<p><b>(ii) Prednisolona × prednisona:</b> a prednisona é pró-fármaco (fraca atividade) que precisa ser bioativada no fígado (11β-HSD) em prednisolona; no quadro AGUDO quer-se resposta desde a 1ª dose → prednisoLONA (também a forma para criança/hepatopata; solução pediátrica do SUS). Prednisona fica para o crônico (osteomioarticular).</p>
+<p class="src"><b>Onde ela falou:</b> SP1 — "LOX ≈ pulmão → AINE desvia AA → leucotrienos → pulmão = CORTICOIDE", "dipirona 500 mg 6/6 h, antitérmico só se &gt;38 °C"; SP3 — "AGUDO = prednisoLONA, CRÔNICO = prednisona", "manhã ≤10 h", "retirada: ≤10–15 d para direto", "anti-inflamatório × imunossupressor = SÓ DOSE (5–20 / 1 mg/kg)"; gabaritos: T5 QD (bronquite aguda → prednisolona 5 mg 1×/dia manhã), PM T7 (AR → prednisona 20 mg), AVA (pneumonia = ATB + dipirona + prednisolona).</p>`,
+check:[
+{t:'Corticoide certo: prednisoLONA (não prednisona, não dexametasona)',w:0.05,g:'c',gate:true},
+{t:'DOSE anti-inflamatória: 5–20 mg (ex.: 20 mg); NÃO 1 mg/kg / 40–60 mg (imunossupressora) — dose errada = zera o corticoide',w:0.1,g:'c',gate:true},
+{t:'1×/dia pela MANHÃ (até ~10 h)',w:0.1,g:'c'},
+{t:'Duração ≤7 dias + suspensão direta (sem desmame)',w:0.05,g:'c'},
+{t:'Antitérmico: dipirona 500 mg VO 6/6 h se T ≥ 38 °C (ou paracetamol 500–750 mg 6/6 h) — sem AINE',w:0.1,g:'d',gate:true},
+{t:'(i) Explicou LOX/leucotrienos: AINE desvia AA → broncoconstrição; corticoide (lipocortina-1 → PLA2) corta COX e LOX',w:0.1},
+{t:'(ii) Explicou: prednisona = pró-fármaco bioativado (11β-HSD) → agudo pede a forma ativa (prednisolona)',w:0.1}
+]},
+
+{id:3,bloco:'neuro',pts:0.5,
+stem:`<span class="cx">C., 47 anos, fibromialgia há 2 anos (dor difusa, sono ruim) e episódio depressivo atual (anedonia, tristeza). Não usa psicofármacos; tem plano de saúde.</span>Prescreva (<b>fármaco, dose inicial, faixa-alvo, horário</b>) e explique: (i) por que esse horário; (ii) o que orientar sobre o tempo até o efeito e os efeitos adversos iniciais; (iii) por que a pregabalina não é a melhor 1ª escolha aqui; (iv) por que NÃO associar tramadol nas agudizações.`,
+model:`<p><b>Duloxetina 30 mg VO 1×/dia pela manhã</b> por ~1 semana → <b>60 mg/dia</b> (faixa terapêutica <b>60–120 mg/dia</b>). IRSN: bloqueia SERT e NAT → potencializa a via modulatória descendente (5-HT1 + α2) e trata a depressão ao mesmo tempo. Acesso: rede privada (no SUS só está no alto custo para fibromialgia).</p>
+<p><b>(i) Manhã:</b> IRSN é ansiogênico/causa INSÔNIA e agitação (ao contrário do tricíclico, sedativo pelo bloqueio H1 → noite).</p>
+<p><b>(ii) Latência:</b> o efeito analgésico dos antidepressivos demora ~30 dias; os efeitos adversos (náusea, insônia, xerostomia, disfunção sexual) aparecem desde o 1º dia → avisar para não abandonar. Titular até a dose MÍNIMA da faixa que controla; doses máximas raramente se usam.</p>
+<p><b>(iii) Pregabalina</b> (300–600 mg/dia, 2×) trata a dor/FM mas não trata a depressão — e pode rebaixar mais o humor (caso da aula: "paciente com desânimo → antidepressivo em 1ª linha"); a duloxetina resolve dor + depressão com menos efeitos adversos que o tricíclico. Amitriptilina seria a opção de acesso (SUS), com mais EA.</p>
+<p><b>(iv) Tramadol</b> libera serotonina e inibe a recaptação de NA → com IRSN o risco de <b>síndrome serotoninérgica</b> (hipertermia que não responde à dipirona + agitação + rigidez) sobe; NICE: "evitar uso concomitante". Agudização → dipirona (adjuvante medular NMDA/5-HT1) ou codeína.</p>
+<p class="src"><b>Onde ela falou:</b> SP2 — "duloxetina 60–120 MANHÃ", "antidepressivo p/ dor: SERT E NAT", "latência ~30 d", "objetivo = dose MÍNIMA da faixa", "amitriptilina = viés de literatura (mais EA)"; caso 2 da aula (diabética com humor rebaixado → duloxetina em vez de gabapentinoide); AVA (neuropatia + depressão + recursos → duloxetina); SP5 — "tramadol: síndrome serotoninérgica, 'prova real da dipirona'"; slide NICE (SNRI: avoid tramadol).</p>`,
+check:[
+{t:'Fármaco certo: duloxetina (IRSN)',w:0.05,g:'a',gate:true},
+{t:'DOSE certa: início 30 mg → faixa 60–120 mg/dia (dose errada = zero)',w:0.15,g:'a',gate:true},
+{t:'(i) Pela manhã + motivo (insônia/ansiogênico); contraste com tricíclico à noite',w:0.1,g:'a'},
+{t:'(ii) Latência ~30 dias + EAs desde o 1º dia (orientar adesão)',w:0.1},
+{t:'(iii) Pregabalina não trata depressão (pode piorar humor); duloxetina resolve dor + depressão',w:0.05},
+{t:'(iv) Tramadol + IRSN → síndrome serotoninérgica (5-HT)',w:0.05}
+]},
+
+{id:4,bloco:'opi',pts:0.6,
+stem:`<span class="cx">P., 66 anos, câncer de pâncreas metastático, em casa (SUS), dor abdominal contínua 9/10 apesar de codeína 60 mg 6/6 h + dipirona 1 g 6/6 h. Deglute bem.</span>Prescreva o opioide (<b>fármaco, dose inicial, posologia, via</b>), diga o que DEVE acompanhar a prescrição desde o 1º dia e explique como conduzir quando, após ~5 dias, a dose "não segurar mais".`,
+model:`<p><b>Morfina (sulfato) 5–10 mg VO de 4/4 h</b> (comprimido 10 mg / solução oral) — ela: "começa com 2,5–5 mg" e titula. Dor intensa (7–10) = degrau 3 da OMS; a codeína já está no teto (240 mg/dia = 60 mg 6/6 h) e tem eficácia máxima BAIXA. No SUS a morfina existe isolada (VO e parenteral). Manter a dipirona (não opioide + adjuvante).</p>
+<p><b>Desde o 1º dia:</b> <b>laxante</b> (constipação por μ2 NÃO sofre tolerância — "quanto mais usa, pior; termina em lavagem intestinal") e, no início, <b>antiemético</b> (náusea pela zona quimiorreceptora — tolera em dias). Orientar retenção urinária, sonolência, prurido; no oncológico não há "dose máxima" de analgesia.</p>
+<p><b>Quando não segurar (~5 dias):</b> tolerância por β-arrestina/internalização diária do receptor ("10 receptores hoje, 9 amanhã") → <b>subir a dose</b> (a depressão respiratória também tolera, por isso é seguro escalar) → ao chegar no teto prático, <b>encurtar a posologia</b> (4/4 → 3/3 h, ou liberação prolongada 12/12 h + resgate) → terminal: <b>bomba de infusão contínua</b>. Se aparecer hiperalgesia induzida (dor piora ao subir a dose) → suspender/rodar (metadona; fentanila adesivo 25 mcg/h 72 h — privada/oncológico). Cuidar da abstinência antecipatória (~30 dias: pede antes da hora) — não é "vício", é farmacologia.</p>
+<p class="src"><b>Onde ela falou:</b> SP5 — "doses: morfina 5–10 mg VO (começa 2,5–5)", "tolerância: β-arrestina/invaginação DIÁRIA (~5 dias e a dose não segura) → sobe dose → teto → ENCURTA posologia; oncológico terminal = bomba de infusão", "depressão respiratória TAMBÉM tolera", "NÃO toleram: constipação (lavagem intestinal no fim)", "náusea → SEMPRE antiemético", "hiperalgesia → suspender/rodar", "abstinência ANTECIPATÓRIA"; slides: codeína máx 240 mg/dia e eficácia máxima baixa; tabela 1 (morfina 5–10 mg, 3–4 h); Banco PM T7 (morfina 5–10 mg VO 4/4 h).</p>`,
+check:[
+{t:'Fármaco certo: morfina VO (não tramadol, não aumentar codeína, não meperidina)',w:0.05,g:'m',gate:true},
+{t:'DOSE certa: 5–10 mg (ou 2,5–5 mg inicial) VO — dose errada = zero',w:0.15,g:'m',gate:true},
+{t:'Posologia certa: 4/4 h (3–4 h), pelo relógio',w:0.1,g:'m'},
+{t:'Laxante desde o 1º dia (constipação não tolera)',w:0.1},
+{t:'Antiemético no início (náusea tolera) ± orientações (retenção urinária, sonolência)',w:0.05},
+{t:'Conduta na tolerância: ↑dose (depressão respiratória tolera) → encurtar intervalo → infusão contínua; citou β-arrestina/internalização',w:0.15}
+]},
+
+{id:5,bloco:'aine',pts:0.6,
+stem:`Explique, com base no <b>balanço TXA2 × PGI2</b> ensinado em aula, por que: <b>(a)</b> o celecoxibe aumenta o risco de IAM/AVE (e por isso só é liberado por 7–15 dias, com receita retida, em paciente SEM doença cardiovascular); <b>(b)</b> o AAS 100 mg/dia protege contra trombose e precisa ser suspenso 7 dias antes de cirurgia; <b>(c)</b> um AINE não seletivo (ibuprofeno) NÃO protege contra trombose, embora prolongue o tempo de sangramento.`,
+model:`<p><b>Base:</b> a plaqueta é ANUCLEADA e só tem <b>COX-1 → TXA2</b> (agregação + vasoconstrição). O endotélio tem <b>COX-2 constitutiva → PGI2</b> (antiagregante + vasodilatadora). Os dois precisam estar em equilíbrio.</p>
+<p><b>(a) Coxibe:</b> inibe só a COX-2 → derruba a PGI2 e PRESERVA o TXA2 → agregação sem freio + vasoconstrição (+ retenção de Na/água → ↑PA, edema) → trombose (IAM/AVE). Por isso: uso curto (7–15 d; máx 28), receita retida, só osteomioarticular, contraindicado em cardiopata/hipertenso; e o "sem doença cardíaca" no enunciado é a senha para liberá-lo.</p>
+<p><b>(b) AAS 100 mg:</b> acetila IRREVERSIVELMENTE a COX-1; em dose baixa (100 mg, no almoço) atinge as plaquetas na circulação e inibe preferencialmente a COX-1 plaquetária; a plaqueta, sem núcleo, não ressintetiza a enzima → sem TXA2 pela vida da plaqueta (7–10 dias). O endotélio (nucleado) ressintetiza a COX-2 e mantém a PGI2 → <b>↓TXA2 com PGI2 preservada = antitrombótico</b>. Suspender 7 dias antes de cirurgia com risco de sangramento (com aval do cardiologista; se não der, bolsas de plaquetas).</p>
+<p><b>(c) Não seletivo:</b> derruba os dois (TXA2 e PGI2) → "empata", sem proteção cardiovascular (e ainda faz ↑PA/edema pelo rim); a inibição plaquetária dos profenos é REVERSÍVEL — dura enquanto o fármaco circula → prolonga o tempo de sangramento transitoriamente (por isso proibido na dengue e no pós-op com sangramento importante → nesses casos, diclofenaco; em risco de trombose, cetoprofeno).</p>
+<p class="src"><b>Onde ela falou:</b> SP1 — "balanço TXA2×PGI2 (COX-2 constitutiva)", "AAS: irreversível/plaqueta anucleada 7–10 d, 100 mg no almoço"; SP4 — "profenos: antiagregação REVERSÍVEL", "pós-op sangramento → diclofenaco / trombose → cetoprofeno", "coxibes: receita retida, 7–15 d, só ósseo/mioarticular"; slides: figura do coxibe (TXA2 plaquetário preservado × PGI2 endotelial inibida), classificação (AAS 75–150 mg = seletivo COX-1); gabaritos T8 Q2/T11 Q16 ("trombose por ↓PGI2 com TXA2 preservado, não por ↑TXA2").</p>`,
+check:[
+{t:'Sem erro invertido: NÃO escreveu "coxibe aumenta a produção de TXA2" nem "AAS reversível" (erro conceitual = zero)',w:0,g:'x',gate:true},
+{t:'(a) Plaqueta anucleada → COX-1 → TXA2; endotélio → COX-2 constitutiva → PGI2 (as duas fontes)',w:0.15,g:'x'},
+{t:'(a) Coxibe ↓PGI2 preservando TXA2 → agregação/vasoconstrição → IAM/AVE (→ uso curto, receita retida, sem cardiopata)',w:0.15,g:'x'},
+{t:'(b) AAS irreversível + plaqueta não ressintetiza → 7–10 dias (suspender 7 d)',w:0.1,g:'x'},
+{t:'(b) Dose baixa poupa a PGI2 endotelial (endotélio ressintetiza COX-2) → ↓TXA2 com PGI2 preservada',w:0.1,g:'x'},
+{t:'(c) Não seletivo derruba os dois ("empata") e a antiagregação é reversível/transitória',w:0.1,g:'x'}
+]}
+];
+
+/* ========================================================= RENDER ========================================================= */
+const $=id=>document.getElementById(id);
+const L=i=>String.fromCharCode(65+i);
+let state={obj:{},qd:{},chk:{},corrected:false,start:Date.now()};
+try{const s=JSON.parse(localStorage.getItem('simVania')||'null');if(s&&s.obj){state=Object.assign(state,s);}}catch(e){}
+function save(){try{localStorage.setItem('simVania',JSON.stringify(state));}catch(e){}}
+function esc(s){return s;}
+
+function render(){
+  const root=$('quiz');root.innerHTML='';
+  const order=['aine','cort','neuro','opi'];
+  order.forEach(b=>{
+    const h=document.createElement('div');h.className='blockh';
+    h.innerHTML='<h2>'+BL[b].n+'</h2><span class="line"></span><span class="pill '+BL[b].cls+'">'+OBJ.filter(q=>q.bloco===b).length+' objetivas · 0,4 cada</span>';
+    root.appendChild(h);
+    OBJ.filter(q=>q.bloco===b).forEach(q=>root.appendChild(renderObj(q)));
+  });
+  const h=document.createElement('div');h.className='blockh';
+  h.innerHTML='<h2>Questões discursivas (QDs)</h2><span class="line"></span><span class="pill d">5 QDs · 2,8 pontos · dose errada = zero</span>';
+  root.appendChild(h);
+  const n=document.createElement('div');n.className='exam';
+  n.innerHTML='<b>Como ela corrige:</b> fármaco + DOSE + posologia + via valem a maior parte; "explique o porquê" pede mecanismo com as palavras dela (enzima → mediador → função → consequência). Escreva como se fosse no papel — sem consultar.';
+  root.appendChild(n);
+  QD.forEach(q=>root.appendChild(renderQd(q)));
+  bindObj();bindQd();updateBar();
+  if(state.corrected)correct(true);
+}
+function renderObj(q){
+  const el=document.createElement('div');el.className='q';el.id='q'+q.id;
+  let opts='';
+  q.opts.forEach((o,j)=>{opts+='<button class="opt'+(state.obj[q.id]===j?' sel':'')+'" data-q="'+q.id+'" data-j="'+j+'"><span class="k">'+L(j)+'</span><span>'+o+'</span></button>';});
+  el.innerHTML='<div class="qhead"><div class="qnum">Q'+q.id+'</div><span class="pill '+BL[q.bloco].cls+'">'+BL[q.bloco].n+'</span><span class="pill o">'+FMT[q.fmt]+'</span><span class="pill o">0,4</span></div>'+
+    '<div class="stem">'+q.stem+'</div><div class="opts">'+opts+'</div><div class="fb" id="fb'+q.id+'"></div>';
+  return el;
+}
+function renderQd(q){
+  const el=document.createElement('div');el.className='q';el.id='qd'+q.id;
+  const txt=state.qd[q.id]||'';
+  el.innerHTML='<div class="qhead"><div class="qnum d">QD'+q.id+'</div><span class="pill '+BL[q.bloco].cls+'">'+BL[q.bloco].n+'</span><span class="pill d">'+q.pts.toFixed(1).replace('.',',')+' ponto'+(q.pts>=1?'s':'')+'</span></div>'+
+    '<div class="stem">'+q.stem+'</div>'+
+    '<textarea id="ta'+q.id+'" placeholder="Fármaco + dose + posologia + via (+ horário/duração)… e o porquê.">'+txt.replace(/</g,'&lt;')+'</textarea>'+
+    '<div class="qdmeta"><span>Escreva como na prova</span><span id="cnt'+q.id+'">'+txt.length+' caracteres</span></div>'+
+    '<div class="model" id="md'+q.id+'"></div>';
+  return el;
+}
+function bindObj(){
+  document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    if(state.corrected)return;
+    const qid=+b.dataset.q,j=+b.dataset.j;
+    state.obj[qid]=j;
+    b.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+    b.classList.add('sel');
+    save();updateBar();
+  }));
+}
+function bindQd(){
+  QD.forEach(q=>{
+    const ta=$('ta'+q.id);
+    ta.addEventListener('input',()=>{state.qd[q.id]=ta.value;$('cnt'+q.id).textContent=ta.value.length+' caracteres';save();updateBar();});
+  });
+}
+function updateBar(){
+  const nObj=Object.keys(state.obj).length;
+  const nQd=QD.filter(q=>(state.qd[q.id]||'').trim().length>0).length;
+  $('pObj').textContent=nObj+'/18';$('pQd').textContent=nQd+'/5';
+}
+
+/* ========================================================= CORREÇÃO ========================================================= */
+function correct(silent){
+  state.corrected=true;save();
+  let hits=0;const perBlock={};
+  OBJ.forEach(q=>{
+    const sel=state.obj[q.id];const ok=sel===q.ans;if(ok)hits++;
+    perBlock[q.bloco]=perBlock[q.bloco]||{n:0,ok:0};perBlock[q.bloco].n++;if(ok)perBlock[q.bloco].ok++;
+    const box=$('q'+q.id);
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');o.classList.remove('sel');if(k===q.ans)o.classList.add('correct');if(k===sel&&!ok)o.classList.add('wrong');});
+    const fb=$('fb'+q.id);
+    const status=sel===undefined?'blank':(ok?'ok':'no');
+    fb.className='fb show '+status;
+    const verdict=status==='ok'?'✓ Correto — +0,4':(status==='blank'?'— Em branco — a correta é '+L(q.ans):'✕ Você marcou '+L(sel)+' — a correta é '+L(q.ans));
+    fb.innerHTML='<div class="verdict" style="color:'+(status==='ok'?'var(--green)':(status==='blank'?'var(--amber)':'var(--red)'))+'">'+verdict+'</div>'+
+      '<div class="why">'+q.why+'</div>'+(q.trap?'<div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>':'')+
+      '<div class="src"><b>Onde ela falou isso:</b> '+q.src+'</div>';
+  });
+  QD.forEach(q=>{
+    const md=$('md'+q.id);md.className='model show';
+    let items='';
+    q.check.forEach((c,i)=>{
+      const key=q.id+'_'+i;const on=!!state.chk[key];
+      items+='<label><input type="checkbox" data-k="'+key+'" '+(on?'checked':'')+'><span>'+(c.gate?'<span class="gate">[trava] </span>':'')+c.t+'</span><span class="w">'+(c.w>0?c.w.toFixed(2).replace('.',','):'—')+'</span></label>';
+    });
+    md.innerHTML='<div class="mtitle">Resposta-modelo (estilo do gabarito dela)</div><div class="mtext">'+q.model+'</div>'+
+      '<div class="chk"><div class="ctitle"><span>Autoavaliação — marque o que a SUA resposta contém</span><span id="qdpts'+q.id+'"></span></div>'+items+'</div>';
+    md.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',()=>{state.chk[cb.dataset.k]=cb.checked;save();scoreQd();}));
+  });
+  showResult(hits,perBlock);
+  scoreQd();
+  if(!silent){$('result').scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function qdScore(q){
+  // grupos com trava: se alguma trava do grupo estiver desmarcada, zera o grupo
+  const groupOk={};
+  q.check.forEach((c,i)=>{if(c.g&&c.gate){const on=!!state.chk[q.id+'_'+i];groupOk[c.g]=(groupOk[c.g]===undefined?true:groupOk[c.g])&&on;}});
+  let s=0;
+  q.check.forEach((c,i)=>{const on=!!state.chk[q.id+'_'+i];if(!on)return;if(c.g&&groupOk[c.g]===false)return;s+=c.w;});
+  return Math.min(s,q.pts);
+}
+function scoreQd(){
+  let tot=0;
+  QD.forEach(q=>{
+    const s=qdScore(q);tot+=s;
+    const el=$('qdpts'+q.id);if(el)el.textContent='Pontos: '+s.toFixed(2).replace('.',',')+' / '+q.pts.toFixed(1).replace('.',',');
+    // marca visual dos grupos zerados
+    const groupOk={};q.check.forEach((c,i)=>{if(c.g&&c.gate){const on=!!state.chk[q.id+'_'+i];groupOk[c.g]=(groupOk[c.g]===undefined?true:groupOk[c.g])&&on;}});
+    const md=$('md'+q.id);if(md){md.querySelectorAll('label').forEach((lab,i)=>{const c=q.check[i];lab.classList.toggle('off',!!(c.g&&groupOk[c.g]===false&&!c.gate));});}
+  });
+  const hits=OBJ.filter(q=>state.obj[q.id]===q.ans).length;
+  const objPts=hits*0.4;const total=objPts+tot;
+  if($('sQd'))$('sQd').textContent=tot.toFixed(2).replace('.',',')+' / 2,8';
+  if($('sTot'))$('sTot').textContent=total.toFixed(1).replace('.',',')+' / 10';
+  if($('sFill'))$('sFill').style.width=Math.min(100,total*10)+'%';
+  if($('sMsg'))$('sMsg').innerHTML=total>=6?'<span class="st-ok">Passou de 6 — sem PM.</span> Agora limpe as pegadinhas do radar.':'<span class="st-no">Abaixo de 6 → cairia na PM (16 ou 18/09).</span> Olhe o radar: é ali que você recupera nota.';
+}
+function showResult(hits,perBlock){
+  const objPts=hits*0.4;
+  let blocks='';
+  ['aine','cort','neuro','opi'].forEach(b=>{const p=perBlock[b]||{n:0,ok:0};blocks+='<span class="chip '+(p.ok===p.n?'cool':(p.ok>=p.n/2?'warm':'hot'))+'">'+BL[b].n+' <b>'+p.ok+'/'+p.n+'</b></span>';});
+  let grid='';
+  OBJ.forEach(q=>{const sel=state.obj[q.id];const st=sel===undefined?'bl':(sel===q.ans?'ok':'no');grid+='<a class="g '+st+'" href="#q'+q.id+'" style="text-decoration:none;color:inherit"><b>Q'+q.id+'</b>'+(sel===undefined?'—':L(sel))+' → '+L(q.ans)+'</a>';});
+  let radar='';
+  OBJ.forEach(q=>{const sel=state.obj[q.id];const st=sel===undefined?'bl':(sel===q.ans?'ok':'no');
+    radar+='<tr><td><a href="#q'+q.id+'" style="color:#8ab8ff">Q'+q.id+'</a> · '+BL[q.bloco].n+'</td><td>'+q.radar+'</td><td class="'+(st==='ok'?'st-ok':(st==='no'?'st-no':'st-bl'))+'">'+(st==='ok'?'escapou':(st==='no'?'CAIU':'em branco'))+'</td></tr>';});
+  const wrong=OBJ.filter(q=>state.obj[q.id]!==q.ans);
+  const byBlock={};wrong.forEach(q=>{byBlock[q.bloco]=(byBlock[q.bloco]||0)+1;});
+  let focus='';
+  const worst=Object.keys(byBlock).sort((a,b)=>byBlock[b]-byBlock[a]);
+  if(worst.length===0)focus='<div class="ok">Nenhuma objetiva errada. Agora revise as QDs com o checklist — é lá que ela derruba a nota (dose errada = zero).</div>';
+  else focus='<div class="warn"><b>Onde concentrar a revisão de quinta:</b> '+worst.map(b=>BL[b].n+' ('+byBlock[b]+' erro'+(byBlock[b]>1?'s':'')+')').join(' · ')+'. Releia as frases-lei dessas aulas e refaça só as questões erradas.</div>';
+  const qdList=QD.map(q=>'<li><b>QD'+q.id+'</b> ('+BL[q.bloco].n+'): trava = fármaco + dose. '+(q.id===5?'Aqui a trava é conceitual: inverter TXA2/PGI2 ou dizer "AAS reversível" zera.':'Se errou a dose, ela zera — mesmo com o porquê perfeito.')+'</li>').join('');
+  $('result').className='';
+  $('result').innerHTML='<div class="panel" id="scorepanel"><h2>Resultado</h2>'+
+    '<div class="scorebar"><span class="lbl">Objetivas</span><span class="val">'+hits+'/18 = '+objPts.toFixed(1).replace('.',',')+'</span><span class="lbl">QDs (autoavaliação)</span><span class="val" id="sQd">0,00 / 2,8</span><span class="lbl">Nota</span><span class="val" id="sTot">0,0 / 10</span><div class="bar"><i id="sFill"></i></div></div>'+
+    '<p id="sMsg"></p><div class="meta">'+blocks+'</div>'+
+    '<div class="note" style="margin-top:10px">A nota das QDs só entra depois que você marcar o checklist de cada uma (abaixo de cada QD). Seja honesto: ela é.</div>'+
+    '<h3>Gabarito rápido (você → correta)</h3><div class="gabgrid">'+grid+'</div>'+
+    '</div>'+
+    '<div class="panel radar"><h2>Radar de pegadinhas do simulado</h2>'+focus+
+    '<div class="tscroll"><table><tr><th>Questão</th><th>Pegadinha embutida</th><th>Você</th></tr>'+radar+'</table></div>'+
+    '<h3>Travas das QDs</h3><ul>'+qdList+'</ul>'+
+    '<h3>As 12 leis que mais derrubam (para reler em voz alta)</h3><ol>'+
+    '<li>Dipirona/paracetamol NÃO são anti-inflamatórios; dipirona = hipotensão (recurso no hipertenso); paracetamol = NAPQI, teto 2 g crônico.</li>'+
+    '<li>Trato respiratório INFERIOR (asma, pneumonia) → zero AINE (LOX → leucotrienos); corticoide corta COX e LOX (lipocortina-1 → PLA2).</li>'+
+    '<li>Balanço TXA2 × PGI2: coxibe preserva TXA2 e derruba PGI2 → trombose; AAS baixo/irreversível 7–10 d; não seletivo "empata".</li>'+
+    '<li>COX-2 é constitutiva no rim: coxibe poupa estômago, não rim; AINE + IECA + diurético = triple whammy; lesão crônica irreversível.</li>'+
+    '<li>Números-pegadinha: cetorolaco 10 mg 6/6 h máx 40 ≤5 d; meloxicam 7,5–15; nimesulida 100 12/12 (<12 a proibida); celecoxibe 100–200; diclofenaco >150 mg/d renal; mefenâmico 250 mg 4/4–6/6 h (<14 a).</li>'+
+    '<li>Corticoide: agudo = prednisoLONA, crônico = prednisona; anti-inflamatório 5–20 mg × imunossupressor 1 mg/kg; manhã ≤10 h poupa o EIXO (não os EAs).</li>'+
+    '<li>Transcortina; t½ biológica ≠ plasmática; efeito 4–6 h (confiável 12 h+); dexa/beta sem mineralo; predniso(lo)na retém Na e excreta K.</li>'+
+    '<li>Retirada: ≤10–15 d direto; com doença de base = menor dose de remissão (10%/sem); ACTH perto de suspender; aldosterona preservada pelo SRAA; pulsoterapia ≠ dias alternados.</li>'+
+    '<li>Faixas: ADT 75–150 (noite) · duloxetina 60–120 (manhã) · gabapentina 900–3600 (3×) · pregabalina 300–600 (2×) · carbamazepina mono ≥600 (noite, indutora). Nunca gabapentina + pregabalina; mesma classe até 3×; latência 30 d.</li>'+
+    '<li>Canabinoides: THC+CBD agonistas CB1, só a combinação tem evidência; oral 5–20%; ≤0,2% THC controle especial × >0,2% Notificação A amarela; TCLE 2 vias; carbamazepina → subterapêutico; capsaicina: piora inicial + lavar as mãos.</li>'+
+    '<li>Opioides: μ1 SNC / μ2 GI; tolerância = β-arrestina (diária) × dependência = DESINIBIÇÃO dopaminérgica; depressão respiratória TOLERA; constipação, miose, convulsão NÃO; morfina = UGT (M3G convulsão / M6G analgesia), codeína = 2D6 (3A4 inativa); tramadol = serotoninérgica ("prova real da dipirona").</li>'+
+    '<li>Doses: codeína 15–30 mg 4/4–6/6 h (máx 240) · tramadol 50–100 mg 4/4–6/6 h (máx 400) · morfina 5–10 mg VO 4/4 h (VO 5 ≈ IV 1) · metadona 15–30 mg/d na dependência (tabela de equivalência) · fentanila adesivo 25 mcg/h 72 h ≈ morfina 50 mg/d; SUS só isolados (codeína, tramadol, morfina); naloxona = só depressão respiratória; naltrexona VO (+ bupropiona).</li>'+
+    '</ol></div>';
+  scoreQd();
+}
+function reset(){
+  state={obj:{},qd:{},chk:{},corrected:false,start:Date.now()};save();
+  $('result').className='hidden';$('result').innerHTML='';
+  render();window.scrollTo({top:0,behavior:'smooth'});
+}
+$('btnCorrigir').addEventListener('click',()=>correct(false));
+$('btnCorrigir2').addEventListener('click',()=>correct(false));
+$('btnRefazer').addEventListener('click',reset);
+
+/* relógio (tempo sugerido 90 min) */
+function tick(){
+  const s=Math.floor((Date.now()-(state.start||Date.now()))/1000);
+  const m=Math.floor(s/60),ss=s%60;
+  const el=$('clock');el.textContent=String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+  el.style.color=m>=90?'var(--red)':(m>=75?'var(--amber)':'#fff');
+}
+setInterval(tick,1000);tick();
+render();
+</script>
+</body>
+</html>

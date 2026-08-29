@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · SP4 — Dor Visceral & Nefrolitíase · Guia de Estudo</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:170px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIII</span>
+    <h1>SP4 — Dor Visceral & Nefrolitíase · <span style="color:var(--tealo)">Guia de estudo</span></h1>
+    <div class="sub">Formato v2: resumo denso primeiro → banco único de 25 questões (10 ENAMED + 15 nível prova) + descritiva com pesos → mapa mental, flashcards e Feynman. Fontes: aula da Verônica (Fisio · Dor visceral), aula + caderno de AINEs da Vânia, resumo da veterana (Tutoria UC13), Goldman-Cecil cap. 27 e 117, diretrizes SBN 2002 e <b>2025</b>.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+
+    <div class="panel">
+      <h2>0 · Os 5 objetivos do quadro (abertura 12/08)</h2>
+      <p><span class="k2">①</span> Dor visceral · <span class="k2">②</span> Dor referida × dor irradiada · <span class="k2">③</span> Nefrolitíase: definição, etiologia, diagnóstico, tratamento ambulatorial e cirúrgico · <span class="k2">④</span> Prescrição no PA e no paciente internado · <span class="k2">⑤</span> AINEs/opiáceos: efeitos colaterais.</p>
+      <p class="src">DDx anotados no quadro: pielonefrite · GECA · gravidez ectópica · cólica nefrética/biliar. Bibliografia do slide: diretriz de litíase urinária da SBN · Goldman-Cecil cap. 117 (Nefrolitíase) e cap. 27 (Dor) · Porto&Porto cap. 6 (dor como sintoma).</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Dor visceral — o que é e por que é diferente (aula da Verônica)</h2>
+      <p>Origina-se em <b>vísceras torácicas, abdominais ou pélvicas</b>, mesentério e serosas (pleura, pericárdio, peritônio). É <span class="hl">profunda, mal localizada, difusa</span> e vem <span class="hl">acompanhada de resposta autonômica</span>. É o tipo de dor mais frequente na prática.</p>
+      <h3>Quem conduz e o que dói</h3>
+      <ul>
+        <li>Nociceptores viscerais = predominantemente <b>fibras C</b> (amielínicas, lentas), que entram na medula em <b>vários níveis</b> junto com fibras autonômicas.</li>
+        <li><b>Estímulos adequados</b> (o que a víscera "sente"): <span class="k2">① distensão de víscera oca · ② isquemia (bradicinina, enzimas proteolíticas) · ③ espasmo de musculatura lisa · ④ inflamação</span>.</li>
+        <li><span class="hl">Cortar, esmagar ou queimar uma víscera NÃO costuma doer</span> — o cirurgião secciona alça intestinal sem dor. O que dói é distender/isquemiar/inflamar. Pegadinha clássica de prova.</li>
+      </ul>
+      <h3>Por que é mal localizada? (3 razões da Verônica)</h3>
+      <ul>
+        <li><b>Pouca representação cortical específica</b> das vísceras.</li>
+        <li><b>Convergência</b> de fibras viscerais e somáticas nos mesmos neurônios de 2ª ordem da medula.</li>
+        <li><b>Experiência prévia limitada</b> com os órgãos internos ("ninguém aprende onde fica o próprio pâncreas").</li>
+      </ul>
+      <p>Resultado: dor difusa, imprecisa e frequentemente <b>referida</b>. E ela <span class="hl">não é aleatória: segue mapa segmentar</span> — ex.: pâncreas (retroperitoneal, aferentes simpáticos <b>T5–T9</b>) → dor referida no <b>dorso</b>; coração → braço E/mandíbula; diafragma central (frênico, C3–C5) → <b>ombro</b>.</p>
+      <div class="note"><b>Caso-fio-condutor da aula:</b> mulher, 46 anos, dor epigástrica intensa há 4 h referida para o dorso, náuseas, sudorese fria, PA 90×60, FC 112 (pancreatite aguda). Tem todos os elementos: estímulo visceral (inflamação + distensão capsular + isquemia), má localização, referência segmentar ao dorso e resposta autonômica potente.</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Visceral × parietal — a regra das serosas</h2>
+      <p>A dor de origem visceral chega à superfície por <b>duas vias</b> (Guyton): a <b>via visceral</b> (profunda, mal localizada, referida) e a <b>via parietal</b> (pleura, pericárdio e peritônio <i>parietais</i> têm inervação <b>somática</b> — Aδ + C — com representação cortical precisa).</p>
+      <table>
+        <tr><th>Folheto</th><th>Inervação</th><th>Como dói</th></tr>
+        <tr><td><b>Visceral</b> (recobre o órgão)</td><td>Autonômica</td><td>Quase não dói à agressão mecânica; sensível a distensão, isquemia, inflamação → dor difusa/referida</td></tr>
+        <tr><td><b>Parietal</b> (parede)</td><td>Somática (intercostais, frênico…)</td><td>Dor intensa, <b>bem localizada</b>, <span class="hl">piora com movimento</span></td></tr>
+      </table>
+      <table>
+        <tr><th>Serosa</th><th>Folheto visceral</th><th>Folheto parietal</th></tr>
+        <tr><td>Pleura</td><td>Dor pouco definida</td><td>Dor em pontada que piora ao respirar → na pleurite o paciente respira superficialmente e evita tossir</td></tr>
+        <tr><td>Pericárdio</td><td>Pouca dor</td><td>Inervação <b>frênica</b>; piora com inspiração, decúbito dorsal e tosse; <span class="hl">melhora ao inclinar-se para a frente</span></td></tr>
+        <tr><td>Peritônio</td><td>Dor difusa</td><td>Dor fixa que piora ao movimento: tossir dói, andar dói, palpar dói, <b>descompressão brusca dói (Blumberg)</b></td></tr>
+      </table>
+      <ul>
+        <li>Mecânica do "piora ao mover": movimento desliza/traciona a membrana inflamada e ativa nociceptores mecanossensíveis; em repouso há pouca deformação.</li>
+        <li>Exceção clássica: peritônio diafragmático <b>central</b> irritado → dor <b>referida no ombro</b> (frênico).</li>
+      </ul>
+      <div class="warn"><b>Aplicação de beira de leito (a Verônica martelou):</b> paciente com dor abdominal que <b>fica imóvel</b> → pense em irritação <b>parietal</b> (peritonite). Paciente <b>inquieto, que não acha posição</b> → dor <b>visceral pura</b> (ex.: <b>cólica renal</b>). Cai em prova trocado.</div>
+      <p><b>Apendicite em 2 tempos</b> (ponte com o resumo da veterana): fase <b>visceral referida</b> = dor periumbilical mal localizada (aferentes ~T9–T10) → fase <b>somática parietal</b> = peritônio parietal inflamado, dor <b>bem localizada na FID</b>, piora com movimento/palpação.</p>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Resposta autonômica, sinais de alerta, idoso e sensibilização</h2>
+      <h3>Por que a dor visceral "vem com cortejo"?</h3>
+      <ul>
+        <li><b>Ativação simpática:</b> sudorese, taquicardia, palidez, vasoconstrição periférica.</li>
+        <li><b>Ativação vagal:</b> náusea, vômito, <b>hipotensão</b> (reflexo vagal intenso), alteração de motilidade (até diarreia). IAM de parede <b>inferior</b> → resposta vagal com bradicardia + hipotensão + náuseas.</li>
+        <li>Razões (Verônica): ① conexões centrais — a via <b>medial</b> da dor (espinorreticular, espinomesencefálica, núcleos talâmicos intralaminares) ativa fortemente formação reticular, hipotálamo e sistema límbico; ② as fibras viscerais <b>viajam junto com fibras autonômicas</b> e entram na medula com elas; ③ o tipo de estímulo (distensão/isquemia/inflamação/tração) tem alto valor biológico de ameaça.</li>
+        <li><span class="hl">Pegadinha da aula:</span> dor <b>somática intensa também</b> pode dar sudorese/náusea/taquicardia — a diferença é de <b>frequência e intensidade</b>, e <b>o fator decisivo NÃO é ser fibra C</b> (pele também tem fibra C): é a <b>conexão central</b> dessas fibras com os centros autonômicos.</li>
+      </ul>
+      <h3>Sinais de alerta (nunca banalizar)</h3>
+      <p>Dor visceral + <b>hipotensão</b> · + <b>alteração de consciência</b> · + <b>sudorese intensa</b> · dor que <b>desperta do sono</b> · <b>idoso com dor atípica/vaga</b>. Podem indicar causa com risco de vida: IAM, obstrução intestinal, pancreatite aguda, peritonite.</p>
+      <h3>Idoso</h3>
+      <p>Menor propensão a sentir dor e maior chance de apresentação <b>atípica</b> (↓densidade de nociceptores, alteração de condução e autonômica) → <span class="hl">eventos isquêmicos silenciosos</span> (IAM sem dor, isquemia mesentérica com dor desproporcional ao exame).</p>
+      <h3>Sensibilização visceral e hiperalgesia visceral</h3>
+      <ul>
+        <li>Mecanismos: sensibilização dos aferentes primários da víscera · hiperexcitabilidade central (neurônios de 2ª ordem) · desregulação da modulação descendente.</li>
+        <li><b>Hiperalgesia visceral</b> = estímulos normais passam a doer (deglutir com esofagite; distensão fisiológica da bexiga na cistite).</li>
+        <li>Exemplos clínicos de sensibilização: <b>síndrome do intestino irritável, cistite intersticial, endometriose, dor pélvica crônica</b> — ponte com a dor nociplástica da SP3.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Dor torácica na prática (tabelas da Verônica)</h2>
+      <table>
+        <tr><th>Característica</th><th>IAM</th><th>Pleurite</th><th>Pericardite</th><th>Musculoesquelética</th></tr>
+        <tr><td>Tipo</td><td><b>Opressiva</b></td><td>Pontada</td><td>Pontada</td><td>Localizada</td></tr>
+        <tr><td>Piora com movimento/respiração?</td><td><b>Não</b></td><td>Sim (respirar)</td><td>Sim (respirar/deitar; melhora inclinado à frente)</td><td>Sim (reproduz à palpação)</td></tr>
+        <tr><td>Resposta autonômica</td><td><b>Frequente</b></td><td>Rara</td><td>Pode ocorrer</td><td>Rara</td></tr>
+        <tr><td>Referida para</td><td>Braço/mandíbula</td><td>Ombro (frênico)</td><td><b>Trapézio</b></td><td>Não</td></tr>
+      </table>
+      <table>
+        <tr><th></th><th>IAM</th><th>Costocondrite</th><th>DRGE</th></tr>
+        <tr><td>Tipo de dor</td><td>Opressiva</td><td>Pontada</td><td><b>Queimação</b></td></tr>
+        <tr><td>Localização</td><td>Retroesternal</td><td>Localizada (reproduz à palpação)</td><td>Epigástrica</td></tr>
+        <tr><td>Autonômica</td><td>Sim</td><td>Raro</td><td>Não típica</td></tr>
+        <tr><td>Referida</td><td>Mandíbula, braço</td><td>Não</td><td>Não</td></tr>
+      </table>
+      <ul>
+        <li>Raciocínio em 4 passos: piora com respiração → pleura/pericárdio · opressiva + autonômica → visceral cardíaca · referida braço/mandíbula → convergência segmentar cardíaca · reproduz à palpação → musculoesquelética.</li>
+        <li>IAM: dor subesternal visceral profunda referida para dorso/mandíbula/braços; náuseas e vômitos por ① dor intensa estimulando NTS + zona de gatilho quimiorreceptora, ② isquemia ativando os mesmos centros, ③ catecolaminas ↓motilidade gástrica, ④ resposta vagal (parede inferior). Sudorese fria/taquicardia = simpático; hiperglicemia/PA↑ = eixo HPA (CRH→ACTH→cortisol).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Dor referida × dor irradiada (objetivo ②)</h2>
+      <table>
+        <tr><th></th><th>Dor REFERIDA</th><th>Dor IRRADIADA (radicular)</th></tr>
+        <tr><td>Definição</td><td>Sentida <b>longe da origem</b>, em área que <b>não</b> corresponde a trajeto de nervo — no dermátomo/miótomo do <b>mesmo segmento medular</b> do órgão lesado</td><td>Sentida à distância <b>ao longo do território da raiz/nervo</b> cuja estimulação gera a dor</td></tr>
+        <tr><td>Mecanismo</td><td><b>Convergência sináptica</b> viscerossomática no corno posterior ("erro de endereço" cortical)</td><td>Estiramento, torção, <b>compressão ou irritação de raiz espinhal</b> (central ao forame) ou nervo</td></tr>
+        <tr><td>Exemplos</td><td>IAM → face interna do braço E (T1) e mandíbula · pâncreas → dorso · diafragma → ombro · apendicite inicial → periumbilical</td><td><b>Ciatalgia</b> por hérnia discal (desce pela perna) · cervicobraquialgia · neuralgia intercostal</td></tr>
+        <tr><td>Caráter/pistas</td><td>Acompanha a intensidade e duração do estímulo visceral; hiperalgesia referida no mesmo dermátomo; costuma se restringir ao segmento espinal</td><td>Em choque/fisgada (Aδ), <b>piora com Valsalva</b> (tosse/evacuar), Lasègue/Bragard +, pode ter parestesia/déficit</td></tr>
+      </table>
+      <div class="warn"><b>Pegadinha nº 1 do semestre (já caiu na APF da SP1 — Q8):</b> isquemia miocárdica → braço esquerdo = <b>REFERIDA</b> (não segue nervo). Hérnia de disco → perna = <b>IRRADIADA</b> (segue a raiz). Quem troca, erra.</div>
+      <p><b>E a cólica renal?</b> Na semiologia (Porto) descreve-se a dor lombar <b>"com irradiação típica"</b> para flanco → fossa ilíaca → virilha/testículo/grandes lábios, acompanhando a descida do cálculo. O mecanismo fisiológico dessa topografia é <b>segmentar</b> (aferentes do rim/ureter ~T10–L1 convergindo com os dermátomos correspondentes — o mesmo mapa da dor referida). Na prova: use "irradiação típica da cólica ureteral" para descrever o quadro clínico e reserve "dor irradiada" <i>stricto sensu</i> para dor de raiz/nervo; se a questão cobrar mecanismo, responda <b>convergência segmentar</b>.</p>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Nefrolitíase — do cristal à cólica (Goldman-Cecil cap. 117)</h2>
+      <h3>Definição e patogênese</h3>
+      <ul>
+        <li>Doença calculosa renal: cálculos se formam quando a <b>supersaturação</b> urinária dos componentes excede a solubilidade — e os <b>inibidores de cristalização</b> (principal: <b>citrato</b>) não dão conta.</li>
+        <li>Início frequente: depósitos de <b>fosfato de cálcio no interstício</b> que se estendem até a papila (<b>placa de Randall</b>), sobre a qual crescem cálculos de oxalato de cálcio.</li>
+        <li>É um <b>distúrbio sistêmico</b>: predispõem má absorção intestinal, <b>hiperparatireoidismo primário</b>, obesidade, DM2, <b>acidose tubular renal distal</b>. Associa-se a HAS, gota, doença cardiovascular, colelitíase, ↓densidade óssea e DRC.</li>
+        <li>Epidemiologia: pico de incidência na <b>3ª–4ª décadas</b>; prevalência sobe até ~70 anos (homens) e ~60 (mulheres); homens > mulheres; <b>recorrência é a regra</b> (~50% em 10 anos sem prevenção).</li>
+      </ul>
+      <h3>Tipos de cálculo</h3>
+      <table>
+        <tr><th>Tipo</th><th>Freq.</th><th>Chaves</th></tr>
+        <tr><td><b>Cálcio</b> (oxalato ≫ fosfato)</td><td><b>70–80%</b></td><td>Hipercalciúria (a causa + comum), hiperoxalúria, hiperuricosúria, <b>hipocitratúria</b>; forte componente genético; radiopacos</td></tr>
+        <tr><td><b>Ácido úrico</b></td><td>~10%</td><td><b>pH urinário baixo</b> + volume baixo ± hiperuricosúria; obesidade/resistência insulínica/DM2; <span class="hl">RADIOTRANSPARENTE no RX</span> (aparece na TC); pode <b>dissolver com alcalinização</b></td></tr>
+        <tr><td><b>Estruvita</b> (fosfato de Mg–amônio; "fosfato triplo")</td><td>10–25%</td><td>Só com <b>bactéria produtora de UREASE</b> + urina alcalina (pH ≥ 7): <b>Proteus</b>, Klebsiella, S. epidermidis, Mycoplasma. <span class="hl">E. coli NÃO produz urease.</span> Maioria dos <b>coraliformes</b>; mulheres com ITU de repetição</td></tr>
+        <tr><td><b>Cistina</b></td><td>1–2%</td><td>Cistinúria (autossômica recessiva): ↓reabsorção tubular dos aminoácidos dibásicos <b>C</b>istina-<b>O</b>rnitina-<b>L</b>isina-<b>A</b>rginina ("COLA"); solubilidade ~300 mg/L; início jovem; cálculo duro</td></tr>
+      </table>
+      <h3>Quadro clínico</h3>
+      <ul>
+        <li><b>Cólica ureteral:</b> dor de início abrupto no flanco, intensa/excruciante ("a pior dor da vida"), que <b>migra</b> para abdome inferior, virilha, testículo/grandes lábios conforme o cálculo desce; paciente <b>inquieto</b>; náuseas/vômitos; Giordano pode ser +. Só alivia quando o cálculo é eliminado/removido.</li>
+        <li><b>Hematúria</b> micro ou macroscópica é comum (às vezes indolor) — mas <span class="hl">a ausência de hematúria NÃO exclui</span>, e cálculo no exame não exclui outra causa da dor.</li>
+        <li>Cálculos grandes podem ser <b>assintomáticos</b>; obstrução pode ser <b>indolor</b> → litíase entra no DDx de lesão renal aguda/crônica inexplicada.</li>
+        <li><span class="hl">ITU + cálculo obstrutivo = "PUS SOB PRESSÃO"</span> → emergência urológica: desobstrução urgente.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>7 · Nefrolitíase — diagnóstico e diferenciais</h2>
+      <ul>
+        <li><b>TC helicoidal SEM contraste = padrão-ouro</b>: sensibilidade e especificidade <b>&gt; 95%</b>; a densidade (UH) sugere composição; ainda identifica causas alternativas da dor. (SBN 2025 aceita começar com <b>USG + RX simples</b> e usar <b>TC de baixa dose</b> para confirmar — realidade de PS/SUS.)</li>
+        <li><b>USG:</b> rápida, sem radiação, detecta hidronefrose; sensibilidade ~<b>85%</b> para cálculo ureteral sintomático → <span class="hl">exame de escolha na GESTANTE</span>.</li>
+        <li><b>RX simples de abdome:</b> só calcificações ≥ 2–3 mm e sem sobreposição de gás/osso; <b>radiopacos</b> = cálcio, estruvita, cistina (fracamente); <b>radiotransparente</b> = ácido úrico.</li>
+        <li><b>Laboratório:</b> parcial de urina (hematúria, leucocitúria, pH, nitrito), <b>creatinina/ureia</b> (função renal), hemograma; <b>urocultura</b> se suspeita de infecção.</li>
+        <li><b>Análise do cálculo eliminado</b> (coar a urina!): padrão-ouro = espectroscopia infravermelha/difração de raios-X (SBN 2025).</li>
+      </ul>
+      <h3>Diagnóstico diferencial (inclui os do quadro)</h3>
+      <p>Pielonefrite aguda · GECA · <b>gravidez ectópica rota</b> (β-hCG em mulher em idade fértil!) · rotura de cisto/torção ovariana · apendicite · diverticulite · colecistite/cólica biliar · obstrução intestinal · isquemia mesentérica · carcinoma de células renais · ITU baixa · herpes zoster.</p>
+      <div class="warn"><b>Pegadinha "mata-idoso":</b> primeira "cólica renal" da vida em &gt; 60 anos com fator de risco vascular → antes de rotular, pense em <b>aneurisma de aorta abdominal em expansão/rotura</b> — a TC (que você já pediria) diferencia. Idoso + dor lombar + hipotensão ≠ pedra até prova em contrário.</div>
+    </div>
+
+    <div class="panel">
+      <h2>8 · Nefrolitíase — tratamento da crise, expulsiva e cirurgia</h2>
+      <h3>Crise de cólica renal (PA)</h3>
+      <ul>
+        <li><b>AINE é 1ª linha</b> e é <b>tão ou MAIS eficaz que opioide</b>, com menos efeitos adversos — além de analgesia, ↓síntese de prostaglandinas → <b>↓pressão intraluminal ureteral e do espasmo</b>. Opções: <b>diclofenaco IM</b>, <b>cetoprofeno IM/IV</b>, cetorolaco IV, ibuprofeno VO (se tolerar VO).</li>
+        <li><b>Dipirona IV</b> (efeito também <b>espasmolítico</b>) pode ser associada — "não opioide mais usado no Brasil" (SBN 2025).</li>
+        <li><b>Opioide = resgate</b> (dor refratária): tramadol IV lento (cuidado: náusea) ou <b>morfina IV titulada</b>, reavaliando a cada 15–30 min.</li>
+        <li><b>Antiemético</b> se náuseas/vômitos: ondansetrona IV; metoclopramida IV (risco extrapiramidal).</li>
+        <li><b>Hidratação:</b> manter <b>normovolemia</b> (SF 0,9%/RL 500–1000 mL com cautela) — <span class="hl">NEM hidratação vigorosa NEM diurético ajudam a expulsar o cálculo</span> (SBN 2025: hidratação IV "para forçar passagem" deve ser <b>evitada</b>). AINE + desidratação = risco de LRA.</li>
+        <li>Escopolamina/hioscina: efeito <b>controverso e limitado</b> (SBN 2025) — quem reduz a pressão no ureter é o AINE.</li>
+        <li>Jejum se houver chance de intervenção cirúrgica.</li>
+      </ul>
+      <h3>Chance de eliminação espontânea (memorize os nº do Goldman — bibliografia da SP)</h3>
+      <table>
+        <tr><th>Tamanho</th><th>≤ 5 mm</th><th>5–7 mm</th><th>7–9 mm</th><th>≥ 9 mm</th></tr>
+        <tr><td>Eliminação espontânea</td><td><b>~70%</b></td><td>~60%</td><td>~48%</td><td>~25%</td></tr>
+      </table>
+      <p class="src">SBN 2025 traz números por altura: &lt;5 mm até 80%; &gt;7 mm — proximal ~25%, médio ~45%, distal ~70%. Regra transversal: <b>quanto menor e mais distal, mais sai sozinho</b>.</p>
+      <h3>Terapia expulsiva medicamentosa (TEM)</h3>
+      <ul>
+        <li>Candidatos: cálculo ureteral <b>&lt; 10 mm</b> (maior benefício: <b>distal de 5–10 mm</b>; +44% de chance de eliminação — SBN 2025), <b>dor controlada, função renal normal, SEM infecção</b>/obstrução grave.</li>
+        <li><b>Tansulosina 0,4 mg/dia à noite</b> (alfabloqueador; alternativas: terazosina, doxazosina; ou nifedipino) por <b>4–6 semanas</b>, com reavaliação por imagem. Também usada pós-litotripsia para eliminar fragmentos.</li>
+      </ul>
+      <h3>Tratamento cirúrgico</h3>
+      <table>
+        <tr><th>Método</th><th>Indicação-tipo</th><th>Observações</th></tr>
+        <tr><td><b>LECO/LOCE</b> (ondas de choque extracorpóreas)</td><td>Cálculos renais/ureterais proximais menores (&lt; 2 cm)</td><td>Fragmenta para eliminação espontânea; <span class="hl">resistem:</span> cálculos duros (cistina, brushita, oxalato monoidratado, &gt; 1000 UH); evitar em infecção ativa, gestação, coagulopatia</td></tr>
+        <tr><td><b>Ureterolitotripsia endoscópica (URS)</b> ± laser</td><td>Cálculos ureterais (sobretudo distais) e renais menores</td><td>Rígida (distal) ou flexível (proximal/renal)</td></tr>
+        <tr><td><b>Nefrolitotomia percutânea (NLP)</b></td><td><b>&gt; 2 cm, coraliformes</b>, complexos</td><td>Via de escolha minimamente invasiva para cálculos grandes</td></tr>
+        <tr><td>Nefrolitotomia <b>anatrófica</b> (aberta)</td><td>Casos complexos selecionados</td><td>Prioriza preservar parênquima/função</td></tr>
+        <tr><td><b>Duplo J / nefrostomia percutânea</b></td><td><b>Desobstrução URGENTE</b></td><td>Pielonefrite obstrutiva ("pus sob pressão"), LRA obstrutiva — primeiro desobstrui + ATB; o cálculo se resolve <b>depois</b> de estabilizar</td></tr>
+      </table>
+      <p><b>Remoção precoce</b> se: obstrução, infecção, dor intratável, cálculo grande/proximal (baixa chance de sair sozinho).</p>
+    </div>
+
+    <div class="panel">
+      <h2>9 · Nefrolitíase — tratamento ambulatorial e prevenção (SBN 2025 + veterana)</h2>
+      <h3>Para todos (medidas gerais)</h3>
+      <ul>
+        <li><b>Líquidos: ~30 mL/kg/dia</b> (diurese-alvo ≥ 2–2,5 L/d, urina clara); atividade física.</li>
+        <li><b>Dieta:</b> <b>↓sódio</b>, <b>proteína animal moderada</b>, <span class="hl">CÁLCIO NORMAL na dieta (1000–1200 mg) — NÃO restringir!</span> Restringir cálcio ↑absorção de oxalato livre e ↑risco. ↓Oxalato (espinafre, beterraba, nozes, chocolate, chá preto) se hiperoxalúria; <b>estimular cítricos/potássio/frutas</b>; padrão DASH/mediterrâneo.</li>
+        <li>Suplementos que <b>aumentam</b> risco: cálcio isolado (fora das refeições, +20%) e <b>vitamina C &gt; 1 g/d</b> (+16% — vira oxalato).</li>
+      </ul>
+      <h3>Investigação metabólica (quem e como)</h3>
+      <ul>
+        <li>Indicação: <b>recorrentes</b>, bilaterais/múltiplos, 1º episódio de alto risco, <b>rim único</b>, criança, cálculo não-cálcico.</li>
+        <li><b>Urina de 24 h ×2</b> (dias não consecutivos, dieta habitual), <b>3–8 semanas após</b> eliminar o cálculo, sem duplo J/ITU: volume, Ca, Na, K, oxalato, <b>citrato</b>, ácido úrico, pH, creatinina. Sangue: creatinina, eletrólitos, ácido úrico, HCO₃, <b>cálcio + PTH</b> (caçar hiperpara 1º!). Reavaliar 24 h em 3–6 meses após iniciar tratamento.</li>
+      </ul>
+      <h3>Fármaco certo para o distúrbio certo</h3>
+      <table>
+        <tr><th>Distúrbio/cálculo</th><th>Tratamento</th><th>Doses (SBN 2025)</th></tr>
+        <tr><td><b>Hipercalciúria</b></td><td><b>Tiazídicos</b> (+ restrição de Na)</td><td>HCTZ 25 mg 2×/d ou 50 mg/d · clortalidona 25–50 mg/d · indapamida SR 1,5 mg/d (monitorar K⁺)</td></tr>
+        <tr><td><b>Hipocitratúria</b> / ATR distal</td><td><b>Citrato de potássio</b></td><td>20–60 mEq/d (até 90 na cistinúria)</td></tr>
+        <tr><td><b>Hiperuricosúria</b> com cálculo de cálcio</td><td><b>Alopurinol</b></td><td>100–300 mg/d (Ettinger: 100 mg 3×/d)</td></tr>
+        <tr><td><b>Cálculo de ácido úrico</b></td><td><b>Alcalinização urinária</b> (dissolve!)</td><td>Citrato de K até <b>pH &gt; 6,5</b> ± alopurinol se hiperuricosúria</td></tr>
+        <tr><td><b>Estruvita</b></td><td>Remoção COMPLETA + erradicar ITU</td><td>Fragmento residual perpetua infecção</td></tr>
+        <tr><td><b>Cistina</b></td><td>Hiper-hidratação + citrato (pH &gt; 6,5–7) → tiopronina/D-penicilamina se refratário</td><td>D-penicilamina 500–1500 mg/d + piridoxina</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>10 · Prescrição no PA e no paciente internado (objetivo ④)</h2>
+      <h3>Objetivos no PA</h3>
+      <p>① Alívio <b>rápido</b> da dor (prioridade nº 1) · ② hidratação/suporte · ③ avaliação clínica + imagem · ④ identificar complicação (obstrução grave, infecção) → decidir <b>alta × internação</b>.</p>
+      <h3>Modelo de prescrição do PA (cólica renal não complicada)</h3>
+      <table>
+        <tr><th>#</th><th>Item</th><th>Exemplo (adulto, sem alergias/comorbidades)</th></tr>
+        <tr><td>1</td><td>Dieta</td><td>Jejum até definir conduta (pode precisar de cirurgia)</td></tr>
+        <tr><td>2</td><td>Hidratação</td><td>SF 0,9% 500–1000 mL IV, velocidade moderada (normovolemia; cautela se cardiopata)</td></tr>
+        <tr><td>3</td><td>AINE</td><td><b>Cetoprofeno 100 mg IV</b> (diluído, lento) <i>ou</i> <b>diclofenaco 75 mg IM</b></td></tr>
+        <tr><td>4</td><td>Analgésico/antiespasmódico</td><td><b>Dipirona 1 g IV</b> (dose de ataque da Vânia) 6/6 h</td></tr>
+        <tr><td>5</td><td>Antiemético</td><td>Ondansetrona 4–8 mg IV (ou metoclopramida 10 mg IV — vigiar extrapiramidal)</td></tr>
+        <tr><td>6</td><td>Opioide de resgate (S/N)</td><td>Tramadol 50–100 mg IV lento <i>ou</i> morfina 2–4 mg IV titulada; <b>reavaliar em 15–30 min</b></td></tr>
+        <tr><td>7</td><td>Cuidados</td><td>Sinais vitais, controle de diurese, <b>coar urina</b> (mandar cálculo p/ análise), reavaliação médica</td></tr>
+      </table>
+      <p><b>Critérios de ALTA:</b> dor controlada + ausência de complicação (sem febre, função renal normal, sem obstrução bilateral/rim único). <b>Receita de alta:</b> AINE VO por 3–5 dias (ex.: ibuprofeno 600 mg 8/8 h) + dipirona 1 g VO 6/6 h S/N + <b>tansulosina 0,4 mg/noite</b> (se cálculo distal &lt;10 mm) + orientações: líquidos, coar urina, <b>retornar se febre, vômitos incoercíveis, anúria ou dor refratária</b>; encaminhar urologia/nefro.</p>
+      <h3>Quando internar</h3>
+      <p><b>Dor refratária</b> · <b>pielonefrite obstrutiva/sepse</b> · <b>obstrução bilateral ou rim único</b> · <b>LRA</b> · vômitos incoercíveis · cálculo grande/impactado · gestante complicada.</p>
+      <h3>Modelo de prescrição do internado (ex.: pielonefrite obstrutiva pós-desobstrução)</h3>
+      <table>
+        <tr><th>#</th><th>Item</th><th>Exemplo</th></tr>
+        <tr><td>1</td><td>Identificação/leito</td><td>Nome completo, registro, leito, data — e <b>legível</b>, com dose-via-intervalo em TODOS os itens</td></tr>
+        <tr><td>2</td><td>Dieta</td><td>Zero (se programação cirúrgica) ou livre/leve conforme caso</td></tr>
+        <tr><td>3</td><td>Hidratação venosa</td><td>SF 0,9% ou RL contínuo, ajustar por <b>balanço hídrico</b></td></tr>
+        <tr><td>4</td><td>Antibiótico (se ITU)</td><td><b>Ceftriaxona 1–2 g IV 1×/d</b> (ou cefepima); <b>sepse/grave:</b> piperacilina-tazobactam ou meropenem — <span class="hl">sempre colher urocultura ANTES e descalonar depois</span></td></tr>
+        <tr><td>5</td><td>Analgesia fixa</td><td>Dipirona 1 g IV 6/6 h + AINE IV/VO conforme função renal</td></tr>
+        <tr><td>6</td><td>Analgesia de resgate (S/N)</td><td>Morfina em bolus intermitente se dor persistente</td></tr>
+        <tr><td>7</td><td>Antiemético S/N</td><td>Ondansetrona 4 mg IV 8/8 h S/N</td></tr>
+        <tr><td>8</td><td>Profilaxias</td><td><b>TEV:</b> enoxaparina 40 mg SC 1×/d (se sem contraindicação); proteção gástrica se fator de risco + AINE</td></tr>
+        <tr><td>9</td><td>Cuidados/monitorização</td><td>SSVV 6/6 h, débito urinário, balanço hídrico, curva térmica; <b>avisar plantão se</b> febre, oligúria, hipotensão, piora da dor</td></tr>
+        <tr><td>10</td><td>Conduta urológica</td><td><b>Duplo J ou nefrostomia</b> se obstrução + infecção/LRA; tratamento definitivo do cálculo (LECO/URS/NLP) <b>após estabilizar</b>; tansulosina se conduta expulsiva</td></tr>
+      </table>
+      <div class="warn"><b>LRA na prescrição:</b> se creatinina subiu (obstrução/desidratação), <b>tire o AINE</b> da prescrição — analgesia com dipirona + opioide. AINE em rim obstruído/desidratado piora a perfusão renal (COX-2/PGE₂-PGI₂).</div>
+      <h3>Receituário na alta (Portaria 344/98 — o que cai)</h3>
+      <ul>
+        <li><b>AINEs/dipirona/paracetamol:</b> receita comum (vários são MIPs — isentos de prescrição; paracetamol "fora do balcão", naproxeno ≤ 400 mg).</li>
+        <li><b>Tramadol/codeína:</b> <b>Receita de Controle Especial branca em 2 vias</b> (1ª via retida na farmácia).</li>
+        <li><b>Morfina, oxicodona, fentanil, metadona (opioides fortes):</b> <b>Notificação de Receita A (amarela)</b>, numerada, retida, quantidade limitada (até 30 dias de tratamento).</li>
+        <li>Coxibes: a Vânia frisou em aula que há <b>retenção de receita</b> (venda controlada, uso restrito ≤ 14 dias pelo risco trombótico).</li>
+        <li>Boas práticas (Lei 9.787): prescrever pela <b>DCB/genérico</b> no SUS, sem abreviaturas perigosas, com dose-via-intervalo-duração.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>11 · AINEs — efeitos colaterais: a lógica (aula da Vânia + Goldman)</h2>
+      <h3>A fisiologia que explica tudo</h3>
+      <ul>
+        <li><b>COX-1</b> (constitutiva): PGE₂ gástrica (<b>muco + bicarbonato</b> = proteção), PGE₂ uterina (contração), <b>TXA2 plaquetário</b> (agregação + vasoconstrição).</li>
+        <li><b>COX-2</b> (induzível na inflamação, MAS constitutiva em 2 lugares-chave): <b>endotélio → PGI2</b> (vasodilata + antiagrega, contrapõe o TXA2) e <b>rim → PGE₂/PGI2</b> (mantêm o fluxo renal, vasodilatando a arteríola aferente contra noradrenalina/angiotensina II).</li>
+        <li><b>COX-3/COX-central (SNC):</b> PGE₂ hipotalâmica = <b>febre</b>. É onde dipirona e paracetamol agem.</li>
+        <li>Se a COX é inibida, sobra ácido araquidônico para a <b>LOX → leucotrienos</b> (broncoconstrição, ↑muco) → por isso <span class="hl">NUNCA AINE em inflamação de trato respiratório INFERIOR</span> (asma/broncoespasmo induzido por AINE/AAS) — trata-se com corticoide (inibe a fosfolipase A2, corta a cascata inteira).</li>
+      </ul>
+      <h3>Efeitos adversos por sistema (a lista da Vânia — "semelhantes para todos")</h3>
+      <table>
+        <tr><th>Sistema</th><th>Efeitos</th><th>Mecanismo</th></tr>
+        <tr><td><b>TGI</b></td><td>Dor abdominal, dispepsia, náuseas, <b>úlceras e sangramentos</b></td><td>↓COX-1 → ↓muco/bicarbonato/fluxo submucoso → mucosa exposta ao HCl. <span class="hl">Exceções: dipirona, paracetamol e seletivos COX-2</span></td></tr>
+        <tr><td><b>Renal</b></td><td>IRA (reversível ao suspender), <b>hipercalemia</b>, proteinúria, retenção de Na/H₂O</td><td>↓PGE₂/PGI2 renais → perde a vasodilatação compensatória. Risco: <b>idoso, desidratado, DM, HAS, DRC, uso crônico</b>; em jovem saudável dose terapêutica quase não altera</td></tr>
+        <tr><td><b>Cardiovascular</b></td><td>Retenção hídrica, <b>hipertensão</b>, edema; raramente IAM e ICC</td><td>↓PGI2/PGE₂ → vasoconstrição + retenção de sódio; coxibes: desequilíbrio <b>PGI2×TXA2</b> → pró-trombótico</td></tr>
+        <tr><td>Hematológico</td><td>Raros: trombocitopenia, neutropenia, anemia aplásica</td><td>—</td></tr>
+        <tr><td>Hepático</td><td>↑transaminases; raramente insuficiência (paracetamol = o mais hepatotóxico)</td><td>—</td></tr>
+        <tr><td>Pulmonar</td><td><b>Asma</b>/broncoespasmo</td><td>Desvio para LOX/leucotrienos</td></tr>
+        <tr><td>Cutâneo</td><td>Exantemas, prurido</td><td>—</td></tr>
+        <tr><td>SNC</td><td>Cefaleia, zumbido, tontura (cefaleia por AINE: suspender e investigar)</td><td>—</td></tr>
+      </table>
+      <h3>Risco cardiovascular × gastrointestinal (artigo extra da Vânia — Rheumatol Forum 2024)</h3>
+      <ul>
+        <li><b>Ibuprofeno (e naproxeno) bloqueiam o sítio da COX-1 plaquetária e ANULAM o efeito antiagregante do AAS</b> (ESC, classe III) → em quem usa AAS 100 mg: <b>evitar ibuprofeno</b>; se AINE inevitável, tomar o AAS ≥ 2 h antes.</li>
+        <li><b>Pós-síndrome coronariana aguda: NENHUM AINE por 3–6 meses.</b></li>
+        <li><b>Alto risco CV</b> → preferir <b>naproxeno</b> (sem AAS) ou cetoprofeno (com AAS); <b>alto risco GI</b> → <b>coxibe + IBP</b> (ou cetoprofeno + IBP); <b>ambos altos</b> → terapia tópica. IBP protege só o <b>TGI alto</b>.</li>
+        <li>PRECISION: <b>celecoxibe</b> = menos complicação GI que naproxeno/ibuprofeno, CV não pior, e <b>menos dano renal que ibuprofeno</b>. EMA: alerta para <b>diclofenaco</b> em risco vascular (composite +27%).</li>
+        <li>Pressão arterial: pior com <b>ibuprofeno, indometacina, naproxeno</b>; neutros: cetoprofeno, aceclofenaco, nimesulida; AAS 100 mg não altera PA (HOT).</li>
+        <li>Anticoagulados com NOACs (rivaroxabana/apixabana/dabigatrana): <b>naproxeno não recomendado</b> (interação).</li>
+        <li><b>Gestação:</b> AINEs categoria D no <b>3º trimestre</b> (fechamento precoce do ducto arterioso; ex-SP3) · paracetamol categoria B · <b>dengue: AAS e AINEs contraindicados</b> (trombocitopenia + antiagregação = hemorragia).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>12 · AINEs fármaco a fármaco — o caderno da Vânia (ela cobra o que FALA)</h2>
+      <table>
+        <tr><th>Fármaco</th><th>Posologia-chave</th><th>Marca registrada de prova</th></tr>
+        <tr><td><b>Paracetamol</b> (COX-3; "analgésico não opiáceo", SEM ação anti-inflamatória)</td><td>500 mg (SUS)–750 mg 6/6 h · <b>máx 4 g/d agudo · 2 g/d crônico</b></td><td>Hepatotóxico nº 1: CYP2E1 → <b>NAPQI</b>, neutralizado pela glutationa; risco↑ com etilismo, jejum, desnutrição e <b>indutores</b> (carbamazepina, isoniazida, rifampicina, fenobarbital, fenitoína). <b>Gestação B</b>, lactação ok, MIP. Antitérmico LENTO (2–3 h)</td></tr>
+        <tr><td><b>Dipirona</b> (COX-3 central + NMDA + opioidérgico κ + 5-HT1 + canais K⁺-ATP; espasmolítica)</td><td>500–1000 mg 6/6 h · <b>1 g = dose de ataque</b> · ação em 30–40 min</td><td><b>Agranulocitose: imunoalérgica, NÃO dose-dependente</b>, a qualquer momento (febre + dor de garganta + lesões de mucosa → parar e procurar serviço). Hipotensão (IV rápido). <b>Hipotermia se febre baixa</b>/associação de antitérmicos. <span class="hl">NÃO é nefrotóxica</span> (não inibe COX-2 renal) e poupa TGI</td></tr>
+        <tr><td><b>AAS</b> (inibição <b>IRREVERSÍVEL</b> COX-1&gt;2)</td><td>Antiagregante <b>100 mg/d</b> · analgésico 500 mg (pouco usado)</td><td>Plaqueta inibida por <b>5–7 dias</b> → <b>suspender 7 d antes de cirurgia</b>. <b>Síndrome de Reye</b> (criança com virose) · <b>dengue = contraindicado</b> · úlcera/anticoagulado · gestação D. Vânia: "tem a propriedade antitérmica, mas NÃO se usa como antitérmico"</td></tr>
+        <tr><td><b>Ibuprofeno</b> (COX-1/2/3)</td><td>200–400 mg (dor/febre) até 400–800 mg 3–4×/d (anti-inflamatório) · <b>máx 3.200 mg/d</b></td><td>Anula o AAS (não usar juntos) · desuso como antitérmico no Brasil (dengue) · contraindicado em febre a esclarecer e 3º tri</td></tr>
+        <tr><td><b>Naproxeno</b></td><td>275 mg 1–2×/d ou 500–550 mg 1×/d · MIP ≤ 400 mg</td><td>Preferido no <b>alto risco CV</b>; interage com <b>NOACs</b>; meia-vida longa (1×/d)</td></tr>
+        <tr><td><b>Cetoprofeno</b> (Profenid/Bi-Profenid)</td><td>50–75 mg 3–4×/d (máx 300) · <b>IV 100 mg</b> · retard 150–200</td><td>Cavalo de batalha <b>intra-hospitalar</b> (IM/IV na dor aguda intensa — cólica renal!) · <span class="hl">único AINE tomado LONGE das refeições</span> (alimento ↓absorção) · PA-neutro</td></tr>
+        <tr><td><b>Diclofenaco</b> (Voltaren/Cataflan)</td><td>50–75 mg 8/8 h (100–200 mg/d em 2–3 tomadas) · <b>&gt; 150 mg/d = risco renal</b></td><td><b>Hepatotoxicidade em ~15%</b> (transaminases) · <b>sem ação antitérmica</b> → associa dipirona/paracetamol · alergia cruzada com AAS · alerta CV da EMA · sais mudam só a velocidade (colestiramina 12/12 h)</td></tr>
+        <tr><td><b>Nimesulida</b> (preferencial COX-2)</td><td>50–100 mg 12/12 h por 3–5 d · não &lt; 12 anos</td><td><b>AINE mais vendido do Brasil</b> · menos queixa GI (afinidade dose-dependente) · Vânia: <span class="hl">"não reconhece a COX-3 → sem ação antitérmica"</span> · oligúria/transaminases</td></tr>
+        <tr><td><b>Meloxicam</b> (preferencial COX-2)</td><td>7,5–15 mg 1×/d</td><td>Inflamação osteomioarticular crônica (agudizações); menos TGI em curto prazo</td></tr>
+        <tr><td><b>Piroxicam/Tenoxicam</b></td><td>20 mg 1×/d (SL disponível) · <b>máx 14 dias</b></td><td>Potentes, meia-vida longa, mas COX-1=COX-2 → TGI pesado</td></tr>
+        <tr><td><b>Cetorolaco</b> (Toragesic)</td><td>10 mg SL/20 mg VO até 6/6 h · <b>máx 40 mg/d, uso CURTO</b></td><td>Analgésico potente (pós-trauma/cirurgia/cólica) · contraindicado: úlcera e <b>doença renal</b> · gestação D</td></tr>
+        <tr><td><b>Ác. mefenâmico</b> (Ponstan)</td><td>250 mg 4/4 h (dismenorreia)</td><td><b>Diarreia grave → interromper</b> · anemia hemolítica · não &lt; 14 anos</td></tr>
+        <tr><td><b>Etodolaco</b> (Flancox)</td><td>300–400 mg 2–3×/d</td><td>Preferencial COX-2, uso agudo, não tem no SUS</td></tr>
+        <tr><td><b>Celecoxibe</b> (coxibe)</td><td>100–200 mg 1–2×/d por 7–14 d</td><td>Contraindicado: <b>alergia a SULFA</b>/AAS, &lt; 18 a, gestação, insuf. renal · risco trombótico se &gt; 14 d (PGI2×TXA2) · hiperglicemia/hipocalemia · retenção de receita (aula)</td></tr>
+        <tr><td><b>Etoricoxibe</b> (Arcoxia)</td><td>60–90 mg 1×/d</td><td><b>Hipertensão</b> e edema de MMII · ↑transaminases 3×</td></tr>
+        <tr><td><b>Tópicos</b></td><td>Acheflan (Cordia verbenacea/α-humuleno) · diclofenaco gel</td><td>Lesão localizada; AINE tópico absorve ~15% (gelo/vasoconstrição ajuda); Acheflan &gt; diclofenaco tópico na aula</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>13 · Opioides — efeitos colaterais (Goldman cap. 27 + veterana)</h2>
+      <h3>Agudos</h3>
+      <ul>
+        <li><span class="hl">Depressão respiratória</span> — o mais temido; dose-dependente ("cuidar a dose"); potencializada por BZD/álcool.</li>
+        <li>Sedação, náuseas e vômitos (zona de gatilho quimiorreceptora), <b>prurido</b> (liberação de histamina — morfina), <b>constipação</b>, <b>retenção urinária</b> (↑tônus esfincteriano — atenção no paciente com cólica!), miose, delírio, alucinações, mioclonia e convulsões.</li>
+        <li><b>Tramadol:</b> ↓limiar convulsivo + risco de <b>síndrome serotoninérgica</b> com ISRS/IRSN (é opioide fraco + inibidor de recaptação) + náusea frequente (correr IV lento).</li>
+        <li><b>Codeína:</b> pró-fármaco ativado pela <b>CYP2D6</b> → metabolizador lento não analgesia; ultrarrápido intoxica.</li>
+        <li>Intoxicação: tríade <b>miose + depressão respiratória + coma</b> → <b>naloxona</b> IV titulada.</li>
+      </ul>
+      <h3>Crônicos</h3>
+      <ul>
+        <li><b>Tolerância</b> (dose precisa subir) e <b>dependência</b> (física/psíquica) — típicos de oncológicos e dependentes químicos.</li>
+        <li><span class="hl">Hiperalgesia induzida por opioide:</span> uso persistente AUMENTA a sensibilidade à dor (paradoxo) — mais um motivo para questionar opioide contínuo em dor crônica NÃO oncológica (ponte com SP3: opioide fortemente desaconselhado na FM).</li>
+        <li><b>Constipação NÃO desenvolve tolerância</b> → prescrever laxante junto desde o início no uso prolongado.</li>
+      </ul>
+      <div class="note"><b>Na cólica renal:</b> opioide é <b>resgate</b>, não 1ª linha — AINE é igual/superior com menos efeitos adversos (Goldman + SBN). Morfina IV titulada (reavaliar 15–30 min) se refratário ou AINE contraindicado (LRA, úlcera, gestação).</div>
+    </div>
+
+    <div class="panel">
+      <h2>14 · Divergências fonte × fonte (a "venlafaxina" desta SP)</h2>
+      <div class="divg"><b>① Diretriz SBN — 2002 × 2025:</b> o slide da professora linka a diretriz de litíase urinária de <b>2002</b> (J Bras Nefrol 24(4)); em <b>2025</b> a SBN publicou as <b>Diretrizes Brasileiras de Nefrolitíase</b> atualizadas (Braz J Nephrol), com doses e condutas mais detalhadas (usadas neste guia: tiazídicos, citrato 20–60 mEq, alopurinol 100–300, TEM distal 5–10 mm, urina 24 h ×2, USG+RX inicial). Para a APF, o seguro é <b>Goldman-Cecil + o que a tutora citar</b>; a 2025 é ouro para a prova final e para a vida.</div>
+      <div class="divg"><b>② Taxa de eliminação espontânea:</b> Goldman (bibliografia da SP): ≤5 mm ~70% · 5–7 ~60% · 7–9 ~48% · ≥9 ~25%. SBN 2025: &lt;5 mm até 80%; &gt;7 mm varia por altura (proximal 25% / médio 45% / distal 70%). Outras fontes falam "90% se &lt;4–5 mm". <b>Numa questão, priorize os números do Goldman</b>; se a questão citar a diretriz, use os dela. O conceito é o mesmo: menor + distal = sai sozinho.</div>
+      <div class="divg"><b>③ Nimesulida antitérmica?</b> A bula e a farmacologia clássica dizem que sim; <b>a Vânia ensinou que NÃO tem ação antitérmica</b> ("não reconhece a COX-3"). Na prova DELA, vale a aula. (Mesma lógica: "AAS não é antitérmico de uso", embora tenha a propriedade.)</div>
+      <div class="divg"><b>④ Dipirona/paracetamol são AINEs?</b> Vânia: são <b>"analgésicos não opiáceos" SEM atividade anti-inflamatória</b> (COX-3 central) — e por isso <b>poupam TGI e rim</b> (dipirona não é nefrotóxica). Muitos resumos/livros os listam como "AINEs". Em questão que diga "todo AINE causa lesão gástrica e renal", lembre-se das exceções: dipirona, paracetamol, seletivos COX-2 (slide dela).</div>
+      <div class="divg"><b>⑤ Cetorolaco:</b> o slide fixa <b>10 mg 6/6 h, máx 40 mg/dia</b>; o caderno da turma anotou "10 (SL)–20 mg até 6/6 h". Grave o teto: <b>40 mg/d, uso curto</b> — é isso que ela cobra.</div>
+      <div class="divg"><b>⑥ "Soro aberto para expulsar a pedra" e Buscopan:</b> prática comum de PS, mas Goldman e SBN 2025: <b>hidratação vigorosa e diuréticos NÃO aceleram a eliminação</b> (hidratar só para normovolemia) e a hioscina tem efeito <b>controverso/limitado</b> — quem age no ureter é o AINE (↓prostaglandinas → ↓pressão intraluminal).</div>
+      <div class="divg"><b>⑦ Restrição de cálcio na litíase de cálcio:</b> intuitivo, porém ERRADO — cálcio dietético deve ser <b>normal</b> (restrição ↑oxalúria e ↑risco). O que se restringe: <b>sódio</b> e proteína animal. Suplemento de cálcio isolado, esse sim, aumenta risco.</div>
+      <div class="divg"><b>⑧ Pendência de fontes:</b> até 16/08 não havia resumo de colega da SP4 em <code>Tutoria/</code> (só Sp2 e SP3) nem artigo novo da tutora — usei o doc da veterana (Danielli) + Farmaco "SP1 e SP4". Se a professora soltar artigo da SP4, me manda que eu cruzo e atualizo.</div>
+    </div>
+
+    <div class="panel">
+      <h2>Fontes deste guia</h2>
+      <ul class="src">
+        <li>Fotos do quadro da abertura (objetivos + bibliografia + DDx).</li>
+        <li><b>Fisio:</b> UC 13 Aula 4 — Dor visceral (prof.ª Maria Verônica Dávila, 45 slides) — <code>Fisio/UC 13 Aula 4- Dor visceral.pdf</code>.</li>
+        <li><b>Farmaco (Vânia):</b> Aula AINEs 2026 (52 slides) + caderno da turma "SP1/SP4 — AINEs" + artigo extra <i>NSAIDs in clinical practice — are there any new reports?</i> (Rheumatol Forum 2024) — pasta <code>Farmaco/SP1 e SP4-20260727/</code>.</li>
+        <li><b>Tutoria:</b> resumo da veterana (Danielli Zanelato) — doc "Tutoria UC13", seção SP4 (base: Goldman-Cecil, 26ª ed., cap. 117 Nefrolitíase + cap. 27 Dor).</li>
+        <li><b>Diretrizes:</b> SBN 2002 (litíase urinária, link do slide) + <b>SBN 2025 — Diretrizes Brasileiras de Nefrolitíase</b> (Braz J Nephrol/SciELO).</li>
+        <li>Porto&Porto, Exame Clínico, 8ª ed., cap. 6 (dor como sintoma) — semiologia da cólica e da dor referida/irradiada.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ============ QUESTÕES ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">25</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0">Q1–Q10: estilo <b>ENAMED</b> (caso curto + "assinale a correta"), dificuldade progressiva. Q11–Q25: <b>nível prova final</b> — INCORRETA, proposições, associação de colunas e casos complexos. No fim, a <b>descritiva integrativa</b> com roteiro de correção por pesos.</div>
+    <div id="quiz"></div>
+
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D</div><span class="pill d">Descritiva integrativa</span><span class="pill o">Todos os objetivos · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 38 anos, obeso, hipertenso em uso irregular de losartana, chega ao PA às 3h da manhã com dor lombar direita de início súbito há 2 horas, intensidade 10/10, em cólica, com irradiação para fossa ilíaca direita e testículo. Está inquieto na maca, sudoreico, com náuseas e um episódio de vômito. Nega febre. PA 150×95 mmHg, FC 105 bpm, Tax 36,8 °C. Giordano positivo à direita. EAS: hematúria (+++), sem piúria/nitrito. Creatinina 1,0 mg/dL. TC de abdome sem contraste: cálculo de 6 mm em ureter distal direito, com hidronefrose leve ipsilateral.</span>
+        Responda por itens (pesos entre parênteses):
+        <br><b>a)</b> Classifique fisiopatologicamente a dor deste paciente, explicando: por que ele fica inquieto (e não imóvel), por que há náuseas/sudorese e qual o mecanismo da dor sentida no testículo. <b>(20)</b>
+        <br><b>b)</b> Justifique o exame de imagem escolhido e diga em que situação a USG passaria a ser a 1ª escolha; comente o papel e as limitações do RX simples. <b>(15)</b>
+        <br><b>c)</b> Escreva a prescrição completa deste paciente no PA (itens numerados, com fármaco, dose, via) e os critérios que autorizam a alta. <b>(25)</b>
+        <br><b>d)</b> Na alta: oriente a terapia expulsiva (fármaco, dose, duração, condições para indicá-la) e as medidas de prevenção de novos cálculos, citando quando indicar investigação metabólica com urina de 24 h. <b>(20)</b>
+        <br><b>e)</b> 48 h depois ele retorna com febre de 39,2 °C, calafrios e piora da dor. Diga o diagnóstico provável, por que é uma emergência e os DOIS pilares da conduta, explicando por que a LECO está contraindicada neste momento e o que muda na analgesia se a creatinina subir. <b>(20)</b>
+      </div>
+      <button class="btn" onclick="document.getElementById('rot').style.display=(document.getElementById('rot').style.display==='block'?'none':'block')">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot" style="display:none;margin-top:12px">
+        <table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pontos</th></tr>
+          <tr><td><b>a</b> (20)</td><td><b>Dor visceral</b> (nociceptiva) do trato urinário por <b>distensão/espasmo</b> ureteral ± isquemia (4) · inquieto = dor visceral PURA, sem irritação peritoneal parietal — paciente "não acha posição"; imóvel seria peritonite (4) · náuseas/sudorese = resposta autonômica (simpática + vagal) pela conexão da via medial com formação reticular/hipotálamo/límbico (4) · dor no testículo = <b>convergência segmentar</b>: aferentes do rim/ureter (~T10–L1) convergem com os dermátomos/genitais no corno posterior — "irradiação típica" da cólica, mecanismo de dor referida (6) · citar que a topografia acompanha a descida do cálculo (2)</td><td>20</td></tr>
+          <tr><td><b>b</b> (15)</td><td>TC helicoidal <b>sem contraste</b> = padrão-ouro, S/E &gt;95%, mede o cálculo (tamanho/altura define conduta), estima densidade/composição e avalia diferenciais (6) · USG = 1ª escolha na <b>GESTANTE</b> (sem radiação; sensibilidade ~85% p/ cálculo sintomático; SBN 2025 aceita USG+RX como porta de entrada) (5) · RX: só radiopacos ≥2–3 mm; <b>ácido úrico é radiotransparente</b>; serve para seguimento de cálculo radiopaco (4)</td><td>15</td></tr>
+          <tr><td><b>c</b> (25)</td><td>Estrutura numerada com dose-via (2) · jejum/dieta zero até definir conduta (2) · SF 0,9% 500–1000 mL IV moderado — normovolemia, SEM "soro aberto para expulsar" (3) · <b>AINE parenteral 1ª linha</b>: cetoprofeno 100 mg IV ou diclofenaco 75 mg IM (5) · dipirona 1 g IV (2) · antiemético: ondansetrona 4–8 mg IV (2) · resgate: morfina 2–4 mg IV titulada ou tramadol 50–100 mg IV lento, reavaliar 15–30 min (4) · cuidados: SSVV, diurese, <b>coar urina</b> (2) · alta se: dor controlada + sem febre/sinais de infecção + função renal normal + sem obstrução bilateral/rim único + tolerando VO (3)</td><td>25</td></tr>
+          <tr><td><b>d</b> (20)</td><td><b>Tansulosina 0,4 mg/noite por 4–6 semanas</b> (3) · indicação correta: cálculo ureteral <b>distal &lt;10 mm</b> (ideal 5–10 mm), dor controlada, função renal normal, sem infecção — decisão compartilhada, reavaliar com imagem (5) · analgesia VO de alta (AINE 3–5 d + dipirona S/N) + retornar se febre/vômitos/anúria/dor refratária (3) · prevenção: líquidos ~30 mL/kg/d (diurese ≥2–2,5 L), <b>↓sódio</b>, proteína animal moderada, <b>cálcio dietético NORMAL</b> (não restringir!), ↓oxalato, cítricos, DASH; sem suplemento de vit. C &gt;1 g (6) · urina 24 h ×2 (3–8 sem após, sem duplo J/ITU) se recorrente/alto risco/rim único; dosar Ca + PTH (hiperpara 1º) (3)</td><td>20</td></tr>
+          <tr><td><b>e</b> (20)</td><td><b>Pielonefrite obstrutiva</b> = "pus sob pressão" — infecção a montante de via urinária obstruída → risco de sepse/perda renal = <b>emergência urológica</b> (5) · pilares: ① <b>ATB IV</b> após colher culturas (ceftriaxona; pip-tazo/meropenem se sepse) + ② <b>DESOBSTRUÇÃO URGENTE</b> (duplo J ou nefrostomia percutânea) — tratamento definitivo do cálculo só depois de estabilizar (8) · LECO contraindicada: infecção ativa (fragmentação dissemina bactérias/agrava sepse, não desobstrui de imediato) (4) · se creatinina subir: <b>suspender AINE</b> (LRA — perfusão renal dependente de PG) → analgesia com dipirona + opioide (3)</td><td>20</td></tr>
+        </table>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto para a APF · 60–79 = revisar os itens perdidos no Resumo · &lt; 60 = refazer o Resumo inteiro + flashcards antes de reatacar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAPA ============ -->
+  <section id="mapa">
+    <div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+
+      <details><summary>🫀 Dor visceral — essência</summary><ul>
+        <li>Vísceras + serosas · fibras C · entra na medula em vários níveis com fibras autonômicas</li>
+        <li>Dói: distensão · isquemia · espasmo · inflamação — NÃO dói: cortar/queimar</li>
+        <li>Mal localizada: pouca representação cortical + convergência + pouca experiência</li>
+        <li>Segue MAPA SEGMENTAR: pâncreas T5–T9→dorso · coração→braço E/mandíbula · diafragma (frênico C3–C5)→ombro</li>
+        <li>Autonômico: simpático (sudorese/taqui/palidez) + vagal (náusea/vômito/hipotensão)</li>
+        <li>Alerta: +hipotensão · +alt. consciência · desperta do sono · idoso atípico</li>
+      </ul></details>
+
+      <details><summary>🧩 Serosas: visceral × parietal</summary><ul>
+        <li>Folheto visceral: autonômico, quase não dói · parietal: somático (Aδ+C), dói forte e localizado, piora ao mover</li>
+        <li>Pleurite: pontada ao respirar → respiração superficial · Pericardite: frênico, melhora inclinado à frente · Peritonite: Blumberg, tudo dói</li>
+        <li>Comportamento: INQUIETO = visceral pura (cólica renal) · IMÓVEL = parietal (peritonite)</li>
+        <li>Apendicite 2 tempos: periumbilical (visceral T9–T10) → FID (parietal)</li>
+      </ul></details>
+
+      <details><summary>↔️ Referida × irradiada</summary><ul>
+        <li>REFERIDA: convergência viscerossomática no corno posterior → "erro de endereço"; dermátomo do mesmo segmento; IAM→braço E</li>
+        <li>IRRADIADA: segue trajeto de raiz/nervo; em choque (Aδ); piora com Valsalva; Lasègue/Bragard; ciática</li>
+        <li>Cólica renal: "irradiação típica" lombar→virilha/testículo = mapa segmentar T10–L1</li>
+      </ul></details>
+
+      <details><summary>🪨 Nefrolitíase — diagnóstico</summary><ul>
+        <li>Supersaturação × inibidores (citrato) · placa de Randall · distúrbio sistêmico (hiperpara, obesidade, DM2, ATR)</li>
+        <li>Ca 70–80% · úrico ~10% (pH baixo, radiotransparente, dissolve) · estruvita (urease: Proteus — E. coli NÃO; coraliforme) · cistina (COLA, jovem)</li>
+        <li>Clínica: cólica + irradiação + inquieto + náuseas + hematúria (ausência não exclui)</li>
+        <li>TC sem contraste padrão-ouro (&gt;95%) · USG na gestante · RX só radiopaco ≥2–3 mm</li>
+        <li>DDx: pielonefrite, GECA, ectópica, apendicite, diverticulite, colecistite… e AAA no idoso!</li>
+      </ul></details>
+
+      <details><summary>💊 Nefrolitíase — tratamento</summary><ul>
+        <li>Crise: AINE IV/IM 1ª linha (≥ opioide; ↓pressão ureteral) + dipirona + antiemético + opioide resgate + normovolemia (NÃO soro aberto/diurético)</li>
+        <li>Eliminação (Goldman): ≤5 mm 70% · 5–7 60% · 7–9 48% · ≥9 25% — menor+distal sai mais</li>
+        <li>TEM: tansulosina 0,4 mg/noite 4–6 sem — distal &lt;10 mm, sem infecção/LRA/dor incontrolável</li>
+        <li>LECO &lt;2 cm (duro/&gt;1000 UH resiste) · URS distal · NLP &gt;2 cm/coraliforme · duplo J/nefrostomia = urgência</li>
+        <li>Urgências: pus sob pressão · LRA · obstrução bilateral/rim único · dor/vômito refratários</li>
+        <li>Prevenção: 30 mL/kg líquido · ↓Na · Ca dietético NORMAL · cítricos · tiazídico/citrato K/alopurinol/alcalinização (pH&gt;6,5) · urina 24 h ×2 nos recorrentes</li>
+      </ul></details>
+
+      <details><summary>📋 Prescrição PA × internado</summary><ul>
+        <li>PA: jejum · SF moderado · cetoprofeno 100 IV ou diclofenaco 75 IM · dipirona 1 g IV · ondansetrona · morfina/tramadol S/N · coar urina</li>
+        <li>Alta: dor controlada + sem complicação → AINE VO + tansulosina + sinais de retorno</li>
+        <li>Internar: dor refratária · pielonefrite obstrutiva · bilateral/rim único · LRA · vômitos</li>
+        <li>Internado (10 itens): ID → dieta → HV → ATB (cultura antes! ceftriaxona; sepse: pip-tazo/meropenem) → analgesia fixa → resgate → antiemético → profilaxia TEV → cuidados/monitorização → conduta urológica</li>
+        <li>Receituário: AINE = comum/MIP · tramadol/codeína = controle especial branca 2 vias · morfina/oxicodona = Notificação A amarela</li>
+      </ul></details>
+
+      <details><summary>⚠️ AINEs — efeitos colaterais</summary><ul>
+        <li>TGI (COX-1: ↓muco/HCO₃ → úlcera/HDA — exceto dipirona/paracetamol/coxibe) · Renal (COX-2: IRA em idoso/desidratado/DM/HAS; hipercalemia) · CV (HAS, edema, coxibe pró-trombótico)</li>
+        <li>TRI: desvio p/ LOX → leucotrienos → broncoespasmo — NUNCA AINE; usa corticoide (inibe PLA2)</li>
+        <li>Ibuprofeno anula AAS (2 h de intervalo; melhor evitar) · pós-SCA 3–6 m sem AINE · naproxeno × NOACs · alto CV→naproxeno · alto GI→coxibe+IBP · ambos→tópico</li>
+        <li>Marcas: paracetamol 4 g/2 g NAPQI · dipirona agranulocitose imunoalérgica não dose-dependente · AAS 7 d pré-op/Reye/dengue · cetoprofeno longe das refeições · diclofenaco hepatotox 15% · nimesulida sem COX-3 (Vânia) · cetorolaco máx 40 mg · celecoxibe sulfa</li>
+        <li>Gestação: AINE D no 3º tri (ducto arterioso) · paracetamol B</li>
+      </ul></details>
+
+      <details><summary>💉 Opioides — efeitos colaterais</summary><ul>
+        <li>Agudos: depressão respiratória (o mais temido) · náusea/vômito · prurido (histamina) · constipação · retenção urinária · miose · sedação/delírio · mioclonia/convulsão</li>
+        <li>Crônicos: tolerância · dependência · HIPERALGESIA induzida por opioide · constipação SEM tolerância → laxante junto</li>
+        <li>Tramadol: convulsão + síndrome serotoninérgica · codeína: CYP2D6 · intoxicação: miose+dep. resp.+coma → naloxona</li>
+        <li>Na cólica: resgate, titulado, reavaliar 15–30 min</li>
+      </ul></details>
+
+    </div></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel"><h2>Flashcards — clique para virar</h2><div class="fcgrid" id="fcbox"></div></div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Técnica de Feynman — explique em voz alta</h2><p class="src">Sem olhar o resumo. Se travar, é ali que está o buraco.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">UC13 · SP4 — Dor visceral & nefrolitíase · guia v2 · gerado em 16/08/2026 · fechamento + APF: 19/08/2026 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+const QS=[
+ {lvl:"ENAMED", obj:"Obj ① · Dor visceral", stem:"Sobre as características gerais da dor visceral, assinale a alternativa correta:",
+  opts:["É bem localizada e conduzida por fibras Aδ mielinizadas, com representação cortical precisa.",
+  "É profunda, difusa e mal localizada, acompanha-se de respostas autonômicas e é conduzida predominantemente por fibras C, que penetram na medula em vários níveis.",
+  "Caracteristicamente piora com o movimento e com a palpação superficial do abdome.",
+  "Nunca é percebida à distância do órgão de origem.",
+  "É o tipo de dor menos frequente na prática clínica."],
+  ans:1,
+  why:"Resumo da aula da Verônica: dor visceral nasce em vísceras/serosas, é profunda, difusa, mal localizada (pouca representação cortical + convergência + pouca experiência prévia), vem com cortejo autonômico e viaja por fibras C que entram na medula em vários níveis — por isso a localização espacial é pobre.",
+  trap:"As alternativas A e C descrevem dor SOMÁTICA/PARIETAL (Aδ, localizada, piora ao mover). Guarde o par: visceral = difusa+autonômica; parietal = localizada+piora ao movimento. Foi exatamente a Q5 da APF real da SP1."},
+
+ {lvl:"ENAMED", obj:"Obj ① · Estímulos viscerais", stem:"<span class='cx'>Durante uma enterectomia com paciente acordado sob anestesia regional, o cirurgião secciona a alça intestinal sem que o paciente sinta dor. Horas depois, no pós-operatório, o mesmo paciente tem dor abdominal difusa intensa associada à distensão de alças.</span> A explicação fisiológica correta é:",
+  opts:["A anestesia regional ainda estava ativa no pós-operatório.",
+  "O intestino não possui inervação sensitiva de nenhum tipo.",
+  "Os nociceptores viscerais respondem a distensão, isquemia, espasmo e inflamação, mas não ao corte — por isso seccionar não dói e distender dói.",
+  "A dor do pós-operatório é psicogênica, pois víscera não gera dor real.",
+  "O corte da alça só doeria se atingisse a mucosa."],
+  ans:2,
+  why:"Estímulos ADEQUADOS da víscera (aula + Guyton): distensão de víscera oca, isquemia (bradicinina/enzimas), espasmo de musculatura lisa e inflamação. Corte, esmagamento e queimadura de víscera caracteristicamente não doem — diferente da pele.",
+  trap:"É a pegadinha conceitual favorita desse tema: 'toda lesão tecidual dói'. Na víscera, NÃO — o que dói é o estímulo adequado (distensão/isquemia/espasmo/inflamação). Já caiu como 'por que o infarto dói? isquemia' na mesma lógica."},
+
+ {lvl:"ENAMED", obj:"Obj ①② · Dor referida", stem:"<span class='cx'>Mulher, 46 anos, dor epigástrica intensa há 4 horas, referida para o dorso, com náuseas, vômitos, sudorese fria, PA 90×60 mmHg e FC 112 bpm. Hipótese: pancreatite aguda.</span> O mecanismo que explica a dor sentida no DORSO é:",
+  opts:["Dor irradiada por compressão direta das raízes lombares pelo pâncreas edemaciado.",
+  "Dor parietal posterior por contato do pâncreas com a musculatura paravertebral.",
+  "Convergência medular: o pâncreas é retroperitoneal e seus aferentes simpáticos (T5–T9) convergem com aferentes somáticos dos dermátomos dorsais — dor visceral referida.",
+  "Metástase precoce para a coluna torácica.",
+  "Dor psicogênica associada ao estresse da internação."],
+  ans:2,
+  why:"Caso-fio-condutor da aula da Verônica. O pâncreas é retroperitoneal, com aferentes viscerais que acompanham fibras simpáticas de T5–T9; a convergência com os neurônios dos dermátomos correspondentes projeta a dor no dorso. 'A dor visceral não é aleatória — segue mapa segmentar.'",
+  trap:"'Irradiada' exigiria comprometimento de raiz/nervo com dor no trajeto (não é o caso). E o cortejo autonômico (sudorese + hipotensão + taquicardia) é a assinatura da dor visceral profunda — sinal de gravidade, não de ansiedade."},
+
+ {lvl:"ENAMED", obj:"Obj ① · Semiologia comparada", stem:"<span class='cx'>No PA, dois pacientes com dor abdominal: PACIENTE A se contorce na maca, inquieto, sem posição de alívio, com dor lombar em cólica que vai à virilha. PACIENTE B está imóvel, com abdome em tábua, e qualquer movimento ou tosse piora a dor; há descompressão brusca dolorosa.</span> Assinale a correta:",
+  opts:["A tem dor parietal (peritonite); B tem dor visceral pura (cólica ureteral).",
+  "A tem dor visceral pura (ex.: cólica ureteral) — sem irritação peritoneal ele procura posição; B tem irritação do peritônio parietal (peritonite) — inervação somática torna o movimento doloroso.",
+  "Ambos têm o mesmo mecanismo de dor, mudando apenas o limiar individual.",
+  "B está imóvel porque a dor visceral melhora com repouso absoluto.",
+  "A agitação de A indica componente psicogênico sobreposto."],
+  ans:1,
+  why:"Regra de beira de leito da Verônica: INQUIETO → dor visceral pura (nada 'por fora' dói, ele busca posição — cólica renal é o exemplo dela); IMÓVEL → irritação parietal (peritônio parietal somático: deslizar os folhetos, tossir, andar e palpar doem; Blumberg +).",
+  trap:"A banca inverte os comportamentos. Âncora mental: peritonite = estátua; cólica renal = paciente 'dançando' na maca."},
+
+ {lvl:"ENAMED", obj:"Obj ③ · Diagnóstico", stem:"<span class='cx'>Homem, 34 anos, cólica lombar direita típica com irradiação para a virilha, náuseas e hematúria ao EAS. Sem febre. Você quer confirmar nefrolitíase.</span> O exame de escolha é:",
+  opts:["Urografia excretora com contraste iodado.",
+  "TC helicoidal de abdome SEM contraste — sensibilidade e especificidade acima de 95%, avalia tamanho, localização, densidade e diagnósticos alternativos.",
+  "Radiografia simples de abdome; se normal, exclui litíase.",
+  "Ultrassonografia, superior à TC em qualquer cenário.",
+  "Ressonância magnética de abdome."],
+  ans:1,
+  why:"Goldman cap. 117: TC helicoidal sem contraste é o padrão-ouro (S/E >95%), diferencia composição pela densidade e flagra causas alternativas da dor. USG (sens ~85% p/ cálculo ureteral sintomático) é a escolha na GESTANTE; a SBN 2025 aceita USG+RX como porta de entrada com TC de baixa dose para confirmar.",
+  trap:"Duas cascas de banana: contraste NÃO ajuda a ver cálculo (atrapalha!) e RX normal NÃO exclui (só vê radiopacos ≥2–3 mm — e ácido úrico é radiotransparente)."},
+
+ {lvl:"ENAMED", obj:"Obj ③ · Tipos de cálculo", stem:"<span class='cx'>Homem, 52 anos, obeso, com DM2 e gota. Cólica renal à direita; RX simples de abdome sem calcificações; TC sem contraste evidencia cálculo ureteral de 7 mm. pH urinário persistentemente em 5,0.</span> Sobre o cálculo mais provável:",
+  opts:["É de estruvita, associado a infecção por E. coli.",
+  "É de oxalato de cálcio, o único tipo que não aparece no RX.",
+  "É de ácido úrico — radiotransparente ao RX, associado a pH urinário baixo e síndrome metabólica — e pode DISSOLVER com alcalinização urinária (citrato de potássio, pH-alvo > 6,5).",
+  "É de cistina, típico dessa idade.",
+  "É impossível estimar a composição sem análise cristalográfica."],
+  ans:2,
+  why:"Perfil clássico do cálculo de ácido úrico (Goldman + veterana): pH urinário baixo + baixo volume ± hiperuricosúria, associação com obesidade/resistência insulínica/DM2, invisível ao RX (radiotransparente) e visível na TC. É o único que se DISSOLVE com tratamento clínico: alcalinização com citrato de K até pH > 6,5 (SBN 2025) ± alopurinol.",
+  trap:"'RX sem cálculo' + 'TC com cálculo' = ácido úrico até prova em contrário. E lembre: quem NÃO produz urease é a E. coli — estruvita pede Proteus/Klebsiella (pegadinha da Q15)."},
+
+ {lvl:"ENAMED", obj:"Obj ③④ · Crise", stem:"Na analgesia da cólica renal aguda no PA, a conduta de PRIMEIRA linha, segundo Goldman e a diretriz da SBN, é:",
+  opts:["Morfina IV imediata, pois a intensidade 10/10 exige opioide de entrada.",
+  "AINE parenteral (ex.: diclofenaco IM ou cetoprofeno IV) — tão ou mais eficaz que opioide, com menos efeitos adversos, e ainda reduz a pressão intraluminal ureteral e o espasmo; opioide fica como resgate.",
+  "Escopolamina (hioscina) isolada, pois o mecanismo da dor é espasmo puro.",
+  "Hidratação venosa vigorosa (2.000 mL correndo), que empurra o cálculo e alivia a dor.",
+  "Paracetamol VO em dose plena."],
+  ans:1,
+  why:"AINE é a base: além do efeito analgésico/anti-inflamatório, a queda das prostaglandinas diminui a pressão intraluminal e o espasmo ureteral. Ensaios mostram eficácia igual ou superior aos opioides com menos eventos adversos (Goldman; SBN 2025: 'AINH eficazes e superiores aos opioides'). Dipirona associa bem (espasmolítica); morfina/tramadol = refratários.",
+  trap:"Dois mitos de plantão caem juntos: 'dor forte = morfina primeiro' (não) e 'soro aberto expulsa a pedra' (não — hidratação é para normovolemia; volume forçado e diurético NÃO aceleram eliminação e pioram a dor da distensão)."},
+
+ {lvl:"ENAMED", obj:"Obj ③ · Terapia expulsiva", stem:"<span class='cx'>Após analgesia eficaz, paciente com cálculo de 6 mm em ureter DISTAL, função renal normal, sem sinais de infecção, tolerando dieta. Deseja evitar procedimento.</span> A melhor conduta é:",
+  opts:["Ureterorrenolitotripsia imediata, pois 6 mm nunca sai espontaneamente.",
+  "Alta com terapia expulsiva: tansulosina 0,4 mg à noite por até 4–6 semanas, analgesia VO, orientações de retorno e reavaliação com imagem.",
+  "LECO de urgência ainda no PA.",
+  "Internação para nefrolitotomia percutânea.",
+  "Nifedipino associado a furosemida para acelerar a eliminação."],
+  ans:1,
+  why:"Cenário perfeito para TEM: cálculo ureteral distal <10 mm (benefício máximo em 5–10 mm — SBN 2025: +44% de chance de eliminação com tansulosina), dor controlada, sem infecção, função renal normal. Goldman: tentar por 4–6 semanas com vigilância. Cálculo distal de 5–7 mm tem ~60–70% de chance de sair sozinho.",
+  trap:"Diurético NÃO faz parte de nenhuma conduta expulsiva (distende e dói, sem acelerar eliminação). E guarde as condições da TEM — sem elas (febre, LRA, dor intratável), a resposta muda para intervenção."},
+
+ {lvl:"ENAMED", obj:"Obj ④ · Prescrição no PA", stem:"<span class='cx'>Mulher, 29 anos, cólica renal típica, vomitando, sem comorbidades, sem alergias, afebril, Cr 0,9.</span> A prescrição MAIS adequada para o PA é:",
+  opts:["Morfina 10 mg IV em bolus único de entrada + SF 0,9% 2.000 mL correndo aberto.",
+  "Jejum + SF 0,9% 500 mL IV moderado + cetoprofeno 100 mg IV + dipirona 1 g IV + ondansetrona 4–8 mg IV + morfina 2–4 mg IV titulada SE dor refratária (reavaliar em 15–30 min).",
+  "Ibuprofeno 600 mg VO + metoclopramida 10 mg VO + alta imediata.",
+  "Escopolamina 20 mg IV isolada + observação sem analgesia adicional.",
+  "Tansulosina 0,4 mg VO agora + alta sem analgesia, pois o cálculo sairá sozinho."],
+  ans:1,
+  why:"Estrutura correta do PA (veterana + SBN): AINE parenteral (1ª linha) + dipirona (analgésica e espasmolítica) + antiemético (está vomitando — e VO não desce) + hidratação para NORMOVOLEMIA + opioide como resgate titulado + jejum enquanto se define conduta. Reavaliar dor a cada 15–30 min.",
+  trap:"Na paciente VOMITANDO, qualquer opção com medicação VO já morre (C e E). E a B ganha da A porque opioide de entrada e soro aberto são os dois erros clássicos da Q7 — repetidos aqui de propósito."},
+
+ {lvl:"ENAMED", obj:"Obj ⑤ · AINEs mecanismo", stem:"Sobre o mecanismo dos efeitos colaterais dos AINEs, assinale a correta:",
+  opts:["A lesão gástrica decorre da inibição da COX-2, enzima dominante na mucosa gástrica.",
+  "A nefrotoxicidade resulta do depósito tubular direto de cristais do fármaco.",
+  "A lesão gástrica decorre da inibição da COX-1 (↓muco e bicarbonato protetores) e a renal, principalmente da perda das prostaglandinas COX-2-dependentes (PGE₂/PGI₂) que sustentam a perfusão renal — por isso idoso, desidratado, diabético e hipertenso são os de maior risco.",
+  "O broncoespasmo por AINE resulta da inibição direta da lipoxigenase.",
+  "Os inibidores seletivos de COX-2 causam mais úlcera péptica que os não seletivos."],
+  ans:2,
+  why:"Aula da Vânia: COX-1 gástrica faz PGE₂ → muco + bicarbonato (inibiu, expôs a mucosa ao HCl); COX-2 renal mantém PGE₂/PGI₂ que vasodilatam contra noradrenalina/angiotensina II — em rim 'dependente de prostaglandina' (idoso, desidratado, DM, HAS, DRC) o AINE precipita IRA reversível + hipercalemia. Asma: a COX inibida DESVIA o ácido araquidônico para a LOX → mais leucotrienos (broncoconstritores) — por isso jamais AINE em inflamação do trato respiratório inferior.",
+  trap:"A alternativa D inverte o mecanismo respiratório (a LOX fica MAIS ativa, não inibida) — pegadinha direta da fala dela sobre por que se usa corticoide (inibe a fosfolipase A2 e corta a cascata inteira)."},
+
+ {lvl:"Prova", obj:"Obj ① · Fisiologia", stem:"Sobre a neurofisiologia da dor visceral, assinale a INCORRETA:",
+  opts:["A maior parte da dor visceral é conduzida por fibras C, que acompanham fibras autonômicas até a medula.",
+  "A convergência de aferentes viscerais e somáticos nos mesmos neurônios de segunda ordem explica tanto a má localização quanto a dor referida.",
+  "As vísceras possuem representação cortical somatotópica rica e precisa, o que permite ao paciente apontar o órgão acometido com exatidão.",
+  "A via medial da dor (espinorreticular, espinomesencefálica e projeções talâmicas intralaminares) ativa formação reticular, hipotálamo e sistema límbico, explicando náusea, sudorese, queda de pressão e mal-estar.",
+  "Dor somática intensa também pode provocar resposta autonômica; o fator decisivo para o cortejo autonômico da dor visceral é a conexão central de suas fibras, não o simples fato de serem fibras C."],
+  ans:2,
+  why:"É exatamente o oposto: a víscera tem POUCA representação cortical específica — uma das três razões da má localização (com a convergência e a pouca experiência prévia com órgãos internos). As demais alternativas são frases quase literais da aula.",
+  trap:"A alternativa E é a nuance que a Verônica fez questão de separar: pele também tem fibra C; o que diferencia é a CONEXÃO CENTRAL com os centros autonômicos. Se vier em prova 'porque são fibras C', desconfie."},
+
+ {lvl:"Prova", obj:"Obj ① · Serosas", stem:"Julgue as proposições sobre a dor das membranas serosas:<br>I. O folheto visceral da pleura é pouco sensível à dor por ter inervação autonômica — por isso doenças restritas ao pulmão/pleura visceral podem ser indolores.<br>II. Na pericardite, a dor tipicamente piora quando o paciente se inclina para a frente.<br>III. A dor à descompressão brusca (Blumberg) traduz irritação do peritônio PARIETAL, de inervação somática.<br>IV. Na pleurite, o paciente adota respiração superficial e evita tossir, porque a tração da pleura parietal inflamada dispara os nociceptores mecanossensíveis.",
+  opts:["Apenas I e III estão corretas.","Apenas I, III e IV estão corretas.","Apenas II e IV estão corretas.","Apenas III e IV estão corretas.","Todas estão corretas."],
+  ans:1,
+  why:"I, III e IV reproduzem a 'regra das serosas' da aula. A II inverte: a dor da pericardite piora com inspiração, decúbito dorsal e tosse, e MELHORA ao inclinar-se para a frente (inervação frênica do pericárdio parietal; dor referida ao trapézio).",
+  trap:"'Melhora inclinado para a frente' é O sinal semiológico da pericardite — a banca sempre tenta invertê-lo. Associe: pericardite = paciente sentado, debruçado ('posição de prece maometana')."},
+
+ {lvl:"Prova", obj:"Obj ① · Dor torácica", stem:"Associe cada perfil de dor torácica (tabela da aula) ao diagnóstico: <br>1. Opressiva, retroesternal, com sudorese e náusea, NÃO piora com respiração, referida para braço/mandíbula.<br>2. Em pontada, piora ao inspirar fundo, referida ao ombro.<br>3. Em pontada, piora ao deitar e melhora sentado inclinado à frente, referida ao trapézio.<br>4. Localizada, reproduzida pela palpação do gradil costal.",
+  opts:["1-Pericardite · 2-IAM · 3-Pleurite · 4-Musculoesquelética",
+  "1-IAM · 2-Pleurite · 3-Pericardite · 4-Musculoesquelética",
+  "1-IAM · 2-Pericardite · 3-Pleurite · 4-DRGE",
+  "1-DRGE · 2-Pleurite · 3-Pericardite · 4-IAM",
+  "1-IAM · 2-Musculoesquelética · 3-Pleurite · 4-Pericardite"],
+  ans:1,
+  why:"Tabela da Verônica: IAM = opressiva + autonômica + referida braço/mandíbula + indiferente à respiração; pleurite = pontada respiratória + ombro (frênico); pericardite = pontada posicional que melhora inclinado à frente + trapézio; musculoesquelética = reproduz à palpação. DRGE seria queimação epigástrica sem cortejo.",
+  trap:"Os dois 'referidos' que se confundem: pleurite → OMBRO, pericardite → TRAPÉZIO. E 'reproduz à palpação' praticamente exclui origem visceral — atalho que resolve metade das questões de dor torácica."},
+
+ {lvl:"Prova", obj:"Obj ① · Idoso/alerta", stem:"<span class='cx'>Homem, 78 anos, hipertenso, diabético, tabagista. Dor abdominal 'vaga' há 6 horas, desproporcional ao exame físico (abdome flácido, pouco doloroso). Chega hipotenso (PA 85×60), confuso, com massa pulsátil duvidosa em mesogástrio.</span> Assinale a correta:",
+  opts:["Dor de baixa intensidade com exame pobre indica quadro benigno; liberar com analgesia e retorno se piora.",
+  "Idosos têm MENOR densidade de nociceptores e respostas atenuadas — dor 'vaga' + hipotensão + alteração de consciência é combinação de altíssimo risco (isquemia mesentérica, aneurisma de aorta em rotura), e este paciente exige estabilização e imagem imediatas.",
+  "O quadro é típico de cólica nefrética bilateral simples.",
+  "A confusão mental afasta causa abdominal e indica causa psiquiátrica primária.",
+  "A prioridade é analgesia com AINE IM e reavaliação em 6 horas."],
+  ans:1,
+  why:"Slide 'Dor visceral e senilidade' + sinais de alerta: no idoso a dor é atípica e subestimada (↓nociceptores, alteração de condução e autonômica) e eventos isquêmicos passam despercebidos. Dor visceral + hipotensão/alteração de consciência = nunca banalizar. Massa pulsátil + choque = pensar AAA roto.",
+  trap:"Armadilha dupla: intensidade da dor NÃO mede gravidade no idoso; e a 'primeira cólica renal da vida' em >60 anos com perfil vascular merece TC pensando em AORTA antes de rotular como pedra."},
+
+ {lvl:"Prova", obj:"Obj ③ · Tipos de cálculo", stem:"Sobre a composição dos cálculos urinários, assinale a INCORRETA:",
+  opts:["Cálculos contendo cálcio (oxalato > fosfato) respondem por 70–80% do total, e hipercalciúria é o distúrbio metabólico mais associado.",
+  "Cálculos de ácido úrico associam-se a pH urinário persistentemente baixo, obesidade, resistência insulínica e DM2.",
+  "Cálculos de estruvita (fosfato de magnésio e amônio) exigem urina alcalina (pH ≥ 7) com bactéria produtora de urease e formam a maioria dos cálculos coraliformes.",
+  "Escherichia coli é a principal bactéria produtora de urease implicada nos cálculos de estruvita.",
+  "Cálculos de cistina decorrem de defeito autossômico recessivo na reabsorção tubular de cistina, ornitina, lisina e arginina, surgindo já em pacientes jovens."],
+  ans:3,
+  why:"E. coli NÃO produz urease (Goldman/veterana, com todas as letras). As produtoras clássicas: PROTEUS (a mais lembrada), Klebsiella, Staphylococcus epidermidis, Mycoplasma e algumas leveduras. Urease quebra ureia → amônio + alcalinização → precipita estruvita → cálculo coraliforme ('de infecção').",
+  trap:"A banca conta com o reflexo 'ITU = E. coli'. Para CÁLCULO de infecção, o vilão é Proteus. Grave o par: E. coli = cistite comum; Proteus = estruvita/coraliforme."},
+
+ {lvl:"Prova", obj:"Obj ③ · Diagnóstico", stem:"Julgue as proposições sobre o diagnóstico da nefrolitíase:<br>I. A TC helicoidal sem contraste tem sensibilidade e especificidade superiores a 95% e pode sugerir a composição pela densidade.<br>II. Na gestante com suspeita de cólica renal, a ultrassonografia é o exame de primeira escolha.<br>III. A ausência de hematúria no EAS exclui, na prática, o diagnóstico de litíase ureteral.<br>IV. O cálculo de ácido úrico é radiotransparente ao RX simples, mas visível à TC.",
+  opts:["Apenas I e II.","Apenas I, II e IV.","Apenas II, III e IV.","Apenas I e IV.","Todas corretas."],
+  ans:1,
+  why:"I, II e IV são o tripé de imagem do Goldman. A III é falsa: hematúria é comum, mas sua AUSÊNCIA não exclui litíase (parcela relevante dos casos não a apresenta; obstrução pode ser indolor e sem hematúria) — e o achado de cálculo tampouco exclui outra causa para a dor.",
+  trap:"'Sem hematúria → não é pedra' derruba muita gente no plantão e na prova. EAS ajuda, não decide: quem decide é a TC."},
+
+ {lvl:"Prova", obj:"Obj ③ · Prevenção dirigida", stem:"Associe o distúrbio ao tratamento preventivo dirigido (SBN 2025):<br>1. Hipercalciúria idiopática<br>2. Hipocitratúria<br>3. Cálculo de ácido úrico recorrente<br>4. Hiperuricosúria com cálculos de oxalato de cálcio",
+  opts:["1-citrato de potássio · 2-tiazídico · 3-alopurinol · 4-alcalinização urinária",
+  "1-tiazídico (HCTZ 25 mg 2×/d, clortalidona ou indapamida) · 2-citrato de potássio 20–60 mEq/d · 3-alcalinização urinária com citrato até pH > 6,5 · 4-alopurinol 100–300 mg/d",
+  "1-alopurinol · 2-citrato de potássio · 3-tiazídico · 4-restrição absoluta de cálcio",
+  "1-tiazídico · 2-alopurinol · 3-citrato de potássio · 4-tiazídico",
+  "1-citrato de potássio · 2-alcalinização · 3-alopurinol · 4-tiazídico"],
+  ans:1,
+  why:"Pareamento clássico: tiazídico reduz calciúria (monitorar K⁺); citrato de K repõe o principal inibidor de cristalização (e trata ATR distal); ácido úrico dissolve com alcalinização (pH-alvo > 6,5); alopurinol tem evidência justamente no fenótipo hiperuricosúria + cálculo de CÁLCIO (estudo de Ettinger). Sempre com líquido ~30 mL/kg + dieta.",
+  trap:"O detalhe fino: alopurinol 'ganha' na hiperuricosúria com cálculo de CÁLCIO; no cálculo de ácido úrico puro, o primeiro passo é alcalinizar (± alopurinol se hiperuricosúria). Quem decorou 'ácido úrico = alopurinol' direto cai."},
+
+ {lvl:"Prova", obj:"Obj ③④ · Urgência", stem:"<span class='cx'>Mulher, 41 anos, cólica renal esquerda há 3 dias, agora com febre de 39,4 °C, calafrios, taquicardia e queda do estado geral. TC: cálculo de 9 mm em ureter proximal E com hidroureteronefrose importante. Leucocitose com desvio; EAS com piúria e nitrito +.</span> A conduta correta é:",
+  opts:["LECO imediata para fragmentar o cálculo e drenar a infecção.",
+  "Tansulosina + antibiótico VO e reavaliação ambulatorial em 72 horas.",
+  "Internação, culturas (urina + sangue), antibiótico IV imediato E desobstrução urinária URGENTE com duplo J ou nefrostomia percutânea; tratamento definitivo do cálculo somente após resolver a infecção.",
+  "Nefrolitotomia percutânea de urgência com retirada completa do cálculo no mesmo tempo.",
+  "Apenas analgesia com AINE e hidratação, pois a prioridade é a dor."],
+  ans:2,
+  why:"Pielonefrite OBSTRUTIVA = 'pus sob pressão' (veterana/Goldman): emergência urológica com risco de sepse e perda renal. ATB sozinho não alcança a coleção sob pressão — é obrigatório DESOBSTRUIR (duplo J ou nefrostomia). Litotripsia/retirada definitiva ficam para depois da estabilização.",
+  trap:"LECO em infecção ativa é contraindicada (fragmentar dissemina bactéria e não desobstrui). E a dupla 'ATB + reavaliar depois' também mata: sem drenagem, o paciente evolui para sepse. Dois pilares SEMPRE: antibiótico + desobstrução."},
+
+ {lvl:"Prova", obj:"Obj ③ · Prevenção/dieta", stem:"<span class='cx'>Homem, 45 anos, segundo episódio de cálculo de oxalato de cálcio. Urina de 24 h: hipercalciúria, volume 1,1 L/dia, sódio urinário elevado. Ele já 'cortou o leite e derivados por conta própria'.</span> A orientação correta é:",
+  opts:["Parabenizá-lo pela restrição de cálcio e reforçá-la, pois cálcio dietético forma cálculo de cálcio.",
+  "Aumentar líquidos (~30 mL/kg/d, diurese ≥ 2–2,5 L), REDUZIR SÓDIO e proteína animal, manter CÁLCIO DIETÉTICO NORMAL (1.000–1.200 mg/d), estimular cítricos, e associar tiazídico; a restrição de cálcio deve ser desfeita.",
+  "Prescrever suplemento de vitamina C 2 g/dia como acidificante urinário protetor.",
+  "Restringir líquidos à noite para reduzir a estase urinária.",
+  "Iniciar citrato de potássio independentemente do perfil da urina de 24 h."],
+  ans:1,
+  why:"Paradoxo do cálcio (Goldman/SBN 2025): restringir cálcio deixa oxalato livre no intestino → mais oxalato absorvido e excretado → MAIS cálculo (e ainda perde osso). O pacote correto na hipercalciúria: líquido abundante, sódio baixo (Na alto arrasta Ca na urina), proteína moderada, cálcio NORMAL nas refeições, cítricos, tiazídico (HCTZ/clortalidona/indapamida) monitorando potássio.",
+  trap:"Vitamina C em suplemento >1 g/d vira OXALATO e aumenta risco em ~16% (SBN 2025) — alternativa C é dupla pegadinha (nem acidificar protege: pH baixo é fator para cálculo de ácido úrico)."},
+
+ {lvl:"Prova", obj:"Obj ③ · Cirurgia", stem:"Sobre o tratamento intervencionista da nefrolitíase, assinale a INCORRETA:",
+  opts:["A nefrolitotomia percutânea é a via de escolha para cálculos renais grandes (> 2 cm) e coraliformes passíveis de abordagem minimamente invasiva.",
+  "A ureterolitotripsia endoscópica é especialmente adequada para cálculos ureterais, sobretudo distais.",
+  "A LECO é o tratamento de escolha para o cálculo coraliforme completo.",
+  "Cateter duplo J e nefrostomia percutânea são os métodos de desobstrução urgente na pielonefrite obstrutiva e na LRA obstrutiva.",
+  "Cálculos muito densos (> 1.000 UH) e de cistina fragmentam mal à LECO."],
+  ans:2,
+  why:"Coraliforme = NLP (± combinações); a LECO fica para cálculos menores (<2 cm) não complicados, e ainda perde eficácia nos duros (cistina, brushita, oxalato monoidratado, >1.000 UH — SBN 2025) e no polo inferior. Nefrolitotomia anatrófica aberta fica para casos complexos selecionados.",
+  trap:"A associação automática 'litíase = LECO' é a isca. Antes de marcar, cheque tamanho (>2 cm?), dureza (>1.000 UH?), infecção ativa (contraindica) e localização."},
+
+ {lvl:"Prova", obj:"Obj ④⑤ · Prescrição hospitalar", stem:"<span class='cx'>Internado por cólica renal complicada, em uso de: SF 0,9% contínuo · cetoprofeno 100 mg IV 12/12 h · dipirona 1 g IV 6/6 h · morfina 2 mg IV S/N · ceftriaxona 2 g IV 1×/d (pós-culturas). No 2º dia: diurese em queda e creatinina subiu de 1,0 → 2,2 mg/dL.</span> O ajuste PRIORITÁRIO da prescrição é:",
+  opts:["Suspender a morfina, principal causa de lesão renal aguda.",
+  "Suspender o CETOPROFENO (AINE) — em rim obstruído/hipoperfundido a perfusão depende das prostaglandinas — mantendo analgesia com dipirona + opioide titulado, e reavaliar a desobstrução.",
+  "Dobrar a dose do cetoprofeno para melhorar a analgesia e a perfusão renal.",
+  "Associar gentamicina para ampliar o espectro antimicrobiano.",
+  "Suspender a hidratação venosa."],
+  ans:1,
+  why:"LRA em curso = AINE fora da prescrição (Vânia + Goldman): a vasodilatação da arteríola aferente é PG-dependente justamente no rim sob estresse (obstrução, hipovolemia, idoso, DM, HAS). Dipirona não é nefrotóxica (não inibe COX-2 renal — fala da Vânia) e opioide titulado cobre a dor. Checar também se a causa é obstrução persistente → duplo J/nefrostomia.",
+  trap:"Gentamicina em rim subindo creatinina é presente de grego (aminoglicosídeo nefrotóxico). E note o padrão de prova: a questão 'de prescrição' na verdade cobra farmacologia renal do AINE — os objetivos ④ e ⑤ vêm juntos."},
+
+ {lvl:"Prova", obj:"Obj ④ · Receituários", stem:"Sobre a prescrição de analgésicos na alta (Portaria 344/98), assinale a correta:",
+  opts:["Morfina e oxicodona podem ser prescritas em receita simples, desde que por 30 dias.",
+  "Tramadol e codeína exigem Notificação de Receita A (amarela).",
+  "Morfina, oxicodona, fentanila e metadona exigem Notificação de Receita A (amarela), retida, com quantidade limitada; tramadol e codeína saem em Receita de Controle Especial branca em 2 vias; AINEs comuns saem em receita simples (vários são MIPs).",
+  "Todos os AINEs exigem receita de controle especial em 2 vias.",
+  "A dipirona exige notificação de receita B (azul)."],
+  ans:2,
+  why:"Escadinha do receituário: opioides FORTES (lista A1: morfina, oxicodona, metadona, fentanila) = Notificação A amarela, numerada, retida; opioides FRACOS (tramadol, codeína) = Controle Especial branca 2 vias (1ª via retida na farmácia); AINEs/dipirona/paracetamol = receita comum, muitos MIPs de venda livre (paracetamol 'fora do balcão', naproxeno ≤400 mg).",
+  trap:"Na aula, a Vânia acrescentou a curiosidade que derruba: COXIBE tem retenção de receita (venda controlada, uso ≤14 dias pelo risco trombótico) — AINE 'comum' que foge da regra da receita simples."},
+
+ {lvl:"Prova", obj:"Obj ⑤ · AINEs (nível Vânia)", stem:"Sobre particularidades dos AINEs e analgésicos cobradas em aula, assinale a INCORRETA:",
+  opts:["O cetoprofeno é o único AINE que deve ser tomado LONGE das refeições, pois alimentos reduzem sua absorção.",
+  "O paracetamol tem dose máxima de 4 g/dia no uso agudo e 2 g/dia no uso crônico, com hepatotoxicidade por NAPQI agravada por etilismo e indutores enzimáticos (carbamazepina, isoniazida, rifampicina).",
+  "O AAS deve ser suspenso cerca de 7 dias antes de cirurgias, pois inibe irreversivelmente a COX-1 plaquetária pela vida inteira da plaqueta.",
+  "A agranulocitose por dipirona é dose-dependente e ocorre apenas após uso prolongado, o que permite prevê-la e preveni-la com doses baixas.",
+  "A nimesulida não é recomendada para menores de 12 anos."],
+  ans:3,
+  why:"A agranulocitose da dipirona é reação IMUNOALÉRGICA: NÃO é dose-dependente, pode ocorrer a qualquer momento (até logo após suspender) e é imprevisível — por isso o alerta: febre + calafrios + dor de garganta + lesões dolorosas de mucosa durante uso de dipirona = parar e procurar serviço (slide e fala da Vânia). As demais são pérolas literais da aula.",
+  trap:"'Dose-dependente' é o disfarce padrão para efeitos IDIOSSINCRÁTICOS/imunoalérgicos. Compare: hepatotoxicidade do paracetamol = dose-dependente; agranulocitose da dipirona = imunoalérgica. Par perfeito de prova."},
+
+ {lvl:"Prova", obj:"Obj ⑤ · Risco CV×GI", stem:"<span class='cx'>Homem, 62 anos, IAM há 14 meses, em uso de AAS 100 mg/dia. Hipertenso controlado, com dispepsia frequente. Crise de gota no tornozelo; precisa de AINE por poucos dias.</span> Com base no artigo de revisão da disciplina (Rheumatol Forum 2024), a melhor estratégia é:",
+  opts:["Ibuprofeno 600 mg 8/8 h tomado junto com o AAS para sinergismo de proteção.",
+  "Cetoprofeno por curto período, mantendo o AAS com intervalo (AAS ≥ 2 h antes do AINE), associado a inibidor de bomba de prótons.",
+  "Etoricoxibe 90 mg/dia, o mais seguro após infarto.",
+  "Diclofenaco 50 mg 8/8 h, por ser o de melhor perfil cardiovascular.",
+  "Suspender o AAS durante o uso do AINE e retomá-lo depois."],
+  ans:1,
+  why:"Paciente de ALTO risco CV (prevenção secundária, mantém AAS) + risco GI (idade + dispepsia + AAS): o algoritmo do artigo indica cetoprofeno com AAS (PA-neutro, sem interação relevante com o efeito antiagregante) + IBP; o AAS deve ser tomado ~2 h ANTES do AINE. Ibuprofeno é proibido junto (ocupa a COX-1 plaquetária e ANULA o bloqueio irreversível do AAS — ESC classe III); naproxeno seria a escolha se ele NÃO usasse AAS.",
+  trap:"Três iscas calibradas: ibuprofeno+AAS (anula), coxibe pós-IAM (pró-trombótico; e já passou dos 6 meses, mas segue longe de 'o mais seguro'), diclofenaco (alerta EMA; composite CV +27%, o pior da lista do SOS Project). E jamais 'suspender o AAS para caber o AINE' em prevenção secundária."},
+
+ {lvl:"Prova", obj:"Obj ⑤ · Opioides", stem:"Julgue as proposições sobre efeitos colaterais dos opioides:<br>I. A constipação intestinal desenvolve tolerância rapidamente, dispensando laxantes no uso prolongado.<br>II. A hiperalgesia induzida por opioides é o aumento paradoxal da sensibilidade dolorosa com o uso persistente — um dos motivos para questionar opioide contínuo na dor crônica não oncológica.<br>III. O tramadol reduz o limiar convulsivo e pode precipitar síndrome serotoninérgica quando associado a ISRS/IRSN.<br>IV. Na intoxicação aguda (miose + depressão respiratória + rebaixamento), a naloxona é o antídoto.",
+  opts:["Apenas I, II e III.","Apenas II, III e IV.","Apenas I e IV.","Apenas II e IV.","Todas corretas."],
+  ans:1,
+  why:"II, III e IV corretas (Goldman cap. 27 + resumo da veterana: efeitos agudos — depressão respiratória, náuseas, vômitos, prurido, constipação, retenção urinária, delírio, mioclonia, convulsão; crônicos — tolerância, dependência e hiperalgesia). A I é falsa: constipação é o efeito que NÃO desenvolve tolerância — laxante entra junto desde o início.",
+  trap:"'Constipação sem tolerância' é a exceção que as bancas amam. E amarre a ponte com a SP3: hiperalgesia + tolerância + dependência = por que opioide é fortemente desaconselhado na dor nociplástica/fibromialgia."}
+];
+
+const state={answered:0,hits:0};
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=QS.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  QS.forEach((q,i)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    const lvlPill=(q.lvl==='ENAMED')?'<span class="pill e">ENAMED</span>':'<span class="pill d">Nível prova</span>';
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div>'+lvlPill+'<span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/QS.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+const FC=[
+ ["O que DÓI na víscera? (4 estímulos) E o que não dói?","Dói: ① DISTENSÃO de víscera oca · ② ISQUEMIA (bradicinina/enzimas) · ③ ESPASMO de m. lisa · ④ INFLAMAÇÃO. NÃO dói: cortar, esmagar, queimar (cirurgião secciona alça sem dor)"],
+ ["Por que a dor visceral é MAL LOCALIZADA? (3 razões)","① Pouca representação cortical específica · ② Convergência de fibras viscerais + somáticas na medula · ③ Pouca experiência prévia com órgãos internos. Resultado: difusa, imprecisa, frequentemente referida — mas seguindo MAPA SEGMENTAR"],
+ ["Regra das serosas (pleura · pericárdio · peritônio)","Folheto VISCERAL: autonômico, quase não dói. PARIETAL: somático → dor intensa, localizada, piora ao mover. Pleurite: pontada ao respirar → respiração superficial. Pericardite: frênico; melhora INCLINADO À FRENTE; refere ao trapézio. Peritonite: Blumberg; tossir/andar/palpar dói"],
+ ["Paciente INQUIETO × IMÓVEL","INQUIETO, sem posição = dor visceral PURA (cólica renal). IMÓVEL, abdome em tábua = irritação do peritônio PARIETAL (peritonite). A banca sempre inverte"],
+ ["Resposta autonômica da dor visceral — por quê?","Simpática: sudorese, taquicardia, palidez. Vagal: náusea, vômito, HIPOTENSÃO, bradicardia (IAM inferior). Motivo decisivo: via MEDIAL da dor conecta com formação reticular + hipotálamo + límbico — NÃO é 'porque são fibras C' (pele também tem!)"],
+ ["Sinais de ALERTA na dor visceral","Dor + hipotensão · + alteração de consciência · + sudorese intensa · dor que desperta do sono · idoso com dor atípica/vaga. Idoso: ↓nociceptores → isquemia silenciosa (IAM sem dor, mesentérica, AAA)"],
+ ["Referida × irradiada — 10 segundos","REFERIDA: convergência viscerossomática, dermátomo do mesmo segmento, NÃO segue nervo (IAM→braço E; pâncreas→dorso; diafragma→ombro). IRRADIADA: segue trajeto da RAIZ/nervo, em choque, piora com Valsalva, Lasègue+ (ciática). Cólica renal→virilha/testículo = mapa segmentar T10–L1"],
+ ["Apendicite em 2 tempos","Fase 1 VISCERAL: dor periumbilical mal localizada (aferentes T9–T10, referida). Fase 2 PARIETAL: peritônio parietal inflamado → dor localizada na FID, piora com movimento/palpação (McBurney, Blumberg)"],
+ ["Tipos de cálculo — % e assinaturas","CÁLCIO (oxalato>fosfato) 70–80%: hipercalciúria + hipocitratúria. ÁCIDO ÚRICO ~10%: pH baixo, obesidade/DM2, RADIOTRANSPARENTE, dissolve alcalinizando. ESTRUVITA: urease + pH≥7, coraliforme. CISTINA 1–2%: COLA, AR, jovem, duro"],
+ ["Quem produz urease? (estruvita)","PROTEUS (o clássico!) · Klebsiella · S. epidermidis · Mycoplasma · leveduras. E. COLI NÃO PRODUZ UREASE — pegadinha nº 1 do tema. Urease: ureia→amônio→pH≥7→fosfato triplo→coraliforme"],
+ ["Imagem na litíase — papéis","TC helicoidal SEM contraste: padrão-ouro, S/E >95%, densidade sugere composição. USG: GESTANTE (sens ~85% p/ ureteral sintomático), vê hidronefrose. RX: só radiopacos ≥2–3 mm (úrico é invisível). SBN 2025 aceita USG+RX de entrada + TC low-dose"],
+ ["Chance de sair sozinho (Goldman)","≤5 mm ~70% · 5–7 mm ~60% · 7–9 mm ~48% · ≥9 mm ~25%. Mais DISTAL = mais sai (SBN 2025: >7 mm distal ~70% × proximal ~25%). Menor + mais distal = expectante"],
+ ["Analgesia da cólica renal — a escada própria","1º AINE parenteral (diclofenaco 75 IM / cetoprofeno 100 IV) = tão ou MAIS eficaz que opioide + ↓pressão intraluminal · associa DIPIRONA 1 g IV (espasmolítica) · resgate: morfina 2–4 mg IV titulada ou tramadol (reavaliar 15–30 min) · antiemético · normovolemia. NÃO: soro aberto, diurético, escopolamina como base"],
+ ["Terapia expulsiva (TEM) — receita completa","TANSULOSINA 0,4 mg à noite por 4–6 semanas + analgesia VO + reavaliação com imagem. Para: cálculo ureteral DISTAL <10 mm (ideal 5–10; +44% eliminação), dor controlada, sem infecção, função renal normal. Febre/LRA/dor refratária = cai fora da TEM"],
+ ["Urgências urológicas na litíase (5)","① Pielonefrite obstrutiva = PUS SOB PRESSÃO → ATB + duplo J/nefrostomia URGENTE · ② LRA obstrutiva · ③ obstrução BILATERAL · ④ obstrução em RIM ÚNICO · ⑤ dor/vômitos refratários. LECO contraindicada com infecção ativa"],
+ ["LECO × URS × NLP","LECO: renais <2 cm (falha: cistina/brushita/oxalato monoidratado, >1.000 UH, polo inferior, infecção, gestante). URS ± laser: ureterais (distais!) e renais menores. NLP: >2 cm e CORALIFORME. Anatrófica aberta: complexos. Duplo J/nefrostomia: só DESOBSTRUI (urgência)"],
+ ["Prevenção de recorrência — o pacote","Líquido ~30 mL/kg/d (diurese ≥2–2,5 L) · ↓SÓDIO · proteína animal moderada · CÁLCIO DIETÉTICO NORMAL (restringir = ↑oxalúria = MAIS pedra!) · cítricos/DASH · sem vit. C >1 g. Dirigido: hipercalciúria→TIAZÍDICO · hipocitratúria→CITRATO K 20–60 mEq · úrico→pH>6,5 · hiperuricosúria+cálculo Ca→ALOPURINOL. Urina 24 h ×2 (3–8 sem após, recorrente/alto risco) + Ca/PTH (hiperpara!)"],
+ ["Paracetamol × dipirona (Vânia)","PARACETAMOL: COX-3, sem anti-inflamatório; máx 4 g agudo/2 g crônico; NAPQI (CYP2E1) — pior com álcool/jejum/indutores (carbamazepina, isoniazida, rifampicina); gestação B; antitérmico LENTO. DIPIRONA: 500–1000 6/6 h (1 g ataque); ação 30–40 min; espasmolítica; hipotensão IV; AGRANULOCITOSE IMUNOALÉRGICA NÃO dose-dependente (febre+garganta+mucosas=parar); NÃO nefrotóxica; hipotermia se febre baixa"],
+ ["AAS · ibuprofeno · pré-op · interações","AAS: inibição IRREVERSÍVEL → plaqueta morta p/ sempre (5–7 d) → suspender 7 d pré-op; Reye (criança c/ virose); DENGUE contraindicado; 100 mg antiagregante. IBUPROFENO ANULA o AAS (ocupar COX-1 plaquetária) → não usar juntos (AAS ≥2 h antes). NAPROXENO × NOACs: evitar. Pós-SCA: NENHUM AINE por 3–6 meses. Alto CV→naproxeno (sem AAS)/cetoprofeno (com AAS) · alto GI→coxibe+IBP · ambos→tópico"],
+ ["Opioides: agudo × crônico × intoxicação","AGUDOS: depressão respiratória (o + temido), sedação, náusea/vômito, prurido (histamina), CONSTIPAÇÃO (sem tolerância → laxante junto!), retenção urinária, miose, delírio, mioclonia/convulsão. CRÔNICOS: tolerância, dependência, HIPERALGESIA induzida por opioide. Tramadol: convulsão + sd. serotoninérgica (ISRS). Codeína: CYP2D6. Intoxicação: miose + dep. resp. + coma → NALOXONA"]
+];
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back">'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+
+const FY=[
+ ["1 · Por que o infarto dói no braço e a pedra dói no testículo?","Explique para um colega de outra fase usando a analogia da central telefônica: os fios do coração (T1–T4) e do rim/ureter (T10–L1) chegam à mesma mesa de operação que os fios da pele — e a telefonista (córtex) erra o endereço. Feche diferenciando isso de uma ciática (o fio comprimido dispara ao longo do próprio cabo = irradiada)."],
+ ["2 · Por que cortar o intestino não dói, mas gases presos doem?","Conte a história dos estímulos adequados: a víscera é cega para faca e fogo, mas grita com distensão, isquemia, espasmo e inflamação. Onde entram as fibras C? Por que a dor vem com náusea, suor e queda de pressão? (via medial → reticular/hipotálamo/límbico)"],
+ ["3 · A jornada da pedra","Narre do início ao fim: supersaturação + citrato baixo → placa de Randall → cálculo cresce → desce → cólica com irradiação (mapa segmentar) → TC sem contraste → 6 mm distal: tansulosina e paciência (70%) OU 15 mm no ureter proximal: URS/LECO OU coraliforme: NLP. Em que momento dessa história entra o 'pus sob pressão'?"],
+ ["4 · Defenda: AINE > morfina na cólica renal","Argumente como num round: prostaglandinas fazem o ureter espasmar e aumentam a pressão intraluminal; o AINE corta o problema na raiz (e a morfina só tapa o alarme, com vômito, retenção urinária e sedação de brinde). Quando a morfina entra? E por que o AINE sai de cena se a creatinina sobe?"],
+ ["5 · Monte a prescrição do PA de cabeça","Fale em voz alta, item por item, como plantonista: jejum → SF moderado (por que NÃO aberto?) → cetoprofeno 100 IV ou diclofenaco 75 IM → dipirona 1 g IV → ondansetrona → morfina titulada S/N → coar urina → critérios de alta e a receita de casa (com tansulosina para quem?)."],
+ ["6 · Convença o paciente a NÃO cortar o leite","Ele tem cálculo de cálcio e 'cortou o leite por conta'. Explique o paradoxo sem jargão: o cálcio da refeição segura o oxalato no intestino; sem ele, o oxalato sobra, é absorvido e vira pedra. O que ele corta de verdade? (sal, exagero de carne) O que ele bebe? (30 mL/kg) O que o médico acrescenta se a urina de 24 h mostrar hipercalciúria? (tiazídico)"],
+ ["7 · Aula-relâmpago: os 3 órgãos do AINE e as 3 fases do opioide","Em 3 minutos: AINE ataca estômago (COX-1: muco/bicarbonato), rim (COX-2: perfusão) e coração/pressão (PGI2×TXA2, coxibe trombótico, ibuprofeno×AAS). Opioide: agudo (depressão respiratória, vômito, retenção), contínuo (constipação SEM tolerância → laxante), crônico (tolerância, dependência, hiperalgesia). Feche com a tríade da intoxicação + antídoto."]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{
+  const p=document.createElement('div');p.className='panel';
+  p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';
+  feybox.appendChild(p);
+});
+</script>
+</body>
+</html>

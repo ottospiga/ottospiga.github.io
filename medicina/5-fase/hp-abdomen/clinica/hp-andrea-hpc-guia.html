@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HPc · Andrea — Hepatites, DHGNA, Cirrose e Ascite · Guia de estudo</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f; --purple:#c6b3ff;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .sub b{color:#dfe9f4}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul,.panel ol{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  .k3{color:#8ab8ff;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tscroll{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .exam{background:#2a161b;border:1px solid #6f2f36;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffc9cd;margin:8px 0}
+  .exam b{color:#fff}
+  .ok{background:#0f2a20;border:1px solid #1f5a41;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cdefdd;margin:8px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.4px;color:#cdd9e6}
+  .box b{color:#dfe9f4}
+  .tt{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:#cfe0ef}
+  .chip b{color:#fff}
+  .chip.hot{border-color:#6f2f36;background:#2a161b;color:#ffb9be}
+  .chip.warm{border-color:#6a5a26;background:#2b2113;color:#ffe1ad}
+  .chip.cool{border-color:#1c5a41;background:#123227;color:#7ff0c0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden;min-width:120px}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.a{background:#33301a;color:#ffdf9e;border:1px solid #6a5a26}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+  .qfilter{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .qfilter .chip{cursor:pointer}
+  .qfilter .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d}
+  details.gab{margin-top:10px;background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:6px 12px}
+  details.gab summary{cursor:pointer;font-weight:700;color:#8fe4d2;padding:6px 0}
+  details.gab p,details.gab li{font-size:13.4px;color:#cfe4f5}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+  .map li b{color:#ffd79e}
+
+  /* ---- deck de flashcards atômicos ---- */
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  .chips .chip{cursor:pointer}
+  .chips .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d;font-weight:700}
+  .fbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut);margin:2px 2px 8px}
+  .fbar b{color:var(--ink)}
+  #card{background:linear-gradient(135deg,#12324a,#151f2c);border:1px solid var(--line);border-radius:18px;min-height:300px;padding:26px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;box-shadow:var(--shadow);position:relative}
+  #card .cat{position:absolute;top:12px;left:14px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 9px;border-radius:6px;color:#fff;background:#244a5c}
+  #card .hint{position:absolute;bottom:10px;font-size:11.5px;color:#7f93a8}
+  #qFront{font-size:20px;font-weight:700;color:#eef3f9}
+  #back{display:none;width:100%}
+  #qTop{font-size:14px;color:var(--mut);font-weight:600;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed #3a4e60}
+  #resp{font-weight:800;color:var(--tealo);font-size:22px;line-height:1.35}
+  #why{color:#b9cbdd;font-size:13.5px;margin-top:12px}
+  .actions{display:flex;gap:10px;margin-top:14px}
+  .actions button{flex:1;border:none;border-radius:14px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+  #btnErrei{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  #btnAcertei{background:#123326;color:#7ff0c0;border:1px solid #1c5a41}
+  .hidden{display:none!important}
+  #fim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+  #fim h2{margin:0 0 8px;font-size:20px;color:#dfe9f4}
+  #fim button{margin-top:14px;border:none;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;background:var(--teal);color:#0c141d;font-family:inherit}
+  #fim button.sec{background:var(--card2);color:var(--ink);border:1px solid var(--line);margin-left:8px}
+
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  @media(max-width:520px){h1{font-size:19px}#qFront{font-size:18px}#resp{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">HP Clínica · Manifestações Abdominais · profª Andrea Cylene Tamura (UNIFEBE 2026)</span>
+    <h1>Hepatites virais, DHGNA, cirrose, ascite e paracentese — <span style="color:var(--tealo)">Guia de estudo</span></h1>
+    <div class="sub">Tudo o que está nos <b>4 decks da Andrea</b> (hepatites, DHGNA/MASLD, cirrose, complicações da cirrose), no deck-fonte do prof. Julio e no <b>quadro de hepatites</b> que ela mandou preencher — organizado do jeito que a prova cobra, com erratas dos slides marcadas.</div>
+    <div class="meta"><span class="chip hot"><b>Prova:</b> ter 01/09 · 18h30</span><span class="chip">5 decks · 160 slides + quadro</span><span class="chip warm"><b>Pesos prováveis:</b> ascite/complicações 35% · hepatites 30% · cirrose 25% · DHGNA 10%</span><span class="chip cool">Estilo do bloco: objetivas A–D diretas ± descritiva (quadro)</span></div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+<div class="panel">
+<h2>0 · Como a prova cobra</h2>
+<p><b>Não existe prova antiga da Andrea.</b> O que existe é a prova do bloco (prof. João, "Prova de Habilidades"): <b>26 questões objetivas A–D, uma linha cada, pergunta direta</b> ("A principal causa de ascite no mundo é…", "SAAG ≥ 1,1 indica…"). As 6 questões do bloco "Ascite e paracentese" estão comentadas no banco (filtro "Prova antiga"). Formato <b>provável</b> da Andrea: objetivas diretas A–D no mesmo espírito, com chance real de <b>1–2 descritivas curtas</b> — a candidata número 1 é o <b>quadro comparativo de hepatites</b> que ela mandou preencher (A/E × B/C/D: cronificação, transmissão, tratamento, prevenção + "aspectos importantes" + sorologias da B); está no fim da aba Questões, com roteiro por pesos.</p>
+<h3>O bloco real (cronograma do slide dela)</h3>
+<ul>
+<li><b>14/08</b> hepatites (33 slides dela + deck-fonte do prof. Julio Razera, 25 slides) · <b>18/08</b> resumo das hepatites (o quadro) + DHGNA (19 slides) + laboratório de fígado, baço e ascite · <b>20/08</b> cirrose (35 slides) + caso clínico · <b>25/08</b> ascite e descompensações (48 slides) + caso com ator · <b>01/09</b> avaliação.</li>
+<li>Ela é <b>cirurgiã/endoscopista</b>: espere peso em ligadura, cianoacrilato, EDA em 12 h, paracentese (local, indicação, contraindicação) e semiologia (macicez móvel, piparote, Skoda, refluxo hepatojugular).</li>
+</ul>
+<h3>O que os slides gritam (caixa alta, vermelho, asterisco)</h3>
+<ul>
+<li>Hepatites: <b>HAV NÃO CRONIFICA</b> · HBV "<b>NÃO CURA!</b>" · "soroconversão só em <b>10%</b>" · "<b>PODE AMAMENTAR!</b>" · HCV "<b>NÃO TEM VACINA! NÃO TEM IMUNOGLOBULINA!</b>" · tratar HCV: "<b>TODOS OS PACIENTES!!</b>" (exceto 3) · RVS 12 semanas · HEV "<b>mais grave em gestantes</b>".</li>
+<li>Cirrose: <b>FIBROSE</b> + <b>NÓDULOS REGENERATIVOS</b> em vermelho; asteriscos vermelhos desenhados à mão nos slides de <b>Child-Turcotte-Pugh</b> e <b>MELD</b> (os dois únicos slides marcados assim — decore).</li>
+<li>Ascite/complicações: GASA ≥ 1,1 · PMN ≥ 250 · "hemotransfusão <b>apenas se Hb &lt; 7</b>" · "endoscopia em até <b>12 h</b>" · varizes esofágicas → <b>ligadura</b>, gástricas → <b>cianoacrilato</b>.</li>
+<li>DHGNA: "<b>TRATAR O PACIENTE, NÃO APENAS O FÍGADO</b>" · "AST/ALT normais <b>não excluem</b> doença significativa" · "risco <b>cardiovascular</b> é a principal preocupação".</li>
+</ul>
+<div class="note">📌 <b>Pesos prováveis</b> (por volume de slides e pela atividade extra): hepatites ~30% · ascite/PBE/paracentese + descompensações ~35% · cirrose ~25% · DHGNA ~10%. Suposição, não dado dela.</div>
+<div class="ok">✅ <b>Plano de leitura:</b> (1) leia os painéis 1 → 4 marcando as tabelas de sorologia B, Child-Pugh e GASA; (2) faça o banco filtrando por tema logo depois de cada painel; (3) na véspera, só Radar + Decoreba + flashcards das erradas. Slide &gt; livro: quando o slide diverge do livro, eu mostro os dois e digo o que marcar.</div>
+</div>
+
+<div class="panel">
+<h2>1 · Hepatites virais (A, B, C, D, E)</h2>
+<p>Hepatite = inflamação do fígado ("hepatus" + "ites"); HIV, CMV, EBV e dengue também causam, mas a prova é sobre os <b>hepatotrópicos</b>. <b>Aguda &lt; 6 meses · crônica &gt; 6 meses</b>. O slide dela lista A, B e C em <b>vermelho</b> (D e E em preto): é onde está o peso.</p>
+<h3>Quadro-mestre (é o que ela mandou preencher)</h3>
+<div class="tscroll"><table>
+<tr><th></th><th>A</th><th>B</th><th>C</th><th>D (delta)</th><th>E</th></tr>
+<tr><td><b>Vírus</b></td><td>RNA · Picornaviridae</td><td><b>DNA</b> · Hepadnaviridae (o único DNA)</td><td>RNA · Flaviviridae</td><td>RNA · Deltavírus, <b>defectivo</b> (precisa do HBsAg)</td><td>RNA · Hepeviridae</td></tr>
+<tr><td><b>Transmissão</b></td><td>Fecal-oral (raro: transfusão na fase aguda, sexual)</td><td>Sexual, vertical, percutânea (agulhas, alicates), transfusão</td><td>Percutânea e vertical; sexual menos frequente</td><td>Fluidos corporais (Norte do Brasil)</td><td>Fecal-oral (África/Ásia)</td></tr>
+<tr><td><b>Cronifica?</b></td><td><b>NÃO</b></td><td>RN &gt; 90% · crianças 20–50% · adultos 5–10%</td><td><b>~80% dos adultos</b> → cirrose em 20–30 anos → CHC</td><td>Sim, junto com o HBV; acelera cirrose/CHC</td><td><b>NÃO</b> (autolimitada)</td></tr>
+<tr><td><b>Gravidade</b></td><td>Fulminante &lt; 1%; pior em <b>adultos</b></td><td>Cirrose e CHC nos crônicos</td><td>Silenciosa; a que mais evolui para cirrose/CHC</td><td>Descompensação, mais CHC</td><td>Fulminante em <b>gestantes</b> (perda fetal, morte)</td></tr>
+<tr><td><b>Diagnóstico</b></td><td>anti-HAV <b>IgM</b> (aguda); IgG = imunidade</td><td>HBsAg, anti-HBc IgM/IgG, HBeAg/anti-HBe, anti-HBs, HBV-DNA</td><td>anti-HCV (rastreio) → <b>HCV-RNA</b> confirma</td><td>anti-HDV IgM + HDV-RNA (+ sorologias B)</td><td>anti-HEV IgM; AMT &gt; 1.000</td></tr>
+<tr><td><b>Tratamento</b></td><td>Suporte (repouso, hidratação, sintomáticos)</td><td>Tenofovir / entecavir / TAF — <b>não cura</b></td><td><b>DAAs</b> 12–24 sem, &gt; 90% cura</td><td>Análogos + <b>alfapeguinterferona</b></td><td>Suporte</td></tr>
+<tr><td><b>Vacina</b></td><td>SUS: dose única aos 15 m (até 5 anos incompletos); privado 2 doses</td><td>Criança 4 doses (nasc–2–4–6 m); adulto 3 doses (0–1–6 m)</td><td><b>Não há vacina nem imunoglobulina</b></td><td>Prevenida pela vacina da B</td><td>Sem vacina no Brasil</td></tr>
+</table></div>
+<div class="divg">🔎 <b>Divergência/errata (E):</b> o slide diz "Vírus RNA (<i>HVA</i> / família <i>Heperividae</i>)" — erro copiado do deck do Julio. O correto é <b>HEV / Hepeviridae</b>. Se a alternativa disser "HAV" para a hepatite E, é distrator, não gabarito.</div>
+<div class="divg">🔎 <b>Divergência (vacina A):</b> Andrea = dose única aos 15 meses no SUS (privado 2 doses); Julio = "PNI 2 doses aos 12 e 15–18 meses". O PNI real é dose única (15 m, até 5 anos incompletos). <b>Na prova, marque dose única aos 15 m.</b></div>
+
+<h3>Hepatite A — clínica e prevenção</h3>
+<ul>
+<li>Fase <b>prodrômica ~1 semana</b> (fadiga, náuseas, vômitos, dor abdominal, mialgia, artralgia, febre) → fase <b>ictérica</b> (icterícia, colúria, acolia, prurido). Icterícia em <b>5–10% das crianças e 50–70% dos adultos</b> — e "<b>NÃO SIGNIFICA GRAVIDADE</b>".</li>
+<li>Fulminante (&lt; 1%) = deterioração rápida com <b>coagulopatia e encefalopatia</b> sem hepatopatia prévia. Julio: mais grave em <b>adultos</b>; surtos (SP e BH ↑ 250% em 2025); AMT &gt; 1.000, linfocitose.</li>
+<li>Prevenção: higiene de alimentos e mãos, água tratada, saneamento, evitar banho em riacho/enchente, vacina inativada (VAQTA).</li>
+</ul>
+
+<h3>Hepatite B — marcadores e interpretação</h3>
+<ul>
+<li><b>HBsAg</b> = vírus presente, <b>primeiro marcador</b> a surgir; &gt; 6 meses = crônica. <b>Anti-HBc IgM</b> = infecção aguda, <b>segundo marcador</b>, dura ~6 meses. <b>Anti-HBc IgG/total</b> = contato com vírus selvagem, persiste a vida toda (é o teste de triagem do MS). <b>HBeAg</b> = replicação, carga viral alta (&gt; 2.000). <b>Anti-HBe</b> = controle de replicação (não é cura). <b>Anti-HBs</b> = cura ou vacina.</li>
+</ul>
+<div class="divg">🔎 <b>Errata do slide de marcadores:</b> ele diz "Anti-HBc <b>IgM</b> → persiste por toda a vida (mesmo após cura)". Quem persiste é o anti-HBc <b>IgG/total</b>; o IgM cai em ~6 meses (o próprio slide anterior diz "duração de 6 meses" e a tabela do MS no slide seguinte mostra IgM negativo na crônica). Na prova: IgM = aguda/recente; IgG = contato passado.</div>
+<div class="tscroll"><table>
+<tr><th>HBsAg</th><th>Anti-HBc</th><th>Anti-HBs</th><th>Leitura</th></tr>
+<tr><td>+ (&lt; 6 m)</td><td>IgM +</td><td>−</td><td><b>Hepatite B aguda</b></td></tr>
+<tr><td>+ (&gt; 6 m)</td><td>IgG + (IgM −)</td><td>−</td><td><b>Hepatite B crônica</b> (HBeAg + = replicando; anti-HBe + = baixa replicação)</td></tr>
+<tr><td>−</td><td>total +</td><td>+</td><td><b>Cura</b> (infecção passada resolvida)</td></tr>
+<tr><td>−</td><td>−</td><td>+</td><td><b>Vacinado</b></td></tr>
+<tr><td>−</td><td>−</td><td>−</td><td><b>Suscetível</b> → vacinar</td></tr>
+<tr><td>−</td><td>IgM + / IgG +</td><td>−</td><td>Janela imunológica / início da convalescença (tabela do MS)</td></tr>
+</table></div>
+<div class="warn">⚠️ <b>Pegadinha:</b> anti-HBs isolado = vacina; anti-HBs + anti-HBc = cura. Anti-HBc positivo com anti-HBs negativo e HBsAg negativo pode ser cura antiga (anti-HBs some com o tempo — nota da tabela do MS). E lembre: o Julio chama o HBV de "vírus safadinho": pode <b>reativar na imunossupressão mesmo com anti-HBs</b> e pode causar <b>CHC sem cirrose</b>.</div>
+<h3>Hepatite B — epidemiologia, cronificação, tratamento</h3>
+<ul>
+<li>350 milhões no mundo; distribuição em <b>bolsões: Amazônia e oeste catarinense</b>. Risco: profissionais do sexo, moradores de rua, usuários de drogas, indígenas; transfusão <b>antes de 1993</b>, tatuagem, lâminas e alicates (Julio).</li>
+<li>Cronificação <b>inversamente proporcional à idade</b>: RN &gt; 90% (vertical) · crianças 20–50% · adultos 5–10% (Julio: 90 / 25–30 / 5%). Dos crônicos: cirrose 50%, CHC 5–15% (Julio).</li>
+<li>Avaliação inicial: sorologias, <b>HBV-DNA</b>, marcadores de lesão/função, USG. Manifestações extra-hepáticas: nefropatia, artrite.</li>
+<li><b>Indicação de tratar:</b> HBV-DNA &gt; 2.000 UI/mL <b>+ ALT elevada</b> (&gt; 52 U/L homens, &gt; 37 mulheres; Julio: &gt; 1,5× LSN e "HBeAg reagente trata"). <b>Independe do HBeAg:</b> história familiar de CHC, manifestações extra-hepáticas, coinfecção HIV/HCV, biópsia ≥ A2F2 ou elastografia &gt; 7,0 kPa, cirrose. Protocolos específicos: gestantes e imunossupressão. Sem critério = "<b>portador inativo</b>".</li>
+<li>Drogas (análogos de nucleosídeos): <b>tenofovir</b> = 1ª linha e único liberado na gravidez · <b>entecavir</b> = preferido na insuficiência renal, osteopenia/osteoporose e cirrose · <b>TAF</b> = alto custo. Metas: HBV-DNA indetectável e soroconversão (HBeAg → anti-HBe; HBsAg → anti-HBs) — "<b>só ocorre em 10%</b>".</li>
+<li><b>Profilaxia vertical:</b> vacina monovalente + <b>IGHAHB na sala de parto ou até 12 h</b>; mãe HBeAg + ou carga viral &gt; 200.000 UI/mL → <b>tenofovir no 3º trimestre até 30 dias pós-parto</b>. <b>Pode amamentar.</b></li>
+</ul>
+
+<h3>Hepatite C</h3>
+<ul>
+<li>180 milhões no mundo; infecção <b>silenciosa</b>; cronifica em <b>80% dos adultos</b>; cirrose após 20–30 anos (Julio: cirrose 20–40%, CHC 4%). É a hepatite que <b>mais evolui para cirrose/CHC</b> e a que mais cronifica em adultos.</li>
+<li>Rastreio com <b>anti-HCV</b>; confirmação com <b>HCV-RNA</b> (carga viral — "primeiro marcador"). Sem vacina, sem imunoglobulina.</li>
+<li>2018: Plano Nacional de Eliminação — testar grupos prioritários e <b>tratar todos</b>. <b>Exceções:</b> oncológico com expectativa de vida &lt; 12 meses; lista de transplante com <b>MELD ≥ 20</b>; <b>gestantes</b>.</li>
+<li>Protocolo antigo: interferon-peguilado + ribavirina, 48–52 semanas, tóxico, 40–47% de cura. Novo: <b>DAAs</b> orais, 12–24 semanas, mínimos efeitos adversos, <b>&gt; 90% de cura</b> (Julio: sofosbuvir, daclatasvir, ledipasvir, velpatasvir, glecaprevir/pibrentasvir por genótipo). <b>RVS = HCV-RNA indetectável 12 semanas após o fim</b> = cura.</li>
+</ul>
+<h3>Hepatite D e E</h3>
+<ul>
+<li><b>D:</b> vírus <b>defectivo</b> — só existe com o HBsAg (coinfecção ou superinfecção; [extra] superinfecção é pior). Predomínio no <b>Norte</b>; descompensação e mais CHC. Diagnóstico anti-HDV IgM + HDV-RNA. Tratamento: análogos + <b>alfapeguinterferona</b>. Prevenção = a da B, inclusive a <b>vacina da hepatite B</b>.</li>
+<li><b>E:</b> fecal-oral, autolimitada, não cronifica ([extra] pode cronificar em imunossuprimidos/transplantados). Febre, icterícia, vômitos, diarreia; <b>AMT &gt; 1.000</b>, hiperbilirrubinemia, linfocitose. <b>Gestantes: fulminante, perda fetal, mortalidade.</b> anti-HEV IgM. Suporte; prevenção igual à da A, sem vacina no Brasil.</li>
+</ul>
+<h3>Lesão × função e diferenciais</h3>
+<ul>
+<li><b>Lesão hepatocelular = AST/TGO e ALT/TGP</b> (nas virais agudas &gt; 1.000; [extra] ALT &gt; AST; FA/GGT = colestase). <b>Função = albumina, TP/INR, bilirrubinas</b> ([extra] — são os itens do Child-Pugh/MELD). O quadro dela pergunta exatamente isso.</li>
+</ul>
+<div class="ok">✅ <b>Take-home:</b> A e E = fecal-oral, não cronificam, suporte; A pior em adultos, E em gestantes. B = DNA, cronifica quanto mais novo, tratamento não cura (10% soroconvertem), vacina + IGHAHB no RN, tenofovir na gestante. C = silenciosa, 80% cronifica, DAAs curam &gt; 90%, sem vacina. D = precisa do B.</div>
+</div>
+
+<div class="panel">
+<h2>2 · DHGNA / MASLD (doença hepática esteatótica associada à disfunção metabólica — "DHEADM")</h2>
+<h3>Nomenclatura nova (slide de abertura)</h3>
+<ul>
+<li>Antigo <b>DHGNA</b> → atual <b>MASLD</b> (<i>metabolic dysfunction-associated steatotic liver disease</i>; ela escreve "DHEADM"). <b>NAFL</b> → <b>MASLD</b> = esteatose simples, menor risco de progressão. <b>NASH</b> → <b>MASH</b> = esteato-hepatite = esteatose + <b>inflamação lobular + balonização</b> (morte hepatocitária). Sequência: esteatose → esteato-hepatite → cirrose.</li>
+<li>Guarda-chuva "SLD": MASLD · <b>MetALD</b> (MASLD + álcool 140–350 g/semana mulher, 210–420 g/semana homem) · ALD (álcool) · causas específicas (DILI, Wilson, HCV, desnutrição, celíaca) · criptogênica.</li>
+</ul>
+<h3>Epidemiologia e fisiopatologia</h3>
+<ul>
+<li><b>Causa mais comum de doença hepática crônica</b>; <b>principal causa de transplante nos EUA</b>; 25–30% da população mundial; <b>35% dos brasileiros</b>; ~30% dos esteatóticos evoluem para MASH; metade tem sobrepeso/obesidade. Com hepatite C e álcool, responde por <b>80% das cirroses no Brasil</b> (deck de cirrose).</li>
+<li>Acúmulo de <b>triglicerídeos</b> no fígado. <b>Resistência à insulina</b> → ↑ lipólise no tecido adiposo → ↑ ácidos graxos livres (também liberados pelos músculos) → captação hepática → triglicerídeos → oxidação, ativação de enzimas e radicais livres → dano. Fatores: metabólicos 80–90% (obesidade, DM2, dislipidemia) + ambientais (dieta, sedentarismo) + genéticos.</li>
+<li>Clínica: <b>assintomáticos</b>; fadiga, desconforto no <b>hipocôndrio direito</b>; <b>hepatomegalia em 75%</b>; esplenomegalia só na fibrose avançada = <b>primeiro indicador de hipertensão portal</b>.</li>
+</ul>
+<h3>Diagnóstico em 2 passos</h3>
+<ul>
+<li><b>Passo 1</b> — esteatose (imagem, escore ou biópsia) <b>+</b> sobrepeso/obesidade (IMC ≥ 25; ≥ 23 em asiáticos) <b>ou</b> DM2 <b>ou</b> peso normal com <b>≥ 2 fatores de risco metabólicos</b>: cintura ≥ 102/88 cm (H/M; asiáticos 90/80), PA ≥ 130/85 ou tratamento, TG ≥ 150, HDL &lt; 40 (H) / &lt; 50 (M), pré-diabetes, HOMA-IR ≥ 2,5, PCR &gt; 2 mg/L.</li>
+<li><b>Passo 2</b> — risco de <b>fibrose</b> com escore não invasivo: <b>FIB-4</b> = idade × AST / (plaquetas × √ALT) (idade, TGO, TGP e plaquetas). <b>&lt; 1,3</b> baixo risco → repetir USG e escores a cada 2–3 anos · <b>1,3–2,67</b> indeterminado → elastografia, referenciar, considerar biópsia · <b>&gt; 2,67</b> alto risco → especialista, biópsia.</li>
+<li><b>USG</b>: barato, mostra infiltração gordurosa só com <b>≥ 33% de gordura</b> e <b>não detecta fibrose</b>. <b>Elastografia/FibroScan</b>: rigidez; melhor para fibrose avançada. <b>Biópsia = padrão-ouro</b> (esteatose, inflamação lobular, fibrose), mas invasiva, cara e com variabilidade de amostra; indicada em etiologia dupla/duvidosa, não invasivos indeterminados, durante colecistectomia ou bariátrica, pesquisa.</li>
+<li>Laboratório: transaminases normais ou &lt; 4× LSN; FA &lt; 2×; GGT &lt; 4×; ferritina pode subir; autoanticorpos em títulos baixos (&lt; 1:80). <b>"AST/ALT normais não excluem doença significativa."</b></li>
+</ul>
+<h3>Tratamento — "tratar o paciente, não apenas o fígado"</h3>
+<ul>
+<li><b>Perda de peso: 3–5% melhora esteatose; ≥ 7–10% melhora inflamação/fibrose.</b> Exercício aeróbico (regularidade &gt; intensidade). Evitar ultraprocessados e açúcar. Tratar DM, obesidade, dislipidemia, HAS — o <b>risco cardiovascular</b> é a principal causa de morte.</li>
+<li><b>Pioglitazona = primeira linha</b>; mais benefício em diabéticos; pode ser empírica (sem biópsia); <b>não usar em insuficiência cardíaca</b>.</li>
+<li><b>Vitamina E</b>: só <b>após biópsia</b> confirmando MASH (reduz inflamação); aumenta <b>eventos hemorrágicos</b>; não usar em <b>DM</b> e em <b>câncer de próstata</b>.</li>
+<li><b>Análogos de GLP-1</b> (liraglutida, semaglutida): perda ponderal e melhora da esteato-hepatite. <b>Metformina: não recomendada</b> para o fígado.</li>
+</ul>
+<div class="divg">🔎 <b>Divergência (vitamina E):</b> o slide diz "não utilizar em paciente DM, CA de próstata e <i>sem</i> cirrose". Pela literatura (AASLD) a vitamina E é justamente para MASH biópsia-comprovada <b>sem diabetes e sem cirrose</b> — o "sem" é provável erro de digitação para "com". Na prova, os pontos seguros são: exige biópsia, contraindicada em DM, risco hemorrágico/CA de próstata.</div>
+<div class="ok">✅ <b>Take-home:</b> esteatose + fator metabólico = MASLD; FIB-4 decide quem vai para elastografia/biópsia; USG não vê fibrose; perde-se peso (3–5% / 7–10%), pioglitazona 1ª linha (não na IC), vitamina E só com biópsia e sem DM, GLP-1 ajuda, metformina não.</div>
+</div>
+
+<div class="panel">
+<h2>3 · Cirrose hepática</h2>
+<h3>Conceito, anatomia e fisiopatologia</h3>
+<ul>
+<li>Sangue chega <b>75% pela veia porta e 25% pela artéria hepática</b>, sai pelas veias hepáticas. Lóbulo = unidade funcional; <b>tríade portal</b> = artéria + porta + ducto biliar.</li>
+<li><b>Cirrose = estágio avançado de FIBROSE com desorganização difusa da arquitetura e NÓDULOS REGENERATIVOS</b>; fase terminal de qualquer doença inflamatória crônica do fígado. Lesão crônica → ativação da <b>célula estrelada</b> → matriz extracelular → fibrose → nódulos envoltos por septos → perda estrutural → perda funcional (insuficiência hepática crônica). "<b>Fibrose é irreversível</b>."</li>
+</ul>
+<h3>Etiologias</h3>
+<ul>
+<li><b>Hepatite C crônica + doença alcoólica + MASLD = 80% das cirroses no Brasil.</b> Outras: hepatite B, colangite esclerosante primária, hemocromatose (ferro), hepatite autoimune, colangite biliar primária (autoimune), Wilson (cobre, genética).</li>
+<li>Raras: cirrose <b>cardiogênica</b> (IC direita, cursa com bilirrubina alta), <b>Budd-Chiari</b> (obstrução da saída venosa hepática por trombose/compressão), deficiência de alfa-1 antitripsina, galactosemia, doença de <b>Caroli</b> (dilatação cística dos ductos intra-hepáticos).</li>
+</ul>
+<h3>Hipertensão portal (HP)</h3>
+<ul>
+<li>Pressão portal <b>5–10 mmHg normal; &gt; 10 mmHg = HP</b> ([extra] gradiente ≥ 10 = clinicamente significativa; ≥ 12 sangra). Avaliação direta (gradiente) ou indireta (varizes, esplenomegalia). Fibrose perissinusoidal → resistência → congestão esplâncnica e vasodilatação → ascite; ↓ volume efetivo → <b>SRAA + ADH</b> → hipervolemia, piora da ascite, <b>hiponatremia</b>, disfunção renal.</li>
+<li>Classificação: <b>pré-hepática</b> (trombose de porta) · <b>intra-hepática pré-sinusoidal</b> (esquistossomose, fibrose congênita) · <b>sinusoidal/pós-sinusoidal</b> (<b>cirrose</b>) · <b>pós-hepática</b> (Budd-Chiari, obstrução de supra-hepática). HP inverte o fluxo → colaterais → <b>encefalopatia, infecções, hemorragia digestiva</b>.</li>
+</ul>
+<h3>Clínica e exame físico</h3>
+<ul>
+<li><b>Hormonal</b> (hiperestrogenismo/hipoandrogenismo): ginecomastia, rarefação de pelos, hipogonadismo/atrofia testicular, telangiectasias (aranhas vasculares), eritema palmar, perda de massa muscular. <b>Amônia</b> → encefalopatia (sonolência, confusão, <b>flapping</b>). <b>Bilirrubina</b> → icterícia, perceptível acima de <b>2,5 mg/dL</b>. Coagulopatia e púrpura; desnutrição (↓ albumina → ascite e edema).</li>
+<li><b>HP:</b> ascite, circulação colateral (cabeça de medusa), varizes, esplenomegalia com hiperesplenismo (plaquetopenia, anemia, leucopenia), hiponatremia, disfunção renal, <b>hipergamaglobulinemia</b> (menos complemento → bacteremia → mais globulinas).</li>
+<li>Palpação do fígado: dimensão (cm), borda fina/romba, superfície lisa/irregular, sensibilidade, consistência elástica/firme, refluxo hepatojugular (decúbito dorsal, cabeça à esquerda, comprimir o fígado → turgência jugular).</li>
+</ul>
+<h3>Diagnóstico</h3>
+<ul>
+<li><b>Biópsia = padrão-ouro</b> (etiologia + gravidade: inflamação e fibrose) — <b>não é feita com frequência</b>, só na dúvida diagnóstica. Na prática: clínica + laboratório + imagem.</li>
+<li>Laboratório: <b>albumina &lt; 3,5 · INR &gt; 1,7 · TP &gt; 3 s · BT &gt; 2 · plaquetas &lt; 150.000</b> · hipergamaglobulinemia.</li>
+<li><b>USG</b>: bom, rápido, barato — fígado <b>diminuído, contornos irregulares, textura heterogênea</b>; detecta ascite leve; Doppler avalia HP; pesquisa nódulos. <b>Elastografia</b> (transitória/shear wave): <b>&gt; 10 kPa fibrose moderada; ≥ 12–13 kPa sugere cirrose</b> (compare: &gt; 7 kPa já indica tratar HBV).</li>
+<li>Ascite da cirrose: <b>GASA ≥ 1,1</b> (HP) + <b>proteína total &lt; 2,5 g/dL</b>; GASA &lt; 1,1 = inflamação, infecção, neoplasia.</li>
+</ul>
+<h3>Child-Turcotte-Pugh (asterisco vermelho) — "BEATA"</h3>
+<div class="tscroll"><table>
+<tr><th></th><th>1 ponto</th><th>2 pontos</th><th>3 pontos</th></tr>
+<tr><td><b>B</b>ilirrubina (mg/dL)</td><td>&lt; 2</td><td>2–3</td><td>&gt; 3</td></tr>
+<tr><td><b>E</b>ncefalopatia</td><td>ausente</td><td>grau 1–2</td><td>grau 3–4</td></tr>
+<tr><td><b>A</b>scite</td><td>ausente</td><td>leve a moderada</td><td>tensa</td></tr>
+<tr><td><b>T</b>P / INR</td><td>&lt; 1,7</td><td>1,7–2,3</td><td>&gt; 2,3</td></tr>
+<tr><td><b>A</b>lbumina (g/dL)</td><td>&gt; 3,5</td><td>2,8–3,5</td><td>&lt; 2,8</td></tr>
+</table></div>
+<p><b>Child A 5–6</b> (compensada) · <b>B 7–9</b> · <b>C ≥ 10</b>. <b>MELD</b> (asterisco vermelho) = <b>BIC: Bilirrubina, INR, Creatinina</b> (3,78·ln bili + 11,2·ln INR + 9,57·ln creat + 6,43). Slide: <b>fila de transplante MELD &gt; 10</b>; MELD clássico subestima em hiponatremia → <b>MELD-Na</b> reflete melhor a mortalidade nos descompensados.</p>
+<div class="warn">⚠️ <b>Pegadinha:</b> albumina e ascite estão no Child, <b>não</b> no MELD; creatinina está no MELD, <b>não</b> no Child. HCV com MELD ≥ 20 em lista não trata (painel 1) — é outro corte.</div>
+<h3>Transplante, tratamento e vigilância</h3>
+<ul>
+<li>Indicações especiais: CHC, síndrome hepatopulmonar, encefalopatia persistente, ascite refratária, colangite de repetição, polineuropatia amiloidótica familiar, doença policística. <b>Urgência:</b> hepatite fulminante, disfunção primária do enxerto, trombose da artéria hepática.</li>
+<li>Tratamento: fibrose irreversível → <b>erradicar o fator causal</b> + prevenir/manejar complicações (HP, varizes, encefalopatia, ascite, SHR, CHC, PBE, <b>desnutrição</b>).</li>
+<li>Nutrição: dieta <b>normoproteica</b> (vegetais, laticínios) — <b>hipoproteica e hipolipídica aumentam morbimortalidade</b>; restrição de sódio nos ascíticos (deck de cirrose: 1,2 g/dia; deck de ascite: &lt; 2 g/dia); <b>restrição hídrica só na hiponatremia grave</b>; tratar hipovitaminoses.</li>
+<li><b>Rastreio de CHC: USG + alfafetoproteína a cada 6 meses</b>; nódulo → TC e RNM.</li>
+<li><b>EDA em todo cirrótico</b> para varizes. <b>Profilaxia primária</b> de HDA varicosa: varizes pequenas com <b>red spots</b>, varizes de médio/grosso calibre, varizes em <b>Child B/C</b> → <b>betabloqueador não seletivo ou ligadura elástica</b>.</li>
+</ul>
+<div class="ok">✅ <b>Take-home:</b> cirrose = fibrose + nódulos, irreversível; 80% = C + álcool + MASLD; biópsia é padrão-ouro mas raramente feita; Child = BEATA (A 5–6, B 7–9, C ≥ 10), MELD = BIC; USG + AFP 6/6 m; EDA em todos, profilaxia com betabloqueador ou ligadura.</div>
+</div>
+
+<div class="panel">
+<h2>3b · Descompensações: HDA varicosa · encefalopatia · síndrome hepatorrenal</h2>
+<h3>Hemorragia digestiva alta varicosa</h3>
+<ul>
+<li><b>15% das HDA; 30% de mortalidade por episódio.</b> Causas: cirrose avançada, esquistossomose. Hematêmese e melena (10–11% hematoquezia); procurar estigmas de hepatopatia e descartar AINE/úlcera.</li>
+<li>Hipovolemia grave: <b>FC &gt; 100, PAS &lt; 100, síncope/lipotímia</b>. Alvos: <b>PAS 90–100, FC &lt; 100, transfundir só se Hb &lt; 7 (alvo 7–9)</b> — transfundir demais sobe a pressão portal e ressangra.</li>
+<li>Sequência do fluxograma: via aérea e volemia → <b>vasoconstritor esplâncnico</b> (terlipressina, octreotide ou somatostatina) → <b>profilaxia de PBE</b> (ceftriaxona ou norfloxacina/quinolona) → hemotransfusão só se Hb &lt; 7 → <b>EDA em até 12 h</b> → resgate: <b>balão de Sengstaken-Blakemore</b> (sangramento maciço), <b>TIPS</b> (shunt porta → veia hepática), cirurgia.</li>
+<li><b>Tratamento de escolha: varizes esofágicas → ligadura elástica; varizes gástricas → escleroterapia com cianoacrilato.</b></li>
+</ul>
+<h3>Encefalopatia hepática (EH)</h3>
+<ul>
+<li>Manifestações neuropsiquiátricas <b>reversíveis</b>, na insuficiência aguda ou crônica; achados sutis (sono, atenção, memória, personalidade). <b>Diagnóstico clínico.</b></li>
+<li><b>West Haven:</b> 0 sem achados · <b>I</b> alteração de consciência/euforia/ansiedade, déficit de atenção, erra adição/subtração, sono · <b>II</b> letargia/apatia, <b>desorientação no tempo</b>, personalidade, dispraxia, <b>asterixis (flapping)</b> · <b>III</b> sonolência/semiestupor responsivo, desorientação grosseira, comportamento bizarro · <b>IV coma</b>.</li>
+<li>Precipitantes: infecções, <b>hemorragia digestiva</b>, hipocalemia/hiponatremia, alcalose, insuficiência renal, TIPS, <b>paracentese de grande volume</b>, desidratação, diuréticos, diarreia/vômitos, <b>constipação</b>, excesso de proteínas, álcool, <b>benzodiazepínicos</b>, cirurgia, hipoglicemia.</li>
+<li>Tratamento: nutrição (normoproteica!), <b>lactulona = primeira escolha</b>, antibióticos (rifaximina, neomicina, metronidazol), pró/prebióticos, <b>LOLA</b> (L-ornitina-L-aspartato: converte amônia em ureia e glutamina).</li>
+</ul>
+<h3>Síndrome hepatorrenal (SHR)</h3>
+<ul>
+<li>Perda rápida e progressiva da função renal na cirrose ou insuficiência hepática aguda; incidência 8% dos cirróticos com ascite; <b>complicação de pior prognóstico</b>; doença hepática terminal.</li>
+<li><b>Tipo I:</b> IRA oligúrica, <b>creatinina &gt; 2,5</b>, clearance cai &gt; 50%, geralmente com <b>fator precipitante</b> (infecção, desidratação, hipovolemia, cirurgia) — <b>sobrevida 2 semanas</b>. <b>Tipo II:</b> lenta, espontânea, associada a <b>ascite refratária</b> — <b>sobrevida 6 meses</b>.</li>
+<li>Critérios: hepatopatia com HP + LRA (creatinina ↑ ≥ 0,3 em 48 h ou ≥ 50% em 7 dias; alguns usam &gt; 1,5) + <b>sem</b> choque, nefrotóxicos ou infecção + proteinúria &lt; 500 mg, &lt; 50 hemácias/campo, USG normal + <b>sem melhora após albumina IV e suspensão de diuréticos por ≥ 2 dias</b>.</li>
+<li>Tratamento do tipo I: <b>transplante</b> (definitivo); ganhar tempo com <b>terlipressina + albumina</b>; TIPS. Prevenção: <b>albumina na PBE</b>; pentoxifilina na hepatite alcoólica.</li>
+</ul>
+<div class="warn">⚠️ <b>Pegadinha:</b> SHR é diagnóstico de <b>exclusão</b> — o primeiro passo é expandir com albumina e suspender diurético; se a creatinina cai, não era SHR. E "evitar AINE e hipotensão" vale para toda ascite (slide de tratamento).</div>
+</div>
+
+<div class="panel">
+<h2>4 · Ascite, PBE e paracentese</h2>
+<h3>Definição, mecanismo, clínica</h3>
+<ul>
+<li>Líquido na cavidade peritoneal. <b>Principal causa = cirrose</b> (prova antiga); <b>complicação mais comum da cirrose</b>; 50% dos cirróticos em 10 anos. 2ª causa: <b>neoplásica</b> (10%: ovário, mama, cólon, pulmão, pâncreas); 3ª no Brasil: <b>tuberculose peritoneal</b>.</li>
+<li>Mecanismos: <b>hipertensão portal</b> (congestão → extravasamento), <b>hipoalbuminemia</b> (↓ pressão oncótica), <b>inflamação peritoneal</b> (↑ permeabilidade: carcinomatose, TB).</li>
+<li>Clínica: assintomática se pequena; desconforto, saciedade precoce, ganho de peso, dispneia. <b>Graus: I</b> leve, só no USG · <b>II</b> moderada, distensão simétrica ("ascite clínica") · <b>III</b> volumosa/tensa. <b>Refratária</b> = não responde/intolera diuréticos ([extra]).</li>
+<li>Exame físico: <b>macicez móvel = melhor método</b>, detecta <b>&gt; 1.500 mL</b>; <b>semicírculo de Skoda</b> (linha timpânico/maciço em decúbito dorsal) e <b>sinal do piparote</b> (onda no flanco oposto, mão do auxiliar na linha média) só com <b>&gt; 5 L</b>. USG = primeira escolha na imagem (pequenos volumes, livre × encistado).</li>
+</ul>
+<h3>Paracentese</h3>
+<ul>
+<li>Segura, simples, à beira do leito, decúbito dorsal, <b>anestesia e assepsia</b>. <b>Local:</b> linha da <b>espinha ilíaca ântero-superior ao umbigo, à esquerda</b>, dividida em 3 — punção na <b>junção do terço médio com o inferior</b> (quadrante inferior esquerdo). [extra] Esquerda porque o ceco é fixo/distendido à direita; lateral ao reto abdominal evita a artéria epigástrica inferior.</li>
+<li><b>Indicações:</b> <b>primeiro episódio</b> de ascite (prova antiga: gabarito B) · <b>toda internação</b> · piora clínica (febre, dor, alteração de consciência, hipotensão) · laboratório de infecção (leucocitose, acidose, insuficiência renal) · hemorragia digestiva.</li>
+<li><b>Contraindicações (slide):</b> <b>CIVD</b> (coágulos difusos consumindo fatores → sangramento), "distensão abdominal importante", cicatriz no local. [extra] Coagulopatia/plaquetopenia da cirrose <b>não</b> contraindicam; evitar cicatrizes (aderências), bexiga cheia, gravidez e distensão de alças.</li>
+<li>[extra] Complicações: <b>hemorragia</b> (prova antiga: principal imediata), vazamento persistente, infecção, perfuração de alça e <b>disfunção circulatória pós-paracentese</b> se &gt; 5 L sem albumina (hiponatremia, SHR).</li>
+</ul>
+<div class="divg">🔎 <b>Divergência (contraindicação):</b> "distensão abdominal importante" como contraindicação contradiz a própria indicação de alívio na ascite tensa; o sentido provável é <b>distensão de alças</b> (íleo/obstrução). Na prova, se a alternativa reproduzir o slide, marque o slide.</div>
+<h3>Análise do líquido e GASA (SAAG)</h3>
+<ul>
+<li>Soro: albumina, TP, bilirrubinas, função renal, amilase, hemograma, AST/ALT, marcadores tumorais, BNP se IC. Líquido: macroscopia, <b>proteína total, albumina, glicose, DHL, amilase, ADA</b>, marcadores, <b>Gram e Ziehl-Neelsen, citologia, cultura</b>.</li>
+<li><b>GASA = albumina sérica − albumina do líquido.</b> <b>≥ 1,1 = hipertensão portal</b> (transudato; prova antiga gabarito B): proteína &lt; 2,5 → <b>sinusoidal</b> (cirrose, Budd-Chiari); proteína &gt; 2,5 → <b>pós-sinusoidal</b> (ICC, pericardite, veno-oclusiva) = "ascite cardíaca". <b>&lt; 1,1</b> (exsudato): proteína &lt; 2,5 → <b>nefrótica</b>; proteína &gt; 2,5 → <b>patologia peritoneal</b>: BK+ = TB, citologia+ = carcinomatose, amilase alta = pancreática (também biliar, serosite).</li>
+</ul>
+<div class="tscroll"><table>
+<tr><th>Líquido</th><th>Cirrose</th><th>Neoplásica</th><th>TB peritoneal</th><th>Pancreática</th></tr>
+<tr><td>Aspecto</td><td>claro/amarelado</td><td>hemorrágico, quiloso</td><td>hemorrágico, quiloso</td><td>amarelado/hemorrágico</td></tr>
+<tr><td>GASA</td><td>≥ 1,1</td><td>&lt; 1,1 (≥ 1,1 se metástase hepática)</td><td>&lt; 1,1</td><td>&lt; 1,1</td></tr>
+<tr><td>Proteína</td><td>&lt; 2,5</td><td>&gt; 2,5 (&lt; 2,5 na metástase hepática)</td><td>&gt; 2,5</td><td>&gt; 2,5 (geralmente &gt; 3)</td></tr>
+<tr><td>Marca</td><td>DHL &lt; soro (relação 0,4); glicose = soro</td><td>≥ 500 leucócitos, linfócitos; citologia + na carcinomatose; DHL &gt; soro</td><td><b>ADA ↑</b>; 150–4.000 leucócitos mononucleares; BAAR + 2%, cultura + até 50%</td><td><b>amilase &gt; 1.000 UI/L</b> (fluxograma: &gt; 100)</td></tr>
+</table></div>
+<h3>Tratamento da ascite cirrótica</h3>
+<ul>
+<li>Doença de base; <b>evitar AINE</b> (insuficiência renal) e <b>hipotensão</b> (anti-hipertensivos). Abstinência, repouso, <b>sódio &lt; 2 g/dia</b>, <b>diuréticos: espironolactona e/ou furosemida</b> ([extra] proporção <b>100:40 mg</b>, até 400:160; perder 0,5 kg/dia sem edema, 1 kg/dia com edema).</li>
+<li><b>Paracentese de alívio</b> na ascite volumosa: <b>&gt; 5 L → repor albumina</b> ([extra] 6–8 g por litro retirado). [extra] Refratária: paracenteses seriadas + albumina, TIPS, transplante (é indicação especial no deck de cirrose).</li>
+</ul>
+<h3>Peritonite bacteriana espontânea (PBE)</h3>
+<ul>
+<li>Infecção do líquido ascítico <b>sem foco intra-abdominal</b>. Risco: cirrose avançada, <b>proteína do LA &lt; 1 g/dL</b>, PBE prévia, bilirrubina &gt; 2,5, HDA varicosa, desnutrição.</li>
+<li>Clínica: assintomático ou dor/distensão/febre; encefalopatia, insuficiência renal, diarreia, hipotermia, íleo, hipotensão — qualquer piora do cirrótico ascítico manda puncionar.</li>
+<li><b>Diagnóstico: PMN ≥ 250/mm³</b> (prova antiga gabarito B) + cultura <b>monobacteriana</b> (E. coli 43%, Klebsiella 11%, pneumococo 9%). [extra] Polimicrobiana = pensar em peritonite secundária.</li>
+<li><b>Tratamento: ceftriaxona ou cefotaxima</b> (alternativa: ciprofloxacino/ofloxacino) <b>+ albumina</b> (previne SHR).</li>
+<li><b>Profilaxia primária:</b> após HDA varicosa → norfloxacina ou ceftriaxona; proteína do LA &lt; 1 g/dL → norfloxacina; proteína &lt; 1,5 + Child ≥ 9 com BT ≥ 3, ou creatinina ≥ 1,2 / ureia ≥ 25 / Na ≤ 130 → norfloxacina. <b>Secundária</b> (quem já teve): norfloxacina 400 mg/dia, cipro 500 mg/dia ou SMX-TMP 800/160 mg/dia <b>até melhora da ascite ou transplante</b>.</li>
+</ul>
+<div class="exam"><b>Como caiu na prova antiga (bloco Ascite e paracentese, 6 questões):</b> principal causa de ascite no mundo = <b>cirrose</b> (IC, TB e nefrótica são distratores de GASA); SAAG ≥ 1,1 = <b>hipertensão portal</b> (não inflamatória/neoplásica/infecção); local mais seguro = <b>flanco/QIE esquerdo</b> (não linha média infraumbilical — bexiga —, não hipocôndrio, não epigástrio); principal complicação imediata = <b>hemorragia</b> (PBE não é complicação da punção, IRC e cirrose são absurdos); paracentese diagnóstica na <b>primeira avaliação</b> de ascite (não só se volumosa/descompensado); neutrófilos ≥ 250 = <b>PBE</b>.</div>
+<div class="ok">✅ <b>Take-home:</b> cirrose é a causa; GASA ≥ 1,1 + proteína &lt; 2,5 = cirrose; punciona-se todo primeiro episódio e toda internação, no QIE (terço médio/inferior EIAS–umbigo); PMN ≥ 250 = PBE → ceftriaxona + albumina; &gt; 5 L retirados → albumina; sal &lt; 2 g + espironolactona/furosemida.</div>
+</div>
+
+<div class="panel">
+<h2>Radar de pegadinhas</h2>
+<ul>
+<li><b>HAV × HEV:</b> as duas fecal-orais e sem cronificar — A pior em <b>adultos</b>, E pior em <b>gestantes</b>; A tem vacina (SUS 15 m), E não tem no Brasil.</li>
+<li><b>Anti-HBc IgM não dura a vida toda</b> (errata do slide): IgM = aguda; IgG/total = contato passado; anti-HBs sozinho = vacina.</li>
+<li><b>HBeAg</b> = replicação (CV &gt; 2.000); <b>anti-HBe</b> = controle, mas não cura. Cura = HBsAg some e anti-HBs aparece.</li>
+<li>HBV: <b>tenofovir</b> na gestante, entecavir no renal/osteoporose/cirrose; quem trata não cura (10% soroconvertem); RN = vacina + IGHAHB em 12 h; <b>pode amamentar</b>.</li>
+<li>HCV: <b>anti-HCV positivo não é diagnóstico</b> — confirma com HCV-RNA; trata todos, exceto oncológico &lt; 12 m, MELD ≥ 20 em lista, gestante; cura = RVS 12 semanas depois.</li>
+<li>HDV precisa do <b>HBsAg</b> (não do anti-HBs); a vacina que previne D é a da B.</li>
+<li>Lesão = AST/ALT; função = albumina/INR/bilirrubina — transaminase alta não é insuficiência; INR alto é.</li>
+<li>MASLD: <b>USG não vê fibrose</b> e só vê gordura ≥ 33%; FIB-4 &lt; 1,3 tranquiliza, &gt; 2,67 referencia; <b>pioglitazona</b> 1ª linha mas não na IC; vitamina E só com biópsia e sem DM; metformina não.</li>
+<li><b>Child tem albumina e ascite; MELD tem creatinina.</b> Child C ≥ 10 pontos; MELD &gt; 10 entra na fila (slide); MELD ≥ 20 em lista = não tratar HCV.</li>
+<li>Dieta do cirrótico é <b>normoproteica</b>; restringir proteína piora — mesmo com encefalopatia (o excesso é precipitante, a restrição é erro).</li>
+<li>Paracentese: <b>esquerda</b>, terço médio/inferior; <b>coagulopatia não contraindica</b>, CIVD sim; &gt; 5 L exige albumina; complicação imediata = hemorragia.</li>
+<li>GASA alto + proteína alta = <b>coração</b>, não cirrose. GASA baixo + proteína baixa = nefrótica. ADA alto = TB; amilase alta = pâncreas; citologia = carcinomatose.</li>
+<li>PBE: <b>PMN ≥ 250</b> fecha, não espere cultura; tratamento é cefalosporina de 3ª <b>+ albumina</b>; profilaxia após HDA em todo cirrótico.</li>
+<li>HDA varicosa: transfundir só <b>Hb &lt; 7</b>; EDA em <b>12 h</b>; esofágica = ligadura, gástrica = cianoacrilato; balão é resgate.</li>
+<li>SHR tipo I vive 2 semanas, tipo II 6 meses; antes de rotular, <b>albumina + suspender diurético 48 h</b>.</li>
+</ul>
+<h2>Decoreba de 60 segundos</h2>
+<ul>
+<li>Aguda &lt; 6 m · crônica &gt; 6 m · HBV cronifica RN &gt; 90% / criança 20–50% / adulto 5–10% · HCV 80% · ictérica HAV 5–10% crianças, 50–70% adultos · fulminante HAV &lt; 1%.</li>
+<li>Tratar HBV: DNA &gt; 2.000 + ALT &gt; 52 (H) / &gt; 37 (M) · elastografia &gt; 7 kPa · soroconversão 10% · IGHAHB ≤ 12 h · tenofovir se CV &gt; 200.000 · vacina B 4 doses (0–2–4–6 m) / adulto 0–1–6 · vacina A 15 m.</li>
+<li>HCV: DAAs 12–24 sem, &gt; 90% · interferon 48–52 sem, 40–47% · RVS 12 sem · exceções MELD ≥ 20, &lt; 12 m de vida, gestante.</li>
+<li>MASLD: 35% dos brasileiros · 30% viram MASH · hepatomegalia 75% · USG ≥ 33% gordura · FIB-4 1,3 / 2,67 · peso −3–5% / −7–10% · IMC ≥ 25 (23 asiáticos) · cintura 102/88 · HOMA ≥ 2,5 · PCR &gt; 2.</li>
+<li>Cirrose: porta 75% / artéria 25% · pressão portal normal 5–10 mmHg · icterícia &gt; 2,5 mg/dL · albumina &lt; 3,5, INR &gt; 1,7, TP &gt; 3 s, BT &gt; 2, plaquetas &lt; 150 mil · Child A 5–6 / B 7–9 / C ≥ 10 · MELD = BIC · CHC: USG + AFP 6/6 m · elastografia ≥ 12–13 kPa.</li>
+<li>Ascite: 50% dos cirróticos em 10 anos · macicez móvel &gt; 1,5 L · Skoda/piparote &gt; 5 L · GASA 1,1 · proteína 2,5 · PMN 250 · proteína LA &lt; 1 (risco) e &lt; 1,5 (profilaxia) · albumina se &gt; 5 L · Na &lt; 2 g/dia · espironolactona:furosemida 100:40 [extra].</li>
+<li>PBE: E. coli 43%, Klebsiella 11% · ceftriaxona/cefotaxima + albumina · norfloxacina 400 mg/dia · SMX-TMP 800/160.</li>
+<li>HDA: 15% das HDA, 30% mortalidade · FC &gt; 100, PAS &lt; 100 · alvo PAS 90–100, Hb 7–9 · EDA 12 h · terlipressina/octreotide/somatostatina · Sengstaken-Blakemore.</li>
+<li>SHR: 8% dos ascíticos · tipo I creatinina &gt; 2,5, 2 semanas · tipo II 6 meses · terlipressina + albumina · West Haven 0–IV.</li>
+</ul>
+</div>
+
+  </section>
+
+  <!-- ============ QUESTÕES ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">0</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0">40 questões: <b>ENAMED</b> (caso curto → assinale a correta, dificuldade crescente) → <b>Nível prova</b> (INCORRETA, proposições I–IV, associação) → <b>Prova antiga</b> (as 6 questões reais do bloco Ascite e paracentese, comentadas) → <b>Estilo do prof</b> (pergunta direta de uma linha, A–D, como o bloco faz). Depois das objetivas, a <b>descritiva do quadro de hepatites</b> com roteiro por pesos. Filtre por tema e refaça só o que errou.</div>
+    <div class="qfilter" id="qfilter"></div>
+    <div id="quiz"></div>
+    <div class="q">
+      <div class="qhead"><div class="qnum">D1</div><span class="pill d">Descritiva integrativa</span><span class="pill o">Hepatites · quadro comparativo (a atividade que ela mandou preencher)</span></div>
+      <div class="stem">Preencha o quadro comparativo das hepatites virais: <b>(a)</b> para os grupos <b>A e E</b> × <b>B, C e D</b>, descreva <b>cronificação, transmissão, tratamento e prevenção</b>; <b>(b)</b> responda: peculiaridades do HBV; hepatite que mais cronifica em menores de 2 anos; a que mais cronifica em adultos; a que mais evolui para cirrose/CHC; população com HVA mais grave; população com HVE mais grave; característica marcante do HDV; marcadores de lesão e de função hepática; <b>(c)</b> interprete: HBsAg+ (&lt; 6 m)/anti-HBc IgM+ · HBsAg+ (&gt; 6 m)/anti-HBc IgG+ · HBsAg−/anti-HBc total+/anti-HBs+ · HBsAg−/anti-HBc−/anti-HBs+ · todos negativos.</div>
+      <details class="gab"><summary>Roteiro de correção (10 pontos)</summary>
+        <p><b>(a) Quadro A/E × B/C/D — 4,0 pontos (1,0 por linha; cada célula vale 0,5):</b></p>
+        <ul>
+          <li><b>Cronificação:</b> A e E <b>não cronificam</b> (autolimitadas; fulminante rara, &lt; 1% na A) · B/C/D <b>cronificam</b> (&gt; 6 meses): HBV RN &gt; 90%, crianças 20–50%, adultos 5–10%; HCV ~80% dos adultos → cirrose em 20–30 anos → CHC; HDV cronifica junto com o HBV.</li>
+          <li><b>Transmissão:</b> A e E <b>fecal-oral</b> (água/alimentos; A também transfusão na fase aguda e sexual; E predomina em África/Ásia) · B/C/D <b>parenteral/fluidos corporais</b>: B sexual, vertical, percutânea (agulhas, alicates), transfusão; C percutânea e vertical (sexual menos frequente); D fluidos corporais, exige coinfecção com HBV, Norte do Brasil.</li>
+          <li><b>Tratamento:</b> A e E <b>sem tratamento específico</b> (repouso, hidratação, sintomáticos) · B: análogos de nucleosídeos (tenofovir 1ª linha/gravidez, entecavir, TAF), reduz carga viral, <b>não cura</b>, indicação DNA &gt; 2.000 + ALT elevada ou cirrose/fibrose ≥ F2/família de CHC/extra-hepáticas/coinfecção · C: <b>DAAs</b> 12–24 semanas, &gt; 90% de cura, tratar todos exceto oncológico &lt; 12 m, MELD ≥ 20 em lista e gestante; cura = RVS (RNA indetectável 12 semanas após) · D: análogos + alfapeguinterferona.</li>
+          <li><b>Prevenção:</b> A e E: saneamento, água tratada, higiene de alimentos e mãos; <b>vacina A</b> (SUS dose única aos 15 m; privado 2 doses); E sem vacina no Brasil · B/C/D: preservativo, não compartilhar seringas/material íntimo, procedimentos seguros, pré-natal; <b>vacina B</b> (4 doses criança, 3 adulto) + profilaxia vertical (vacina + IGHAHB até 12 h; tenofovir no 3º trimestre se HBeAg+ ou CV &gt; 200 mil; pode amamentar); <b>C não tem vacina nem imunoglobulina</b>; D é prevenida pela vacina da B.</li>
+        </ul>
+        <p><b>(b) Aspectos importantes — 3,5 pontos:</b></p>
+        <ul>
+          <li>Peculiaridades do HBV (1,0 — 0,25 por item, máximo 4): único vírus de <b>DNA</b> (Hepadnaviridae); tratamento <b>não cura</b> (soroconversão 10%); cronificação inversamente proporcional à idade; bolsões (Amazônia, oeste catarinense); manifestações extra-hepáticas; base para o HDV; oncogênico mesmo sem cirrose [extra]; reativação na imunossupressão [extra].</li>
+          <li>Mais cronifica &lt; 2 anos: <b>B</b> (RN &gt; 90%) (0,5) · mais cronifica em adultos: <b>C</b> (~80%) (0,5) · mais evolui para cirrose/CHC: <b>C</b> (0,5).</li>
+          <li>HVA mais grave em <b>adultos</b> (0,25) · HVE mais grave em <b>gestantes</b> (0,25).</li>
+          <li>HDV: vírus <b>defectivo</b>, precisa do HBsAg (coinfecção/superinfecção) (0,5).</li>
+          <li>Lesão = <b>AST/ALT</b> (&gt; 1.000 nas agudas) · função = <b>albumina, TP/INR, bilirrubinas</b> (0,5; metade para cada).</li>
+        </ul>
+        <p><b>(c) Sorologias — 2,5 pontos (0,5 cada):</b> aguda · crônica · cura (contato com vírus selvagem resolvido) · imunidade vacinal · suscetível (indicar vacinação).</p>
+        <p><b>Erros que zeram o item:</b> dizer que A ou E cronificam; dizer que a hepatite B se cura com o tratamento; dizer que C tem vacina; dizer que anti-HBs isolado é cura; chamar o HEV de "HVA" (o slide erra — não repita).</p>
+      </details>
+    </div>
+    <div class="q">
+      <div class="qhead"><div class="qnum">D2</div><span class="pill d">Descritiva integrativa</span><span class="pill o">Ascite · paracentese e PBE</span></div>
+      <div class="stem"><span class='cx'>Homem, 58 anos, cirrótico por álcool, interna com aumento do volume abdominal há 3 semanas, febre baixa e dor abdominal difusa. Exame: macicez móvel e piparote presentes.</span> Descreva: <b>(a)</b> a indicação e o local da paracentese neste paciente; <b>(b)</b> quais exames pedir no líquido e como interpretar GASA e proteína total; <b>(c)</b> o critério diagnóstico de PBE e o tratamento; <b>(d)</b> o tratamento ambulatorial da ascite após a alta.</div>
+      <details class="gab"><summary>Roteiro de correção (10 pontos)</summary>
+        <ul>
+          <li><b>(a) 2,5:</b> indicações presentes: primeiro episódio/piora clínica (febre, dor) e toda internação (1,0). Local: linha da <b>espinha ilíaca ântero-superior ao umbigo, à esquerda</b>, punção na <b>junção do terço médio com o inferior</b>, decúbito dorsal, assepsia e anestesia (1,0). Contraindicações: CIVD, distensão de alças, cicatriz no local — coagulopatia da cirrose não contraindica [extra] (0,5).</li>
+          <li><b>(b) 2,5:</b> celularidade com diferencial, proteína total, albumina, glicose, DHL, amilase, ADA, Gram/BAAR, citologia e cultura (1,0). <b>GASA = albumina sérica − albumina do líquido: ≥ 1,1 = hipertensão portal</b>; com proteína &lt; 2,5 = cirrose; com proteína &gt; 2,5 = cardíaca; GASA &lt; 1,1 = peritoneal (TB/ADA, carcinomatose/citologia, pancreática/amilase) ou nefrótica se proteína &lt; 2,5 (1,5).</li>
+          <li><b>(c) 2,5:</b> <b>PMN ≥ 250/mm³</b>, cultura monobacteriana (E. coli, Klebsiella), sem foco intra-abdominal (1,0). Tratamento: <b>ceftriaxona ou cefotaxima + albumina</b> (previne SHR) (1,0). Profilaxia secundária depois: norfloxacina 400 mg/dia até melhora da ascite/transplante (0,5).</li>
+          <li><b>(d) 2,5:</b> abstinência de álcool, <b>restrição de sódio &lt; 2 g/dia</b>, <b>espironolactona ± furosemida</b> (100:40 [extra]), evitar AINE e hipotensão (1,5); paracentese de alívio se volumosa, com <b>albumina se &gt; 5 L</b> (0,5); EDA para varizes e USG + AFP semestral (0,5).</li>
+        </ul>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- ============ MAPA MENTAL ============ -->
+  <section id="mapa">
+    <div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+<details><summary>🦠 Hepatites A e E — as fecal-orais</summary><ul>
+<li><b>RNA</b> as duas: HAV Picornaviridae · HEV Hepeviridae (slide erra: "HVA/Heperividae").</li>
+<li><b>Não cronificam</b>; tratamento = repouso, hidratação, sintomáticos.</li>
+<li>HAV: prodrômica 1 semana → ictérica (5–10% crianças, 50–70% adultos, "não significa gravidade"); fulminante &lt; 1%; <b>pior em adultos</b>; anti-HAV IgM = aguda, IgG = imune; <b>vacina SUS dose única aos 15 m</b>.</li>
+<li>HEV: África/Ásia; AMT &gt; 1.000; <b>gestante = fulminante, perda fetal</b>; anti-HEV IgM; sem vacina no Brasil.</li>
+</ul></details>
+<details><summary>🧬 Hepatite B — o único DNA</summary><ul>
+<li>Hepadnaviridae; sexual, vertical, percutânea, transfusão; 350 milhões; <b>bolsões: Amazônia e oeste catarinense</b>.</li>
+<li>Marcadores: <b>HBsAg</b> 1º (vírus) · <b>anti-HBc IgM</b> 2º (aguda, 6 m) · <b>anti-HBc IgG/total</b> vida toda (errata do slide: não é IgM) · <b>HBeAg</b> replicação · <b>anti-HBe</b> controle · <b>anti-HBs</b> cura/vacina.</li>
+<li>Perfis: HBsAg+ &lt;6 m/IgM+ = aguda · HBsAg+ &gt;6 m = crônica · anti-HBc+ anti-HBs+ = cura · só anti-HBs = vacina · tudo − = suscetível.</li>
+<li>Cronifica: <b>RN &gt; 90% · crianças 20–50% · adultos 5–10%</b>.</li>
+<li>Tratar: HBV-DNA &gt; 2.000 + ALT alta (&gt;52 H / &gt;37 M) ou independente do HBeAg (família CHC, extra-hepática, HIV/HCV, ≥A2F2/elastografia &gt; 7 kPa, cirrose). <b>Tenofovir</b> 1ª linha/gravidez · <b>entecavir</b> renal/osteoporose/cirrose · TAF caro. <b>Não cura</b>; soroconversão 10%.</li>
+<li>Vacina 4 doses criança (0–2–4–6 m), 3 no adulto (0–1–6). RN de mãe HBsAg+: <b>vacina + IGHAHB ≤ 12 h</b>; mãe HBeAg+ ou CV &gt; 200 mil → tenofovir 3º tri até 30 d pós-parto; <b>pode amamentar</b>.</li>
+</ul></details>
+<details><summary>💉 Hepatites C e D</summary><ul>
+<li>HCV: RNA Flaviviridae; percutânea/vertical; silenciosa; <b>80% cronifica</b> → cirrose 20–30 anos → CHC; <b>anti-HCV rastreia, HCV-RNA confirma</b>; <b>sem vacina nem imunoglobulina</b>.</li>
+<li>Tratar <b>todos</b> — exceto oncológico &lt; 12 m de vida, lista de transplante com MELD ≥ 20, gestante. <b>DAAs</b> 12–24 sem, &gt; 90% cura; <b>RVS = RNA indetectável 12 sem após</b>.</li>
+<li>HDV: Deltavírus <b>defectivo</b>, precisa do HBsAg; Norte; anti-HDV IgM + HDV-RNA; análogos + <b>alfapeguinterferona</b>; prevenção = vacina da B.</li>
+</ul></details>
+<details><summary>🍔 DHGNA / MASLD</summary><ul>
+<li>MASLD = esteatose simples; <b>MASH</b> = esteatose + inflamação lobular + balonização; MetALD = + álcool (140–350 g/sem M, 210–420 g/sem H).</li>
+<li>Causa mais comum de hepatopatia crônica; 1ª causa de transplante nos EUA; 35% dos brasileiros; 30% viram MASH; <b>resistência à insulina</b> → ácidos graxos → triglicerídeos → oxidação/radicais livres.</li>
+<li>Dx: esteatose + IMC ≥ 25 (23 asiáticos) ou DM2 ou ≥ 2 fatores metabólicos → <b>FIB-4</b> (idade, AST, ALT, plaquetas): &lt; 1,3 baixo · 1,3–2,67 elastografia · &gt; 2,67 especialista/biópsia. USG precisa de ≥ 33% gordura e <b>não vê fibrose</b>. Biópsia = padrão-ouro.</li>
+<li>Tto: peso −3–5% (esteatose) / −7–10% (inflamação); exercício aeróbico regular; comorbidades (risco CV!). <b>Pioglitazona</b> 1ª linha (não na IC) · <b>vitamina E</b> só após biópsia, não em DM/CA próstata, sangra · <b>GLP-1</b> ajuda · <b>metformina não</b>.</li>
+</ul></details>
+<details><summary>🫀 Cirrose — conceito, causas, diagnóstico</summary><ul>
+<li><b>Fibrose + nódulos regenerativos</b>, irreversível; célula estrelada → matriz → fibrose. Porta 75% / artéria 25%.</li>
+<li><b>HCV + álcool + MASLD = 80%</b> no Brasil; outras: HBV, CEP, hemocromatose (Fe), autoimune, CBP, Wilson (Cu); raras: cardiogênica, Budd-Chiari, α1-antitripsina, Caroli.</li>
+<li>Clínica: hiperestrogenismo (ginecomastia, telangiectasia, eritema palmar, rarefação de pelos, atrofia testicular), amônia (encefalopatia, flapping), icterícia &gt; 2,5 mg/dL, coagulopatia, desnutrição; HP: ascite, colaterais, varizes, esplenomegalia/hiperesplenismo, hipergamaglobulinemia.</li>
+<li>Dx: <b>biópsia padrão-ouro</b> (raramente feita); albumina &lt; 3,5, INR &gt; 1,7, TP &gt; 3 s, BT &gt; 2, plaquetas &lt; 150 mil; USG (fígado pequeno, irregular, heterogêneo); elastografia &gt; 10 fibrose moderada, <b>≥ 12–13 kPa cirrose</b>.</li>
+<li>HP: normal 5–10 mmHg, &gt; 10 = HP; pré-hepática (trombose porta) · pré-sinusoidal (esquistossomose) · sinusoidal (cirrose) · pós-hepática (Budd-Chiari).</li>
+</ul></details>
+<details><summary>📊 Child-Pugh, MELD, transplante e vigilância</summary><ul>
+<li><b>BEATA</b>: Bilirrubina (&lt;2 / 2–3 / &gt;3), Encefalopatia (0 / 1–2 / 3–4), Ascite (0 / leve-mod / tensa), TP-INR (&lt;1,7 / 1,7–2,3 / &gt;2,3), Albumina (&gt;3,5 / 2,8–3,5 / &lt;2,8). <b>A 5–6 · B 7–9 · C ≥ 10</b>.</li>
+<li><b>MELD = BIC</b> (bilirrubina, INR, creatinina); fila &gt; 10 (slide); MELD-Na melhor na hiponatremia.</li>
+<li>Transplante urgente: fulminante, disfunção primária do enxerto, trombose da artéria hepática. Especiais: CHC, hepatopulmonar, encefalopatia persistente, ascite refratária, colangite de repetição, PAF, policística.</li>
+<li>Nutrição normoproteica; sódio restrito; água só na hiponatremia grave. <b>CHC: USG + AFP a cada 6 m</b>. <b>EDA em todo cirrótico</b>; profilaxia primária (red spots, médio/grosso calibre, Child B/C): <b>betabloqueador não seletivo ou ligadura</b>.</li>
+</ul></details>
+<details><summary>🩸 HDA varicosa, encefalopatia e síndrome hepatorrenal</summary><ul>
+<li>HDA: 15% das HDA, 30% mortalidade; alvo PAS 90–100, FC &lt; 100, <b>Hb &lt; 7 transfunde</b>; <b>terlipressina/octreotide/somatostatina</b> + <b>ceftriaxona/norfloxacina</b> + <b>EDA ≤ 12 h</b>; esofágica = <b>ligadura</b>, gástrica = <b>cianoacrilato</b>; resgate = balão de Sengstaken-Blakemore, TIPS, cirurgia.</li>
+<li>EH: reversível, diagnóstico clínico; <b>West Haven</b> I atenção/sono · II letargia, desorientação no tempo, <b>flapping</b> · III sonolência/estupor · IV coma; precipitantes (infecção, HDA, constipação, diurético, BZD, paracentese grande); <b>lactulona 1ª escolha</b>, rifaximina/neomicina/metronidazol, LOLA.</li>
+<li>SHR: 8% dos ascíticos, pior prognóstico; <b>tipo I</b> creatinina &gt; 2,5, precipitante, <b>2 semanas</b>; <b>tipo II</b> ascite refratária, <b>6 meses</b>; exclusão (albumina + parar diurético 2 dias); tto: transplante, <b>terlipressina + albumina</b>, TIPS; prevenção: albumina na PBE.</li>
+</ul></details>
+<details><summary>💧 Ascite e PBE</summary><ul>
+<li><b>Cirrose = principal causa</b> (2ª neoplásica 10%, 3ª TB no Brasil); mecanismos: HP, hipoalbuminemia, inflamação peritoneal. Graus I (USG) / II (clínica) / III (tensa).</li>
+<li>Exame: <b>macicez móvel &gt; 1,5 L</b> (melhor método); Skoda e piparote &gt; 5 L. USG 1ª escolha.</li>
+<li><b>GASA</b> = alb sérica − alb LA: <b>≥ 1,1 = HP</b> (proteína &lt; 2,5 cirrose; &gt; 2,5 cardíaca) · <b>&lt; 1,1</b> (proteína &lt; 2,5 nefrótica; &gt; 2,5 TB/ADA, carcinomatose/citologia, pancreática/amilase).</li>
+<li>Tto: sem AINE, sem hipotensão; sódio &lt; 2 g; <b>espironolactona ± furosemida</b> (100:40 [extra]); alívio &gt; 5 L → <b>albumina</b>.</li>
+<li><b>PBE: PMN ≥ 250</b>, cultura monobacteriana (E. coli, Klebsiella); risco proteína LA &lt; 1; <b>ceftriaxona/cefotaxima + albumina</b>; profilaxia primária (pós-HDA: norflox/ceftriaxona; proteína &lt; 1 ou &lt; 1,5 + Child ≥ 9/renal/Na ≤ 130) e secundária (norfloxacina 400, cipro 500, SMX-TMP) até melhora da ascite/transplante.</li>
+</ul></details>
+<details><summary>🩻 Paracentese</summary><ul>
+<li><b>Indicações:</b> 1º episódio · toda internação · piora clínica (febre, dor, encefalopatia, hipotensão) · leucocitose/acidose/IRA · hemorragia digestiva.</li>
+<li><b>Local:</b> linha EIAS–umbigo à <b>esquerda</b>, junção do <b>terço médio com o inferior</b> (QIE); decúbito dorsal, assepsia + anestesia; à beira do leito.</li>
+<li><b>Contraindicações (slide):</b> CIVD, distensão abdominal importante (= de alças), cicatriz no local. [extra] Coagulopatia da cirrose não contraindica.</li>
+<li>[extra] Complicações: <b>hemorragia</b> (principal imediata — prova antiga), vazamento, infecção, perfuração, disfunção circulatória se &gt; 5 L sem albumina (6–8 g/L).</li>
+<li>Líquido: proteína, albumina, glicose, DHL, amilase, ADA, Gram/BAAR, citologia, cultura; cirrose = claro, GASA ≥ 1,1, proteína &lt; 2,5, DHL &lt; soro.</li>
+</ul></details>
+
+    </div></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel">
+      <h2>Flashcards atômicos — 1 informação por cartão</h2>
+      <p class="src">Toque no cartão para virar (a pergunta continua visível). Marque ❌ Errei / ✅ Acertei; no fim, repita só as erradas até zerar. Teclado: espaço vira · 1 = errei · 2 = acertei.</p>
+      <div class="chips" id="chips"></div>
+      <div class="fbar"><span>Cartão <b id="pos">–</b></span><span>✅ <b id="nOk">0</b> · ❌ <b id="nErr">0</b></span></div>
+      <div id="card">
+        <span class="cat" id="cat"></span>
+        <div id="qFront"></div>
+        <div id="back"><div id="qTop"></div><div id="resp"></div><div id="why"></div></div>
+        <span class="hint" id="hint">toque para ver a resposta</span>
+      </div>
+      <div class="actions hidden" id="actions">
+        <button id="btnErrei">❌ Errei</button>
+        <button id="btnAcertei">✅ Acertei</button>
+      </div>
+      <div id="fim" class="hidden">
+        <h2 id="fimTitulo"></h2>
+        <div id="fimTexto" style="color:var(--mut);font-size:14.5px"></div>
+        <div><button id="btnErradas">Repetir só as que errei</button><button class="sec" id="btnReiniciar">Recomeçar</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Técnica de Feynman — explique em voz alta</h2><p class="src">Sem olhar o resumo. Se travar, é ali que está o buraco.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">Guia de estudo · HP Clínica — Manifestações Abdominais · profª Andrea Cylene Tamura · fontes: slides das aulas de 14/08, 18/08, 20/08 e 25/08/2026, deck de hepatites do prof. Julio Razera, quadro comparativo preenchido, prova antiga do bloco (prof. João). Itens [extra] vêm de Harrison/AASLD/EASL e não estão nos slides.</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ===== QUESTÕES =====
+   {lvl:"ENAMED"|"PROVA"|"ANTIGA", obj:"tema", stem:"html", opts:[...], ans:idx, why:"html", trap:"html"} */
+const QS=[
+{lvl:"ENAMED", obj:"Hepatites · sorologia da B", stem:"<span class='cx'>Homem, 34 anos, icterícia e colúria há 2 semanas, ALT 1.800 U/L. Sorologias: HBsAg reagente, anti-HBc IgM reagente, HBeAg reagente, anti-HBs não reagente.</span> O diagnóstico é:", opts:["Hepatite B aguda","Hepatite B crônica em fase replicativa","Infecção passada resolvida (cura)","Resposta vacinal com infecção antiga"], ans:0, why:"HBsAg positivo com <b>anti-HBc IgM</b> positivo é a assinatura da infecção <b>aguda</b> (IgM dura ~6 meses; é o segundo marcador a surgir). Crônica exigiria HBsAg por mais de 6 meses com anti-HBc IgG e IgM negativo; cura teria HBsAg negativo com anti-HBc total e anti-HBs positivos; vacinado tem só anti-HBs.", trap:"HBeAg positivo não define cronicidade — define <b>replicação</b> (carga viral alta). Cronicidade é tempo (> 6 meses), não HBeAg."},
+{lvl:"ENAMED", obj:"Hepatites · diagnóstico da C", stem:"<span class='cx'>Homem, 52 anos, ex-usuário de drogas injetáveis, assintomático, ALT 60 U/L. Teste rápido anti-HCV reagente.</span> O próximo passo é:", opts:["Repetir o anti-HCV em 6 meses para confirmar cronicidade","Iniciar antivirais de ação direta imediatamente","Solicitar HCV-RNA (carga viral) para confirmar infecção ativa","Solicitar biópsia hepática antes de qualquer decisão"], ans:2, why:"O <b>anti-HCV é rastreio</b>: positivo em infecção ativa, mas também em infecção curada (espontânea ou tratada). A confirmação é o <b>HCV-RNA</b> — o slide chama de 'primeiro marcador/carga viral'. Só com RNA detectável se indica DAA. Biópsia não é necessária para tratar.", trap:"Anticorpo positivo ≠ vírus presente. Na hepatite C, quem confirma é o RNA; na B, quem mostra o vírus é o HBsAg."},
+{lvl:"ENAMED", obj:"Hepatites · transmissão vertical da B", stem:"<span class='cx'>Gestante, 30 semanas, HBsAg reagente, HBeAg reagente, HBV-DNA 2 milhões UI/mL, ALT normal.</span> A conduta correta é:", opts:["Cesariana eletiva e contraindicar a amamentação","Imunoglobulina anti-hepatite B (IGHAHB) para a mãe agora","Entecavir imediato e vacina do recém-nascido aos 2 meses","Tenofovir do 3º trimestre até 30 dias pós-parto; vacina + IGHAHB ao recém-nascido em até 12 h; amamentação liberada"], ans:3, why:"Mãe HBeAg+ ou carga viral > 200.000 UI/mL recebe <b>tenofovir</b> (único análogo liberado na gravidez) do 3º trimestre até 30 dias após o parto. O RN recebe <b>vacina monovalente + IGHAHB na sala de parto ou até 12 h</b>. O slide grita: <b>PODE AMAMENTAR</b>. Entecavir não é usado na gestação; a via de parto não muda a profilaxia.", trap:"A imunoglobulina é do bebê, não da mãe; e a primeira dose da vacina B é ao nascimento, não aos 2 meses."},
+{lvl:"ENAMED", obj:"Hepatites · hepatite E", stem:"<span class='cx'>Gestante no 3º trimestre, volta de viagem à Índia com febre, icterícia, vômitos, AST 2.400 U/L. Anti-HAV IgM, HBsAg, anti-HBc IgM e anti-HCV não reagentes.</span> A hipótese com maior risco de hepatite fulminante nessa paciente é:", opts:["Hepatite E","Hepatite A","Hepatite B em janela imunológica","Hepatite C aguda"], ans:0, why:"Fecal-oral, África/Ásia, AMT > 1.000 e sorologias A/B/C negativas em uma <b>gestante</b> = hepatite E, cuja marca nos slides é 'mais grave em gestantes (fulminante, perda fetal, mortalidade)'. Diagnóstico: anti-HEV IgM. Tratamento é suporte; não há vacina no Brasil.", trap:"A hepatite A também é fecal-oral e pode dar AMT > 1.000, mas o IgM negativo afasta e a gravidade da A é em adultos em geral, não especificamente na gestante."},
+{lvl:"ENAMED", obj:"Hepatites · hepatite D", stem:"<span class='cx'>Homem de Manaus, portador de HBsAg há 8 anos, estável, apresenta icterícia aguda, ALT 900 U/L. Anti-HBc IgM não reagente.</span> O exame que define o diagnóstico mais provável é:", opts:["HBV-DNA quantitativo","Anti-HDV IgM e HDV-RNA","Anti-HBs quantitativo","Anti-HEV IgM"], ans:1, why:"Portador crônico de HBV (anti-HBc IgM negativo afasta B aguda) da região Norte com hepatite aguda = <b>superinfecção pelo vírus delta</b>, que é defectivo e só se replica com o HBsAg. Diagnóstico: anti-HDV IgM e HDV-RNA (+ sorologias da B). Tratamento: análogos + alfapeguinterferona.", trap:"A carga viral do HBV não explica uma hepatite aguda em portador estável; o pulo do gato é a epidemiologia (Norte) + HBsAg prévio."},
+{lvl:"ENAMED", obj:"DHGNA · FIB-4", stem:"<span class='cx'>Homem, 58 anos, DM2, IMC 33, esteatose ao USG. AST 48, ALT 52, plaquetas 140.000/mm³ (FIB-4 ≈ 2,8).</span> A conduta é:", opts:["Repetir USG e escores não invasivos em 2–3 anos","Iniciar vitamina E empiricamente","Referenciar ao especialista e avaliar fibrose com elastografia/biópsia","Dispensar investigação porque as transaminases são quase normais"], ans:2, why:"FIB-4 (idade × AST / plaquetas × √ALT) <b>> 2,67 = alto risco de fibrose avançada</b> → referenciar e considerar biópsia (o grupo indeterminado 1,3–2,67 vai para elastografia). FIB-4 < 1,3 é que repete em 2–3 anos. Transaminases 'quase normais' não tranquilizam: 'AST/ALT normais não excluem doença significativa'.", trap:"Vitamina E nunca é empírica (exige biópsia) e é contraindicada em diabético — dois erros na alternativa B."},
+{lvl:"ENAMED", obj:"DHGNA · tratamento", stem:"<span class='cx'>Mulher, 61 anos, MASH confirmada por biópsia (F2), DM2, insuficiência cardíaca com FE 30%, IMC 36.</span> A melhor opção farmacológica é:", opts:["Pioglitazona","Vitamina E 800 UI/dia","Metformina como hepatoprotetor","Análogo de GLP-1 (semaglutida) associado a perda ponderal ≥ 7–10%"], ans:3, why:"Pioglitazona é a 1ª linha do slide, <b>mas não se usa em insuficiência cardíaca</b>. Vitamina E é <b>contraindicada em DM</b>. Metformina 'não é recomendada' para o fígado. Sobram os <b>análogos de GLP-1</b>, que dão perda de peso e melhoram a esteato-hepatite — e a meta de peso para melhorar inflamação é ≥ 7–10%.", trap:"Pioglitazona é 'primeira linha' na maioria das questões; a IC é a exceção que a questão testa."},
+{lvl:"ENAMED", obj:"Cirrose · Child-Pugh", stem:"<span class='cx'>Cirrótico com bilirrubina 2,5 mg/dL, albumina 2,6 g/dL, INR 1,9, ascite moderada controlada com diurético e sem encefalopatia.</span> A classificação de Child-Turcotte-Pugh é:", opts:["Child A, 6 pontos","Child B, 8 pontos","Child B, 9 pontos","Child C, 10 pontos"], ans:3, why:"BEATA: bilirrubina 2–3 = 2; encefalopatia ausente = 1; ascite leve/moderada = 2; INR 1,7–2,3 = 2; albumina < 2,8 = 3. Total <b>10 = Child C</b> (A 5–6, B 7–9, C ≥ 10).", trap:"Albumina 2,6 vale 3 pontos (corte 2,8), não 2 — é o item que derruba a soma."},
+{lvl:"ENAMED", obj:"Cirrose · estigmas", stem:"<span class='cx'>Homem, 55 anos, etilista, com ginecomastia, eritema palmar, telangiectasias em tronco, rarefação de pelos e atrofia testicular.</span> Esses achados decorrem de:", opts:["Hiperestrogenismo e hipoandrogenismo por falha na metabolização hormonal","Acúmulo de amônia por perda da função de detoxificação","Hipoalbuminemia por perda da síntese hepática","Hipertensão portal com circulação colateral"], ans:0, why:"O slide agrupa esses sinais sob 'comprometimento na metabolização dos hormônios (hiperestrogenismo e hipoandrogenismo)'. Amônia dá encefalopatia/flapping; albumina baixa dá ascite/edema; hipertensão portal dá ascite, varizes, esplenomegalia e cabeça de medusa.", trap:"Eritema palmar e aranhas vasculares são estrogênio, não hipertensão portal — a prova gosta de misturar as duas listas."},
+{lvl:"ENAMED", obj:"Complicações · HDA varicosa", stem:"<span class='cx'>Cirrótico Child B chega com hematêmese volumosa, PA 85/50, FC 120, Hb 6,5 g/dL.</span> A conduta correta é:", opts:["Transfundir até Hb 10 g/dL antes de qualquer procedimento","Estabilizar e realizar endoscopia em 24–48 h","Terlipressina + ceftriaxona, transfusão (Hb < 7) e endoscopia em até 12 h com ligadura elástica","Passar balão de Sengstaken-Blakemore como primeira medida"], ans:2, why:"Fluxograma do slide: via aérea e volemia → vasoconstritor esplâncnico (terlipressina/octreotide/somatostatina) → profilaxia de PBE (ceftriaxona ou quinolona) → <b>hemotransfusão apenas se Hb < 7</b> (alvo 7–9) → <b>EDA em até 12 h</b> (varizes esofágicas = ligadura) → resgate com balão, TIPS ou cirurgia.", trap:"Transfundir demais aumenta a pressão portal e ressangra; balão é resgate para sangramento maciço incontrolável, não primeira medida."},
+{lvl:"ENAMED", obj:"Ascite/PBE · PBE", stem:"<span class='cx'>Cirrótico com ascite, febre 38,2 °C e dor abdominal difusa. Líquido ascítico: 380 polimorfonucleares/mm³, proteína 0,8 g/dL; cultura em andamento.</span> A conduta é:", opts:["Aguardar o resultado da cultura para iniciar antibiótico","Laparotomia exploradora por peritonite","Norfloxacina oral por 5 dias","Ceftriaxona (ou cefotaxima) intravenosa + albumina"], ans:3, why:"<b>PMN ≥ 250/mm³ fecha PBE</b> — não se espera cultura (que é monobacteriana em geral: E. coli 43%, Klebsiella 11%). Tratamento do slide: ceftriaxona ou cefotaxima (alternativa ciprofloxacino/ofloxacino) <b>+ albumina</b>, que previne síndrome hepatorrenal. Norfloxacina é profilaxia, não tratamento; laparotomia é para peritonite secundária.", trap:"PBE não tem foco intra-abdominal — cirurgia é erro. Albumina faz parte do tratamento, não é opcional."},
+{lvl:"ENAMED", obj:"Complicações · síndrome hepatorrenal", stem:"<span class='cx'>Cirrótico com ascite tratou PBE; creatinina subiu de 1,0 para 2,8 mg/dL em 6 dias. Diuréticos suspensos e albumina IV por 2 dias sem melhora; sem proteinúria ou hematúria; USG renal normal; PA 100/60 sem choque.</span> Diagnóstico e conduta:", opts:["Síndrome hepatorrenal tipo I — terlipressina + albumina e avaliar transplante","Síndrome hepatorrenal tipo II — TIPS eletivo","Necrose tubular aguda — hemodiálise imediata","Hipovolemia — furosemida e cristaloide"], ans:0, why:"Perda rápida da função renal (creatinina > 2,5) com fator precipitante (infecção), sem choque/nefrotóxico/lesão parenquimatosa e <b>sem resposta à expansão com albumina e suspensão de diuréticos por ≥ 2 dias</b> = SHR <b>tipo I</b> (sobrevida ~2 semanas). Ganha-se tempo com terlipressina + albumina; o tratamento definitivo é o transplante.", trap:"Tipo II é lento e associado a ascite refratária (sobrevida 6 meses). Diurético piora a SHR."},
+{lvl:"PROVA", obj:"Hepatites · cronificação", stem:"Sobre a cronificação das hepatites virais, analise: <b>I.</b> A hepatite A nunca cronifica. <b>II.</b> A hepatite B cronifica em mais de 90% dos recém-nascidos e em 5–10% dos adultos. <b>III.</b> A hepatite C cronifica em cerca de 80% dos adultos. <b>IV.</b> A hepatite E cronifica em cerca de 30% dos adultos imunocompetentes. Estão corretas:", opts:["I e III","I, II e III","II, III e IV","Todas"], ans:1, why:"A e E são autolimitadas ('NÃO CRONIFICA' / 'não evolui para formas crônicas'). B cronifica inversamente à idade: RN > 90%, crianças 20–50%, adultos 5–10%. C cronifica em ~80% dos adultos. A E só cronifica em imunossuprimidos ([extra]), nunca em 30% de imunocompetentes.", trap:"A hepatite que mais cronifica em < 2 anos é a B (vertical); em adultos é a C. Os dois fatos aparecem no quadro dela."},
+{lvl:"PROVA", obj:"Hepatites · tratamento da B", stem:"Sobre o tratamento da hepatite B crônica, assinale a alternativa <b>INCORRETA</b>:", opts:["Tenofovir é a primeira linha e o único análogo liberado na gravidez","Entecavir é preferido em insuficiência renal, osteopenia/osteoporose e cirrose","Tenofovir alafenamida (TAF) tem uso limitado pelo alto custo","As metas são HBV-DNA indetectável e soroconversão, obtida em cerca de 10% dos pacientes","Os análogos de nucleosídeos curam a infecção na maioria dos pacientes após 48 semanas"], ans:4, why:"O slide é taxativo: 'Tratamento: reduzir carga viral, <b>NÃO CURA!</b>'. A cura sorológica (soroconversão HBeAg → anti-HBe e HBsAg → anti-HBs) ocorre em apenas ~10%. As demais alternativas reproduzem o slide de drogas (tenofovir 1ª linha/gravidez; entecavir renal/osso/cirrose; TAF caro).", trap:"Quem cura em > 90% com 12–24 semanas é a hepatite C com DAAs — não confundir os dois vírus."},
+{lvl:"PROVA", obj:"Hepatites · perfis sorológicos", stem:"Associe os perfis sorológicos à interpretação: <b>1.</b> HBsAg −, anti-HBc total +, anti-HBs + · <b>2.</b> HBsAg −, anti-HBc −, anti-HBs + · <b>3.</b> HBsAg + há 8 meses, anti-HBc IgG +, HBeAg + · <b>4.</b> HBsAg +, anti-HBc IgM +. <b>(a)</b> imunidade vacinal · <b>(b)</b> hepatite B aguda · <b>(c)</b> cura · <b>(d)</b> hepatite B crônica em replicação. A sequência correta é:", opts:["1c, 2a, 3d, 4b","1a, 2c, 3d, 4b","1c, 2a, 3b, 4d","1d, 2a, 3c, 4b"], ans:0, why:"Anti-HBc + anti-HBs sem HBsAg = contato prévio resolvido (<b>cura</b>); anti-HBs isolado = <b>vacina</b>; HBsAg > 6 meses com HBeAg = <b>crônica replicativa</b>; HBsAg com anti-HBc IgM = <b>aguda</b>. É exatamente a tabela final do quadro dela.", trap:"A diferença entre cura e vacina é o anti-HBc: vacina nunca gera anti-HBc (só quem viu o vírus selvagem)."},
+{lvl:"PROVA", obj:"Hepatites · tratamento da C", stem:"Sobre o tratamento da hepatite C, assinale a alternativa <b>INCORRETA</b>:", opts:["Todos os pacientes com infecção ativa devem ser tratados","Pacientes oncológicos com expectativa de vida inferior a 12 meses são exceção","Pacientes em lista de transplante com MELD ≥ 20 são exceção","Gestantes devem ser tratadas com antivirais de ação direta durante a gestação","Resposta viral sustentada é HCV-RNA indetectável 12 semanas após o fim do tratamento"], ans:3, why:"O slide vermelho: 'TODOS OS PACIENTES!! EXCETO: oncológicos com expectativa < 12 meses; lista de transplante com MELD ≥ 20; <b>gestantes</b>'. Gestante é exceção — trata-se depois do parto. RVS 12 semanas = critério de cura.", trap:"Na B, a gestante é justamente quem recebe tenofovir no 3º trimestre; na C, a gestante é quem NÃO trata. Sentidos opostos."},
+{lvl:"PROVA", obj:"Hepatites · vacinas e profilaxia", stem:"Sobre prevenção das hepatites virais, analise: <b>I.</b> No SUS, a vacina da hepatite A é dose única aos 15 meses (até 5 anos incompletos). <b>II.</b> A vacina da hepatite B é feita em 4 doses na criança (nascimento, 2, 4 e 6 meses) e 3 doses no adulto (0, 1 e 6 meses). <b>III.</b> A vacina da hepatite B previne a hepatite D. <b>IV.</b> Após exposição percutânea ao HCV, indica-se imunoglobulina específica. Estão corretas:", opts:["I, II e III","II e III","I, III e IV","Todas"], ans:0, why:"HCV 'NÃO TEM VACINA! NÃO TEM IMUNOGLOBULINA!' — IV é falsa. HDV é defectivo e depende do HBsAg, por isso a vacina da B previne a D. Os esquemas de A (dose única 15 m no SUS; 2 doses no privado) e B (4 doses/3 doses) são os do slide.", trap:"O deck do Julio diz '2 doses aos 12 e 15–18 meses' para a A; na prova da Andrea vale o dela: dose única aos 15 meses."},
+{lvl:"PROVA", obj:"DHGNA · nomenclatura", stem:"Sobre a doença hepática esteatótica associada à disfunção metabólica, analise: <b>I.</b> MASLD é o termo atual para a antiga DHGNA/NAFL (esteatose simples). <b>II.</b> MASH corresponde à esteato-hepatite, com inflamação lobular e balonização de hepatócitos. <b>III.</b> MetALD designa MASLD com consumo de álcool de 140–350 g/semana (mulheres) ou 210–420 g/semana (homens). <b>IV.</b> A ultrassonografia é o melhor exame para detectar fibrose precoce. Estão corretas:", opts:["I e II","I, II e III","II, III e IV","Todas"], ans:1, why:"I, II e III reproduzem o fluxograma de nomenclatura. A ultrassonografia identifica infiltração gordurosa só com ≥ 33% de gordura e '<b>NÃO DETECTA FIBROSE</b>' — para fibrose usam-se FIB-4 e elastografia; biópsia é padrão-ouro.", trap:"USG é barato e é a porta de entrada, mas 'barato' não é 'sensível para fibrose'."},
+{lvl:"PROVA", obj:"Cirrose · hipertensão portal", stem:"Associe a causa de hipertensão portal à sua classificação: <b>1.</b> trombose da veia porta · <b>2.</b> esquistossomose mansônica · <b>3.</b> cirrose hepática · <b>4.</b> síndrome de Budd-Chiari. <b>(a)</b> pré-hepática · <b>(b)</b> intra-hepática pré-sinusoidal · <b>(c)</b> intra-hepática sinusoidal/pós-sinusoidal · <b>(d)</b> pós-hepática. A sequência correta é:", opts:["1a, 2c, 3b, 4d","1d, 2b, 3c, 4a","1a, 2b, 3c, 4d","1b, 2a, 3c, 4d"], ans:2, why:"Slide de classificação: pré-hepática (trombose de porta); intra-hepática pré-sinusoidal (esquistossomose, fibrose hepática congênita); sinusoidal/pós-sinusoidal (<b>cirrose</b>); pós-hepática (Budd-Chiari, obstrução de veia supra-hepática).", trap:"Esquistossomose é a grande causa de hipertensão portal com função hepática preservada — pré-sinusoidal, não cirrose."},
+{lvl:"PROVA", obj:"Cirrose · MELD e Child", stem:"Sobre os escores prognósticos na cirrose, assinale a alternativa <b>INCORRETA</b>:", opts:["O MELD usa bilirrubina, INR e creatinina","O MELD-Na reflete melhor a mortalidade em cirróticos com hiponatremia","Segundo o slide, entra na fila de transplante o paciente com MELD > 10","O Child-Pugh usa bilirrubina, albumina, INR, ascite e encefalopatia","O MELD inclui albumina e presença de ascite em sua fórmula"], ans:4, why:"MELD = <b>BIC</b> (Bilirrubina, INR, Creatinina), fórmula logarítmica; não tem albumina nem ascite — esses estão no Child (BEATA). O slide diz 'fila de transplante: MELD > 10' e que o MELD clássico subestima a gravidade na hiponatremia (daí o MELD-Na).", trap:"Creatinina só no MELD; albumina e ascite só no Child. Encefalopatia também é só Child."},
+{lvl:"PROVA", obj:"Cirrose · vigilância", stem:"Sobre a vigilância do cirrótico, analise: <b>I.</b> Todo paciente cirrótico deve ser submetido a endoscopia digestiva alta. <b>II.</b> Varizes de pequeno calibre com manchas avermelhadas (red spots) têm indicação de profilaxia primária. <b>III.</b> A profilaxia primária da hemorragia varicosa é feita com betabloqueador não seletivo ou ligadura elástica. <b>IV.</b> O rastreamento de hepatocarcinoma é feito com ultrassonografia e alfafetoproteína a cada 6 meses. Estão corretas:", opts:["I e II","I, III e IV","II e IV","Todas"], ans:3, why:"Os quatro itens são frases literais dos slides de EDA e de rastreio de CHC: EDA em todo cirrótico; profilaxia para red spots, médio/grosso calibre e Child B/C; betabloqueador não seletivo ou ligadura; USG + AFP semestral, e nódulo → TC/RNM.", trap:"A ligadura entra tanto na profilaxia primária quanto no tratamento da hemorragia; o que muda é o contexto."},
+{lvl:"PROVA", obj:"Complicações · encefalopatia", stem:"<span class='cx'>Cirrótico trazido pela família: letárgico, apático, desorientado no tempo, com comportamento inadequado e flapping evidente; responde a comandos.</span> Pelos critérios de West Haven, o grau é:", opts:["I","II","III","IV"], ans:1, why:"Grau <b>II</b> = letargia/apatia, desorientação no tempo, alteração de personalidade, comportamento inadequado, dispraxia e <b>asterixis</b>. Grau I é só atenção/sono/euforia com dificuldade de cálculo; III é sonolência/semiestupor com desorientação grosseira; IV é coma.", trap:"Flapping aparece a partir do grau II; desorientação 'grosseira' e semiestupor já são III."},
+{lvl:"PROVA", obj:"Ascite/PBE · GASA", stem:"<span class='cx'>Mulher, 70 anos, sem estigmas de hepatopatia, com ascite, turgência jugular e edema de membros. Albumina sérica 3,4 g/dL, albumina do líquido 1,8 g/dL (GASA 1,6), proteína total do líquido 3,2 g/dL.</span> A causa mais provável da ascite é:", opts:["Cirrose não complicada","Tuberculose peritoneal","Carcinomatose peritoneal","Ascite cardíaca (hipertensão pós-sinusoidal)"], ans:3, why:"GASA ≥ 1,1 = hipertensão portal (transudato). Com <b>proteína > 2,5 g/dL</b> o fluxograma aponta hipertensão <b>pós-sinusoidal</b>: ICC, pericardite, doença veno-oclusiva — 'ascite cardíaca'. Cirrose daria GASA alto com proteína < 2,5; TB e carcinomatose dão GASA < 1,1 com proteína alta.", trap:"Quem separa cirrose de coração não é o GASA (alto nos dois) — é a proteína total do líquido."},
+{lvl:"PROVA", obj:"Ascite/PBE · profilaxia da PBE", stem:"Sobre a profilaxia da peritonite bacteriana espontânea, assinale a alternativa <b>INCORRETA</b>:", opts:["Após hemorragia digestiva varicosa, indica-se norfloxacina ou ceftriaxona","Proteína do líquido ascítico < 1 g/dL indica profilaxia primária com norfloxacina","A profilaxia secundária usa norfloxacina 400 mg/dia (ou ciprofloxacina 500 mg/dia, ou SMX-TMP 800/160 mg/dia)","A profilaxia secundária deve ser suspensa 7 dias após o término do tratamento da PBE"], ans:3, why:"Quem já teve PBE mantém profilaxia <b>até melhora da ascite ou até o transplante hepático</b> — não por 7 dias. As demais reproduzem os slides: pós-HDA (norfloxacina/ceftriaxona), proteína < 1 g/dL (norfloxacina), e < 1,5 g/dL com Child ≥ 9/BT ≥ 3 ou disfunção renal/Na ≤ 130.", trap:"Proteína baixa no líquido é fator de risco (menos opsoninas) — quanto menor a proteína, maior o risco de PBE, ao contrário do que a intuição sugere."},
+{lvl:"ANTIGA", obj:"Ascite/PBE · principal causa", stem:"<b>(Prova antiga do bloco, questão 7)</b> A principal causa de ascite no mundo é:", opts:["Insuficiência cardíaca","Cirrose hepática","Tuberculose","Síndrome nefrótica"], ans:1, why:"Gabarito B. O slide da Andrea repete: 'Principal causa da ascite é a cirrose; complicação mais comum da cirrose; 50% dos cirróticos em 10 anos'. Neoplásica é a 2ª causa (10%) e tuberculose peritoneal a 3ª no Brasil; insuficiência cardíaca e nefrótica são causas de GASA alto/baixo, respectivamente, mas bem menos frequentes.", trap:"'No Brasil' a 3ª causa é TB — não deixe a palavra 'Brasil' te empurrar para a C."},
+{lvl:"ANTIGA", obj:"Ascite/PBE · SAAG", stem:"<b>(Prova antiga do bloco, questão 8)</b> O gradiente soro-ascítico de albumina (SAAG) ≥ 1,1 indica:", opts:["Ascite inflamatória","Ascite por hipertensão portal","Ascite neoplásica","Infecção bacteriana"], ans:1, why:"Gabarito B. GASA/SAAG = albumina sérica − albumina do líquido; <b>≥ 1,1 g/dL = hipertensão portal</b> (cirrose, Budd-Chiari; se proteína > 2,5, causa cardíaca). < 1,1 = inflamação, infecção (TB), neoplasia (carcinomatose), nefrótica, pancreática.", trap:"Neoplasia pode ter GASA ≥ 1,1 quando é metástase hepática (comprime sinusoides) — mas a regra da prova é: GASA alto = hipertensão portal."},
+{lvl:"ANTIGA", obj:"Paracentese · local", stem:"<b>(Prova antiga do bloco, questão 9)</b> O local mais seguro para paracentese é:", opts:["Linha média infraumbilical","Hipocôndrio direito","Flanco esquerdo lateral","Epigástrio"], ans:2, why:"Gabarito C. Na Andrea: linha da espinha ilíaca ântero-superior ao umbigo, <b>à esquerda</b>, dividida em três, punção na junção do terço médio com o inferior (quadrante inferior esquerdo). [extra] Esquerda porque o ceco à direita é fixo e distendido e o sigmoide é móvel; lateral ao reto abdominal evita a artéria epigástrica inferior.", trap:"Linha média infraumbilical é usada por alguns, mas arrisca bexiga distendida; hipocôndrio direito é fígado; epigástrio é estômago."},
+{lvl:"ANTIGA", obj:"Paracentese · complicações", stem:"<b>(Prova antiga do bloco, questão 10)</b> A principal complicação imediata da paracentese é:", opts:["Peritonite bacteriana espontânea","Hemorragia","Insuficiência renal crônica","Cirrose"], ans:1, why:"Gabarito B. A complicação imediata mais relevante é a <b>hemorragia</b> (parede abdominal/artéria epigástrica inferior) — por isso o local lateral ao reto. Outras [extra]: vazamento persistente de líquido, infecção, perfuração de alça e disfunção circulatória pós-paracentese (tardia, quando > 5 L sem albumina). PBE é infecção espontânea do líquido, não complicação da agulha.", trap:"'Espontânea' no nome já exclui a PBE como complicação de procedimento; IRC e cirrose são absurdos de distrator."},
+{lvl:"ANTIGA", obj:"Paracentese · indicação", stem:"<b>(Prova antiga do bloco, questão 11)</b> A paracentese diagnóstica está indicada em:", opts:["Toda ascite de causa conhecida estável","Primeira avaliação de ascite","Apenas em ascite volumosa","Apenas em pacientes cirróticos descompensados"], ans:1, why:"Gabarito B. Slide de indicações: <b>primeiro episódio de ascite</b>, toda internação hospitalar, piora clínica (febre, dor, alteração de consciência, hipotensão), laboratório sugerindo infecção (leucocitose, acidose, insuficiência renal) e hemorragia digestiva. Ascite pequena também se punciona (guiada por USG); ascite estável de causa conhecida não precisa de nova punção sem gatilho.", trap:"'Apenas' é a palavra que mata as alternativas C e D — a paracentese é ampla, não restrita a volumosos/descompensados."},
+{lvl:"ANTIGA", obj:"Ascite/PBE · diagnóstico de PBE", stem:"<b>(Prova antiga do bloco, questão 12)</b> Contagem de neutrófilos no líquido ascítico ≥ 250 células/mm³ sugere:", opts:["Ascite cardíaca","Peritonite bacteriana espontânea","Neoplasia","Cirrose compensada"], ans:1, why:"Gabarito B. Slide: 'Diagnóstico: contagem de polimorfonucleares ≥ 250/mm³; cultura monobacteriana'. Trata-se com ceftriaxona/cefotaxima + albumina, sem esperar cultura. Neoplasia e TB cursam com celularidade alta, mas de predomínio <b>linfocitário</b>.", trap:"A contagem é de neutrófilos/PMN, não de leucócitos totais — TB tem até 4.000 leucócitos, mas mononucleares."},
+{lvl:"DIRETA", obj:"Hepatites · genoma", stem:"O único vírus de hepatite com genoma DNA é o:", opts:["HBV","HAV","HCV","HEV"], ans:0, why:"HBV pertence à família Hepadnaviridae e é o único vírus hepatotrópico de DNA; A (Picornaviridae), C (Flaviviridae), D (Deltavírus) e E (Hepeviridae) são RNA. É o primeiro item de 'peculiaridades do HBV' no quadro dela.", trap:"O nome da família ajuda: Hepa-DNA-viridae."},
+{lvl:"DIRETA", obj:"Hepatites · cronificação em adultos", stem:"A hepatite viral com maior taxa de cronificação em adultos é a:", opts:["Hepatite A","Hepatite B","Hepatite C","Hepatite E"], ans:2, why:"HCV cronifica em ~80% dos adultos (HBV em apenas 5–10% dos adultos); A e E não cronificam. Em recém-nascidos a resposta muda: HBV > 90%.", trap:"Se a pergunta for 'em menores de 2 anos', a resposta é B."},
+{lvl:"DIRETA", obj:"Hepatites · replicação viral", stem:"O marcador sorológico que indica replicação ativa do vírus da hepatite B é o:", opts:["HBsAg","Anti-HBc IgM","Anti-HBe","HBeAg"], ans:3, why:"HBeAg positivo 'sugere replicação viral' com carga viral alta (> 2.000); anti-HBe indica controle da replicação (não cura); HBsAg indica presença do vírus (primeiro marcador); anti-HBc IgM indica infecção aguda.", trap:"HBsAg diz que o vírus está lá; HBeAg diz que ele está se multiplicando."},
+{lvl:"DIRETA", obj:"Hepatites · sorologia vacinal", stem:"Anti-HBs positivo com HBsAg e anti-HBc negativos indica:", opts:["Imunidade vacinal","Infecção passada resolvida","Hepatite B crônica","Suscetibilidade à infecção"], ans:0, why:"Só a vacina gera anti-HBs sem anti-HBc, porque a vacina contém apenas HBsAg. Cura tem anti-HBc total positivo junto; crônica tem HBsAg; suscetível tem tudo negativo.", trap:"Anti-HBc é a 'cicatriz' do vírus selvagem — se está negativo, a pessoa nunca se infectou."},
+{lvl:"DIRETA", obj:"DHGNA · perda de peso", stem:"Na MASLD, a perda de peso mínima associada à melhora da esteatose é de:", opts:["3–5%","1–2%","7–10%","Mais de 15%"], ans:0, why:"Slide: 3–5% melhora a esteatose; ≥ 7–10% dá maior chance de melhorar inflamação (esteato-hepatite) e doença hepática. Exercício aeróbico com regularidade e dieta sem ultraprocessados/açúcar completam.", trap:"Dois números, duas metas: 3–5% para gordura, 7–10% para inflamação/fibrose."},
+{lvl:"DIRETA", obj:"Cirrose · elastografia", stem:"Na elastografia hepática, o valor de rigidez que sugere cirrose é:", opts:["> 7 kPa","> 10 kPa","≥ 12–13 kPa","> 25 kPa"], ans:2, why:"Slide de diagnóstico da cirrose: > 10 kPa sugere fibrose moderada; ≥ 12–13 kPa sugere cirrose. O corte de 7 kPa aparece em outro contexto — critério de tratamento da hepatite B (equivale a ≥ F2).", trap:"Três cortes de elastografia nos slides dela: 7 (tratar HBV), 10 (fibrose moderada), 12–13 (cirrose)."},
+{lvl:"DIRETA", obj:"Complicações · varizes gástricas", stem:"O tratamento endoscópico de escolha para varizes gástricas sangrantes é:", opts:["Ligadura elástica","Balão de Sengstaken-Blakemore","Escleroterapia com cianoacrilato","TIPS"], ans:2, why:"Quadro vermelho do slide: varizes esofágicas → ligadura elástica; varizes gástricas → escleroterapia com cianoacrilato. Balão, TIPS e cirurgia são resgate quando o tratamento endoscópico falha.", trap:"Ligadura é para esôfago; no fundo gástrico a cola (cianoacrilato) é a escolha."},
+{lvl:"DIRETA", obj:"Complicações · encefalopatia", stem:"A medicação de primeira escolha no tratamento da encefalopatia hepática é:", opts:["Rifaximina","Neomicina","Lactulona","L-ornitina-L-aspartato"], ans:2, why:"Slide: 'Lactulona: medicação de primeira escolha'. Antibióticos (rifaximina, neomicina, metronidazol), pró/prebióticos e LOLA (converte amônia em ureia e glutamina) são adjuvantes. Diagnóstico da encefalopatia é clínico, e a dieta continua normoproteica.", trap:"Rifaximina é o antibiótico mais lembrado, mas é segunda linha/associação — não primeira escolha."},
+{lvl:"DIRETA", obj:"Paracentese · albumina", stem:"Na paracentese de alívio, a reposição de albumina está indicada quando o volume retirado é superior a:", opts:["2 litros","3 litros","5 litros","8 litros"], ans:2, why:"Slide: 'Paracentese de alívio (ascite volumosa): > 5 L → repor albumina'. [extra] A dose habitual é 6–8 g de albumina por litro retirado, para evitar a disfunção circulatória pós-paracentese (hiponatremia, síndrome hepatorrenal).", trap:"5 L também é o volume dos sinais de Skoda e do piparote — são coisas diferentes com o mesmo número."},
+{lvl:"DIRETA", obj:"Ascite/PBE · etiologias", stem:"A terceira principal causa de ascite no Brasil é:", opts:["Tuberculose peritoneal","Síndrome nefrótica","Insuficiência cardíaca","Pancreatite"], ans:0, why:"Slides: cirrose (1ª), neoplásica (2ª, 10% dos casos: ovário, mama, cólon, pulmão, pâncreas, fígado) e tuberculose peritoneal (3ª no Brasil). Na TB o líquido tem GASA < 1,1, proteína > 2,5, ADA aumentado, linfócitos, BAAR positivo em 2% e cultura positiva em até 50%.", trap:"ADA alto no líquido é a dica de TB peritoneal; cultura é lenta e só positiva na metade."}
+];
+const LVL={ENAMED:'<span class="pill e">ENAMED</span>',PROVA:'<span class="pill d">Nível prova</span>',ANTIGA:'<span class="pill a">Prova antiga</span>',DIRETA:'<span class="pill a">Estilo do prof</span>'};
+let qFilter='all';
+const state={answered:0,hits:0};
+function buildQFilter(){
+  const objs=[...new Set(QS.map(q=>q.obj.split(' · ')[0]))];
+  const box=document.getElementById('qfilter');
+  box.innerHTML='<span class="chip'+(qFilter==='all'?' on':'')+'" data-k="all">Todas ('+QS.length+')</span>'+
+    objs.map(o=>'<span class="chip'+(qFilter===o?' on':'')+'" data-k="'+o+'">'+o+' ('+QS.filter(q=>q.obj.split(' · ')[0]===o).length+')</span>').join('');
+  box.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{qFilter=c.dataset.k;renderQuiz();});
+}
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  const list=QS.map((q,i)=>({q,i})).filter(x=>qFilter==='all'||x.q.obj.split(' · ')[0]===qFilter);
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  buildQFilter();
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i},n)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div>'+(LVL[q.lvl]||'')+'<span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div>'+(q.trap?'<div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>':'');
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+/* ===== FLASHCARDS (deck atômico) =====
+   CATS={key:{n:"nome",cor:"#hex"}} · CARDS=[{c:"key",q:"pergunta",a:"resposta curta",w:"1 linha de porquê (opcional)"}] */
+const CATS={
+hep:{n:"Hepatites",cor:"#0e7490"},
+dhgna:{n:"DHGNA",cor:"#a16207"},
+cirr:{n:"Cirrose",cor:"#6d28d9"},
+asc:{n:"Ascite/PBE",cor:"#15803d"},
+para:{n:"Paracentese",cor:"#b91c1c"}
+};
+const CARDS=[
+{c:"hep",q:"Único vírus de hepatite de DNA?",a:"HBV (Hepadnaviridae)",w:"Todos os outros (A, C, D, E) são RNA."},
+{c:"hep",q:"Quais hepatites NÃO cronificam?",a:"A e E",w:"HEV só cronifica em imunossuprimidos [extra]."},
+{c:"hep",q:"Hepatite A: icterícia em que % das crianças e dos adultos?",a:"5–10% crianças · 50–70% adultos",w:"Icterícia 'não significa gravidade'."},
+{c:"hep",q:"População com hepatite A mais grave?",a:"Adultos"},
+{c:"hep",q:"População com hepatite E mais grave?",a:"Gestantes (fulminante, perda fetal, mortalidade)"},
+{c:"hep",q:"Vacina da hepatite A no SUS?",a:"Dose única aos 15 meses (até 5 anos incompletos)",w:"Rede privada: 2 doses."},
+{c:"hep",q:"Onde estão os 'bolsões' de hepatite B no Brasil?",a:"Amazônia e oeste catarinense"},
+{c:"hep",q:"Primeiro marcador a surgir na hepatite B?",a:"HBsAg"},
+{c:"hep",q:"Marcador de contato com o vírus B selvagem que persiste a vida toda?",a:"Anti-HBc IgG/total",w:"O slide diz 'IgM' — errata; IgM cai em 6 meses."},
+{c:"hep",q:"Marcador de replicação viral do HBV?",a:"HBeAg (carga viral > 2.000)"},
+{c:"hep",q:"HBsAg+ / anti-HBc IgM+ / anti-HBs− = ?",a:"Hepatite B aguda"},
+{c:"hep",q:"HBsAg− / anti-HBc total+ / anti-HBs+ = ?",a:"Cura (infecção passada resolvida)"},
+{c:"hep",q:"Anti-HBs+ isolado (HBsAg− e anti-HBc−) = ?",a:"Imunidade vacinal"},
+{c:"hep",q:"Taxa de cronificação do HBV em recém-nascidos?",a:"> 90%"},
+{c:"hep",q:"Taxa de cronificação do HBV em crianças e em adultos?",a:"Crianças 20–50% · adultos 5–10%"},
+{c:"hep",q:"Critério para tratar hepatite B crônica (carga viral + enzima)?",a:"HBV-DNA > 2.000 UI/mL + ALT elevada (> 52 H / > 37 M)"},
+{c:"hep",q:"Primeira linha para hepatite B e único liberado na gravidez?",a:"Tenofovir"},
+{c:"hep",q:"O tratamento da hepatite B cura?",a:"Não — reduz carga viral; soroconversão em só 10%"},
+{c:"hep",q:"Profilaxia do RN de mãe HBsAg+?",a:"Vacina + IGHAHB na sala de parto ou até 12 h"},
+{c:"hep",q:"Quando dar tenofovir à gestante HBsAg+?",a:"HBeAg+ ou carga viral > 200.000 UI/mL, 3º trimestre",w:"Mantém até 30 dias pós-parto; pode amamentar."},
+{c:"hep",q:"Vacina da hepatite B: esquema criança e adulto?",a:"Criança 4 doses (0–2–4–6 m) · adulto 3 (0–1–6 m)"},
+{c:"hep",q:"Taxa de cronificação da hepatite C em adultos?",a:"~80%",w:"Cirrose após 20–30 anos → hepatocarcinoma."},
+{c:"hep",q:"Exame de rastreio e exame confirmatório na hepatite C?",a:"Rastreio anti-HCV · confirma HCV-RNA"},
+{c:"hep",q:"Hepatite C tem vacina ou imunoglobulina?",a:"Não tem vacina nem imunoglobulina"},
+{c:"hep",q:"Quem NÃO trata hepatite C (3 exceções)?",a:"Oncológico < 12 m de vida · lista com MELD ≥ 20 · gestante"},
+{c:"hep",q:"Duração e taxa de cura dos DAAs na hepatite C?",a:"12–24 semanas · > 90% de cura"},
+{c:"hep",q:"Definição de resposta viral sustentada (cura) na hepatite C?",a:"HCV-RNA indetectável 12 semanas após o tratamento"},
+{c:"hep",q:"Característica marcante do vírus da hepatite D?",a:"Defectivo: precisa do HBsAg para se replicar"},
+{c:"hep",q:"Como se previne a hepatite D?",a:"Vacina da hepatite B"},
+{c:"hep",q:"Marcadores de LESÃO hepatocelular?",a:"AST/TGO e ALT/TGP (> 1.000 nas virais agudas)"},
+{c:"hep",q:"Marcadores de FUNÇÃO hepática?",a:"Albumina, TP/INR e bilirrubinas [extra]"},
+{c:"dhgna",q:"Nome atual da DHGNA (esteatose simples)?",a:"MASLD (doença hepática esteatótica metabólica)"},
+{c:"dhgna",q:"O que define MASH (antiga NASH) na histologia?",a:"Esteatose + inflamação lobular + balonização"},
+{c:"dhgna",q:"O que é MetALD?",a:"MASLD + álcool 140–350 g/sem (M) ou 210–420 g/sem (H)"},
+{c:"dhgna",q:"Achado de exame físico mais comum na MASLD?",a:"Hepatomegalia (75%)",w:"Esplenomegalia = 1º sinal de hipertensão portal."},
+{c:"dhgna",q:"Variáveis do FIB-4?",a:"Idade, AST, ALT e plaquetas"},
+{c:"dhgna",q:"FIB-4 < 1,3 significa e o que fazer?",a:"Baixo risco de fibrose → repetir USG/escores em 2–3 anos"},
+{c:"dhgna",q:"FIB-4 > 2,67 significa?",a:"Alto risco de fibrose avançada → especialista/biópsia"},
+{c:"dhgna",q:"USG detecta esteatose a partir de quanta gordura? E fibrose?",a:"≥ 33% de gordura · NÃO detecta fibrose"},
+{c:"dhgna",q:"Perda de peso que melhora esteatose e a que melhora inflamação?",a:"3–5% esteatose · ≥ 7–10% inflamação"},
+{c:"dhgna",q:"Droga de primeira linha na MASH e sua contraindicação?",a:"Pioglitazona; não usar em insuficiência cardíaca"},
+{c:"dhgna",q:"Condições para usar vitamina E na MASH?",a:"Só após biópsia; não em DM nem CA de próstata",w:"Aumenta eventos hemorrágicos."},
+{c:"dhgna",q:"Metformina na MASLD?",a:"Não é recomendada (para o fígado)"},
+{c:"cirr",q:"Definição de cirrose em duas palavras-chave?",a:"Fibrose avançada + nódulos regenerativos"},
+{c:"cirr",q:"Três causas = 80% das cirroses no Brasil?",a:"Hepatite C, álcool e MASLD"},
+{c:"cirr",q:"Cirrose é hipertensão portal de que tipo?",a:"Intra-hepática sinusoidal/pós-sinusoidal"},
+{c:"cirr",q:"Padrão-ouro para diagnóstico de cirrose?",a:"Biópsia hepática (raramente feita)"},
+{c:"cirr",q:"Corte de albumina, INR e plaquetas sugestivos de cirrose?",a:"Albumina < 3,5 · INR > 1,7 · plaquetas < 150.000"},
+{c:"cirr",q:"Elastografia: fibrose moderada e cirrose?",a:"> 10 kPa moderada · ≥ 12–13 kPa cirrose"},
+{c:"cirr",q:"Variáveis do Child-Pugh (BEATA)?",a:"Bilirrubina, Encefalopatia, Ascite, TP/INR, Albumina"},
+{c:"cirr",q:"Pontos de Child A, B e C?",a:"A 5–6 · B 7–9 · C ≥ 10"},
+{c:"cirr",q:"Cortes de albumina no Child-Pugh?",a:"> 3,5 · 2,8–3,5 · < 2,8 g/dL"},
+{c:"cirr",q:"Variáveis do MELD (BIC)?",a:"Bilirrubina, INR, Creatinina"},
+{c:"cirr",q:"MELD para entrar na fila de transplante (slide)?",a:"MELD > 10",w:"MELD-Na é melhor quando há hiponatremia."},
+{c:"cirr",q:"Rastreamento de hepatocarcinoma no cirrótico?",a:"USG + alfafetoproteína a cada 6 meses"},
+{c:"cirr",q:"Profilaxia primária da HDA varicosa?",a:"Betabloqueador não seletivo ou ligadura elástica"},
+{c:"cirr",q:"Dieta do cirrótico: proteína?",a:"Normoproteica (hipoproteica aumenta mortalidade)"},
+{c:"cirr",q:"Limiar de hemotransfusão na HDA varicosa?",a:"Hb < 7 g/dL (alvo 7–9)"},
+{c:"cirr",q:"Prazo da endoscopia na HDA varicosa?",a:"Até 12 h"},
+{c:"cirr",q:"Vasoconstritores esplâncnicos na HDA varicosa?",a:"Terlipressina, octreotide ou somatostatina"},
+{c:"cirr",q:"Tratamento de escolha: varizes esofágicas × gástricas?",a:"Esofágicas ligadura · gástricas cianoacrilato"},
+{c:"cirr",q:"West Haven grau II — marca clínica?",a:"Letargia, desorientação no tempo, flapping"},
+{c:"cirr",q:"Primeira escolha no tratamento da encefalopatia hepática?",a:"Lactulona",w:"Adjuvantes: rifaximina, neomicina, metronidazol, LOLA."},
+{c:"cirr",q:"SHR tipo I: creatinina e sobrevida?",a:"Creatinina > 2,5 · sobrevida 2 semanas"},
+{c:"cirr",q:"SHR tipo II: associação e sobrevida?",a:"Ascite refratária · 6 meses"},
+{c:"cirr",q:"Teste que exclui SHR antes de rotular?",a:"Albumina IV + suspender diuréticos por 2 dias (sem melhora = SHR)"},
+{c:"cirr",q:"Tratamento medicamentoso da SHR tipo I?",a:"Terlipressina + albumina (transplante é o definitivo)"},
+{c:"asc",q:"Principal causa de ascite?",a:"Cirrose"},
+{c:"asc",q:"Segunda e terceira causas de ascite (Brasil)?",a:"2ª neoplásica (10%) · 3ª tuberculose peritoneal"},
+{c:"asc",q:"Melhor método de exame físico para ascite e volume mínimo?",a:"Macicez móvel · > 1.500 mL"},
+{c:"asc",q:"Volume mínimo para Skoda e piparote?",a:"> 5 litros"},
+{c:"asc",q:"Como se calcula o GASA?",a:"Albumina sérica − albumina do líquido ascítico"},
+{c:"asc",q:"GASA ≥ 1,1 indica?",a:"Hipertensão portal"},
+{c:"asc",q:"GASA ≥ 1,1 com proteína > 2,5 indica?",a:"Hipertensão pós-sinusoidal (ICC, pericardite)"},
+{c:"asc",q:"Líquido ascítico da cirrose: GASA e proteína?",a:"GASA ≥ 1,1 · proteína total < 2,5 g/dL"},
+{c:"asc",q:"Marcador do líquido que sugere tuberculose peritoneal?",a:"ADA aumentado (linfócitos, proteína > 2,5)"},
+{c:"asc",q:"Marcador do líquido na ascite pancreática?",a:"Amilase > 1.000 UI/L"},
+{c:"asc",q:"Diuréticos da ascite cirrótica?",a:"Espironolactona e/ou furosemida (100:40 mg [extra])"},
+{c:"asc",q:"Critério diagnóstico de PBE?",a:"PMN ≥ 250/mm³ (cultura monobacteriana)"},
+{c:"asc",q:"Tratamento da PBE?",a:"Ceftriaxona ou cefotaxima + albumina"},
+{c:"asc",q:"Proteína do líquido que indica risco de PBE e profilaxia?",a:"< 1 g/dL → norfloxacina"},
+{c:"asc",q:"Profilaxia secundária da PBE: droga e duração?",a:"Norfloxacina 400 mg/dia até melhora da ascite ou transplante"},
+{c:"para",q:"Indicações de paracentese diagnóstica (5)?",a:"1º episódio · toda internação · piora clínica · lab de infecção · HDA"},
+{c:"para",q:"Local da punção na paracentese?",a:"Linha EIAS–umbigo à esquerda, junção terço médio/inferior"},
+{c:"para",q:"Por que puncionar à esquerda? [extra]",a:"Ceco fixo/distendido à direita; evita a. epigástrica lateral ao reto"},
+{c:"para",q:"Contraindicações de paracentese (slide)?",a:"CIVD, distensão abdominal (alças) importante, cicatriz no local"},
+{c:"para",q:"Coagulopatia da cirrose contraindica paracentese? [extra]",a:"Não — só CIVD/fibrinólise"},
+{c:"para",q:"Principal complicação imediata da paracentese?",a:"Hemorragia (parede/artéria epigástrica)"},
+{c:"para",q:"Volume retirado que exige albumina na paracentese de alívio?",a:"> 5 litros",w:"[extra] 6–8 g de albumina por litro retirado."},
+{c:"para",q:"Complicação da paracentese de grande volume sem albumina? [extra]",a:"Disfunção circulatória pós-paracentese (hiponatremia, SHR)"}
+];
+let filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],virado=false;
+const $=id=>document.getElementById(id);
+function buildChips(){
+  const chips=[["all","Todas ("+CARDS.length+")"]].concat(Object.keys(CATS).map(k=>[k,CATS[k].n+" ("+CARDS.filter(c=>c.c===k).length+")"]));
+  $("chips").innerHTML=chips.map(([k,n])=>'<span class="chip'+(k===filtro?" on":"")+'" data-k="'+k+'">'+n+'</span>').join("");
+  document.querySelectorAll("#chips .chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;start();});
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function start(soErradas){
+  const base=soErradas?erradas.slice():CARDS.filter(c=>filtro==="all"||c.c===filtro);
+  fila=shuffle(base.slice());idx=0;ok=0;err=0;erradas=[];
+  $("fim").classList.add("hidden");$("card").style.display="flex";
+  buildChips();mostra();
+}
+function mostra(){
+  virado=false;
+  if(idx>=fila.length){return fim();}
+  const c=fila[idx];
+  $("cat").textContent=CATS[c.c].n;$("cat").style.background=CATS[c.c].cor;
+  $("qFront").textContent=c.q;
+  $("qTop").textContent=c.q;
+  $("resp").textContent=c.a;
+  $("why").textContent=c.w||"";$("why").style.display=c.w?"block":"none";
+  $("qFront").style.display="block";$("back").style.display="none";
+  $("hint").textContent="toque para ver a resposta";
+  $("actions").classList.add("hidden");
+  $("pos").textContent=(idx+1)+" / "+fila.length;
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+}
+function vira(){
+  if(virado)return;virado=true;
+  $("qFront").style.display="none";$("back").style.display="block";
+  $("hint").textContent="acertou? marca embaixo 👇";
+  $("actions").classList.remove("hidden");
+}
+function responde(acertou){
+  if(!virado)return;
+  if(acertou){ok++;}else{err++;erradas.push(fila[idx]);}
+  idx++;mostra();
+}
+function fim(){
+  $("card").style.display="none";$("actions").classList.add("hidden");
+  $("fim").classList.remove("hidden");
+  const total=ok+err;
+  $("fimTitulo").textContent=err===0?"🏆 Zerou!":"Rodada: "+ok+"/"+total;
+  $("fimTexto").textContent=err===0?"Tudo certo nessa leva.":err+" para repetir — vai nelas até zerar.";
+  $("btnErradas").style.display=err?"inline-block":"none";
+}
+$("card").onclick=vira;
+$("btnAcertei").onclick=()=>responde(true);
+$("btnErrei").onclick=()=>responde(false);
+$("btnErradas").onclick=()=>start(true);
+$("btnReiniciar").onclick=()=>start(false);
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById('flash').classList.contains('active'))return;
+  if(e.code==="Space"){e.preventDefault();vira();}
+  if(e.key==="1"&&virado)responde(false);
+  if(e.key==="2"&&virado)responde(true);
+});
+buildChips();start();
+
+/* ===== FEYNMAN ===== */
+const FY=[
+["1 · O quadro das hepatites em voz alta","Explique A, B, C, D e E como se fosse preencher o quadro dela: para cada uma, diga vírus (qual é o único DNA), via de transmissão, se cronifica (e as taxas da B por idade e os 80% da C), quem faz a forma grave (A em adultos, E em gestantes), como se diagnostica (IgM da A/E, HBsAg + anti-HBc da B, anti-HCV → RNA da C, HDV precisa do HBsAg), se trata e se tem vacina. Termine dizendo o que é marcador de lesão (AST/ALT) e o que é de função (albumina, INR, bilirrubina)."],
+["2 · Interpretar cinco sorologias de hepatite B","Sem olhar a tabela: descreva a ordem em que os marcadores aparecem na infecção aguda (HBsAg → anti-HBc IgM → anti-HBe → anti-HBs), o que significa HBeAg e anti-HBe, por que o anti-HBc IgG é o marcador de contato com o vírus selvagem (e por que o slide que diz IgM está errado) e leia os cinco perfis: aguda, crônica, cura, vacinado, suscetível. Depois: quando tratar (DNA > 2.000 + ALT, ou cirrose/família de CHC/coinfecção/F2) e por que o tratamento não cura."],
+["3 · A gestante e o recém-nascido","Uma gestante com HBsAg+ chega no 3º trimestre: o que você faz com ela (tenofovir se HBeAg+ ou CV > 200 mil, até 30 dias pós-parto), o que faz com o bebê nas primeiras 12 horas (vacina + IGHAHB) e se ela pode amamentar. Depois compare com a gestante com hepatite C (não trata na gestação) e com a gestante com hepatite E (risco de fulminante)."],
+["4 · Do fígado gorduroso à cirrose","Conte a história: resistência à insulina → ácidos graxos → triglicerídeos no hepatócito → esteatose (MASLD) → inflamação lobular e balonização (MASH) → célula estrelada ativada → fibrose e nódulos regenerativos → cirrose. No caminho, diga como você estadia sem biópsia (FIB-4 1,3 / 2,67; elastografia > 10 e ≥ 12–13 kPa), por que o USG não serve para fibrose, e o que muda com 5% e com 10% de perda de peso, pioglitazona, vitamina E, GLP-1 e metformina."],
+["5 · Classificar um cirrótico e decidir o que vigiar","Pegue um paciente com bilirrubina 2,5, albumina 2,6, INR 1,9, ascite moderada e sem encefalopatia: calcule o Child (BEATA) em voz alta e diga a classe; diga quais variáveis entram no MELD e por que o MELD-Na existe. Depois liste o que esse paciente precisa: EDA (e quando fazer profilaxia com betabloqueador ou ligadura), USG + alfafetoproteína de 6 em 6 meses, dieta normoproteica, restrição de sódio, e as indicações de transplante."],
+["6 · Paracentese do começo ao fim","Explique por que todo primeiro episódio de ascite e toda internação do cirrótico exigem paracentese; onde você punciona (EIAS–umbigo à esquerda, terço médio/inferior) e por que é à esquerda; o que contraindica (CIVD, distensão de alças, cicatriz) e o que NÃO contraindica (INR alto); o que pede no líquido; como lê o GASA com a proteína (cirrose, cardíaca, nefrótica, TB/ADA, carcinomatose/citologia, pancreática/amilase); o que fecha PBE (PMN ≥ 250) e como trata (ceftriaxona + albumina) e previne; e por que repor albumina acima de 5 L retirados."],
+["7 · O cirrótico que sangra, confunde e para de urinar","Descreva a sequência da HDA varicosa (via aérea/volemia, terlipressina, ceftriaxona, Hb < 7, EDA em 12 h com ligadura — cianoacrilato se gástrica — e resgate com balão/TIPS). Depois classifique a encefalopatia pelo West Haven (o que define o grau II), cite 5 precipitantes e o tratamento de primeira escolha. Feche com a síndrome hepatorrenal: tipo I × tipo II, por que é diagnóstico de exclusão (albumina + suspender diurético 48 h) e como se trata (terlipressina + albumina, transplante)."]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{const p=document.createElement('div');p.className='panel';p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';feybox.appendChild(p);});
+</script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco Vânia · Farmaco UC13 · questões reais T5–T11</title>
+<style>
+  :root{--bg:#f4f6f8;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;
+    --ok:#15803d;--ok-soft:#dcfce7;--bad:#b91c1c;--bad-soft:#fee2e2;--warn:#a16207;--warn-soft:#fef9c3;
+    --purple:#6d28d9;--purple-soft:#ede9fe;--pink:#be185d;--line:#e2e8f0}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:15px}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 14px 70px}
+  header{background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  header h1{margin:0;font-size:20px}
+  header .sub{opacity:.92;font-size:13px;margin-top:4px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 4px}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .chips2 .chip.on{background:var(--pink);border-color:var(--pink)}
+  .score{font-size:13px;color:var(--muted);margin:8px 2px}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .q .top{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;letter-spacing:.3px}
+  .b-aine{background:var(--accent-soft);color:#0c4a5e}
+  .b-cort{background:var(--warn-soft);color:var(--warn)}
+  .b-opi{background:var(--purple-soft);color:var(--purple)}
+  .b-neuro{background:#dcfce7;color:var(--ok)}
+  .b-fonte{background:#eef2f6;color:var(--muted)}
+  .b-o{background:var(--ok-soft);color:var(--ok)}
+  .b-v{background:#e0e7ff;color:#3730a3}
+  .b-i{background:var(--warn-soft);color:var(--warn)}
+  .enun{white-space:pre-line;margin-bottom:10px}
+  .alts button{display:block;width:100%;text-align:left;margin:5px 0;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-size:14.5px;line-height:1.45;color:var(--ink)}
+  .alts button:hover{border-color:var(--accent)}
+  .alts button.certa{background:var(--ok-soft);border-color:var(--ok);font-weight:600}
+  .alts button.errada{background:var(--bad-soft);border-color:var(--bad)}
+  .alts button:disabled{cursor:default;opacity:.92}
+  .gab{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
+  .gab .g{font-weight:700;color:var(--ok)}
+  .gab .c{color:#33414f;margin-top:4px;white-space:pre-line}
+  .verbtn{margin-top:8px;border:none;background:var(--accent-soft);color:#0c4a5e;font-weight:700;border-radius:10px;padding:9px 14px;cursor:pointer;font-size:14px}
+  .modelo{display:none;margin-top:10px;background:#f0fdf4;border:1px solid #b5e3c4;border-radius:10px;padding:10px 13px;font-size:14px;white-space:pre-line}
+  .note{background:var(--warn-soft);border:1px solid #f5e79b;border-radius:10px;padding:9px 13px;margin:10px 0;font-size:13.5px}
+  footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}
+  @media(max-width:600px){body{font-size:14.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🏦 Banco Vânia — Farmaco UC13</h1>
+  <div class="sub">Questões reais das provas de turmas anteriores (T5–T11), PMs e atividades do AVA — deduplicadas, com gabarito comentado. Responda ANTES de revelar.</div>
+</header>
+
+<div class="note"><b>Selos de confiança:</b> <span class="badge b-o">OFICIAL</span> gabarito comentado da própria professora (PM/AVA/correção a caneta) · <span class="badge b-v">VETERANO</span> marcação de prova corrigida (confiável, mas não infalível) · <span class="badge b-i">INFERIDO</span> resolvido por análise + material dela · <span class="badge b-o">🎧 AULA 2026</span> questão inédita montada no estilo dela a partir do que ela FALOU nas aulas gravadas (fonte: transcrição).</div>
+
+<div class="chips" id="fBloco"></div>
+<div class="chips chips2" id="fTipo"></div>
+<div class="score" id="score"></div>
+<div id="lista"></div>
+
+<footer>Banco montado em 18/08/2026 a partir de Provas Farmaco.pdf (T5–T11 + PMs + atividades AVA) e da aula 2026 de opioides · Prova: 04/09 · Estratégia completa no artifact “farmaco-a1-estrategia”</footer>
+</div>
+
+<script>
+const BLOCOS={aine:"AINEs & analgésicos",cort:"Corticoides",opi:"Opioides",neuro:"Neuropática & CB"};
+const CONF={o:["OFICIAL","b-o"],v:["VETERANO","b-v"],i:["INFERIDO","b-i"],a:["🎧 AULA 2026","b-o"]};
+const Q=[
+// ================== AINEs ==================
+{b:"aine",t:"obj",fonte:"T5 Q1",conf:"v",
+e:"M.S., 4 anos, quadro de pneumonia, em tratamento com antibiótico, deve fazer uso de anti-inflamatório e antitérmico. Das opções, qual a mais adequada para uso ambulatorial?",
+alts:["dipirona + dexametasona","dipirona + fluticasona","ibuprofeno + prednisolona","paracetamol + prednisolona","paracetamol + dexametasona"],g:3,
+com:"Pneumonia = AINE vetado (ibuprofeno fora). Antitérmico seguro em criança: paracetamol. Corticoide: prednisoLONA (forma ativa, padrão em criança; dexametasona não é a escolha para quadro respiratório comum; fluticasona é inalatória). Mesma lógica da associação oficial do AVA para adulto: ATB + dipirona + prednisolona."},
+
+{b:"aine",t:"obj",fonte:"T5 Q7",conf:"v",
+e:"Sobre AINEs em adultos, assinale a correta:\nI. AAS 500 mg 2×/dia para quadros inflamatórios pode causar sangramentos porque inibe a agregação plaquetária ao inibir a COX-1.\nII. Paracetamol é analgésico e antitérmico efetivo, 500 mg até 4×/dia, mas deve-se evitar uso crônico pelo risco de hepatotoxicidade.\nIII. Dipirona tem efeito analgésico e antitérmico em doses de 100 a 1000 mg, sendo a hipotensão e a hipotermia os maiores riscos quando empregada como antitérmica.\nIV. Diclofenaco 75 mg injetável ou VO de 12/12h para alívio da dor em quadros inflamatórios agudos; principal EA: distúrbios gastrintestinais.\nV. Diclofenaco é inibidor não seletivo e o uso crônico pode desencadear insuficiência renal e úlceras, o que NÃO é observado com AINEs seletivos COX-2, como o celecoxibe.",
+alts:["I, II, III, IV e V","I, II e IV","I, II, III e IV","II, III e IV","I, II e V"],g:2,
+com:"V é a falsa: o seletivo COX-2 poupa a úlcera, mas NÃO poupa o rim — os efeitos renais (↓PGI2/PGE2 renais) acontecem igual, porque a COX-2 é constitutiva no rim. Pegadinha clássica dela: estender a proteção gástrica do coxibe para o rim."},
+
+{b:"aine",t:"obj",fonte:"T5 Q8",conf:"v",
+e:"Sobre os efeitos adversos dos AINEs:\nI. O uso crônico é contraindicado para hipertensos porque aumentam a resistência vascular periférica ao reduzir a biossíntese de PGI2 (inibição da COX-2).\nII. Edema, hipercalemia e proteinúria podem surgir com uso crônico e estão relacionados com insuficiência renal justificada principalmente pela inibição da COX-2.\nIII. A inibição seletiva da COX-1 mediada por AAS e ibuprofeno reduz a produção de PGE2 e causa úlceras gástricas, assim como reduz a produção de TXA2 e aumenta o risco de trombose.\nIV. O ibuprofeno é contraindicado para febre em pacientes com pneumonia porque, ao inibir a COX-2, reduz a disponibilidade de PGI2, aumentando a produção de leucotrienos e o risco de broncoconstrição.\nV. Exantemas e pruridos são EAs desencadeados por reações alérgicas a alguns AINEs; diante desses quadros deve-se suspender imediatamente o fármaco.",
+alts:["I e V","II, III e IV","I, IV e V","I, II e III","I, II e V"],g:2,
+com:"III é falsa duas vezes: AAS/ibuprofeno NÃO são seletivos de COX-1, e ↓TXA2 REDUZ trombose (não aumenta). II caiu como falsa no gabarito do veterano — provável pegadinha na justificativa (na doutrina dela, a IR vem da perda hemodinâmica de PGI2/PGE2 renais; edema/hipercalemia são consequência dessa queda, não 'insuficiência renal justificada pela COX-2' como o item amarra). I, IV e V estão no padrão das correções dela."},
+
+{b:"aine",t:"obj",fonte:"T5 Q9",conf:"v",
+e:"(Asserção-razão) Sobre o cetorolaco:\nI. Cetorolaco 10 mg via sublingual em até 4×/dia (dose máxima 40 mg/dia) apresenta rápida e significativa ação analgésica, empregado para dor nociceptiva de intensidade moderada a severa, porém contraindicado para gestantes e crianças.\nPORQUE\nII. O cetorolaco inibe de forma não seletiva as COXs e tem como principais efeitos adversos dor abdominal, náuseas, vômitos, sangramentos, ulcerações e broncoespasmo em suscetíveis (asmáticos).",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II NÃO justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:1,
+com:"As duas são verdadeiras, mas a II (mecanismo/EAs) não é a RAZÃO da indicação analgésica descrita na I. Padrão da banca dela: julgar cada proposição isolada e SÓ depois a conexão — muito veterano acerta V/V e erra a justificativa."},
+
+{b:"aine",t:"obj",fonte:"T6 Q1",conf:"v",
+e:"Sobre os AINEs:\nI. O etodolaco é uma das opções terapêuticas para tratar crises de gota, pois atua com bom efeito analgésico e tem ação anti-inflamatória.\nII. O ácido mefenâmico inibe as COXs de forma não seletiva e é empregado para tratar dores leves a moderadas, mas é CONTRAINDICADO para dismenorreia.\nIII. Os coxibes são contraindicados para gestantes e menores de 18 anos, sendo principalmente empregados para quadros inflamatórios crônicos em pacientes com gastrite.\nIV. O meloxicam é utilizado em doses de até 50 mg/dia; inibe com mais afinidade a COX-2 do que a COX-1, sendo boa opção terapêutica para pacientes com problemas renais.\nV. Doses de paracetamol acima de 2 g/dia representam risco potencial de hepatotoxicidade, principalmente se o paciente estiver em uso de fármacos como FLUOXETINA e carbamazepina.",
+alts:["I e III","I, III e V","III, IV e V","II e IV","I e V"],g:0,
+com:"II: mefenâmico é O fármaco da dismenorreia — 'contraindicado' inverte tudo. IV: dose real 7,5–15 mg/dia (50 = pegadinha) e AINE nunca é 'boa opção' para nefropata. V: carbamazepina sim (indutora → mais NAPQI), mas FLUOXETINA não é indutora — o par contamina a frase. Sobram I e III."},
+
+{b:"aine",t:"obj",fonte:"T6 Q3 · T7 Q6",conf:"v",
+e:"Dos AINEs listados abaixo, qual o mais indicado para tratar processos dolorosos intensos (dor aguda moderada a severa)?",
+alts:["codeína","meloxicam","tramadol","cetorolaco","celecoxibe"],g:3,
+com:"A pergunta pede o AINE analgésico — cetorolaco (10 mg 6/6h, máx 40/d, ≤5 dias). Codeína e tramadol são opioides (distratores de classe). Caiu em pelo menos 2 provas."},
+
+{b:"aine",t:"obj",fonte:"Atividade T11 (oficial)",conf:"o",
+e:"Características específicas de alguns AINEs:\nI. Os efeitos anti-inflamatório e antiagregante plaquetário do AAS são decorrentes da inibição da COX-1.\nII. O ibuprofeno em doses de 400 mg exerce ação anti-inflamatória, porém não causa dano renal — o que é observado em doses a partir de 600 mg.\nIII. A dipirona é usualmente empregada na dose de 500 mg como analgésico e antitérmico. A hipotensão é o efeito adverso mais comum.\nIV. O paracetamol é empregado como analgésico e antitérmico em doses usuais de 500 mg; os efeitos adversos comuns do uso crônico são náuseas, gastrite, pirose, tontura, cefaleia e hepatotoxicidade.\nV. O uso crônico de cetorolaco pode causar danos ao trato gastrintestinal e renal, decorrentes da inibição da COX-1 constitutiva; há baixo risco de eventos tromboembólicos.",
+alts:["I e III","apenas III","III e V","I, III e V","II e IV"],g:1,
+com:"GABARITO OFICIAL do AVA: apenas III.\nI: anti-inflamatório = COX-2 (antiagregante sim é COX-1).\nII: 400 mg já inibe COX-2 → já pode dar dano renal.\nIV: paracetamol NÃO lesa TGI (não inibe COX-1 periférica); EAs agudos raros (náusea, cefaleia); hepatotoxicidade só em dose elevada.\nV: o dano RENAL vem da COX-2 (↓PGI2) — feedback literal dela."},
+
+{b:"aine",t:"obj",fonte:"T7 Q1",conf:"v",
+e:"Sobre os AINEs:\nI. A maioria liga-se reversivelmente ao sítio ativo das COXs competindo com o ácido araquidônico, exceto o AAS, cuja ligação é irreversível — o que justifica o efeito antiagregante plaquetário duradouro (em média 7 dias).\nII. Os AINEs seletivos da COX-2 foram desenvolvidos para reduzir os efeitos adversos associados à inibição da COX-1, como insuficiência renal, trombose, sangramentos, gastrite e úlceras.\nIII. A redução da função plaquetária por ibuprofeno e AAS decorre da inibição da síntese do tromboxano A2, um potente agregante plaquetário e vasoconstritor, cuja ação é inibida predominantemente pela PGI2.\nIV. A ação analgésica de dipirona e paracetamol é, em parte, uma ação PERIFÉRICA no local da dor, mais eficaz quando a dor tem origem inflamatória.\nV. Pirógenos circulantes como a interleucina-1 elevam a produção de PGE2 no hipotálamo, que deprime a resposta dos neurônios sensíveis à temperatura, causando a febre. Dipirona e paracetamol são os antitérmicos mais indicados, mas diferem quanto à potência e eficácia antitérmica.",
+alts:["I, IV e V","I, III e V","I e V","II, IV e V","I e III"],g:1,
+com:"II: IR e trombose NÃO são efeitos da COX-1 (IR = COX-2 renal; trombose = EA dos seletivos) — só gastrite/sangramento/úlcera são. IV: dipirona/paracetamol têm ação CENTRAL (por isso poupam TGI e funcionam mesmo sem inflamação). I, III e V corretas."},
+
+{b:"aine",t:"obj",fonte:"T7 Q2 · T9 · Ativ. T10 (oficial)",conf:"o",
+e:"Farmacocinética dos AINEs:\nI. A maioria sofre metabolismo hepático em compostos inativos e difere na meia-vida de eliminação. Fármacos de ação curta como PIROXICAM e diclofenaco necessitam de administração frequente (8/8h e 12/12h).\nII. A absorção ocorre predominantemente no ESTÔMAGO e é rápida e completa; o AAS tem sua biodisponibilidade AUMENTADA quando administrado com refeições porque reduz o efeito de primeira passagem.\nIII. A administração transcutânea (gel) objetiva fornecer concentrações adequadas no local do processo inflamatório e reduzir os efeitos adversos sistêmicos.\nIV. Os AINEs são predominantemente excretados via renal, por isso são contraindicados para pacientes com disfunção renal, para os quais a inibição da COX-2 implica significativa redução da PGE2 e da perfusão renal decorrente da vasodilatação perdida.\nV. O paracetamol metabolizado pela CYP2E1 gera o metabólito NAPQI, altamente reativo; quando não neutralizado pela glutationa, liga-se a macromoléculas do fígado causando morte celular e insuficiência hepática. O tratamento da sobredose consiste na administração de NAC (N-acetilcisteína).",
+alts:["III e V","I, III, IV e V","III, IV e V","I e II","II, III e IV"],g:0,
+com:"GABARITO OFICIAL (AVA): III e V.\nI: piroxicam é de ação LONGA (20 mg 1×/dia).\nII: absorção é no INTESTINO delgado e comida ↓absorção.\nIV: caiu como incorreta na versão oficial — o detalhe é 'vasodilatação': a PGE2/PGI2 renal mantém VASODILATAÇÃO da arteríola; o texto amarra errado o mecanismo (a redução da perfusão decorre da vasoconstrição sem oposição, não 'da vasodilatação')."},
+
+{b:"aine",t:"obj",fonte:"T7 Q3 · T9 QD3",conf:"o",
+e:"Qual AINE é indicado para quadros mioarticulares crônicos (ex.: artrose), com maior afinidade pela COX-2 e comodidade de dose única diária?",
+alts:["cetorolaco","nimesulida","meloxicam","diclofenaco","ibuprofeno"],g:2,
+com:"Meloxicam 15 mg 1×/dia — tripé que ela cobra: crônico + preferência COX-2 (poupa estômago) + 1×/dia. Cetorolaco é 6/6h e ≤5 dias; nimesulida 12/12h."},
+
+{b:"aine",t:"obj",fonte:"T7 Q4 · Ativ. T10 (oficial)",conf:"o",
+e:"J.S., 53 anos, feminino, histórico de hipertensão e gastrite crônica, queixa-se de dor crônica leve no joelho por alterações osteoartríticas. A dor interrompe seu sono. Qual o fármaco mais indicado, observando os critérios de racionalidade terapêutica?",
+alts:["celecoxibe 100 mg","dipirona 500 mg","paracetamol 800 mg","tramadol 100 mg","cetorolaco 10 mg"],g:1,
+com:"GABARITO OFICIAL (AVA): dipirona.\nCoxibe: vetado pelo risco CV no hipertenso. AINE não seletivo: vetado pela gastrite. Paracetamol 800: nota oficial dela — 'não ajuda na hipertensão'(?) e dose fora do usual. Dor LEVE → analgésico central resolve. Racionalidade = eficácia + segurança + acesso."},
+
+{b:"aine",t:"obj",fonte:"T7 Q5",conf:"v",
+e:"C.S., 8 anos, com faringite bacteriana em tratamento com antibiótico, precisa de um anti-inflamatório. Qual a opção adequada?",
+alts:["nimesulida","paracetamol","piroxicam","cetoprofeno","dipirona"],g:3,
+com:"Nimesulida: proibida <12 anos. Paracetamol e dipirona: NÃO são anti-inflamatórios (a pergunta pede anti-inflamatório!). Piroxicam: potente demais, uso crônico/1×dia. Cetoprofeno é o AINE 'liberado' para criança que ela citou em aula."},
+
+{b:"aine",t:"obj",fonte:"T7 Q8",conf:"v",
+e:"Correlacione fármaco × efeito adverso/característica:\n1. Ibuprofeno · 2. Ácido mefenâmico · 3. Diclofenaco · 4. Dipirona · 5. Celecoxibe\nA. Sangramento (inibição COX-1 plaquetária)\nB. Hipotensão\nC. Alergia cruzada com AAS\nD. Trombose\nE. Diarreia",
+alts:["1A · 2E · 3C · 4B · 5D","1B · 2E · 3C · 4A · 5D","1A · 2C · 3E · 4B · 5D","1D · 2E · 3C · 4B · 5A"],g:0,
+com:"Ibuprofeno–sangramento (COX-1) · mefenâmico–diarreia · diclofenaco–alergia cruzada com AAS · dipirona–hipotensão · celecoxibe–trombose. Essa correlação já caiu pronta — vale decorar os 5 pares."},
+
+{b:"aine",t:"obj",fonte:"T7 Q9",conf:"v",
+e:"Paciente com história de alergia ao ácido acetilsalicílico (AAS) tem contraindicação de uso de:",
+alts:["ibuprofeno","dipirona","diclofenaco","paracetamol","nimesulida"],g:2,
+com:"Reatividade cruzada clássica cobrada por ela: diclofenaco (não seletivo, correlação C da questão anterior). Dipirona/paracetamol são as alternativas seguras no alérgico a AAS."},
+
+{b:"aine",t:"obj",fonte:"T8 Q1",conf:"v",
+e:"(Asserção-razão)\nI. A maioria dos AINEs inibe tanto a COX-1 como a COX-2, embora a potência relativa para cada isoforma seja diferente. Acredita-se que a ação anti-inflamatória (e provavelmente a maioria das ações analgésicas) esteja relacionada à inibição de COX-2 (periférica e central), enquanto seus efeitos indesejáveis, particularmente os que afetam o trato gastrintestinal, resultem sobretudo da inibição de COX-1.\nPORQUE\nII. A COX-1 é expressa constitutivamente na maioria das células e está envolvida na homeostase dos tecidos — é responsável, por exemplo, pela produção de prostaglandinas com funções em citoproteção gástrica, como a PGE2. Em contrapartida, a COX-2 é prontamente induzível e seus níveis dependem de estímulos como tensão de cisalhamento, fatores de crescimento e citocinas inflamatórias.",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II não justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:0,
+com:"O 'texto-doutrina' da disciplina: efeito terapêutico = COX-2, efeito colateral GI = COX-1, e a II explica exatamente o porquê. Aqui a justificativa CONECTA — compare com a asserção do cetorolaco (T5), onde não conectava."},
+
+{b:"aine",t:"obj",fonte:"T8 Q2",conf:"v",
+e:"Sobre os AINEs:\nI. O uso crônico de ibuprofeno aumenta o risco cardiovascular porque a inibição da COX-2 endotelial reduz a PGI2, fonte primária das prostaciclinas vasculares, aumentando o risco de trombos.\nII. O AAS inibe tanto a COX-1 quanto a COX-2 de forma irreversível. Baixas doses (100 mg/dia) inibem preferencialmente, mas não exclusivamente, a COX-1 plaquetária; doses mais altas inibem tanto a COX-1 quanto a COX-2 sistêmicas.\nIII. O uso crônico de AINEs seletivos COX-2 está implicado no aumento da resistência vascular periférica e da pressão arterial, o que NÃO é observado com AINEs não seletivos, visto que estes inibem também a produção de TXA2.\nIV. Os efeitos analgésicos e anti-inflamatórios dos AINEs devem-se principalmente à redução do edema (pela redução de PGE2 e PGI2, que fazem vasodilatação e aumento da permeabilidade dos vasos no local lesionado), além de reduzir a produção de PGLs que sensibilizam as terminações nervosas nociceptivas.\nV. Em processos inflamatórios crônicos, como na artrite reumatoide, os principais mediadores são citocinas e enzimas lisossômicas, e por isso fármacos como meloxicam e celecoxibe NÃO são indicados, sendo recomendados apenas nos casos de agudização.",
+alts:["I, II, III, IV e V","II, IV e V","II e V","I, II, IV e V","III e IV"],g:4,
+com:"Gabarito marcado: III e IV. A chave é o BALANÇO TXA2×PGI2 que ela ensina: o seletivo derruba só a PGI2 (vasodilatadora) e preserva o TXA2 (vasoconstritor/agregante) → vasoconstrição/trombose/↑PA; o não seletivo derruba os dois → 'empata'. I atribui ao ibuprofeno (não seletivo) o mecanismo do coxibe; II tropeça no detalhe do não-exclusivo/irreversível conforme a correção; V é falsa — meloxicam/celecoxibe SÃO usados na AR crônica com gastrite."},
+
+{b:"aine",t:"obj",fonte:"T8 Q8",conf:"v",
+e:"Efeitos específicos de alguns AINEs:\nI. As atividades antipiréticas e analgésicas da dipirona e do paracetamol podem ser atribuídas à inibição da síntese de prostaglandinas no SNC; a dose usual de ambos é 500 mg a cada 6 horas e apresentam poucos efeitos adversos, sendo a hipotensão a principal queixa do uso de dipirona.\nII. O consumo crônico de álcool, mas não agudo, pode exacerbar a toxicidade do paracetamol administrado em doses superiores a 4 g/dia (ou 2 g/dia de forma crônica), ao induzir as enzimas hepáticas microssomais que produzem o metabólito NAPQI.\nIII. O celecoxibe e o etoricoxibe são indicados para alívio dos sinais e sintomas agudos da osteoartrite e artrite reumatoide em pacientes com história de gastrite. Efeitos adversos comuns: cefaleia, tontura, distúrbios GI, edema periférico por retenção hídrica.\nIV. O meloxicam na dose de 15 mg/dia é indicado para processos inflamatórios agudos pós-cirúrgicos em pacientes com gastrite devido à sua ação SELETIVA sobre a COX-2.\nV. O diclofenaco em doses de 50 mg/dia é contraindicado para quem apresenta história de alergia ao AAS. O ácido mefenâmico em doses maiores que 250 mg/dia é CONTRAINDICADO para dismenorreia, porque ao inibir COX-1 e COX-2 aumenta o risco de sangramentos.",
+alts:["I, III e V","II, III e V","I, II e III","I e V","I e III"],g:2,
+com:"IV: meloxicam é PREFERENCIAL (não 'seletivo') COX-2 e seu nicho é o CRÔNICO, não pós-cirúrgico agudo. V: começa certo (alergia cruzada) mas termina errado — mefenâmico é INDICADO para dismenorreia. II é a exceção que confirma: álcool crônico INDUZ a CYP2E1 → mais NAPQI."},
+
+{b:"aine",t:"obj",fonte:"T8 Q13",conf:"v",
+e:"Mulher, 38 anos, com asma mal controlada e histórico de pólipo nasal, tem artrite reumatoide e no momento ocorreu recrudescimento da doença, com edema e dor nas articulações da mão. NÃO apresenta histórico de doença cardíaca. Qual o fármaco de escolha?",
+alts:["diclofenaco","cetorolaco","tramadol","paracetamol","celecoxibe"],g:4,
+com:"Asma + pólipo nasal = doença respiratória exacerbada por AINE (não seletivo desvia AA→LOX→broncoespasmo). Precisa de ANTI-INFLAMATÓRIO (AR agudizada — tramadol/paracetamol não resolvem inflamação). Coxibe poupa a via e é liberado porque o enunciado GRITA 'sem doença cardíaca' — essa frase é a senha da resposta."},
+
+{b:"aine",t:"obj",fonte:"T9 Q6",conf:"v",
+e:"Sobre os AINEs:\nI. Cetoprofeno 100 mg/2 ml pode ser administrado via IM para tratar crises de gota, com bom efeito analgésico, antitérmico e anti-inflamatório. É contraindicado em suspeita de dengue.\nII. O ácido mefenâmico é indicado para alívio de dor moderadamente grave do pós-operatório e dismenorreia primária. Inibe as COXs de forma não seletiva; principais EAs: sonolência, desconforto GI, visão embaçada, cefaleia, nervosismo e diarreia.\nIII. Celecoxibe 500 mg é contraindicado para gestantes e menores de 18 anos. Inibe de forma seletiva a COX-2, e o uso por mais de vinte dias aumenta o risco de nefrite decorrente da redução de PGI2.\nIV. Meloxicam é utilizado 1×/dia na dose máxima de 15 mg via oral. Inibe com mais afinidade a COX-2 do que a COX-1, sendo boa opção terapêutica para pacientes com problemas gastrintestinais.\nV. Doses de paracetamol acima de 2 g/dia representam risco potencial de hepatotoxicidade, principalmente se associado a fármacos como carbamazepina, pois aumenta a velocidade de produção do metabólito tóxico NAPQI.",
+alts:["I, III e IV","I, II, IV e V","II, III e V","I, II e IV","I e V"],g:1,
+com:"III cai pela DOSE: celecoxibe é 100–200 mg (500 = pegadinha). O resto do item até faz sentido — é assim que ela esconde: frase boa, número errado. Regra de ouro do bloco: CONFIRA TODO NÚMERO."},
+
+{b:"aine",t:"obj",fonte:"T11 Q1 · PM T9 Q16",conf:"o",
+e:"Das opções abaixo, qual representa uma escolha eficaz e segura para tratar um quadro de mialgia intensa em paciente com suspeita de dengue?",
+alts:["cetorolaco","dipirona","tramadol","cetoprofeno","dexametasona"],g:1,
+com:"Dengue → zero AINE (cetorolaco e cetoprofeno inibem COX-1 plaquetária → ↓TXA2 → hemorragia). Dipirona 500 mg 6/6h; principal EA: hipotensão (foi QD na PM T9). Tramadol não é o padrão para mialgia febril."},
+
+{b:"aine",t:"obj",fonte:"T11 Q5",conf:"v",
+e:"Paciente 1: quadro de faringite. Paciente 2: agudização da artrose no joelho. Ambos têm gastrite crônica. Qual proposta é mais apropriada, segundo o princípio da terapêutica racional (segurança e eficácia)?",
+alts:["P1: nimesulida 100 mg 2×/dia · P2: celecoxibe 100 mg 1×/dia","P1: ibuprofeno 400 mg 2×/dia · P2: celecoxibe 100 mg 2×/dia","P1: diclofenaco 100 mg 2×/dia · P2: meloxicam 15 mg 1×/dia","P1: nimesulida 100 mg 3×/dia · P2: meloxicam 150 mg 1×/dia"],g:0,
+com:"Gastrite → poupadores de COX-1: nimesulida (preferencial COX-2; faringite/tecidos moles, 100 mg 12/12h) e celecoxibe (crônico articular). As erradas trazem não seletivos (ibuprofeno/diclofenaco lesam a gastrite) ou DOSES infladas (nimesulida 3×, meloxicam 150 mg)."},
+
+{b:"aine",t:"obj",fonte:"T11 Q16",conf:"v",
+e:"Sobre AINEs e seus efeitos, assinale a alternativa que descreve corretamente o fármaco:",
+alts:["Paracetamol 750 mg é contraindicado para gestantes, decorrente do efeito teratogênico do NAPQI e risco de autismo","Ácido mefenâmico 100 mg 2×/dia é empregado para dismenorreia; apresenta alta afinidade pela COX-2 e baixo risco de dano ao trato digestivo","Etoricoxibe 90 mg 1×/dia é indicado para quadros inflamatórios agudos e tem alto potencial de risco para eventos trombóticos devido ao AUMENTO da produção de TXA2","Meloxicam na dose de 15 mg 1×/dia é empregado para tratar quadros inflamatórios mioarticulares e apresenta maior afinidade pela COX-2"],g:3,
+com:"a) paracetamol é O seguro da gestação (autismo/teratogênese = distrator). b) mefenâmico é não seletivo e a dose é 500 mg 8/8h. c) quase certa — mas a trombose é por ↓PGI2 com TXA2 PRESERVADO, não 'aumento da produção de TXA2'. Uma palavra derruba. d) o retrato fiel do meloxicam."},
+
+{b:"aine",t:"obj",fonte:"Ativ. T5 (correções oficiais)",conf:"o",
+e:"V ou F (corrija as falsas — formato real da atividade dela):\n1. Os AINEs, como diclofenaco e nimesulida, são contraindicados para hipertensos porque aumentam o risco de trombose devido à redução da PGI2.\n2. Celecoxibe 100 mg 2×/dia é indicado para tratar processos inflamatórios AGUDOS do trato respiratório superior em pacientes com úlcera gástrica.\n3. Paracetamol 500 mg até 4×/dia pode ser empregado para quadros de dor e febre; os principais efeitos adversos são hepatotoxicidade e dores epigástricas.\n4. O ibuprofeno é contraindicado em suspeita de dengue porque inibe de forma IRREVERSÍVEL a COX-1 plaquetária, e há riscos de hemorragia.",
+alts:["Todas falsas — e sei corrigir cada uma","Preciso rever as correções"],g:0,
+com:"Correções oficiais dela (a caneta):\n1. F — o problema do hipertenso é ↑PA/edema; trombose é dos seletivos (e a nimesulida, preferencial COX-2, não derruba a PGI2 como um coxibe pleno).\n2. F — coxibe não é indicado para quadro AGUDO de TRS (nicho: crônico articular).\n3. F — hepatotoxicidade NÃO é efeito adverso do uso usual (só sobredose) e paracetamol não dá dor epigástrica (não inibe COX-1 periférica).\n4. F — o ibuprofeno inibe de forma REVERSÍVEL as COXs (irreversível = só AAS). A contraindicação na dengue permanece, mas pela inibição plaquetária em si."},
+// ================== CORTICOIDES ==================
+{b:"cort",t:"obj",fonte:"T5 Q2",conf:"v",
+e:"Da lista abaixo, qual o corticoide de uso SISTÊMICO que apresenta baixa ação mineralocorticoide?",
+alts:["fluticasona","betametasona","prednisolona","prednisona","hidrocortisona"],g:1,
+com:"Duas camadas: (1) 'uso sistêmico' elimina a fluticasona (inalatória/nasal — pegadinha que repete na T9, onde a resposta vira dexametasona pela mesma lógica); (2) entre os sistêmicos, quem tem BAIXO mineralo são beta/dexametasona. Prednisona/prednisolona/hidrocortisona = ação mineralocorticoide presente (edema, ↑PA, hipocalemia)."},
+
+{b:"cort",t:"obj",fonte:"T5 Q3 × PM T5/T7 (par!)",conf:"o",
+e:"(Asserção-razão — ela usa DUAS versões desta!)\nVERSÃO A (T5): I. A suplementação com cálcio deve ser indicada para todos os pacientes em uso crônico de corticoides, principalmente com fatores de risco para osteoporose. PORQUE II. Os corticoides estimulam a ação dos osteoclastos e INIBEM A REABSORÇÃO óssea, por isso a importância de suplementar para manter a homeostasia do cálcio.\nVERSÃO B (PM T5/T7): mesma I. PORQUE II. Os corticoides estimulam a excreção renal de cálcio e reduzem a absorção intestinal deste mineral, promovendo a desmineralização óssea mediada pelo PTH, que pode ser reduzida pela suplementação.",
+alts:["Versão A: c) I verdadeira, II falsa · Versão B: a) ambas verdadeiras e a II justifica a I","As duas versões: a) ambas verdadeiras, II justifica","As duas versões: c) I verdadeira, II falsa","Versão A: a · Versão B: c"],g:0,
+com:"A MESMA asserção aparece com a razão certa e com a razão sabotada. Na versão A, 'inibem a reabsorção' é o contrário (corticoide PROMOVE reabsorção via PTH/RANKL) → I V, II F. Na versão B a cadeia está correta e JUSTIFICA (↓absorção intestinal + ↑excreção renal → hipocalcemia → PTH → osso; suplementa Ca para não ativar o PTH — gabarito comentado dela em verde). Quem decorou 'letra' em vez de cadeia, caiu."},
+
+{b:"cort",t:"obj",fonte:"T5 Q11",conf:"v",
+e:"Sobre os corticoides:\nI. A corticoterapia sistêmica tem como principais efeitos adversos agudos a insônia, pesadelos, nervosismo, euforia, aumento do apetite e hiperglicemia, entre outros.\nII. Corticoides administrados cronicamente por via inalatória apresentam efeitos sistêmicos e podem suprimir o eixo hipotálamo-adenohipófise-adrenal, não podendo ser retirados abruptamente pelo risco de desenvolver a síndrome de retirada (rinorreia, agitação, hipertensão, náuseas).\nIII. Em pacientes com doença autoimune e em uso de prednisona 60 mg/dia, a retirada do fármaco consiste na redução para a menor dose efetiva a fim de manter a remissão da doença; caso seja intenção suspender completamente o uso, deve-se primeiramente dosar o ACTH.\nIV. O uso crônico de dexametasona 4 mg/dia está relacionado ao desenvolvimento da síndrome de Cushing e alterações metabólicas, incluindo osteoporose, mesmo suplementando com cálcio e vitamina D.\nV. A dexametasona tem menor efeito mineralocorticoide quando comparada com a prednisona, mesmo apresentando meia-vida longa, superior a 30 horas, e maior potência anti-inflamatória.",
+alts:["I, II, III, IV e V","I, III, IV e V","I, IV e V","II, III e IV","I, II e IV"],g:1,
+com:"II é a falsa: inalatórios têm POUCOS efeitos sistêmicos (dose e tempo-dependentes) — o gabarito comentado da PM T5 confirma essa doutrina em verde. As outras quatro são a espinha dorsal do bloco: EAs agudos (I), retirada racional + ACTH (III), potência da dexa (IV) e o trio menor-mineralo/meia-vida>30h/maior potência (V)."},
+
+{b:"cort",t:"obj",fonte:"T7 Q10",conf:"i",
+e:"Sobre a corticoterapia:\nI. O efeito anti-inflamatório é mediado principalmente pela redução da expressão de COX-2 e de citocinas e pelo aumento da lipocortina-1, que inibe a fosfolipase A2.\nII. O edema é o efeito adverso esperado dos corticoides que apresentam significativa atividade mineralocorticoide, tal como a DEXAMETASONA e a BETAMETASONA.\nIII. A budesonida em doses de 1 mg, quando empregada por via intranasal, REDUZ o limiar para o alérgeno em função da imunossupressão celular que produz.\nIV. A síndrome de Cushing e a imunossupressão são efeitos adversos do uso crônico de corticoides, que podem ser REDUZIDOS se administrados até as 10h da manhã.",
+alts:["I, II e IV","I, III e IV","I e III","I e IV","I apenas"],g:4,
+com:"Só a I sobrevive. II troca os nomes (quem dá edema é prednisona/prednisolona — correção a caneta na prova). III inverte: budesonida AUMENTA o limiar ao alérgeno (↓citocinas/células imunes) — e 'imunossupressão celular' intranasal também está errado. IV é a pegadinha fina: tomar de manhã reduz a SUPRESSÃO DO EIXO, não Cushing/imunossupressão (esses são dose/tempo-dependentes). Veterano marcou I e IV e levou X."},
+
+{b:"cort",t:"obj",fonte:"T7 Q13",conf:"v",
+e:"M.S., 67 anos, diagnóstico de artrose na coluna vertebral e quadril, em uso há 5 meses de dexametasona 4 mg/dia pela manhã, foi orientado pelo médico a fazer a retirada do medicamento:\nI. Para a retirada sugere-se a substituição da dexametasona por prednisona, que apresenta ação intermediária, e a dose deve ser reduzida de forma lenta e gradual.\nII. O uso diário de dexametasona, mesmo respeitando o ritmo circadiano, pode suprimir o eixo HPA (hipotálamo-adenohipófise-adrenal), e por isso recomenda-se dosar ACTH antes da retirada total do corticoide.\nIII. Para esse caso, deve-se reduzir gradualmente a dose de dexametasona até manifestação da doença.\nIV. São manifestações clínicas da síndrome de retirada de corticoides: HIPERGLICEMIA, equimoses, HIPERTENSÃO, labilidade emocional e desidratação.",
+alts:["I e IV","II e IV","III e IV","II, III e IV","I e II"],g:4,
+com:"III: reduz até a menor dose efetiva/desmame programado — não 'até a doença voltar'. IV mistura os lados: hiperglicemia, equimoses e hipertensão são efeitos DO USO; a retirada dá o oposto (fadiga, hipotensão, hipoglicemia, mialgia). Sobram I e II — o par 'trocar por ação intermediária + dosar ACTH' é o protocolo que ela quer."},
+
+{b:"cort",t:"obj",fonte:"T8 Q14",conf:"v",
+e:"Sobre os glicocorticoides:\nI. O efeito anti-inflamatório envolve o aumento da lipocortina-1 (inibe a fosfolipase A2) e a redução da expressão de COX-2.\nII. A administração de 20 mg/dia de prednisona pode desencadear como efeitos adversos agudos o aumento da glicemia plasmática (resistência insulínica), a hipocalcemia pelo aumento da excreção renal de cálcio e o edema em função do aumento do hormônio ALDOSTERONA.\nIII. Em pacientes que necessitem de prednisolona 20 mg/dia por mais de 30 dias, recomenda-se suplementação com cálcio para reduzir o risco de osteoporose. A administração pela manhã reduz o risco de supressão do eixo, cujo monitoramento laboratorial é dado pela determinação das concentrações de HORMÔNIO LIBERADOR DE CORTICOTROFINA.\nIV. A budesonida administrada em doses de 500 mcg 2× ao dia AUMENTA o limiar aos alérgenos em pacientes com asma, porque os corticoides reduzem a produção de citocinas e a expressão de células do sistema imune relacionadas ao quadro alérgico (mastócitos) e inflamatório (macrófagos e neutrófilos).\nV. A aplicação de corticoides no local primário de ação reduz suas ações sistêmicas, embora ainda possam ocorrer efeitos sistêmicos adversos com altas doses — ainda que raro, pacientes em uso de corticoides inalatórios por longos períodos e doses altas (ex.: beclometasona 1,5 mg/dia) podem ter manifestações da síndrome de Cushing.",
+alts:["I e IV","II, III e V","I, II, III, IV e V","I, IV e V","I, II e IV"],g:3,
+com:"II: o edema do corticoide vem do EFEITO MINERALOCORTICOIDE DO PRÓPRIO FÁRMACO, não de 'aumento da aldosterona' (corticoide exógeno SUPRIME o eixo, aldosterona não sobe — correção dela a caneta). III: o exame é o ACTH (corticotrofina) — 'hormônio LIBERADOR de corticotrofina' é o CRH hipotalâmico. Uma palavra ('liberador') mata o item. I, IV e V corretas."},
+
+{b:"cort",t:"obj",fonte:"T8 Q3",conf:"v",
+e:"Paciente com rinite alérgica crônica que apresenta exacerbação das crises na primavera foi orientada a fazer uso de corticoide (profilaxia das crises). Qual a proposta indicada?",
+alts:["dexametasona 100 mcg/dia","fluticasona 800 mcg/dia","budesonida 250 mcg/dia","prednisolona 5 mg","beclometasona 1000 mcg"],g:2,
+com:"Rinite = corticoide TÓPICO NASAL em dose baixa → budesonida 250 mcg/dia. Sistêmico (dexa/prednisolona) não é profilaxia de rinite; fluticasona 800 e beclometasona 1000 são doses de ASMA (e a T10 confirma: beclometasona inalatória ≠ rinite nasal)."},
+
+{b:"cort",t:"obj",fonte:"T9 Q3",conf:"v",
+e:"Sobre o uso de glicocorticoides:\nI. Quando administrados por via intravenosa apresentam boa biodisponibilidade, em torno de 70%, e os efeitos sistêmicos iniciam algumas horas após a administração, porque dependem da inibição da transcrição gênica de proteínas inflamatórias.\nII. O efeito mineralocorticoide observado após administração de 20 mg/dia de prednisolona resulta da ação desse corticoide sobre os receptores de aldosterona, o que promove a reabsorção de sódio e água, causando o edema.\nIII. O uso prolongado de corticoides está relacionado com quadros de osteoporose, mesmo suplementando com cálcio, pois há um desequilíbrio na função osteoblastos/osteoclastos, predominando a função destas últimas células e a reabsorção óssea.\nIV. O uso agudo de prednisona 10 mg/dia causa hiperglicemia decorrente da INIBIÇÃO da gliconeogênese e HIPOCALEMIA em função do aumento da excreção de cálcio. O uso crônico pode desencadear a síndrome de Cushing.\nV. A beclometasona é indicada em doses baixas para tratar pacientes com asma, porque aumenta o limiar aos alérgenos ao reduzir a produção de citocinas e a expressão de células do sistema imune no trato respiratório.",
+alts:["II, III e V","II, III, IV e V","I, III e V","II e V","I, III e IV"],g:0,
+com:"I: via IV a biodisponibilidade é 100% por definição ('70%' = pegadinha de conceito farmacocinético). IV: hiperglicemia é por ESTÍMULO da gliconeogênese (+resistência insulínica) — 'inibição' inverte; e amarra hipocalemia com excreção de CÁLCIO (são coisas diferentes). II, III e V = doutrina correta."},
+
+{b:"cort",t:"obj",fonte:"PM T9 Q9+Q10",conf:"o",
+e:"Dupla seca de recuperação:\n(1) Dos corticoides listados — dexametasona, prednisona, fluticasona, hidrocortisona — qual é empregado SISTEMICAMENTE e apresenta MENOR efeito mineralocorticoide?\n(2) Qual o principal mecanismo relacionado com a ação anti-inflamatória dos corticoides?",
+alts:["(1) dexametasona · (2) aumento da síntese de lipocortina-1","(1) fluticasona · (2) inibição das COX-2","(1) prednisona · (2) redução da síntese de citocinas (IL-1)","(1) hidrocortisona · (2) redução da síntese de lipocortina-1"],g:0,
+com:"(1) Fluticasona tem baixíssimo mineralo, MAS é inalatória — 'sistemicamente' a elimina; dexametasona é a resposta. (2) O mecanismo Nº1 que ela cobra é o AUMENTO da síntese de lipocortina-1 (anexina A1) → inibe a fosfolipase A2 → corta o AA das vias COX E LOX. 'Redução de lipocortina' e 'inibição direta da COX-2' são os distratores dela."},
+
+{b:"cort",t:"obj",fonte:"T10 Q18",conf:"v",
+e:"Sobre o uso de glicocorticoides:\nI. A prednisolona em doses de 10–20 mg/dia apresenta efeito anti-inflamatório e mineralocorticoide, sendo este último a principal causa do edema.\nII. Doses de prednisona de 1 mg/kg/dia são empregadas com finalidade imunossupressora. A interrupção do tratamento deve ser lenta e gradual a fim de evitar a síndrome de retirada.\nIII. A beclometasona em doses de até 800 mcg/dia via INALATÓRIA é empregada para tratar RINITE alérgica. Os principais efeitos adversos são rouquidão e candidíase oral.\nIV. O uso de corticoides sistêmicos pode desencadear desmineralização óssea, porque os corticoides causam desbalanço cálcico ao promoverem a excreção renal de cálcio e reduzirem a absorção intestinal de cálcio.\nV. A dexametasona apresenta efeito anti-inflamatório superior à prednisolona, bem como maior duração de ação. Ambos os fármacos podem ser empregados para tratar quadros inflamatórios no trato respiratório inferior.",
+alts:["I, II, III, IV e V","II, III e IV","I, IV e V","I, II, IV e V","II e III"],g:3,
+com:"III: a VIA denuncia — rinite se trata por via NASAL; 'inalatória' (bocal → pulmão) é para asma. Os EAs citados (rouquidão/candidíase) até são verdadeiros para inalatórios, o que torna a pegadinha mais traiçoeira. As demais são o resumo perfeito do bloco (doses 10–20 anti-infl. × 1 mg/kg imunossupressora!)."},
+
+// ================== OPIOIDES ==================
+{b:"opi",t:"obj",fonte:"T5 Q10",conf:"i",
+e:"Sobre o uso crônico de opioides:\nI. Os efeitos analgésicos sofrem rápida e intensa tolerância, explicada pela ação das β-arrestinas, resultando na necessidade de aumento progressivo da dose e redução dos intervalos entre as administrações.\nII. A dependência aos opioides é tratada com NALTREXONA, porque REDUZ A DISPONIBILIDADE DE DOPAMINA no circuito de recompensa, evitando o intenso prazer percebido pelos usuários.\nIII. A depressão respiratória é um efeito adverso esperado no início do tratamento caso administradas doses elevadas, porém sofre intensa tolerância, o que justifica a possibilidade de usar doses progressivamente maiores em pacientes oncológicos.\nIV. A constipação é um efeito adverso dos opioides, explicado pelo BLOQUEIO dos receptores μ2 presentes no intestino, o qual não sofre tolerância, assim como os efeitos SEDATIVOS e pruriginosos.\nV. A naloxona é usada para reverter quadros de depressão respiratória induzida por doses elevadas de opioides, enquanto a metadona é usada para substituir o fármaco opioide em pacientes adictos de opiáceos.",
+alts:["I, III e V","II e V","I e V","I, II, III, IV e V","I, III e IV"],g:0,
+com:"O veterano marcou 'todas' e levou X vermelho no gabarito. II: a naltrexona é ANTAGONISTA do receptor opioide — ela impede a desinibição dopaminérgica; dizer que 'reduz a disponibilidade de dopamina' descreve outro mecanismo. IV: dupla falha — os opioides ATIVAM (não bloqueiam) μ2 intestinal, e a SEDAÇÃO sofre tolerância (quem não tolera: miose e constipação). Sobram I, III e V."},
+
+{b:"opi",t:"obj",fonte:"T5 Q12",conf:"v",
+e:"Sobre os opioides:\nI. A morfina atua como agonista de receptores opioides promovendo a hiperpolarização, principalmente das células pós-sinápticas, ao INIBIR O EFLUXO DE POTÁSSIO e ao bloquear canais de cálcio, diminuindo a excitabilidade neuronal e a percepção da dor.\nII. A codeína 30 mg administrada de 6/6h é comumente associada a AINEs como dipirona e paracetamol para tratar dores moderadas, mas sua efetiva ação analgésica é dependente da biotransformação hepática POR MEIO DA CONJUGAÇÃO COM O ÁCIDO GLICURÔNICO.\nIII. A morfina, quando administrada por via oral, sofre extenso efeito de primeira passagem, o que reduz significativamente a sua biodisponibilidade, principalmente se usada concomitante com FÁRMACOS INIBIDORES DA CYP3A4 E CYP2D6, como a fluoxetina.\nIV. Para pacientes em âmbito domiciliar que necessitam de analgésicos potentes com longa duração de ação, pode-se optar pela metadona via oral na dose de 10 mg 12/12h ou pelo adesivo transdérmico de fentanila com duração média de 72h.\nV. A morfina pode sofrer a reação de conjugação com ácido glicurônico no SNC, gerando os metabólitos morfina-3-glicuronídio e morfina-6-glicuronídio, os quais têm ação convulsivante e analgésica, respectivamente — tais respostas variam para cada paciente.",
+alts:["I, III, IV e V","II, IV e V","IV e V","I, III e V","I, II, III e IV"],g:2,
+com:"O TRIO de pegadinhas dela num só lugar:\nI — opioide ABRE canais de K⁺ (aumenta o efluxo!); 'inibir o efluxo' inverte a hiperpolarização.\nII — codeína é ativada pela CYP2D6, não por glicuronidação.\nIII — morfina é metabolizada por UGT: inibidor/indutor de CYP NÃO mexe com ela (gabarito em vermelho da PM T5: 'a inibição ou indução da CYP não altera biodisponibilidade').\nIV e V corretas — e a V virou resposta-modelo de QD ('por que a morfina causa convulsões?' → M3G no SNC)."},
+
+{b:"opi",t:"obj",fonte:"T7 Q12",conf:"v",
+e:"Sobre os opiáceos:\nI. A morfina atua como ANTAGONISTA de receptores canabinoides, cujo estímulo da proteína G inibitória promove a redução da excitabilidade neural.\nII. A oxicodona é um analgésico forte e de longa duração de ação, amplamente utilizado em ambiente hospitalar, e apresenta BAIXO risco de depressão respiratória.\nIII. A fentanila é amplamente utilizada via endovenosa — infusão contínua (duração curta) — em pacientes entubados e causa tolerância e dependência após alguns dias de uso.\nIV. A dependência aos opiáceos é um fenômeno que ocorre rapidamente (poucos dias de uso), mediado pelas Β-ARRESTINAS, que liberam dopamina no circuito de recompensa.\nV. A naloxona é o fármaco de escolha para tratar quadros de depressão respiratória induzida pela dose elevada de opiáceos, porque atua como antagonista de receptores opioides.",
+alts:["I, II, IV e V","III e V","I e IV","II e IV","III e IV"],g:1,
+com:"I: morfina age em receptor OPIOIDE (canabinoide = outra família). II: 'baixo risco de depressão respiratória' não existe para agonista forte. IV: β-arrestina é o mecanismo da TOLERÂNCIA — a dependência é dopaminérgica (desinibição via GABA). Trocar tolerância↔dependência é A pegadinha do bloco. Sobram III e V."},
+
+{b:"opi",t:"obj",fonte:"T8 Q9",conf:"v",
+e:"A dor aguda muito grave (p. ex., no infarto agudo do miocárdio) requer um opioide potente. Sabendo que a dor intensa é frequentemente acompanhada de estimulação do sistema nervoso simpático, qual o analgésico opioide e a via de administração recomendada?",
+alts:["metadona via IM","morfina via oral","tramadol IV","morfina IV","morfina IM"],g:3,
+com:"Morfina IV: rápida e potente. As notas do veterano explicam as erradas: IM → a vasoconstrição simpática REDUZ a absorção (dose fica 'presa' no músculo); VO → primeira passagem extensa atrasa/reduz. Tramadol não tem potência para IAM."},
+
+{b:"opi",t:"obj",fonte:"T8 Q12",conf:"v",
+e:"Sobre os opioides:\nI. Todos os analgésicos opioides atuam como agonistas de receptores opioides, os quais são ligados a proteínas Gi/Go e, portanto, abrem os canais de potássio (causando hiperpolarização) e inibem a abertura dos canais de cálcio (inibem a liberação do transmissor).\nII. Os analgésicos opioides de CURTA duração de ação, como morfina, podem desencadear sintomas de abstinência mais LENTOS E MENOS INTENSOS, quando comparados com a retirada da metadona, que tem meia-vida longa.\nIII. A exposição prolongada aos opioides pode induzir o estado de hiperalgesia, que é decorrente da redução da responsividade e expressão de receptores opioides, que sofrem invaginação pela ação das beta-arrestinas.\nIV. O fentanil tem meia-vida curta, mas ao ser administrado via transdérmica o alívio da dor perdura por várias horas devido à lenta liberação do fármaco do adesivo, além de o efeito persistir após a remoção do adesivo, devido ao acúmulo de fármaco no tecido adiposo e subcutâneo.\nV. O tramadol é comumente administrado na dose de 100 mg a cada 6h, cujo efeito também é mantido por metabólitos ativos formados pelas CYP3A4 e CYP2D6, que posteriormente são conjugados com ácido glicurônico e excretados via renal.",
+alts:["I, III, IV e V","I, II, III e V","II, IV e V","I, IV e V","II e III"],g:0,
+com:"II inverte a lógica do desmame: ação CURTA → abstinência RÁPIDA E INTENSA; metadona (longa) → lenta e branda — é exatamente por isso que ela é a ponte de retirada. I, III, IV e V estão letra por letra na aula 2026 (mecanismo Gi/Go, hiperalgesia + invaginação, depósito adiposo do fentanil, rota do tramadol)."},
+
+{b:"opi",t:"obj",fonte:"T9 Q7",conf:"i",
+e:"(Asserção-razão)\nI. Os fármacos opioides atuam como agonistas de receptores, predominantemente dos subtipos μ1, κ e δ — principais receptores relacionados com a analgesia —, promovendo a redução do INFLUXO DE CÁLCIO E POTÁSSIO, ao inibir a despolarização de junções pré-sinápticas.\nPORQUE\nII. Os receptores opioides são acoplados às proteínas G inibitórias (Gi/G0) e a ativação destes promove a inibição da enzima adenilato ciclase, com redução da geração intracelular de AMPc e consequentemente o fechamento de canais de Ca⁺⁺ voltagem-dependentes nos neurônios-alvo, reduzindo a liberação de neurotransmissores. Também promovem a abertura de canais de K⁺, causando hiperpolarização de neurônios-alvo, tornando-os menos responsivos aos impulsos despolarizantes.",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II não justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:3,
+com:"O veterano marcou 'a' e levou X no grid. A I erra a física dos íons: cálcio tem INFLUXO reduzido (ok), mas o potássio tem EFLUXO AUMENTADO (abertura de canais, evento PÓS-sináptico) — 'redução do influxo de potássio' não descreve o mecanismo. A II é o parágrafo-perfeito (praticamente o slide 2026). → I falsa, II verdadeira."},
+
+{b:"opi",t:"obj",fonte:"Ativ. T11 (oficial)",conf:"o",
+e:"Sobre o emprego terapêutico e efeitos dos derivados opiáceos:\nI. A morfina atua como agonista de receptores opioides que, quando estimulados, reduzem a excitabilidade neural promovendo analgesia.\nII. A meperidina é um analgésico forte e de LONGA duração de ação, amplamente utilizado em ambiente hospitalar, e apresenta BAIXO risco de depressão respiratória.\nIII. A fentanila é amplamente utilizada via intravenosa — infusão contínua (duração curta) — em pacientes entubados, e há necessidade de desmame quando usada por vários dias.\nIV. A tolerância aos opiáceos é um fenômeno que ocorre rapidamente (poucos dias de uso), mediado pelas proteínas beta-arrestinas, com consequente internalização dos receptores.\nV. O tramadol causa síndrome serotoninérgica se associado com antidepressivos no tratamento da dor neuropática, POR ISSO É CONTRAINDICADO para esse tipo de analgesia.",
+alts:["II, III, IV e V","I e V","II e V","I, III e IV","III e IV"],g:3,
+com:"GABARITO OFICIAL com feedback literal dela:\nII — 'Curta duração de ação e tem significativo potencial para depressão respiratória — dose-dependente.'\nV — 'O tramadol pode desencadear manifestações de síndrome serotoninérgica porque promove a liberação de serotonina, independente se associado. NÃO EXISTE ESSA CONTRAINDICAÇÃO.'\nRepare: aqui a β-arrestina aparece no lugar CERTO (tolerância, IV verdadeira) — compare com a T7, onde aparece na dependência (falsa)."},
+
+{b:"opi",t:"obj",fonte:"Ativ. T10 (oficial)",conf:"o",
+e:"Sobre diferentes fármacos que atuam sobre o sistema opioidérgico, assinale a afirmativa correta:",
+alts:["A codeína e seu metabólito norcodeína, gerado pela CYP2D6, apresentam pouca atividade analgésica","A principal aplicação clínica da naloxona consiste no tratamento da sobredose aguda de opioides","A metadona é o fármaco de escolha para tratar dependência química, pois reduz o estímulo prazeroso no circuito de recompensa","O metabólito morfina-3-glicuronídeo permeia facilmente a BHE e pode causar convulsões","O tramadol na dose de 100 mcg administrado 1× ao dia é empregado para quadros dolorosos de fibromialgia"],g:1,
+com:"GABARITO OFICIAL: naloxona = sobredose aguda.\na) o metabólito ATIVO da CYP2D6 é a MORFINA (norcodeína é o inativo da CYP3A4 — veja a figura de metabolização!). c) quem 'reduz o prazer' é a NALTREXONA (antagonista); metadona é substituição. d) M3G tem capacidade LIMITADA de permear a BHE (slide 2026) — convulsiona pelo acúmulo. e) dose absurda (mcg!) e indicação errada — opioide não trata FM."},
+
+{b:"opi",t:"obj",fonte:"T9 Q1",conf:"v",
+e:"Sobre os opioides:\nI. Os opioides são bem absorvidos e a biodisponibilidade é a mesma INDEPENDENTE da via de administração escolhida.\nII. Os receptores μ (mu), δ (delta) e κ (kappa) são os principais relacionados com a analgesia; o subtipo μ1 relaciona-se à analgesia, enquanto o μ2 à depressão respiratória e aos efeitos gastrintestinais.\nIII. A morfina promove a inibição de canais de cálcio e a ativação de canais de potássio, por meio do acoplamento com proteínas Gi/Go.\nIV. O adesivo de fentanila é indicado para dor persistente/oncológica por fornecer concentrações consistentes do fármaco, principalmente em pacientes incapazes de usar a via enteral.\nV. A síndrome de abstinência aos opioides consiste em rinorreia, lacrimejamento, bocejos, calafrios, arrepios (piloereção), midríase, dores musculares, vômitos, diarreia, ansiedade e hostilidade — e a readministração de um opioide suprime rapidamente os sinais e sintomas.",
+alts:["I, II e III","II, III e IV","I, III e V","II, III, IV e V","II, III e IV — e a V também está correta"],g:1,
+com:"I é a falsa óbvia: a via oral sofre 1ª passagem → dose VO precisa ser MAIOR que a parenteral (aula 2026). O veterano marcou II, III e IV; a V é o parágrafo literal do slide de abstinência — se cair sozinha, é verdadeira (a alternativa marcada na prova não a incluía, guarde o conteúdo, não a letra)."},
+
+{b:"opi",t:"obj",fonte:"T5/T9 figura",conf:"o",
+e:"(Figura da metabolização codeína/morfina — ela JÁ COBROU 2×)\nI. A metabolização de fase 2 (UGT2B7) é a via predominante de biotransformação hepática tanto para a morfina como para a codeína.\nII. Pacientes com polimorfismo genético que SUPEREXPRESSAM a CYP2D6 têm BAIXA resposta analgésica ao usar codeína.\nIII. Em pacientes que fazem uso crônico de CARBAMAZEPINA é esperado que o paciente tenha baixa eficácia ao usar codeína.\nIV. A CYP3A4 é a responsável pela conversão em metabólitos INATIVOS, tanto para a morfina como para a codeína.",
+alts:["I e II","I, II e IV","I e IV — e a III é discutível","I, III e IV","II e III"],g:3,
+com:"II é a falsa: quem SUPEREXPRESSA a 2D6 converte MAIS codeína em morfina → resposta AUMENTADA (risco de intoxicação!); baixa resposta é da HIPOexpressão. I e IV = leitura direta da figura (UGT2B7 predominante; CYP3A4 → norcodeína/normorfina inativos). III = V: carbamazepina induz a CYP3A4 → desvia a codeína para a rota INATIVA → menos morfina formada. Na T9 o gabarito marcado foi 'I e IV' (sem a III) — se a combinação existir com III, prefira incluí-la; anote a divergência."},
+
+// QDs de opioides
+{b:"opi",t:"qd",fonte:"PM T7 QD6 (oficial)",conf:"o",
+e:"Por que a morfina pode causar convulsões em algumas pessoas? (0,75)",
+resp:"Quando é conjugada com ácido glicurônico no SNC (metabolização por UGT), a morfina gera 2 metabólitos: M3G (convulsivante) e M6G (analgésico). Esses efeitos dependem do paciente, por questões como polimorfismo genético (e acúmulo dos glicuronídeos, que permeiam mal a BHE mas convulsionam quando acumulam).",
+com:"Resposta manuscrita aprovada na PM T7 — é ESSE o nível de detalhe que ela quer: enzima + os 2 metabólitos + qual faz o quê + variabilidade individual."},
+
+{b:"opi",t:"qd",fonte:"PM T7 QD7 (oficial)",conf:"o",
+e:"Por que a codeína pode apresentar falha terapêutica, mesmo administrada corretamente? Nesses casos, qual a opção terapêutica para substituição? (1,0)",
+resp:"Hipoexpressão (polimorfismo) da CYP2D6 → a codeína não é convertida em morfina, seu metabólito ativo → falha analgésica. (O mesmo ocorre se o paciente usa inibidores da CYP2D6, como fluoxetina.) Substituição: morfina 5 a 10 mg VO 4/4h.",
+com:"A substituição TEM que vir com dose e posologia — foi assim que valeu 1,0."},
+
+{b:"opi",t:"qd",fonte:"T6 QD6 · PM T7 QD8 (oficial)",conf:"o",
+e:"M.S., 38 anos, trabalha em UTI, foi afastado do trabalho após episódio de intoxicação por fentanila e deve iniciar tratamento ambulatorial da dependência química com acompanhamento psicológico. Qual o fármaco de escolha e o objetivo do tratamento? (0,75)",
+resp:"Metadona 10 mg VO 12/12h. O objetivo é utilizar um fármaco intermediário de LONGA duração de ação para evitar/minimizar a síndrome de abstinência, e ir reduzindo a dose aos poucos (desmame). [Aula 2026: desintoxicação 15–30 mg 1×/dia, máx 40 mg/d, com redução gradual.]",
+com:"Os dois elementos pontuam: fármaco+dose E o porquê (longa ação ↔ abstinência). A naltrexona apareceu como resposta em outra turma (T9 QD: 'fármaco para dependência a opioides = naltrexona') — regra prática: DESMAME/substituição = metadona; manutenção da abstinência ambulatorial (paciente já desintoxicado) = naltrexona. Se a questão citar 'síndrome de abstinência' ou 'reduzir aos poucos', é metadona."},
+
+{b:"opi",t:"qd",fonte:"T8 QD2/QD3",conf:"o",
+e:"(a) Qual o fármaco indicado para tratar paciente com quadro de depressão respiratória após uso de meperidina? (b) Cite um analgésico opioide, dose e posologia, para tratar dor aguda de intensidade média após procedimento cirúrgico (âmbito domiciliar).",
+resp:"(a) Naloxona (antagonista opioide, IV — reverte a depressão respiratória da intoxicação aguda).\n(b) Tramadol 50 mg VO 6/6h.",
+com:"Par clássico de QDs curtas. Se pedir o AINE do pós-operatório hospitalar: cetorolaco 10 mg 6/6h (≤5 dias); se pedir versão domiciliar de dor média: tramadol."},
+
+{b:"opi",t:"qd",fonte:"T9 QD1+QD2",conf:"o",
+e:"(a) Qual o principal mecanismo de tolerância aos opioides? (0,5)\n(b) Qual fármaco é empregado no tratamento ambulatorial da dependência a opioides (paciente já desintoxicado)? (0,5)",
+resp:"(a) Fosforilação do receptor MOR (pelas GRK) → ligação das β-ARRESTINAS → dessensibilização e INTERNALIZAÇÃO (invaginação) dos receptores → menos receptores expressos → necessidade de doses maiores.\n(b) Naltrexona (VO — antagonista; bloqueia o efeito prazeroso e ajuda a manter a abstinência).",
+com:"'β-arrestina' e 'internalização/invaginação' são as palavras que valem o ponto. Não confundir com o mecanismo de DEPENDÊNCIA (dopamina/recompensa)."},
+
+{b:"opi",t:"qd",fonte:"PM T5 QD6",conf:"o",
+e:"Qual o analgésico de escolha para uso oral em paciente que fez amputação da perna (altura da coxa), com dor moderada a severa após alta hospitalar, e que esteja disponível no SUS?",
+resp:"Dipirona 1 g VO 6/6h.",
+com:"Gabarito comentado dela: 'ela pede ANALGÉSICO, e não tratamento de dor neuropática' — e opioides fortes/cetorolaco não estavam disponíveis no SUS no contexto da questão → 'ficando como única opção cabível dipirona 1 grama'. Lição: leia O QUE ela pede (analgésico ≠ adjuvante neuropático) e lembre do critério ACESSO."},
+// ================== NEUROPÁTICA & CANABINOIDES ==================
+{b:"neuro",t:"obj",fonte:"T5 Q5",conf:"v",
+e:"Sobre o tratamento da dor neuropática:\nI. Carbamazepina (± 200–600 mg/dia) e lamotrigina (± 100 mg/dia) são empregadas para tratar dores neuropáticas porque bloqueiam canais de sódio das fibras ascendentes, reduzindo a liberação de glutamato e substância P e a neurotransmissão álgica.\nII. Os fármacos pregabalina e carbamazepina podem ser associados com duloxetina em pacientes com dores neuropáticas refratárias à monoterapia, MAS CONTRAINDICADOS se associados com amitriptilina devido aos efeitos antimuscarínicos e histaminérgicos.\nIII. Gabapentina (± 1200 mg/dia) e pregabalina (± 300–600 mg/dia) atuam bloqueando canais de cálcio das fibras nervosas pré-sinápticas ascendentes, reduzindo a liberação de neurotransmissores álgicos e a estimulação cortical da dor.\nIV. A carbamazepina é o fármaco de primeira escolha para tratar neuralgia do trigêmeo, pois promove significativa depressão da fibra nervosa, porém pode REDUZIR A MEIA-VIDA de outros fármacos porque é um potente indutor das enzimas CYP450.\nV. A duloxetina nas doses que variam de 20 a 60 mg/dia administradas pela manhã pode ser associada com gabapentina, porque os fármacos atuam em distintos alvos. A duloxetina estimula os receptores serotoninérgicos e adrenérgicos nas fibras eferentes (modulatórias).",
+alts:["I, III e IV","I, III, IV e V","I, II e V","II, III e IV","I, II, III e IV"],g:1,
+com:"II é a falsa: a associação com amitriptilina não é 'contraindicada' — na prática ADT + gabapentinoide é combinação comum; o item inventa a proibição. Na IV, repare que ela escreve CERTO aqui ('reduzir a meia-vida... indutor') — na PM T5 caiu a versão sabotada ('aumenta a meia-vida') marcada como FALSA em vermelho. Mesma frase, dois sinais — leia o verbo."},
+
+{b:"neuro",t:"obj",fonte:"T7 Q11",conf:"v",
+e:"Sobre o tratamento da dor neuropática:\nI. A GABAPENTINA é o fármaco de primeira escolha para tratar neuralgia do TRIGÊMEO, porque atua bloqueando a sensação dolorosa em vias ascendentes.\nII. A pregabalina bloqueia canais de cálcio das fibras ascendentes PROMOVENDO A HIPERPOLARIZAÇÃO da célula nervosa, com consequente redução da neurotransmissão dolorosa.\nIII. A carbamazepina atua bloqueando canais de sódio, reduzindo significativamente a liberação de neurotransmissores da dor, porém causa acentuada depressão do SNC.\nIV. A lamotrigina é uma opção para tratar dores neuropáticas em substituição à carbamazepina, por atuar bloqueando canais de sódio sem interferir no metabolismo hepático citocromo P450.\nV. A pregabalina pode ser associada à duloxetina em pacientes refratários à monoterapia, ou quando são intolerantes à dose máxima de pregabalina, ou ainda em pacientes com depressão.",
+alts:["III, IV e V","IV e V","I, II e V","I, II, III, IV e V","III e IV"],g:0,
+com:"I: trigêmeo = CARBAMAZEPINA (correção a caneta na prova). II: bloquear canal de Ca²⁺ pré-sináptico REDUZ A LIBERAÇÃO de neurotransmissor — não 'hiperpolariza' (quem despolariza a fibra são os canais de Na⁺; gabarito comentado da PM: 'só diminui a liberação, mas ainda há despolarização da fibra'). Hiperpolarização é vocabulário de OPIOIDE (K⁺) — ela transplanta o termo para pegar."},
+
+{b:"neuro",t:"obj",fonte:"T8 Q5",conf:"v",
+e:"Paciente com neuropatia diabética, em uso de hipoglicemiantes, anti-hipertensivos e FLUOXETINA 20 mg/dia para tratamento da ansiedade, busca atendimento com especialista em função da intensa dor em membros inferiores, principalmente pé esquerdo. Qual o tratamento medicamentoso indicado?",
+alts:["gabapentina 300 a 600 mg/dia","carbamazepina 400 mg/dia","duloxetina 60 a 120 mg/dia","amitriptilina 75 a 300 mg/dia","pregabalina 150 a 300 mg/dia"],g:4,
+com:"A fluoxetina no enunciado é a senha: duloxetina somaria efeito serotoninérgico (risco de síndrome) e a fluoxetina ainda inibe a CYP2D6; carbamazepina é indutora (bagunça os outros fármacos); amitriptilina em diabético/dose alta = anticolinérgica. Gabapentinoide resolve sem interação → pregabalina na dose correta (150–300). A gabapentina em 'a' está com dose subterapêutica (começa 300 mas efetiva é 900+) — anotação do veterano."},
+
+{b:"neuro",t:"obj",fonte:"T8 Q10",conf:"v",
+e:"Sabendo que a resposta vagal é um dos importantes mecanismos de secreção de insulina, qual dos fármacos abaixo NÃO é recomendado para pacientes com neuropatia diabética?",
+alts:["pregabalina","duloxetina","imipramina","carbamazepina","amitriptilina"],g:4,
+com:"Resposta vagal = acetilcolina/receptor muscarínico → quem BLOQUEIA muscarínico atrapalha a secreção de insulina no diabético. O ADT mais antimuscarínico = AMITRIPTILINA (a imipramina, no gabarito de QD dela, é o ADT de MENOR ação antimuscarínica — por isso não é a resposta). Questão-ponte fisiologia×farmaco típica dela."},
+
+{b:"neuro",t:"obj",fonte:"T9 Q2",conf:"v",
+e:"Sobre o tratamento da dor neuropática:\nI. A carbamazepina é o fármaco de primeira escolha para tratar neuralgia do trigêmeo porque atua reduzindo a neurotransmissão ao BLOQUEAR CANAIS DE CÁLCIO.\nII. A lamotrigina atua bloqueando canais de sódio e tem como efeitos adversos tontura, cefaleia, diplopia, náusea, insônia ou sonolência e erupção cutânea.\nIII. A pregabalina e a gabapentina bloqueiam canais de cálcio das fibras ascendentes, reduzindo a liberação de glutamato e substância P, promovendo o alívio da dor.\nIV. A gabapentina é predominantemente excretada inalterada na urina e tem meia-vida curta, em torno de 5 a 8 horas — assim, o fármaco deve ser administrado 2 a 3 vezes ao dia.\nV. Dentre os principais efeitos adversos da carbamazepina destacam-se: diplopia, ataxia, desconforto gastrintestinal, tontura, sonolência e diminuição da coordenação motora.",
+alts:["III e IV","I, II, III, IV e V","I, III e V","II, III, IV e V","II e V"],g:3,
+com:"I: a indicação está certa, o MECANISMO não — carbamazepina bloqueia canais de SÓDIO. É o espelho da pegadinha da T7 (lá o fármaco estava errado; aqui, o canal). O par de troca Na⁺↔Ca²⁺ entre carbamazepina e gabapentinoides é presença garantida."},
+
+{b:"neuro",t:"obj",fonte:"Ativ. T10 (oficial)",conf:"o",
+e:"Sobre o tratamento medicamentoso de dores neuropáticas:\nI. Amitriptilina em doses médias de 75 a 150 mg/dia deve ser administrada à NOITE, porque um dos efeitos adversos é a sonolência (bloqueio competitivo de receptores histaminérgicos). A duloxetina em doses de 60 a 120 mg/dia deve ser administrada pela MANHÃ, porque causa insônia.\nII. Os antidepressivos IRSNs, como duloxetina, são MAIS EFETIVOS que os ADTs para o tratamento da dor neuropática, exceto para a neuralgia do trigêmeo. Ambas as classes atuam sobre a via descendente modulatória da dor, potencializando a liberação das monoaminas e facilitando a transmissão adrenérgica e serotoninérgica.\nIII. As doses efetivas de gabapentina variam de 900 a 3600 mg/dia, divididas em até três vezes ao dia. Sua principal ação deve-se ao bloqueio de canais de cálcio presentes nas fibras pré-sinápticas, o que reduz a liberação de neurotransmissores como glutamato e substância P — neurotransmissores relacionados com o processo álgico.\nIV. A pregabalina utilizada em doses que variam de 300 a 600 mg/dia, administrada comumente duas vezes ao dia, é indicada para tratar neuralgia pós-herpética, neuropatia diabética, neuropatia central e foi aprovada também para o tratamento da fibromialgia. Efeitos adversos comuns: sonolência, tontura, ataxia, ganho de peso, xerostomia.\nV. Os canabinoides THC e CBD podem ser empregados para tratar dores neuropáticas, pois ao estimularem receptores CB1, presentes em fibras nervosas pré-sinápticas, reduzem a excitabilidade neural e a liberação de neurotransmissores relacionados com a dor. Efeitos adversos esperados: diminuição da função cognitiva e de memória e comprometimento da coordenação motora.",
+alts:["III, IV e V","I, II, III e V","II, IV e V","I, III, IV e V","I, III e IV"],g:3,
+com:"GABARITO OFICIAL do AVA: I, III, IV e V. A II cai no 'mais efetivos': os IRSN NÃO são superiores aos ADTs (são alternativas; a amitriptilina segue referência de eficácia). Este é O resumo do bloco — os horários (noite/manhã), as faixas de dose e o parágrafo dos canabinoides caem literalmente assim."},
+
+{b:"neuro",t:"obj",fonte:"T6 Q4 × Ativ. T5 Q3 (par!)",conf:"o",
+e:"A MESMA pergunta com dois finais — e duas respostas:\n(A) 'Dos fármacos, selecione aquele que potencializa a resposta da fibra modulatória descendente, SEGUNDO OS PRINCÍPIOS DA TERAPÊUTICA MEDICAMENTOSA RACIONAL / disponível na atenção básica' → ?\n(B) 'Dos fármacos, selecione aquele que potencializa a fibra modulatória descendente e que apresenta MENOR INCIDÊNCIA DE EFEITOS ADVERSOS / melhor perfil de segurança, sem sonolência' → ?",
+alts:["(A) amitriptilina · (B) duloxetina","(A) duloxetina · (B) amitriptilina","(A) e (B) duloxetina","(A) e (B) amitriptilina"],g:0,
+com:"ADT e IRSN atuam ambos na via descendente (NA + 5HT). O QUALIFICADOR decide: 'racional/atenção básica' → amitriptilina (acesso!); 'menor EA/sem sonolência' → duloxetina (sem anticolinérgico/sedação — confirmado na QD 17 da PM T9, nota dela: 'TRIC – NÃO... IRSN → duloxetina'). Grife o final da pergunta antes de responder."},
+
+{b:"neuro",t:"obj",fonte:"T6 Q6",conf:"v",
+e:"Efeitos adversos como XEROSTOMIA, SONOLÊNCIA, HIPOTENSÃO POSTURAL e DISFUNÇÃO SEXUAL são característicos do uso de:",
+alts:["pregabalina","morfina","amitriptilina","duloxetina","tramadol"],g:2,
+com:"Combo anticolinérgico (xerostomia) + anti-histamínico (sonolência) + bloqueio α (hipotensão postural) = ADT → amitriptilina. Contraste que ela cobra: duloxetina dá INSÔNIA (por isso manhã); T9 trouxe o espelho ('60–120 mg pela manhã, insônia e disfunção sexual' = duloxetina)."},
+
+{b:"neuro",t:"obj",fonte:"T11 Q13–15",conf:"v",
+e:"Sobre anticonvulsivantes e canabinoides na dor neuropática:\nI. A gabapentina é um ANÁLOGO do GABA e atua potencializando as ações do GABA, além de bloquear canais de cálcio, reduzindo a excitabilidade neural.\nII. A pregabalina se liga a uma subunidade (α2δ) de canais de cálcio disparados por voltagem no SNC, inibindo a liberação de neurotransmissor excitatório. Tem indicação para neuropatia periférica diabética, neuralgia pós-herpética e fibromialgia.\nIII. A pregabalina é empregada nas doses de 300 a 600 mg/dia, é bem absorvida mesmo com alimentos, e sua eliminação é predominantemente renal APÓS CONJUGAÇÃO COM ÁCIDO GLICURÔNICO.\nIV. Euforia, diminuição cognitiva e de memória, relaxamento muscular e comprometimento da coordenação motora são efeitos adversos esperados do uso de CBD/THC, que atuam ESTIMULANDO receptores canabinoides.\nV. (Caso) J.S., 32 anos, dor do membro fantasma, usa carbamazepina 200 mg/dia + duloxetina 90 mg/dia. Iniciou Cannabis (10 mg/kg/dia de CBD em 2 doses) sem melhora. A causa provável é a interação farmacocinética: a CARBAMAZEPINA REDUZ A MEIA-VIDA do CBD/THC e compromete a manutenção das concentrações na faixa terapêutica.",
+alts:["II, IV e V","I, II, III, IV e V","I, II e IV","III, IV e V","II e V"],g:0,
+com:"I: gabapentina é análogo ESTRUTURAL do GABA mas NÃO age no sistema GABA (só nos canais de Ca²⁺) — 'potencializando as ações do GABA' mata o item. III: a pregabalina/gabapentina são eliminadas INALTERADAS via renal (sem conjugação — sem metabolismo hepático; por isso não interagem!). IV: 'estimulando' está CERTO (agonistas — a versão com 'bloqueando' é a falsa). V: gabarito corrigido a caneta na T11 — indutor derruba a meia-vida do canabinoide."},
+
+{b:"neuro",t:"obj",fonte:"Ativ. (oficial)",conf:"o",
+e:"Três casos com gabarito oficial do AVA — responda os três:\n(1) V.S., 58 anos, neuropatia diabética + apatia, anedonia, tristeza (quadro depressivo). Iniciou insulinização (tem recursos para comprar o tratamento). Fármaco mais indicado segundo eficácia, segurança e acesso?\n(2) J.S., 49 anos, usa SERTRALINA 50 mg/dia + terapia de reposição hormonal, tem fibromialgia há 1 ano e mantém muita dor apesar de fisioterapia e atividade física supervisionada. Qual a mais indicada?\n(3) Dos fármacos, qual o de primeira escolha para dores neuropáticas em paciente que depende dos medicamentos disponíveis na ATENÇÃO BÁSICA e não usa nenhum psicotrópico?",
+alts:["(1) duloxetina · (2) pregabalina · (3) amitriptilina","(1) amitriptilina · (2) duloxetina · (3) pregabalina","(1) pregabalina · (2) amitriptilina · (3) duloxetina","(1) duloxetina · (2) amitriptilina · (3) carbamazepina"],g:0,
+com:"Os 3 gabaritos oficiais ('Sua resposta está correta') do AVA:\n(1) Duloxetina — trata a DOR e a DEPRESSÃO juntas; paciente pode comprar (acesso ok).\n(2) Pregabalina — FM aprovada + NÃO mexe com serotonina (sertralina a bordo!).\n(3) Amitriptilina — é o que TEM na atenção básica.\nO tripé eficácia-segurança-ACESSO decide tudo neste bloco."},
+
+{b:"neuro",t:"obj",fonte:"T11 Q7 · T7/T10 (zoster)",conf:"o",
+e:"Herpes zoster e dor — três momentos, três respostas. J.S., 36 anos, dor na região torácica por herpes zoster com escala de dor = 5 (moderada). Qual o analgésico de escolha?",
+alts:["morfina","carbamazepina","gabapentina","codeína","dipirona"],g:3,
+com:"Zoster AGUDO com dor moderada (5/10) → degrau 2 da escada → CODEÍNA (gabarito T11). Se a dor for INTENSA → tramadol (gabarito oficial do AVA T10: 'dor aguda intensa em paciente com infecção por herpes zoster' = tramadol). Se for a neuropatia PÓS-herpética instalada → pregabalina/gabapentina (QD da T8: pregabalina 300 mg). A palavra do enunciado (aguda × escala × pós-herpética) escolhe o fármaco."},
+
+// ================== QDs — AINEs & corticoides ==================
+{b:"aine",t:"qd",fonte:"T5 QD1 · T7 QD1",conf:"o",
+e:"(a) Qual o antitérmico de escolha para um quadro febril em adulto diagnosticado com pneumonia? Cite dose e posologia.\n(b) Qual o AINE que apresenta maior risco de causar HIPOTERMIA quando usado por pacientes com quadros febris?",
+resp:"(a) Dipirona 500 mg VO 6/6h (gabaritada na prova real da T5).\n(b) Dipirona — potente antitérmica de ação central; em febre baixa/moderada pode 'passar do ponto' → hipotermia (e hipotensão).",
+com:"Note que na (a) o ibuprofeno está vetado pela pneumonia (broncoconstrição via leucotrienos). A dupla hipotensão+hipotermia da dipirona é marca registrada das provas dela."},
+
+{b:"aine",t:"qd",fonte:"PM T5/T7 QD2 (oficial)",conf:"o",
+e:"Qual o analgésico de escolha para tratar um quadro de cefaleia em paciente hipertenso, com PA 150×95 mmHg no momento do atendimento? Cite a dose usual.",
+resp:"Dipirona 500 mg VO 6/6h (na PM T7 ela aceitou 8/8h).",
+com:"Comentário em verde do gabarito dela: 'apesar de a maioria dos AINEs causarem hipertensão, os de ação central não — e a dipirona ainda pode causar hipotensão'. AINE clássico sobe PA (retenção de Na/água por ↓PGs renais)."},
+
+{b:"aine",t:"qd",fonte:"PM T5 QD3 · T8 QD1",conf:"o",
+e:"Qual o anti-inflamatório comumente empregado para tratar quadros agudos de inflamação em tecidos moles e esqueléticos (ex.: dor aguda moderada a severa pós-procedimento cirúrgico)? Cite dose e posologia.",
+resp:"Nimesulida 100 mg VO 12/12h.\n(Se a pergunta pedir 'AINE com ação analgésica potente para dor aguda intensa': cetorolaco 10 mg 6/6h, máx 40 mg/dia, até 5 dias.)",
+com:"Na T8 a resposta aceita para o pós-cirúrgico foi a própria nimesulida 100 mg 12/12h (com o mefenâmico 250 mg 4/4h aparecendo nas anotações como alternativa). Guarde o par: tecidos moles = nimesulida; dor intensa = cetorolaco."},
+
+{b:"aine",t:"qd",fonte:"PM T7 QD1/QD2 (oficial)",conf:"o",
+e:"Por que o ibuprofeno é contraindicado para tratar febre cuja etiologia seja suspeita de dengue? (Explicação completa, modelo de resposta)",
+resp:"Porque inibe a COX-1 plaquetária, responsável pela produção de TXA2, que promove a agregação plaquetária. Ao inibir, reduz a agregação e pode causar hemorragias — risco associado aos mecanismos da própria dengue (plaquetopenia). Antitérmicos de escolha: dipirona ou paracetamol.",
+com:"Resposta manuscrita aprovada na PM T7. Estrutura que pontua: enzima → mediador → função → consequência clínica → alternativa segura."},
+
+{b:"aine",t:"qd",fonte:"T8 QD5 (oficial)",conf:"o",
+e:"Explique objetivamente por que o uso crônico de AINEs está relacionado ao desenvolvimento de insuficiência renal.",
+resp:"A inibição crônica da COX-2 (e portanto da PGI2/PGE2 renais) bloqueia o efeito VASODILATADOR dessas prostaglandinas nas arteríolas renais. Sem essa vasodilatação compensatória, não ocorre a regulação normal da perfusão/pressão renal → vasoconstrição predominante, ↓TFG, sobrecarga e dano renal → predisposição à insuficiência renal.",
+com:"A correção a caneta dela acrescentou: 'não produz mais PGE2 nas arteríolas renais → dano celular'. Palavras-chave: COX-2, PGI2/PGE2, vasodilatação da arteríola, perfusão/TFG."},
+
+{b:"cort",t:"qd",fonte:"T5 QD3 · PM T7 QD3 · T7 QD4",conf:"o",
+e:"As 3 QDs de dose de corticoide que já caíram:\n(a) X.S., 57 anos, quadro AGUDO de bronquite, corticoterapia sistêmica por 5 dias — fármaco, dose e posologia?\n(b) X.S., 57 anos, 78 kg, artrite reumatoide, corticoide VO por 5 dias — fármaco, dose e posologia?\n(c) Qual o fármaco de escolha para tratar um quadro inflamatório decorrente de um processo infeccioso no pulmão?",
+resp:"(a) Prednisolona 5 mg VO 1×/dia, pela manhã (gabaritada na T5).\n(b) Prednisona 20 mg VO 1×/dia, pela manhã (PM T7 — nas indicações osteomioarticulares a referência dela é prednisona 10–20 mg).\n(c) Prednisolona (ou prednisona) — na associação completa da pneumonia: antibiótico + dipirona + prednisolona.",
+com:"SEMPRE fechar com '1× ao dia, pela manhã' — o ciclo circadiano vale ponto. Note a escala de dose: quadro respiratório leve 5 mg × osteomioarticular 20 mg."},
+
+{b:"cort",t:"qd",fonte:"T11 QD2 (oficial)",conf:"o",
+e:"S.X., 33 anos, hospitalizada por pré-eclâmpsia, tem indicação de terapia para acelerar a MATURAÇÃO PULMONAR FETAL e prevenir a síndrome do desconforto respiratório do recém-nascido. Qual corticoide de ALTA POTÊNCIA é indicado? (0,5)",
+resp:"Dexametasona.",
+com:"Correção em vermelho na prova real (veterana escreveu prednisolona). Alta potência + longa ação + atravessa a placenta = dexa (betametasona também é usada na prática, mas a resposta dela na lista é dexametasona)."},
+
+{b:"cort",t:"qd",fonte:"T9 QD11+QD12 (oficial)",conf:"o",
+e:"(a) Qual exame deve ser solicitado quando o paciente fez uso crônico de corticoide e o tratamento vai ser suspenso? Explique a relação do resultado com o uso do corticoide. (0,8)\n(b) Cite duas recomendações que devem ser repassadas para pacientes que fazem uso de dispositivo inalatório para asma contendo budesonida, justificando o porquê. (0,9)",
+resp:"(a) Dosagem de ACTH SÉRICO. O corticoide exógeno crônico suprime o eixo HHA (↓CRH/ACTH e ↓produção endógena de cortisol). A dosagem avalia a recuperação do eixo antes/durante a retirada — que deve ser lenta e gradual.\n(b) 1. ENXAGUAR A BOCA após o uso — evitar candidíase orofaríngea (deposição do corticoide na cavidade oral). 2. TOMAR/INGERIR ÁGUA após o enxague — retirar o corticoide depositado nas cordas vocais e evitar disfonia/rouquidão.",
+com:"As duas respostas estão a caneta rosa na própria prova (gabarito da professora). Na objetiva-espelho, cuidado com 'hormônio LIBERADOR de corticotrofina' (CRH) no lugar de ACTH."},
+
+// ================== QDs — Neuropática & CB ==================
+{b:"neuro",t:"qd",fonte:"T11 QD3 (oficial)",conf:"o",
+e:"Qual o fármaco de primeira escolha para tratar NEURALGIA DO TRIGÊMEO e o principal mecanismo de ação? (0,4)",
+resp:"Carbamazepina — bloqueio dos canais de SÓDIO (reduz a neurotransmissão álgica nas fibras; dose de referência 200 mg/dia, podendo titular).",
+com:"Resposta manuscrita aceita na prova. Se pedirem 'por que não é 1ª escolha nas DEMAIS neuropáticas': potente INDUTORA de CYP450 (interações) + depressão do SNC."},
+
+{b:"neuro",t:"qd",fonte:"T7 QD3 · PM T7 QD9 (oficial)",conf:"o",
+e:"(a) Por que, em casos de dores neuropáticas, o tratamento inicial recomendado consiste na administração de gabapentina ou pregabalina em detrimento da carbamazepina?\n(b) Qual o tratamento de primeira escolha (dose e posologia inicial) para paciente com dor neuropática de etiologia desconhecida que usa anti-hipertensivos (hidroclorotiazida e losartana), antidepressivo (SERTRALINA) e sedativo (clonazepam)? Justifique.",
+resp:"(a) Gabapentina/pregabalina agem nos canais de CÁLCIO pré-sinápticos (α2δ), reduzindo a liberação de neurotransmissores álgicos, NÃO sofrem metabolismo hepático (eliminação renal inalterada → sem interações CYP) e têm melhor perfil. A carbamazepina bloqueia canais de Na⁺, mas é potente INDUTORA de CYP450 (reduz a meia-vida de vários fármacos) e causa depressão do SNC — fica reservada ao trigêmeo.\n(b) PREGABALINA, dose inicial ~75 mg 2×/dia, aumentando gradualmente conforme resposta. Justificativa: não interage com os fármacos em uso (evita duloxetina/tramadol pelo risco serotoninérgico com sertralina; evita indutores; sem metabolismo hepático).",
+com:"A (b) é resposta manuscrita aprovada com 1,0 na PM T7 ('pregabalina com dose inicial de 75 mg 2× ao dia e ir aumentando à medida que o paciente relatar melhora da dor'). Dose inicial + titulação + justificativa de interação = pontuação cheia."},
+
+{b:"neuro",t:"qd",fonte:"T5 QD2 (oficial)",conf:"o",
+e:"X.S., 35 anos, feminina, diagnóstico de FIBROMIALGIA, em uso de anticoncepcional oral combinado, FLUOXETINA 20 mg (ansiedade) e zolpidem 10 mg (insônia), deve iniciar a terapêutica medicamentosa para fibromialgia. Qual o fármaco indicado? Cite a dose mínima efetiva.",
+resp:"Pregabalina — início 25 mg (à noite), titulando até a faixa efetiva (300–600 mg/dia na FM).",
+com:"Resposta 'Pregabalina 25 mg (início)' gabaritada na prova real. A fluoxetina veta a duloxetina (serotoninérgica + inibidora de CYP2D6). Detalhe fino: na SP3 (tutoria/SBR) a faixa da FM é 300–600 — o '25 mg' é a DOSE INICIAL da aula de Farmaco. Se a prova pedir 'dose mínima efetiva/início', responda 25 mg; se pedir faixa terapêutica, 300–600."},
+
+{b:"neuro",t:"qd",fonte:"T8 QD4",conf:"o",
+e:"Qual o fármaco de escolha para iniciar o tratamento de um paciente com diagnóstico de dor neuropática PÓS-HERPÉTICA?",
+resp:"Pregabalina 300 mg/dia (÷2). A correção dela anotou: 'pregabalina OU gabapentina'.",
+com:"Zoster agudo = opioide pela escada (codeína/tramadol); sequela pós-herpética = gabapentinoide. Capsaicina tópica é adjuvante (depleta substância P)."},
+
+{b:"neuro",t:"qd",fonte:"T6 QD1+QD2 (oficial)",conf:"o",
+e:"(a) Os canabinoides também atuam na medula espinhal, suprimindo a excitabilidade neuronal por meio da hiperpolarização das membranas neuronais e produzindo analgesia — por isso são empregados para tratar dores crônicas e neuropáticas. Cite quais os canabinoides responsáveis por essa ação e como atuam (mecanismo/receptor).\n(b) Qual o fármaco que atua DEPLETANDO A SUBSTÂNCIA P presente nas terminações nervosas sensitivas e é usado como terapia tópica em alguns casos de dores neuropáticas?",
+resp:"(a) THC e CBD — AGONISTAS de receptores CB1 (acoplados à proteína Gi, inibitória), localizados sobretudo em terminações PRÉ-sinápticas: ↓AMPc, ↓liberação de neurotransmissores excitatórios (glutamato/substância P) → ↓excitabilidade → analgesia.\n(b) Capsaicina (tópica).",
+com:"As duas QDs reais da T6 (a correção rosa completou o mecanismo do receptor). Lembre o pacote canabinoide: agonistas (não 'bloqueiam'), naloxona NÃO reverte, carbamazepina reduz os níveis, CBD 10 mg/kg/dia ÷2 iniciando à noite, EAs cognitivos/motores."},
+
+{b:"neuro",t:"qd",fonte:"T9 QD4 · T10 QD3",conf:"o",
+e:"(a) Qual antidepressivo usado no tratamento da dor neuropática apresenta MAIOR ação antimuscarínica, e qual manifestação clínica desse bloqueio?\n(b) E qual dos ADTs apresenta MENOR ação antimuscarínica?",
+resp:"(a) Amitriptilina — xerostomia (boca seca) é a manifestação clássica do bloqueio muscarínico (além de constipação, retenção urinária, visão borrada, sonolência).\n(b) Imipramina (gabarito dela na T10).",
+com:"Par que já caiu dos dois lados. Consequência clínica no diabético: antimuscarínico bloqueia a resposta vagal da secreção de insulina (objetiva da T8)."},
+
+{b:"opi",t:"qd",fonte:"T7 QD5 (oficial)",conf:"o",
+e:"Qual(is) o(s) opioide(s) que pode(m) ter sua ação analgésica afetada pelo polimorfismo genético na CYP2D6?",
+resp:"CODEÍNA (a resposta dela). O veterano escreveu 'codeína e morfina' e levou corte na morfina — a morfina NÃO passa por CYP (é glicuronidada/UGT).",
+com:"Se a pergunta ampliar para 'fármacos da dor afetados pela CYP2D6': codeína e TRAMADOL (ambos ativados/potencializados por metabólitos via 2D6 — o slide 2026 lista oxicodona, codeína, di-hidrocodeína, hidrocodona e tramadol). Mas morfina NUNCA."},
+
+// ================== 🎧 INÉDITAS — montadas do que ela FALOU nas aulas 2026 ==================
+{b:"aine",t:"obj",fonte:"Aula SP1 (áudio)",conf:"a",
+e:"Sobre antitérmicos no Brasil:\nI. Apenas três fármacos possuem registro em bula para o tratamento da febre: paracetamol, dipirona e ibuprofeno.\nII. Desde 2023 recomenda-se não prescrever ibuprofeno ou cetoprofeno para febre de etiologia DESCONHECIDA, pelo risco de dengue hemorrágica.\nIII. O AAS não possui ação antitérmica, e por isso não é utilizado para tratar quadros febris.\nIV. A dipirona só é recomendada como antitérmico se a febre for superior a 38°C — em febrícula, pelo seu potente efeito, há risco de hipotermia.\nV. O paracetamol estabiliza a temperatura em 30–40 minutos, mas a queda ocorre em 1,5–2 horas — o paciente deve ser orientado a não repetir/alternar o antitérmico nesse intervalo, sob risco de hipotermia.",
+alts:["I, II, IV e V","I, II, III e IV","II, III e V","I, IV e V","I, II, III, IV e V"],g:0,
+com:"III é a pegadinha que ela ditou em aula: 'é ERRADO afirmar que o AAS não tem ação antitérmica — ele TEM, mas NÃO PODE ser usado' (síndrome de Reye em infecção viral; a bula nem traz mais a indicação). O resto é fala literal da SP1."},
+
+{b:"aine",t:"obj",fonte:"Aula SP4 (áudio)",conf:"a",
+e:"Recém-nascido com persistência do canal arterial tem indicação de tratamento farmacológico para promover o fechamento do ducto. Qual o fármaco e o mecanismo?",
+alts:["indometacina VO — inibição da LOX","ibuprofeno IV por 2 dias — redução da PGE2 que mantém o canal aberto","dipirona IV — inibição da COX-3","prednisolona VO — inibição da fosfolipase A2","paracetamol IV — redução central de prostaglandinas"],g:1,
+com:"Indicação EXCLUSIVA da família dos profenos que ela destacou (e que já caiu na tutoria da 3ª fase): a PGE2 mantém o ducto arterial DILATADO; ibuprofeno IV ~2 dias derruba a PGE2 → o canal fecha. Ela conectou: 'para fechar, não posso deixar o vaso dilatado'."},
+
+{b:"aine",t:"obj",fonte:"Aula SP4 (áudio)",conf:"a",
+e:"Sobre AINEs e agregação plaquetária no perioperatório:\nI. Os profenos (ibuprofeno, naproxeno, cetoprofeno) entram livremente nas plaquetas e inibem a produção de TXA2, porém de forma REVERSÍVEL — diferentemente do AAS.\nII. Em paciente em uso de AAS que fará cirurgia com risco importante de sangramento, recomenda-se suspender o fármaco 7 dias antes, com aval do cardiologista; se a suspensão não for possível, providenciam-se bolsas de plaquetas.\nIII. No pós-operatório de cirurgia com sangramento significativo, prefere-se o CETOPROFENO ao diclofenaco, pela sua ação antiagregante.\nIV. Em procedimentos com risco de tromboembolismo pós-cirúrgico, a ação antiagregante do cetoprofeno pode ser um efeito desejável.",
+alts:["I, II e IV","I, II e III","II, III e IV","I e II","I, II, III e IV"],g:0,
+com:"III inverte a regra que ela deu: sangramento importante → DICLOFENACO (não mexe tanto na plaqueta); risco de TROMBOSE → cetoprofeno (a antiagregação vira benefício). 'Por isso o hospital tem os dois.' Os 7 dias do AAS = vida da plaqueta (anucleada, não ressintetiza a COX acetilada)."},
+
+{b:"aine",t:"obj",fonte:"Aula SP1/SP4 (áudio)",conf:"a",
+e:"M.C., 52 anos, em uso de dipirona há 5 dias por lombalgia, retorna com febre e lesões ulcerativas dolorosas na mucosa oral e na região genital. Qual a principal hipótese e a conduta imediata?",
+alts:["Reação de hipersensibilidade tipo I — administrar anti-histamínico e manter a dipirona","Agranulocitose por dipirona — solicitar hemograma, suspender o fármaco e contraindicar o uso de dipirona definitivamente","Síndrome de Stevens-Johnson — trocar dipirona por paracetamol e reavaliar em 7 dias","Candidíase mucocutânea — iniciar antifúngico tópico e manter o tratamento analgésico"],g:1,
+com:"O quadro-assinatura que ela descreveu em aula: sem granulócitos, as MUCOSAS (portas de entrada) infeccionam e ulceram — boca, garganta, nariz, genitália + febre. Investigação = hemograma (granulócitos despencados). Pode ocorrer DURANTE ou APÓS o uso; quem teve NUNCA mais usa dipirona."},
+
+{b:"aine",t:"obj",fonte:"Aula SP4 (áudio)",conf:"a",
+e:"(Asserção-razão)\nI. A dipirona pode ser empregada como ADJUVANTE analgésico em pacientes com dor neuropática agudizada refratária, embora não seja indicada para o tratamento da dor neuropática.\nPORQUE\nII. Seus metabólitos ativos, além de inibir a COX-3, bloqueiam receptores NMDA na medula espinhal e estimulam receptores 5-HT1 pré-sinápticos (acoplados a proteína G inibitória), reduzindo a liberação de substância P e glutamato pelas fibras ascendentes.",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II não justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:0,
+com:"Fala literal da SP4: o metabólito 'se comporta como se fosse serotonina' nos 5-HT1 e bloqueia NMDA — por isso dipirona é 'analgésico de medula' e PODE ajudar quando a pregabalina não segura a agudização (paracetamol 'não adianta NADA'). Ela avisou que NÃO cobra o nome dos metabólitos (4-MAA/4-AA) — cobra o mecanismo."},
+
+{b:"aine",t:"qd",fonte:"Aula SP1/SP4 (áudio)",conf:"a",
+e:"Paciente vai realizar pequeno procedimento cirúrgico (exérese de unha na UBS) e pergunta se deve tomar um anti-inflamatório ANTES do procedimento para prevenir a dor e a inflamação. Qual a orientação correta e por quê?",
+resp:"Não adianta tomar AINE antes. A dor do pós-procedimento decorre de mediadores químicos JÁ PRONTOS, liberados na lesão tecidual (que estimulam a substância P), e a COX-2 ainda nem foi induzida no momento do trauma — o AINE só age depois que a cascata começou. Orientar o uso APÓS o procedimento, quando o processo inflamatório está instalado.",
+com:"Doutrina dela dita em aula ('muito comum na estética esse toma um antes — isso não existe'). Cuidado: é a posição DELA — na prova, vale a aula."},
+
+{b:"aine",t:"obj",fonte:"Aula SP4 (áudio)",conf:"a",
+e:"Sobre os anti-inflamatórios de uso tópico:\nI. O gel deve ser aplicado sobre a pele SECA e FRIA — recomenda-se crioterapia (gelo) antes da aplicação, pois a vasodilatação da inflamação aumentaria a absorção sistêmica do fármaco.\nII. O objetivo da via tópica é obter concentração no local inflamado minimizando os efeitos adversos sistêmicos; pode-se reaplicar 4 a 6 vezes ao dia.\nIII. O fitoterápico à base de Cordia verbenacea (erva-baleeira), desenvolvido no Brasil, apresenta resposta anti-inflamatória superior à do diclofenaco gel, pois além de inibir COX reduz a produção de diversas citocinas; está disponível apenas para uso tópico.\nIV. Os AINEs tópicos são a via de escolha para processos inflamatórios de tecidos profundos e articulações coxofemorais.",
+alts:["I, II e III","I e II","II, III e IV","I, II, III e IV"],g:0,
+com:"IV extrapola: tópico é para processos LOCALIZADOS e superficiais (antebraço, joelho superficial...) — articulação profunda não é alvo de gel. A tríade I-II-III é fala literal (a Cordia/Acheflan tem cheiro de questão nova — laboratório Aché, só tópico por enquanto)."},
+
+{b:"cort",t:"obj",fonte:"Aula SP3 (áudio)",conf:"a",
+e:"(Asserção-razão)\nI. Em um quadro inflamatório AGUDO, como uma pneumonia, prefere-se prescrever prednisoLONA em vez de prednisona.\nPORQUE\nII. A prednisona é um pró-fármaco de fraca atividade que precisa ser biotransformado no fígado em prednisolona (seu metabólito ativo); no processo agudo não se quer aguardar essa conversão para obter a resposta máxima desde a primeira dose.",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II não justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:0,
+com:"Explicação literal da aula — e é o porquê dos gabaritos de QD (pneumonia → prednisolona; crônico/osteomioarticular/imunossupressão → prednisona). Corolário dela: criança e hepatopata também ficam com a forma ATIVA (prednisolona; no SUS é a solução líquida pediátrica)."},
+
+{b:"cort",t:"obj",fonte:"Aula SP3 (áudio)",conf:"a",
+e:"Sobre esquemas especiais de corticoterapia:\nI. A pulsoterapia consiste na administração hospitalar de doses muito elevadas de metilprednisolona IV por poucos dias, com o objetivo de deter rapidamente a atividade de uma doença autoimune grave.\nII. O esquema de dias alternados consiste em administrar o dobro da dose diária em dias intercalados (ex.: 120 mg dia sim, dia não, em vez de 60 mg/dia), e sua única vantagem real é a menor supressão do eixo hipotálamo-hipófise-adrenal.\nIII. A desvantagem do esquema de dias alternados é a oscilação dos efeitos adversos, que muitos pacientes não toleram — por isso há médicos adeptos e não adeptos.\nIV. A pulsoterapia é o esquema preferencial para reduzir a supressão do eixo HHA em tratamentos prolongados.",
+alts:["I, II e III","I e II","II, III e IV","I, II, III e IV"],g:0,
+com:"IV mistura os dois esquemas — a pulsoterapia não tem nada a ver com poupar o eixo (é choque de dose para URGÊNCIA imunológica, ex.: lúpus atacando órgão vital). Quem poupa o eixo (um pouco) é o dia alternado. Ela deu os dois em sequência na aula justamente para não confundirem."},
+
+{b:"cort",t:"obj",fonte:"Aula SP3 (áudio)",conf:"a",
+e:"Sobre a farmacocinética dos glicocorticoides:\nI. No sangue, circulam ligados predominantemente à TRANSCORTINA — a mesma proteína transportadora do cortisol endógeno.\nII. A meia-vida plasmática é relativamente curta, mas a duração de ação é determinada pela meia-vida BIOLÓGICA — o tempo em que o fármaco permanece dentro da célula alterando a transcrição gênica.\nIII. Administrados por via intravenosa, apresentam biodisponibilidade de 100%.\nIV. O efeito anti-inflamatório é imediato: minutos após a administração já se observa a resposta clínica máxima.",
+alts:["I, II e III","I e II","I, III e IV","II e III","I, II, III e IV"],g:0,
+com:"IV contradiz o mecanismo: o efeito depende de transcrição gênica e síntese proteica (lipocortina-1) — começa em 4–6h e só é confiável 12h+ ('nimesulida em 3h você sente; corticoide não'). I e II são as duas pegadinhas finas que ela explicou no quadro; III é definição (IV = 100% — o '70%' já derrubou veterano na T9)."},
+
+{b:"cort",t:"obj",fonte:"Aula SP3 (áudio)",conf:"a",
+e:"Sobre corticoide e osso:\nI. O corticoide reduz a absorção intestinal e aumenta a excreção renal de cálcio → hipocalcemia → secreção de PTH → reabsorção óssea pelos osteoclastos.\nII. Além do mecanismo mediado pelo PTH, o corticoide age nos osteoblastos REDUZINDO a produção de osteoprotegerina (OPG); sem a OPG, o RANKL atua livremente e superativa os osteoclastos.\nIII. Os protocolos recomendam suplementação de cálcio quando o uso for superior a 3 meses, em maiores de 65 anos ou em doses elevadas; a vitamina D deve ser DOSADA antes de suplementar.\nIV. A desmineralização só se inicia após meses de uso do corticoide.",
+alts:["I, II e III","I e III","II e IV","I, II, III e IV"],g:0,
+com:"IV é falsa na doutrina dela: o desbalanço do cálcio começa 'desde o primeiro dia' — o que demora é o IMPACTO clínico (osteoporose). O mecanismo DUPLO (PTH + OPG/RANKL) é o upgrade da aula sobre o que as provas antigas cobravam; a II explica a questão da T11 ('corticoides suprimem RANKL' = F — eles suprimem a OPG!)."},
+
+{b:"neuro",t:"obj",fonte:"Aula SP2 (áudio)",conf:"a",
+e:"Sobre a farmacocinética de gabapentina e pregabalina:\nI. A absorção intestinal depende de um transportador SATURÁVEL — por isso as doses diárias precisam ser fracionadas (não se pode administrar 900 mg de gabapentina em tomada única).\nII. A gabapentina é fracionada em 3 tomadas/dia e a pregabalina em 2 — um dos motivos pelos quais a pregabalina foi a escolhida para o componente de alto custo do SUS.\nIII. São excretadas praticamente inalteradas pela via renal, sem metabolismo hepático relevante — por isso quase não têm interações via CYP.\nIV. A associação gabapentina + pregabalina é racional em casos refratários, pois permite somar os efeitos das duas moléculas.",
+alts:["I, II e III","I e III","II, III e IV","I, II, III e IV"],g:0,
+com:"IV é o erro que ela fez questão de martelar: NUNCA associar as duas — mesmo alvo (α2δ) E competição pelo MESMO transportador saturável ('ora entra uma, ora entra outra — não faz sentido'). Associações corretas: gabapentinoide + carbamazepina (alvo diferente) ou + antidepressivo (via descendente)."},
+
+{b:"neuro",t:"obj",fonte:"Aula SP2 (áudio)",conf:"a",
+e:"Sobre o manejo prático do tratamento da dor neuropática:\nI. Os antidepressivos apresentam tempo de latência de cerca de 30 dias para o efeito analgésico — nesse intervalo é comum associar tramadol em dose baixa como ponte.\nII. Diante de falha terapêutica OU intolerância a efeito adverso, os protocolos recomendam trocar imediatamente de classe farmacológica.\nIII. A resposta às moléculas de uma mesma classe pode variar entre pacientes (afinidades por receptores e metabolização polimórfica diferentes) — intolerância à amitriptilina não prediz intolerância à nortriptilina.\nIV. O objetivo da titulação é atingir a dose MÍNIMA da faixa terapêutica; as doses máximas raramente são usadas, pois os efeitos adversos crescem mais que a resposta — prefere-se associar um segundo fármaco de outra via.\nV. Os opioides são reservados às agudizações/crises da dor neuropática — o uso contínuo leva à tolerância em 2–3 meses.",
+alts:["I, III, IV e V","I, II, III e IV","II, III e V","I, IV e V","I, II, IV e V"],g:0,
+com:"II inverte o protocolo que ela ditou: tenta-se OUTRO fármaco DA MESMA classe (até 3 vezes!) antes de trocar de classe — não importa se foi falha ou intolerância. O resto é fala literal, incluindo o tramadol-ponte e o 'ninguém começa gabapentina com 900 — não levanta'."},
+
+{b:"neuro",t:"obj",fonte:"Aula SP2 (áudio)",conf:"a",
+e:"Sobre os canabinoides medicinais (atualização 2026):\nI. A RDC atualizada em janeiro de 2026 autorizou o cultivo nacional de Cannabis para fins medicinais e ampliou a prescrição para pacientes com doenças graves refratárias aos tratamentos convencionais.\nII. Produtos com até 0,2% de THC são prescritos em receituário azul (tipo B, Portaria 344); acima disso exige-se o receituário amarelo, controlado pela Polícia Federal, com médico cadastrado.\nIII. O médico deve obter e ARQUIVAR no prontuário o Termo de Consentimento Livre e Esclarecido (TCLE) do paciente.\nIV. As evidências de eficácia na dor sustentam-se na SINERGIA THC+CBD; o CBD isolado não tem estudos demonstrando resposta terapêutica na dor.\nV. A principal limitação prática é o acesso: alto custo + baixa biodisponibilidade oral (lipofílicos, primeira passagem) — o ideal seriam 3–4 tomadas/dia, mas na prática os pacientes usam 2, ficando frequentemente subdosados.",
+alts:["I, II, III, IV e V","I, II e III","II, IV e V","I, III e IV"],g:0,
+com:"Tudo verdadeiro — este é o pacote 2026 que ela deu em aula (a RDC de janeiro é novidade que provavelmente NÃO está nas provas antigas = alvo perfeito de questão nova). Bônus dela: Cannabis medicinal é geneticamente modificada para CBD ≈ THC; a 'de rua'/skunk tem muito mais THC. E carbamazepina → canabinoide subterapêutico."},
+
+{b:"neuro",t:"qd",fonte:"Aula SP2 (áudio)",conf:"a",
+e:"Ao prescrever o emplastro/gel de capsaicina para dor neuropática localizada, quais as DUAS orientações obrigatórias ao paciente, e qual o mecanismo do fármaco?",
+resp:"Mecanismo: a capsaicina (substância ativa da pimenta) promove a liberação e posterior DEPLEÇÃO da substância P das terminações nervosas locais.\nOrientações: (1) no início do efeito há PIORA transitória da dor, com queimação local, antes do alívio (que dura 2–3h, com sensação de adormecimento/formigamento); (2) LAVAR AS MÃOS imediatamente após manipular o produto (risco de levar às mucosas/olhos).",
+com:"As duas orientações foram ditas exatamente assim na aula. Indicação típica: dor neuropática LOCALIZADA (ex.: compressões radiculares, pós-herpética)."},
+
+{b:"opi",t:"obj",fonte:"Aula SP5 (áudio)",conf:"a",
+e:"J.S., 41 anos, 2º dia de pós-operatório em uso de tramadol 100 mg 6/6h, apresenta temperatura elevada, agitação e rigidez muscular. A enfermagem administra dipirona 1 g IV e, após 1 hora, a temperatura NÃO se altera. Qual a principal hipótese e a conduta?",
+alts:["Infecção de sítio cirúrgico — iniciar antibioticoterapia empírica e manter o tramadol","Síndrome serotoninérgica pelo tramadol — suspender o fármaco e tratar a hipertermia com MEDIDAS FÍSICAS (resfriamento)","Febre de origem central — substituir dipirona por paracetamol e reavaliar","Reação alérgica ao tramadol — administrar anti-histamínico e corticoide"],g:1,
+com:"O raciocínio-assinatura da aula SP5: hipertermia da síndrome serotoninérgica NÃO responde a antitérmico — a 'PROVA REAL DA DIPIRONA' diferencia (febre baixa; serotoninérgica não, porque o setpoint hipotalâmico não foi alterado). Tratamento: suspender o tramadol + resfriamento físico. Tramadol libera muita serotonina (pior se houver antidepressivo junto — mas acontece mesmo sem)."},
+
+{b:"opi",t:"obj",fonte:"Aula SP5 (áudio)",conf:"a",
+e:"Sobre os receptores e efeitos práticos dos opioides no hospital:\nI. Os receptores μ1 concentram-se no SNC (analgesia), enquanto os μ2 têm sua maior concentração no trato gastrintestinal (constipação severa).\nII. Todos os opioides estimulam a zona quimiorreceptora do vômito — por isso, em ambiente hospitalar, prescreve-se ANTIEMÉTICO preventivo junto.\nIII. A liberação de histamina causa prurido, tipicamente concentrado na região OROFACIAL e mais intenso no uso parenteral.\nIV. A alta hospitalar após uso de opioide exige que o paciente tenha urinado (retenção urinária é efeito esperado).\nV. A depressão respiratória não desenvolve nenhum grau de tolerância, por isso as doses nunca podem ser aumentadas em pacientes oncológicos.",
+alts:["I, II, III e IV","I, II e III","II, III, IV e V","I, II, III, IV e V"],g:0,
+com:"V é a falsa — e é fina: a depressão respiratória TAMBÉM tolera ('20 mg de cara mata; depois de 6 semanas, 20 mg tranquilo') — é isso que PERMITE escalar dose no oncológico. Quem NÃO tolera: constipação (termina em lavagem intestinal), miose e convulsão (se convulsionou, opioide nunca mais)."},
+
+{b:"opi",t:"obj",fonte:"Aula SP5 (áudio)",conf:"a",
+e:"(Asserção-razão)\nI. Ao prescrever codeína para paciente em uso de um INIBIDOR potente da CYP3A4, espera-se uma resposta analgésica e sedativa MAIOR do que a habitual.\nPORQUE\nII. Com a via da CYP3A4 (que gera metabólito inativo) bloqueada, uma fração maior da codeína fica disponível para a CYP2D6 — formando mais morfina do que o esperado para a dose.",
+alts:["I e II verdadeiras, e a II justifica a I","I e II verdadeiras, mas a II não justifica a I","I verdadeira, II falsa","I falsa, II verdadeira","I e II falsas"],g:0,
+com:"Raciocínio de rota metabólica que ela desenhou no quadro: a codeína tem DUAS saídas — 3A4 (inativa a maioria) e 2D6 (vira morfina). Fechar a 3A4 desvia o fluxo para a 2D6 → mais morfina → mais sedação/sonolência. O espelho da falha por inibição da 2D6 (fluoxetina). Morfina VO 5 mg ≈ 1 mg IV (1ª passagem) é o mesmo tipo de detalhe quantitativo que ela ama."},
+
+{b:"opi",t:"qd",fonte:"Aula SP5 (áudio)",conf:"a",
+e:"Profissional de saúde com dependência de fentanila iniciará desmame com metadona. Como se define a DOSE de metadona nesse contexto, e quais os cuidados operacionais que ela citou em aula?",
+resp:"A dose NÃO é a padrão de analgesia: é calculada pelas TABELAS DE EQUIVALÊNCIA internacionais a partir da dose de fentanila que o paciente usava (geralmente resulta em 15–30 mg/dia). Cuidados: entrega SUPERVISIONADA (um responsável/família administra — o paciente não fica com o frasco), e REDUÇÃO SEMANAL progressiva da dose até a suspensão, minimizando a síndrome de abstinência.",
+com:"Ela contextualizou a população típica: profissionais de centro cirúrgico/UTI/emergência com acesso a sobras de medicamentos controlados ('extremamente comum — uma luta diária nos hospitais'). Metadona é a escolha por ser longa e por já existirem os cálculos de equivalência."},
+
+{b:"neuro",t:"obj",fonte:"Aula SP2 (áudio)",conf:"a",
+e:"Correlacione o fármaco à FAIXA terapêutica que deve ser estudada (ela avisou: cobra as faixas, não as doses de titulação):\n1. Amitriptilina/tricíclicos · 2. Duloxetina · 3. Gabapentina · 4. Pregabalina · 5. Carbamazepina (monoterapia)\nA. 60–120 mg/dia · B. 900–3600 mg/dia · C. ~50–150 mg/dia (maioria acima de 100) · D. ≥600 mg/dia · E. 300–600 mg/dia",
+alts:["1C · 2A · 3B · 4E · 5D","1A · 2C · 3B · 4E · 5D","1C · 2A · 3E · 4B · 5D","1C · 2D · 3B · 4E · 5A"],g:0,
+com:"Aviso literal da aula: 'vocês vão ser cobrados pelas FAIXAS, não pela titulação'. Detalhe: carbamazepina ≥600 é para MONOTERAPIA (trigêmeo); associada pode aparecer em ~100 mg à noite. Doses máximas quase nunca se usam (associa 2º fármaco antes)."},
+];
+</script>
+<script>
+// ================== RENDERIZAÇÃO ==================
+let fB="all", fT="all", resp={};
+function chips(){
+  const bl=[["all","Todos os blocos ("+Q.length+")"]].concat(Object.keys(BLOCOS).map(k=>[k,BLOCOS[k]+" ("+Q.filter(q=>q.b===k).length+")"]));
+  document.getElementById("fBloco").innerHTML=bl.map(([k,n])=>`<span class="chip${k===fB?" on":""}" data-k="${k}">${n}</span>`).join("");
+  const tp=[["all","Objetivas + Discursivas"],["obj","Só objetivas"],["qd","Só discursivas (QD)"]];
+  document.getElementById("fTipo").innerHTML=tp.map(([k,n])=>`<span class="chip${k===fT?" on":""}" data-k="${k}">${n}</span>`).join("");
+  document.querySelectorAll("#fBloco .chip").forEach(c=>c.onclick=()=>{fB=c.dataset.k;render();});
+  document.querySelectorAll("#fTipo .chip").forEach(c=>c.onclick=()=>{fT=c.dataset.k;render();});
+}
+function score(){
+  const vals=Object.values(resp);
+  const ok=vals.filter(v=>v==="ok").length, err=vals.filter(v=>v==="err").length;
+  document.getElementById("score").innerHTML=`Nesta sessão: <b style="color:var(--ok)">${ok} certas</b> · <b style="color:var(--bad)">${err} erradas</b> — o placar zera ao fechar (anote os erros no caderno de pegadinhas).`;
+}
+function render(){
+  chips(); score();
+  const list=document.getElementById("lista");
+  const qs=Q.map((q,i)=>({q,i})).filter(({q})=>(fB==="all"||q.b===fB)&&(fT==="all"||(fT==="qd"?q.t==="qd":q.t!=="qd")));
+  list.innerHTML=qs.map(({q,i},n)=>{
+    const conf=CONF[q.conf]||CONF.i;
+    const head=`<div class="top"><span class="badge b-${q.b}">${BLOCOS[q.b]}</span><span class="badge b-fonte">${q.fonte}</span><span class="badge ${conf[1]}">${conf[0]}</span>${q.t==="qd"?'<span class="badge" style="background:#fce7f3;color:#be185d">DISCURSIVA</span>':""}</div>`;
+    if(q.t==="qd"){
+      return `<div class="q"><div style="font-weight:700;color:var(--muted);font-size:12.5px">QD ${n+1}</div>${head}<div class="enun">${q.e}</div>
+      <button class="verbtn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Ver resposta-modelo</button>
+      <div class="modelo"><b>Resposta-modelo:</b> ${q.resp}${q.com?"\n\n"+q.com:""}</div></div>`;
+    }
+    return `<div class="q" id="q${i}"><div style="font-weight:700;color:var(--muted);font-size:12.5px">Questão ${n+1}</div>${head}<div class="enun">${q.e}</div>
+      <div class="alts">${q.alts.map((a,j)=>`<button onclick="marca(${i},${j})">${String.fromCharCode(97+j)}) ${a}</button>`).join("")}</div>
+      <div class="gab" id="gab${i}"><div class="g">Gabarito: ${String.fromCharCode(97+q.g)}) ${q.alts[q.g]}</div><div class="c">${q.com}</div></div></div>`;
+  }).join("")||'<div class="q">Nenhuma questão neste filtro.</div>';
+}
+function marca(i,j){
+  const q=Q[i];
+  const card=document.getElementById("q"+i);
+  const btns=card.querySelectorAll(".alts button");
+  btns.forEach((b,k)=>{b.disabled=true;if(k===q.g)b.classList.add("certa");});
+  if(j!==q.g){btns[j].classList.add("errada");resp[i]="err";}else{resp[i]="ok";}
+  document.getElementById("gab"+i).style.display="block";
+  score();
+}
+render();
+</script>
+</body>
+</html>

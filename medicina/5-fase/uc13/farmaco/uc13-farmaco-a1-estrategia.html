@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmaco A1 · Estratégia de Guerra · 04/09</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a2332; --muted:#5a6a7e;
+    --accent:#0e7490; --accent-soft:#e0f2f7;
+    --danger:#b91c1c; --danger-soft:#fee2e2;
+    --ok:#15803d; --ok-soft:#dcfce7;
+    --warn:#a16207; --warn-soft:#fef9c3;
+    --purple:#6d28d9; --purple-soft:#ede9fe;
+    --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:15.5px}
+  .wrap{max-width:880px;margin:0 auto;padding:28px 18px 80px}
+  header{background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;border-radius:16px;padding:26px 26px 22px;margin-bottom:22px}
+  header h1{margin:0 0 6px;font-size:24px;letter-spacing:.2px}
+  header .sub{opacity:.92;font-size:14.5px}
+  .datebar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .datebar .pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:13px}
+  h2{font-size:19px;margin:34px 0 10px;display:flex;align-items:center;gap:8px}
+  h2 .n{background:var(--accent);color:#fff;border-radius:8px;min-width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  h3{font-size:15.5px;margin:18px 0 6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  .muted{color:var(--muted)}
+  .small{font-size:13.5px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+  th{text-align:left;background:var(--accent-soft);color:#0c4a5e;padding:7px 9px;border:1px solid var(--line);font-size:13px}
+  td{padding:6px 9px;border:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:600;margin-right:4px}
+  .t-red{background:var(--danger-soft);color:var(--danger)}
+  .t-green{background:var(--ok-soft);color:var(--ok)}
+  .t-blue{background:var(--accent-soft);color:#0c4a5e}
+  .t-purple{background:var(--purple-soft);color:var(--purple)}
+  .t-yellow{background:var(--warn-soft);color:var(--warn)}
+  .trap{border-left:4px solid var(--danger);background:#fff;border-radius:10px;padding:10px 14px;margin:8px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .trap .wrong{color:var(--danger);font-weight:600}
+  .trap .right{color:var(--ok);font-weight:600}
+  .step{display:flex;gap:12px;margin:10px 0}
+  .step .when{flex:0 0 128px;font-weight:700;color:#0c4a5e;font-size:13.5px;padding-top:2px}
+  .step .what{flex:1;border-left:3px solid var(--accent);padding-left:12px}
+  details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:#fff}
+  summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:8px}
+  summary::before{content:"▸";color:var(--accent);transition:.15s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .inner{padding:2px 16px 12px}
+  ul{margin:6px 0;padding-left:20px}
+  li{margin:4px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}.step{flex-direction:column;gap:2px}.step .when{flex:none}}
+  .big{font-size:17px;font-weight:700}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .kpi .box{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+  .kpi .box .v{font-size:21px;font-weight:800;color:var(--accent)}
+  .kpi .box .l{font-size:12.5px;color:var(--muted)}
+  .weightbar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin:10px 0 4px;font-size:12px;color:#fff;font-weight:700}
+  .weightbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+  .legend{font-size:12.5px;color:var(--muted)}
+  .note{background:var(--warn-soft);border:1px solid #f5e79b;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+  .check{background:var(--ok-soft);border:1px solid #b5e3c4;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;text-align:center}
+  @media print{body{background:#fff}.card,details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>💊 Farmacologia UC13 — Estratégia para o A1</h1>
+  <div class="sub">Baseada na leitura completa de <b>Provas Farmaco.pdf</b>: 7 provas de turmas anteriores (T5–T11), 3 PMs com gabarito comentado da própria Vânia e atividades do AVA corrigidas.</div>
+  <div class="datebar">
+    <span class="pill">📅 Prova: <b>sex 04/09</b> · 🎧 ela disse "sexta DE MANHÃ" — confirmar horário!</span>
+    <span class="pill">🎓 Bloco completo: 5 aulas dadas e transcritas ✅</span>
+    <span class="pill">🔁 PM (se precisar): 18/09</span>
+  </div>
+</header>
+
+<!-- ================= RAIO-X ================= -->
+<h2><span class="n">1</span> Raio-X da prova dela</h2>
+<div class="card">
+  <div class="kpi">
+    <div class="box"><div class="v">12–18</div><div class="l">objetivas (A–D ou A–E)</div></div>
+    <div class="box"><div class="v">3–6</div><div class="l">discursivas (0,3 a 1,0 cada)</div></div>
+    <div class="box"><div class="v">~70%</div><div class="l">das questões se repetem entre turmas</div></div>
+  </div>
+
+  <h3>Peso aproximado por bloco (contagem nas 7 provas)</h3>
+  <div class="weightbar">
+    <div style="background:#0e7490;width:35%">AINEs + dipirona/paracetamol ~35%</div>
+    <div style="background:#6d28d9;width:27%">Opioides ~27%</div>
+    <div style="background:#a16207;width:20%">Corticoides ~20%</div>
+    <div style="background:#15803d;width:18%">Neuropática ~18%</div>
+  </div>
+  <div class="legend">Dor neuropática inclui anticonvulsivantes, antidepressivos e canabinoides (canabinoides caem MUITO: QD e 2–3 objetivas em várias provas).</div>
+
+  <h3>Os 5 formatos de questão (sempre os mesmos)</h3>
+  <table>
+    <tr><th>Formato</th><th>Como vem</th><th>Onde mora o perigo</th></tr>
+    <tr><td><b>Sentenças I–V</b> "assinale a correta"</td><td>5 afirmativas longas, combinações nas alternativas</td><td>UMA palavra trocada no meio de uma frase 90% certa</td></tr>
+    <tr><td><b>Asserção-razão</b> (PORQUE)</td><td>2 proposições + as 5 opções clássicas</td><td>As duas verdadeiras, mas a II não justificar a I</td></tr>
+    <tr><td><b>Caso clínico → escolha do fármaco</b></td><td>Paciente com comorbidades + 5 fármacos</td><td>Racionalidade: eficácia + segurança + <b>acesso (SUS)</b></td></tr>
+    <tr><td><b>Correlacione colunas</b></td><td>Fármaco × efeito adverso/contraindicação</td><td>Ibuprofeno-sangramento, dipirona-hipotensão, diclofenaco-alergia cruzada c/ AAS, celecoxibe-trombose, mefenâmico-diarreia</td></tr>
+    <tr><td><b>Figura</b></td><td>Metabolização codeína/morfina (CYP2D6, CYP3A4, UGT2B7)</td><td>Saber a rota de cada metabólito (M3G, M6G, norcodeína)</td></tr>
+  </table>
+
+  <h3>Como ela cobra nas discursivas (QD)</h3>
+  <ul>
+    <li>Padrão fixo: <b>fármaco + dose + posologia</b> ("cite a dose e posologia"). Sem a dose certa, perde ponto — teve resposta de veterano com fármaco certo e dose corrigida em vermelho.</li>
+    <li>Ou <b>"explique o porquê"</b> mecanístico: por que ibuprofeno é contraindicado na dengue, por que morfina causa convulsão, por que codeína falha, por que AINE crônico causa insuficiência renal, por que corticoide é melhor que AINE na pneumonia.</li>
+    <li>As respostas-modelo das PMs mostram o nível esperado: 2–4 linhas, citando mediador/enzima (TXA2, PGI2, lipocortina-1, CYP2D6, M3G/M6G, β-arrestinas).</li>
+  </ul>
+
+  <div class="note"><b>⚠️ A maior descoberta:</b> ela recicla questões pesadamente — entre turmas (a mesma asserção de cálcio+corticoide aparece em 4 provas), entre a prova e as <b>atividades do AVA</b>, e entre prova e PM. As atividades online que a turma fizer <b>são banco de questões da prova</b>. Guarde os prints de TODAS.</div>
+  <div class="note"><b>⚠️ "Vale a aula":</b> como já visto na SP4 (nimesulida/COX-3, dipirona não-nefrotóxica), quando a literatura divergir do que ela falou em aula, <b>na prova vale a aula 2026</b>. As provas antigas são de outras turmas — se o slide novo mudou algo, o áudio da aula manda.</div>
+</div>
+
+<!-- ================= RADAR ================= -->
+<h2><span class="n">2</span> Radar de pegadinhas (extraídas das correções reais)</h2>
+<div class="card">
+<p class="small muted">Cada uma abaixo derrubou veterano em prova (marcações em vermelho / gabaritos comentados das PMs). Formato: <span class="tag t-red">como ela escreve</span> → <span class="tag t-green">o certo</span></p>
+
+<h3>🟣 Opioides</h3>
+<div class="trap"><span class="wrong">"Morfina inibe o efluxo de K⁺"</span> → <span class="right">ABRE canais de K⁺ (↑efluxo) = hiperpolarização pós-sináptica; FECHA canais de Ca²⁺ pré-sinápticos (↓liberação de neurotransmissor). Via Gi/G0 → ↓adenilato ciclase → ↓AMPc.</span></div>
+<div class="trap"><span class="wrong">"Morfina interage com inibidores/indutores de CYP"</span> → <span class="right">morfina é glicuronidada (UGT2B7, fase 2) → M3G (convulsivante) e M6G (analgésico). CYP não muda nada. Convulsão por morfina = M3G no SNC.</span></div>
+<div class="trap"><span class="wrong">"Codeína é ativada por conjugação com ácido glicurônico"</span> → <span class="right">pró-fármaco ativado pela CYP2D6 → morfina. Hipoexpressão OU fluoxetina/ISRS (inibidores da 2D6) = falha analgésica; ultrarrápidos = risco de intoxicação.</span></div>
+<div class="trap"><span class="wrong">"Tolerância à miose e à constipação"</span> → <span class="right">miose e constipação NÃO sofrem tolerância (μ2 intestinal). Toleram: analgesia, euforia, náusea, depressão respiratória. Mecanismo da tolerância = β-arrestinas → internalização ("invaginação") dos receptores.</span></div>
+<div class="trap"><span class="wrong">"Meperidina: longa duração e baixo risco de depressão respiratória"</span> → <span class="right">CURTA duração e depressão respiratória significativa dose-dependente.</span></div>
+<div class="trap"><span class="wrong">Confundir os 3 fármacos do "pós-uso"</span> → <span class="right">intoxicação aguda = NALOXONA (antagonista IV) · dependência ambulatorial = NALTREXONA (VO) · substituição/desmame (ex.: fentanila na UTI) = METADONA 10mg 12/12h VO, reduzindo aos poucos (longa ação evita abstinência).</span></div>
+<div class="trap"><span class="wrong">"Dependência por bloqueio de receptores"</span> → <span class="right">ativação de receptores opioides em fibras GABAérgicas → desinibição das fibras DOPAminérgicas do circuito de recompensa (mesolímbico).</span></div>
+
+<h3>🔵 AINEs, dipirona e paracetamol</h3>
+<div class="trap"><span class="wrong">"AINE é contraindicado no hipertenso porque aumenta trombose"</span> → <span class="right">no hipertenso o problema é ↑PA/edema (↓PGI2 e ↓PGE2 renais → retenção de Na⁺/água). TROMBOSE é dos seletivos COX-2 (↓PGI2 endotelial com TXA2 plaquetário preservado) — não de "qualquer AINE". E "↓TXA2 aumenta resistência vascular" é FALSO.</span></div>
+<div class="trap"><span class="wrong">Dengue + AINE/AAS</span> → <span class="right">contraindicados: inibem COX-1 plaquetária → ↓TXA2 → ↓agregação → hemorragia. Escolha na dengue: DIPIRONA 500mg 6/6h (ou paracetamol). EA que ela pergunta: hipotensão (e hipotermia em febre leve).</span></div>
+<div class="trap"><span class="wrong">Febre/inflamação + pneumonia, asma ou bronquite → AINE</span> → <span class="right">AINE bloqueia COX → sobra ácido araquidônico para a via LOX → leucotrienos → broncoconstrição. Escolha: CORTICOIDE (↑lipocortina-1 → inibe fosfolipase A2 → corta as DUAS vias). Associação clássica da pneumonia: antibiótico + dipirona + prednisolona.</span></div>
+<div class="trap"><span class="wrong">"Ibuprofeno inibe irreversivelmente a COX-1"</span> → <span class="right">só o AAS é irreversível (acetilação; antiagregação dura ~7 dias, a vida da plaqueta). Todos os outros: reversíveis/competitivos. AAS 100mg/d no almoço; ibuprofeno anula o AAS (AAS ≥2h antes).</span></div>
+<div class="trap"><span class="wrong">"Paracetamol lesa o estômago / é contraindicado na gestação"</span> → <span class="right">paracetamol NÃO lesa TGI (não inibe COX-1 periférica) e é o seguro na gestação. O perigo é o fígado: CYP2E1 → NAPQI; glutationa esgota; antídoto = NAC. Teto: 2g/d crônico (OMS) / 4g agudo hospitalar; álcool e indutores pioram.</span></div>
+<div class="trap"><span class="wrong">"Piroxicam é de ação curta" / "AINEs absorvem no estômago" / "comida aumenta a biodisponibilidade do AAS"</span> → <span class="right">piroxicam tem meia-vida LONGA (20mg 1×/dia); absorção é no intestino delgado; refeições ↓absorção (exceção da aula: cetoprofeno longe das refeições). Diclofenaco: alimento não muda biodisponibilidade, só atrasa Tmáx.</span></div>
+<div class="trap"><span class="wrong">Doses infladas para pegar</span> → <span class="right">celecoxibe 100mg 12/12h (500mg = pegadinha) · meloxicam 7,5–15mg 1×/dia (50mg = pegadinha) · cetorolaco 10mg 6/6h, máx 40mg/d, ≤5 dias · nimesulida 100mg 12/12h e PROIBIDA <12 anos · ibuprofeno adulto 600mg 3–4×/d.</span></div>
+
+<h3>🟡 Corticoides</h3>
+<div class="trap"><span class="wrong">"Dexametasona causa edema/hipocalemia"</span> → <span class="right">quem tem efeito mineralocorticoide = prednisona/prednisolona (e hidrocortisona). DEXA e BETA = MENOR efeito mineralo + MAIOR potência + meia-vida longa (>30h → maior duração de ação). "Menor mineralo de uso sistêmico" = dexametasona (fluticasona não conta — é inalatória!).</span></div>
+<div class="trap"><span class="wrong">"Corticoide estimula osteoclasto diretamente, por isso suplementa cálcio"</span> → <span class="right">a cadeia dela: ↓absorção intestinal de Ca²⁺ + ↑excreção renal → hipocalcemia → ↑PTH → ↑RANKL/osteoclastos → desmineralização. Suplementa Ca (±vit D) para NÃO ativar o PTH. Nessa asserção o gabarito dela = ambas verdadeiras e a II justifica a I.</span></div>
+<div class="trap"><span class="wrong">"Suspender de uma vez / dosar cortisol depois"</span> → <span class="right">retirada LENTA E GRADUAL + dosar ACTH sérico antes de suspender (avaliar eixo HHA). Tomar pela manhã (até ~10h, ciclo circadiano) reduz a supressão do eixo.</span></div>
+<div class="trap"><span class="wrong">"Inalatório suprime o eixo igual sistêmico" / "budesonida reduz o limiar ao alérgeno"</span> → <span class="right">inalatórios: poucos efeitos sistêmicos, dose e tempo-dependentes. Budesonida AUMENTA o limiar ao alérgeno (↓citocinas/células imunes). Pós-inalação: enxaguar a boca (candidíase) + ingerir água (retirar o resto das cordas vocais → evita disfonia).</span></div>
+<div class="trap"><span class="wrong">"Mecanismo = inibir COX-2" / "reduz lipocortina"</span> → <span class="right">mecanismo nº1 = ↑ SÍNTESE de lipocortina-1 (anexina A1) → inibe fosfolipase A2 (+ ↓transcrição de COX-2 e citocinas). Por isso demora horas (síntese proteica). Doses de prednisona: 10–20mg anti-inflamatória · ≥40mg (≈1mg/kg) imunossupressora · pulsoterapia = dose altíssima para deter doença grave RÁPIDO (não é "dias alternados").</span></div>
+<div class="trap"><span class="wrong">Corticoide errado para o caso</span> → <span class="right">maturação pulmonar fetal (pré-eclâmpsia) = DEXAMETASONA · rinite/asma = budesonida (ou beclometasona) inalatória/nasal · criança/hepatopata = prednisoLONA (ativa; prednisona é pró-fármaco hepático) · efeitos agudos que ela lista: insônia, pesadelos, nervosismo, euforia, ↑apetite, HIPERGLICEMIA (resistência insulínica + gliconeogênese).</span></div>
+
+<h3>🟢 Dor neuropática + canabinoides</h3>
+<div class="trap"><span class="wrong">"Carbamazepina bloqueia canais de cálcio" / "gabapentina é 1ª escolha no trigêmeo"</span> → <span class="right">carbamazepina = canais de SÓDIO e é a 1ª escolha SÓ na neuralgia do trigêmeo (200mg). Gabapentinoides = subunidade α2δ dos canais de CÁLCIO pré-sinápticos → ↓liberação de glutamato/substância P (quem despolariza a fibra são os canais de Na⁺ — "ainda há despolarização").</span></div>
+<div class="trap"><span class="wrong">"Carbamazepina aumenta a meia-vida dos outros fármacos"</span> → <span class="right">é INDUTORA potente de CYP450 → REDUZ meia-vida/nível de ACO, tramadol, CBD/THC... Substituta com o mesmo alvo (Na⁺) sem induzir CYP = LAMOTRIGINA (mas não disponível na atenção primária — ela cobra isso).</span></div>
+<div class="trap"><span class="wrong">"CBD/THC bloqueiam CB1" / "naloxona reverte canabinoide"</span> → <span class="right">são AGONISTAS CB1 (pré-sinápticos → ↓excitabilidade/↓liberação). Naloxona NÃO reverte. Dependência = THC → dopamina mesolímbica. Excreção NÃO é urinária inalterada: lipofílicos, acumulam em tecidos queratinizados (cabelo) — detectáveis dias após parar. Dose que caiu: CBD 10mg/kg/dia em 2 tomadas (faixa 2,5–25), iniciar à noite. Capsaicina tópica = DEPLETA substância P.</span></div>
+<div class="trap"><span class="wrong">Escolher antidepressivo ignorando o resto da receita</span> → <span class="right">paciente já usa fluoxetina/sertralina (ISRS)? → NÃO somar duloxetina/tramadol (serotoninérgica + fluoxetina inibe CYP2D6) → vai de PREGABALINA/GABAPENTINA. Cardiopata/idoso → evitar amitriptilina (anticolinérgica: xerostomia, retenção, arritmia; ADT com MENOR ação antimuscarínica = imipramina*, segundo o gabarito dela). Atenção básica sem psicotrópico → AMITRIPTILINA (acesso!). Menor sedação/antimuscarínico de todos = DULOXETINA (manhã, porque dá insônia).</span></div>
+</div>
+
+<!-- ================= POSOLOGIA ================= -->
+<h2><span class="n">3</span> Tabela-mestre de posologia (o que mata as QDs)</h2>
+<div class="card">
+<p class="small muted">Doses dos gabaritos reais (respostas aceitas/corrigidas por ela) <b>cruzadas com as 4 aulas gravadas de 2026</b> — o que veio da fala dela está marcado com 🎧. <b>Decorar = ~2 pontos garantidos de QD.</b> Aviso literal da aula: <i>"vocês vão ser cobrados pelas FAIXAS terapêuticas, não pelas doses de titulação"</i>.</p>
+
+<h3>Analgésicos / antitérmicos / AINEs</h3>
+<table>
+  <tr><th>Fármaco</th><th>Dose e posologia</th><th>Quando ela cobra / detalhe da aula</th></tr>
+  <tr><td><b>Dipirona</b></td><td>500mg–1g VO 6/6h (até 4×/d) · 🎧 ATAQUE: 1g na dor intensa · efetiva desde 100mg</td><td>Febre do adulto, dengue, cefaleia no hipertenso, escolha hospitalar · 🎧 antitérmico só se febre >38° (senão hipotermia) · EA nº1: hipotensão · agranulocitose: febre + úlceras de mucosa</td></tr>
+  <tr><td><b>Paracetamol</b></td><td>500–750mg 6/6h · máx 2g/d crônico (4g agudo) · 🎧 efetivo já com ≥300mg</td><td>Antitérmico seguro (gestante!) porém 🎧 LENTO (cai em 1,5–2h — não alternar antitérmico) · NAPQI/CYP2E1 → NAC · 🎧 uso crônico por anos = transplante hepático</td></tr>
+  <tr><td><b>AAS</b></td><td>100mg/d no ALMOÇO (antiagregante) · anti-inflamatório 500–1000mg (quase não se usa) · 🎧 IAM: 300mg MASTIGADOS</td><td>Irreversível — plaqueta anucleada, 7–10 dias · 🎧 suspender 7d pré-cirurgia (senão: bolsas de plaquetas) · NUNCA antitérmico (Reye) · 🎧 tópico = queratolítico</td></tr>
+  <tr><td><b>Ibuprofeno</b></td><td>600mg 3–4×/d (comprimidos 400–600) · 🎧 <400mg NÃO é anti-inflamatório</td><td>🎧 4 ações (inclui ANTIAGREGANTE) · um dos 3 únicos com registro p/ febre · CI: dengue/febre desconhecida (2023), pulmão · 🎧 exclusividade dos profenos: fechar canal arterial do neonato (IV, 2 dias)</td></tr>
+  <tr><td><b>Naproxeno</b></td><td>250–500mg 12/12h</td><td>Mioarticular (artrose, muscular) · 🎧 só rede privada: <400mg venda livre, ≥400 atrás do balcão</td></tr>
+  <tr><td><b>Cetoprofeno</b></td><td>🎧 SUS: só PARENTERAL — 100mg/2ml IM (crise de GOTA na UBS, alívio 10–15min) · único que se toma LONGE das refeições</td><td>Anti-inflamatório permitido na criança (faringite) · 🎧 pós-op: risco de trombose → cetoprofeno; risco de sangramento → diclofenaco</td></tr>
+  <tr><td><b>Diclofenaco</b></td><td>50mg 8/8h VO · 75mg 12/12h (IM ou colestiramina) · gel tópico</td><td>🎧 4 sais: sódico=injetável/EV (Voltaren) · potássico=VO (Cataflam) · resinato=gotas · colestiramina=↑meia-vida e ↓irritação de contato · alergia cruzada com AAS (na bula dos dois!)</td></tr>
+  <tr><td><b>Etodolaco</b> 🎧</td><td>300mg até 3×/dia · ~5 dias</td><td>DOR FORTE de origem inflamatória (fratura, pós-op, ortopedia) · "a maior afinidade COX-2 dele é QUASE MENTIRA (6 de 10)" · nunca faringite — "não está na bula, VOU DAR NA PROVA"</td></tr>
+  <tr><td><b>Ác. mefenâmico</b></td><td>500mg 8/8h</td><td>Bula: dismenorreia PRIMÁRIA (Ponstan) · 🎧 cólica por ESPASMO não responde (→ antiespasmódico); a inflamatória (endometriose) sim · EA de correlação: diarreia</td></tr>
+  <tr><td><b>Cetorolaco</b></td><td>10mg VO/SL 6/6h · máx 40mg/d · ≤5 dias</td><td>🎧 "o TOP em analgesia" (dor nociceptiva) · pós-op ambulatorial de dor intensa · SL rápido e intenso (risco de abuso popular)</td></tr>
+  <tr><td><b>Nimesulida</b></td><td>100mg 12/12h · CI <12 anos — 🎧 motivo: HEPATOTOXICIDADE (fígado imaturo)</td><td>Tecidos moles (faringite do adulto) E músculo-esquelético — 🎧 "concorrente do ibuprofeno SEM antitérmico" · 7 de 10 na COX-2 (primeiros dias sem queixa GI) · gota na atenção básica</td></tr>
+  <tr><td><b>Meloxicam</b></td><td>7,5–15mg 1×/dia</td><td>🎧 "REALMENTE mais afim da COX-2 (7 de 10)" — mioarticular CRÔNICO com gastrite · nunca faringite (sem distribuição p/ tecido mole)</td></tr>
+  <tr><td><b>Piroxicam / tenoxicam</b></td><td>20mg 1×/dia (meia-vida LONGA)</td><td>Potentes, sem preferência de COX (5 de 10) → dispepsia cedo, CI gastrite · 🎧 piroxicam SL: ação em ~10min sem injeção (odonto/UBS)</td></tr>
+  <tr><td><b>Celecoxibe</b></td><td>100mg 12/12h (ou 200mg 1×/d) · uso CURTO: 7–15 dias</td><td>Artrose/AR + gastrite/úlcera · CI cardiopata (↓PGI2 com TXA2 preservado) · alergia a sulfa · 🎧 receita RETIDA (risco CV, não dependência) e caro (~R$100/10cp)</td></tr>
+  <tr><td><b>Etoricoxibe</b></td><td>60–90mg 1×/dia (agudos)</td><td>Seletivo COX-2 · 🎧 SÓ ósseo/mioarticular — "sem estudo de distribuição em tecidos moles"</td></tr>
+  <tr><td><b>Tópicos</b> 🎧</td><td>Gel 4–6×/dia sobre pele SECA e FRIA (gelo antes)</td><td>Vasodilatação da inflamação ↑ absorção · fitoterápico Cordia verbenacea (erva-baleeira/Acheflan) > diclofenaco gel — só tópico</td></tr>
+</table>
+
+<h3>Corticoides — com os gabaritos reais de QD</h3>
+<table>
+  <tr><th>Caso que caiu</th><th>Resposta aceita</th></tr>
+  <tr><td>Bronquite aguda, corticoterapia 5 dias</td><td><b>Prednisolona 5mg 1×/dia pela manhã</b> (T5)</td></tr>
+  <tr><td>Artrite reumatoide, 78kg, 5 dias</td><td><b>Prednisona 20mg 1×/dia pela manhã</b> (PM T7)</td></tr>
+  <tr><td>Pneumonia + antibiótico (adulto)</td><td><b>Prednisolona 20mg 1×/dia</b> · associação: ATB + dipirona + prednisolona · 🎧 agudo pede a forma ATIVA ("não quero esperar biotransformação")</td></tr>
+  <tr><td>Criança 4 anos, pneumonia (anti-inflamatório + antitérmico)</td><td><b>Paracetamol + prednisolona</b> (criança/hepatopata = forma ativa; no SUS é a solução líquida)</td></tr>
+  <tr><td>Inflamatório crônico com longa duração de ação</td><td><b>Dexametasona</b> (meia-vida >30h) — veterano respondeu prednisona e perdeu</td></tr>
+  <tr><td>Maturação pulmonar fetal (pré-eclâmpsia)</td><td><b>Dexametasona</b> (alta potência)</td></tr>
+  <tr><td>Rinite alérgica sazonal (profilaxia das crises)</td><td><b>Budesonida 250mcg/dia</b> nasal · 🎧 50–100mcg por narina, máx ~400mcg/d — profilaxia ANTES da estação (↑limiar ao alérgeno)</td></tr>
+  <tr><td>Cushing crônico em dose baixa</td><td>Dexametasona 4mg/dia já causa (potência!)</td></tr>
+</table>
+
+<h3>🎧 Corticoides — doses, potências e regras da aula SP3</h3>
+<table>
+  <tr><th>Item</th><th>O que decorar</th></tr>
+  <tr><td><b>Prednisona × prednisolona</b></td><td>Prednisona = PRÓ-FÁRMACO fraco → fígado → prednisolona (ativa). AGUDO = prednisoLONA · CRÔNICO/imunossupressão = prednisona</td></tr>
+  <tr><td><b>Doses de predniso(lo)na</b></td><td><b>5–10–20mg/d = anti-inflamatória</b> · ~40mg (60kg) = transição · <b>1mg/kg/dia = imunossupressora</b></td></tr>
+  <tr><td><b>Potência / equivalência</b></td><td>Predniso(lo)na ≈ 4–5× o cortisol · dexa/beta ≈ 20× → doses VO de dexa 0,5–6mg · <b>5mg de prednisona ≈ <1mg de dexa/beta</b></td></tr>
+  <tr><td><b>Duração de ação</b></td><td>Curta: prednisona/prednisolona · intermediária: triancinolona (tópica/intra-articular; AME/hospital) · LONGA: dexa/betametasona (>30h)</td></tr>
+  <tr><td><b>Mineralocorticoide</b></td><td>Predniso(lo)na/hidrocortisona = efeito RÁPIDO ("5mg hoje → amanhã dedos inchados"): edema, ↑PA e HIPOCALEMIA · dexa/beta = quase nada → escolha no hipertenso/IC</td></tr>
+  <tr><td><b>Pulsoterapia ≠ dias alternados</b></td><td>Pulso = METILPREDNISOLONA IV hospitalar, dose altíssima (até ~1g/d), deter autoimune grave · dias alternados = dobro da dose dia sim/dia não, só p/ poupar o eixo (EAs oscilantes)</td></tr>
+  <tr><td><b>Retirada</b></td><td>Dose baixa ≤10–15 dias → pode parar direto · resto: desmame gradual · <b>em ~5mg → dosar ACTH</b> antes de zerar · "retirada com doença de base" = ficar na MENOR dose que mantém remissão</td></tr>
+  <tr><td><b>Inalatórios (asma)</b></td><td>100–1000mcg/d (maioria 400–600) · moléculas do SUS: <b>beclometasona e budesonida</b> (partícula leve) · pó seco = só adulto com força inspiratória · bombinha + ESPAÇADOR = criança/idoso/DPOC · ritual: enxaguar → cuspir → tomar água · previne crise (crise = sistêmico)</td></tr>
+  <tr><td><b>Farmacocinética fina</b></td><td>Transporte = TRANSCORTINA · duração de ação = meia-vida BIOLÓGICA (intracelular), não a plasmática · IV = biodisponibilidade 100% · efeito demora: 4–6h, confiável 12h+</td></tr>
+  <tr><td><b>Cálcio/vitamina D</b></td><td>Suplementar Ca se: uso >3 meses OU ≥65 anos OU dose alta · vitamina D: DOSAR antes · osteoporose dupla: hipocalcemia→PTH→osteoclasto E osteoblasto↓OPG→RANKL livre</td></tr>
+</table>
+
+<h3>Dor neuropática — faixas terapêuticas (🎧 "cobro as FAIXAS, não a titulação")</h3>
+<table>
+  <tr><th>Fármaco</th><th>FAIXA e posologia</th><th>Detalhe que ela cobra</th></tr>
+  <tr><td><b>Pregabalina</b></td><td><b>300–600mg/d ÷2</b> · início neuropática: 75mg 12/12h · início FM (QD real): 25mg</td><td>Pós-herpética, diabética, central, FIBROMIALGIA (aprovada) · 🎧 EA típico: GANHO DE PESO · 🎧 SUS/alto custo só p/ FM (e escolheu ela por ser 2×/d)</td></tr>
+  <tr><td><b>Gabapentina</b></td><td><b>900–3600mg/d ÷3</b> (início 300mg, subindo)</td><td>🎧 Fracionada pelo TRANSPORTADOR intestinal saturável · excreção renal inalterada (sem CYP) · EA típico: edema de MMII/constipação · 🎧 NUNCA associar com pregabalina</td></tr>
+  <tr><td><b>Duloxetina</b></td><td><b>60–120mg/d</b> 1×/dia PELA MANHÃ</td><td>Causa insônia/agitação → manhã · 1ª linha diabética · trata dor+depressão · interação serotoninérgica (não somar com ISRS)</td></tr>
+  <tr><td><b>Amitriptilina</b> (tricíclicos)</td><td>Início 25mg à NOITE · <b>faixa na dor: 75–150mg (🎧 maioria fica >100)</b></td><td>A escolha da ATENÇÃO BÁSICA · anticolinérgica (CI cardiopata/idoso) · 🎧 domina por viés de literatura — nortriptilina/imipramina são iguais com bem menos EA · overdose fatal</td></tr>
+  <tr><td><b>Carbamazepina</b></td><td><b>Monoterapia (trigêmeo): ≥600mg/d (600–1200 fracionada)</b> · 🎧 associada: ~100–200mg à NOITE · titular do baixo, tomar após comer</td><td>SÓ trigêmeo como 1ª escolha · 🎧 à noite ("de manhã ninguém fica acordado") · INDUTORA de quase todas as CYPs + autoindução · EAs: diplopia, ataxia, rebaixamento, hiponatremia · é a opção do SUS na AB</td></tr>
+  <tr><td><b>Oxcarbazepina</b> 🎧</td><td>Rede privada (não é do SUS)</td><td>🎧 Ela ensina: a carbamazepina é metabolizada EM oxcarbazepina ativa → por isso dura mais; a oxcarbazepina comprada acaba quando é metabolizada (duração mais curta)</td></tr>
+  <tr><td><b>Antidepressivos (regra)</b> 🎧</td><td>Latência ~30 dias → ponte com tramadol dose baixa</td><td>Precisam bloquear SERT E NAT (tricíclico ou IRSN; ISRS não se prescreve PARA dor) · falha/intolerância → outro DA MESMA classe (até 3×) antes de trocar de classe</td></tr>
+  <tr><td><b>CBD/THC</b></td><td>Caso de prova: CBD 10mg/kg/d ÷2, iniciar à noite · 🎧 bula até ~15mg/kg/d, mas na prática doses bem menores tituladas em gotas (subdose por custo é comum)</td><td>AGONISTAS CB1 · 🎧 só a COMBINAÇÃO THC+CBD tem evidência · RDC jan/2026: cultivo nacional + doença grave refratária · receituário: ≤0,2% THC azul B, acima = amarelo (PF) + TCLE no prontuário · carbamazepina → subterapêutico</td></tr>
+  <tr><td><b>Capsaicina</b> 🎧</td><td>Adesivo/emplastro ou gel tópico, dor neuropática LOCALIZADA</td><td>Depleta substância P · orientar: PIORA no início (queimação) antes do alívio (2–3h) · LAVAR AS MÃOS após manipular</td></tr>
+  <tr><td><b>Opioide na neuropática</b> 🎧</td><td>SÓ agudização/crise (zoster agudo, trauma)</td><td>Nunca contínuo: tolerância em 2–3 meses · AINE/corticoide NÃO tratam neuropática (sem inflamação)</td></tr>
+</table>
+
+<h3>🎧 Opioides — doses, nichos e regras (aula SP5 + provas)</h3>
+<table>
+  <tr><th>Fármaco / tema</th><th>Dose e posologia</th><th>O que ela cobra</th></tr>
+  <tr><td><b>Escada da OMS</b></td><td>Fracos (dor moderada ~4–6): <b>tramadol e codeína</b> · Fortes (7–10): <b>morfina, fentanila, meperidina, oxicodona, metadona</b></td><td>Regras: VO preferencial · pelo relógio · pela escada · individualizado. Opioide NUNCA é 1ª linha (tolerância/dependência)</td></tr>
+  <tr><td><b>Morfina</b></td><td>5–10mg VO 4/4h (começa 2,5–5 e titula) · IV no IAM · 🎧 <b>VO 5mg ≈ 1mg IV</b> (1ª passagem!)</td><td>UGT → M3G (convulsivante — entra na <b>BHE INFLAMADA</b>) / M6G (analgésico) · 🎧 via CYP3A4 = metabólito INATIVO · nicho: enfermaria · convulsionou → opioide NUNCA MAIS (sem tolerância a esse efeito)</td></tr>
+  <tr><td><b>Codeína</b></td><td>15–30mg 4/4–6/6h · máx 240mg/d</td><td>Pró-fármaco: CYP2D6 → morfina (o efeito real); a maioria vai pela 3A4 = inativa · fluoxetina (inibe 2D6) = falha · 🎧 <b>inibir a 3A4 = MAIS morfina que o esperado</b> · EA: broncoespasmo · zoster 5/10 = codeína</td></tr>
+  <tr><td><b>Tramadol</b></td><td>50–100mg 4/4–6/6h · máx 400mg/d</td><td>Dual: μ fraco + ↑NA/5-HT · metabólito ATIVO prolonga o efeito · 🎧 <b>síndrome serotoninérgica: hipertermia+agitação+rigidez → "PROVA REAL DA DIPIRONA" (não baixou = não é febre) → medidas FÍSICAS + suspender</b> · NÃO é contraindicado com antidepressivo (gabarito oficial)</td></tr>
+  <tr><td><b>Metadona</b></td><td>Analgesia: 2,5–10mg VO 6/6–12/12h (QD clássica: 10mg 12/12h) · Dependência: 🎧 dose por <b>TABELA DE EQUIVALÊNCIA</b> da droga usada (ger. 15–30mg/d), entrega supervisionada, redução SEMANAL</td><td>Longa ação = desmame (UTI/fentanila) e dor oncológica domiciliar · 🎧 depósito ADIPOSO → equilíbrio só no ~4º dia → titular do baixo · população típica: profissionais de CC/UTI/emergência</td></tr>
+  <tr><td><b>Fentanila</b></td><td>Adesivo transdérmico 72h (oncológico/sem VO) · IV em UTI (início rápido, ação curta)</td><td>🎧 Escolha no paciente INTUBADO (anestesia balanceada) — extubou, faz DESMAME · depósito no tecido adiposo (efeito persiste após remover o adesivo)</td></tr>
+  <tr><td><b>Meperidina</b></td><td>Só IV, hospitalar — duração CURTA</td><td>🎧 Nicho: pós-operatório IMEDIATO (primeiras horas) · "longa duração/baixo risco de depressão respiratória" = PEGADINHA oficial (é curta + depressora dose-dependente)</td></tr>
+  <tr><td><b>Oxicodona</b></td><td>VO, rede privada</td><td>Analgésico forte de longa duração — paciente ONCOLÓGICO em escalada/rotação de opioide</td></tr>
+  <tr><td><b>Naloxona</b></td><td>IV, aguda</td><td>🎧 No Brasil: EXCLUSIVA p/ depressão respiratória da intoxicação + reversão pós-anestésica · NÃO reverte canabinoide · EUA/Canadá: crise do fentanil (população carrega)</td></tr>
+  <tr><td><b>Naltrexona</b></td><td>VO, dependência/compulsões</td><td>Bloqueia os receptores opioides das fibras GABA (até endorfinas endógenas) → compulsão sem prazer · 🎧 frequentemente associada à <b>BUPROPIONA</b> (repõe dopamina; Contrave na obesidade; SUS tem os dois separados)</td></tr>
+  <tr><td><b>Receptores</b></td><td colspan="2">🎧 <b>μ1 = SNC/analgesia · μ2 = trato GI (constipação)</b> · μ no tronco → depressão respiratória = MAIOR RISCO · κ/δ límbicos → despersonalização/desrealização, euforia⇄disforia · mecanismo: Gi/Go → ↓AMPc · fecha Ca²⁺ pré (↓liberação) · ABRE K⁺ pós (hiperpolariza) — "inibe o efluxo de K⁺" = FALSO</td></tr>
+  <tr><td><b>Tolerância</b></td><td colspan="2">β-arrestinas → invaginação DIÁRIA e progressiva ("10 receptores hoje, 9 amanhã… em ~5 dias a dose não segura") → sobe a dose até o teto → depois ENCURTA a posologia (6/6→4/4) · oncológico terminal = bomba de infusão · 🎧 <b>a depressão respiratória TAMBÉM tolera</b> (permite escalar) · NÃO toleram: constipação (termina em lavagem intestinal), miose e convulsão · DEPENDÊNCIA = <b>DESINIBIÇÃO</b> dopaminérgica (μ/κ nas fibras GABA) — "nunca falem estimulação; quem estimula direto é a COCAÍNA"</td></tr>
+  <tr><td><b>EAs práticos (hospital)</b></td><td colspan="2">🎧 Náusea/vômito: TODOS estimulam a zona quimiorreceptora → <b>SEMPRE antiemético preventivo</b> · prurido por histamina, concentrado OROFACIAL, pior no parenteral · retenção urinária → <b>alta só depois de urinar</b> · constipação severa (μ2) · euforia⇄disforia oscilando (desinibição) · abstinência ANTECIPATÓRIA após ~30 dias (pede o remédio antes da hora) · hiperalgesia induzida → suspender/rodar · gestante PODE (analgesia de parto; cuidar depressão neonatal)</td></tr>
+  <tr><td><b>Retirada / SUS</b></td><td colspan="2">Retirada: −10% nos primeiros dias → depois 25% · abstinência: MIDRÍASE, rinorreia, piloereção, diarreia, mialgia, ansiedade (readministrar suprime rápido) · evitar BZD na retirada · 🎧 <b>SUS: só codeína, tramadol e morfina ISOLADOS — combinados opioide+AINE (ex.: codeína+paracetamol) = rede privada</b> (pós-cirúrgico)</td></tr>
+</table>
+</div>
+
+<!-- ================= MAPA DE DECISÃO ================= -->
+<h2><span class="n">4</span> Mapa "perfil do paciente → fármaco" (o coração dos casos clínicos)</h2>
+<div class="card">
+<table>
+  <tr><th>Se o caso disser…</th><th>A resposta é…</th><th>Porque…</th></tr>
+  <tr><td>Suspeita de dengue</td><td>Dipirona (ou paracetamol)</td><td>AAS/AINE → ↓TXA2 → hemorragia</td></tr>
+  <tr><td>Cefaleia/febre + hipertenso</td><td>Dipirona 500mg</td><td>AINEs sobem PA; dipirona até hipotensa</td></tr>
+  <tr><td>Febre/inflamação + pneumonia, bronquite ou asma</td><td>Corticoide (prednisolona/prednisona) ± dipirona; NUNCA AINE</td><td>AINE desvia AA para LOX → leucotrienos → broncoespasmo</td></tr>
+  <tr><td>Artrose/AR crônica + gastrite ou úlcera</td><td>Celecoxibe 100mg 12/12h ou meloxicam 15mg 1×/d</td><td>Poupam COX-1 gástrica</td></tr>
+  <tr><td>Dor osteoartrítica leve + hipertensão + gastrite juntas</td><td>Dipirona 500mg</td><td>Coxibe: risco CV; não seletivo: gastrite. Sobra o analgésico central</td></tr>
+  <tr><td>Dor aguda moderada–severa (pós-operatório, hospital)</td><td>Cetorolaco 10mg 6/6h (≤5d)</td><td>O AINE "analgésico potente"</td></tr>
+  <tr><td>Pós-operatório em casa (dor média)</td><td>Tramadol 50mg 6/6h (± AINE)</td><td>Degrau 2, VO</td></tr>
+  <tr><td>Crise de gota</td><td>Cetoprofeno 100mg IM / etodolaco; na atenção básica: nimesulida</td><td>Acesso + potência anti-inflamatória</td></tr>
+  <tr><td>Dismenorreia primária</td><td>Ácido mefenâmico</td><td>Clássico dela</td></tr>
+  <tr><td>Criança com faringite (anti-inflamatório)</td><td>Cetoprofeno</td><td>Nimesulida <12a proibida; paracetamol/dipirona não são anti-inflamatórios</td></tr>
+  <tr><td>Criança 4a com pneumonia (antitérmico+anti-inflamatório)</td><td>Paracetamol + prednisolona</td><td>Sem AINE (pulmão!), prednisolona é a ativa</td></tr>
+  <tr><td>Dor torácica do IAM</td><td>Morfina IV</td><td>Rápida e potente (IM não: vasoconstrição ↓absorção)</td></tr>
+  <tr><td>Herpes zoster agudo com dor intensa</td><td>Tramadol</td><td>Dor aguda intensa → opioide; AINE não resolve neuropática</td></tr>
+  <tr><td>Neuropatia pós-herpética instalada</td><td>Pregabalina (300mg/d ÷2)</td><td>1ª linha</td></tr>
+  <tr><td>Neuropatia diabética "pura"</td><td>Duloxetina 60mg manhã (ou pregabalina)</td><td>1ª linha; trata ansiedade/depressão junto</td></tr>
+  <tr><td>Neuropática + já usa ISRS (fluoxetina/sertralina)</td><td>Pregabalina/gabapentina</td><td>Evita sd. serotoninérgica e inibição da CYP2D6</td></tr>
+  <tr><td>Neuropática + hipertenso/cardiopata/idoso</td><td>Pregabalina/gabapentina (evitar ADT)</td><td>Amitriptilina = anticolinérgica/arritmia</td></tr>
+  <tr><td>Neuropática na atenção básica, sem psicotrópico</td><td>Amitriptilina</td><td>ACESSO — pregabalina/duloxetina não têm na AB</td></tr>
+  <tr><td>Neuralgia do trigêmeo</td><td>Carbamazepina 200mg</td><td>Única indicação em que ela é 1ª escolha</td></tr>
+  <tr><td>Fibromialgia (+ fluoxetina, ACO, zolpidem)</td><td>Pregabalina (início 25mg)</td><td>Aprovada p/ FM; não mexe com serotonina</td></tr>
+  <tr><td>UTI + fentanila + dependência</td><td>Metadona 10mg 12/12h, desmame gradual</td><td>Longa ação ↔ evita abstinência</td></tr>
+  <tr><td>Dependência química ambulatorial</td><td>Naltrexona VO</td><td>Antagonista, tira o prazer</td></tr>
+  <tr><td>Intoxicação aguda por opioide</td><td>Naloxona IV</td><td>Tríade: miose + depressão resp. + coma</td></tr>
+  <tr><td>Dor oncológica em casa, sem via oral confiável</td><td>Fentanila adesivo 72h (ou metadona VO)</td><td>Longa duração domiciliar</td></tr>
+</table>
+</div>
+
+<!-- ================= PLANO ================= -->
+<h2><span class="n">5</span> Plano até 04/09 (âncora no fim de semana)</h2>
+<div class="card">
+<p class="small muted">Pensado em volta do que já existe: APF SP5 + fechamento 26/08, provas de Anato/Fisio 27/08 e Pato 28/08, Lab 02/09, Teste de Progresso 02–03/09. Farmaco ocupa os 2 fins de semana + brechas "sem culpa".</p>
+
+<div class="step"><div class="when">Esta semana<br>(17–21/08)</div><div class="what"><b>Brechas de 30–60′:</b> ler este plano + começar os flashcards de dose (10′/dia na tabela-mestre). <b>Sexta 21/08 (aula de opioides):</b> gravar o áudio, fotografar TODO quadro/slide e me mandar → eu fecho o material do 4º bloco com o que ela realmente falou em 2026.</div></div>
+<div class="step"><div class="when">Sáb 22 + Dom 23<br>(2 blocos de 2–3h)</div><div class="what"><b>Rodada 1 — AINEs (sáb) e Corticoides (dom).</b> Método teste-primeiro: refazer as questões das provas T5–T11 desses blocos SEM olhar nada → corrigir com gabarito comentado → só então revisar o slide do que errou. Fechar cada dia escrevendo 2 QDs à mão (fármaco+dose+posologia completos).</div></div>
+<div class="step"><div class="when">Semana 24–28/08<br>(semana pesada)</div><div class="what">Prioridade é SP5/APF (26) e as provas de 27–28. Farmaco entra só como <b>flashcard de dose, 10–15′/dia</b> (banheiro, fila, ônibus). Nada de conteúdo novo.</div></div>
+<div class="step"><div class="when">Sáb 29 + Dom 30<br>(2 blocos de 2–3h)</div><div class="what"><b>Rodada 2 — Opioides (sáb, com o material da aula nova) e Dor neuropática + canabinoides (dom).</b> Mesmo método teste-primeiro. Domingo à tarde: <b>simulado completo estilo Vânia</b> (18 objetivas + 5 QDs, cronometrado) que eu monto pra você.</div></div>
+<div class="step"><div class="when">Seg–Qui 31/08–03/09</div><div class="what">Semana do Teste de Progresso — Farmaco só nas brechas: <b>refazer apenas os erros</b> do simulado + radar de pegadinhas (15′). Qui 03/09 à noite: revisão-relâmpago de 45′ (tabela de doses + radar inteiro, em voz alta).</div></div>
+<div class="step"><div class="when">Sex 04/09<br>(prova 15h20)</div><div class="what">De manhã/almoço: SÓ flashcards de dose (20′) e releitura do radar. Nada novo. Na prova: sublinhar fármaco-dose-mecanismo de cada afirmativa antes de julgar (é onde ela esconde a palavra trocada).</div></div>
+
+<div class="check"><b>Regra de ouro do tempo:</b> ±6–8h líquidas de Farmaco nesses 18 dias bastam — desde que sejam em cima de QUESTÃO e QD escrita, não releitura passiva de slide. As provas antigas são o melhor preditor da prova real que você poderia ter.</div>
+</div>
+
+<!-- ================= MÉTODO ================= -->
+<h2><span class="n">6</span> Método de cada sessão (como estudar)</h2>
+<div class="card">
+<ul>
+  <li><b>1. Teste-primeiro:</b> questão antes de teoria, sempre. Errou → marca a classe do erro (conteúdo / interpretação / atenção / divergência fonte×aula) e só então abre o slide daquele ponto.</li>
+  <li><b>2. QD à mão:</b> toda sessão termina escrevendo 1–2 discursivas completas (fármaco + dose + posologia + justificativa mecanística em 2–4 linhas, como nas respostas-modelo das PMs). É o formato exato que ela corrige.</li>
+  <li><b>3. Leitura desconfiada:</b> em afirmativa I–V, sublinhe: fármaco, dose, enzima/canal, e palavras absolutas (todos, nunca, somente, irreversível). A pegadinha mora aí.</li>
+  <li><b>4. Asserção-razão:</b> julgue cada proposição isolada ANTES de pensar na conexão "porque". O erro clássico dos veteranos foi acertar V/V e errar a justificativa.</li>
+  <li><b>5. Áudio da aula manda:</b> onde slide antigo, livro e aula 2026 divergirem, anote "vale a aula" (como nimesulida/COX-3 na SP4). Me mande os áudios que eu extraio essas frases-lei.</li>
+  <li><b>6. Atividades do AVA:</b> quando ela liberar atividade da sua turma, faça com calma e me mande print — historicamente as questões REAPARECEM na prova.</li>
+</ul>
+</div>
+
+<footer>Gerado em 17/08/2026 a partir de Provas Farmaco.pdf (T5–T11 + PMs + atividades AVA) · Tabela-mestre revisada em 21/08 com as 4 aulas gravadas de 2026 (itens 🎧) · Prova A1: 04/09/2026</footer>
+</div>
+</body>
+</html>

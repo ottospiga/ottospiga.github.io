@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisão-Relâmpago · A1 Anato Seccional + Fisio · 27/08</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a2332; --muted:#5a6a7e;
+    --accent:#0e7490; --accent-soft:#e0f2f7;
+    --danger:#b91c1c; --danger-soft:#fee2e2;
+    --ok:#15803d; --ok-soft:#dcfce7;
+    --warn:#a16207; --warn-soft:#fef9c3;
+    --purple:#6d28d9; --purple-soft:#ede9fe;
+    --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;font-size:15px}
+  .wrap{max-width:880px;margin:0 auto;padding:24px 16px 80px}
+  header{background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;border-radius:16px;padding:22px 22px 18px;margin-bottom:18px}
+  header h1{margin:0 0 6px;font-size:22px;letter-spacing:.2px}
+  header .sub{opacity:.92;font-size:14px}
+  .datebar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .datebar .pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  h2{font-size:18px;margin:30px 0 8px;display:flex;align-items:center;gap:8px}
+  h2 .n{background:var(--accent);color:#fff;border-radius:8px;min-width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  h2.fisio .n{background:var(--purple)}
+  h3{font-size:15px;margin:16px 0 6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .muted{color:var(--muted)}
+  .small{font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+  th{text-align:left;background:var(--accent-soft);color:#0c4a5e;padding:6px 8px;border:1px solid var(--line);font-size:12.5px}
+  td{padding:5px 8px;border:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tblwrap{overflow-x:auto}
+  .tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600;margin-right:4px;white-space:nowrap}
+  .t-red{background:var(--danger-soft);color:var(--danger)}
+  .t-green{background:var(--ok-soft);color:var(--ok)}
+  .t-blue{background:var(--accent-soft);color:#0c4a5e}
+  .t-purple{background:var(--purple-soft);color:var(--purple)}
+  .t-yellow{background:var(--warn-soft);color:var(--warn)}
+  .trap{border-left:4px solid var(--danger);background:#fff;border-radius:10px;padding:9px 13px;margin:8px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px}
+  .trap .wrong{color:var(--danger);font-weight:600}
+  .trap .right{color:var(--ok);font-weight:600}
+  details{border:1px solid var(--line);border-radius:10px;margin:7px 0;background:#fff}
+  summary{cursor:pointer;padding:9px 13px;font-weight:600;font-size:14px;list-style:none;display:flex;align-items:flex-start;gap:8px}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸";color:var(--accent);transition:.15s;flex:0 0 auto}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .inner{padding:2px 16px 11px;font-size:14px}
+  details .inner p{margin:5px 0}
+  ul{margin:6px 0;padding-left:20px}
+  li{margin:3px 0}
+  .flow{background:var(--accent-soft);border-radius:10px;padding:9px 13px;margin:8px 0;font-size:13.5px;font-weight:600;color:#0c4a5e;overflow-x:auto;white-space:nowrap}
+  .timebox{display:flex;align-items:center;gap:8px;background:var(--warn-soft);border:1px solid #e9d98a;border-radius:10px;padding:8px 13px;margin:10px 0;font-size:13.5px;font-weight:600;color:var(--warn)}
+  .lam{color:var(--accent);font-weight:700;white-space:nowrap}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>⚡ Revisão-Relâmpago · A1 · quinta 27/08</h1>
+  <div class="sub">Anatomia Seccional (cabeça e pescoço) + Fisiologia (dor) — feita pra 30 minutos, das 7:05 às 7:35. Nada aqui é novo: é só reativar o que você viu ontem.</div>
+  <div class="datebar">
+    <span class="pill">🧠 7:05–7:25 · Anato</span>
+    <span class="pill">💜 7:25–7:35 · Fisio</span>
+    <span class="pill">📝 Prova Anato 8:40</span>
+    <span class="pill">📝 Prova Fisio 10:20</span>
+  </div>
+</header>
+
+<div class="timebox">⏱️ Como usar: leia o mapa dos cortes (3 min) → responda as perguntas do prof ANTES de abrir cada resposta (12 min) → decoreba de 60s (5 min) → Fisio (10 min). No trajeto/entre as provas: só as pegadinhas de Fisio.</div>
+
+<!-- ================= ANATO ================= -->
+<h2><span class="n">1</span> Mapa dos 14 cortes em 3 minutos</h2>
+<div class="card">
+  <p class="small muted" style="margin-top:0">Primeiro reflexo diante de qualquer lâmina: <b>me localizar</b>. Axial (1–10, de cima pra baixo) ou coronal (11–14, da frente pra trás)? As âncoras em <span class="tag t-yellow">amarelo</span> são as que estavam marcadas no PDF com nomes.</p>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:52px">Prancha</th><th style="width:170px">Onde estou</th><th>Âncoras pra reconhecer</th></tr>
+    <tr><td><b>1</b></td><td>Axial · olhos + ponte</td><td>Lente, corpo vítreo, n. óptico no canal óptico · hipófise + seio cavernoso · <span class="tag t-yellow">a. basilar</span> na fossa interpeduncular · <span class="tag t-yellow">verme do cerebelo</span> · <span class="tag t-yellow">seio sagital sup.</span> · corno occipital do <span class="tag t-yellow">ventrículo lateral</span></td></tr>
+    <tr><td><b>2</b></td><td>Axial · ponte / seio esfenoidal</td><td>Seio esfenoidal + clivo · <b>n. trigêmeo (V)</b> saindo da ponte · parte petrosa do temporal · <span class="tag t-yellow">carótida interna</span> · seio cavernoso</td></tr>
+    <tr><td><b>3</b></td><td>Axial · ATM / ângulo pontocerebelar</td><td><span class="tag t-yellow">Cabeça da mandíbula</span> na fossa mandibular · cisterna pontocerebelar com <b>NC VII e VIII</b> · seio maxilar · seio transverso</td></tr>
+    <tr><td><b>4</b></td><td>Axial · nasofaringe / bulbo</td><td><span class="tag t-yellow">Tuba auditiva</span> + cóano + <span class="tag t-yellow">parte nasal da faringe</span> · glândula parótida + meato acústico externo · <b>NC IX e X</b> junto à jugular interna · seio sigmóideo · bulbo</td></tr>
+    <tr><td><b>5</b></td><td>Axial · atlas–áxis</td><td><span class="tag t-yellow">Dente do áxis</span> + <span class="tag t-yellow">lig. transverso do atlas</span> (art. atlantoaxial mediana) · <b>NC IX, X, XI, XII</b> · <span class="tag t-yellow">a. vertebral</span> · pterigóideos + masseter · palato duro/mole</td></tr>
+    <tr><td><b>6</b></td><td>Axial · laringe alta (~C5)</td><td><span class="tag t-yellow">Cartilagem epiglótica</span> + <span class="tag t-yellow">aritenóidea</span> + vestíbulo da laringe · recesso piriforme · <span class="tag t-yellow">cartilagem tireóidea</span> · ECM · jugulares int./ext.</td></tr>
+    <tr><td><b>7</b></td><td>Axial · ~C6</td><td>Glândula tireoide · <b>m. constritor inferior da faringe</b> · recesso piriforme · escalenos anterior/médio · medula espinal</td></tr>
+    <tr><td><b>8</b></td><td>Axial · C7</td><td>Glândula tireoide + cartilagens tireóidea/aritenóidea · <b>n. espinal C5</b> · escalenos + levantador da escápula + trapézio · arco de T1</td></tr>
+    <tr><td><b>9</b></td><td>Axial · transição C7–T1</td><td><b>Cartilagem cricóidea</b> · <span class="tag t-yellow">esôfago</span> atrás · <b>n. frênico</b> sobre o escaleno anterior · tronco tireocervical + a. tireóidea inferior · n. espinal T1</td></tr>
+    <tr><td><b>10</b></td><td>Axial · T1 / abertura superior do tórax</td><td>Traqueia + <span class="tag t-yellow">esôfago</span> · <b>cúpula da pleura</b> · costelas I–III · <span class="tag t-yellow">a. carótida comum</span> + vago na bainha · a. transversa do pescoço</td></tr>
+    <tr><td><b>11</b></td><td>Coronal · face anterior (órbita + boca)</td><td>Molares + m. bucinador · assoalho da boca: <b>milo-hióideo, gênio-hióideo, genioglosso, digástrico (v. anterior)</b> · conchas/meatos nasais · n. infraorbital · <span class="tag t-yellow">células etmoidais</span></td></tr>
+    <tr><td><b>12</b></td><td>Coronal · órbita posterior</td><td><b>N. óptico no meio dos 4 retos</b> + oblíquo superior + levantador da pálpebra · bulbo olfatório · seio maxilar · língua</td></tr>
+    <tr><td><b>13</b></td><td>Coronal · ramo da mandíbula</td><td>Ramo da mandíbula com <b>n./a./v. alveolares inferiores</b> no canal · pterigóideo medial + masseter (sanduíche do ramo) · palato mole</td></tr>
+    <tr><td><b>14</b></td><td>Coronal · hipófise + faringe</td><td><span class="tag t-yellow">Hipófise</span> na sela + <b>seio cavernoso</b> (III, IV, V1, V2 na parede; VI + carótida dentro) · <span class="tag t-yellow">3 partes da faringe</span> (nasal/oral/laríngea) + tonsila + úvula · núcleos da base: caudado, putame, <b>cápsula interna</b>, corpo caloso, <span class="tag t-yellow">ventrículo lateral</span> · a. cerebral anterior</td></tr>
+  </table>
+  </div>
+</div>
+
+<h2><span class="n">2</span> As perguntas que o prof fez em sala (responda antes de abrir)</h2>
+<div class="card">
+  <p class="small muted" style="margin-top:0">São as do compilado <b>Estruturas_UC_13 ANATOMIA</b> — a maior chance de reaparecer na prova. <span class="lam">L3-6</span> = prancha 3, estrutura 6.</p>
+
+  <details><summary><span class="lam">L1-4</span> Glândula lacrimal — onde drena?</summary><div class="inner"><p><b>Direto:</b> ductos excretores → <b>fórnice conjuntival superior</b>. Depois a lágrima segue: pontos → canalículos → saco lacrimal → ducto nasolacrimal → <b>meato nasal inferior</b>. <span class="tag t-red">pegadinha</span> "meato nasal" sozinho é a resposta incompleta que rolou em sala.</p></div></details>
+
+  <details><summary><span class="lam">L2-7</span> Carótida interna — quais as partes?</summary><div class="inner"><p><b>Cervical → petrosa → cavernosa → cerebral</b> (de baixo pra cima, na ordem do trajeto).</p></div></details>
+
+  <details><summary><span class="lam">L3-6</span> Cabeça da mandíbula — articula em qual estrutura óssea?</summary><div class="inner"><p><b>Fossa mandibular</b> (fossa articular do osso temporal). <span class="tag t-red">pegadinha</span> NÃO é "fossa submandibular" — esse erro estava nas anotações de sala.</p></div></details>
+
+  <details><summary><span class="lam">L3-4</span> Esfenoide — quais as partes?</summary><div class="inner"><p><b>Corpo, asas menores, asas maiores e processos pterigoides.</b></p></div></details>
+
+  <details><summary><span class="lam">L4-28</span> Seio sigmóideo — termina onde?</summary><div class="inner"><p>No <b>forame jugular</b>, continuando como <b>veia jugular interna</b>. Trajeto: seio transverso → sigmóideo → forame jugular → VJI.</p></div></details>
+
+  <details><summary><span class="lam">L5-22</span> Jugular interna une-se a qual veia para formar a braquiocefálica?</summary><div class="inner"><p>À <b>veia subclávia</b>.</p></div></details>
+
+  <details><summary><span class="lam">L6-11</span> Artéria vertebral — origem?</summary><div class="inner"><p><b>Artéria subclávia</b> (1º ramo). Sobe pelos forames transversos de C6→C1.</p></div></details>
+
+  <details><summary><span class="lam">L7-25</span> Escaleno anterior separa qual artéria de qual veia?</summary><div class="inner"><p><b>Veia subclávia ANTERIOR</b> ao músculo · <b>artéria subclávia POSTERIOR</b> (junto com o plexo braquial, que fica atrás da artéria). Sobre a 1ª costela, de frente pra trás: <b>veia → escaleno anterior → artéria → plexo</b>.</p></div></details>
+
+  <details><summary><span class="lam">L8-8</span> Nervo espinal C5 — região de inervação?</summary><div class="inner"><p>Entra no <b>plexo braquial (C5–T1)</b> → ombro/deltoide e face lateral do braço (dermátomo C5). Também contribui pro <b>n. frênico (C3–C5)</b>.</p></div></details>
+
+  <details><summary><span class="lam">L9-14</span> Nervo espinal T1 — sensitivo, motor ou misto?</summary><div class="inner"><p><b>Misto</b> — TODO nervo espinal é misto (raiz dorsal sensitiva + ventral motora), sem exceção.</p></div></details>
+
+  <details><summary><span class="lam">L10-25</span> Esôfago perfura o diafragma em qual nível?</summary><div class="inner"><p><b>T10</b> (hiato esofágico, com os troncos vagais). Bônus: VCI em <b>T8</b>, aorta em <b>T12</b> — regra 8-10-12.</p></div></details>
+
+  <details><summary><span class="lam">L11-20</span> Milo-hióideo — inserção?</summary><div class="inner"><p>Origem na linha milo-hióidea da mandíbula → inserção na <b>rafe mediana e corpo do hioide</b>. É o diafragma do assoalho da boca; inervação: n. milo-hióideo (ramo de <b>V3</b>).</p></div></details>
+
+  <details><summary><span class="lam">L12-8</span> Nervo óptico — emergência craniana?</summary><div class="inner"><p>Sai da órbita pelo <b>canal óptico</b> (asa menor do esfenoide), acompanhado da <b>a. oftálmica</b>, e segue ao quiasma.</p></div></details>
+
+  <details><summary><span class="lam">L14-31</span> Hipófise — divisão anterior e posterior?</summary><div class="inner"><p><b>Adeno-hipófise (anterior)</b>: origem epitelial, PRODUZ GH, TSH, ACTH, FSH, LH, prolactina. <b>Neuro-hipófise (posterior)</b>: origem neural, ARMAZENA/libera ADH e ocitocina (produzidos no hipotálamo). Conecta ao hipotálamo pelo infundíbulo, na sela túrcica.</p></div></details>
+
+  <details><summary><span class="lam">L2-22</span> Artéria basilar — como se forma e onde fica?</summary><div class="inner"><p><b>União das duas artérias vertebrais</b>, no sulco basilar da <b>face anterior da ponte</b>.</p></div></details>
+
+  <details><summary><span class="lam">L3-28</span> Além do occipital, quais os lobos do cérebro?</summary><div class="inner"><p><b>Frontal, parietal, temporal</b> (+ ínsula, o "quinto lobo").</p></div></details>
+
+  <details><summary><span class="lam">L6-1</span> As pregas vocais estão acima ou abaixo da epiglote?</summary><div class="inner"><p><b>Abaixo.</b> Escada da laringe (C3→C6): epiglote (C3) → vestíbulo → pregas vestibulares (falsas) → <b>pregas vocais (~C4–C5, na tireóidea)</b> → cavidade infraglótica → cricóidea (C6) → traqueia.</p></div></details>
+</div>
+<h2><span class="n">3</span> Complementares que o prof puxou</h2>
+<div class="card">
+  <details><summary>Cada seio paranasal drena em qual meato?</summary><div class="inner">
+    <div class="tblwrap"><table>
+      <tr><th>Desemboca em</th><th>Quem chega lá</th></tr>
+      <tr><td><b>Meato médio</b></td><td>Seio <b>frontal</b>, seio <b>maxilar</b> (óstio no hiato semilunar), células etmoidais <b>anteriores</b></td></tr>
+      <tr><td><b>Meato superior</b></td><td>Células etmoidais <b>posteriores</b></td></tr>
+      <tr><td><b>Recesso esfenoetmoidal</b></td><td>Seio <b>esfenoidal</b></td></tr>
+      <tr><td><b>Meato inferior</b></td><td>NENHUM seio — só o <b>ducto nasolacrimal</b></td></tr>
+    </table></div>
+    <p class="small muted">Mnemônico SAME: <b>S</b>phenoidal→recesso · <b>A</b>nterior ethmoid + <b>M</b>axillary + frontal→médio · posterior <b>E</b>thmoid→superior.</p>
+  </div></details>
+
+  <details><summary>Qual artéria irriga o olho?</summary><div class="inner"><p><b>A. oftálmica</b> — ramo da <b>carótida interna</b> (logo após sair do seio cavernoso), entra pelo <b>canal óptico</b> junto do NC II. A retina fica com a <b>a. central da retina</b> (ramo dela). A lente e a córnea são <b>avasculares</b>.</p></div></details>
+
+  <details><summary>Quem irriga cerebelo e tronco encefálico?</summary><div class="inner"><p><b>Sistema vertebrobasilar</b>: <b>PICA</b> ← vertebral · <b>AICA</b>, <b>aa. pontinas</b> e <b>cerebelar superior (SCA)</b> ← basilar · <b>a. cerebral posterior</b> = ramo terminal da basilar (irriga lobo occipital). Ponte = ramos pontinos da basilar.</p></div></details>
+
+  <details><summary>Qual veia NÃO passa pela braquiocefálica antes da cava?</summary><div class="inner"><p><b>V. ázigos</b> — sobe pelo tórax posterior, arqueia sobre a raiz do pulmão direito e desemboca <b>direto na veia cava superior</b>.</p></div></details>
+
+  <details><summary>Qual o único sangue venoso que não vai pro átrio direito?</summary><div class="inner"><p>O das <b>veias pulmonares</b> (oxigenado) → <b>átrio ESQUERDO</b>.</p></div></details>
+
+  <details><summary>Quais nervos cranianos NÃO são mistos?</summary><div class="inner"><p><b>Sensitivos puros: I, II, VIII.</b> <b>Motores: III, IV, VI, XI, XII.</b> <b>Mistos: V, VII, IX, X.</b> E todo nervo <b>espinal</b> é misto, sem exceção.</p></div></details>
+
+  <details><summary>Poliomielite — o que acontece no corno anterior?</summary><div class="inner"><p>Destrói os <b>motoneurônios inferiores (alfa)</b> do corno <b>anterior</b> → <b>paralisia FLÁCIDA + atrofia + arreflexia</b> (fasciculações na fase aguda). Contraste: lesão de NM superior = espástica, hiper-reflexia, sem atrofia importante.</p></div></details>
+
+  <details><summary>Infecção sublingual/submandibular — qual o risco?</summary><div class="inner"><p>Os espaços são separados pelo <b>milo-hióideo</b> mas se comunicam na borda posterior dele → infecção odontogênica (molares inferiores) vira <b>angina de Ludwig</b>: celulite bilateral do assoalho da boca, empurra a língua pra cima/trás → <b>obstrução de via aérea</b>; pode descer ao mediastino.</p></div></details>
+</div>
+
+<h2><span class="n">4</span> Decoreba de 60 segundos</h2>
+<div class="card">
+  <h3 style="margin-top:0">Sangue venoso da cabeça (o caminho do LCS ao pescoço)</h3>
+  <div class="flow">Sagital superior (recebe LCS pelas granulações aracnóideas) → confluência → transverso → sigmóideo → forame jugular → jugular interna</div>
+  <div class="flow">Sagital inferior + v. cerebral magna (Galeno) → seio RETO → confluência</div>
+  <p class="small">Seio cavernoso: <b>parede lateral = III, IV, V1, V2</b> · <b>dentro = VI + carótida interna</b>. Foice do cérebro: margens = sagital sup. (fixa) e sagital inf. (livre). Tentório = prega <b>horizontal</b>; na incisura passa o <b>mesencéfalo</b>.</p>
+
+  <h3>Inervações batidas</h3>
+  <ul>
+    <li><b>Extraoculares:</b> tudo NC III, exceto <b>R</b>eto <b>L</b>ateral = VI e <b>O</b>blíquo <b>S</b>uperior = IV ("LR6-SO4, resto 3"). Reto medial = adução; reto lateral = abdução.</li>
+    <li><b>Mastigação</b> (masseter, temporal, pterigóideos, milo-hióideo, ventre ant. do digástrico) = <b>V3</b> · <b>mímica</b> (bucinador, platisma, orbicular) = <b>VII</b>.</li>
+    <li><b>Língua</b> = XII (genioglosso = protrusão) · <b>ECM + trapézio</b> = XI · <b>faringe/laringe</b> = X (vago desce na <b>bainha carotídea</b>: carótida + VJI + vago).</li>
+    <li><b>Emergências no tronco:</b> III = fossa interpeduncular (mesencéfalo) · V = ponte · VII/VIII = ângulo pontocerebelar · IX/X/XI = sulco retro-olivar do bulbo · XII = sulco pré-olivar.</li>
+  </ul>
+
+  <h3>Forames — o que passa</h3>
+  <div class="tblwrap"><table>
+    <tr><th>Abertura</th><th>Conteúdo</th></tr>
+    <tr><td>Canal óptico</td><td>NC II + a. oftálmica</td></tr>
+    <tr><td>Fissura orbital superior</td><td>NC III, IV, VI, V1 + v. oftálmica superior</td></tr>
+    <tr><td>Forame redondo / oval</td><td>V2 / V3 (fossa infratemporal: V3 + a. maxilar + plexo pterigóideo)</td></tr>
+    <tr><td>Meato acústico interno</td><td>NC VII + VIII</td></tr>
+    <tr><td>Forame jugular</td><td>NC IX, X, XI + fim do sigmóideo → início da VJI</td></tr>
+    <tr><td>Canal do hipoglosso</td><td>NC XII</td></tr>
+  </table></div>
+
+  <h3>Cervical em 4 linhas</h3>
+  <ul>
+    <li><b>Atlas (C1):</b> sem corpo e sem processo espinhoso; a. vertebral sulca o arco posterior. <b>Áxis (C2):</b> dente, preso pelo <b>lig. transverso do atlas</b> (articulação trocóidea/pivô).</li>
+    <li><b>Laringe C3–C6:</b> epiglote C3 · tireóidea/pregas vocais C4–C5 · cricóidea C6 (única cartilagem em anel completo; transição pra traqueia).</li>
+    <li><b>Tireoide:</b> a. tireóidea superior ← carótida externa · a. tireóidea inferior ← tronco tireocervical (← subclávia).</li>
+    <li><b>Frênico</b> (C3–C5) desce SOBRE o escaleno anterior · plexo braquial passa ENTRE escalenos anterior e médio.</li>
+  </ul>
+</div>
+<h2 class="fisio"><span class="n">5</span> Fisio · a prova antiga em 12 linhas</h2>
+<div class="card">
+  <p class="small muted" style="margin-top:0">Formato que te espera: <b>12 objetivas × 0,75 + 1 discursiva × 1,0</b> · gabarito em folha própria, <b>caneta azul, letra maiúscula</b>; rasura só vale com rubrica. Confere se você lembra o PORQUÊ de cada resposta:</p>
+  <div class="tblwrap"><table>
+    <tr><th style="width:30px">Q</th><th style="width:190px">Tema</th><th style="width:34px">Gab.</th><th>Porquê em uma linha</th></tr>
+    <tr><td>1</td><td>Sensibilização central</td><td><b>A</b></td><td>II, III e IV certas: NMDA/Ca²⁺, perda de GABA/glicina → alodinia, glia → citocinas. I erra o wind-up (é fibra C).</td></tr>
+    <tr><td>2</td><td>Dor rápida × tardia</td><td><b>D</b></td><td>Aδ = rápida, aguda, bem localizada · C = lenta, difusa, persistente.</td></tr>
+    <tr><td>3</td><td>Apendicite migratória</td><td><b>C</b></td><td>Visceral mal localizada (periumbilical, ~T10) → inflamação alcança o <b>peritônio parietal</b> (inervação somática) → localiza na FID.</td></tr>
+    <tr><td>4</td><td>Fibromialgia</td><td><b>B</b></td><td>Amplificação <b>central</b> + <b>redução das vias inibitórias descendentes</b>. Exames normais; não é inflamação muscular.</td></tr>
+    <tr><td>5</td><td>Neuralgia pós-herpética</td><td><b>A</b></td><td>Lesão do sistema somatossensitivo → dor <b>neuropática</b> (queimação + parestesias).</td></tr>
+    <tr><td>6</td><td>Pontos dolorosos da FM</td><td><b>B</b></td><td><b>Tender points</b>: áreas hipersensíveis em tecidos MOLES, dói no local SEM referir. (≠ trigger points do miofascial: bandas tensas, dor referida.)</td></tr>
+    <tr><td>7</td><td>Dor visceral (assertivas)</td><td><b>E</b></td><td>I, II e IV: convergência víscero-somática, fibras C, dor em 2 áreas. III erra ("raramente autonômica" — é FREQUENTE) e V erra (pleura <b>parietal</b>).</td></tr>
+    <tr><td>8</td><td>Neuropatia diabética</td><td><b>A</b></td><td>Alodinia = <b>conexões aberrantes de fibras Aβ</b> (tato) com neurônios nociceptivos no corno dorsal.</td></tr>
+    <tr><td>9</td><td>Pericardite</td><td><b>B</b></td><td>Pericárdio <b>parietal</b> tem inervação somática (frênico) → dor em pontada com respiração/tosse, melhora inclinado pra frente.</td></tr>
+    <tr><td>10</td><td>Esfregar alivia a dor</td><td><b>C</b></td><td>Teoria do portão: fibras <b>Aβ</b> ativam interneurônios inibitórios no corno dorsal.</td></tr>
+    <tr><td>11</td><td>Cólica + paciente inquieto</td><td><b>D</b></td><td>Dor visceral por <b>distensão de víscera oca</b>. (Irritação do peritônio parietal = paciente quieto, imóvel.)</td></tr>
+    <tr><td>12</td><td>Glutamato + portão</td><td><b>B</b></td><td>II e IV certas: núcleo magno da rafe; bradicinina/serotonina/histamina excitam nociceptores. I erra (NMDA/AMPA/kainato = <b>ionotrópicos</b>), III erra (portão = fibras grossas Aβ), V erra (portão age ANTES da percepção). <span class="tag t-red">a aluna caiu nessa</span></td></tr>
+  </table></div>
+</div>
+
+<h2 class="fisio"><span class="n">6</span> As pegadinhas que valem a prova</h2>
+<div class="card">
+  <div class="trap">Wind-up = estimulação repetitiva de <span class="right">fibras C</span> → NMDA/glutamato/Ca²⁺. Se a questão disser <span class="wrong">"fibras Aδ"</span>, está errada.</div>
+  <div class="trap">NMDA, AMPA e kainato = receptores <span class="right">IONOtrópicos</span>. <span class="wrong">"Metabotrópicos"</span> = mGluR (outra família).</div>
+  <div class="trap">Portão de Melzack-Wall: fibras <span class="right">Aβ grossas, mielinizadas e rápidas</span> ativam interneurônios inibitórios <span class="right">antes</span> da percepção — não <span class="wrong">"fibras finas"</span>, não <span class="wrong">"depois da percepção"</span>.</div>
+  <div class="trap">Dor visceral <span class="right">TEM resposta autonômica frequente</span> (náusea, sudorese, palidez) e é referida em 2 áreas. Pleura/pericárdio: quem dói é o folheto <span class="right">PARIETAL</span> (intercostais + frênico); o <span class="wrong">visceral</span> é insensível.</div>
+  <div class="trap">Alodinia = dor com estímulo <span class="right">inócuo</span> (algodão) · hiperalgesia = dor exagerada com estímulo <span class="right">doloroso</span>. Não confundir os dois.</div>
+  <div class="trap">Comportamento: cólica/víscera oca = paciente <span class="right">inquieto</span> · peritonite/parietal = paciente <span class="right">imóvel</span>.</div>
+</div>
+
+<h2 class="fisio"><span class="n">7</span> Se a discursiva vier (na antiga: dor irruptiva)</h2>
+<div class="card">
+  <p style="margin-top:0"><b>A) Tipo:</b> dor <b>irruptiva</b> (breakthrough) — episódio súbito e transitório (~20–30 min) de dor intensa apesar da dor basal controlada com opioide de longa ação; se desencadeada por movimento = <b>incidental</b>.</p>
+  <p><b>B) Mecanismos (cite ≥2):</b> progressão tumoral (compressão/invasão de vísceras e nervos, isquemia, obstrução) · dor incidental por movimento/fratura · tolerância ao opioide · <b>hiperalgesia induzida por opioide</b>.</p>
+  <p><b>C) Manejo:</b> dose de <b>resgate</b> com opioide de <b>liberação IMEDIATA</b>: morfina IR VO ~<b>10% da dose diária total</b> (ou fentanil <b>transmucoso/sublingual</b>). Se &gt;3 resgates/dia → reajustar a dose basal.</p>
+  <div class="trap">Fentanil <span class="wrong">transdérmico</span> como resgate = ERRADO (início lento, é pra dor BASAL estável). A aluna da prova antiga perdeu ponto exatamente aí. Resgate = ação <span class="right">rápida</span>.</div>
+</div>
+
+<h2 class="fisio"><span class="n">8</span> Micro-tabela final (30 segundos)</h2>
+<div class="card">
+  <div class="tblwrap"><table>
+    <tr><th></th><th>Neoespinotalâmica</th><th>Paleoespinotalâmica</th></tr>
+    <tr><td><b>Fibra</b></td><td>Aδ (mielinizada)</td><td>C (amielínica)</td></tr>
+    <tr><td><b>Dor</b></td><td>Rápida, aguda, BEM localizada</td><td>Lenta, queimação, difusa</td></tr>
+    <tr><td><b>Neurotransmissor</b></td><td>Glutamato</td><td>Glutamato + substância P</td></tr>
+    <tr><td><b>Destino</b></td><td>Tálamo (VPL) → córtex S1</td><td>Formação reticular, tálamo medial → límbico (componente afetivo)</td></tr>
+  </table></div>
+  <p class="small">Limiar ALTO = hiporreativo · limiar BAIXO = hiperreativo (limiar e reação são inversos). Tratamento por intensidade: leve = dipirona/paracetamol/AINE · moderada = codeína/tramadol · intensa = morfina/metadona/fentanil/oxicodona. Dor crônica &gt; 3 meses (ou além da recuperação esperada), sem utilidade biológica, e é doença por si (CID-11).</p>
+  <p style="margin-bottom:0"><b>Agora respira. Você viu tudo isso ontem — hoje é só executar. 💪</b></p>
+</div>
+
+</div>
+</body>
+</html>

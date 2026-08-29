@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · SP3 — Dor Crônica: FM & Miofascial · Aprofundamento</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:170px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIII</span>
+    <h1>SP3 — Dor Crônica: Fibromialgia & Sd. Miofascial · <span style="color:var(--tealo)">Aprofundamento</span></h1>
+    <div class="sub">Resumo denso · 15 questões nível prova final · mapa mental · flashcards · Feynman. Inclui a aula de Fisio da Verônica (dor referida × irradiada) e as diretrizes SBR 2026.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 15 questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+
+    <div class="panel">
+      <h2>1 · Propedêutica da dor + tipos de dor (aula de Fisio)</h2>
+      <h3>LIIDERAMCA</h3>
+      <p><span class="k2">L</span>ocalização · <span class="k2">I</span>ntensidade · <span class="k2">I</span>rradiação · <span class="k2">D</span>uração · <span class="k2">E</span>volução · <span class="k2">R</span>elação com funções orgânicas · <span class="k2">A</span>gravantes · <span class="k2">M</span>anifestações concomitantes · <span class="k2">C</span>aráter · <span class="k2">A</span>tenuantes.</p>
+      <h3>Classificação (Verônica): distribuição/percepção × origem</h3>
+      <table>
+        <tr><th>Tipo</th><th>O paciente diz</th><th>O médico pensa</th></tr>
+        <tr><td><b>Referida</b></td><td>"Dói no braço mas não machuquei"</td><td>Convergência medular</td></tr>
+        <tr><td><b>Irradiada</b></td><td>"Começa nas costas e desce pela perna"</td><td>Nervo/raiz comprimido</td></tr>
+        <tr><td><b>Somática</b></td><td>"Dói exatamente aqui"</td><td>Músculo/pele/osso/articulação</td></tr>
+        <tr><td><b>Visceral</b></td><td>"Uma dor ruim… difícil explicar"</td><td>Órgão</td></tr>
+      </table>
+      <ul>
+        <li><b>Dor referida:</b> percebida em região somática <b>distante da origem</b>, <b>sem seguir trajeto</b> de nervo. Mecanismo: <span class="hl">convergência sináptica</span> — aferentes viscerais e cutâneos fazem sinapse no <b>mesmo neurônio de 2ª ordem no corno dorsal</b>; o cérebro, "acostumado" com dor cutânea, interpreta errado. Origens: vísceras, superfícies de cavidades (pleura/peritônio = dor referida parietal), estruturas somáticas profundas (músculo, articulação, ligamento, periósteo).</li>
+        <li><b>Exemplos clássicos:</b> IAM → epigástrio, braço E, mandíbula (com <span class="hl">ECG podendo estar normal no início</span> — o caso da aula!); vesícula → escápula/ombro D; diafragma → ombro; rim → flanco/virilha. <b>Apendicite</b>: fase visceral referida <b>periumbilical</b> (aferentes entram em T9–T10) → fase somática parietal <b>bem localizada na FID</b> quando o peritônio parietal inflama. Lembrar: <b>visceral = mal localizada; peritônio parietal = localizada</b>.</li>
+        <li><b>Dor irradiada (radicular):</b> compressão/inflamação/estiramento de nervo ou raiz, percebida <b>ao longo do trajeto anatômico</b>. Caráter em <b>choque elétrico/fisgada/descarga</b>, súbita, curta, em salvas (fibras <b>Aδ</b>); <span class="hl">piora com Valsalva</span> (tossir, espirrar, evacuar); pode haver déficit neurológico e parestesia. Ex.: ciatalgia por hérnia discal; pulpite de pré-molar irradiando à mandíbula.</li>
+        <li><b>Manobras (ciática):</b> <span class="k2">Lasègue</span> = elevação passiva da perna estendida reproduz a dor irradiada → positivo (na figura da aula, ~40–50°). <span class="k2">Bragard</span> = após o Lasègue, a <b>dorsiflexão do pé</b> faz a dor irradiada retornar → positivo.</li>
+        <li><b>Dor somática:</b> superficial (pele — aguda, bem localizada, queimação/picada) × <b>profunda</b> ("dor em peso": músculo = difusa, em pressão, piora com movimento e melhora com repouso; osso = profunda, contínua, persistente; articulação = padrão inflamatório [piora noturna + rigidez matinal] ou mecânico [piora ao movimento]). <span class="hl">A dor miofascial é o exemplo de dor somática profunda.</span></li>
+        <li><b>Classificar em 10 segundos:</b> segue trajeto? → <b>irradiada</b> · mudou de lugar? → <b>inflamatória visceral evolutiva</b> (ex.: apendicite) · difusa + sintomas autonômicos? → <b>visceral</b> · bem localizada? → <b>somática</b>.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Escalas de avaliação da dor</h2>
+      <table>
+        <tr><th>Escala</th><th>Como é</th><th>Para quem</th></tr>
+        <tr><td><b>EVN</b> (verbal numérica)</td><td>0–10 falado</td><td>Adulto comunicativo; rápida e precisa. Ruim p/ analfabetos, idosos com déficit cognitivo</td></tr>
+        <tr><td><b>EVA</b> (visual analógica)</td><td>Linha de 10 cm (0–100 mm), âncoras "nenhuma dor"–"dor insuportável"</td><td>Adultos; exige abstração</td></tr>
+        <tr><td><b>Faces</b></td><td>6 faces → converte em número</td><td>Crianças e déficit cognitivo/comunicação <b>leve</b></td></tr>
+        <tr><td><b>NIPS</b></td><td>Fisiológico + comportamental; 0–7; <b>&gt;4 = dor</b></td><td>Neonatos e crianças até 2 anos</td></tr>
+        <tr><td><b>PAINAD</b></td><td>Comportamental</td><td>Idosos com <b>demência avançada</b></td></tr>
+        <tr><td><b>Comfort Behavior</b></td><td>Comportamental</td><td>Crianças em ventilação mecânica</td></tr>
+        <tr><td><b>BPS</b></td><td>Comportamental</td><td>Adultos <b>sedados/VM</b></td></tr>
+        <tr><td><b>RASS</b></td><td>Sedação–agitação</td><td><span class="hl">NÃO é escala de dor</span> — avalia nível de sedação (usar em quem recebe opioide/sedativos)</td></tr>
+      </table>
+      <div class="note"><b>Na FM (SBR 2026):</b> instrumentos validados no Brasil — <b>FIQR</b> (impacto/gravidade, seguimento) e <b>FSQ</b> (= WPI/IDG + SSS/EGS, dos critérios ACR); <b>CSI</b> para rastrear sensibilização central (inclusive em outras doenças reumáticas). Alvos do tratamento: <b>dor, fadiga e sono</b>.</div>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Fibromialgia — conceito e fisiopatologia</h2>
+      <ul>
+        <li><b>Síndrome</b> (termo oficial — SBR 2026) de <b>dor musculoesquelética crônica difusa</b> + fadiga + <b>sono não reparador</b> + alterações cognitivas (<i>fibrofog</i>) + ansiedade/depressão + rigidez. Dor <b>nociplástica</b> prototípica: migratória, flutuante, mal localizada (≠ nociceptiva, fixa e bem localizada).</li>
+        <li><b>Epidemiologia:</b> 2ª condição reumatológica mais comum no Brasil (2,5–5,5%; slide da Fisio: ~2% mundial); mulheres ≫ homens (&gt;80%); pico <b>35–60 anos</b>. Fatores de risco: sexo F &gt;40a, história familiar (agregação genética), lesões repetidas, comorbidades (AR, LES), obesidade, transtornos psíquicos.</li>
+        <li><b>Fisiopatologia = amplificação central da dor</b> ("o problema não está no músculo, está no processamento"): ↓ limiar de dor → <b>alodinia</b> (estímulo leve dói) e <b>hiperalgesia</b> (doloroso dói mais).
+          <ul>
+            <li>↑ Neurotransmissores <b>excitatórios ascendentes</b>: glutamato, <b>substância P (~3× no LCR)</b>, receptores NMDA ↑.</li>
+            <li>↓ <b>Inibição descendente</b>: serotonina e noradrenalina (apoptose/↓ receptores).</li>
+            <li>Alteração do <b>eixo sono–dor</b> (sono não-REM fragmentado), eixo HHA e simpático; gatilhos: infecção viral, trauma físico, estresse.</li>
+          </ul>
+        </li>
+        <li class="hl"><b>A fisiopatologia explica (slide da Verônica — decorar essa tríade!):</b> ① por que os exames vêm normais (alteração é central) · ② por que AINEs não resolvem (não há inflamação) · ③ por que antidepressivos ajudam (repõem o freio inibitório 5-HT/NA).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Fibromialgia — diagnóstico e diferenciais</h2>
+      <ul>
+        <li><b>Diagnóstico CLÍNICO</b> — sem exame confirmatório. Labs só para diferencial (hemograma, VHS/PCR, TSH, CK ± vit D): <b>normais</b> na FM.</li>
+        <li><b>ACR 2010/2011 (IDG + EGS):</b> dor ≥3 meses + <b>IDG ≥7 e EGS ≥5</b> OU <b>IDG 3–6 e EGS ≥9</b>. IDG (0–19 áreas de dor em 7 dias); EGS (0–12: fadiga, sono não reparador, sintomas cognitivos 0–3 cada + somáticos).</li>
+        <li><b>ACR 2016 (refinamento):</b> WPI ≥7 + SSS ≥5 <i>ou</i> WPI <b>4–6</b> + SSS ≥9; dor <b>generalizada em ≥4 de 5 regiões</b>; ≥3 meses; <b>o diagnóstico vale mesmo coexistindo outra doença</b> (não exclui AR/LES).</li>
+        <li><b>AAPT 2019 (slide da Fisio):</b> <b>dor multilocal em ≥6 de 9 regiões (MSP)</b> + <b>fadiga OU distúrbio do sono</b>, ambos &gt;3 meses.</li>
+        <li><b>Tender points:</b> não são mais necessários (ACR 1990 exigia 11/18 com ~4 kg de pressão — "empalidecer a unha"). Sensibilidade é variável contínua. Tender point = dor <b>local</b> à pressão, <b>sem banda tensa e sem dor referida</b>.</li>
+        <li><b>Diferenciais:</b> hipotireoidismo (TSH) · <b>polimialgia reumática</b> (idoso, cinturas, VHS↑, responde a corticoide) · miopatias (CK↑, fraqueza objetiva) · AR/LES iniciais (sinovite, sorologias) · espondiloartrites · apneia do sono · hipovitaminose D · depressão · <b>síndrome miofascial</b> (regional!).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Fibromialgia — tratamento NÃO farmacológico (SBR 2026 parte 1 + EULAR)</h2>
+      <ul>
+        <li><b>Educação do paciente = componente fundamental</b> do plano (empodera, melhora dor, humor e função). Equipe <b>interdisciplinar</b> recomendada (melhor QV e dor que profissional isolado).</li>
+        <li><b>Exercício é o carro-chefe</b> (única recomendação FORTE da EULAR 2017): <b>aeróbico</b> (caminhada, corrida, dança, bike, hidro) ≥2×/sem, 30–60 min, intensidade moderada-alta · <b>fortalecimento</b> 2–3×/sem (40–80% de 1RM) — reduz dor, melhora sono e QV · <b>combinação aeróbico+força &gt; modalidade isolada</b> (programas de 13–24 semanas) · terapia aquática melhora dor, sono e FIQ · <span class="hl">flexibilidade isolada = MENOR eficácia</span>.</li>
+        <li><b>Com evidência/recomendadas:</b> TCC e ACT · acupuntura · Tai Chi · plataforma vibratória · exergame · neuromodulação <b>tDCS/rTMS</b> (alvos M1 e DLPFC — eficazes para dor).</li>
+        <li><b>Sem evidência (SBR 2026):</b> ventosaterapia, manipulação espinhal, homeopatia, capsaicina tópica. Massagem ≥5 semanas: viável, evidência limitada. Liberação miofascial/drenagem: evidência moderada. Espiritualidade/religiosidade: papel complementar significativo.</li>
+        <li><b>Dieta:</b> apenas balanceada — nenhuma dieta/suplemento específico recomendado; <b>perda de peso se obesidade</b>.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Fibromialgia — tratamento farmacológico (SBR 2026 parte 2)</h2>
+      <table>
+        <tr><th>Recomendados ✔</th><th>Dose/observação</th></tr>
+        <tr><td><b>Amitriptilina</b> (ADT)</td><td>25–50 mg/dia à noite; 30–50% respondem; cuidado anticolinérgico (boca seca, constipação, ganho de peso)</td></tr>
+        <tr><td><b>Duloxetina</b> (IRSN)</td><td>30–120 mg/dia; <b>60 mg = melhor equilíbrio</b>; boa se humor/ansiedade associados</td></tr>
+        <tr><td><b>Pregabalina</b></td><td>300–600 mg/dia; melhora dor, sono e QV (α2δ dos canais de Ca²⁺ → ↓glutamato/subst. P)</td></tr>
+        <tr><td><b>Ciclobenzaprina</b></td><td>5–10 mg à noite (dose baixa); foco no sono</td></tr>
+      </table>
+      <table>
+        <tr><th>NÃO recomendados ✘</th><th>Por quê</th></tr>
+        <tr><td><b>Opioides</b></td><td><b>Fortemente desaconselhados</b>: pioram desfechos (função, humor, insônia), dependência. Tramadol: evidência insuficiente</td></tr>
+        <tr><td>AINEs e analgésicos simples</td><td>FM <b>não é inflamatória</b> — sem eficácia; só uso curto p/ dor sobreposta (bursite, tendinite, miofascial). Dipirona/paracetamol são mais seguros que AINE p/ uso prolongado</td></tr>
+        <tr><td>ISRS (fluoxetina etc.)</td><td>Sem evidência suficiente p/ dor/sono/fadiga (tratam a depressão comórbida)</td></tr>
+        <tr><td><b>Venlafaxina</b>/desvenlafaxina</td><td>Sem evidência (≠ duloxetina!) — pegadinha: Harrison cita "IRSN" genérico, a SBR 2026 especifica</td></tr>
+        <tr><td><b>Gabapentina</b></td><td>Evidência insuficiente na FM (≠ pregabalina; ≠ dor neuropática da SP2!) — apesar do uso comum na prática</td></tr>
+        <tr><td>BZD e hipnóticos, canabinoides, lidocaína/cetamina IV, naltrexona, psicoestimulantes</td><td>Sem evidência para recomendação</td></tr>
+      </table>
+      <div class="note"><b>Escolha racional por comorbidade:</b> humor/ansiedade → duloxetina · insônia proeminente → amitriptilina/ciclobenzaprina à noite (ou pregabalina) · intolerância anticolinérgica → duloxetina/pregabalina. Milnaciprano é eficaz mas indisponível no Brasil.</div>
+    </div>
+
+    <div class="panel">
+      <h2>7 · Síndrome dolorosa miofascial</h2>
+      <ul>
+        <li><b>Dor REGIONAL</b> (confinada a uma área) crônica de músculo/fáscia + <b>pontos-gatilho (PG)</b> em <b>bandas tensas palpáveis</b> → dor local + <b>dor referida muscular</b> em padrão previsível + fenômenos motores (fraqueza sem atrofia, restrição de ADM), sensoriais (dormência/formigamento) e autonômicos (vasoconstrição, sudorese, piloereção); proprioceptivos: tontura, zumbido, desequilíbrio. Locais: cervical, escapular/trapézio, glútea, panturrilha. 31–50 anos, ambos os sexos.</li>
+        <li><b>PG ativo × latente (slide da Fisio):</b> <span class="k2">ativo</span> = dor espontânea e contínua, mesmo sem pressionar (local ou referida) · <span class="k2">latente</span> = só dói (e refere) quando pressionado.</li>
+        <li><b>Como identificar um PG (SBR):</b> pele mais quente sobre o ponto · <b>"sinal do pulo"</b> (contração local à palpação + reação involuntária de retirada) · dor ao alongamento ou contração do músculo · hipersensibilidade à palpação · dor referida ao redor ou à distância. <i>Twitch response</i> = resposta contrátil local à palpação transversal/agulhamento.</li>
+        <li><b>Fisiopatologia — "crise energética":</b> contração contínua no PG → compressão capilar → ↓ fluxo/O₂ → isquemia + acúmulo de metabólitos/toxinas → dor, tensão e espasmo; micro/macrotraumas rompem retículo sarcoplasmático → liberação/acúmulo de Ca²⁺ → contratura mantida → ↑ consumo energético → colapso da microcirculação (ciclo vicioso). Fatores: postura, movimento repetitivo, estresse, sono ruim, imobilidade, deficiências endócrinas/nutricionais.</li>
+        <li><b>Diagnóstico clínico:</b> critérios maiores (dor regional · dor/alteração sensorial na distribuição referida esperada · banda tensa palpável · ponto doloroso na banda · restrição de ADM) + ≥1 menor (reprodução da queixa à pressão · twitch response · alívio com infiltração/agulhamento).</li>
+        <li><b>Tratamento:</b> não farmacológico primeiro — <b>agulhamento seco</b>, acupuntura, correção postural/ergonômica, <b>alongamento + fortalecimento</b>, calor local, TCC/relaxamento; farmacológico: <b>infiltração anestésica</b>, analgésicos simples (paracetamol/dipirona), <b>AINEs e miorrelaxantes PODEM ser usados</b> (≠ FM!), ADTs; toxina botulínica em refratários.</li>
+      </ul>
+      <h3>FM × SMF — a tabela da Verônica (decorar!)</h3>
+      <table>
+        <tr><th>Característica</th><th>Fibromialgia</th><th>Sd. miofascial</th></tr>
+        <tr><td>Distribuição</td><td><b>Simétrica, difusa</b></td><td><b>Assimétrica, local</b>, em pontada</td></tr>
+        <tr><td>Sexo</td><td>Mulheres (&gt;80%)</td><td>Ambos</td></tr>
+        <tr><td>Idade</td><td>35–60 anos</td><td>Qualquer</td></tr>
+        <tr><td>Localização</td><td>18 <b>tender points</b></td><td><b>Pontos-gatilho</b></td></tr>
+        <tr><td>Dor referida</td><td><b>Não</b></td><td><b>Sim</b></td></tr>
+        <tr><td>Fraqueza muscular</td><td>Incomum</td><td><b>Comum</b></td></tr>
+        <tr><td>Algometria</td><td>Dói com <b>4 kg</b> de pressão</td><td>Limiar de dor <b>2 kg</b></td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>8 · Automedicação + cuidado integral da dor crônica</h2>
+      <h3>Automedicação</h3>
+      <ul>
+        <li><b>Riscos gerais:</b> intoxicação, reação alérgica, dependência, <b>interações</b> (anular/potencializar — AINE+varfarina!), resistência, <b>mascarar o diagnóstico</b>.</li>
+        <li><b>AINEs:</b> EA — TGI (dor, úlcera, sangramento, perfuração), renal (IRA, hipercalemia, proteinúria), CV (retenção, HAS, edema, IAM, ICC), hepático, hematológico (raros), asma, exantemas. <b>Contraindicações:</b> idosos, <b>gestantes</b> (atravessam placenta: fechamento precoce do ducto arterioso, gastrosquise, espinha bífida; passam ao leite), IR/IH/IC, cirrose, HAS descontrolada, risco de sangramento/varfarina, &gt;3 doses de álcool/dia, úlcera/gastrite prévia.</li>
+        <li><b>Tetos práticos (resumo da turma):</b> paracetamol seguro até <b>~2 g/dia</b> (hepatotóxico além disso; pior em etilistas/desnutridos) · dipirona <b>&gt;4 g/dia</b> → reações cutâneas, náuseas, dor abdominal, insuficiência renal (agranulocitose: rara e idiossincrática) · AAS em dose alta (anti-inflamatória) → risco GI/renal como os demais AINEs.</li>
+      </ul>
+      <h3>Cuidado integral, continuado e interdisciplinar (APS)</h3>
+      <ul>
+        <li><b>Multimodal:</b> exercício + TCC + fisioterapia + calor + relaxamento/respiração + acupuntura/auriculoterapia + yoga/massagem + educação — integrados num <b>PTS</b> (projeto terapêutico singular) com equipe multiprofissional.</li>
+        <li><b>MCCP (Stewart):</b> ① explorar a doença E a experiência da doença (sentimentos, ideias, efeitos na função, expectativas) · ② entender a pessoa inteira (contexto) · ③ elaborar plano conjunto (decisão compartilhada) · ④ incorporar prevenção/promoção · ⑤ fortalecer a relação · ⑥ ser realista.</li>
+        <li><b>Princípios na dor crônica:</b> metas <b>funcionais</b> pactuadas (não "dor zero"), retornos <b>programados</b> (não só sob demanda), longitudinalidade, validar o sofrimento sem iatrogenia (Cassell: trata-se a <b>pessoa</b> que sofre, não só a doença), desprescrição negociada da automedicação, monitorar com EVN/FIQR.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Fontes</h2>
+      <p class="src">Diretriz SBR 2026 partes 1–2 (Advances in Rheumatology — PDFs da professora) · Slides Fisio SP3 (Prof.ª Verônica): dor profunda/irradiada/referida, FM, miofascial (refs: Harrison 21ª, Robbins 10ª, Clauw JAMA 2014, Wolfe 2016) · Resumo SP3 da colega · Harrison 21ª e Goldman-Cecil 27ª · Tratado de MFC 2ª ed. · EULAR 2017 · Heymann 2017 · Travell & Simons · Stewart 2014 · Cassell 2013.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span>
+      <span class="val"><span id="hit">0</span>/<span id="tot">15</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Reiniciar</button>
+    </div>
+    <div id="quiz"></div>
+  </section>
+
+  <!-- ============ MAPA ============ -->
+  <section id="mapa">
+    <div class="panel">
+      <h2>Mapa mental da SP3 — 8 ramos (clique para expandir)</h2>
+      <div class="map">
+        <details open><summary>1 · Propedêutica — LIIDERAMCA + "classificar em 10 s"</summary>
+          <ul>
+            <li>Localização · Intensidade · Irradiação · Duração · Evolução · Relação c/ funções · Agravantes · Manif. concomitantes · Caráter · Atenuantes.</li>
+            <li>Segue trajeto → irradiada · mudou de lugar → visceral evolutiva · difusa+autonômico → visceral · localizada → somática.</li>
+          </ul>
+        </details>
+        <details><summary>2 · Tipos de dor — referida × irradiada · somática × visceral</summary>
+          <ul>
+            <li>Referida: convergência sináptica no corno dorsal; não segue trajeto; IAM→braço E/mandíbula; apendicite periumbilical→FID; vísceras/pleura-peritônio/somáticas profundas.</li>
+            <li>Irradiada: nervo/raiz; segue trajeto; choque/fisgada (Aδ); Valsalva piora; Lasègue + Bragard; ciática, pulpite.</li>
+            <li>Somática superficial (pele, bem localizada) × profunda (peso: músculo/osso/articulação — miofascial é o exemplo) × visceral (mal localizada + autonômicos).</li>
+          </ul>
+        </details>
+        <details><summary>3 · Escalas</summary>
+          <ul>
+            <li>EVN 0–10 · EVA 10 cm · Faces (criança/déficit leve) · NIPS (≤2 a; &gt;4 = dor) · PAINAD (demência) · Comfort-B (criança VM) · BPS (sedado VM) · RASS = sedação, não dor.</li>
+            <li>FM: FIQR e FSQ (WPI+SSS) validados; CSI p/ sensibilização central; alvos dor-fadiga-sono.</li>
+          </ul>
+        </details>
+        <details><summary>4 · FM — fisiopatologia e clínica</summary>
+          <ul>
+            <li>Amplificação central (nociplástica): ↑glutamato + substância P (~3× LCR) · ↓serotonina/noradrenalina · eixo sono–dor · alodinia + hiperalgesia.</li>
+            <li>Explica: exames normais · AINE não funciona · antidepressivo funciona.</li>
+            <li>Clínica: dor difusa migratória + fadiga + sono não reparador + fibrofog + humor + rigidez; sobreposições (cefaleia, DTM, SII, miofascial).</li>
+          </ul>
+        </details>
+        <details><summary>5 · FM — diagnóstico e DD</summary>
+          <ul>
+            <li>Clínico: ACR 2010 (IDG≥7+EGS≥5 ou IDG 3–6+EGS≥9, ≥3 m) · ACR 2016 (WPI/SSS, ≥4 de 5 regiões, não exclui outras doenças) · AAPT 2019 (≥6 de 9 regiões + fadiga OU sono).</li>
+            <li>Tender points dispensáveis; labs normais (VHS/PCR/TSH/CK p/ DD).</li>
+            <li>DD: hipotireoidismo, PMR (VHS↑ + cinturas + idoso), miopatia (CK↑), AR/LES, apneia, vit D, depressão, SMF.</li>
+          </ul>
+        </details>
+        <details><summary>6 · FM — tratamento</summary>
+          <ul>
+            <li>Base: educação + exercício (aeróbico 2×/sem 30–60' + força 2–3×/sem; combinado &gt; isolado; EULAR: única rec. forte) + TCC/ACT + acupuntura/Tai Chi/aquática + tDCS/rTMS.</li>
+            <li>Fármacos SIM: amitriptilina 25–50 · duloxetina 60 (30–120) · pregabalina 300–600 · ciclobenzaprina 5–10 noite.</li>
+            <li>NÃO: opioides! AINE de base, ISRS, venlafaxina, gabapentina, BZD, canabinoides, IV lido/cetamina.</li>
+          </ul>
+        </details>
+        <details><summary>7 · Síndrome miofascial</summary>
+          <ul>
+            <li>Regional + banda tensa + PG (ativo × latente) + dor referida + twitch/"sinal do pulo"; fraqueza comum; cervical/trapézio/glúteo/panturrilha.</li>
+            <li>Crise energética: contração → isquemia → ↓ATP + Ca²⁺ → contratura → dor.</li>
+            <li>Critérios maiores + ≥1 menor; algometria 2 kg (FM: 4 kg).</li>
+            <li>Tto: alongamento/ergonomia/calor · agulhamento seco/infiltração · AINE/miorrelaxante podem (≠FM) · botox refratário.</li>
+          </ul>
+        </details>
+        <details><summary>8 · Automedicação + cuidado integral</summary>
+          <ul>
+            <li>AINE: TGI/renal/CV; CI: idoso, gestante (ducto arterioso!), varfarina, úlcera, etilista. Paracetamol ~2 g/d · dipirona &gt;4 g/d (agranulocitose rara) · AAS alto = AINE.</li>
+            <li>Riscos: mascarar dx, interação, dependência.</li>
+            <li>APS: MCCP (6 componentes) · PTS · equipe interdisciplinar · metas funcionais · retornos programados · Cassell (sofrimento da pessoa).</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel">
+      <h2>Flashcards — clique para virar</h2>
+      <div class="fcgrid" id="fcbox"></div>
+    </div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Explique em voz alta, como se ensinasse alguém</h2>
+      <p class="sub">Um roteiro por objetivo. Se travar em algum passo, é ali que está a lacuna — volta no resumo e tenta de novo.</p>
+    </div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">Aprofundamento · SP3 Dor Crônica (FM & SMF) · UC13 · fontes: diretriz SBR 2026, slides da Fisio (Verônica), resumo da colega, Harrison/Cecil, Tratado de MFC.</div>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+const QS=[
+ {obj:"FM · geral", stem:"Sobre a fibromialgia, assinale a INCORRETA:",
+  opts:["É a segunda condição reumatológica mais comum no Brasil, com predomínio feminino marcante.",
+  "Fadiga, sono não reparador e sintomas cognitivos integram os critérios diagnósticos (EGS/SSS).",
+  "Associa-se com frequência a depressão, ansiedade, cefaleia e síndrome do intestino irritável.",
+  "A dor tem localização fixa, constante e bem delimitada, como na dor nociceptiva.",
+  "Exames laboratoriais e de imagem são caracteristicamente normais."],
+  ans:3,
+  why:"A dor da FM é DIFUSA, migratória e flutuante — 'sobe e desce', muda de lugar, é difícil de localizar. Localização fixa e constante é típica de dor nociceptiva (lesão tecidual).",
+  trap:"Enunciado pede a INCORRETA — na pressa, marca-se uma verdadeira. Sublinhe 'INCORRETA' e valide alternativa por alternativa."},
+
+ {obj:"Fisio · dor referida", stem:"<span class='cx'>Homem, 58 anos, chega à emergência com dor epigástrica em queimação, náuseas e sudorese. ECG inicial normal. Após 30 minutos, passa a sentir dor no braço esquerdo e na mandíbula.</span> O fenômeno que explica a topografia da dor e a conduta correta são:",
+  opts:["Dor irradiada — o estímulo percorre o trajeto do nervo ulnar; repetir ECG apenas se surgir déficit motor.",
+  "Dor referida por convergência sináptica de aferentes viscerais cardíacos e somáticos no corno dorsal — manter investigação de síndrome coronariana (ECG seriado + troponina), pois o ECG inicial normal não exclui IAM.",
+  "Dor somática parietal por irritação do pericárdio, bem localizada — liberar após analgesia.",
+  "Dor nociplástica por sensibilização central — tranquilizar e encaminhar à APS.",
+  "Dor psicogênica associada à ansiedade — prescrever benzodiazepínico."],
+  ans:1,
+  why:"É o caso da aula da Verônica: aferentes viscerais do coração e aferentes cutâneos (braço E, mandíbula, epigástrio) convergem para os MESMOS neurônios de 2ª ordem no corno dorsal — o cérebro, habituado à dor cutânea, 'erra o endereço'. Dor visceral referida NÃO segue trajeto de nervo.",
+  trap:"Duas armadilhas: chamar de 'irradiada' (não há nervo comprimido; não segue trajeto anatômico) e confiar no ECG inicial normal — que NÃO exclui infarto (seriar ECG + troponina)."},
+
+ {obj:"Escalas", stem:"Julgue as proposições sobre escalas de dor:<br>I. A EVA usa uma linha de 10 cm com âncoras verbais, quantificada de 0–100 mm.<br>II. A EVN é de aplicação rápida, mas inadequada para analfabetos e pacientes com déficit cognitivo importante.<br>III. A NIPS avalia neonatos e crianças até 2 anos por critérios fisiológicos e comportamentais (0–7; escore &gt;4 indica dor).<br>IV. A PAINAD é a escala de escolha para adultos sedados em ventilação mecânica.",
+  opts:["Apenas I e II estão corretas.","Apenas I, II e III estão corretas.","Apenas II, III e IV estão corretas.","Apenas III e IV estão corretas.","Todas estão corretas."],
+  ans:1,
+  why:"I, II e III reproduzem o resumo da SP3. A IV troca as populações: PAINAD é para DEMÊNCIA AVANÇADA; para adulto sedado/VM usa-se a BPS (criança em VM: Comfort Behavior).",
+  trap:"As bancas trocam a POPULAÇÃO das escalas comportamentais (PAINAD × BPS × Comfort-B × NIPS). Grave o par escala→população, não só o nome."},
+
+ {obj:"Fisio · dor irradiada", stem:"<span class='cx'>Mulher, 45 anos, lombalgia com dor 'em choque' que desce pela face posterior da coxa e perna direita até o pé, em salvas, com piora ao tossir e ao evacuar. Elevação passiva da perna estendida reproduz a dor; a dorsiflexão do pé durante a manobra intensifica-a.</span> Sobre o quadro:",
+  opts:["Trata-se de dor referida — a convergência medular explica o trajeto descendente.",
+  "Trata-se de dor irradiada (radicular): compressão/irritação de raiz, dor em choque por ativação de fibras Aδ, piora com Valsalva; Lasègue e Bragard positivos.",
+  "Trata-se de síndrome miofascial do piriforme — a manobra descrita é o 'sinal do pulo'.",
+  "Trata-se de dor nociplástica, pois não há lesão demonstrável.",
+  "Trata-se de dor visceral evolutiva, pois mudou de localização ao longo do tempo."],
+  ans:1,
+  why:"Dor que SEGUE trajeto anatômico + caráter em choque/fisgada (Aδ) + piora com Valsalva (tosse/evacuação aumentam pressão intraespinhal) + Lasègue positivo (elevação passiva da perna estendida) + Bragard positivo (dorsiflexão do pé após Lasègue) = dor radicular/ciatalgia, tipicamente por hérnia discal.",
+  trap:"Referida NÃO segue trajeto (é 'erro de endereço' cortical); irradiada SEGUE o nervo. E Bragard ≠ sinal do pulo (este é da síndrome miofascial, à palpação do PG)."},
+
+ {obj:"FM · critérios", stem:"Sobre os critérios diagnósticos de fibromialgia, assinale a correta:",
+  opts:["ACR 2016: exige contagem de 11/18 tender points com pressão de 4 kg, além de dor por 6 semanas.",
+  "ACR 2016: WPI ≥7 + SSS ≥5 (ou WPI 4–6 + SSS ≥9), dor generalizada em ≥4 de 5 regiões, por ≥3 meses — e o diagnóstico permanece válido mesmo coexistindo outra doença (ex.: artrite reumatoide).",
+  "AAPT 2019: dor em ≥2 regiões + insônia terminal por 6 meses.",
+  "O diagnóstico exige eletroneuromiografia normal documentada.",
+  "A coexistência de artrite reumatoide exclui definitivamente o diagnóstico de fibromialgia."],
+  ans:1,
+  why:"ACR 2016 refinou o 2010/2011: WPI ≥7+SSS ≥5 ou WPI 4–6+SSS ≥9; dor generalizada em ≥4 de 5 regiões; ≥3 meses; e FM pode COEXISTIR com outras doenças (FM 'secundária'/concomitante — não exclui). O slide da Fisio ainda traz o AAPT 2019: dor multilocal em ≥6 de 9 regiões + fadiga OU distúrbio do sono >3 meses.",
+  trap:"Números trocados são a pegadinha padrão: ≥4 de 5 REGIÕES (ACR 2016) ≠ 6 de 9 (AAPT) ≠ 11/18 (tender points do ACR 1990, abandonados). E o prazo é 3 MESES, sempre."},
+
+ {obj:"FM · diferencial", stem:"<span class='cx'>Mulher, 68 anos, dor e rigidez matinal importantes em cinturas escapular e pélvica há 2 meses, dificuldade para pentear o cabelo e levantar da cadeira. VHS 88 mm/h. Melhora dramática com prednisona em dose baixa.</span> Diagnóstico mais provável:",
+  opts:["Fibromialgia — dor difusa com exames alterados.","Síndrome miofascial de cinturas.","Polimialgia reumática.","Hipotireoidismo descompensado.","Polimiosite com fraqueza proximal."],
+  ans:2,
+  why:"Idosa + dor/rigidez de cinturas (rizomélica) + VHS muito elevada + resposta dramática a corticoide em dose baixa = polimialgia reumática. É o grande diferencial 'inflamatório' da dor difusa no idoso.",
+  trap:"Na FM o VHS é NORMAL — provas inflamatórias alteradas afastam FM e mandam procurar outra causa. (Polimiosite cursaria com fraqueza objetiva + CK↑; hipotireoidismo pede TSH.)"},
+
+ {obj:"FM × SMF", stem:"Associe as características (tabela da aula de Fisio) — 1. Dor referida ao estimular o ponto · 2. Predomínio feminino (&gt;80%), 35–60 anos · 3. Fraqueza muscular comum · 4. Dolorimento com 4 kg de pressão na algometria — a (F) fibromialgia ou (S) síndrome miofascial:",
+  opts:["1-F · 2-S · 3-F · 4-S","1-S · 2-F · 3-S · 4-F","1-S · 2-F · 3-F · 4-S","1-F · 2-F · 3-S · 4-S","1-S · 2-S · 3-F · 4-F"],
+  ans:1,
+  why:"Trigger point (SMF) refere dor; tender point (FM) não. FM: mulheres >80%, 35–60 anos, dói com 4 kg de pressão. SMF: ambos os sexos, qualquer idade, fraqueza comum, limiar de dor ~2 kg no ponto.",
+  trap:"A linha 'algometria' da tabela da Verônica confunde: na FM os pontos doem com 4 kg (pressão padronizada dos tender points); na SMF o LIMIAR no ponto-gatilho é menor (~2 kg). E fraqueza é comum na MIOFASCIAL, incomum na FM."},
+
+ {obj:"FM · fisiopatologia", stem:"Sobre a neurobiologia da fibromialgia, assinale a INCORRETA:",
+  opts:["Há redução da atividade dos sistemas inibitórios descendentes serotoninérgico e noradrenérgico.",
+  "Há aumento de neurotransmissores excitatórios, como glutamato e substância P (esta, elevada ~3× no líquor).",
+  "O sono não reparador participa do ciclo dor–sono–fadiga (eixo sono–dor).",
+  "A biópsia muscular demonstra inflamação característica que confirma o diagnóstico.",
+  "Essa fisiopatologia explica por que os exames vêm normais, por que AINEs falham e por que antidepressivos ajudam."],
+  ans:3,
+  why:"Não há inflamação nem lesão muscular característica — 'o problema não está no músculo, está no processamento da dor' (slide da Verônica). Biópsia não faz parte da investigação.",
+  trap:"A alternativa E é o coração da aula da Fisio e cai fácil em prova: alteração central → exames normais + AINE ineficaz + antidepressivo eficaz. Guarde como tríade."},
+
+ {obj:"FM · farmacologia aplicada", stem:"<span class='cx'>Mulher, 42 anos, FM com dor difusa EVN 7, humor deprimido e ansiedade proeminentes. Sem contraindicações.</span> Considerando a diretriz SBR 2026, a melhor escolha inicial é:",
+  opts:["Fluoxetina 20 mg/dia — ISRS de primeira linha para a dor da FM.",
+  "Venlafaxina 75 mg/dia — IRSN recomendado pela diretriz para FM.",
+  "Duloxetina 60 mg/dia — IRSN com eficácia na dor e nos sintomas de humor/ansiedade.",
+  "Gabapentina 900 mg/dia — gabapentinoide recomendado na FM.",
+  "Naproxeno 500 mg 12/12h contínuo — controle da inflamação de base."],
+  ans:2,
+  why:"Comorbidade guia a escolha: com depressão/ansiedade proeminentes, duloxetina (30–120; 60 mg = melhor equilíbrio) trata dor + humor num só fármaco.",
+  trap:"Duas pegadinhas de diretriz: ISRS NÃO são recomendados para a dor da FM, e dentro dos IRSN a SBR 2026 recomenda DULOXETINA, mas NÃO venlafaxina (evidência insuficiente). Gabapentina ≠ pregabalina. AINE contínuo não tem alvo na FM."},
+
+ {obj:"FM · opioides", stem:"Sobre opioides na fibromialgia, assinale a correta:",
+  opts:["São opção de segunda linha quando amitriptilina falha.",
+  "As diretrizes desaconselham fortemente: o uso associa-se a piores desfechos (maior interferência da dor, pior função, mais depressão e insônia) e a risco de dependência; nem o tramadol tem evidência suficiente para recomendação.",
+  "A codeína é recomendada por seu perfil de segurança.",
+  "São úteis porque a FM cursa com deficiência opioide endógena comprovada que eles corrigem.",
+  "Podem ser usados por curtos períodos como 'prova terapêutica' diagnóstica."],
+  ans:1,
+  why:"SBR 2026: uso de opioides NÃO é recomendado na FM — vínculo com piores desfechos clínicos e dependência; tramadol (opioide fraco + ação 5-HT/NA) tem apenas benefício modesto em combinação, com evidência insuficiente.",
+  trap:"'Dor intensa = opioide' é reflexo perigoso que a prova adora explorar. Na dor NOCIPLÁSTICA o opioide não trata o mecanismo — e piora sono, humor e função no longo prazo."},
+
+ {obj:"FM · não farmacológico", stem:"Sobre o tratamento não farmacológico da FM (SBR 2026), assinale a INCORRETA:",
+  opts:["Exercício aeróbico (caminhada, dança, bicicleta, hidroginástica) é recomendado, tipicamente ≥2×/semana por 30–60 minutos.",
+  "Treino de força/resistência (2–3×/semana, 40–80% de 1RM) reduz dor e melhora sono e qualidade de vida.",
+  "A combinação aeróbico + fortalecimento supera qualquer modalidade isolada.",
+  "Exercícios de flexibilidade/alongamento isolados são a modalidade de MAIOR eficácia entre todas.",
+  "tDCS e rTMS (alvos M1 e DLPFC) são eficazes na redução da dor; TCC/ACT e acupuntura também são recomendadas."],
+  ans:3,
+  why:"Flexibilidade isolada tem eficácia MENOR que aeróbico e força em quase todos os parâmetros (SBR 2026). O pódio é: multimodal (aeróbico+força) > modalidades isoladas > flexibilidade.",
+  trap:"Também sem evidência (não confundir com as recomendadas): ventosaterapia, manipulação espinhal, homeopatia, capsaicina tópica. Tai Chi, plataforma vibratória e exergame TÊM evidência."},
+
+ {obj:"SMF · manejo", stem:"<span class='cx'>Costureira, 45 anos, dor contínua em trapézio direito que refere à região occipital mesmo sem palpação. Banda tensa com nódulo; à palpação, contração local visível e reação de retirada ('sinal do pulo'). Sem dor difusa, sono preservado.</span> Sobre o quadro e o manejo:",
+  opts:["Ponto-gatilho LATENTE — só doeria se pressionado; conduta expectante.",
+  "Ponto-gatilho ATIVO em síndrome miofascial — tratar com correção ergonômica, alongamento + fortalecimento, calor, e se persistir agulhamento seco ou infiltração anestésica; AINE/miorrelaxante podem ser usados por curto período.",
+  "Fibromialgia localizada — iniciar duloxetina 60 mg/dia.",
+  "Contratura psicogênica — encaminhar exclusivamente à psicoterapia.",
+  "Tender point típico — solicitar FAN e fator reumatoide."],
+  ans:1,
+  why:"Dor ESPONTÂNEA e contínua + referida = PG ATIVO (latente só dói quando pressionado — slide da Fisio). Manejo: atacar o fator perpetuante (ergonomia do trabalho repetitivo), alongar/fortalecer, calor; agulhamento seco/infiltração se persistir. Na SMF, diferente da FM, AINEs e miorrelaxantes têm papel (curto).",
+  trap:"Ativo × latente é distinção que a Verônica destacou. E note o contraste terapêutico: AINE 'pode' na MIOFASCIAL, 'não' como base na FIBROMIALGIA — pegadinha de tabela cruzada."},
+
+ {obj:"Automedicação", stem:"Julgue as proposições sobre automedicação analgésica:<br>I. O paracetamol é considerado seguro até ~2 g/dia, mas é hepatotóxico em doses altas — com tolerância ainda menor em etilistas e desnutridos.<br>II. A dipirona acima de 4 g/dia associa-se a reações cutâneas, sintomas gastrointestinais e insuficiência renal; a agranulocitose é rara.<br>III. AINEs na gestação (sobretudo 3º trimestre) associam-se a fechamento prematuro do ducto arterioso.<br>IV. Em dose alta, o AAS torna-se anti-inflamatório e, por isso, fica isento dos riscos renais e digestivos da classe.",
+  opts:["Apenas I e III.","Apenas II e IV.","Apenas I, II e III.","Apenas III e IV.","Todas corretas."],
+  ans:2,
+  why:"I, II e III batem com o resumo da SP3. A IV é o oposto: em dose alta (anti-inflamatória) o AAS passa a carregar os MESMOS riscos GI e renais dos demais AINEs.",
+  trap:"Também memorize as contraindicações de AINE que viram caso clínico: idoso + varfarina (sangramento!), úlcera prévia, HAS descontrolada, IR/IH/IC, cirrose, etilismo ≥3 doses/dia, gestante."},
+
+ {obj:"MCCP", stem:"Segundo Stewart (método clínico centrado na pessoa — leitura recomendada da SP3), NÃO é componente do método:",
+  opts:["Explorar a doença E a experiência da doença (sentimentos, ideias, efeitos na função e expectativas).",
+  "Entender a pessoa como um todo, no seu contexto de vida.",
+  "Elaborar um plano conjunto de manejo, com decisão compartilhada.",
+  "Garantir que o paciente adira integralmente ao plano definido previamente pelo médico.",
+  "Incorporar prevenção e promoção da saúde, fortalecendo a relação médico-pessoa e sendo realista."],
+  ans:3,
+  why:"O MCCP substitui o plano 'definido pelo médico' pela construção CONJUNTA (common ground): problemas, objetivos e papéis pactuados. Impor plano pronto é o modelo centrado no médico/na doença.",
+  trap:"Na descritiva sobre a paciente que 'quer um exame que prove a dor', cite o MCCP nominalmente: explorar a experiência da doença (medo de não ser acreditada) é exatamente o componente 1."},
+
+ {obj:"Integrador · APS", stem:"<span class='cx'>Mulher, 40 anos, FM confirmada + sintomas depressivos moderados + uso diário de ibuprofeno por conta própria. UBS com equipe de fisioterapia, psicologia e educador físico (NASF).</span> O melhor arranjo de cuidado é:",
+  opts:["Encaminhar ao reumatologista e ao psiquiatra e aguardar as consultas para iniciar qualquer medida.",
+  "Prescrever tramadol para alívio imediato enquanto aguarda vaga na fisioterapia.",
+  "APS coordena: educação sobre a doença, pactuação de metas funcionais, PTS com equipe interdisciplinar (exercício supervisionado + TCC), início de duloxetina, desprescrição gradual e negociada do ibuprofeno, retornos programados e seguimento com EVN/FIQR.",
+  "Solicitar painel reumatológico completo (FAN, FR, anti-CCP, complemento) para 'fechar' o diagnóstico antes de tratar.",
+  "Dar alta assim que a dor melhorar, orientando retorno apenas se piorar."],
+  ans:2,
+  why:"É a síntese da SP3: cuidado integral (pessoa + doença), CONTINUADO (retornos programados, longitudinalidade — não alta) e INTERDISCIPLINAR (PTS com NASF), com a APS coordenando; duloxetina cobre dor + humor; automedicação se resolve com desprescrição negociada + plano substituto; monitorização objetiva (EVN/FIQR).",
+  trap:"FM se maneja NA APS (referenciar é exceção, não regra); 'painel completo' sem indicação reforça a peregrinação por exames; opioide nunca é ponte. Dor crônica não recebe 'alta por melhora' — recebe acompanhamento."}
+];
+
+const state={answered:0,hits:0};
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  QS.forEach((q,i)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill d">Nível prova</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/QS.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+const FC=[
+ ["LIIDERAMCA — o que é cada letra?","Localização · Intensidade · Irradiação · Duração · Evolução · Relação c/ funções orgânicas · Agravantes · Manifestações concomitantes · Caráter · Atenuantes"],
+ ["Mecanismo da dor REFERIDA","Convergência sináptica: aferentes viscerais + cutâneos no MESMO neurônio de 2ª ordem do corno dorsal → cérebro interpreta como dor cutânea. Não segue trajeto de nervo. Ex.: IAM → braço E/mandíbula; vesícula → escápula D"],
+ ["Como reconhecer dor IRRADIADA (radicular)?","Segue trajeto do nervo/raiz · caráter em choque/fisgada, em salvas (fibras Aδ) · piora com Valsalva (tosse, espirro, evacuação) · pode ter parestesia/déficit · ex.: ciática por hérnia discal"],
+ ["Lasègue × Bragard","Lasègue: elevação passiva da perna estendida reproduz dor irradiada → +. Bragard: após Lasègue, dorsiflexão do pé faz a dor retornar → +. Sugerem radiculopatia (ciática)"],
+ ["Dor da apendicite — 2 fases","Fase visceral referida: periumbilical, mal localizada (aferentes T9–T10). Fase somática parietal: peritônio parietal inflamado → dor BEM localizada na FID, piora com movimento/palpação"],
+ ["Escala certa para cada paciente","Adulto lúcido: EVN/EVA · criança/déficit leve: Faces · neonato–2a: NIPS (>4 = dor) · demência avançada: PAINAD · criança em VM: Comfort-B · adulto sedado em VM: BPS · RASS = sedação (não é dor!)"],
+ ["FM — tríade que a fisiopatologia explica","Alteração é CENTRAL → ① exames normais ② AINE não funciona ③ antidepressivo funciona (repõe inibição descendente 5-HT/NA)"],
+ ["FM — neuroquímica","↑ excitatórios: glutamato + substância P (~3× no LCR), NMDA↑ · ↓ inibitórios descendentes: serotonina + noradrenalina · eixo sono–dor alterado (sono não-REM fragmentado)"],
+ ["Critérios de FM — 3 versões","ACR 2010: IDG≥7+EGS≥5 ou IDG 3–6+EGS≥9, ≥3 meses · ACR 2016: + dor em ≥4 de 5 regiões, não exclui outras doenças · AAPT 2019 (Fisio): ≥6 de 9 regiões + fadiga OU sono >3 meses"],
+ ["FM × SMF (tabela da Verônica)","FM: difusa simétrica · mulheres >80% · 35–60a · tender points (dói c/ 4 kg) · SEM dor referida · fraqueza incomum || SMF: local assimétrica · ambos sexos · qualquer idade · trigger points (limiar 2 kg) · COM dor referida · fraqueza comum"],
+ ["Ponto-gatilho ATIVO × LATENTE + sinal do pulo","Ativo: dor espontânea contínua (local ou referida) sem pressionar · Latente: dói/refere só à palpação · Sinal do pulo: contração local + retirada involuntária à palpação · twitch: resposta contrátil à palpação transversal/agulha"],
+ ["Crise energética do PG","Contração sustentada → compressão capilar → isquemia (↓O₂/ATP) → falha na recaptação de Ca²⁺ (retículo lesado) → contratura mantida → acúmulo de metabólitos → dor → mais contração (ciclo vicioso)"],
+ ["FM — fármacos SIM (SBR 2026, com dose)","Amitriptilina 25–50 mg/noite · Duloxetina 60 mg/d (30–120) · Pregabalina 300–600 mg/d · Ciclobenzaprina 5–10 mg/noite (sono)"],
+ ["FM — fármacos NÃO (SBR 2026)","Opioides (fortemente desaconselhados!) · AINE/analgésico como base · ISRS · VENLAFAXINA · GABAPENTINA · BZD/hipnóticos · canabinoides · lidocaína/cetamina IV · tramadol/naltrexona (insuficiente)"],
+ ["Não farmacológico na FM — o pódio","1º Educação + exercício aeróbico (2×/sem, 30–60') + força (2–3×/sem) — combinado > isolado (EULAR: única rec. FORTE) · com evidência: TCC/ACT, acupuntura, Tai Chi, aquática, tDCS/rTMS · flexibilidade isolada: menor eficácia · sem evidência: ventosa, manipulação, homeopatia"],
+ ["Tetos da automedicação + AINE no idoso anticoagulado","Paracetamol ~2 g/d (hepatotóxico; pior etilista/desnutrido) · Dipirona >4 g/d (pele, TGI, renal; agranulocitose rara) · AAS dose alta = riscos de AINE · AINE + varfarina + idoso = sangramento TGI (interação + lesão de mucosa) + IRA + ↑PA"],
+ ["MCCP (Stewart) — 6 componentes","① Explorar doença + EXPERIÊNCIA da doença (sentimentos/ideias/função/expectativas) ② Pessoa como um todo ③ Plano COMUM (decisão compartilhada) ④ Prevenção/promoção ⑤ Relação médico-pessoa ⑥ Ser realista"],
+ ["Cuidado da dor crônica na APS","Metas FUNCIONAIS (não 'dor zero') · retornos PROGRAMADOS · PTS + equipe interdisciplinar (NASF) · desprescrição negociada · monitorar EVN/FIQR · validar sofrimento sem iatrogenia (Cassell: a pessoa, não só a doença)"]
+];
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back">'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+
+const FY=[
+ ["1 · Caracterizar uma dor (LIIDERAMCA)","Pegue a Lourdes do caso e apresente a dor dela item por item do LIIDERAMCA, em voz alta, como se passasse o caso num round. Depois responda: qual item diferencia a dor dela de uma ciática? (dica: irradiação/trajeto e caráter)."],
+ ["2 · Referida × irradiada para um leigo","Explique para um amigo: por que o infarto dói no braço? (central telefônica com fios cruzados no corno dorsal = referida) e por que a hérnia de disco desce pela perna? (o fio comprimido dispara ao longo do próprio cabo = irradiada). Feche com: qual das duas piora ao tossir, e por quê?"],
+ ["3 · Por que os exames da fibromialgia vêm normais?","Use a analogia do amplificador: o alto-falante (músculo) está íntegro; o volume (SNC) está no máximo. Explique alodinia e hiperalgesia com essa imagem, cite os 2 neurotransmissores que faltam (5-HT/NA) e os 2 que sobram (glutamato/substância P) — e conclua com a tríade: exames normais, AINE falha, antidepressivo ajuda."],
+ ["4 · O ponto-gatilho e a crise energética","Conte a história de uma cãibra que não desliga: contração → isquemia → sem ATP → cálcio preso → mais contração. Onde entram o nódulo, a banda tensa, o twitch e o sinal do pulo? Por que agulhar/alongar quebra o ciclo?"],
+ ["5 · Por que exercício é o remédio nº 1 da FM?","Defenda em 2 minutos: o que a EULAR classifica como única recomendação forte? Monte a 'receita' (aeróbico 2×/sem 30–60' + força 2–3×/sem, progressivo) e explique por que repouso piora e por que flexibilidade sozinha não basta."],
+ ["6 · Por que ibuprofeno todo dia é uma armadilha?","Explique para a Lourdes, sem jargão e sem confronto: por que o AINE não trata a dor dela (mecanismo central, não inflamação), quais os 3 órgãos que ele ameaça no uso crônico (estômago, rim, coração/pressão) e qual é o plano substituto."],
+ ["7 · Como se acompanha uma dor que não 'cura'?","Descreva o cuidado da Lourdes em 1 ano na UBS: PTS com quem? Metas funcionais quais? Retornos com que frequência? Que instrumento objetivo acompanha (EVN/FIQR)? Onde entram MCCP e Cassell (a pessoa que sofre)? O que NUNCA entra (opioide, alta por melhora, peregrinação de exames)?"]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{
+  const p=document.createElement('div');p.className='panel';
+  p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';
+  feybox.appendChild(p);
+});
+</script>
+</body>
+</html>

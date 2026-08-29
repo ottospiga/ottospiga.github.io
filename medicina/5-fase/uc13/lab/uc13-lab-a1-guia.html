@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · Laboratório (Práticas Funcionais) — Guia de estudo A1</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f; --purple:#c6b3ff;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .sub b{color:#dfe9f4}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul,.panel ol{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  .k3{color:#8ab8ff;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tscroll{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .exam{background:#2a161b;border:1px solid #6f2f36;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffc9cd;margin:8px 0}
+  .exam b{color:#fff}
+  .ok{background:#0f2a20;border:1px solid #1f5a41;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cdefdd;margin:8px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.4px;color:#cdd9e6}
+  .box b{color:#dfe9f4}
+  .tt{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:#cfe0ef}
+  .chip b{color:#fff}
+  .chip.hot{border-color:#6f2f36;background:#2a161b;color:#ffb9be}
+  .chip.warm{border-color:#6a5a26;background:#2b2113;color:#ffe1ad}
+  .chip.cool{border-color:#1c5a41;background:#123227;color:#7ff0c0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden;min-width:120px}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.a{background:#33301a;color:#ffdf9e;border:1px solid #6a5a26}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+  .qfilter{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .qfilter .chip{cursor:pointer}
+  .qfilter .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d}
+  details.gab{margin-top:10px;background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:6px 12px}
+  details.gab summary{cursor:pointer;font-weight:700;color:#8fe4d2;padding:6px 0}
+  details.gab p,details.gab li{font-size:13.4px;color:#cfe4f5}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+  .map li b{color:#ffd79e}
+
+  /* ---- deck de flashcards atômicos ---- */
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  .chips .chip{cursor:pointer}
+  .chips .chip.on{background:var(--teal);border-color:var(--teal);color:#0c141d;font-weight:700}
+  .fbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut);margin:2px 2px 8px}
+  .fbar b{color:var(--ink)}
+  #card{background:linear-gradient(135deg,#12324a,#151f2c);border:1px solid var(--line);border-radius:18px;min-height:300px;padding:26px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;box-shadow:var(--shadow);position:relative}
+  #card .cat{position:absolute;top:12px;left:14px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 9px;border-radius:6px;color:#fff;background:#244a5c}
+  #card .hint{position:absolute;bottom:10px;font-size:11.5px;color:#7f93a8}
+  #qFront{font-size:20px;font-weight:700;color:#eef3f9}
+  #back{display:none;width:100%}
+  #qTop{font-size:14px;color:var(--mut);font-weight:600;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed #3a4e60}
+  #resp{font-weight:800;color:var(--tealo);font-size:22px;line-height:1.35}
+  #why{color:#b9cbdd;font-size:13.5px;margin-top:12px}
+  .actions{display:flex;gap:10px;margin-top:14px}
+  .actions button{flex:1;border:none;border-radius:14px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+  #btnErrei{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  #btnAcertei{background:#123326;color:#7ff0c0;border:1px solid #1c5a41}
+  .hidden{display:none!important}
+  #fim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+  #fim h2{margin:0 0 8px;font-size:20px;color:#dfe9f4}
+  #fim button{margin-top:14px;border:none;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;background:var(--teal);color:#0c141d;font-family:inherit}
+  #fim button.sec{background:var(--card2);color:var(--ink);border:1px solid var(--line);margin-left:8px}
+
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  @media(max-width:520px){h1{font-size:19px}#qFront{font-size:18px}#resp{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UC13 · Laboratório / Práticas Funcionais · 5º período · UNIFEBE</span>
+    <h1><span style="color:var(--tealo)">Guia de estudo</span> — Laboratório UC13: inflamação, tireoide, REMIT, urina e líquor</h1>
+    <div class="sub">Feito a partir dos <b>5 conjuntos de slides do Lab (SP1–SP5)</b> e da <b>prova da turma passada (25/03/26, corrigida)</b>. Slide manda; livro entra marcado como [extra]. A prova é toda "interprete os exames destes dois pacientes" — então este guia é tabela, valor de referência e raciocínio de laudo.</div>
+    <div class="meta"><span class="chip hot"><b>Prova:</b> qua 02/09 · 8h20</span><span class="chip">5 aulas · 169 slides</span><span class="chip warm"><b>Formato provável:</b> 14 objetivas A–D (6,5% cada) + 1 discursiva (9%)</span><span class="chip cool">Profª Tabata T. Hoffmann (nome na prova antiga)</span></div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Questões</button>
+    <button class="tab" data-t="mapa">🧠 Mapa mental</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+    <button class="tab" data-t="fey">🗣️ Feynman</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+<div class="panel">
+<h2>0 · Como a prova cobra</h2>
+<p><b>Formato real (prova de 25/03/2026, turma passada):</b> cabeçalho "Práticas Funcionais – Avaliação Teórica UC XIII", <b>professora Tabata T. Hoffmann</b> (o nome está na prova; os slides não têm autoria — é "provável" que seja a mesma). <b>14 objetivas A–D valendo 6,5% cada (91%) + 1 discursiva valendo 9%</b>. As respostas são transcritas para um quadro; rasura anula; a discursiva é "sem correção parcial" (a aluna escreveu "diplococos gram-positivo" para meningococo e zerou).</p>
+<h3>O estilo dela (14 de 14 seguem o mesmo molde)</h3>
+<ul>
+<li><b>"Analise os dados dos pacientes abaixo"</b>: 2 (às vezes 3) pacientes com exames brutos, <b>sem valor de referência</b>, e a pergunta "a interpretação mais provável para o paciente 1 e 2, respectivamente é". Você precisa saber os VR de cabeça — por isso a categoria "VR" nos flashcards.</li>
+<li>Nunca pergunta "qual exame pedir"; pergunta "<b>o que este resultado significa</b>" e, na REMIT, "<b>qual o mecanismo</b>" (ADH, lactato, cortisol).</li>
+<li>Distratores fixos: trocar <b>primário × secundário</b>, <b>clínico × subclínico</b>, <b>intra × extravascular</b>, <b>Ebb × Flow</b>, <b>viral × bacteriana</b>; frases como "PCR normal exclui LES" e "FAN isolado confirma LES".</li>
+<li>Distribuição por bloco: <b>Inflamação/eletroforese 4</b> (Q1–4) · <b>Tireoide 2</b> (Q5–6) · <b>REMIT 2</b> (Q7–8) · <b>Urina 3</b> (Q9–11) · <b>Líquor 3 + discursiva</b> (Q12–14). Ou seja: <b>a prova segue os slides do Lab</b> (SP1 inflamação, SP2 tireoide, SP3 REMIT, SP4 urina, SP5 líquor), não os temas de dor das tutorias.</li>
+<li>Onde a turma passada errou (marcas na prova corrigida): eletroforese nefrótica × inflamação aguda, Ebb × Flow pelo mecanismo, hemólise intra × extravascular, tinta nanquim (Cryptococcus) e o Gram do meningococo.</li>
+</ul>
+<h3>O que os slides gritam (destaque, estrela, repetição)</h3>
+<p>Algoritmo da <b>procalcitonina</b> (estrela); <b>"VHS &gt;100 mm/h"</b>; faixas de <b>PCR</b>; tabela de <b>TBG</b>; <b>fluxograma TSH → T4 livre</b> (estrela); anticorpos tireoidianos (slide repetido 4×); <b>Ebb × Flow</b>; "albumina baixa ≠ desnutrição"; <b>sangue na fita</b>; <b>bilirrubina × urobilinogênio</b>; "cilindros: <b>exclusivamente renal!</b>"; <b>produção/volume de líquor</b> (estrela); tabela <b>bacteriana × viral × fúngica</b>; <b>Gram dos 3 agentes</b>; <b>bandas oligoclonais</b>.</p>
+<div class="note">📌 <b>Plano de leitura (3 linhas):</b> (1) hoje: painéis 1–5 com as tabelas, ~35 min; (2) depois: as 15 questões ANTIGAS + 7 DIRETAS do banco, lendo o "porquê" mesmo quando acertar; (3) véspera: flashcards "VR" até zerar + Decoreba de 60 segundos + as duas descritivas.</div>
+</div>
+
+<div class="panel">
+<h2>1 · SP1 — Marcadores inflamatórios: VHS, PCR, PCT, eletroforese, AR e LES</h2>
+<p>Marcadores <b>inespecíficos</b> (VHS, PCR, PCT, alfa-1-antitripsina, eletroforese) e <b>específicos</b> (AR e LES). A prova antiga tirou 4 questões daqui.</p>
+<h3>VHS — velocidade de hemossedimentação (Westergren)</h3>
+<div class="tscroll"><table><tr><th>Grupo</th><th>Masculino</th><th>Feminino</th></tr><tr><td>Recém-nascido</td><td>&lt;2 mm/h</td><td>&lt;2 mm/h</td></tr><tr><td>Adulto</td><td><b>&lt;10 mm/h</b></td><td><b>&lt;20 mm/h</b></td></tr><tr><td>Idoso</td><td>&lt;40 mm/h</td><td>&lt;50 mm/h</td></tr></table></div>
+<ul>
+<li>Sobe porque <b>fibrinogênio e proteínas inflamatórias</b> empilham hemácias: infecção, trauma, malignidade, injúria tecidual, <b>algumas anemias</b>. <span class="hl">Acima de 100 mm/h = "extremamente elevado"</span> (slide amarelo).</li>
+<li>Cai em: <b>leucocitose extrema, policitemia, anemia falciforme, hipofibrinogenemia</b>. Exemplo de uso do slide: acompanhar artrite reumatoide.</li>
+</ul>
+<div class="divg">🔎 <b>Divergência:</b> a tabela do slide (Wetteland 1996) é mais baixa que a usual dos livros (homem &lt;15, mulher &lt;20; acima de 50 anos até 20/30). <b>Na prova, use a do slide.</b></div>
+<h3>PCR — proteína C reativa</h3>
+<ul>
+<li>Proteína de fase aguda feita pelo <b>fígado</b>, regulada por <b>IL-6</b>. <b>Meia-vida 19 h</b>; começa a subir em <b>6–8 h</b>; pico em <b>36–50 h</b>; cai quando o estímulo cessa.</li>
+<li><b>Referência &lt;0,5 mg/dL</b>. Faixas do slide: <b>1,0–5,0 = viral / inflamação leve · 5,1–20 = bacteriana / inflamação sistêmica · &gt;20 = infecção grave, grande queimado, politrauma</b>.</li>
+</ul>
+<h3>Procalcitonina (PCT)</h3>
+<ul>
+<li>Sobe por <b>IL-6 e TNF-α</b>; <b>aumento em 2–4 h, pico 8–24 h</b> (mais rápida que a PCR). Usos: infecção/sepse e <b>decidir início e suspensão de antibiótico</b>; estratifica risco de sepse.</li>
+<li>Não é específica: <b>trauma, grandes queimaduras, grandes cirurgias, pancreatite aguda, IAM</b> elevam.</li>
+</ul>
+<div class="tscroll"><table><tr><th>PCT (µg/L)</th><th>&lt;0,1</th><th>0,1–0,25</th><th>0,25–0,5</th><th>≥0,5</th></tr><tr><td>Infecção bacteriana</td><td>muito improvável</td><td>improvável</td><td>provável</td><td>muito provável</td></tr><tr><td>Antibiótico</td><td>fortemente desencorajado</td><td>desencorajado</td><td>encorajado</td><td><b>fortemente encorajado</b></td></tr></table></div>
+<div class="exam"><b>Como caiu na prova antiga (Q2 e Q3):</b> febre 37,8 °C + PCR 1,8 + PCT 0,08 + leucócitos 7.800 = <b>viral</b>; febre 39,5 °C + PA 80/50 + PCR 22 + PCT 0,9 + leucócitos 19.200 = <b>bacteriana</b> (gabarito B). Idoso confuso com VHS 90, PCR 28, PCT 1,2 e 18.500 leucócitos com desvio à esquerda = <b>bacteriana, forte indicação de antibiótico</b>; pós-operatório de 12 h com PCR 6,0, PCT 0,35, 10.300 leucócitos, afebril = <b>"elevação esperada por trauma cirúrgico, sem evidência clara de infecção"</b> (gabarito D).</div>
+<div class="warn">⚠️ <b>Pegadinha:</b> PCT 0,35 cai na faixa "encorajado" do algoritmo, mas a professora quis o contexto: <b>cirurgia recente eleva PCT sem infecção</b>. Olhe febre, PA, leucograma e o tempo desde o trauma antes de rotular.</div>
+<h3>Proteínas plasmáticas e eletroforese</h3>
+<ul>
+<li><b>Proteínas totais 6,5–8,1 g/dL</b>. <b>Alfa-1-antitripsina 90–200 mg/dL</b>: antiprotease hepática (neutraliza tripsina, plasmina, elastase); sobe em gravidez, doenças pulmonares crônicas, hepáticas, reumáticas e como fase aguda ("aumentado é inflamado; diminuído pode ser genético"). <b>Fibrinogênio</b> = fase aguda; existe no <b>plasma</b> (tubo com anticoagulante), não no <b>soro</b> (o coágulo consumiu).</li>
+</ul>
+<div class="tscroll"><table><tr><th>Zona</th><th>O que tem</th><th>VR (&gt;16 anos)</th></tr><tr><td>Albumina</td><td>pré-albumina + albumina</td><td><b>3,50–4,85 g/dL (54–60%)</b></td></tr><tr><td>Alfa-1</td><td>alfa-1 glicoproteína ácida, <b>alfa-1-antitripsina</b>, alfa-lipoproteína, TBG, alfafetoproteína</td><td>0,22–0,43 (3,4–5,3%)</td></tr><tr><td>Alfa-2</td><td><b>alfa-2 macroglobulina, haptoglobina, ceruloplasmina</b></td><td>0,55–1,08 (8,4–13,3%)</td></tr><tr><td>Beta-1</td><td><b>transferrina</b></td><td>0,32–0,54</td></tr><tr><td>Beta-2</td><td><b>C3</b>, beta-lipoproteína</td><td>0,24–0,54</td></tr><tr><td>Gama</td><td>IgG, IgA, IgM, IgE (IgD)</td><td><b>0,74–1,75 (11,4–21,6%)</b></td></tr></table></div>
+<div class="tscroll"><table><tr><th>Padrão</th><th>Albumina</th><th>α1 / α2</th><th>Gama</th><th>Pense em</th></tr><tr><td>Fase aguda</td><td>↓</td><td>↑ ↑</td><td>N</td><td>infecção/inflamação aguda, trauma</td></tr><tr><td>Pico policlonal (largo)</td><td>↓</td><td>N</td><td>↑↑ largo</td><td>autoimune, infecção crônica, hepatopatia crônica</td></tr><tr><td>Pico monoclonal (estreito)</td><td>↓</td><td>N</td><td>↑↑ em agulha</td><td><b>mieloma múltiplo</b></td></tr><tr><td>Nefrótica</td><td>↓↓ (1–2 g/dL)</td><td><b>α2 ↑</b> (macroglobulina é grande e não se perde)</td><td>↓ (perde IgG)</td><td>edema + proteinúria</td></tr></table></div>
+<div class="exam"><b>Como caiu (Q4):</b> mulher de 60 anos com edema importante; albumina 1,8, alfa-1 0,30, alfa-2 1,60, beta 0,60, gama 0,50. Gabarito: <b>síndrome nefrótica</b>. A aluna marcou "processo inflamatório agudo" — errou porque na fase aguda a albumina cai pouco, alfa-1 sobe junto e gama fica normal; aqui albumina está no chão, alfa-1 normal e <b>gama baixa</b>. "Pico monoclonal" exigiria agulha em gama; "deficiência de alfa-1-antitripsina" daria alfa-1 quase ausente.</div>
+<h3>Marcadores específicos — artrite reumatoide</h3>
+<ul>
+<li><b>Fator reumatoide</b> e <b>anti-CCP/ACPA</b>: autoanticorpos; parte dos pacientes é <b>soronegativa</b>. <b>Anti-CarP</b> (antipeptídeos carbamilados) = o mais recente. <b>Nenhum teste isolado confirma AR.</b></li>
+<li><b>VHS e PCR aumentadas na AR e normais na osteoartrite</b> (frase literal do slide).</li>
+<li>ACR/EULAR 2010: <b>≥6 pontos</b> = AR — articulações (0–5), sorologia (FR ou ACPA em <b>título alto = &gt;3× o limite superior</b> vale 3; baixo, 2), duração ≥6 semanas (1), PCR ou VHS anormal (1). ACR 1987: <b>4 de 7</b> (rigidez matinal ≥1 h, ≥3 áreas, mãos, simetria, nódulos, FR, radiografia).</li>
+</ul>
+<h3>Marcadores específicos — lúpus</h3>
+<ul>
+<li><b>FAN</b>: sensibilidade <b>&gt;95%</b> → serve de <b>triagem</b>; <b>negativo torna LES altamente improvável</b>; positivo isolado não confirma (inespecífico). <b>Anti-DNA nativo, anti-Sm, anti-nucleossomo</b> ajudam.</li>
+<li><b>VHS aumentada, PCR em geral normal</b>: o <b>interferon tipo 1</b>, muito alto no LES, inibe a síntese hepática de PCR. Se a PCR subir em lúpico, pense em <b>serosite ou infecção</b> [extra].</li>
+<li>ACR 1997: <b>4 de 11</b> (malar, discoide, fotossensibilidade, úlceras orais, artrite, serosite, renal — proteinúria &gt;0,5 g/dia —, neurológico, hematológico — leucopenia &lt;4.000, linfopenia &lt;1.500, plaquetas &lt;100.000 —, imunológico — anti-DNA, anti-Sm, antifosfolípide, <b>VDRL falso-positivo</b> —, FAN).</li>
+</ul>
+<div class="exam"><b>Como caiu (Q1):</b> mulher 32 anos, artralgia simétrica há 3 meses, rigidez matinal 1 h, edema em MCF, VHS 58, PCR 3,2, FR 120 = <b>AR</b>; homem 25 anos, dor pleurítica + exantema malar, FAN 1:640, PCR 0,3, VHS 65 = <b>LES</b> (gabarito B). O distrator D dizia "PCR normal exclui LES" — é o contrário: a dissociação VHS alta / PCR normal é a cara do lúpus.</div>
+<div class="ok">✅ PCR = IL-6, 19 h, pico em 2 dias; PCT = 2–4 h, corte 0,5; VHS &gt;100 = alarme; α2 sobe na inflamação E na nefrótica — quem separa é albumina/gama; AR = VHS/PCR altas + FR/anti-CCP; LES = FAN de triagem, VHS alta com PCR normal.</div>
+</div>
+
+<div class="panel">
+<h2>2 · SP2 — Tireoide (e um toque de GH e puberdade precoce)</h2>
+<h3>Fisiologia que a prova usa</h3>
+<ul>
+<li>Eixo: <b>TRH → TSH → T4/T3</b>, com feedback negativo de T4/T3 sobre hipófise e hipotálamo. <b>T4 → T3</b> nos tecidos pelas <b>desiodases 1 e 2</b>; a <b>desiodase 3</b> gera <b>T3 reverso</b> (inativo).</li>
+<li>Fração ligada (inativa): <b>75% TBG, 10–15% transtirretina, 10–15% albumina</b>. Livre: <b>T4 = 0,03% do total; T3 = 0,3%</b>. Frase-lei do slide: <b>T4/T3 totais são "altamente suscetíveis a variações da TBG" (gravidez, fármacos, hereditariedade); uso reservado a discordâncias dos ensaios livres.</b></li>
+</ul>
+<div class="tscroll"><table><tr><th>↑ TBG (T4 total ↑, T4L normal)</th><th>↓ TBG (T4 total ↓, T4L normal)</th><th>Inibem a ligação T4–TBG</th></tr><tr><td>Congênita, <b>gestação</b>, período neonatal, <b>estrogênio</b>, hepatite, porfiria, heroína, metadona, mitotano, 5-fluoruracil, tamoxifeno/raloxifeno</td><td><b>Androgênios, esteroides anabolizantes, glicocorticoides</b>, doença de Graves, insuficiência hepática, <b>síndrome nefrótica</b>, ácido nicotínico, L-asparaginase</td><td>Salicilatos, furosemida, fenitoína, carbamazepina, heparina, AINEs</td></tr></table></div>
+<h3>Valores de referência (slide)</h3>
+<div class="tscroll"><table><tr><th>Exame</th><th>VR</th><th>Exame</th><th>VR</th></tr><tr><td><b>TSH</b></td><td><b>0,4–4,3 µUI/mL</b></td><td>T3 total</td><td>60–215 ng/mL</td></tr><tr><td><b>T4 livre</b></td><td><b>0,7–1,8 ng/dL</b></td><td>T3 livre</td><td>2–4,4 pg/mL</td></tr><tr><td><b>T4 total</b></td><td><b>4,8–13,7 µg/dL</b></td><td>Tireoglobulina</td><td>14–78 ng/mL</td></tr><tr><td><b>Anti-TPO</b></td><td><b>até 35 UI/mL</b></td><td>Anti-TG</td><td>até 115 UI/mL</td></tr><tr><td><b>Anti-TSHr (TRAb)</b></td><td><b>até 1,75 UI/mL</b></td><td>TSH após TRH</td><td>resposta normal = <b>10× o basal</b></td></tr></table></div>
+<div class="divg">🔎 <b>Divergência:</b> os livros descrevem a resposta normal ao TRH como elevação absoluta de ~5–25 mUI/L; o slide diz "aumento de 10 vezes o valor basal" (e repete o slide 4×). <b>Na prova, marque 10×.</b></div>
+<h3>O fluxograma (estrela vermelha no slide) — decore como tabela</h3>
+<div class="tscroll"><table><tr><th>TSH</th><th>T4 livre</th><th>Diagnóstico</th></tr><tr><td>normal</td><td>—</td><td>eutireoidiano</td></tr><tr><td><b>baixo</b></td><td>normal</td><td><b>hipertireoidismo subclínico</b></td></tr><tr><td><b>baixo</b></td><td>alto</td><td><b>hipertireoidismo clínico</b> (primário)</td></tr><tr><td><b>baixo</b></td><td>baixo</td><td><b>hipotireoidismo central</b> (secundário, hipofisário)</td></tr><tr><td><b>alto</b></td><td>normal</td><td><b>hipotireoidismo subclínico</b></td></tr><tr><td><b>alto</b></td><td>baixo</td><td><b>hipotireoidismo clínico</b> (primário, ex. Hashimoto)</td></tr><tr><td><b>alto</b></td><td>alto</td><td>investigar hipertireoidismo central / tumor produtor de TSH</td></tr></table></div>
+<div class="note">📌 Regra: <b>"primário" = TSH e T4L em direções opostas; "central" = os dois na mesma direção; "subclínico" = só o TSH está fora.</b> A chave do central é <b>"o TSH não sobe apesar do T4L baixo"</b> → RM de hipófise e avaliação dos outros eixos.</div>
+<h3>Hipertireoidismo</h3>
+<ul>
+<li>Excesso de T3/T4 livres = tireotoxicose. Causas: hiperplasia difusa, bócio multinodular hiperfuncionante, adenoma tireoidiano ou hipofisário, câncer, excesso de iodeto, <b>doença de Graves</b>. "T3 total ↑ por estímulo enzimático".</li>
+<li>Ponto de partida <b>TSH baixo + T4L/T3L altos</b> → <b>relação T3/T4 &gt;20 = hiperfunção verdadeira (Graves, síntese direta de T3); &lt;20 = tireoidite destrutiva</b>. Etiologia: <b>Graves = TRAb (+) e captação DIFUSA de I-131; bócio multinodular tóxico = TRAb (−) e captação NODULAR</b>.</li>
+<li><b>TRAb</b>: liga-se ao receptor de TSH (estimulador ou bloqueador); positivo em <b>&gt;90%</b> dos Graves; <b>atravessa a placenta</b> (risco fetal/neonatal) e prevê remissão no fim do tratamento.</li>
+</ul>
+<h3>Hipotireoidismo</h3>
+<ul>
+<li>Primárias: mutações, resistência ao hormônio, cirurgia/radioiodo, <b>Hashimoto</b>, deficiência de iodo, fármacos (<b>lítio, iodeto, PAS</b>). Secundárias: falência hipofisária/hipotalâmica. <b>Clínico 0,3%; subclínico 4% da população.</b></li>
+<li><b>Anti-TPO</b>: marcador de destruição folicular mediada por células T; <b>o teste mais sensível para doença autoimune da tireoide; presente em &gt;95% das Hashimoto</b>; define risco de progressão no subclínico.</li>
+</ul>
+<h3>Situações especiais</h3>
+<ul>
+<li><b>Gravidez:</b> a <b>subunidade α do HCG é idêntica à do TSH</b> → o pico de HCG (1º trimestre) estimula o receptor de TSH e <b>suprime transitoriamente o TSH</b> (mimetiza hipertireoidismo subclínico); o estrogênio <b>eleva a TBG</b> → T4/T3 totais sobem. <b>T4 livre é a única métrica confiável</b>, com VR por trimestre.</li>
+<li><b>Síndrome do doente eutireoideu:</b> fase aguda = <b>T3 cai</b>, <b>rT3 sobe</b>; TSH pode ficar transitoriamente <b>&lt;0,02</b> e depois <b>falsamente alto</b> no rebote. Regra de ouro: <b>TSH detectável (&gt;0,02) = eutireoideu após a recuperação; evite painel tireoidiano no doente agudo grave</b>.</li>
+<li><b>Carcinoma diferenciado de tireoide:</b> seguimento com <b>tireoglobulina após TSH recombinante &gt;1,0 ng/mL = tecido residual ou metástase</b>.</li>
+</ul>
+<div class="exam"><b>Como caiu (Q5 e Q6):</b> mulher 32 a, perda de 6 kg, palpitações, tremor, calor, TSH 0,12, T4L 2,8, anti-TSHr 9,2 = <b>hipertireoidismo primário clínico por Graves</b>; homem 55 a, fadiga, ganho de peso, TSH 12, T4L 0,5, anti-TPO 210 = <b>hipotireoidismo primário clínico por Hashimoto</b> (gabarito D; os distratores trocavam "secundário" e "subclínico"). Q6: gestante com T4 total 15,2, T4L 1,1, TSH 1,2 = <b>eutireoidiana com ↑TBG</b>; homem em anabolizante com T4 total 3,9, TSH 2,3, T4L 1,4 = <b>eutireoidiano com ↓TBG</b>; mulher em estrogênio = ↑TBG (gabarito A). Regra: <b>TSH e T4L normais = eutireoidiano, seja lá o que o T4 total diga.</b></div>
+<h3>GH e puberdade precoce (não caíram na prova antiga, mas estão nos slides)</h3>
+<ul>
+<li>GH (GHRH +, somatostatina −) → fígado → <b>IGF-1</b>. GH ↓ = <b>nanismo</b> (tratamento GH). GH ↑ = <b>gigantismo</b> na criança / <b>acromegalia</b> no adulto (cirurgia, <b>somatostatina</b>, antagonista do receptor). <b>Síndrome de Laron</b> = receptor defeituoso: <b>GH normal/alto com IGF-1 baixo</b>; tratamento = <b>IGF-1</b>. Testes de estímulo: <b>insulina</b> (hipoglicemia = estímulo mais potente; risco de convulsão, contraindicado em epilepsia/AVC/cardiopatia e &gt;60 anos), <b>clonidina</b> (bem tolerada; sonolência/hipotensão), <b>exercício</b> (fisiológico, baixa sensibilidade).</li>
+<li>Puberdade precoce: <b>meninas &lt;8 anos, meninos &lt;9 anos</b>. <b>Central</b>: <b>LH e FSH ↑</b>, esteroides sexuais ↑, <b>análogo de GnRH eleva o LH em 2 h</b>. <b>Periférica</b>: <b>LH e FSH suprimidos</b> com esteroides altos (gônadas ou adrenais).</li>
+</ul>
+<div class="ok">✅ TSH manda; T4L confirma; T4 total só "mente" por TBG. Graves = TRAb + captação difusa + T3/T4 &gt;20. Hashimoto = anti-TPO. Gestante: TSH baixo no 1º tri é fisiológico e T4L é o juiz. Doente grave: T3 baixo e rT3 alto não é hipotireoidismo.</div>
+</div>
+
+<div class="panel">
+<h2>3 · SP3 — REMIT: o laboratório do politrauma e do pós-operatório</h2>
+<p><b>REMIT</b> = Resposta Endócrino-Metabólica e Imunológica ao Trauma: <b>resposta fisiológica adaptativa (alostase, não patologia)</b>; "o objetivo não é suprimi-la, é compreendê-la". Cadeia: <b>trauma → eixo HPA e simpático (catecolaminas, cortisol) → gliconeogênese, lipólise, proteólise → citocinas e proteínas de fase aguda</b>.</p>
+<h3>As fases (Cuthbertson) — as questões 7 e 8 vivem aqui</h3>
+<div class="tscroll"><table><tr><th>Fase</th><th>Quando</th><th>Fisiologia</th><th>Laboratório típico</th></tr><tr><td><b>Ebb (choque)</b></td><td><b>0–48 h</b></td><td>hipoperfusão, <b>↓ metabolismo basal</b>, instabilidade hemodinâmica</td><td><b>acidose metabólica com lactato alto</b> (anaerobiose), <b>hiperglicemia</b> (catecolaminas), <b>hipercalemia</b> (lesão celular + acidose), <b>hiponatremia dilucional</b> (ADH), albumina ainda normal</td></tr><tr><td><b>Flow (catabolismo)</b></td><td>até <b>~10 dias</b></td><td><b>hipermetabolismo, resistência à insulina, degradação proteica</b></td><td>hiperglicemia persistente, <b>ureia ↑</b> (proteólise), <b>albumina ↓</b>, PCR muito alta, leucocitose, febre, perda de peso</td></tr><tr><td><b>Recuperação (anabolismo)</b></td><td>semanas</td><td>síntese proteica, restauração das reservas</td><td>normalização progressiva</td></tr></table></div>
+<h3>Hormônios e eletrólitos</h3>
+<ul>
+<li><b>Sobem</b>: catecolaminas, cortisol, glucagon, GH, <b>ADH (até 50× o basal: reabsorve água e faz vasoconstrição esplâncnica)</b>, renina-angiotensina-<b>aldosterona</b>. <b>Cai / é resistida</b>: insulina. Resultado renal (gabarito do slide): <b>oligúria, retenção de Na, excreção de K</b>.</li>
+<li><b>Sódio</b>: retido por ADH e aldosterona "para restaurar a volemia" — mas o ADH retém <b>mais água que sal</b> → soro <b>diluído: hiponatremia</b> (anotação do próprio slide: "+ água, fica mais diluído, hiponatremia"). <b>Potássio</b>: tendência inicial de <b>hipercalemia por lesão tecidual (rabdomiólise) e acidose</b>, com quedas rápidas após volume e insulina.</li>
+</ul>
+<div class="warn">⚠️ <b>Pegadinha (a mais errada da turma):</b> "retenção de sódio" no slide não vira "hipernatremia" na prova. A sequência é <b>trauma → ADH ↑ → água retida → Na sérico baixo</b>. E a <b>hipercalemia não é "efeito da aldosterona"</b> (aldosterona <b>excreta</b> K); é lesão celular + acidose.</div>
+<h3>Painel glicêmico: estresse × doença</h3>
+<ul>
+<li>Glicose sobe por <b>gliconeogênese hepática acelerada + resistência periférica à insulina</b> induzidas por catecolaminas e cortisol. <b>Hiperglicemia de estresse: HbA1c normal (&lt;5,7%)</b>, resposta aguda adaptativa. <b>Diabetes prévio: HbA1c ≥6,5%</b>, patologia crônica.</li>
+<li><b>Alvo (BRASPEN/ESPEN 2023): 140–180 mg/dL.</b> Controle estrito (80–110) <b>aumenta mortalidade</b> por hipoglicemia; só inicie insulina EV com glicemia <b>persistentemente &gt;180</b>.</li>
+</ul>
+<h3>Cortisol, tireoide e hemograma no doente crítico</h3>
+<ul>
+<li><b>Cortisol</b> é a pedra angular da fase Flow — não confunda REMIT com Cushing. <b>CBG e albumina caem</b> → cortisol <b>total</b> pode parecer normal/baixo com a <b>fração livre massivamente elevada</b>; <b>ritmo circadiano abolido na UTI</b>. Interprete o eixo adrenal com cautela.</li>
+<li><b>Síndrome do doente eutireoideu</b>: trauma inibe a <b>desiodase 1</b> → <b>T3 total/livre baixo, rT3 alto, TSH normal ou levemente baixo, T4L normal</b>. É down-regulation protetor: <b>não prescreva levotiroxina</b>.</li>
+<li><b>Leucocitose ≠ infecção</b>: catecolaminas e cortisol <b>desmarginam neutrófilos</b> e liberam medula (leucocitose de estresse). <b>Plaquetopenia de consumo</b> pela ativação sistêmica da coagulação.</li>
+</ul>
+<h3>Proteínas de fase aguda e a "armadilha nutricional"</h3>
+<ul>
+<li><b>Positivas (sobem): PCR, fibrinogênio, ferritina.</b> <b>Negativas (caem): albumina, transferrina, pré-albumina</b> — o fígado prioriza defesa e há fuga capilar (no gráfico do slide, albumina e transferrina despencam nos primeiros 3–6 dias).</li>
+<li><b>Mito: albumina baixa após trauma = desnutrição. Regra de ouro BRASPEN 2023: NUNCA use albumina ou transferrina como marcador nutricional na fase aguda; elas medem inflamação.</b></li>
+</ul>
+<h3>pH e PICS</h3>
+<ul>
+<li>pH normal <b>7,35–7,45</b>; compatível com a vida 6,8–8,0. Trauma = <b>acidose metabólica lática</b> (HCO₃ baixo, pCO₂ baixa compensando).</li>
+<li><b>PICS</b> (Persistent Inflammation, Immunosuppression and Catabolism): doença crítica crônica a partir do <b>dia 14</b>, quando o paciente sobrevive mas não entra na fase anabólica. Critérios: <b>PCR &gt;0,5–2,0 mg/dL</b> persistente, <b>linfócitos &lt;0,8 × 10⁹/L</b>, <b>albumina &lt;3,0 g/dL + sarcopenia</b>. Resultado: internação longa, infecções recorrentes, má cicatrização.</li>
+</ul>
+<div class="exam"><b>Como caiu (Q7 e Q8):</b> politraumatizado taquicárdico e frio com pH 7,24, HCO₃ 14, pCO₂ 30, lactato 5,6, Na 129, K 5,9, glicemia 238 → gabarito B: <b>"acidose metabólica por hipóxia (metabolismo anaeróbio → lactato); hiponatremia relacionada ao aumento de ADH"</b>. Distratores: "hiperglicemia com <i>aumento</i> da sensibilidade à insulina" (é resistência) e "hipercalemia por efeito da aldosterona" (ela excreta K). Q8: 4 h pós-trauma, hipotenso, pH 7,15, lactato 8, K 6,5, albumina 3,9 = <b>Ebb pela acidose metabólica e lactato alto</b>; 6º dia, febre, emagrecimento, glicemia 272, PCR 210, albumina 2,7, ureia 82 = <b>Flow pela hiperglicemia e albumina baixa (catabolismo)</b> — gabarito C. A aluna marcou Flow por "retenção renal de ureia" (errado: a ureia sobe por proteólise).</div>
+<div class="note">📌 Gabaritos das questões resolvidas nos slides: pós-op de choque → <b>catabolismo intenso</b>; padrão pós-trauma → <b>oligúria, excreção de K, retenção de Na</b>; glicose → <b>↑ gliconeogênese hepática</b>; hormônio do edema pós-colectomia → <b>aldosterona</b>; baixa diurese no 1º PO → <b>fase catabólica por ADH, renina e angiotensina</b>; alteração <b>NÃO esperada = hipoglicemia</b>.</div>
+<div class="ok">✅ Ebb = frio, hipotenso, lactato e K altos, Na baixo, primeiras 48 h. Flow = quente, febril, hiperglicêmico, ureia alta, albumina baixa, até 10 dias. Albumina baixa é inflamação; HbA1c separa estresse de diabetes; alvo 140–180.</div>
+</div>
+
+<div class="panel">
+<h2>4 · SP4 — Parcial de urina (EAS): laudo, química e sedimento</h2>
+<h3>Coleta e o laudo-padrão (VR do slide — decore)</h3>
+<ul>
+<li>Amostras: aleatória (hospital); <b>1ª da manhã = mais concentrada, a ideal</b> (inclusive para nitrito); jejum/2ª da manhã e pós-prandial = glicosúria. Higienizar, <b>desprezar o 1º jato</b>, colher jato médio, levar logo ao laboratório.</li>
+</ul>
+<div class="tscroll"><table><tr><th>Físico</th><th>VR</th><th>Química</th><th>VR</th><th>Microscopia</th><th>VR</th></tr><tr><td>pH</td><td><b>5,5–7,0</b></td><td>Proteínas</td><td><b>0–30 mg/dL</b></td><td>Células epiteliais</td><td><b>até 15.000/mL</b></td></tr><tr><td>Densidade</td><td><b>1.003–1.035</b></td><td>Cetonas / glicose</td><td>negativo</td><td>Leucócitos</td><td><b>até 10.000/mL</b></td></tr><tr><td>Cor</td><td>amarelo claro / citrino</td><td>Urobilinogênio</td><td><b>normal</b> (nunca "negativo")</td><td>Hemácias</td><td><b>até 4.000/mL</b></td></tr><tr><td>Aspecto</td><td>límpido / lig. turvo</td><td>Bilirrubina / nitrito / sangue</td><td>negativo</td><td>Cilindros, leveduras, Trichomonas</td><td>ausentes</td></tr><tr><td>Depósito</td><td>nulo / +</td><td></td><td></td><td>Flora bacteriana</td><td><b>discreta</b></td></tr></table></div>
+<ul>
+<li><b>Cor</b>: incolor/claro = diluída (poliúria, DI, DM); amarelo escuro/<b>âmbar/laranja</b> = concentrada, <b>bilirrubina</b>, nitrofurantoína; <b>verde</b> = <i>Pseudomonas</i>, amitriptilina, azul de metileno; <b>rosada/vermelha</b> = hemácia, hemoglobina, mioglobina, menstruação; <b>marrom/preta</b> = hemácias oxidadas, meta-hemoglobina, metronidazol. <b>Turbidez</b>: células, bactérias, leveduras, cristais, cilindros, lipídios, sêmen, muco, cremes. <b>pH alto = mais chance de infecção</b> (urease).</li>
+</ul>
+<h3>Química (tira de 10 parâmetros)</h3>
+<ul>
+<li><b>Proteínas</b>: normal <b>&lt;10 mg/dL ou &lt;150 mg/24 h</b> (albumina quase toda reabsorvida + Tamm-Horsfall, prostáticas, seminais). Pequena perda pesa mais em urina <b>diluída</b>. Não patológicas: <b>exercício intenso, ortostática</b>. Patológicas: lesão glomerular, tubular, nefropatia diabética, pré-eclâmpsia, <b>mieloma</b>, <b>rabdomiólise</b> (mioglobina).</li>
+<li><b>Glicose</b>: reabsorvida até o <b>limiar 160–180 mg/dL</b>. Cuidados do slide: glicosúria após refeição rica em carboidrato em saudável; diabético avalia-se pelo <b>sangue</b>; <b>doença tubular renal = glicosúria SEM hiperglicemia</b>.</li>
+<li><b>Cetonas</b> (acetona, acetoacetato, β-hidroxibutirato): <b>DM descompensado e jejum prolongado</b>.</li>
+<li><b>Nitrito</b>: só bactérias que reduzem nitrato — <b>Gram-negativas principais (E. coli) sim; Gram-positivas e fungos não</b>. <b>Falso-negativo: urina ao acaso (pouco tempo de contato), ácido ascórbico, antibiótico</b>. <b>Falso-positivo: amostra velha (proliferação), amostra pigmentada</b>. Nitrito negativo <b>não exclui</b> ITU; nitrito positivo isolado <b>não fecha</b> ITU.</li>
+<li><b>Leucócitos</b> (piúria): inflamação, infecciosa ou não — pielonefrite, cistite, uretrite, prostatite, glomerulonefrite, lúpus, tumor.</li>
+</ul>
+<div class="tscroll"><table><tr><th>Sangue + na fita</th><th>Cor da urina</th><th>Cor do soro/plasma</th><th>Microscopia</th><th>Causa</th></tr><tr><td><b>Hemácias</b> (hematúria)</td><td>vermelha</td><td><b>normal</b></td><td><b>hemácias íntegras</b></td><td>cálculo, glomerulopatia, infecção, trauma, tumor, exercício, menstruação</td></tr><tr><td><b>Hemoglobina livre</b></td><td>vermelha</td><td><b>vermelha/rosada</b></td><td>ausência/poucas hemácias</td><td><b>hemólise intravascular</b>: anemia hemolítica, reação transfusional, infecção</td></tr><tr><td><b>Mioglobina</b></td><td>vermelha/"cola"</td><td><b>normal</b></td><td>ausência/poucas hemácias</td><td><b>rabdomiólise</b>, trauma, coma, convulsão, miopatia, exercício intenso (CK alta [extra])</td></tr></table></div>
+<div class="tscroll"><table><tr><th>Situação</th><th>Bilirrubina (direta)</th><th>Urobilinogênio</th></tr><tr><td><b>Colestase</b> (obstrução; também hepatite, cirrose, neoplasia)</td><td><b>+++</b></td><td>normal (ou baixo)</td></tr><tr><td><b>Doença hemolítica</b> (extravascular)</td><td><b>negativa</b> (indireta não filtra)</td><td><b>+++</b></td></tr></table></div>
+<div class="exam"><b>Como caiu (Q9 e Q11):</b> idoso pálido, <b>plasma levemente rosado após centrifugação</b>, urina vermelha e límpida com sangue ++ e <b>hemácias 2.000/mL (normal)</b> = <b>anemia hemolítica INTRAvascular</b> (gabarito C; a aluna marcou extravascular — na extravascular não há hemoglobina livre: a bilirrubina indireta vai ao fígado e o que sobe é o urobilinogênio). Q11: urina <b>âmbar</b>, sangue negativo, <b>bilirrubina ++</b>, urobilinogênio normal = <b>colestase</b> (gabarito A).</div>
+<h3>Sedimento</h3>
+<ul>
+<li><b>Hemácias</b> não passam por néfrons íntegros: glomerulopatia, cálculo, infecção, neoplasia, exercício. <b>Células epiteliais</b>: escamosas/transicionais = qualidade da amostra, baixa relevância; <b>tubulares renais = necrose tubular</b>.</li>
+<li><b>Cilindros — "EXCLUSIVAMENTE RENAL!"</b>: glicoproteína de <b>Tamm-Horsfall</b> moldada no túbulo (TCD) sob estase, com células, bactérias, grânulos ou cristais.</li>
+</ul>
+<div class="tscroll"><table><tr><th>Cilindro</th><th>Significa</th></tr><tr><td>Hialino</td><td>normal, exercício intenso, desidratação</td></tr><tr><td><b>Hemático</b></td><td><b>doença glomerular</b> (nefrite)</td></tr><tr><td><b>Leucocitário</b></td><td>inflamação renal — <b>pielonefrite</b> é a mais comum</td></tr><tr><td><b>De células epiteliais</b></td><td><b>necrose tubular renal</b> (rabdomiólise, síndrome de lise tumoral, pielonefrite)</td></tr><tr><td>Granuloso</td><td>degradação das células dentro dos cilindros celulares</td></tr><tr><td><b>Céreo</b></td><td>estágio final de degradação — <b>estase urinária extrema</b> (doença renal crônica)</td></tr></table></div>
+<ul>
+<li><b>Cristais</b>: precipitação por <b>concentração</b>, pH e temperatura. <b>"Presença de cristais NÃO é sinônimo de cálculo."</b> Normais em <b>urina ácida: ácido úrico, urato amorfo, urato de sódio, oxalato de cálcio</b> (envelope); em <b>urina alcalina: fosfato triplo</b> (tampa de caixão), fosfato amorfo, fosfato de cálcio, biurato de amônio, carbonato de cálcio. Anormais <b>metabólicos: bilirrubina, cistina, colesterol, leucina, tirosina</b>; <b>iatrogênicos: ampicilina, sulfonamida</b>.</li>
+<li><b>Cálculos</b>: cólica nefrética, hidronefrose, hematúria. Formação: supersaturação → pH favorável → nucleação → crescimento → agregação. <b>Principal inibidor fisiológico = água.</b> Infecção é complicação importante, <b>mas cálculo não é sinônimo de infecção</b>.</li>
+<li><b>Flora bacteriana</b>: <b>discreta = descarta infecção bacteriana</b> (com clínica, pense em atípicas); <b>moderada = possível</b>; <b>intensa = provável</b>. Sempre junto com <b>clínica, leucócitos, células epiteliais e nitrito</b>. Outros achados: <i>Trichomonas</i>, leveduras, espermatozoides.</li>
+</ul>
+<div class="exam"><b>Como caiu (Q10):</b> 30 anos, dor lombar intensa; urina vermelha, turva, proteínas 300 mg/dL, sangue ++, leucócitos 4.000, <b>hemácias 181.000, cilindros hemáticos +++</b>, flora discreta, <b>nitrito positivo</b> → gabarito B: <b>doença renal glomerular</b>. A dor lombar puxava para "cálculo" e o nitrito para "infecção", mas <b>cilindro hemático = glomérulo</b>; leucócitos normais e flora discreta descartam ITU.</div>
+<div class="note">📌 Os laudos dos slides em uma linha: leveduras +++ com 49.000 leucócitos e nitrito negativo = <b>candidíase</b>; urato amorfo + cilindros hialinos = <b>urina concentrada, normal</b>; glicose +++ e cetonas ++ = <b>diabetes descompensado</b>; 173.000 células epiteliais + flora moderada = <b>amostra contaminada</b>; 461.000 leucócitos + flora intensa com nitrito negativo = <b>ITU mesmo assim</b>; 597.000 células tubulares + cilindros epiteliais/granulosos = <b>necrose tubular aguda</b>; cor laranja + bilirrubina +++ = <b>colestase</b>.</div>
+<div class="ok">✅ Sangue na fita: hemácia (plasma normal, hemácias íntegras) × hemoglobina (plasma vermelho) × mioglobina (plasma normal, CK). Bilirrubina na urina = colestase; urobilinogênio = hemólise. Cilindro = rim; hemático = glomérulo; leucocitário = pielonefrite; epitelial = NTA; céreo = estase. Cristal ≠ cálculo; cálculo ≠ infecção; nitrito negativo ≠ sem infecção.</div>
+</div>
+
+<div class="panel">
+<h2>5 · SP5 — Líquor: meningites, hemorragia, punção traumática e esclerose múltipla</h2>
+<p>Micro-organismos chegam ao SNC por <b>corrente sanguínea</b> ou <b>infecção focal craniana</b>. A análise do líquor serve para <b>meningites, hemorragias, células neoplásicas (leucemia/linfoma) e autoimunes (EM)</b>.</p>
+<h3>Produção e volume (tabela com estrela vermelha)</h3>
+<div class="tscroll"><table><tr><th>Faixa</th><th>Produção (mL/h)</th><th>Volume total (mL)</th><th>Máximo seguro por punção (mL)</th></tr><tr><td><b>Adultos</b></td><td><b>22</b></td><td><b>150–170</b></td><td><b>15–17</b></td></tr><tr><td>Adolescentes</td><td>18</td><td>120–170</td><td>12–17</td></tr><tr><td>Crianças</td><td>12</td><td>100–150</td><td>10–15</td></tr><tr><td>Lactentes</td><td>10</td><td>60–90</td><td>6–9</td></tr><tr><td><b>Neonatos</b></td><td><b>1</b></td><td><b>20–40</b></td><td><b>2–4</b></td></tr></table></div>
+<h3>Análise física e bioquímica</h3>
+<ul>
+<li><b>Aspecto</b>: límpido / ligeiramente turvo / turvo. <b>Cor</b>: incolor / hemorrágico / xantocrômico. <b>Opaco e celular = meningite ou hemorragia</b>; <b>límpido, pouca célula e xantocrômico = pense em EM (imunoglobulina)</b>.</li>
+<li>Bioquímica = filtrado do plasma ajustado pela <b>barreira hematoencefálica</b> → VR próprios. <b>Glicose: 60–70% (2/3) da glicemia, ~50 mg/dL</b> (glicemia 100 → 65; 70 → 47; 200 → 120). <b>"Valores aumentados são resultado de elevação plasmática"</b> — glicorraquia alta não é doença do SNC.</li>
+<li><b>Proteínas 15–45 mg/dL</b> (soro 5,7–8,2 g/dL); baixo peso molecular; <b>albumina 15 mg/dL</b>. <b>Aumentam</b> por comprometimento da BHE, produção de imunoglobulinas no SN e degeneração neural (<b>meningite, hemorragia</b> em destaque); <b>diminuem</b> por extravasamento (fístula).</li>
+<li><b>Lactato 9–19 mg/dL</b>: sobe por redução de oxigênio — <b>principalmente meningite bacteriana</b>. <b>LDH</b>: isoenzimas <b>LDH1 e LDH2 = tecido encefálico</b>; estima destruição tecidual.</li>
+</ul>
+<div class="tscroll"><table><tr><th>Parâmetro</th><th>VR do líquor</th></tr><tr><td>Aspecto / cor</td><td>límpido / incolor</td></tr><tr><td><b>Leucócitos</b></td><td><b>até 5/mm³</b>, predomínio de <b>mononucleares</b></td></tr><tr><td>Hemácias</td><td>ausentes</td></tr><tr><td><b>Proteínas</b></td><td><b>15–45 mg/dL</b></td></tr><tr><td><b>Glicose</b></td><td><b>2/3 da glicemia</b> (tabela final: 50–80 mg/dL)</td></tr><tr><td><b>Lactato</b></td><td><b>9–19 mg/dL</b></td></tr></table></div>
+<h3>Hemorragia ou acidente de punção?</h3>
+<ul>
+<li>A agulha introduz <b>leucócitos, hemácias e proteínas</b> no líquor. Acidente de punção: <b>sangue desigual entre os frascos</b> (clareia) e <b>coágulos</b>. Hemorragia: <b>sobrenadante xantocrômico</b> (hemólise), sangue homogêneo <b>sem coágulo</b>.</li>
+</ul>
+<div class="exam"><b>Como caiu (Q14):</b> cefaleia súbita intensa, líquor hemorrágico, 96 leucócitos, 18.000 hemácias, proteínas 120, "coletado apenas um frasco, que <b>não apresentava coágulos</b>" → <b>hemorragia subaracnóidea</b> (gabarito B). Com um frasco só não dá para ver clareamento; a ausência de coágulo decide.</div>
+<h3>Citologia e as meningites</h3>
+<div class="tscroll"><table><tr><th>Meningite</th><th>Leucócitos</th><th>Glicose</th><th>Proteínas</th><th>Lactato</th></tr><tr><td><b>Bacteriana</b></td><td><b>↑↑ PMN (neutrófilos)</b></td><td><b>↓ acentuada</b></td><td><b>↑↑ grande elevação</b></td><td><b>↑</b></td></tr><tr><td><b>Viral</b></td><td>↑ mononucleares (linfócitos)</td><td>normal</td><td>↑ moderada / N</td><td>normal</td></tr><tr><td><b>Fúngica</b></td><td>variável</td><td>normal (pode cair [extra])</td><td>↑ / N</td><td>—</td></tr><tr><td>Tuberculosa [extra]</td><td>↑ linfócitos</td><td>↓</td><td>↑↑</td><td>↑</td></tr></table></div>
+<ul>
+<li>Strasinger: <b>linfócitos</b> = normal, meningite viral/tuberculosa/fúngica, esclerose múltipla; <b>neutrófilos</b> = bacteriana, <b>casos incipientes</b> de viral/TB/fúngica e <b>hemorragia cerebral</b>. Polimorfonucleares = granulócitos (neutrófilo, eosinófilo, basófilo); mononucleares = linfócito e monócito.</li>
+</ul>
+<div class="tscroll"><table><tr><th>Coloração</th><th>Agente</th><th>Como aparece</th></tr><tr><td><b>Gram</b></td><td><b><i>Neisseria meningitidis</i></b></td><td><b>diplococos Gram-NEGATIVOS</b> (DCGN, "grão de café", intra e extracelulares)</td></tr><tr><td>Gram</td><td><b><i>Haemophilus influenzae</i></b></td><td><b>cocobacilos Gram-negativos</b> (CBGN)</td></tr><tr><td>Gram</td><td><b><i>Streptococcus pneumoniae</i></b></td><td><b>diplococos Gram-POSITIVOS</b> (DGP, lanceolados)</td></tr><tr><td><b>Ziehl-Neelsen</b></td><td><i>Mycobacterium tuberculosis</i></td><td>BAAR (bastonetes vermelhos)</td></tr><tr><td><b>Tinta nanquim</b> (tinta da China)</td><td><i>Cryptococcus neoformans</i></td><td>leveduras com <b>halo capsular</b> claro</td></tr></table></div>
+<div class="exam"><b>Como caiu (Q12, Q13 e a discursiva):</b> jovem com febre e rigidez de nuca, líquor turvo, 1.240 leucócitos com 92% PMN, glicose 28 (glicemia 90), proteínas 180 = <b>bacteriana</b>; criança com febre baixa, líquor límpido, 45 leucócitos com 88% mononucleares, glicose 58, proteínas 49 = <b>viral</b> (gabarito A). Q13: HIV confuso, líquor com <b>5 leucócitos, proteínas 30, glicose 108 e tinta nanquim positiva</b> = <b>Cryptococcus</b> (gabarito B; a aluna marcou tuberculose — com celularidade quase normal, quem manda é a coloração; glicose 108 é só glicemia alta). <b>Discursiva (9%):</b> líquor com 412 leucócitos, 98% PMN, proteínas 94, glicose 51, em surto de <i>N. meningitidis</i>: bacterioscopia esperada = <b>"diplococos Gram-negativos"</b> — morfologia + Gram completos, sem correção parcial; "diplococos Gram-positivo" (pneumococo) zerou.</div>
+<h3>Esclerose múltipla no líquor</h3>
+<ul>
+<li>EM = doença <b>autoimune, inflamatória e desmielinizante do SNC</b> (2,9 milhões no mundo; mais prevalente na América do Norte e Europa).</li>
+<li><b>Eletroforese de proteínas no líquor</b>: albumina alta = <b>"dano na BHE"</b>; <b>gama alta = síntese intratecal</b> de Ig. VR (%): pré-albumina 3,3–5,9 (o líquor tem pré-albumina, o soro quase não), albumina 43–56, α1 4,7–8,7, α2 6,2–6,4, β 13,7–23,3, γ 8,5–13,8; total 15–45 mg/dL.</li>
+<li><b>Bandas oligoclonais (BOC)</b>: focalização isoelétrica do líquor <b>em paralelo com o soro</b>. <b>≥2 bandas presentes no LCR e ausentes no soro = síntese intratecal (padrão EM)</b>; <b>1 banda = inconclusivo, não confirma</b>; ausência = normal. Sempre à luz da clínica.</li>
+<li>Líquor típico da EM: <b>límpido/incolor, glicose normal, proteínas levemente aumentadas, poucos leucócitos mononucleares, eletroforese com albumina normal e banda gama aumentada, BOC com ≥2 bandas</b>.</li>
+</ul>
+<div class="note">📌 Exercício final do slide: 5 anos, 15 leucócitos (69% MN), glicose 49, proteínas 48 → <b>viral</b>; 36 anos, xantocrômico, 214 leucócitos (97% PMN), proteínas 91 → <b>bacteriana</b>; 32 anos, 6 leucócitos, proteínas 39 → <b>praticamente normal</b>; 12 anos, hemorrágico, 706 hemácias, 108 leucócitos (73% PMN) → sangue no líquor: decida <b>punção × hemorragia</b> por coágulo/clareamento/xantocromia (provável hemorragia ou bacteriana incipiente).</div>
+<div class="ok">✅ Líquor normal: ≤5 células mononucleares, proteína 15–45, glicose 2/3 da glicemia, lactato 9–19. Bacteriana = PMN + glicose baixa + proteína alta + lactato alto. Viral = linfócitos + glicose normal. HIV + nanquim = Cryptococcus. Coágulo = punção; xantocromia = hemorragia. Meningococo = diplococo Gram-negativo. EM = ≥2 BOC só no líquor.</div>
+</div>
+
+<div class="panel">
+<h2>6 · Radar de pegadinhas + Decoreba de 60 segundos</h2>
+<h3>Radar de pegadinhas</h3>
+<ul>
+<li><b>PCR normal não exclui LES</b> — é o esperado (IFN-1). VHS alta + PCR normal = lúpus.</li>
+<li><b>FAN positivo isolado não confirma LES</b>; FAN negativo é o que afasta (sensibilidade &gt;95%).</li>
+<li><b>Alfa-2 alta aparece na inflamação aguda E na nefrótica</b>: albumina no chão + gama baixa + edema = nefrótica.</li>
+<li><b>PCT elevada sem infecção</b>: cirurgia, trauma, queimadura, pancreatite, IAM — pós-op de 12 h com PCT 0,35 é "esperado".</li>
+<li><b>T4 total alterado com TSH e T4L normais = TBG</b>, não doença: gestação/estrogênio ↑; anabolizante/androgênio/glicocorticoide/nefrótica ↓.</li>
+<li><b>TSH baixo + T4L baixo é hipotireoidismo central</b>, não hipertireoidismo. Primário = direções opostas.</li>
+<li><b>TSH suprimido no 1º trimestre é HCG</b>; doente grave com T3 baixo e rT3 alto não recebe levotiroxina.</li>
+<li><b>"Retenção de sódio" na REMIT vira hiponatremia</b> (ADH retém água); hipercalemia é lesão celular + acidose, não aldosterona (que excreta K).</li>
+<li><b>Albumina baixa no trauma = inflamação</b>, não desnutrição; ureia alta na Flow = proteólise, não "retenção renal".</li>
+<li><b>Hiperglicemia com HbA1c normal = estresse</b>; alvo 140–180, nunca 80–110.</li>
+<li><b>Sangue + na fita sem hemácias</b>: plasma vermelho = hemoglobina (hemólise intravascular); plasma normal = mioglobina.</li>
+<li><b>Hemólise extravascular não faz hemoglobinúria</b>: faz urobilinogênio alto com bilirrubina urinária negativa. Bilirrubina na urina = colestase.</li>
+<li><b>Nitrito positivo não fecha ITU nem negativo exclui</b>; cilindro hemático vence dor lombar e nitrito: é glomérulo.</li>
+<li><b>Glicose alta no líquor = glicemia alta</b>; líquor quase normal em HIV com nanquim positivo = Cryptococcus, não TB.</li>
+<li><b>Meningococo = diplococo Gram-NEGATIVO</b>; pneumococo = diplococo Gram-positivo; Haemophilus = cocobacilo Gram-negativo. Sem coágulo = hemorragia; coágulo = agulha.</li>
+<li><b>1 banda oligoclonal não confirma EM</b>; precisa de ≥2 só no líquor. Cristal ≠ cálculo; cálculo ≠ infecção.</li>
+</ul>
+<h3>Decoreba de 60 segundos</h3>
+<div class="grid2">
+<div class="box"><b>Inflamação</b><br>VHS adulto H &lt;10 / M &lt;20; idoso H &lt;40 / M &lt;50; &gt;100 = extremo.<br>PCR &lt;0,5 mg/dL; 1–5 viral; 5,1–20 bacteriana; &gt;20 grave. IL-6, t½ 19 h, sobe 6–8 h, pico 36–50 h.<br>PCT &lt;0,1 / 0,1–0,25 / 0,25–0,5 / ≥0,5; IL-6 + TNF, 2–4 h, pico 8–24 h.<br>α1-AT 90–200 mg/dL; PT 6,5–8,1 g/dL; albumina 3,5–4,85 (54–60%); gama 0,74–1,75.<br>AR: ≥6 pontos; título alto &gt;3× LSN; 1987: 4/7. LES: 4/11; FAN &gt;95%.</div>
+<div class="box"><b>Tireoide</b><br>TSH 0,4–4,3; T4L 0,7–1,8 ng/dL; T4T 4,8–13,7 µg/dL; T3T 60–215; T3L 2–4,4; TG 14–78.<br>Anti-TPO ≤35; anti-TG ≤115; TRAb ≤1,75; TRH → TSH 10×.<br>TBG 75% / TTR 10–15% / albumina 10–15%; T4L 0,03%, T3L 0,3%.<br>T3/T4 &gt;20 Graves; &lt;20 tireoidite. TRAb &gt;90% Graves; anti-TPO &gt;95% Hashimoto.<br>Hipo clínico 0,3%, subclínico 4%. TG pós-rhTSH &gt;1,0 = residual. Puberdade precoce: ♀ &lt;8, ♂ &lt;9.</div>
+<div class="box"><b>REMIT</b><br>Ebb 0–48 h; Flow até 10 d; recuperação semanas; PICS dia 14.<br>ADH até 50×. HbA1c &lt;5,7 estresse / ≥6,5 DM. Alvo 140–180.<br>pH 7,35–7,45 (vida 6,8–8,0).<br>PICS: PCR &gt;0,5–2; linfócitos &lt;0,8; albumina &lt;3,0.<br>Positivas: PCR, fibrinogênio, ferritina. Negativas: albumina, transferrina, pré-albumina.</div>
+<div class="box"><b>Urina e líquor</b><br>pH 5,5–7,0; densidade 1.003–1.035; proteína 0–30 mg/dL (normal &lt;10 mg/dL, &lt;150 mg/24 h).<br>Leucócitos ≤10.000; hemácias ≤4.000; epiteliais ≤15.000 /mL. Limiar da glicose 160–180.<br>Líquor: leucócitos ≤5/mm³ MN; proteína 15–45; albumina 15; glicose 2/3 (50–80); lactato 9–19.<br>Produção adulto 22 mL/h; volume 150–170; retirar 15–17 mL (neonato 1 / 20–40 / 2–4).<br>EM: BOC ≥2; γ do líquor 8,5–13,8%.</div>
+</div>
+</div>
+
+  </section>
+
+  <!-- ============ QUESTÕES ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">0</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0">44 questões no formato A–D da prova: <b>12 ENAMED</b> (caso curto, dificuldade crescente) → <b>10 nível PROVA</b> (INCORRETA, proposições, associação, 3 pacientes) → <b>15 ANTIGAS</b> (as 14 objetivas + a discursiva da prova de 25/03/26, comentadas com o gabarito real) → <b>7 DIRETAS</b> no estilo da professora. Filtre por tema; a pegadinha vem no rodapé de cada resposta.</div>
+    <div class="qfilter" id="qfilter"></div>
+    <div id="quiz"></div>
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D1</div><span class="pill d">Descritiva · estilo da prova antiga (9%)</span><span class="pill o">SP5 · Líquor / bacterioscopia</span></div>
+      <div class="stem">
+        <span class="cx">Mulher, 19 anos, estudante, chega ao pronto-socorro com febre de 39,5 °C, cefaleia intensa, vômitos e rigidez de nuca há 12 h. Líquor: aspecto turvo, incolor; leucócitos 2.100/mm³ (95% polimorfonucleares); hemácias 4/mm³; proteínas 210 mg/dL; glicose 22 mg/dL (glicemia 98 mg/dL); lactato 48 mg/dL. Há um surto de meningite por <i>Haemophilus influenzae</i> na escola dela.</span>
+        <b>a)</b> Classifique a meningite (bacteriana, viral ou fúngica) justificando com CADA parâmetro do líquor comparado ao valor de referência. <b>(5 pontos)</b><br>
+        <b>b)</b> Se o agente for o mesmo do surto, qual resultado você espera na bacterioscopia pelo Gram? Descreva a morfologia e a coloração completas, e diga como diferenciá-lo do meningococo e do pneumococo. <b>(4 pontos)</b>
+      </div>
+      <details class="gab"><summary>Roteiro de correção (a prova antiga NÃO deu nota parcial na bacterioscopia: morfologia OU Gram errados = zero)</summary>
+        <p><b>a) Bacteriana (5 pts, 1 por parâmetro):</b> (1) aspecto <b>turvo</b> = celularidade alta (normal: límpido/incolor); (2) <b>leucócitos 2.100/mm³ com 95% PMN</b> — normal ≤5/mm³ com predomínio de mononucleares; pleocitose neutrofílica = bacteriana (viral/TB/fúngica = mononuclear, salvo fase muito inicial); (3) <b>proteínas 210 mg/dL</b> — normal 15–45; grande elevação = quebra da barreira hematoencefálica (na viral a elevação é moderada); (4) <b>glicose 22 mg/dL</b> = 22% da glicemia — normal 2/3 (≈65 mg/dL para glicemia 98); consumo bacteriano/hipoglicorraquia acentuada (viral = normal); (5) <b>lactato 48 mg/dL</b> — normal 9–19; metabolismo anaeróbio, típico de bacteriana (viral = normal). Hemácias 4 = sem sangramento/punção traumática relevante.</p>
+        <p><b>b) Haemophilus influenzae = COCOBACILOS GRAM-NEGATIVOS</b> (pequenos bastonetes curtos, pleomórficos, corados em rosa/vermelho pela safranina — não retêm o cristal violeta). Diferenciação: <b>Neisseria meningitidis</b> = <b>diplococos Gram-negativos</b> em "grão de café", intra e extracelulares (mesma cor, forma diferente: cocos aos pares × cocobacilos); <b>Streptococcus pneumoniae</b> = <b>diplococos Gram-POSITIVOS</b> lanceolados (roxos). Bônus: Listeria = bacilo Gram-positivo; S. agalactiae = cocos Gram-positivos em cadeia; E. coli = bacilo Gram-negativo; Cryptococcus = tinta nanquim (levedura com halo); M. tuberculosis = Ziehl-Neelsen (BAAR).</p>
+        <p class="src">Na prova de 25/03/26 a discursiva foi exatamente esta pergunta com <i>Neisseria</i> — a aluna escreveu "diplococos Gram-positivos" e zerou. Treine os 3 pares "forma + Gram" até sair automático.</p>
+      </details>
+    </div>
+
+    <div class="q" id="descritiva2">
+      <div class="qhead"><div class="qnum">D2</div><span class="pill d">Descritiva integrativa</span><span class="pill o">SP4 + SP1 · Urina e eletroforese</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 58 anos, edema de membros inferiores e face há 3 semanas. Urina: cor amarelo-escura, aspecto turvo, depósito ++; proteínas 500 mg/dL, sangue negativo, nitrito negativo; leucócitos 6.000/mL, hemácias 2.000/mL, cilindros hialinos ++ e céreos +, flora discreta. Eletroforese sérica: albumina 1,9 g/dL, alfa-2 1,7 g/dL, gama 0,5 g/dL. PCR 0,3 mg/dL.</span>
+        <b>a)</b> Interprete o parcial de urina, parâmetro a parâmetro. <b>(4)</b> · <b>b)</b> Interprete a eletroforese e integre com a urina: qual a síndrome e por que NÃO se trata de fase aguda inflamatória nem de mieloma? <b>(5)</b>
+      </div>
+      <details class="gab"><summary>Roteiro de correção</summary>
+        <p><b>a)</b> Proteinúria maciça (500 mg/dL; normal ≤30) sem hematúria (hemácias 2.000 ≤4.000, fita negativa) e sem infecção (nitrito −, leucócitos ≤10.000, flora discreta) = perda proteica glomerular <b>não inflamatória</b>; turbidez/depósito por proteína e cilindros; cilindros hialinos (proteína de Tamm-Horsfall, podem ser normais) e <b>céreos</b> (estase/degradação prolongada — doença renal crônica); cor escura = urina concentrada pelo edema/terceiro espaço.</p>
+        <p><b>b)</b> Padrão <b>nefrótico</b>: albumina ↓↓ (perda urinária), <b>alfa-2 ↑</b> (macroglobulina é grande demais para ser filtrada e o fígado compensa), <b>gama ↓</b> (IgG perdida na urina). Não é fase aguda porque nesta a albumina cai pouco, α1 e α2 sobem e a PCR está alta (aqui 0,3 = normal); não é mieloma porque não há pico monoclonal estreito em gama (gama está BAIXA) nem proteinúria de Bence-Jones. Integração: proteinúria maciça + hipoalbuminemia + edema = <b>síndrome nefrótica</b> — exatamente a Q4 da prova antiga, em que a aluna marcou "processo inflamatório agudo" e errou.</p>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- ============ MAPA MENTAL ============ -->
+  <section id="mapa">
+    <div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>🧭 Prova antiga (25/03/26, profª Tabata Hoffmann) — o formato</summary><ul>
+        <li><b>14 objetivas A–D (6,5% cada) + 1 discursiva (9%)</b> · sempre "analise os dados dos pacientes 1 e 2" → "a interpretação mais provável, respectivamente" · <b>sem valores de referência no enunciado</b></li>
+        <li>Distribuição: SP1 inflamação <b>4</b> · SP2 tireoide <b>2</b> · SP3 REMIT <b>2</b> · SP4 urina <b>3</b> · SP5 líquor <b>3 + discursiva</b> (bacterioscopia da Neisseria = diplococos Gram-NEGATIVOS)</li>
+        <li>Erros da aluna (armadilhas reais): eletroforese nefrótica × fase aguda · Ebb × Flow pelo mecanismo · hemoglobinúria intra × extravascular · tinta nanquim = Cryptococcus</li>
+        <li>Não caíram, mas estão nos slides: GH/puberdade precoce, PICS/HbA1c/alvo glicêmico (slides 2026), esclerose múltipla/BOC</li>
+      </ul></details>
+
+      <details><summary>🔥 SP1 — Marcadores inflamatórios</summary><ul>
+        <li><b>VHS</b> (Westergren, mm/h): adulto ♂ &lt;10 · ♀ &lt;20 · idosos ♂ &lt;40 ♀ &lt;50 · RN &lt;2 · <b>&gt;100 = extremamente elevado</b> · sobe por fibrinogênio; cai em policitemia, falciforme, leucocitose extrema</li>
+        <li><b>PCR</b>: fígado, <b>IL-6</b>, meia-vida 19 h, sobe 6–8 h, pico 36–50 h · VR <b>&lt;0,5 mg/dL</b> · 1–5 viral/leve · 5,1–20 bacteriana/sistêmica · <b>&gt;20 grave/queimado/politrauma</b></li>
+        <li><b>PCT</b>: IL-6 + TNF-α, sobe 2–4 h, pico 8–24 h (mais rápida) · <b>&lt;0,1 improvável / 0,1–0,25 / 0,25–0,5 provável / ≥0,5 muito provável</b> → guia antibiótico · sobe também em trauma, cirurgia, pancreatite, IAM</li>
+        <li><b>Alfa-1-antitripsina</b> 90–200 mg/dL: alta = inflamação; baixa = genético</li>
+        <li><b>Eletroforese</b>: albumina 3,5–4,85 g/dL (54–60%) · α1 (antitripsina, glicoproteína ácida) · α2 (macroglobulina, haptoglobina, ceruloplasmina) · β (transferrina, C3) · γ 0,74–1,75 (Ig) · <b>fase aguda</b>: alb ↓, α1 ↑, α2 ↑ · <b>nefrótica</b>: alb ↓↓, α2 ↑↑, γ ↓ (edema!) · <b>policlonal</b>: γ largo (infecção crônica, autoimune, hepatopatia) · <b>monoclonal</b>: pico estreito = mieloma</li>
+        <li>Plasma = COM anticoagulante (tem fibrinogênio) · soro = sem (coágulo)</li>
+        <li><b>AR</b>: FR, anti-CCP/ACPA (título alto = &gt;3× LSN), anti-CarP · VHS/PCR ↑ (osteoartrite = normais) · ACR/EULAR 2010 ≥6 pontos · 1987 4/7</li>
+        <li><b>LES</b>: FAN triagem (sensibilidade &gt;95%; negativo quase exclui), anti-DNA, anti-Sm, anti-nucleossomo · <b>VHS ↑ com PCR NORMAL (IFN-1 inibe PCR)</b> · VDRL falso-positivo · ACR 1997 4/11</li>
+      </ul></details>
+
+      <details><summary>🦋 SP2 — Tireoide (+ GH e puberdade)</summary><ul>
+        <li>Eixo TRH → TSH → T4/T3 (feedback negativo) · ligação: <b>TBG 75%</b>, transtirretina 10–15%, albumina 10–15% · livre: T4 0,03%, T3 0,3% · D3 faz rT3</li>
+        <li>VR: <b>TSH 0,4–4,3</b> · <b>T4L 0,7–1,8 ng/dL</b> · T4T 4,8–13,7 µg/dL · T3T 60–215 · anti-TPO ≤35 · anti-TG ≤115 · <b>TRAb ≤1,75</b> · TRH → TSH sobe 10×</li>
+        <li><b>Fluxograma</b>: TSH ↓ + T4L ↑ = hiper clínico · TSH ↓ + T4L N = hiper subclínico · TSH ↓ + T4L ↓ = hipo <b>central</b> · TSH ↑ + T4L ↓ = hipo clínico · TSH ↑ + T4L N = hipo subclínico · TSH ↑ + T4L ↑ = tumor produtor de TSH</li>
+        <li><b>TBG ↑</b> (gestação, estrogênio, hepatite, heroína/metadona, tamoxifeno) → T4 TOTAL ↑ com T4L e TSH normais = eutireoideu · <b>TBG ↓</b> (androgênios, anabolizantes, glicocorticoide, nefrótica, insuficiência hepática) → T4 total ↓, eutireoideu · salicilato/furosemida/fenitoína/heparina inibem a ligação</li>
+        <li><b>Graves</b>: TRAb + (&gt;90%), captação difusa, T3/T4 &gt;20 · <b>BMNT</b>: TRAb −, captação nodular · tireoidite destrutiva: T3/T4 &lt;20 · <b>Hashimoto</b>: anti-TPO &gt;95% (teste mais sensível de autoimunidade) · hipo clínico 0,3% / subclínico 4%</li>
+        <li>Gestação: HCG (subunidade α = TSH) suprime TSH no 1º tri; estrogênio ↑TBG → só o <b>T4 livre</b> vale · Doente eutireoideu: T3 ↓, rT3 ↑, TSH normal/baixo — não tratar · CDT: tireoglobulina pós-rhTSH &gt;1,0 = residual/metástase</li>
+        <li><b>GH</b>: IGF-1/IGFBP-3 · estímulo: insulina (mais potente, risco), clonidina, exercício · Laron = GH normal/alto + IGF-1 baixo · <b>Puberdade precoce</b>: ♀ &lt;8 a, ♂ &lt;9 a · central = LH/FSH ↑ (GnRH → LH sobe em 2 h) · periférica = LH/FSH suprimidos + esteroides ↑</li>
+      </ul></details>
+
+      <details><summary>🚑 SP3 — REMIT (trauma e pós-operatório)</summary><ul>
+        <li>Resposta fisiológica adaptativa: HPA + simpático (cortisol, catecolaminas) → gliconeogênese, lipólise, proteólise + citocinas/fase aguda · <b>Ebb 0–48 h</b> (hipoperfusão, ↓metabolismo, acidose, lactato) → <b>Flow até ~10 d</b> (hipermetabolismo, resistência à insulina, catabolismo, albumina ↓) → recuperação (anabolismo)</li>
+        <li><b>Glicose</b>: hiperglicemia de estresse = HbA1c &lt;5,7 · DM prévio = HbA1c ≥6,5 · alvo <b>140–180</b> (controle estrito 80–110 aumenta mortalidade) · insulina EV só se persistentemente &gt;180</li>
+        <li><b>Cortisol</b>: livre ↑↑ mesmo com total normal (CBG/albumina caem); ritmo circadiano abolido · <b>Doente eutireoideu</b>: T3 ↓, rT3 ↑, TSH N — sem levotiroxina</li>
+        <li>Hemograma: leucocitose de estresse (desmarginação) ≠ infecção · plaquetopenia de consumo · <b>Fase aguda +</b>: PCR, fibrinogênio, ferritina · <b>−</b>: albumina, transferrina, pré-albumina → <b>nunca marcador nutricional na fase aguda</b> (BRASPEN 2023)</li>
+        <li>Eletrólitos: <b>Na retido por ADH/aldosterona → hiponatremia dilucional</b> · <b>K ↑ inicial (lesão tecidual + acidose)</b>, depois cai com volume/insulina · ADH até 50× · aldosterona: retém Na, excreta K, oligúria</li>
+        <li><b>PICS</b> (dia 14+): PCR &gt;0,5–2 · linfócitos &lt;0,8 ×10⁹/L · albumina &lt;3,0 + sarcopenia</li>
+        <li>Prova antiga: gasometria pH 7,24/HCO₃ 14/lactato 5,6/Na 129/K 5,9 = acidose metabólica por hipóxia + hiponatremia por ADH · Ebb = acidose + lactato; Flow = hiperglicemia + albumina baixa</li>
+      </ul></details>
+
+      <details><summary>🧪 SP4 — Parcial de urina (EAS)</summary><ul>
+        <li>Coleta: 1ª da manhã (concentrada, nitrito), jato médio · <b>VR do laudo</b>: pH 5,5–7,0 · densidade 1.003–1.035 · proteína 0–30 mg/dL · epiteliais ≤15.000 · <b>leucócitos ≤10.000</b> · <b>hemácias ≤4.000</b>/mL · flora discreta · cilindros ausentes</li>
+        <li>Cor: âmbar/laranja = bilirrubina/concentrada · vermelha = hemácia/Hb/mioglobina/menstruação · verde = Pseudomonas, amitriptilina · marrom = meta-Hb, metronidazol · pH alto = mais chance de infecção (urease)</li>
+        <li>Proteína: normal &lt;10 mg/dL ou &lt;150 mg/24 h; ortostática/exercício benignas; glomerular, tubular, pré-eclâmpsia, Bence-Jones, mioglobina · Glicose: limiar renal 160–180; glicosúria sem hiperglicemia = tubulopatia · Cetonas: DM/jejum</li>
+        <li><b>Sangue na fita</b>: hemácias (plasma normal + hemácias no sedimento) · <b>hemoglobina livre (plasma vermelho/rosado, sem hemácias) = hemólise INTRAvascular</b> · mioglobina (plasma normal, sem hemácias, CK ↑) · extravascular = urobilinogênio ↑, sem hemoglobinúria</li>
+        <li><b>Bilirrubina + / urobilinogênio normal = colestase</b> · <b>bilirrubina − / urobilinogênio +++ = hemólise</b> (bilirrubina indireta não filtra)</li>
+        <li>Nitrito: Gram-negativos (E. coli) produzem; Gram+ e fungos não · falso − (ácido ascórbico, ATB, urina ao acaso) · falso + (amostra velha, pigmentada) · Leucócitos = inflamação (piúria)</li>
+        <li><b>Cilindros = exclusivamente renais</b> (Tamm-Horsfall, TCD): hialino normal/exercício/desidratação · <b>hemático = glomerular</b> · leucocitário = pielonefrite · epitelial = necrose tubular · granuloso/céreo = degradação/estase</li>
+        <li>Cristais ≠ cálculo · ácida: ácido úrico, uratos, oxalato de cálcio · alcalina: fosfato triplo, fosfato amorfo, carbonato de cálcio · anormais: cistina, colesterol, leucina, tirosina, bilirrubina; ampicilina, sulfa · cálculo: água = principal inibidor</li>
+        <li>Flora: discreta = descarta bacteriana · moderada = possível · intensa = provável — sempre com a clínica · epiteliais escamosas em excesso = coleta ruim · tubulares = NTA</li>
+      </ul></details>
+
+      <details><summary>🧠 SP5 — Líquor</summary><ul>
+        <li>Produção/volume/coleta segura: <b>adulto 22 mL/h · 150–170 mL · 15–17 mL</b> · neonato 1 mL/h · 20–40 mL · 2–4 mL</li>
+        <li><b>VR</b>: límpido, incolor · <b>leucócitos ≤5/mm³, mononucleares</b> · hemácias 0 · <b>proteínas 15–45 mg/dL</b> (albumina 15) · <b>glicose 2/3 da glicemia (50–80)</b> · <b>lactato 9–19 mg/dL</b> · LDH1/LDH2 = tecido encefálico</li>
+        <li>Glicose alta no líquor = glicemia alta (não é doença do SNC) · proteína ↑ = quebra da BHE, síntese intratecal, degeneração (meningite, hemorragia) · proteína ↓ = fístula</li>
+        <li><b>Meningites</b>: bacteriana = PMN ↑↑, glicose ↓↓, proteína ↑↑, lactato ↑ · viral = MN, glicose N, proteína N/↑, lactato N · fúngica/TB = MN, glicose N/↓, proteína ↑ · neutrófilos também em fases INICIAIS de viral/TB/fúngica e em hemorragia</li>
+        <li><b>Colorações</b>: Gram — <b>Neisseria = diplococos Gram-NEGATIVOS</b> (grão de café, intra/extracelulares) · pneumococo = diplococos Gram-positivos lanceolados · <b>H. influenzae = cocobacilos Gram-negativos</b> · Listeria = bacilo Gram+ · <b>Ziehl-Neelsen = BAAR (tuberculose)</b> · <b>tinta nanquim = Cryptococcus</b> (halo capsular; HIV)</li>
+        <li><b>Hemorragia × acidente de punção</b>: A.P. = clareamento entre os frascos + coágulo · HSA = sangue homogêneo, sem coágulo, sobrenadante <b>xantocrômico</b></li>
+        <li><b>Esclerose múltipla</b>: límpido, glicose N, proteína leve ↑, poucos MN · eletroforese: albumina N + γ ↑ (síntese intratecal) · <b>bandas oligoclonais ≥2 no líquor e ausentes no soro</b> = EM; 1 banda = inconclusivo</li>
+      </ul></details>
+
+      <details><summary>📏 Decoreba de valores (o que a prova não dá)</summary><ul>
+        <li>PCR &lt;0,5 · PCT 0,1/0,25/0,5 · VHS ♂&lt;10 ♀&lt;20 · albumina 3,5–4,85 · γ 0,74–1,75 · proteínas totais 6,5–8,1 · α1-AT 90–200</li>
+        <li>TSH 0,4–4,3 · T4L 0,7–1,8 · T4T 4,8–13,7 · anti-TPO ≤35 · anti-TG ≤115 · TRAb ≤1,75 · T3/T4 &gt;20 Graves</li>
+        <li>pH 7,35–7,45 · alvo glicêmico 140–180 · HbA1c 5,7/6,5 · Ebb 48 h · Flow 10 d · PICS 14 d · ADH 50×</li>
+        <li>Urina: pH 5,5–7,0 · densidade 1.003–1.035 · proteína ≤30 · leuco ≤10.000 · hemácias ≤4.000 · epiteliais ≤15.000 · limiar glicose 160–180</li>
+        <li>Líquor: leuco ≤5 · proteína 15–45 · glicose 2/3 (50–80) · lactato 9–19 · coleta 15–17 mL · puberdade ♀8/♂9</li>
+      </ul></details>
+
+    </div></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel">
+      <h2>Flashcards atômicos — 1 informação por cartão</h2>
+      <p class="src">Toque no cartão para virar (a pergunta continua visível). Marque ❌ Errei / ✅ Acertei; no fim, repita só as erradas até zerar. Teclado: espaço vira · 1 = errei · 2 = acertei.</p>
+      <div class="chips" id="chips"></div>
+      <div class="fbar"><span>Cartão <b id="pos">–</b></span><span>✅ <b id="nOk">0</b> · ❌ <b id="nErr">0</b></span></div>
+      <div id="card">
+        <span class="cat" id="cat"></span>
+        <div id="qFront"></div>
+        <div id="back"><div id="qTop"></div><div id="resp"></div><div id="why"></div></div>
+        <span class="hint" id="hint">toque para ver a resposta</span>
+      </div>
+      <div class="actions hidden" id="actions">
+        <button id="btnErrei">❌ Errei</button>
+        <button id="btnAcertei">✅ Acertei</button>
+      </div>
+      <div id="fim" class="hidden">
+        <h2 id="fimTitulo"></h2>
+        <div id="fimTexto" style="color:var(--mut);font-size:14.5px"></div>
+        <div><button id="btnErradas">Repetir só as que errei</button><button class="sec" id="btnReiniciar">Recomeçar</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEYNMAN ============ -->
+  <section id="fey">
+    <div class="panel"><h2>Técnica de Feynman — explique em voz alta</h2><p class="src">Sem olhar o resumo. Se travar, é ali que está o buraco.</p></div>
+    <div id="feybox"></div>
+  </section>
+
+  <div class="foot">Guia montado a partir dos slides SP1–SP5 do Laboratório da UC13 e da prova antiga de 25/03/2026. Fidelidade: slide > livro; conteúdo de referência marcado como [extra]. Boa prova, Otto.</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ===== QUESTÕES =====
+   {lvl:"ENAMED"|"PROVA"|"ANTIGA", obj:"tema", stem:"html", opts:[...], ans:idx, why:"html", trap:"html"} */
+const QS=[
+{lvl:"ENAMED", obj:"Inflamação · AR × osteoartrite", stem:"<span class='cx'>Mulher de 66 anos com dor em joelhos e interfalangianas distais que piora com o uso e melhora com repouso, rigidez matinal de 10 minutos e nódulos de Heberden. Exames: VHS 14 mm/h, PCR 0,3 mg/dL, fator reumatoide negativo, anti-CCP negativo.</span> A interpretação mais provável é:", opts:["Artrite reumatoide soronegativa em atividade — o FR negativo não afasta a doença","Osteoartrite — VHS e PCR normais são o esperado, pois a doença não é inflamatória sistêmica","Lúpus eritematoso sistêmico em fase inicial, com provas inflamatórias ainda normais","Artrite reumatoide inicial — provas de atividade normais são comuns nos primeiros 3 meses"], ans:1, why:"O slide é literal: <b>VHS e PCR estão aumentadas na AR e normais na osteoartrite</b>. Dor mecânica em IFD com Heberden, rigidez curta e provas inflamatórias normais fecham osteoartrite. AR soronegativa existe (parte dos pacientes tem FR/anti-CCP negativos), mas ainda cursa com VHS/PCR elevadas e acomete MCF/IFP, não IFD.", trap:"'FR negativo = soronegativa' é o distrator: soronegativa é sorologia negativa com provas de atividade positivas, não o oposto."},
+{lvl:"ENAMED", obj:"Inflamação · eletroforese", stem:"<span class='cx'>Homem de 68 anos com dor óssea lombar, anemia (Hb 9,2), creatinina 2,1 mg/dL e cálcio 11,8 mg/dL. Eletroforese de proteínas séricas: albumina 3,2 g/dL, alfa-1 0,30, alfa-2 0,80, beta 0,60, gama 3,4 g/dL com pico estreito, alto e de base fina na região gama.</span> A interpretação mais provável é:", opts:["Hipergamaglobulinemia policlonal por hepatopatia crônica","Processo inflamatório agudo com elevação de alfa-1 e alfa-2","Pico monoclonal — mieloma múltiplo","Síndrome nefrótica com perda seletiva de albumina"], ans:2, why:"Pico <b>estreito e alto em gama</b> = <b>monoclonal</b>, e o slide o rotula como <b>mieloma múltiplo</b>; dor óssea, anemia, hipercalcemia e lesão renal completam o quadro. O pico policlonal é <b>largo</b> (autoimune, infecção crônica, hepatopatia). Fase aguda sobe alfa-1/alfa-2, não gama. Nefrótica teria albumina muito baixa e gama baixa.", trap:"Distinguir 'pico largo' (policlonal) de 'pico em agulha' (monoclonal) é a essência da questão — a prova antiga trouxe o gráfico."},
+{lvl:"ENAMED", obj:"Endócrino · hipotireoidismo subclínico", stem:"<span class='cx'>Mulher de 40 anos, assintomática, em check-up. TSH 8,5 µUI/mL, T4 livre 1,2 ng/dL, anti-TPO 450 UI/mL.</span> A interpretação mais provável é:", opts:["Hipotireoidismo primário clínico por tireoidite de Hashimoto","Hipotireoidismo central — TSH inapropriado para o T4 livre","Eutireoidiana com aumento de TBG","Hipotireoidismo subclínico autoimune (Hashimoto), com alto risco de progressão"], ans:3, why:"No fluxograma do slide, <b>TSH aumentado + T4 livre normal = hipotireoidismo subclínico</b> (VR: TSH 0,4–4,3; T4L 0,7–1,8). O <b>anti-TPO</b> (VR até 35) positivo marca doença autoimune — está presente em &gt;95% das Hashimoto — e, no subclínico, <b>define o risco de progressão</b>. 'Clínico' exigiria T4L baixo; central exigiria TSH baixo/normal com T4L baixo; TBG não altera TSH.", trap:"'Subclínico' é definido pelo T4 livre normal, não pela ausência de sintomas."},
+{lvl:"ENAMED", obj:"Endócrino · gestação", stem:"<span class='cx'>Gestante de 10 semanas, com náuseas, sem bócio ou oftalmopatia. TSH 0,15 µUI/mL, T4 livre 1,3 ng/dL, T4 total 14,8 µg/dL.</span> A interpretação mais provável é:", opts:["Supressão fisiológica do TSH pelo HCG e aumento de TBG pelo estrogênio — com T4 livre normal para o trimestre, é eutireoidiana","Hipertireoidismo primário clínico — iniciar antitireoidiano","Hipotireoidismo central, pois TSH está baixo","Doença de Graves gestacional — a elevação do T4 total confirma tireotoxicose"], ans:0, why:"A <b>subunidade alfa do HCG é idêntica à do TSH</b>: o pico de HCG no 1º trimestre estimula o receptor de TSH e <b>suprime transitoriamente o TSH</b> (mimetiza hipertireoidismo subclínico). O estrogênio <b>eleva a TBG</b> → T4 total sobe. O slide diz que o <b>T4 livre é a única métrica confiável</b> na gestação, com VR por trimestre — e está normal.", trap:"Rotular o TSH baixo do 1º trimestre como hipertireoidismo. Sem clínica, sem T4L alto e sem TRAb, é fisiologia."},
+{lvl:"ENAMED", obj:"Endócrino · tireoidite × Graves", stem:"<span class='cx'>Mulher de 30 anos com dor cervical anterior e febre baixa 3 semanas após uma virose. TSH 0,05 µUI/mL, T4 livre 2,6 ng/dL, T3 total 180 ng/dL, T4 total 15 µg/dL (relação T3/T4 = 12), TRAb negativo, VHS 70 mm/h.</span> A interpretação mais provável é:", opts:["Doença de Graves — relação T3/T4 elevada com hiperfunção verdadeira","Bócio multinodular tóxico — TRAb negativo com captação nodular","Tireoidite destrutiva (subaguda) — relação T3/T4 abaixo de 20 e TRAb negativo","Hipertireoidismo central por adenoma hipofisário"], ans:2, why:"O slide parte de TSH baixo com T4L/T3L altos e separa pela <b>relação T3/T4: &gt;20 = hiperfunção verdadeira (Graves, síntese direta de T3); &lt;20 = tireoidite destrutiva</b> (liberação de hormônio pré-formado, rico em T4). TRAb negativo, dor cervical pós-viral e VHS alta reforçam tireoidite. Graves teria TRAb (+) e captação difusa; BMNT teria captação nodular sem dor.", trap:"Ver TSH suprimido + T4L alto e parar em 'Graves' sem olhar a relação T3/T4 e o TRAb."},
+{lvl:"ENAMED", obj:"REMIT · hiperglicemia de estresse", stem:"<span class='cx'>Homem de 52 anos, 2º pós-operatório de laparotomia por trauma abdominal, sem diabetes prévio. Glicemias 205, 215 e 198 mg/dL; HbA1c 5,3%.</span> A interpretação e a conduta mais adequadas são:", opts:["Hiperglicemia de estresse (gliconeogênese + resistência à insulina; HbA1c normal) — alvo 140–180 mg/dL, insulina EV apenas se persistir acima de 180","Diabetes prévio descompensado — iniciar esquema basal-bolus","Hiperglicemia de estresse — instituir controle estrito (80–110 mg/dL) para reduzir mortalidade","Fase Ebb tardia — a hiperglicemia indica hipometabolismo persistente"], ans:0, why:"O painel glicêmico do slide: <b>hiperglicemia de estresse = glicemia alta com HbA1c normal (&lt;5,7%)</b>, resposta aguda adaptativa; diabetes prévio teria <b>HbA1c ≥6,5%</b>. Alvo BRASPEN/ESPEN 2023: <b>140–180 mg/dL</b>; o controle estrito 80–110 <b>aumenta a mortalidade</b> por hipoglicemia, e insulina EV só com glicemia persistentemente &gt;180. No 2º PO ele já está entrando em Flow, não Ebb.", trap:"'Controle estrito reduz mortalidade' é o distrator clássico — o slide diz exatamente o contrário."},
+{lvl:"ENAMED", obj:"REMIT · doente eutireoideu", stem:"<span class='cx'>Paciente no 5º dia de UTI após politrauma. T3 total 40 ng/mL (baixo), T4 livre 1,0 ng/dL, TSH 0,3 µUI/mL, T3 reverso elevado.</span> A interpretação mais provável é:", opts:["Hipotireoidismo central — repor levotiroxina","Hipertireoidismo subclínico — TSH suprimido com T4 livre normal","Hipotireoidismo primário em fase inicial","Síndrome do doente eutireoideu — down-regulation protetor; não prescrever levotiroxina"], ans:3, why:"Perfil do slide da SP3: <b>T3 total/livre baixo, TSH normal ou levemente reduzido, T4 livre normal, rT3 elevado</b>. O trauma reduz a atividade da <b>desiodase 1</b> (menos T4→T3) e desvia para rT3 (desiodase 3). Regra clínica: <b>não é hipotireoidismo; não prescreva levotiroxina</b>. Hipertireoidismo subclínico não cursa com T3 baixo e rT3 alto.", trap:"TSH levemente baixo em doente grave — a 'armadilha do TSH' do slide: pode estar transitoriamente suprimido e depois falsamente alto no rebote."},
+{lvl:"ENAMED", obj:"Urina · mioglobinúria", stem:"<span class='cx'>Homem de 24 anos correu uma maratona em dia quente e urina 'cor de Coca-Cola'. Parcial de urina: sangue +++, proteínas 30 mg/dL; hemácias 1.000/mL. Soro colhido no mesmo momento: cor normal após centrifugação. CK 38.000 U/L.</span> A interpretação mais provável é:", opts:["Hemólise intravascular com hemoglobinúria","Hematúria de origem glomerular","Mioglobinúria por rabdomiólise","Hemólise extravascular"], ans:2, why:"Tabela do slide: <b>sangue positivo na fita + ausência/poucas hemácias na microscopia + soro/plasma de cor NORMAL = mioglobina</b> (proteína muscular: rabdomiólise, trauma, exercício intenso). Hemoglobina livre daria <b>plasma vermelho/rosado</b>. Hematúria daria hemácias íntegras. Hemólise extravascular não faz sangue positivo na fita (aumenta urobilinogênio).", trap:"Hemoglobinúria e mioglobinúria são idênticas na fita e na microscopia — só a cor do plasma (e a CK) separa."},
+{lvl:"ENAMED", obj:"Urina · ITU com nitrito negativo", stem:"<span class='cx'>Mulher de 26 anos com disúria e polaciúria há 2 dias. Parcial de urina (amostra colhida à tarde): turva, pH 7,0, nitrito negativo, leucócitos 380.000/mL, hemácias 8.000/mL, células epiteliais 9.000/mL, flora bacteriana intensa.</span> A interpretação mais provável é:", opts:["Amostra contaminada — as células epiteliais explicam a leucocitúria","Nitrito negativo exclui infecção bacteriana; pensar em uretrite por Trichomonas","Infecção bacteriana do trato urinário — o nitrito negativo não a exclui","Glomerulonefrite aguda"], ans:2, why:"Slide 'Bactérias': <b>flora intensa = provável infecção bacteriana</b>, a ser lida com <b>clínica, leucócitos, células epiteliais e nitrito</b>. Piúria maciça com epiteliais dentro do VR (até 15.000) afasta contaminação. O nitrito tem <b>falso-negativo em urina ao acaso</b> (pouco tempo de contato bactéria–nitrato), com ácido ascórbico, antibiótico, e com <b>Gram-positivos/fungos</b>, que não produzem nitrito.", trap:"'Nitrito negativo exclui ITU' é falso; 'nitrito positivo isolado confirma ITU' também é (Q10 da prova antiga)."},
+{lvl:"ENAMED", obj:"Urina · síndrome nefrótica", stem:"<span class='cx'>Menino de 6 anos com edema palpebral matinal e de membros inferiores e urina espumosa. Parcial de urina: proteínas 500 mg/dL, sangue negativo, hemácias 2.000/mL, cilindros hialinos (+); albumina sérica 1,9 g/dL.</span> A interpretação mais provável é:", opts:["Síndrome nefrítica (glomerulonefrite aguda)","Síndrome nefrótica — proteinúria maciça com hipoalbuminemia, sem hematúria","Infecção urinária com proteinúria secundária","Proteinúria ortostática benigna"], ans:1, why:"Proteinúria maciça (VR da fita 0–30 mg/dL; normal &lt;150 mg/24 h) + hipoalbuminemia + edema, <b>sem hematúria nem cilindros hemáticos</b>, é padrão nefrótico. Nefrítica cursa com hematúria e <b>cilindros hemáticos</b> (Q10 da prova antiga). Ortostática é discreta e sem edema. ITU teria leucocitúria/nitrito/flora.", trap:"Confundir 'lesão glomerular' (causa de proteinúria no slide) com 'nefrítica': o que define nefrítica é hematúria com cilindros hemáticos."},
+{lvl:"ENAMED", obj:"Líquor · meningite tuberculosa", stem:"<span class='cx'>Homem de 38 anos com cefaleia, febre vespertina e sudorese há 3 semanas e paralisia do VI nervo craniano. Líquor: ligeiramente turvo, 220 leucócitos/mm³ (85% linfócitos), glicose 22 mg/dL (glicemia 98), proteínas 240 mg/dL, lactato elevado; coloração de Ziehl-Neelsen com bacilos álcool-ácido resistentes.</span> A interpretação mais provável é:", opts:["Meningite viral — predomínio de linfócitos","Meningite bacteriana aguda por pneumococo","Meningite por Cryptococcus","Meningite tuberculosa — linfócitos, glicose baixa, proteína muito alta e BAAR positivo"], ans:3, why:"O slide associa <b>Ziehl-Neelsen → Mycobacterium tuberculosis (BAAR)</b> e a tabela de Strasinger coloca linfócitos em viral, tuberculosa e fúngica. O que separa TB de viral é a <b>glicose baixa</b> (22 com glicemia 98, muito abaixo de 2/3) e a <b>proteína muito elevada</b>, com evolução subaguda [extra]. Cryptococcus seria tinta nanquim; bacteriana aguda seria PMN.", trap:"'Linfócitos = viral' é automático demais: glicose baixa com linfócitos pede TB (ou fungo)."},
+{lvl:"ENAMED", obj:"Líquor · esclerose múltipla", stem:"<span class='cx'>Mulher de 29 anos com neurite óptica há 1 mês e episódio de parestesias em membros há 1 ano. Líquor: límpido, incolor, 7 leucócitos/mm³ (mononucleares), proteínas 46 mg/dL, glicose 62 mg/dL (glicemia 90); eletroforese com albumina normal e banda gama aumentada; focalização isoelétrica com 5 bandas no LCR ausentes no soro.</span> A interpretação mais provável é:", opts:["Esclerose múltipla — síntese intratecal de imunoglobulinas (≥2 bandas oligoclonais exclusivas do líquor)","Meningite viral em resolução","Lesão de barreira hematoencefálica por hemorragia subaracnóidea","Líquor normal — uma banda oligoclonal não confirma esclerose múltipla"], ans:0, why:"Perfil típico da EM no slide: <b>líquor límpido, glicose normal, proteínas levemente aumentadas, poucos leucócitos mononucleares, eletroforese com albumina normal e gama aumentada, BOC com 2 ou mais bandas</b> presentes no LCR e ausentes no soro (síntese intratecal). Albumina normal afasta dano de BHE. Uma banda seria inconclusiva; aqui são cinco.", trap:"Ler 'poucos leucócitos mononucleares' como viral: na EM a pleocitose é mínima e o que define é a BOC."},
+{lvl:"PROVA", obj:"Inflamação · cinética PCR e PCT", stem:"Sobre a cinética dos marcadores inflamatórios, analise as proposições: I) A PCR é sintetizada no fígado sob regulação da IL-6 e tem meia-vida plasmática de 19 horas. II) A PCR começa a se elevar 6–8 h após o estímulo, com pico em 36–50 h. III) A procalcitonina sobe em 2–4 h com pico em 8–24 h, sendo mais precoce que a PCR. IV) PCT ≥0,5 µg/L torna a infecção bacteriana muito provável e a antibioticoterapia fortemente encorajada. Estão corretas:", opts:["Apenas I e II","Apenas I, II e III","Apenas II, III e IV","I, II, III e IV"], ans:3, why:"Todas reproduzem os slides: PCR — <b>fígado, IL-6, meia-vida 19 h, sobe em 6–8 h, pico 36–50 h</b>; PCT — <b>IL-6 e TNF-α, aumento em 2–4 h, pico 8–24 h</b>; algoritmo <b>≥0,5 µg/L = muito provável / fortemente encorajado</b>.", trap:"Trocar os tempos entre PCR e PCT: a PCT é a rápida (horas), a PCR faz pico em ~2 dias."},
+{lvl:"PROVA", obj:"Inflamação · zonas da eletroforese", stem:"Associe a zona eletroforética ao seu principal componente: 1) alfa-1; 2) alfa-2; 3) beta-1; 4) beta-2; 5) gama. (a) transferrina; (b) complemento C3; (c) alfa-1-antitripsina; (d) haptoglobina, ceruloplasmina e alfa-2 macroglobulina; (e) imunoglobulinas. A sequência correta é:", opts:["1c, 2d, 3a, 4b, 5e","1d, 2c, 3a, 4b, 5e","1c, 2d, 3b, 4a, 5e","1c, 2a, 3d, 4b, 5e"], ans:0, why:"Tabela de Eckersall no slide: <b>alfa-1 = alfa-1 glicoproteína ácida, alfa-1-antitripsina, alfalipoproteína; alfa-2 = alfa-2 macroglobulina, haptoglobina, ceruloplasmina; beta-1 = transferrina; beta-2 = C3 e beta-lipoproteína; gama = IgG, IgA, IgM, IgE</b>. Saber onde mora a haptoglobina/macroglobulina explica por que alfa-2 sobe na nefrótica e na inflamação.", trap:"Transferrina é beta-1 e C3 é beta-2 — a inversão (3b, 4a) é o erro mais comum."},
+{lvl:"PROVA", obj:"Endócrino · TBG (INCORRETA)", stem:"Sobre a globulina ligadora de tiroxina (TBG) e a interpretação dos hormônios totais, assinale a alternativa INCORRETA:", opts:["Gestação e estrogênio aumentam a TBG e elevam o T4 total sem alterar o T4 livre nem o TSH","Androgênios, esteroides anabolizantes e glicocorticoides reduzem a TBG, baixando o T4 total","A síndrome nefrótica aumenta a TBG por retenção de proteínas de baixo peso molecular","Fenitoína, carbamazepina, salicilatos, furosemida, heparina e AINEs inibem a ligação T4–TBG"], ans:2, why:"Na tabela do slide a <b>síndrome nefrótica está na coluna de REDUÇÃO da TBG</b> (perda urinária de proteína), junto com androgênios, anabolizantes, glicocorticoides, Graves, insuficiência hepática, ácido nicotínico e L-asparaginase. Gestação, estrogênio, hepatite, porfiria, heroína, metadona, tamoxifeno aumentam. A coluna de inibidores da ligação está correta.", trap:"O raciocínio 'nefrótica retém proteína' está errado: a nefrótica perde proteínas ligadoras pela urina."},
+{lvl:"PROVA", obj:"Endócrino · três pacientes", stem:"<span class='cx'>Paciente A: TSH 9,0 µUI/mL, T4 livre 1,1 ng/dL. Paciente B (traumatismo craniano com pan-hipopituitarismo): TSH 0,2, T4 livre 0,4. Paciente C (macroadenoma hipofisário): TSH 7,5, T4 livre 3,0.</span> As interpretações mais prováveis para A, B e C, respectivamente, são:", opts:["Hipotireoidismo subclínico; hipertireoidismo subclínico; hipertireoidismo primário clínico","Hipotireoidismo primário clínico; hipotireoidismo central; hipotireoidismo subclínico","Hipotireoidismo subclínico; hipotireoidismo central; investigar tumor produtor de TSH (hipertireoidismo central)","Hipotireoidismo subclínico; hipertireoidismo clínico; doença de Graves"], ans:2, why:"Fluxograma (estrela): <b>TSH alto + T4L normal = hipotireoidismo subclínico</b>; <b>TSH baixo + T4L baixo = hipotireoidismo central</b> (o TSH não sobe apesar do T4L baixo → RM de hipófise); <b>TSH alto + T4L alto = investigar hipertireoidismo central/tumor produtor de TSH</b>. Regra: primário = direções opostas; central = mesma direção.", trap:"Ler 'TSH baixo' como hipertireoidismo sem olhar o T4 livre — o paciente B está hipotireoideu."},
+{lvl:"PROVA", obj:"REMIT · fases", stem:"Sobre as fases da resposta metabólica ao trauma, analise: I) A fase Ebb (0–48 h) cursa com hipoperfusão, redução do metabolismo basal e lactato elevado. II) A fase Flow (até ~10 dias) é hipermetabólica, com resistência à insulina e proteólise que eleva a ureia. III) A fase de recuperação é anabólica e dura semanas. IV) Na fase Flow, a albumina baixa indica desnutrição e deve guiar a prescrição nutricional. Estão corretas:", opts:["Apenas I, II e III","Apenas I e II","Apenas II e IV","I, II, III e IV"], ans:0, why:"I, II e III são a cinética do slide (Ebb 0–48 h; Flow até 10 dias com hipermetabolismo, resistência à insulina e degradação proteica; recuperação anabólica em semanas). IV contraria a <b>regra de ouro BRASPEN 2023: NUNCA usar albumina ou transferrina como marcador nutricional na fase aguda — refletem inflamação</b> (proteínas de fase aguda negativas).", trap:"'Albumina baixa = desnutrição' é o mito que o slide nomeia como 'armadilha nutricional'."},
+{lvl:"PROVA", obj:"REMIT · hormônios (INCORRETA)", stem:"Sobre os hormônios da REMIT, assinale a alternativa INCORRETA:", opts:["O ADH pode se elevar até 50 vezes o basal, promovendo reabsorção de água e vasoconstrição esplâncnica","A aldosterona retém sódio e excreta potássio, contribuindo para a oligúria","O cortisol elevado promove anabolismo proteico, poupando a massa muscular","A insulina cai ou sofre resistência periférica, favorecendo gliconeogênese e hiperglicemia"], ans:2, why:"Questão resolvida no slide: a alternativa 'cortisol aumentado com consequente anabolismo proteico' é <b>falsa</b> — o cortisol é o hormônio do <b>catabolismo</b> (proteólise, gliconeogênese, resistência à insulina), pedra angular da fase Flow. As demais estão nos slides: ADH até 50×; aldosterona retém Na e excreta K (padrão oligúria/retenção de Na/excreção de K); insulina reduzida/resistida.", trap:"'Insulina é hormônio catabólico' também apareceu como distrator no slide — insulina é anabólica, mas está suprimida na REMIT."},
+{lvl:"PROVA", obj:"Urina · cilindros", stem:"Associe o cilindro ao seu significado clínico: 1) hemático; 2) leucocitário; 3) de células epiteliais; 4) céreo; 5) hialino. (a) pielonefrite; (b) doença glomerular; (c) estase urinária extrema; (d) normal, exercício, desidratação; (e) necrose tubular renal. A sequência correta é:", opts:["1a, 2b, 3e, 4c, 5d","1b, 2a, 3e, 4c, 5d","1b, 2a, 3c, 4e, 5d","1b, 2e, 3a, 4c, 5d"], ans:1, why:"Slide 'Cilindros — exclusivamente renal': <b>hemáticos = principalmente doença glomerular; leucocitários = inflamação renal, mais comum na pielonefrite; de células epiteliais = necrose tubular (rabdomiólise, lise tumoral, pielonefrite); granulosos = degradação de células; céreos = estágio final, estase urinária extrema; hialinos = normal, exercício intenso, desidratação</b>.", trap:"Céreo × epitelial: céreo é o fim da degradação (estase/DRC); epitelial é necrose tubular ativa."},
+{lvl:"PROVA", obj:"Urina · cristais e cálculos (INCORRETA)", stem:"Sobre cristais e cálculos urinários, assinale a alternativa INCORRETA:", opts:["Cristais precipitam conforme concentração da substância, pH e temperatura; ácido úrico e oxalato de cálcio são típicos de urina ácida, fosfato triplo de urina alcalina","A presença de cristais de oxalato de cálcio no sedimento confirma nefrolitíase","O principal inibidor fisiológico da formação de cálculos é a água","Infecção é uma complicação importante da litíase, mas cálculo não é sinônimo de infecção"], ans:1, why:"Frase destacada no slide: <b>'Presença de cristais NÃO é sinônimo da presença de cálculos'</b>. Oxalato de cálcio e ácido úrico são cristais <b>normais</b> de urina ácida; fosfato triplo, de urina alcalina. A água é o principal inibidor fisiológico; a sequência é supersaturação → pH favorável → nucleação → crescimento → agregação. E 'cálculo não é sinônimo de infecção' é literal.", trap:"Cristais anormais são outra história: bilirrubina, cistina, colesterol, leucina, tirosina (metabólicos) e ampicilina, sulfonamida (iatrogênicos)."},
+{lvl:"PROVA", obj:"Líquor · punção e volumes", stem:"Sobre a coleta e a interpretação do líquor, analise: I) Formação de coágulos no frasco sugere acidente de punção. II) Sobrenadante xantocrômico após centrifugação indica hemorragia com hemólise. III) Distribuição desigual do sangue entre os frascos (clareamento) sugere acidente de punção. IV) Em adultos, a produção é de ~22 mL/h e podem ser colhidos com segurança 15–17 mL em uma punção. Estão corretas:", opts:["I, II, III e IV","Apenas I, II e III","Apenas I e II","Apenas II e IV"], ans:0, why:"Slide 'Hemorragia ou acidente de punção?': <b>distribuição desigual = A.P.; coágulos = A.P.; sobrenadante xantocrômico (hemólise) = hemorragia</b>. Tabela com estrela: adultos <b>22 mL/h, volume 150–170 mL, máximo seguro 15–17 mL</b> (neonatos 1 mL/h, 20–40 mL, 2–4 mL).", trap:"O acidente de punção introduz também leucócitos e proteínas — não só hemácias — o que pode simular meningite."},
+{lvl:"PROVA", obj:"Líquor · colorações", stem:"Associe a coloração/morfologia ao agente: 1) Ziehl-Neelsen com bacilos álcool-ácido resistentes; 2) tinta nanquim com leveduras capsuladas; 3) cocobacilos Gram-negativos; 4) diplococos Gram-positivos. (a) Cryptococcus neoformans; (b) Mycobacterium tuberculosis; (c) Streptococcus pneumoniae; (d) Haemophilus influenzae. A sequência correta é:", opts:["1b, 2a, 3c, 4d","1a, 2b, 3d, 4c","1b, 2a, 3d, 4c","1b, 2d, 3a, 4c"], ans:2, why:"Slide das colorações: <b>Ziehl-Neelsen → M. tuberculosis (BAAR); tinta nanquim → Cryptococcus neoformans; Gram: Neisseria meningitidis = diplococos Gram-negativos (DCGN), Haemophilus influenzae = cocobacilos Gram-negativos (CBGN), Streptococcus pneumoniae = diplococos Gram-positivos (DGP)</b>.", trap:"Pneumococo e meningococo são ambos diplococos — o Gram (positivo × negativo) é o que a discursiva da prova antiga cobrou."},
+{lvl:"ANTIGA", obj:"Inflamação · AR × LES", stem:"<span class='cx'>Paciente 1: mulher de 32 anos com artralgias simétricas há 3 meses, rigidez matinal por 1 hora e edema em metacarpofalangeanas. VHS 58 mm/h; PCR 3,2 mg/dL; fator reumatoide 120 UI/mL. Paciente 2: homem de 25 anos com dor torácica pleurítica e exantema malar. FAN reagente 1:640; PCR 0,3 mg/dL; VHS 65 mm/h.</span> Considerando os dados, a interpretação mais provável para o paciente 1 e 2, respectivamente, é:", opts:["Paciente 1: marcadores inflamatórios normais, afastando artrite reumatoide. Paciente 2: FAN positivo isolado confirma LES","Paciente 1: achados compatíveis com artrite reumatoide. Paciente 2: perfil laboratorial compatível com LES","Paciente 1: achados compatíveis com osteoartrite. Paciente 2: achados compatíveis com LES","Paciente 1: achados compatíveis com artrite reumatoide. Paciente 2: PCR normal exclui LES"], ans:1, why:"Gabarito B (prova 25/03/26). Paciente 1: poliartrite simétrica de pequenas articulações, rigidez ≥1 h, <b>VHS/PCR elevadas e FR alto</b> = AR (osteoartrite teria provas normais). Paciente 2: serosite + malar + <b>FAN 1:640 com VHS alta e PCR normal</b> — no LES o <b>IFN-1 inibe a produção de PCR</b>, então PCR normal é o esperado, não exclusão. 'FAN isolado confirma' é falso: FAN é triagem sensível, não específico.", trap:"A alternativa D é a armadilha: 'PCR normal exclui LES' inverte o slide."},
+{lvl:"ANTIGA", obj:"Inflamação · viral × bacteriana", stem:"<span class='cx'>Paciente 1: febre 37,8 °C, mialgia, PCR 1,8 mg/dL, procalcitonina 0,08 µg/L, leucócitos 7.800/mm³. Paciente 2: febre 39,5 °C, hipotensão (PA 80/50 mmHg), PCR 22 mg/dL, procalcitonina 0,9 µg/L, leucócitos 19.200/mm³.</span> A interpretação mais provável para o paciente 1 e 2, respectivamente, é:", opts:["Ambos apresentam evidências que indicam infecção viral","Paciente 1: provável infecção viral; paciente 2: provável infecção bacteriana","Paciente 1: valores normais; paciente 2: inflamação não infecciosa","Ambos apresentam evidências que indicam infecção bacteriana, indicando início de antibioticoterapia"], ans:1, why:"Gabarito B. Paciente 1: PCR na faixa <b>1–5 mg/dL (viral/leve)</b>, <b>PCT &lt;0,1 (bacteriana muito improvável)</b>, leucograma normal. Paciente 2: PCR <b>&gt;20 (infecção grave)</b>, <b>PCT ≥0,5 (fortemente encorajado antibiótico)</b>, leucocitose e hipotensão = sepse bacteriana. 'Valores normais' está errado porque PCR 1,8 já está acima de 0,5.", trap:"PCR 1,8 é 'alterada', mas na faixa viral — não confunda 'acima do VR' com 'bacteriana'."},
+{lvl:"ANTIGA", obj:"Inflamação · pós-operatório", stem:"<span class='cx'>Paciente 1: homem de 70 anos, febre alta e confusão mental. VHS 90 mm/h; PCR 28 mg/dL; procalcitonina 1,2 µg/L; leucócitos 18.500/mm³ com desvio à esquerda. Paciente 2: homem de 40 anos, pós-operatório de grande cirurgia abdominal há 12 horas. PCR 6,0 mg/dL; procalcitonina 0,35 µg/L; leucócitos 10.300/mm³; temperatura 36,1 °C.</span> A interpretação mais provável para o paciente 1 e 2, respectivamente, é:", opts:["Paciente 1: provável infecção bacteriana com forte indicação de antibioticoterapia. Paciente 2: provável infecção bacteriana com forte indicação de antibioticoterapia","Paciente 1: resultado sugere trauma de grandes proporções. Paciente 2: provável infecção viral, sem indicação de antibioticoterapia","Paciente 1: provável infecção bacteriana com forte indicação de antibioticoterapia. Paciente 2: provável infecção viral","Paciente 1: provável infecção bacteriana com forte indicação de antibioticoterapia. Paciente 2: elevação esperada por trauma cirúrgico, sem evidência clara de infecção"], ans:3, why:"Gabarito D. Paciente 1: PCR &gt;20, PCT &gt;0,5, leucocitose com desvio, febre e confusão = bacteriana grave. Paciente 2: <b>12 h de grande cirurgia</b> — o slide lista <b>grandes cirurgias, trauma, queimaduras, pancreatite e IAM</b> como elevadores de PCT sem infecção; PCR 6,0 no pós-op imediato, leucócitos limítrofes e afebril = resposta ao trauma cirúrgico. Não é 'viral' (não há clínica viral) e não justifica antibiótico.", trap:"PCT 0,35 está na faixa 'encorajado' do algoritmo — mas a professora quer o contexto: cirurgia recente eleva PCT."},
+{lvl:"ANTIGA", obj:"Inflamação · eletroforese nefrótica", stem:"<span class='cx'>Mulher de 60 anos com edema importante em membros inferiores. Eletroforese de proteínas séricas: albumina 1,8 g/dL; alfa-1 0,30 g/dL; alfa-2 1,60 g/dL; beta 0,60 g/dL; gama 0,50 g/dL. No gráfico, o pico de albumina está reduzido, alfa-2 está elevado e a região gama, achatada.</span> Considerando os dados, a interpretação mais provável é:", opts:["Pico monoclonal","Deficiência de alfa-1 antitripsina","Processo inflamatório agudo","Síndrome nefrótica"], ans:3, why:"Gabarito D (a aluna marcou C e errou). <b>Albumina 1,8 (VR 3,5–4,85) é perda maciça</b>, <b>alfa-2 1,60 (VR até 1,08) sobe</b> porque a alfa-2 macroglobulina é grande demais para ser filtrada e é sintetizada em excesso, e <b>gama 0,50 (VR 0,74–1,75) cai</b> por perda de IgG. Fase aguda: albumina cai pouco, alfa-1 E alfa-2 sobem, gama normal. Monoclonal: agulha em gama. Deficiência de alfa-1-AT: alfa-1 quase ausente (aqui 0,30 é normal).", trap:"Alfa-2 alta aparece nos dois padrões; o edema + albumina 1,8 + gama baixa decide nefrótica."},
+{lvl:"ANTIGA", obj:"Endócrino · Graves × Hashimoto", stem:"<span class='cx'>Paciente 1: mulher de 32 anos com perda de peso e palpitações; tremores, intolerância ao calor e perda de 6 kg em 2 meses. TSH 0,12 mUI/L; T4 livre 2,8 ng/dL; anti-TSHr 9,2 U/mL. Paciente 2: homem de 55 anos com fadiga e ganho de peso. TSH 12 mUI/L; T4 livre 0,5 ng/dL; anti-TPO 210 UI/mL.</span> A interpretação mais provável para o paciente 1 e 2, respectivamente, é:", opts:["Paciente 1: hipertireoidismo clínico, secundário, por doença de Graves. Paciente 2: hipotireoidismo clínico, primário, por tireoidite de Hashimoto","Paciente 1: hipotireoidismo primário, subclínico, por Hashimoto. Paciente 2: hipertireoidismo clínico, secundário, por doença de Graves","Paciente 1: hipertireoidismo primário clínico, sem causa definida. Paciente 2: hipotireoidismo primário, subclínico","Paciente 1: hipertireoidismo primário, clínico, por doença de Graves. Paciente 2: hipotireoidismo primário, clínico, por tireoidite de Hashimoto"], ans:3, why:"Gabarito D. Paciente 1: <b>TSH baixo + T4L alto = hipertireoidismo primário clínico</b> (direções opostas = primário; T4L alterado = clínico) e <b>TRAb 9,2 (VR até 1,75) define Graves</b>. Paciente 2: <b>TSH alto + T4L baixo = hipotireoidismo primário clínico</b>; <b>anti-TPO 210 (VR até 35) = Hashimoto</b>. 'Secundário' exigiria TSH na mesma direção do T4L; 'subclínico' exigiria T4L normal; 'sem causa definida' ignora o TRAb.", trap:"Graves é primário (a doença está na tireoide, com TSH suprimido) — 'secundário' é o distrator recorrente."},
+{lvl:"ANTIGA", obj:"Endócrino · TBG", stem:"<span class='cx'>Paciente 1: mulher de 28 anos, gestante. T4 total 15,2 µg/dL; T4 livre 1,1 ng/dL; TSH 1,2 mUI/L. Paciente 2: homem de 40 anos usando esteroides anabolizantes. T4 total 3,9 µg/dL; TSH 2,3 mUI/L; T4 livre 1,4 ng/dL. Paciente 3: mulher de 25 anos usando estrogênio. T4 total 15,0 µg/dL; TSH 2,5 mUI/L; T4 livre 1,3 ng/dL.</span> A interpretação mais provável para os pacientes 1, 2 e 3, respectivamente, é:", opts:["Paciente 1: eutireoidiana com aumento de TBG provavelmente por gestação. Paciente 2: eutireoidiano com redução de TBG. Paciente 3: eutireoidiana com aumento de TBG","Paciente 1: eutireoidiana com redução de TBG por gestação. Paciente 2: eutireoidiano com aumento de TBG. Paciente 3: eutireoidiana com redução de TBG","Paciente 1: hipertireoidismo subclínico. Paciente 2: hipotireoidismo subclínico. Paciente 3: hipertireoidismo subclínico","Paciente 1: eutireoidiana com redução de TBG por gestação. Paciente 2: hipotireoidismo subclínico. Paciente 3: hipertireoidismo subclínico"], ans:0, why:"Gabarito A. Os três têm <b>TSH (0,4–4,3) e T4 livre (0,7–1,8) normais = eutireoidianos</b>; só o T4 total (VR 4,8–13,7) está fora, ou seja, é efeito de <b>TBG</b>. Tabela do slide: <b>gestação e estrogênio aumentam TBG</b> (T4 total ↑); <b>androgênios/esteroides anabolizantes reduzem TBG</b> (T4 total ↓). Subclínico exigiria TSH alterado.", trap:"'Subclínico' só existe com TSH fora do VR — aqui todos os TSH estão normais."},
+{lvl:"ANTIGA", obj:"REMIT · gasometria no politrauma", stem:"<span class='cx'>Homem de 29 anos, politraumatizado após colisão, chega ao PS taquicárdico e com extremidades frias. Gasometria arterial: pH 7,24; HCO₃⁻ 14 mEq/L; pCO₂ 30 mmHg; lactato 5,6 mmol/L; sódio 129 mEq/L; potássio 5,9 mEq/L; glicemia 238 mg/dL.</span> Assinale a alternativa que melhor interpreta o conjunto de alterações e sua provável causa, relacionada ao mecanismo de REMIT:", opts:["Alcalose metabólica por perda gástrica com hipocalemia e hipernatremia associadas ao trauma, por extravasamento intracelular","Acidose metabólica por hipóxia, com aumento do metabolismo anaeróbio e consequente elevação de lactato; hiponatremia relacionada ao aumento de ADH","Hiperglicemia por efeito do aumento de GH e cortisol, além do aumento da sensibilidade à insulina","Acidose respiratória por hipoventilação, associada a hipercalemia por efeito da aldosterona, que aumenta a reabsorção de potássio"], ans:1, why:"Gabarito B. pH 7,24 com <b>HCO₃ 14 baixo e pCO₂ 30 baixa</b> = acidose metabólica (a pCO₂ baixa é compensação respiratória, não acidose respiratória); <b>lactato 5,6</b> = anaerobiose por hipoperfusão (fase Ebb); <b>Na 129</b> = hiponatremia dilucional pelo ADH; <b>K 5,9</b> = lesão tecidual + acidose; glicemia 238 = catecolaminas/cortisol com <b>resistência</b> (não aumento da sensibilidade) à insulina. Aldosterona <b>excreta</b> potássio.", trap:"'Retenção de sódio pelo ADH' não vira hipernatremia — o ADH retém água e dilui o sódio."},
+{lvl:"ANTIGA", obj:"REMIT · Ebb × Flow", stem:"<span class='cx'>Paciente 1: homem de 28 anos, 4 h pós-trauma, pele fria, PA 85/50, confuso. pH 7,15; HCO₃⁻ 12; lactato 8,0 mmol/L; Na 130; K 6,5; glicemia 190; albumina 3,9 g/dL. Paciente 2: mulher de 46 anos, 6º dia pós-trauma extenso, emagrecimento, febre. pH 7,32; HCO₃⁻ 18; lactato 2,6; Na 132; K 5,2; glicemia 272; PCR 210 mg/dL; albumina 2,7 g/dL; ureia 82 mg/dL.</span> Assinale a alternativa que corretamente relaciona fase e padrão laboratorial da REMIT:", opts:["Paciente 1 está em fase Flow, visto que há hiperglicemia; paciente 2 está em fase Ebb pela albumina baixa, relacionada ao processo inflamatório","Pacientes 1 e 2 estão em recuperação anabólica, pois ambos têm sódio baixo","Paciente 1 sugere fase Ebb pela acidose metabólica e lactato alto; paciente 2 sugere Flow pela hiperglicemia, além da albumina baixa, que indica catabolismo","Paciente 1 sugere fase Ebb pela hipercalemia e hiponatremia provocadas pelo ADH; paciente 2 sugere Flow pela ureia aumentada, que indica compensação renal com retenção de ureia"], ans:2, why:"Gabarito C (a aluna marcou D e errou). Paciente 1 (4 h, choque): <b>Ebb = hipoperfusão → acidose metabólica com lactato 8</b>. Paciente 2 (6º dia, febre, emagrecimento): <b>Flow = hipermetabolismo/catabolismo → hiperglicemia por resistência à insulina, albumina baixa (fase aguda negativa) e ureia alta por proteólise</b>. A alternativa D erra os mecanismos: o ADH não causa hipercalemia, e a ureia sobe por catabolismo proteico, não por 'retenção renal compensatória'.", trap:"Hiperglicemia aparece nas duas fases — não serve para separar Ebb de Flow; lactato/choque × albumina baixa/ureia é o que separa."},
+{lvl:"ANTIGA", obj:"Urina · hemoglobinúria", stem:"<span class='cx'>Homem de 70 anos com palidez e indisposição. Após coleta de sangue, observou-se sobrenadante levemente rosado após centrifugação. Parcial de urina: cor vermelha, aspecto límpido, depósito nulo; sangue ++, sem outras alterações químicas; leucócitos 5.000/mL, hemácias 2.000/mL, células epiteliais 8.000/mL, flora discreta.</span> A interpretação mais provável é:", opts:["Doença hepatobiliar","Anemia hemolítica extravascular","Anemia hemolítica intravascular","Rabdomiólise"], ans:2, why:"Gabarito C (a aluna marcou B e errou). <b>Sangue positivo na fita com hemácias normais (2.000/mL, VR até 4.000) = pigmento, não hematúria</b>; <b>plasma rosado = hemoglobina livre</b> (tabela do slide: hemoglobina → soro/plasma vermelho; mioglobina → soro normal). Hemoglobina livre circulante só existe na <b>hemólise intravascular</b> (satura a haptoglobina → hemoglobinúria/hemossiderinúria). Na extravascular o heme vira bilirrubina indireta no macrófago e o que sobe é o urobilinogênio. Rabdomiólise daria plasma de cor normal.", trap:"Intra × extravascular: só a intravascular tem hemoglobina livre no plasma e na urina."},
+{lvl:"ANTIGA", obj:"Urina · cilindros hemáticos", stem:"<span class='cx'>Paciente de 30 anos com dor lombar intensa. Parcial de urina: cor vermelha, aspecto turvo, depósito ++; sangue ++, proteínas 300 mg/dL; leucócitos 4.000/mL, hemácias 181.000/mL, células epiteliais 11.000/mL, flora discreta, cilindros hemáticos +++, nitrito positivo.</span> A interpretação mais provável é:", opts:["Cálculo renal","Doença renal glomerular","Infecção bacteriana","Doença renal tubular"], ans:1, why:"Gabarito B. <b>Cilindros hemáticos = principalmente doença glomerular</b> (e cilindro é exclusivamente renal); proteinúria 300 mg/dL acompanha a lesão glomerular. Cálculo daria hematúria <b>sem cilindros</b>. Infecção exigiria leucocitúria (aqui 4.000, normal) e flora aumentada — o <b>nitrito positivo isolado</b> pode ser falso-positivo (amostra não recente/pigmentada) e não fecha ITU. Doença tubular daria células/cilindros epiteliais.", trap:"Dor lombar e nitrito positivo são iscas; hemácias + cilindro hemático + proteinúria apontam para o glomérulo."},
+{lvl:"ANTIGA", obj:"Urina · colestase", stem:"<span class='cx'>Homem de 40 anos. Parcial de urina: cor âmbar, aspecto límpido, depósito nulo; sangue negativo, bilirrubina positiva (++), urobilinogênio normal; leucócitos 6.000/mL, hemácias 1.000/mL, células epiteliais 10.000/mL, flora discreta.</span> A interpretação mais provável é:", opts:["Colestase","Anemia hemolítica extravascular","Anemia hemolítica intravascular","Insuficiência hepática"], ans:0, why:"Gabarito A. Tabela do slide: <b>colestase = bilirrubina (direta) +++ com urobilinogênio normal; doença hemolítica = bilirrubina negativa com urobilinogênio +++</b>. A bilirrubina que aparece na urina é a <b>conjugada</b> (a indireta, ligada à albumina, não é filtrada), e a cor âmbar/laranja é típica de bilirrubinúria. Hemólise intravascular daria sangue positivo na fita; insuficiência hepática grave costuma elevar o urobilinogênio [extra].", trap:"Bilirrubina na urina é sempre direta — não existe 'bilirrubinúria por hemólise'."},
+{lvl:"ANTIGA", obj:"Líquor · bacteriana × viral", stem:"<span class='cx'>Paciente 1: homem de 22 anos, febre alta e rigidez de nuca há 24 h; glicose sérica 90 mg/dL. Líquor: turvo, incolor, leucócitos 1.240/mm³, hemácias 10/mm³, 92% polimorfonucleares, glicose 28 mg/dL, proteínas 180 mg/dL. Paciente 2: criança de 4 anos, cefaleia e febre baixa há 3 dias; glicose sérica 90 mg/dL. Líquor: límpido, leucócitos 45/mm³, hemácias 3/mm³, 88% mononucleares, glicose 58 mg/dL, proteínas 49 mg/dL.</span> A interpretação mais provável para o paciente 1 e 2, respectivamente, é:", opts:["Paciente 1: bacteriana. Paciente 2: viral","Paciente 1: bacteriana. Paciente 2: bacteriana","Paciente 1: viral. Paciente 2: fúngica","Paciente 1: bacteriana. Paciente 2: fúngica"], ans:0, why:"Gabarito A. Paciente 1: <b>PMN 92%, glicose 28 (bem abaixo de 2/3 de 90 = 60), proteínas 180 (VR 15–45), líquor turvo</b> = bacteriana. Paciente 2: <b>pleocitose discreta com mononucleares, glicose 58 (≈2/3 de 90, normal), proteínas pouco elevadas, líquor límpido</b> = viral. Fúngica teria celularidade variável e, no HIV, tinta nanquim positiva.", trap:"Glicose 58 parece 'baixa' se você esquecer de comparar com a glicemia: 2/3 de 90 é 60."},
+{lvl:"ANTIGA", obj:"Líquor · Cryptococcus", stem:"<span class='cx'>Paciente de 40 anos com HIV apresenta confusão mental. Líquor: aspecto ligeiramente turvo, leucócitos 5/mm³ (contagem diferencial não realizada), proteínas 30 mg/dL, glicose 108 mg/dL, tinta nanquim positiva.</span> Assinale a interpretação correta:", opts:["Meningite por M. tuberculosis","Meningite por Cryptococcus","Meningite por H. influenzae","Não apresenta evidências laboratoriais de meningite"], ans:1, why:"Gabarito B (a aluna marcou A e errou). <b>Tinta nanquim (tinta da China) positiva = leveduras capsuladas de Cryptococcus neoformans</b>; no imunossuprimido a resposta inflamatória é pobre, então leucócitos 5, proteína 30 e glicose podem ficar quase normais — o exame direto decide. A glicose 108 no líquor não é doença: 'valores aumentados são resultado de elevação plasmática'. TB seria Ziehl-Neelsen; H. influenzae, cocobacilos Gram-negativos com PMN.", trap:"Líquor 'quase normal' não é 'sem meningite' quando há coloração específica positiva."},
+{lvl:"ANTIGA", obj:"Líquor · hemorragia subaracnóidea", stem:"<span class='cx'>Homem de 55 anos com cefaleia súbita intensa. Líquor: cor hemorrágica, leucócitos 96/mm³, hemácias 18.000/mm³, proteínas 120 mg/dL. Foi coletado apenas um frasco de líquor, que não apresentava coágulos.</span> A interpretação mais provável é:", opts:["Punção traumática","Hemorragia subaracnóidea","Meningite bacteriana","Meningite viral"], ans:1, why:"Gabarito B. Slide: <b>coágulos e distribuição desigual entre frascos = acidente de punção; sobrenadante xantocrômico e sangue homogêneo = hemorragia</b>. Com um único frasco não dá para avaliar clareamento, mas <b>a ausência de coágulo aponta para sangue que já estava no espaço subaracnóideo</b>, e a cefaleia súbita ('a pior da vida') é o quadro clássico [extra]. Os 96 leucócitos e a proteína 120 vêm do sangue no líquor, não de meningite.", trap:"18.000 hemácias trazem leucócitos e proteína 'de carona' — não confundir com meningite."},
+{lvl:"ANTIGA", obj:"Líquor · bacterioscopia (discursiva)", stem:"<span class='cx'>Adulto com líquor: proteínas 94 mg/dL, glicose 51 mg/dL, 3 hemácias e 412 leucócitos/mm³, sendo 98% polimorfonucleares. Na cidade ocorre um surto de meningite por Neisseria meningitidis.</span> Se este for o agente, o resultado esperado na bacterioscopia (Gram) é:", opts:["Diplococos Gram-positivos, lanceolados","Diplococos Gram-negativos, intra e extracelulares","Cocobacilos Gram-negativos","Bacilos Gram-positivos"], ans:1, why:"Esta foi a <b>discursiva (9%)</b> da prova antiga — a aluna escreveu 'diplococos gram-positivo' e zerou, porque a professora exigiu 'características morfológicas/Gram completas' sem correção parcial. <b>Neisseria meningitidis = diplococos Gram-NEGATIVOS</b> (DCGN, em 'grão de café', intra e extracelulares). Diplococos Gram-positivos lanceolados = <i>S. pneumoniae</i>; cocobacilos Gram-negativos = <i>H. influenzae</i>; bacilos Gram-positivos = <i>Listeria</i> [extra]. O perfil (PMN 98%, proteína alta) é bacteriano.", trap:"Na discursiva, escreva as duas palavras: 'diplococos' E 'Gram-negativos'. Faltou uma, zerou."},
+{lvl:"DIRETA", obj:"Inflamação · VHS", stem:"A velocidade de hemossedimentação (VHS) encontra-se DIMINUÍDA em:", opts:["Policitemia","Infecção bacteriana","Mieloma múltiplo","Politraumatismo"], ans:0, why:"Slide: VHS cai em <b>leucocitose extrema, policitemia, anemia falciforme e hipofibrinogenemia</b> (menos plasma/fibrinogênio, hemácias anormais ou em excesso não empilham). Sobe em infecção, trauma, malignidade (mieloma é clássico, com valores &gt;100 mm/h) e injúria tecidual.", trap:"'Algumas anemias' aumentam a VHS; a falciforme é a exceção que diminui."},
+{lvl:"DIRETA", obj:"Líquor · glicose", stem:"A glicorraquia normal corresponde a:", opts:["Valor igual ao da glicemia","Um terço da glicemia","Um valor fixo de 50 mg/dL, independente da glicemia","Cerca de 2/3 (60–70%) da glicemia"], ans:3, why:"Slide: <b>VR = 60–70% da glicose plasmática ou 2/3 (~50 mg/dL)</b>: glicemia 100 → 65; 70 → 47; 200 → 120. Por isso a glicose do líquor só se interpreta com a glicemia colhida junto; e 'valores aumentados são resultado de elevação plasmática'.", trap:"Um valor 'normal' absoluto (ex. 58) pode ser baixo para uma glicemia de 200."},
+{lvl:"DIRETA", obj:"Urina · cilindros", stem:"A presença de cilindros no sedimento urinário indica que o processo tem origem obrigatoriamente:", opts:["Uretral ou prostática","Vesical","Renal — formados por Tamm-Horsfall nos túbulos","Em qualquer ponto do trato urinário"], ans:2, why:"Slide em caixa alta: <b>'CILINDROS — EXCLUSIVAMENTE RENAL!'</b> São moldes de <b>glicoproteína de Tamm-Horsfall</b> formados no túbulo (TCD) sob estase, incorporando células, bactérias, grânulos ou cristais; o significado depende do tipo (hialino, hemático, leucocitário, epitelial, granuloso, céreo).", trap:"Hematúria pode vir de qualquer lugar; cilindro hemático localiza no rim (glomérulo)."},
+{lvl:"DIRETA", obj:"Inflamação · procalcitonina", stem:"Paciente com febre e mialgia apresenta procalcitonina de 0,08 µg/L. Pelo algoritmo guiado por PCT, a interpretação é:", opts:["Infecção bacteriana muito improvável — antibioticoterapia fortemente desencorajada","Infecção bacteriana provável — antibioticoterapia encorajada","Sepse — antibioticoterapia fortemente encorajada","Resultado indeterminado — repetir em 1 hora"], ans:0, why:"Algoritmo com estrela no slide: <b>&lt;0,1 µg/L = bacteriana muito improvável / ATB fortemente desencorajado; 0,1–0,25 = improvável / desencorajado; 0,25–0,5 = provável / encorajado; ≥0,5 = muito provável / fortemente encorajado</b>. Foi exatamente o paciente 1 da Q2 da prova antiga (viral).", trap:"A PCT sobe em 2–4 h; em febre de horas, um valor baixo ainda é confiável para 'não bacteriana' na lógica do slide."},
+{lvl:"DIRETA", obj:"Líquor · volume de coleta", stem:"O volume máximo de líquor que pode ser colhido com segurança em uma punção lombar de adulto é de:", opts:["2–4 mL","6–9 mL","10–15 mL","15–17 mL"], ans:3, why:"Tabela com estrela vermelha (Informe técnico SES): <b>adultos 22 mL/h de produção, 150–170 mL de volume total, 15–17 mL por punção</b>; adolescentes 12–17; crianças 10–15; lactentes 6–9; <b>neonatos 2–4 mL</b> (produção 1 mL/h, volume 20–40 mL).", trap:"A tabela tem três colunas — a prova pode perguntar produção, volume total ou volume seguro."},
+{lvl:"DIRETA", obj:"Endócrino · anti-TPO", stem:"O autoanticorpo considerado o mais sensível para doença autoimune da tireoide, presente em mais de 95% dos casos de tireoidite de Hashimoto, é o:", opts:["Anti-receptor de TSH (TRAb)","Anti-tireoglobulina (anti-TG)","Fator antinuclear (FAN)","Anti-tireoperoxidase (anti-TPO)"], ans:3, why:"Slide: <b>anti-TPO = marcador de destruição folicular mediada por células T; o teste mais sensível para doença autoimune da tireoide; presente em &gt;95% das Hashimoto; define o risco de progressão do hipotireoidismo subclínico</b>. VR até 35 UI/mL. TRAb (VR até 1,75) define Graves (&gt;90%); anti-TG (VR até 115) é acessório.", trap:"TRAb é o anticorpo do hipertireoidismo (Graves); anti-TPO, do hipotireoidismo autoimune."},
+{lvl:"DIRETA", obj:"Urina · cristais", stem:"Cristal classificado como normal, típico de urina ALCALINA:", opts:["Oxalato de cálcio","Fosfato triplo","Ácido úrico","Cistina"], ans:1, why:"Slide 'Cristais': normais em <b>urina ácida = ácido úrico, urato amorfo, urato de sódio, oxalato de cálcio</b>; em <b>urina alcalina = fosfato triplo, fosfato amorfo, fosfato de cálcio, biurato de amônio, carbonato de cálcio</b>. Anormais: metabólicos (bilirrubina, <b>cistina</b>, colesterol, leucina, tirosina) e iatrogênicos (ampicilina, sulfonamida).", trap:"Cistina é cristal ANORMAL (metabólico) — não entra na lista de 'normais' de nenhum pH."}
+];
+const LVL={ENAMED:'<span class="pill e">ENAMED</span>',PROVA:'<span class="pill d">Nível prova</span>',ANTIGA:'<span class="pill a">Prova antiga</span>',DIRETA:'<span class="pill a">Estilo do prof</span>'};
+let qFilter='all';
+const state={answered:0,hits:0};
+function buildQFilter(){
+  const objs=[...new Set(QS.map(q=>q.obj.split(' · ')[0]))];
+  const box=document.getElementById('qfilter');
+  box.innerHTML='<span class="chip'+(qFilter==='all'?' on':'')+'" data-k="all">Todas ('+QS.length+')</span>'+
+    objs.map(o=>'<span class="chip'+(qFilter===o?' on':'')+'" data-k="'+o+'">'+o+' ('+QS.filter(q=>q.obj.split(' · ')[0]===o).length+')</span>').join('');
+  box.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{qFilter=c.dataset.k;renderQuiz();});
+}
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  const list=QS.map((q,i)=>({q,i})).filter(x=>qFilter==='all'||x.q.obj.split(' · ')[0]===qFilter);
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  buildQFilter();
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i},n)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div>'+(LVL[q.lvl]||'')+'<span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div>'+(q.trap?'<div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>':'');
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+/* ===== FLASHCARDS (deck atômico) =====
+   CATS={key:{n:"nome",cor:"#hex"}} · CARDS=[{c:"key",q:"pergunta",a:"resposta curta",w:"1 linha de porquê (opcional)"}] */
+const CATS={
+sp1:{n:"SP1 Inflamação",cor:"#b91c1c"},
+sp2:{n:"SP2 Tireoide",cor:"#6d28d9"},
+sp3:{n:"SP3 REMIT",cor:"#a16207"},
+sp4:{n:"SP4 Urina",cor:"#15803d"},
+sp5:{n:"SP5 Líquor",cor:"#1d4ed8"},
+vr:{n:"Valores de referência",cor:"#0e7490"}
+};
+const CARDS=[
+{c:"sp1",q:"Qual citocina regula a produção hepática de PCR?",a:"IL-6",w:"PCR é proteína de fase aguda feita pelo fígado."},
+{c:"sp1",q:"Meia-vida plasmática da PCR?",a:"19 horas"},
+{c:"sp1",q:"PCR começa a subir e faz pico em quanto tempo?",a:"Sobe em 6–8 h; pico em 36–50 h"},
+{c:"sp1",q:"PCT começa a subir e faz pico em quanto tempo?",a:"Sobe em 2–4 h; pico em 8–24 h",w:"Mais rápida que a PCR."},
+{c:"sp1",q:"A procalcitonina se eleva em resposta a quais estímulos?",a:"IL-6 e TNF-alfa"},
+{c:"sp1",q:"Situações não infecciosas que elevam a PCT?",a:"Trauma, grandes queimaduras, grandes cirurgias, pancreatite, IAM"},
+{c:"sp1",q:"O que faz a VHS CAIR?",a:"Leucocitose extrema, policitemia, falciforme, hipofibrinogenemia"},
+{c:"sp1",q:"Zona alfa-2 da eletroforese contém?",a:"Alfa-2 macroglobulina, haptoglobina, ceruloplasmina"},
+{c:"sp1",q:"Beta-1 e beta-2 da eletroforese contêm?",a:"Beta-1 transferrina; beta-2 C3 e beta-lipoproteína"},
+{c:"sp1",q:"Pico estreito e alto em gama sugere?",a:"Pico monoclonal — mieloma múltiplo"},
+{c:"sp1",q:"Padrão eletroforético da síndrome nefrótica?",a:"Albumina muito baixa, alfa-2 alta, gama baixa"},
+{c:"sp1",q:"Padrão eletroforético de fase aguda?",a:"Albumina ↓, alfa-1 e alfa-2 ↑, gama normal"},
+{c:"sp1",q:"Plasma × soro: qual tem fibrinogênio?",a:"Plasma (tubo com anticoagulante); soro não",w:"'Plasma tem P de Proteínas'."},
+{c:"sp1",q:"Por que a PCR fica normal no LES ativo?",a:"IFN tipo 1 inibe a produção hepática de PCR",w:"VHS alta + PCR normal = lúpus."},
+{c:"sp1",q:"VHS e PCR na osteoartrite?",a:"Normais (na AR estão aumentadas)"},
+{c:"sp1",q:"Sensibilidade do FAN no LES e seu uso?",a:">95% — triagem; negativo afasta"},
+{c:"sp1",q:"Título 'alto' de FR/anti-CCP no ACR/EULAR 2010?",a:">3× o limite superior da normalidade",w:"Vale 3 pontos; ≥6 pontos = AR."},
+{c:"sp1",q:"Autoanticorpo mais recente da AR?",a:"Anti-CarP (antipeptídeos carbamilados)"},
+{c:"sp2",q:"Fração livre do T4 e do T3?",a:"T4 0,03%; T3 0,3% do total"},
+{c:"sp2",q:"Proteínas que transportam T4/T3 e proporções?",a:"75% TBG, 10–15% transtirretina, 10–15% albumina"},
+{c:"sp2",q:"Gestação e estrogênio fazem o quê com a TBG?",a:"Aumentam — T4 total sobe, T4L normal"},
+{c:"sp2",q:"Androgênios, anabolizantes e glicocorticoides fazem o quê com a TBG?",a:"Reduzem — T4 total cai, T4L normal"},
+{c:"sp2",q:"Fármacos que inibem a ligação T4–TBG?",a:"Salicilatos, furosemida, fenitoína, carbamazepina, heparina, AINEs"},
+{c:"sp2",q:"TSH baixo + T4 livre normal?",a:"Hipertireoidismo subclínico"},
+{c:"sp2",q:"TSH baixo + T4 livre baixo?",a:"Hipotireoidismo central (secundário)",w:"O TSH não sobe apesar do T4L baixo → RM."},
+{c:"sp2",q:"TSH alto + T4 livre normal?",a:"Hipotireoidismo subclínico"},
+{c:"sp2",q:"TSH alto + T4 livre alto?",a:"Investigar tumor produtor de TSH (hiper central)"},
+{c:"sp2",q:"Relação T3/T4 > 20 sugere?",a:"Graves — hiperfunção verdadeira"},
+{c:"sp2",q:"Relação T3/T4 < 20 sugere?",a:"Tireoidite destrutiva"},
+{c:"sp2",q:"Graves × bócio multinodular tóxico: TRAb e cintilografia?",a:"Graves TRAb+ captação difusa; BMNT TRAb− nodular"},
+{c:"sp2",q:"Anticorpo que define Graves e atravessa a placenta?",a:"TRAb (anti-receptor de TSH)",w:"Positivo em >90% dos Graves."},
+{c:"sp2",q:"Teste mais sensível para tireoidite de Hashimoto?",a:"Anti-TPO (>95% dos casos)"},
+{c:"sp2",q:"Por que o TSH cai no 1º trimestre da gestação?",a:"Subunidade alfa do HCG é idêntica à do TSH"},
+{c:"sp2",q:"Único parâmetro tireoidiano confiável na gestação?",a:"T4 livre, com VR por trimestre"},
+{c:"sp2",q:"Perfil da síndrome do doente eutireoideu?",a:"T3 ↓, rT3 ↑, TSH normal/↓, T4L normal",w:"Não prescrever levotiroxina."},
+{c:"sp2",q:"Qual desiodase gera T3 reverso?",a:"Desiodase 3"},
+{c:"sp2",q:"Tireoglobulina pós-TSH recombinante > 1,0 ng/mL significa?",a:"Tecido residual ou metástase (carcinoma diferenciado)"},
+{c:"sp2",q:"Síndrome de Laron: GH e IGF-1?",a:"GH normal/alto, IGF-1 baixo; tratar com IGF-1"},
+{c:"sp2",q:"Estímulo mais potente no teste de reserva de GH?",a:"Hipoglicemia insulínica",w:"Risco de convulsão; CI epilepsia/AVC/cardiopatia/>60 a."},
+{c:"sp2",q:"Puberdade precoce: idade de corte?",a:"Meninas < 8 anos; meninos < 9 anos"},
+{c:"sp2",q:"Puberdade precoce central × periférica no laboratório?",a:"Central LH/FSH ↑; periférica LH/FSH suprimidos"},
+{c:"sp3",q:"Fase Ebb: duração e característica?",a:"0–48 h; hipoperfusão e hipometabolismo"},
+{c:"sp3",q:"Fase Flow: duração e característica?",a:"Até ~10 dias; hipermetabolismo e catabolismo"},
+{c:"sp3",q:"Por que a glicose sobe no trauma?",a:"Gliconeogênese + resistência à insulina (catecolaminas, cortisol)"},
+{c:"sp3",q:"Hiperglicemia de estresse × diabetes prévio: como separar?",a:"HbA1c < 5,7% no estresse; ≥ 6,5% no diabetes"},
+{c:"sp3",q:"Alvo glicêmico BRASPEN/ESPEN 2023 no crítico?",a:"140–180 mg/dL",w:"80–110 aumenta mortalidade."},
+{c:"sp3",q:"Hormônio da retenção hídrica/edema no pós-operatório (slide)?",a:"Aldosterona"},
+{c:"sp3",q:"ADH no trauma: sobe quanto e faz o quê?",a:"Até 50×; retém água → oligúria, hiponatremia dilucional"},
+{c:"sp3",q:"Aldosterona: efeito sobre Na e K?",a:"Retém Na, excreta K"},
+{c:"sp3",q:"Por que hipercalemia inicial no trauma?",a:"Lesão tecidual (rabdomiólise) + acidose"},
+{c:"sp3",q:"Proteínas de fase aguda NEGATIVAS?",a:"Albumina, transferrina, pré-albumina"},
+{c:"sp3",q:"Proteínas de fase aguda POSITIVAS?",a:"PCR, fibrinogênio, ferritina"},
+{c:"sp3",q:"Albumina baixa na fase aguda do trauma indica?",a:"Inflamação, não desnutrição (BRASPEN 2023)"},
+{c:"sp3",q:"Leucocitose sem infecção no trauma — mecanismo?",a:"Desmarginação de neutrófilos por catecolaminas/cortisol"},
+{c:"sp3",q:"Cortisol total normal no crítico: por quê?",a:"CBG e albumina caem; fração livre está alta"},
+{c:"sp3",q:"PICS: quando começa e critérios?",a:"Dia 14; PCR > 0,5–2, linfócitos < 0,8, albumina < 3,0"},
+{c:"sp3",q:"Alteração NÃO esperada na REMIT?",a:"Hipoglicemia"},
+{c:"sp3",q:"pH sanguíneo normal e compatível com a vida?",a:"7,35–7,45; vida 6,8–8,0"},
+{c:"sp4",q:"Melhor amostra para o parcial de urina?",a:"1ª da manhã, jato médio, após higiene"},
+{c:"sp4",q:"Glicosúria sem hiperglicemia indica?",a:"Doença tubular renal (glicosúria renal)"},
+{c:"sp4",q:"Limiar renal da glicose?",a:"160–180 mg/dL"},
+{c:"sp4",q:"Duas causas de cetonúria (slide)?",a:"Diabetes descompensado e jejum prolongado"},
+{c:"sp4",q:"Sangue + na fita, hemácias íntegras, plasma normal?",a:"Hematúria"},
+{c:"sp4",q:"Sangue + na fita, poucas hemácias, plasma vermelho?",a:"Hemoglobinúria — hemólise intravascular"},
+{c:"sp4",q:"Sangue + na fita, poucas hemácias, plasma normal?",a:"Mioglobinúria — rabdomiólise"},
+{c:"sp4",q:"Bilirrubina +++ com urobilinogênio normal?",a:"Colestase"},
+{c:"sp4",q:"Bilirrubina negativa com urobilinogênio +++?",a:"Doença hemolítica (extravascular)"},
+{c:"sp4",q:"Qual fração de bilirrubina aparece na urina?",a:"Direta (conjugada)",w:"A indireta vai ligada à albumina e não filtra."},
+{c:"sp4",q:"Quem produz nitrito na urina?",a:"Bactérias Gram-negativas (E. coli); GP e fungos não"},
+{c:"sp4",q:"Falso-negativo do nitrito?",a:"Urina ao acaso, ácido ascórbico, antibiótico"},
+{c:"sp4",q:"Cilindros hemáticos indicam?",a:"Doença glomerular"},
+{c:"sp4",q:"Cilindros leucocitários indicam?",a:"Inflamação renal — pielonefrite"},
+{c:"sp4",q:"Cilindros de células epiteliais indicam?",a:"Necrose tubular renal"},
+{c:"sp4",q:"Cilindros céreos indicam?",a:"Estase urinária extrema (fase final)"},
+{c:"sp4",q:"Cilindros hialinos indicam?",a:"Normal, exercício intenso, desidratação"},
+{c:"sp4",q:"Cristais normais de urina ÁCIDA?",a:"Ácido úrico, uratos, oxalato de cálcio"},
+{c:"sp4",q:"Cristais normais de urina ALCALINA?",a:"Fosfato triplo, fosfatos, biurato de amônio, carbonato de cálcio"},
+{c:"sp4",q:"Cristais anormais metabólicos?",a:"Bilirrubina, cistina, colesterol, leucina, tirosina"},
+{c:"sp4",q:"Cristais iatrogênicos?",a:"Ampicilina e sulfonamida"},
+{c:"sp4",q:"Principal inibidor fisiológico de cálculos?",a:"Água"},
+{c:"sp4",q:"Flora bacteriana discreta / moderada / intensa?",a:"Descarta / possível / provável infecção"},
+{c:"sp4",q:"Células epiteliais tubulares na urina indicam?",a:"Necrose tubular (alta relevância)"},
+{c:"sp4",q:"Urina verde: causas?",a:"Pseudomonas, amitriptilina, azul de metileno"},
+{c:"sp5",q:"Glicose no líquor: regra?",a:"2/3 (60–70%) da glicemia"},
+{c:"sp5",q:"Glicose alta no líquor significa?",a:"Hiperglicemia plasmática, não doença do SNC"},
+{c:"sp5",q:"Lactato do líquor sobe principalmente em?",a:"Meningite bacteriana (hipóxia)"},
+{c:"sp5",q:"Perfil do líquor na meningite bacteriana?",a:"PMN ↑↑, glicose ↓, proteínas ↑↑, lactato ↑"},
+{c:"sp5",q:"Perfil do líquor na meningite viral?",a:"Mononucleares ↑, glicose normal, proteínas pouco ↑"},
+{c:"sp5",q:"Neutrófilos no líquor além da bacteriana?",a:"Viral/TB/fúngica incipientes; hemorragia cerebral"},
+{c:"sp5",q:"Acidente de punção × hemorragia: sinais?",a:"Coágulo e clareamento = punção; xantocromia = hemorragia"},
+{c:"sp5",q:"Coloração para Cryptococcus?",a:"Tinta nanquim (tinta da China)"},
+{c:"sp5",q:"Coloração para Mycobacterium tuberculosis?",a:"Ziehl-Neelsen (BAAR)"},
+{c:"sp5",q:"Gram de Neisseria meningitidis?",a:"Diplococos Gram-negativos",w:"Foi a discursiva da prova antiga."},
+{c:"sp5",q:"Gram de Haemophilus influenzae?",a:"Cocobacilos Gram-negativos"},
+{c:"sp5",q:"Gram de Streptococcus pneumoniae?",a:"Diplococos Gram-positivos"},
+{c:"sp5",q:"Bandas oligoclonais positivas: definição?",a:"≥ 2 bandas no LCR ausentes no soro"},
+{c:"sp5",q:"Uma única banda oligoclonal significa?",a:"Inconclusivo — não confirma EM"},
+{c:"sp5",q:"Albumina alta na eletroforese do líquor indica?",a:"Dano na barreira hematoencefálica"},
+{c:"sp5",q:"Líquor típico da esclerose múltipla?",a:"Límpido, glicose N, proteína pouco ↑, gama ↑, BOC ≥ 2"},
+{c:"sp5",q:"Isoenzimas de LDH do tecido encefálico?",a:"LDH1 e LDH2"},
+{c:"vr",q:"VHS adulto (Westergren, slide)?",a:"Homem < 10 mm/h; mulher < 20 mm/h"},
+{c:"vr",q:"VHS idoso (slide)?",a:"Homem < 40; mulher < 50 mm/h"},
+{c:"vr",q:"VHS 'extremamente elevada'?",a:"> 100 mm/h"},
+{c:"vr",q:"PCR: referência?",a:"< 0,5 mg/dL"},
+{c:"vr",q:"PCR 1–5 / 5,1–20 / > 20 mg/dL?",a:"Viral-leve / bacteriana-sistêmica / grave-queimado-politrauma"},
+{c:"vr",q:"PCT: os 4 cortes do algoritmo?",a:"< 0,1 / 0,1–0,25 / 0,25–0,5 / ≥ 0,5 µg/L"},
+{c:"vr",q:"Alfa-1-antitripsina sérica?",a:"90–200 mg/dL"},
+{c:"vr",q:"Proteínas totais séricas?",a:"6,5–8,1 g/dL"},
+{c:"vr",q:"Albumina na eletroforese sérica?",a:"3,50–4,85 g/dL (54–60%)"},
+{c:"vr",q:"Gamaglobulinas na eletroforese sérica?",a:"0,74–1,75 g/dL (11,4–21,6%)"},
+{c:"vr",q:"TSH adulto?",a:"0,4–4,3 µUI/mL"},
+{c:"vr",q:"T4 livre?",a:"0,7–1,8 ng/dL"},
+{c:"vr",q:"T4 total?",a:"4,8–13,7 µg/dL"},
+{c:"vr",q:"Anti-TPO / anti-TG / TRAb?",a:"≤ 35 / ≤ 115 / ≤ 1,75 UI/mL"},
+{c:"vr",q:"Resposta normal do TSH após TRH (slide)?",a:"Aumento de 10× o basal"},
+{c:"vr",q:"HbA1c: normal × diabetes?",a:"< 5,7% × ≥ 6,5%"},
+{c:"vr",q:"Urina: pH e densidade?",a:"pH 5,5–7,0; densidade 1.003–1.035"},
+{c:"vr",q:"Urina: proteínas na tira?",a:"0–30 mg/dL",w:"Normal < 10 mg/dL ou < 150 mg/24 h."},
+{c:"vr",q:"Urina: leucócitos / hemácias / epiteliais por mL?",a:"≤ 10.000 / ≤ 4.000 / ≤ 15.000"},
+{c:"vr",q:"Líquor: leucócitos e diferencial?",a:"Até 5/mm³, predomínio mononuclear"},
+{c:"vr",q:"Líquor: proteínas e albumina?",a:"15–45 mg/dL; albumina 15 mg/dL"},
+{c:"vr",q:"Líquor: lactato?",a:"9–19 mg/dL"},
+{c:"vr",q:"Líquor: glicose (tabela final)?",a:"50–80 mg/dL (2/3 da glicemia)"},
+{c:"vr",q:"Líquor adulto: produção / volume / retirada segura?",a:"22 mL/h / 150–170 mL / 15–17 mL"},
+{c:"vr",q:"Líquor neonato: produção / volume / retirada segura?",a:"1 mL/h / 20–40 mL / 2–4 mL"},
+{c:"vr",q:"Hipotireoidismo clínico × subclínico: prevalência?",a:"0,3% × 4% da população"}
+];
+let filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],virado=false;
+const $=id=>document.getElementById(id);
+function buildChips(){
+  const chips=[["all","Todas ("+CARDS.length+")"]].concat(Object.keys(CATS).map(k=>[k,CATS[k].n+" ("+CARDS.filter(c=>c.c===k).length+")"]));
+  $("chips").innerHTML=chips.map(([k,n])=>'<span class="chip'+(k===filtro?" on":"")+'" data-k="'+k+'">'+n+'</span>').join("");
+  document.querySelectorAll("#chips .chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;start();});
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function start(soErradas){
+  const base=soErradas?erradas.slice():CARDS.filter(c=>filtro==="all"||c.c===filtro);
+  fila=shuffle(base.slice());idx=0;ok=0;err=0;erradas=[];
+  $("fim").classList.add("hidden");$("card").style.display="flex";
+  buildChips();mostra();
+}
+function mostra(){
+  virado=false;
+  if(idx>=fila.length){return fim();}
+  const c=fila[idx];
+  $("cat").textContent=CATS[c.c].n;$("cat").style.background=CATS[c.c].cor;
+  $("qFront").textContent=c.q;
+  $("qTop").textContent=c.q;
+  $("resp").textContent=c.a;
+  $("why").textContent=c.w||"";$("why").style.display=c.w?"block":"none";
+  $("qFront").style.display="block";$("back").style.display="none";
+  $("hint").textContent="toque para ver a resposta";
+  $("actions").classList.add("hidden");
+  $("pos").textContent=(idx+1)+" / "+fila.length;
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+}
+function vira(){
+  if(virado)return;virado=true;
+  $("qFront").style.display="none";$("back").style.display="block";
+  $("hint").textContent="acertou? marca embaixo 👇";
+  $("actions").classList.remove("hidden");
+}
+function responde(acertou){
+  if(!virado)return;
+  if(acertou){ok++;}else{err++;erradas.push(fila[idx]);}
+  idx++;mostra();
+}
+function fim(){
+  $("card").style.display="none";$("actions").classList.add("hidden");
+  $("fim").classList.remove("hidden");
+  const total=ok+err;
+  $("fimTitulo").textContent=err===0?"🏆 Zerou!":"Rodada: "+ok+"/"+total;
+  $("fimTexto").textContent=err===0?"Tudo certo nessa leva.":err+" para repetir — vai nelas até zerar.";
+  $("btnErradas").style.display=err?"inline-block":"none";
+}
+$("card").onclick=vira;
+$("btnAcertei").onclick=()=>responde(true);
+$("btnErrei").onclick=()=>responde(false);
+$("btnErradas").onclick=()=>start(true);
+$("btnReiniciar").onclick=()=>start(false);
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById('flash').classList.contains('active'))return;
+  if(e.code==="Space"){e.preventDefault();vira();}
+  if(e.key==="1"&&virado)responde(false);
+  if(e.key==="2"&&virado)responde(true);
+});
+buildChips();start();
+
+/* ===== FEYNMAN ===== */
+const FY=[
+["1 · PCR, PCT e VHS em dois pacientes febris","Explique como você separa infecção viral de bacteriana com os três marcadores. Precisa aparecer: PCR feita no fígado sob IL-6, sobe em 6–8 h e faz pico em 36–50 h, referência abaixo de 0,5 mg/dL, faixas 1–5 / 5,1–20 / acima de 20; PCT sobe em 2–4 h (IL-6 e TNF), cortes 0,1 / 0,25 / 0,5 e a decisão de antibiótico em cada faixa; VHS depende de fibrinogênio, cai em policitemia/falciforme, acima de 100 é alarme; e por que um pós-operatório de 12 h com PCT 0,35 não é infecção."],
+["2 · A curva da eletroforese em quatro padrões","Desenhe (na cabeça) a curva normal e diga o que mora em cada zona: alfa-1 (antitripsina), alfa-2 (haptoglobina, macroglobulina, ceruloplasmina), beta-1 (transferrina), beta-2 (C3), gama (Ig). Depois descreva os quatro padrões: fase aguda (albumina cai, alfa-1 e alfa-2 sobem), pico policlonal largo (autoimune, infecção crônica, hepatopatia), pico monoclonal em agulha (mieloma) e nefrótica (albumina 1–2 g/dL, alfa-2 alta, gama baixa). Diga por que a aluna da prova antiga confundiu nefrótica com fase aguda."],
+["3 · TSH manda, T4 livre confirma, T4 total mente","Percorra o fluxograma: TSH normal, baixo ou alto, e o que cada T4 livre significa (subclínico, clínico, central, tumor produtor de TSH). Explique 'primário = direções opostas; central = mesma direção; subclínico = só o TSH fora'. Depois a TBG: quem aumenta (gestação, estrogênio), quem reduz (androgênio, anabolizante, glicocorticoide, nefrótica) e por que TSH e T4L normais com T4 total alterado é eutireoidiano. Feche com Graves (TRAb, captação difusa, T3/T4 acima de 20) e Hashimoto (anti-TPO), e o TSH suprimido do 1º trimestre pelo HCG."],
+["4 · Ebb e Flow no laboratório","Conte a história de um politraumatizado nas primeiras 48 h e no 6º dia. Ebb: hipoperfusão, acidose metabólica com lactato alto, hiperglicemia por catecolaminas, hipercalemia por lesão celular e acidose, hiponatremia dilucional por ADH (até 50×). Flow: hipermetabolismo, resistência à insulina, ureia alta por proteólise, albumina e transferrina baixas como proteínas de fase aguda negativas (não desnutrição), PCR alta, leucocitose de estresse. Inclua HbA1c para separar estresse de diabetes, o alvo 140–180, cortisol total enganoso e o doente eutireoideu (T3 baixo, rT3 alto, sem levotiroxina)."],
+["5 · Sangue na fita: hemácia, hemoglobina ou mioglobina?","Explique o algoritmo do slide: fita positiva → microscopia (hemácias íntegras ou poucas) → cor do plasma (normal ou vermelho). Diga o que cada combinação significa e dê as causas (cálculo/glomérulo/infecção; hemólise intravascular; rabdomiólise). Depois conecte com bilirrubina e urobilinogênio: colestase (bilirrubina direta +++, urobilinogênio normal) versus hemólise extravascular (bilirrubina negativa, urobilinogênio +++), e por que a hemólise extravascular não faz hemoglobinúria. Termine com cilindros (exclusivamente renais) e o significado de hemático, leucocitário, epitelial e céreo."],
+["6 · Líquor: quem é quem","Diga os valores normais (até 5 células mononucleares, proteína 15–45, glicose 2/3 da glicemia, lactato 9–19) e como ficam na bacteriana (PMN, glicose baixa, proteína e lactato altos), na viral (linfócitos, glicose normal), na tuberculosa (linfócitos com glicose baixa) e no HIV com Cryptococcus (líquor quase normal, tinta nanquim positiva). Explique como diferenciar hemorragia de acidente de punção (coágulo e clareamento = agulha; xantocromia = hemorragia) e cite o Gram dos três agentes: meningococo diplococo Gram-negativo, pneumococo diplococo Gram-positivo, Haemophilus cocobacilo Gram-negativo. Feche com a EM: albumina normal, gama alta, duas ou mais bandas oligoclonais só no líquor."]
+];
+const feybox=document.getElementById('feybox');
+FY.forEach(f=>{const p=document.createElement('div');p.className='panel';p.innerHTML='<h2>'+f[0]+'</h2><p>'+f[1]+'</p>';feybox.appendChild(p);});
+</script>
+</body>
+</html>

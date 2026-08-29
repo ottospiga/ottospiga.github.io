@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards Farmaco A1 · v3 atômico</title>
+<style>
+  :root{--bg:#f4f6f8;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;
+    --ok:#15803d;--ok-soft:#dcfce7;--bad:#b91c1c;--bad-soft:#fee2e2;--line:#e2e8f0;
+    --c-aine:#0e7490;--c-cort:#a16207;--c-opi:#6d28d9;--c-neuro:#15803d}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+  .wrap{max-width:560px;margin:0 auto;padding:14px 12px 40px}
+  header{text-align:center;padding:8px 0 2px}
+  header h1{font-size:18px;margin:0}
+  header .sub{color:var(--muted);font-size:12px;margin-top:2px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin:2px 2px 8px}
+  .bar b{color:var(--ink)}
+  #card{background:var(--card);border:1px solid var(--line);border-radius:18px;min-height:290px;padding:20px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(15,40,60,.06);position:relative}
+  #card .cat{position:absolute;top:12px;left:14px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 9px;border-radius:6px;color:#fff}
+  #card .hint{position:absolute;bottom:10px;font-size:11.5px;color:#a8b3c0}
+  #qFront{font-size:20px;font-weight:700}
+  #back{display:none;width:100%}
+  #qTop{font-size:14px;color:var(--muted);font-weight:600;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed var(--line)}
+  #resp{font-weight:800;color:var(--accent);font-size:22px;line-height:1.35}
+  #why{color:var(--muted);font-size:13.5px;margin-top:12px}
+  .actions{display:flex;gap:10px;margin-top:14px}
+  .actions button{flex:1;border:none;border-radius:14px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer}
+  #btnErrei{background:var(--bad-soft);color:var(--bad)}
+  #btnAcertei{background:var(--ok-soft);color:var(--ok)}
+  .hidden{display:none!important}
+  #fim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+  #fim h2{margin:0 0 8px;font-size:20px}
+  #fim button{margin-top:14px;border:none;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff}
+  #fim button.sec{background:var(--accent-soft);color:var(--accent);margin-left:8px}
+  .foot{text-align:center;color:var(--muted);font-size:11.5px;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>⚡ Flashcards Farmaco A1 <span style="font-size:12px;color:var(--muted)">v3</span></h1>
+  <div class="sub">1 informação por cartão · resposta curta · toque para virar</div>
+</header>
+
+<div class="chips" id="chips"></div>
+<div class="bar"><span>Cartão <b id="pos">–</b></span><span>✅ <b id="nOk">0</b> · ❌ <b id="nErr">0</b></span></div>
+
+<div id="card">
+  <span class="cat" id="cat"></span>
+  <div id="qFront"></div>
+  <div id="back"><div id="qTop"></div><div id="resp"></div><div id="why"></div></div>
+  <span class="hint" id="hint">toque para ver a resposta</span>
+</div>
+<div class="actions hidden" id="actions">
+  <button id="btnErrei">❌ Errei</button>
+  <button id="btnAcertei">✅ Acertei</button>
+</div>
+
+<div id="fim" class="hidden">
+  <h2 id="fimTitulo"></h2>
+  <div id="fimTexto" style="color:var(--muted);font-size:14.5px"></div>
+  <div><button id="btnErradas">Repetir só as que errei</button><button class="sec" id="btnReiniciar">Recomeçar</button></div>
+</div>
+
+<div class="foot">Fontes: gabaritos reais das provas T5–T11, PMs e aulas gravadas 2026 (🎧).<br>Progresso vive só nesta aba — deck de brecha, 5s por cartão.</div>
+</div>
+
+<script>
+const CATS={aine:{n:"AINEs & analgésicos",cor:"var(--c-aine)"},cort:{n:"Corticoides",cor:"var(--c-cort)"},opi:{n:"Opioides",cor:"var(--c-opi)"},neuro:{n:"Neuropática & CB",cor:"var(--c-neuro)"}};
+// q = pergunta · a = resposta (curta!) · w = 1 linha opcional de porquê
+const CARDS=[
+// ===== AINEs & analgésicos =====
+{c:"aine",q:"Dipirona — dose e posologia usual?",a:"500 mg – 1 g VO 6/6h",w:"Máx 4 g/dia."},
+{c:"aine",q:"Dipirona — dose de ATAQUE para dor intensa?",a:"1 g"},
+{c:"aine",q:"Principal efeito adverso da dipirona?",a:"Hipotensão"},
+{c:"aine",q:"🎧 Dipirona como antitérmico: só se a febre passar de…?",a:"38 °C",w:"Em febrícula faz hipotermia."},
+{c:"aine",q:"Antitérmico/analgésico de escolha na DENGUE?",a:"Dipirona 500 mg 6/6h",w:"Paracetamol também vale."},
+{c:"aine",q:"Por que AAS/AINE são proibidos na dengue?",a:"COX-1 plaquetária → ↓TXA2 → hemorragia"},
+{c:"aine",q:"Cefaleia no HIPERTENSO — analgésico de escolha?",a:"Dipirona 500 mg",w:"AINE sobe a PA; a hipotensão da dipirona ajuda."},
+{c:"aine",q:"🎧 Únicos 3 fármacos com registro para FEBRE no Brasil?",a:"Paracetamol, dipirona e ibuprofeno"},
+{c:"aine",q:"🎧 Agranulocitose por dipirona — quadro clínico?",a:"Febre + úlceras de mucosa (boca, genitália)",w:"Hemograma; nunca mais usar dipirona."},
+{c:"aine",q:"Paracetamol — dose usual e teto crônico?",a:"500–750 mg 6/6h · máx 2 g/dia",w:"4 g só no agudo hospitalar."},
+{c:"aine",q:"Metabólito tóxico do paracetamol e enzima que o gera?",a:"NAPQI — via CYP2E1"},
+{c:"aine",q:"Antídoto da intoxicação por paracetamol?",a:"N-acetilcisteína (NAC)"},
+{c:"aine",q:"Por que paracetamol NÃO lesa estômago nem rim?",a:"~90% das moléculas inibem só a COX-3 (central)"},
+{c:"aine",q:"Analgésico/antitérmico seguro na GESTAÇÃO?",a:"Paracetamol",w:"Dipirona também é categoria B — mas prescrevem paracetamol."},
+{c:"aine",q:"🎧 Por que NÃO alternar antitérmico depois do paracetamol?",a:"Ele é lento (cai em 1–2h) → somar = HIPOTERMIA"},
+{c:"aine",q:"AAS antiagregante — dose e horário?",a:"100 mg/dia, no ALMOÇO",w:"Acidez da refeição ajuda a absorção."},
+{c:"aine",q:"Por que o efeito antiplaquetário do AAS dura ~7 dias?",a:"Inibição IRREVERSÍVEL + plaqueta ANUCLEADA",w:"Sem núcleo, não ressintetiza a COX."},
+{c:"aine",q:"🎧 AAS no IAM — dose e como tomar?",a:"300 mg MASTIGADOS",w:"Antes mesmo de chegar ao hospital."},
+{c:"aine",q:"🎧 Suspender AAS quantos dias antes de cirurgia?",a:"7 dias",w:"Com aval do cardio; se não puder → bolsas de plaquetas."},
+{c:"aine",q:"Por que AAS NUNCA é usado como antitérmico?",a:"Síndrome de REYE (infecção viral)",w:"Ela: 'TEM ação antitérmica, mas NÃO PODE usar'."},
+{c:"aine",q:"🎧 Ácido salicílico tópico — qual ação?",a:"Queratolítica",w:"Calosidade, pele encravada."},
+{c:"aine",q:"Ibuprofeno — dose anti-inflamatória usual?",a:"600 mg 3–4×/dia",w:"🎧 Abaixo de 400 mg NÃO é anti-inflamatório."},
+{c:"aine",q:"🎧 As 4 ações do ibuprofeno?",a:"Analgésico · antitérmico · anti-inflamatório · ANTIAGREGANTE",w:"Ele entra nas plaquetas."},
+{c:"aine",q:"🎧 Indicação EXCLUSIVA dos profenos?",a:"Fechar o canal arterial do neonato",w:"Ibuprofeno IV 2 dias — derruba a PGE2 que mantém o ducto aberto."},
+{c:"aine",q:"🎧 Cetoprofeno no SUS — forma e uso clássico?",a:"Só PARENTERAL — crise de GOTA na UBS (IM)",w:"Alívio em 10–15 min."},
+{c:"aine",q:"Único AINE tomado LONGE das refeições?",a:"Cetoprofeno"},
+{c:"aine",q:"🎧 Pós-op com risco de SANGRAMENTO — qual AINE?",a:"Diclofenaco",w:"Cetoprofeno antiagrega."},
+{c:"aine",q:"🎧 Pós-op com risco de TROMBOSE — qual AINE?",a:"Cetoprofeno",w:"A antiagregação vira benefício."},
+{c:"aine",q:"Nimesulida — dose e restrição de idade?",a:"100 mg 12/12h · proibida <12 anos"},
+{c:"aine",q:"🎧 Por que nimesulida é proibida em criança?",a:"HEPATOTOXICIDADE (fígado imaturo)"},
+{c:"aine",q:"Nimesulida — nicho de indicação?",a:"Tecidos moles (faringite do adulto) + músculo-esquelético",w:"Sem ação antitérmica."},
+{c:"aine",q:"Meloxicam — dose e nicho?",a:"7,5–15 mg 1×/dia · mioarticular CRÔNICO",w:"Gastrite tolera (7 de 10 na COX-2); nunca faringite."},
+{c:"aine",q:"🎧 Etodolaco — nicho que ela ditou?",a:"DOR FORTE de origem inflamatória (fratura, pós-op)",w:"300 mg 3×/d · 'a afinidade COX-2 dele é quase mentira'."},
+{c:"aine",q:"Cetorolaco — dose, teto e limite de tempo?",a:"10 mg 6/6h · máx 40 mg/d · ≤5 dias"},
+{c:"aine",q:"🎧 'O TOP em analgesia' entre os AINEs?",a:"Cetorolaco",w:"Dor nociceptiva/orgânica — não neuropática."},
+{c:"aine",q:"Piroxicam — dose e a pegadinha de prova?",a:"20 mg 1×/dia — meia-vida LONGA",w:"Enunciado dizendo 'ação curta' = falso."},
+{c:"aine",q:"🎧 Piroxicam SUBLINGUAL — para quê?",a:"Ação rápida (~10 min) sem injeção",w:"Pós-procedimento odontológico, UBS."},
+{c:"aine",q:"Celecoxibe — dose e caso clássico?",a:"100 mg 12/12h · artrose/AR + gastrite ou úlcera"},
+{c:"aine",q:"Por que coxibe dá TROMBOSE?",a:"↓PGI2 com TXA2 preservado",w:"COX-1 da plaqueta fica livre."},
+{c:"aine",q:"🎧 Coxibe serve para tecidos moles (faringite)?",a:"NÃO — só ósseo/mioarticular",w:"'Não tem estudo de distribuição em tecido mole'."},
+{c:"aine",q:"🎧 Por que a receita do celecoxibe fica RETIDA?",a:"Risco cardiovascular",w:"Não é dependência. Uso máx 7–15 dias."},
+{c:"aine",q:"Diclofenaco — dose usual?",a:"50 mg 8/8h",w:"IM: 75 mg 12/12h · colestiramina 75 mg 12/12h."},
+{c:"aine",q:"Alergia cruzada clássica do diclofenaco?",a:"Com AAS",w:"🎧 Está na bula dos dois (fármacos ácidos)."},
+{c:"aine",q:"Ácido mefenâmico — indicação de bula?",a:"Dismenorreia primária (500 mg 8/8h)",w:"🎧 Cólica por ESPASMO não responde (→ antiespasmódico)."},
+{c:"aine",q:"AINE crônico → insuficiência renal: mecanismo?",a:"↓PGI2/PGE2 renais → perde a vasodilatação da arteríola → ↓TFG",w:"🎧 Silencioso e IRREVERSÍVEL ('fígado regenera, rim não')."},
+{c:"aine",q:"Febre/inflamação + pneumonia ou asma: por que AINE é vetado?",a:"AA desvia para a LOX → leucotrienos → broncoconstrição"},
+{c:"aine",q:"Anti-inflamatório da inflamação PULMONAR?",a:"Corticoide",w:"Lipocortina-1 inibe a fosfolipase A2 → corta COX e LOX."},
+{c:"aine",q:"🎧 Gel anti-inflamatório — como aplicar?",a:"Sobre a pele SECA e FRIA",w:"Gelo antes; vasodilatação aumentaria a absorção."},
+{c:"aine",q:"🎧 Fitoterápico tópico superior ao diclofenaco gel?",a:"Cordia verbenacea (erva-baleeira / Acheflan)"},
+{c:"aine",q:"Comer antes do AINE muda o quê?",a:"~Dobra a latência (2h para agir)",w:"E NÃO protege o mecanismo gástrico."},
+{c:"aine",q:"🎧 'Enxaqueca crônica' — 1º passo que ela ensinou?",a:"Desintoxicar de AINEs (2–3 dias sem nenhum)",w:"Cefaleia é EA de quase todo AINE."},
+{c:"aine",q:"🎧 Tomar AINE ANTES do procedimento adianta?",a:"NÃO",w:"Mediadores já prontos + COX-2 nem foi induzida."},
+{c:"aine",q:"AINEs são absorvidos onde?",a:"Intestino delgado",w:"'No estômago' = pegadinha."},
+{c:"aine",q:"Criança com faringite — qual anti-inflamatório?",a:"Cetoprofeno",w:"Nimesulida <12a proibida; dipirona/paracetamol não são anti-inflamatórios."},
+{c:"aine",q:"Artrose leve + hipertensão + gastrite — o que dar?",a:"Dipirona 500 mg",w:"Coxibe: risco CV · não seletivo: gastrite."},
+{c:"aine",q:"Correlacione: ibuprofeno · dipirona · diclofenaco · celecoxibe · mefenâmico",a:"Sangramento · hipotensão · alergia cruzada AAS · trombose · diarreia",w:"Correlação pronta de prova (T7)."},
+// ===== Corticoides =====
+{c:"cort",q:"QD real: bronquite aguda, 5 dias — fármaco, dose, posologia?",a:"Prednisolona 5 mg 1×/dia pela manhã"},
+{c:"cort",q:"QD real: artrite reumatoide (78 kg), 5 dias?",a:"Prednisona 20 mg 1×/dia pela manhã"},
+{c:"cort",q:"Pneumonia no adulto — associação VO oficial?",a:"Antibiótico + dipirona + prednisolona"},
+{c:"cort",q:"Criança com pneumonia — antitérmico + anti-inflamatório?",a:"Paracetamol + prednisolona"},
+{c:"cort",q:"🎧 Prednisona × prednisolona — quem é o pró-fármaco?",a:"Prednisona",w:"O fígado a converte em prednisolona (ativa)."},
+{c:"cort",q:"🎧 Quadro AGUDO × CRÔNICO — qual das duas usar?",a:"Agudo = prednisoLONA · crônico = prednisona",w:"'No agudo não quero esperar biotransformação'."},
+{c:"cort",q:"Corticoide de MAIOR duração de ação?",a:"Dexametasona",w:"Meia-vida biológica >30h."},
+{c:"cort",q:"Maturação pulmonar fetal (pré-eclâmpsia) — corticoide?",a:"Dexametasona"},
+{c:"cort",q:"Rinite alérgica — corticoide e dose?",a:"Budesonida nasal ~250 mcg/dia",w:"🎧 50–100 mcg por narina."},
+{c:"cort",q:"🎧 Prednisona: dose anti-inflamatória × imunossupressora?",a:"5–20 mg/dia × 1 mg/kg/dia",w:"~40 mg (60 kg) = transição."},
+{c:"cort",q:"🎧 Pulsoterapia — o que é?",a:"Metilprednisolona IV em dose altíssima, no hospital",w:"Para frear doença autoimune GRAVE rapidamente."},
+{c:"cort",q:"🎧 Esquema de dias alternados — única vantagem real?",a:"Menor supressão do eixo HHA",w:"Preço: efeitos adversos oscilantes."},
+{c:"cort",q:"Antes de ZERAR o corticoide crônico, dosar o quê?",a:"ACTH sérico",w:"Quando chegar a ~5 mg."},
+{c:"cort",q:"Por que corticoide se toma de MANHÃ (até 10h)?",a:"Mimetiza o pico circadiano → menor supressão do EIXO",w:"Não reduz Cushing nem imunossupressão."},
+{c:"cort",q:"Quem tem efeito mineralocorticoide FORTE?",a:"Prednisona, prednisolona e hidrocortisona",w:"Dexa/beta quase não têm."},
+{c:"cort",q:"Efeito mineralocorticoide = quais sinais?",a:"Edema + ↑PA + HIPOCALEMIA",w:"🎧 '5 mg hoje → amanhã dedos inchados'."},
+{c:"cort",q:"Osteoporose do corticoide — mecanismo 1 (clássico)?",a:"↓Ca (↓absorção + ↑excreção) → PTH → osteoclastos"},
+{c:"cort",q:"🎧 Osteoporose — mecanismo 2 (da aula)?",a:"Osteoblasto ↓OPG → RANKL LIVRE → superativa osteoclasto",w:"'Suprimem RANKL' na prova = FALSO (suprimem a OPG!)."},
+{c:"cort",q:"🎧 Suplementar CÁLCIO quando?",a:"Uso >3 meses OU ≥65 anos OU dose alta",w:"Vitamina D: DOSAR antes de repor."},
+{c:"cort",q:"Mecanismo anti-inflamatório nº 1 do corticoide?",a:"↑ Síntese de LIPOCORTINA-1 → inibe a fosfolipase A2",w:"Corta o AA das vias COX E LOX."},
+{c:"cort",q:"🎧 Quanto tempo até o corticoide 'pegar'?",a:"Começa em 4–6h · confiável 12h+",w:"'Nimesulida em 3h você sente; corticoide não'."},
+{c:"cort",q:"🎧 Proteína que transporta corticoide no sangue?",a:"Transcortina",w:"Não é albumina."},
+{c:"cort",q:"🎧 Qual meia-vida explica a duração de ação?",a:"A BIOLÓGICA (intracelular)",w:"A plasmática é curta — pegadinha."},
+{c:"cort",q:"Efeitos adversos AGUDOS clássicos?",a:"Insônia, euforia, ↑apetite, HIPERGLICEMIA, edema",w:"Diabético: ajustar a insulina."},
+{c:"cort",q:"Inalatório — ritual pós-uso?",a:"Enxaguar a boca → cuspir → tomar água",w:"Evita candidíase ('sapinho') e disfonia."},
+{c:"cort",q:"🎧 Corticoides inalatórios do SUS?",a:"Beclometasona e budesonida",w:"Partícula leve para chegar longe."},
+{c:"cort",q:"🎧 Bombinha + ESPAÇADOR é para quem?",a:"Criança, idoso e DPOC",w:"Quem não tem força inspiratória p/ pó seco."},
+{c:"cort",q:"Inalatório PREVINE ou TRATA a crise de asma?",a:"PREVINE (aumenta o limiar ao alérgeno)",w:"Crise deflagrada = corticoide SISTÊMICO."},
+{c:"cort",q:"🎧 Corticoide resolve a crise alérgica instalada?",a:"NÃO — é profilaxia",w:"Histamina já liberada → anti-histamínico."},
+{c:"cort",q:"🎧 Síndrome de retirada — o que tem de grave?",a:"Crise adrenal (risco de morte) + tristeza profunda",w:"Retirada sempre lenta e gradual."},
+{c:"cort",q:"🎧 'Retirada com doença de base' significa…?",a:"Ficar na MENOR dose que mantém a remissão",w:"A maioria nunca zera (10–20 mg)."},
+{c:"cort",q:"🎧 Equivalência: 5 mg de prednisona ≈ ? de dexametasona",a:"Menos de 1 mg",w:"Dexa/beta ≈ 20× o cortisol."},
+{c:"cort",q:"Corticoide 'de uso sistêmico com baixo mineralo' — cuidado com qual distrator?",a:"Fluticasona (é inalatória!)",w:"Resposta certa: dexa ou betametasona."},
+// ===== Opioides =====
+{c:"opi",q:"Mecanismo molecular do opioide (3 passos)?",a:"Gi/Go: ↓AMPc · fecha Ca²⁺ pré · ABRE K⁺ pós"},
+{c:"opi",q:"A pegadinha do potássio nas provas?",a:"'Inibe o efluxo de K⁺' = FALSO",w:"Opioide ABRE canais de K⁺ (efluxo aumenta)."},
+{c:"opi",q:"Morfina — dose VO e via no IAM?",a:"5–10 mg 4/4h · IAM = IV",w:"IM não: vasoconstrição ↓absorção."},
+{c:"opi",q:"Metabolismo da morfina?",a:"UGT (glicuronidação)",w:"CYP não mexe com morfina — pegadinha recorrente."},
+{c:"opi",q:"M3G × M6G?",a:"M3G convulsivante · M6G analgésico"},
+{c:"opi",q:"QD real: por que morfina causa convulsão em alguns?",a:"Acúmulo de M3G (conjugação no SNC)",w:"Varia por paciente/polimorfismo."},
+{c:"opi",q:"Codeína — dose e ativação?",a:"15–30 mg 4/4–6/6h · CYP2D6 → morfina",w:"Máx 240 mg/dia."},
+{c:"opi",q:"Por que FLUOXETINA anula a codeína?",a:"Inibe a CYP2D6 → codeína não vira morfina"},
+{c:"opi",q:"Tramadol — dose e teto?",a:"50–100 mg 4/4–6/6h · máx 400 mg/dia"},
+{c:"opi",q:"Mecanismo DUPLO do tramadol?",a:"Agonista μ fraco + ↑noradrenalina/serotonina"},
+{c:"opi",q:"Tramadol é contraindicado com antidepressivo?",a:"NÃO (gabarito oficial dela)",w:"Ele libera serotonina 'independente se associado'."},
+{c:"opi",q:"🎧 Metadona na dependência — dose da aula?",a:"15–30 mg 1×/dia (máx 40), reduzindo gradual",w:"QD clássica aceita: 10 mg 12/12h."},
+{c:"opi",q:"Fentanila — as 2 'caras' de prova?",a:"IV na UTI (curta) · adesivo 72h (oncológico)",w:"Deposita no tecido ADIPOSO."},
+{c:"opi",q:"Naloxona × naltrexona × metadona?",a:"Intoxicação · dependência ambulatorial · desmame/substituição"},
+{c:"opi",q:"Mecanismo da TOLERÂNCIA?",a:"GRK fosforila → β-arrestinas → INTERNALIZAÇÃO do receptor"},
+{c:"opi",q:"Quais efeitos NÃO sofrem tolerância?",a:"Miose e constipação"},
+{c:"opi",q:"Mecanismo da DEPENDÊNCIA?",a:"μ nas fibras GABA → desinibição DOPAminérgica",w:"β-arrestina aqui = pegadinha (é da tolerância)."},
+{c:"opi",q:"Abstinência — sinal ocular?",a:"MIDRÍASE",w:"+ rinorreia, piloereção, diarreia, mialgia…"},
+{c:"opi",q:"🎧 Retirada lenta de opioide — ritmo?",a:"−10% da dose por semana",w:"E EVITAR benzodiazepínicos."},
+{c:"opi",q:"Abstinência pior: morfina ou metadona?",a:"Morfina (ação curta → rápida e intensa)",w:"Por isso metadona é a ponte."},
+{c:"opi",q:"Escada da OMS — degraus 2 e 3?",a:"2º: tramadol/codeína · 3º: morfina/metadona/fentanila"},
+{c:"opi",q:"Meperidina — a pegadinha oficial?",a:"'Longa duração e baixo risco' = FALSO",w:"Curta + depressão respiratória dose-dependente."},
+{c:"opi",q:"Hiperalgesia induzida por opioide?",a:"Uso persistente AUMENTA a sensação de dor"},
+{c:"opi",q:"Os 3 Ts da boa prática com opioides?",a:"Titulação · ajustes · Transição (redução gradual)"},
+{c:"opi",q:"🎧 Opioide na dor neuropática — quando?",a:"SÓ na agudização/crise",w:"Contínuo nunca: tolerância em 2–3 meses."},
+{c:"opi",q:"QD real: dor média pós-cirúrgica em casa?",a:"Tramadol 50 mg 6/6h"},
+{c:"opi",q:"QD real: depressão respiratória por opioide?",a:"Naloxona (IV)"},
+{c:"opi",q:"Zoster — dor 5/10 × intensa × pós-herpética?",a:"Codeína × tramadol × pregabalina"},
+{c:"opi",q:"🎧 μ1 × μ2 — onde e o quê?",a:"μ1 = SNC/analgesia · μ2 = trato GI (constipação)",w:"μ no tronco → depressão respiratória = o maior risco."},
+{c:"opi",q:"🎧 Morfina VO 5 mg equivale a quanto IV?",a:"~1 mg IV",w:"Primeira passagem — por isso a dose oral é maior."},
+{c:"opi",q:"🎧 Morfina metabolizada pela CYP3A4 vira o quê?",a:"Metabólito INATIVO",w:"O ativo/convulsivante vem da CONJUGAÇÃO (M6G/M3G)."},
+{c:"opi",q:"🎧 Quando o M3G consegue entrar no cérebro?",a:"Quando a barreira hematoencefálica está INFLAMADA",w:"Permeabilidade aumentada → acúmulo → convulsão."},
+{c:"opi",q:"🎧 Paciente convulsionou com opioide — pode tentar de novo?",a:"NUNCA MAIS — não há tolerância ao efeito convulsivo",w:"Assim como miose e constipação, convulsão não tolera."},
+{c:"opi",q:"🎧 Inibir a CYP3A4 de quem usa codeína dá o quê?",a:"MAIS morfina que o esperado (desvia tudo p/ 2D6)",w:"Sedação/sonolência acima do previsto."},
+{c:"opi",q:"🎧 Hipertermia + agitação no pós-op com tramadol: febre ou serotoninérgica?",a:"Faz a PROVA REAL DA DIPIRONA: não baixou = síndrome serotoninérgica",w:"Trata com medidas FÍSICAS (resfriamento) + suspender tramadol."},
+{c:"opi",q:"🎧 Meperidina — via, ambiente e nicho?",a:"Só IV, hospitalar — pós-operatório IMEDIATO (duração curta)"},
+{c:"opi",q:"🎧 Depósito no tecido adiposo — quais 2 opioides e a consequência?",a:"Metadona e fentanila → titular do baixo (o depósito satura em 3–5 dias)",w:"Começar alto = sobra na circulação depois."},
+{c:"opi",q:"🎧 Por que SEMPRE prescrever antiemético junto do opioide no hospital?",a:"Todos estimulam a zona quimiorreceptora → náusea/vômito esperados"},
+{c:"opi",q:"🎧 Prurido do opioide — onde concentra e quando é pior?",a:"Região OROFACIAL · pior no uso PARENTERAL",w:"Liberação de histamina."},
+{c:"opi",q:"🎧 Alta hospitalar pós-opioide só depois de quê?",a:"O paciente URINAR",w:"Retenção urinária (antimuscarínico + bexiga)."},
+{c:"opi",q:"🎧 'Estimulação da fibra dopaminérgica' está certo?",a:"NÃO — é DESINIBIÇÃO (a GABA deixa de inibir)",w:"Quem estimula DIRETO a dopaminérgica é a COCAÍNA."},
+{c:"opi",q:"🎧 Metadona na dependência — como se calcula a dose?",a:"Por TABELA DE EQUIVALÊNCIA da droga usada (ger. 15–30 mg)",w:"Entrega supervisionada + redução semanal."},
+{c:"opi",q:"🎧 População típica da dependência de fentanil que ela citou?",a:"Profissionais de saúde de centro cirúrgico/UTI/emergência",w:"Acesso a sobras de controlados — 'luta diária nos hospitais'."},
+{c:"opi",q:"🎧 Naltrexona é frequentemente associada a quê (e por quê)?",a:"BUPROPIONA — repõe dopamina basal (naltrexona bloqueia até as endorfinas)",w:"Serve p/ outras compulsões; SUS tem os dois separados."},
+{c:"opi",q:"🎧 Abstinência ANTECIPATÓRIA — o que é?",a:"Após ~30 dias, o paciente pede o remédio ANTES da hora",w:"Menos receptores → o fármaco circulante já não segura."},
+{c:"opi",q:"🎧 SUS tem opioide combinado com AINE?",a:"NÃO — só codeína, tramadol e morfina isolados",w:"Combinados (ex.: codeína+paracetamol) = rede privada, pós-cirúrgico."},
+// ===== Neuropática & CB =====
+{c:"neuro",q:"Por que AINE/corticoide NÃO tratam dor neuropática?",a:"Não há inflamação: sem citocina, sem prostaglandina",w:"Usar = 'irracional': não alivia e lesa o rim."},
+{c:"neuro",q:"Vias DESCENDENTES modulatórias — quais?",a:"Adrenérgica (α2) e serotoninérgica (5-HT1)"},
+{c:"neuro",q:"Neurotransmissores da via ASCENDENTE da dor?",a:"Glutamato e substância P"},
+{c:"neuro",q:"Pregabalina — faixa e fracionamento?",a:"300–600 mg/dia em 2 tomadas"},
+{c:"neuro",q:"Gabapentina — faixa e fracionamento?",a:"900–3600 mg/dia em 3 tomadas"},
+{c:"neuro",q:"🎧 Por que os gabapentinoides são fracionados?",a:"Transportador intestinal SATURÁVEL",w:"900 mg de uma vez não absorve."},
+{c:"neuro",q:"🎧 Pode associar gabapentina + pregabalina?",a:"NUNCA",w:"Mesmo alvo + competem no mesmo transportador."},
+{c:"neuro",q:"Gabapentinoides sofrem metabolismo hepático?",a:"NÃO — excreção renal inalterada",w:"Por isso quase não interagem."},
+{c:"neuro",q:"🎧 EA típico: gabapentina × pregabalina?",a:"Edema de MMII/constipação × GANHO DE PESO"},
+{c:"neuro",q:"Mecanismo dos gabapentinoides?",a:"α2δ dos canais de Ca²⁺ pré-sinápticos → ↓liberação",w:"A célula AINDA despolariza (Na⁺ intacto)."},
+{c:"neuro",q:"Carbamazepina — canal e única 1ª escolha?",a:"Canais de SÓDIO · neuralgia do TRIGÊMEO"},
+{c:"neuro",q:"Carbamazepina e as CYPs?",a:"INDUTORA potente (↓ meia-vida dos outros)",w:"🎧 Inclusive autoindução."},
+{c:"neuro",q:"🎧 Carbamazepina — melhor horário?",a:"À NOITE",w:"'De manhã ninguém fica acordado'."},
+{c:"neuro",q:"🎧 Carbamazepina monoterapia — faixa?",a:"≥600 mg/dia",w:"Associada pode aparecer com ~100 mg à noite."},
+{c:"neuro",q:"Lamotrigina — quando é a resposta?",a:"Mesmo alvo (Na⁺) SEM induzir CYP",w:"Detalhe de acesso: fora da atenção básica."},
+{c:"neuro",q:"Amitriptilina — dose, horário e nicho?",a:"25 mg à NOITE · a escolha da ATENÇÃO BÁSICA",w:"Faixa p/ dor: ~50–150 (maioria >100)."},
+{c:"neuro",q:"Duloxetina — faixa e horário?",a:"60–120 mg pela MANHÃ",w:"Causa insônia/agitação."},
+{c:"neuro",q:"Antidepressivo para DOR precisa bloquear o quê?",a:"SERT E NAT (serotonina E noradrenalina)",w:"→ tricíclicos e IRSN."},
+{c:"neuro",q:"ISRS (fluoxetina/sertralina) trata dor neuropática?",a:"NÃO se prescreve PARA dor",w:"Se o paciente já usa → soma gabapentinoide."},
+{c:"neuro",q:"🎧 Latência do antidepressivo na dor?",a:"~30 dias",w:"Ponte: tramadol em dose baixa."},
+{c:"neuro",q:"🎧 Falhou/intolerou o antidepressivo — troca para…?",a:"OUTRO da MESMA classe (até 3 tentativas)",w:"Só depois muda de classe."},
+{c:"neuro",q:"🎧 Por que a amitriptilina 'domina' as prescrições?",a:"Viés de literatura (foi a 1ª)",w:"Nortriptilina/imipramina: iguais com menos EA."},
+{c:"neuro",q:"Neuropática + paciente JÁ usa ISRS — escolher?",a:"Pregabalina ou gabapentina"},
+{c:"neuro",q:"Neuropática + DEPRESSÃO (pode pagar) — escolher?",a:"Duloxetina",w:"Trata a dor e a depressão juntas."},
+{c:"neuro",q:"QD real: fibromialgia + fluoxetina — fármaco e início?",a:"Pregabalina, início 25 mg",w:"Faixa da FM: 300–600."},
+{c:"neuro",q:"QD real: trigêmeo — fármaco e mecanismo?",a:"Carbamazepina — bloqueio de canais de sódio"},
+{c:"neuro",q:"THC/CBD — receptor e ação?",a:"AGONISTAS CB1 pré-sinápticos (Gi) → ↓liberação",w:"'Bloqueiam CB1' = falso."},
+{c:"neuro",q:"🎧 CBD ISOLADO funciona na dor?",a:"NÃO — evidência só para THC+CBD combinados (sinergia)"},
+{c:"neuro",q:"🎧 RDC de janeiro/2026 mudou o quê?",a:"Cultivo nacional + prescrição p/ doença grave refratária"},
+{c:"neuro",q:"🎧 Receituário dos canabinoides?",a:"≤0,2% THC = azul B · >0,2% = amarelo (Polícia Federal)",w:"TCLE arquivado no prontuário."},
+{c:"neuro",q:"🎧 Interação 'assassina' do canabinoide?",a:"Carbamazepina → canabinoide SUBTERAPÊUTICO",w:"Indutora de CYP."},
+{c:"neuro",q:"Naloxona reverte canabinoide?",a:"NÃO",w:"Receptor diferente (CB1 ≠ opioide)."},
+{c:"neuro",q:"🎧 Capsaicina — mecanismo?",a:"Depleta a SUBSTÂNCIA P das terminações",w:"É o ativo da pimenta; uso tópico localizado."},
+{c:"neuro",q:"🎧 Capsaicina — as 2 orientações obrigatórias?",a:"PIORA no início (queimação) · LAVAR AS MÃOS depois"},
+{c:"neuro",q:"Neuropatia diabética 'pura' — 1ª linha?",a:"Duloxetina 60 mg manhã (ou pregabalina)"},
+{c:"neuro",q:"Neuropática na atenção básica, sem psicotrópico?",a:"Amitriptilina",w:"Acesso: pregabalina/duloxetina não têm na AB."}
+];
+
+let filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],virado=false;
+const $=id=>document.getElementById(id);
+function buildChips(){
+  const chips=[["all","Todas ("+CARDS.length+")"]].concat(Object.keys(CATS).map(k=>[k,CATS[k].n+" ("+CARDS.filter(c=>c.c===k).length+")"]));
+  $("chips").innerHTML=chips.map(([k,n])=>`<span class="chip${k===filtro?" on":""}" data-k="${k}">${n}</span>`).join("");
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;start();});
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function start(soErradas){
+  const base=soErradas?erradas.slice():CARDS.filter(c=>filtro==="all"||c.c===filtro);
+  fila=shuffle(base.slice());idx=0;ok=0;err=0;erradas=[];
+  $("fim").classList.add("hidden");$("card").style.display="flex";
+  buildChips();mostra();
+}
+function mostra(){
+  virado=false;
+  if(idx>=fila.length){return fim();}
+  const c=fila[idx];
+  $("cat").textContent=CATS[c.c].n;$("cat").style.background=CATS[c.c].cor;
+  $("qFront").textContent=c.q;
+  $("qTop").textContent=c.q;
+  $("resp").textContent=c.a;
+  $("why").textContent=c.w||"";$("why").style.display=c.w?"block":"none";
+  $("qFront").style.display="block";$("back").style.display="none";
+  $("hint").textContent="toque para ver a resposta";
+  $("actions").classList.add("hidden");
+  $("pos").textContent=(idx+1)+" / "+fila.length;
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+}
+function vira(){
+  if(virado)return;virado=true;
+  $("qFront").style.display="none";$("back").style.display="block";
+  $("hint").textContent="acertou? marca embaixo 👇";
+  $("actions").classList.remove("hidden");
+}
+function responde(acertou){
+  if(!virado)return;
+  if(acertou){ok++;}else{err++;erradas.push(fila[idx]);}
+  idx++;mostra();
+}
+function fim(){
+  $("card").style.display="none";$("actions").classList.add("hidden");
+  $("fim").classList.remove("hidden");
+  const total=ok+err;
+  $("fimTitulo").textContent=err===0?"🏆 Zerou!":`Rodada: ${ok}/${total}`;
+  $("fimTexto").textContent=err===0?"Tudo certo nessa leva.":`${err} para repetir — vai nelas até zerar.`;
+  $("btnErradas").style.display=err?"inline-block":"none";
+}
+$("card").onclick=vira;
+$("btnAcertei").onclick=()=>responde(true);
+$("btnErrei").onclick=()=>responde(false);
+$("btnErradas").onclick=()=>start(true);
+$("btnReiniciar").onclick=()=>start(false);
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space"){e.preventDefault();vira();}
+  if(e.key==="1"&&virado)responde(false);
+  if(e.key==="2"&&virado)responde(true);
+});
+buildChips();start();
+</script>
+</body>
+</html>

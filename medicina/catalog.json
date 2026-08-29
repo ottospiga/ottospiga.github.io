@@ -1,0 +1,155 @@
+[
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC XIII · SP1 — Dor · Modo Inicial v2",
+    "tipo": "guia-sp",
+    "data": "2026-07-28",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp1-dor-modo-inicial-v2.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP1_Dor_ModoInicial_v2.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC XIII · SP1 Dor · Aprofundamento",
+    "tipo": "guia-sp",
+    "data": "2026-07-28",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp1-dor-aprofundamento.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP1_Dor_Aprofundamento.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP2 — Dor Neuropática · Modo Inicial",
+    "tipo": "guia-sp",
+    "data": "2026-08-04",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-modo-inicial.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP2_Dor_Neuropatica_ModoInicial.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP2 — Dor Neuropática · Aprofundamento",
+    "tipo": "guia-sp",
+    "data": "2026-08-04",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-aprofundamento.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP2_Dor_Neuropatica_Aprofundamento.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP3 — Dor Crônica: Fibromialgia & Miofascial · Modo Inicial",
+    "tipo": "guia-sp",
+    "data": "2026-08-10",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp3-dor-cronica-modo-inicial.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP3_Dor_Cronica_ModoInicial.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP3 — Dor Crônica: FM & Miofascial · Aprofundamento",
+    "tipo": "guia-sp",
+    "data": "2026-08-10",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp3-dor-cronica-aprofundamento.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP3_Dor_Cronica_Aprofundamento.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP4 — Dor Visceral & Nefrolitíase · Guia de Estudo",
+    "tipo": "guia-sp",
+    "data": "2026-08-16",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp4-dor-visceral.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP4_Dor_Visceral.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · SP5 — Dor Neoplásica, Opioides & Cefaleias · Guia de Estudo",
+    "tipo": "guia-sp",
+    "data": "2026-08-24",
+    "arquivo": "5-fase/uc13/tutoria/uc13-sp5-dor-neoplasica.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_SP5_Dor_Neoplasica.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Anatomia + Fisiologia",
+    "titulo": "Revisão-Relâmpago · A1 Anato Seccional + Fisio · 27/08",
+    "tipo": "guia-prova",
+    "data": "2026-08-26",
+    "arquivo": "5-fase/uc13/anato-fisio/revisao-relampago-a1-anato-fisio.html",
+    "origem": "5_fase/UC13/Revisao_Relampago_A1_Anato_Fisio.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Patologia",
+    "titulo": "Pato A1 · Revisão Pré-Prova · 28/08 13h",
+    "tipo": "guia-prova",
+    "data": "2026-08-28",
+    "arquivo": "5-fase/uc13/pato/uc13-pato-a1-revisao.html",
+    "origem": "5_fase/UC13/UC13_Pato_A1_Revisao.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Farmaco A1 · Estratégia de Guerra · 04/09",
+    "tipo": "guia-prova",
+    "data": "2026-08-22",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-a1-estrategia.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_A1_Estrategia.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Banco Vânia · Farmaco UC13 · questões reais T5–T11",
+    "tipo": "banco",
+    "data": "2026-08-21",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-banco-vania.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_Banco_Vania.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Flashcards Farmaco A1 · v3 atômico",
+    "tipo": "flashcards",
+    "data": "2026-08-21",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-flashcards-posologia.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_Flashcards_Posologia.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Simuladão Vânia · Farmaco UC13 · A1 04/09",
+    "tipo": "simulado",
+    "data": "2026-08-29",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-simuladao-vania.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_Simuladao_Vania.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Laboratório",
+    "titulo": "UC13 · Laboratório (Práticas Funcionais) — Guia de estudo A1",
+    "tipo": "guia-prova",
+    "data": "2026-08-29",
+    "arquivo": "5-fase/uc13/lab/uc13-lab-a1-guia.html",
+    "origem": "5_fase/UC13/Lab/UC13_Lab_A1_Guia.html"
+  },
+  {
+    "uc": "HP Manifestações Abdominais",
+    "materia": "Procedimentos",
+    "titulo": "HP · Prova do João (HPp) — Exame físico abdominal, abdome agudo, ascite, via biliar e endoscopia · Guia de estudo",
+    "tipo": "guia-prova",
+    "data": "2026-08-29",
+    "arquivo": "5-fase/hp-abdomen/procedimentos/hp-joao-hpp-guia.html",
+    "origem": "5_fase/HP/Abdomen/joao/HP_Joao_HPp_Guia.html"
+  },
+  {
+    "uc": "HP Manifestações Abdominais",
+    "materia": "Clínica",
+    "titulo": "HPc · Andrea — Hepatites, DHGNA, Cirrose e Ascite · Guia de estudo",
+    "tipo": "guia-prova",
+    "data": "2026-08-29",
+    "arquivo": "5-fase/hp-abdomen/clinica/hp-andrea-hpc-guia.html",
+    "origem": "5_fase/HP/Abdomen/andrea/HP_Andrea_HPc_Guia.html"
+  }
+]
