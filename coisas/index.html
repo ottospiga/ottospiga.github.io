@@ -35,6 +35,24 @@
   </style>
 </head>
 <body>
+  <script>
+    // porteira simples: segura curioso, não é segurança de verdade
+    (function () {
+      var SENHA = atob('cGx1dG9uaW8zMjE=');
+      var ok = false;
+      try { ok = sessionStorage.getItem('coisas-ok') === '1'; } catch (e) {}
+      if (!ok) {
+        var s = prompt('Senha:');
+        if (s === SENHA) {
+          try { sessionStorage.setItem('coisas-ok', '1'); } catch (e) {}
+        } else {
+          if (s !== null) alert('Senha incorreta.');
+          document.documentElement.style.visibility = 'hidden';
+          location.replace('../index.html');
+        }
+      }
+    })();
+  </script>
   <main>
     <nav><a href="../index.html">← Início</a></nav>
     <p class="kicker">ottospiga.github.io</p>
