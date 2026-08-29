@@ -42,7 +42,8 @@
       var ok = false;
       try { ok = sessionStorage.getItem('coisas-ok') === '1'; } catch (e) {}
       if (!ok) {
-        var s = prompt('Senha:');
+        var s = null;
+        try { s = prompt('Senha:'); } catch (e) {}
         if (s === SENHA) {
           try { sessionStorage.setItem('coisas-ok', '1'); } catch (e) {}
         } else {
