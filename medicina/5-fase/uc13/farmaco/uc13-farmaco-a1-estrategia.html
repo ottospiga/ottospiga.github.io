@@ -41,6 +41,12 @@
   .trap{border-left:4px solid var(--danger);background:#fff;border-radius:10px;padding:10px 14px;margin:8px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
   .trap .wrong{color:var(--danger);font-weight:600}
   .trap .right{color:var(--ok);font-weight:600}
+  .pocket td:nth-child(2){font-weight:700}
+  .pocket tr.blk td{font-weight:800;font-size:13px;letter-spacing:.3px}
+  .blk-b td{background:var(--accent-soft)!important;color:#0c4a5e}
+  .blk-y td{background:var(--warn-soft)!important;color:var(--warn)}
+  .blk-g td{background:var(--ok-soft)!important;color:var(--ok)}
+  .blk-p td{background:var(--purple-soft)!important;color:var(--purple)}
   .step{display:flex;gap:12px;margin:10px 0}
   .step .when{flex:0 0 128px;font-weight:700;color:#0c4a5e;font-size:13.5px;padding-top:2px}
   .step .what{flex:1;border-left:3px solid var(--accent);padding-left:12px}
@@ -125,6 +131,7 @@
 <p class="small muted">Cada uma abaixo derrubou veterano em prova (marcações em vermelho / gabaritos comentados das PMs). Formato: <span class="tag t-red">como ela escreve</span> → <span class="tag t-green">o certo</span></p>
 
 <h3>🟣 Opioides</h3>
+<div class="trap"><span class="wrong">"Opioides são bem absorvidos, independente da via" = falso?</span> → <span class="right">NÃO — é VERDADEIRO assim escrito (T9 Q1: o veterano marcou como falso e levou ✗). ABSORÇÃO ≠ BIODISPONIBILIDADE: a absorção é boa por todas as vias; o que a VO tem é 1ª passagem hepática → biodisponibilidade menor → dose VO MAIOR que a parenteral. Na mesma questão, a falsa era "depressão respiratória = μ1" (μ1 é ANALGESIA; depressão respiratória = μ no tronco).</span></div>
 <div class="trap"><span class="wrong">"Morfina inibe o efluxo de K⁺"</span> → <span class="right">ABRE canais de K⁺ (↑efluxo) = hiperpolarização pós-sináptica; FECHA canais de Ca²⁺ pré-sinápticos (↓liberação de neurotransmissor). Via Gi/G0 → ↓adenilato ciclase → ↓AMPc.</span></div>
 <div class="trap"><span class="wrong">"Morfina interage com inibidores/indutores de CYP"</span> → <span class="right">morfina é glicuronidada (UGT2B7, fase 2) → M3G (convulsivante) e M6G (analgésico). CYP não muda nada. Convulsão por morfina = M3G no SNC.</span></div>
 <div class="trap"><span class="wrong">"Codeína é ativada por conjugação com ácido glicurônico"</span> → <span class="right">pró-fármaco ativado pela CYP2D6 → morfina. Hipoexpressão OU fluoxetina/ISRS (inibidores da 2D6) = falha analgésica; ultrarrápidos = risco de intoxicação.</span></div>
@@ -161,6 +168,48 @@
 <h2><span class="n">3</span> Tabela-mestre de posologia (o que mata as QDs)</h2>
 <div class="card">
 <p class="small muted">Doses dos gabaritos reais (respostas aceitas/corrigidas por ela) <b>cruzadas com as 4 aulas gravadas de 2026</b> — o que veio da fala dela está marcado com 🎧. <b>Decorar = ~2 pontos garantidos de QD.</b> Aviso literal da aula: <i>"vocês vão ser cobrados pelas FAIXAS terapêuticas, não pelas doses de titulação"</i>.</p>
+
+<h3>⚡ Posologia de bolso — a lista limpa do "tem que saber"</h3>
+<p class="small muted">Só fármaco → dose → posologia, destilado dos gabaritos de QD e das doses que ela ditou em aula. Na QD, resposta completa = <b>fármaco + dose + posologia</b> (+ duração quando o caso pedir). Detalhes e pegadinhas de cada um: tabelas logo abaixo.</p>
+<table class="pocket">
+  <tr><th style="width:24%">Fármaco</th><th style="width:44%">Dose e posologia</th><th>Caso-gatilho</th></tr>
+  <tr class="blk blk-b"><td colspan="3">AINEs · DIPIRONA · PARACETAMOL</td></tr>
+  <tr><td>Dipirona</td><td>500mg–1g VO 6/6h · ataque: 1g</td><td>febre >38° · dengue · hospital</td></tr>
+  <tr><td>Paracetamol</td><td>500–750mg 6/6h · máx 2g/d crônico (4g agudo)</td><td>gestante · febre "segura"</td></tr>
+  <tr><td>AAS</td><td>100mg 1×/d no almoço · IAM: 300mg mastigados</td><td>antiagregação · IAM</td></tr>
+  <tr><td>Ibuprofeno</td><td>600mg 3–4×/d (anti-inflamatório só ≥400mg)</td><td>febre (tem registro) · CI dengue</td></tr>
+  <tr><td>Naproxeno</td><td>250–500mg 12/12h</td><td>mioarticular (privada)</td></tr>
+  <tr><td>Cetoprofeno</td><td>100mg/2ml IM — SUS parenteral</td><td>crise de gota na UBS</td></tr>
+  <tr><td>Diclofenaco</td><td>50mg 8/8h VO · 75mg 12/12h</td><td>pós-op c/ risco de sangramento</td></tr>
+  <tr><td>Etodolaco</td><td>300mg 3×/d · ~5 dias</td><td>dor FORTE inflamatória (ortopedia)</td></tr>
+  <tr><td>Ác. mefenâmico</td><td>500mg 8/8h</td><td>dismenorreia primária</td></tr>
+  <tr><td>Cetorolaco</td><td>10mg VO/SL até 4×/d · máx 40mg/d · ≤5 dias</td><td>dor intensa pós-op ("top analgesia")</td></tr>
+  <tr><td>Nimesulida</td><td>100mg 12/12h · CI <12 anos</td><td>faringite/tecido mole do adulto</td></tr>
+  <tr><td>Meloxicam</td><td>7,5–15mg 1×/dia</td><td>articular crônico + gastrite</td></tr>
+  <tr><td>Piroxicam</td><td>20mg 1×/dia (SL age em ~10min)</td><td>potente · meia-vida longa</td></tr>
+  <tr><td>Celecoxibe</td><td>100mg 12/12h (ou 200mg 1×/d) · 7–15 dias</td><td>artrose/AR + úlcera · CI cardiopata</td></tr>
+  <tr><td>Etoricoxibe</td><td>60–90mg 1×/dia</td><td>quadro ósseo agudo</td></tr>
+  <tr class="blk blk-y"><td colspan="3">CORTICOIDES — sempre 1×/dia PELA MANHÃ</td></tr>
+  <tr><td>Prednisolona</td><td>5–20mg 1×/d manhã</td><td>agudo: bronquite 5mg · pneumonia 20mg · criança</td></tr>
+  <tr><td>Prednisona</td><td>20mg 1×/d manhã (AR) · imunossupressão: 1mg/kg/d</td><td>crônico (pró-fármaco)</td></tr>
+  <tr><td>Dexametasona</td><td>VO 0,5–6mg/d · 20× mais potente (5mg predni ≈ <1mg dexa)</td><td>longa ação · maturação fetal · hipertenso</td></tr>
+  <tr><td>Budesonida nasal</td><td>50–100mcg/narina · máx ~400mcg/d (QD aceitou 250mcg/d)</td><td>rinite — PROFILAXIA</td></tr>
+  <tr><td>Beclometasona/budesonida inalatória</td><td>100–1000mcg/d (usual 400–600)</td><td>asma — prevenção de crise</td></tr>
+  <tr><td>Metilprednisolona</td><td>pulsoterapia IV ~1g/d, hospitalar</td><td>autoimune grave</td></tr>
+  <tr class="blk blk-g"><td colspan="3">DOR NEUROPÁTICA — ela cobra as FAIXAS</td></tr>
+  <tr><td>Amitriptilina</td><td>início 25mg à NOITE · faixa 75–150mg/d (maioria >100)</td><td>atenção básica</td></tr>
+  <tr><td>Duloxetina</td><td>60–120mg 1×/d pela MANHÃ</td><td>diabética · sem sonolência</td></tr>
+  <tr><td>Gabapentina</td><td>900–3600mg/d ÷3</td><td>excreção renal · fracionar sempre</td></tr>
+  <tr><td>Pregabalina</td><td>300–600mg/d ÷2 · início 75mg 12/12h (FM: 25mg)</td><td>fibromialgia (aprovada)</td></tr>
+  <tr><td>Carbamazepina</td><td>trigêmeo: 600–1200mg/d fracionada · associada: 100–200mg à noite</td><td>neuralgia do trigêmeo · SUS</td></tr>
+  <tr><td>CBD/THC</td><td>CBD 10mg/kg/d ÷2, começar à noite</td><td>refratária (caso de prova)</td></tr>
+  <tr class="blk blk-p"><td colspan="3">OPIOIDES</td></tr>
+  <tr><td>Morfina</td><td>5–10mg VO 4/4h (inicia 2,5–5) · VO 5mg ≈ 1mg IV</td><td>enfermaria · IAM (IV) · falha da codeína</td></tr>
+  <tr><td>Codeína</td><td>15–30mg 4/4–6/6h · máx 240mg/d</td><td>dor moderada · zoster 5/10</td></tr>
+  <tr><td>Tramadol</td><td>50–100mg 4/4–6/6h · máx 400mg/d · QD real: 50mg 6/6h</td><td>pós-op domiciliar</td></tr>
+  <tr><td>Metadona</td><td>10mg VO 12/12h (QD) · dependência: 15–30mg/d por tabela, ↓semanal</td><td>desmame · fentanila/UTI</td></tr>
+  <tr><td>Fentanila</td><td>adesivo transdérmico 72h · IV na UTI</td><td>intubado · oncológico sem VO</td></tr>
+</table>
 
 <h3>Analgésicos / antitérmicos / AINEs</h3>
 <table>
