@@ -187,5 +187,14 @@
     "data": "2026-09-07",
     "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-simuladao-pm.html",
     "origem": "5_fase/UC13/UC13_Farmaco_Simuladao_PM.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Tutoria",
+    "titulo": "UC13 · Prova Final de Tutoria · Guia + Simulado",
+    "tipo": "guia-prova",
+    "data": "2026-09-07",
+    "arquivo": "5-fase/uc13/tutoria/uc13-prova-final-tutoria-guia.html",
+    "origem": "5_fase/UC13/Tutoria/UC13_ProvaFinal_Tutoria_Guia.html"
   }
 ]

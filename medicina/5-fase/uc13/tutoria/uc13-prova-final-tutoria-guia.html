@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC13 · Prova Final de Tutoria · Guia + Simulado</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map{padding-left:4px}
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:170px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  .src a{color:#7fb2e8}
+  .svgbox{background:#101a26;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0}
+  .svgbox svg{display:block;max-width:100%;height:auto;margin:0 auto}
+  .svgcap{font-size:12px;color:#8aa0b5;text-align:center;margin-top:6px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIII · Tutoria</span>
+    <h1>PROVA FINAL DE TUTORIA — UC13 · <span style="color:var(--tealo)">Guia + Simulado</span></h1>
+    <div class="sub">Prova quarta 09/09 (80% da nota: metade objetiva + metade discursiva). Calibrado pela <b>prova REAL da T11</b> (mesma tutora, Ana Elisa): 20 objetivas A–D — 4 por SP, em ordem — e 5 discursivas-caso, uma por SP. Fontes: prova T11 comentada, síntese da veterana, seus 5 guias de SP, aulas da Verônica e da Vânia, diretrizes (SBN 2025, SBR 2026, SBED) e o doc de precauções em enxaqueca.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-t="resumo">📖 Resumo</button>
+    <button class="tab" data-t="quizsec">📝 Simulado padrão prova</button>
+    <button class="tab" data-t="vespera">⚡ Véspera</button>
+    <button class="tab" data-t="flash">🎴 Flashcards</button>
+  </div>
+
+  <!-- ============ RESUMO ============ -->
+  <section id="resumo" class="active">
+
+    <div class="panel">
+      <h2>0 · Seu plano até quarta + como a prova É</h2>
+      <table>
+        <tr><th>Janela</th><th>O que fazer</th></tr>
+        <tr><td><b>Hoje · tarde</b> (~3h)</td><td>Resumo SP1→SP3 (seções 1–3) → responder <b>objetivas 1–12</b> do simulado lendo os comentários</td></tr>
+        <tr><td><b>Hoje · noite</b> (~2h)</td><td>Resumo SP4→SP5 (seções 4–5) → <b>objetivas 13–20</b> → 1ª passada nos flashcards</td></tr>
+        <tr><td><b>Amanhã · tarde</b> (~3h)</td><td><span class="hl">Escrever À MÃO as 5 discursivas</span> (uma por SP) e só depois abrir os roteiros; anotar o que faltou; voltar ao Resumo só nos buracos. É aqui que a nota se ganha — a objetiva você já domina (gabaritou SP1 e SP2).</td></tr>
+        <tr><td><b>Quarta · manhã</b> (~45–60′)</td><td>Aba <b>⚡ Véspera</b> inteira (números + pegadinhas-ouro + erros da T11) + 2ª passada rápida nos flashcards. Nada de matéria nova.</td></tr>
+      </table>
+      <h3>Anatomia da prova real (T11, 25/03/2026 — tutora Ana Elisa)</h3>
+      <ul>
+        <li><b>Objetiva:</b> 20 questões, <b>todas A–D</b>, estilo "assinale a CORRETA" com mini-casos + <b>1 associação de colunas</b> (tipos de cálculo). <span class="hl">Estrutura fixa: Q1–4 SP1 · Q5–8 SP2 · Q9–12 SP3 · Q13–16 SP4 · Q17–20 SP5.</span></li>
+        <li><b>Discursiva:</b> 5 questões-caso, UMA POR SP, com sub-itens objetivos (a–d, e a de cefaleia teve a–j!): SP1 apendicite (tipos de dor + decálogo) · SP2 neuropatia diabética (rastreio→complicações) · SP3 FM×SMF · SP4 nefrolitíase (composição→dieta) · SP5 migrânea+uso excessivo de analgésico.</li>
+        <li>A prova CITA as diretrizes pelo nome ("Diretrizes Brasileiras de Nefrolitíase de 2025", "recomendações da SBED") — as mesmas que usamos nos guias. ✔</li>
+        <li><b>Onde a veterana perdeu ponto (não repita!):</b> ① escolha de fármaco na dor neuropática do cardiopata (amitriptilina é contraindicada pós-IAM → <b>duloxetina</b>); ② conduta no estado migranoso (&gt;72 h refratário → <b>dexametasona IV</b>); ③ <b>critério de migrânea crônica</b> (deixou em branco: ≥15 dias/mês por &gt;3 meses, sendo ≥8 com características de migrânea); ④ mecanismo da piora da migrânea com analgésico diário = <b>cefaleia por uso excessivo (MOH)</b> — não "dilatação arterial".</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>1 · SP1 — Dor: conceitos, vias, decálogo e portão</h2>
+      <h3>Conceitos (cai literal)</h3>
+      <ul>
+        <li><b>Dor (IASP):</b> experiência <b>sensorial E emocional</b> desagradável associada a dano tecidual <b>real ou potencial</b>, ou descrita em termos de tal dano — <span class="hl">pode existir SEM lesão demonstrável</span>, e a intensidade não se correlaciona com a gravidade da lesão.</li>
+        <li><b>Nocicepção:</b> o componente FISIOLÓGICO da dor — 4 processos: <b>transdução</b> (estímulo→potencial elétrico no nociceptor) → <b>transmissão</b> (condução ao SNC) → <b>modulação</b> (amplifica/atenua — medula) → <b>percepção</b> (consciência/memória).</li>
+        <li><b>Limiar da dor:</b> estímulo mínimo para gerar percepção; <span class="hl">INVERSAMENTE proporcional à reação</span> — limiar alto = hiporreativo; limiar baixo = hiperreativo (pegadinha da sua APF SP1).</li>
+      </ul>
+      <h3>Classificações</h3>
+      <table>
+        <tr><th>Fisiopatológica</th><th>Assinatura</th><th>Exemplos</th></tr>
+        <tr><td><b>Nociceptiva</b></td><td>Ativação de nociceptores por lesão real; alivia removendo a causa; inclui a inflamatória</td><td>Trauma, fratura, cólica renal, apendicite</td></tr>
+        <tr><td><b>Neuropática</b></td><td>Lesão/disfunção do sistema somatossensorial; queimação/choque/formigamento; alodinia; impulsos ectópicos (canais de Na⁺)</td><td>Neuropatia diabética, NPH, ciática</td></tr>
+        <tr><td><b>Mista</b></td><td>Nociceptivo + neuropático juntos</td><td><b>Câncer</b>, herpes-zóster</td></tr>
+        <tr><td><b>Nociplástica</b></td><td><b>Sensibilização central</b> sem lesão demonstrável: ↑subst. P/glutamato, ↓5-HT/NA</td><td><b>Fibromialgia</b>, SII, cefaleias primárias, miofascial</td></tr>
+      </table>
+      <p><b>Temporal:</b> aguda (alerta; relação com a lesão; até <b>3 meses</b>; PODE cronificar) × crônica (<b>&gt;3 meses/90 dias</b> ou além da cura esperada; é doença, perdeu a função de alerta). <b>Origem:</b> somática superficial (pele, bem localizada) · somática profunda (músculo/articulação, difusa, pode referir) · visceral (mal localizada + autonômica) · <b>referida</b> (dermátomo do mesmo segmento, sem trajeto de nervo — IAM→braço E/T1) · <b>irradiada</b> (segue raiz/nervo — ciática).</p>
+      <h3>Fibras e vias (a Q1 da T11 foi exatamente isso)</h3>
+      <table>
+        <tr><th></th><th>Dor RÁPIDA (1ª dor)</th><th>Dor LENTA (2ª dor)</th></tr>
+        <tr><td>Fibra</td><td><b>Aδ</b> mielínica fina (12–30 m/s)</td><td><b>C</b> amielínica (0,5–2 m/s)</td></tr>
+        <tr><td>Caráter</td><td>Pontada, bem localizada</td><td>Queimação, difusa</td></tr>
+        <tr><td>Trato</td><td><b>NEOespinotalâmico</b> (lâmina I → decussa → tálamo → córtex)</td><td><b>PALEOespinotalâmico</b> (lâminas II–III/V → formação reticular → tálamo → córtex)</td></tr>
+        <tr><td>Neurotransmissor</td><td><span class="hl">GLUTAMATO</span> (rápido, excitatório)</td><td><span class="hl">SUBSTÂNCIA P</span> (lenta, excitatória)</td></tr>
+      </table>
+      <div class="svgbox">
+        <svg viewBox="0 0 760 240" role="img" aria-label="Via da dor">
+          <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4c8dff"/></marker></defs>
+          <rect x="8" y="30" width="120" height="52" rx="10" fill="#12324a" stroke="#2a3a4d"/><text x="68" y="52" fill="#dfe9f4" font-size="13" text-anchor="middle" font-weight="700">Periferia</text><text x="68" y="70" fill="#9fb2c6" font-size="11" text-anchor="middle">nociceptor · transdução</text>
+          <rect x="180" y="30" width="150" height="52" rx="10" fill="#12324a" stroke="#2a3a4d"/><text x="255" y="52" fill="#dfe9f4" font-size="13" text-anchor="middle" font-weight="700">1º neurônio</text><text x="255" y="70" fill="#9fb2c6" font-size="11" text-anchor="middle">gânglio da raiz dorsal</text>
+          <rect x="382" y="30" width="160" height="52" rx="10" fill="#3a2a12" stroke="#6a5a26"/><text x="462" y="52" fill="#ffe1ad" font-size="13" text-anchor="middle" font-weight="700">Corno dorsal (2º)</text><text x="462" y="70" fill="#d8c08a" font-size="11" text-anchor="middle">sinapse · DECUSSA · modulação</text>
+          <rect x="594" y="30" width="150" height="52" rx="10" fill="#123326" stroke="#1f5a41"/><text x="669" y="52" fill="#d9f2e6" font-size="13" text-anchor="middle" font-weight="700">Tálamo (3º) → Córtex</text><text x="669" y="70" fill="#9fd4bb" font-size="11" text-anchor="middle">percepção</text>
+          <line x1="128" y1="56" x2="178" y2="56" stroke="#4c8dff" stroke-width="2.5" marker-end="url(#ar)"/>
+          <line x1="330" y1="56" x2="380" y2="56" stroke="#4c8dff" stroke-width="2.5" marker-end="url(#ar)"/>
+          <line x1="542" y1="56" x2="592" y2="56" stroke="#4c8dff" stroke-width="2.5" marker-end="url(#ar)"/>
+          <rect x="60" y="130" width="300" height="84" rx="10" fill="#101f2b" stroke="#244a5c"/>
+          <text x="210" y="152" fill="#8ab8ff" font-size="12.5" text-anchor="middle" font-weight="700">Aδ → NEOespinotalâmico · GLUTAMATO</text>
+          <text x="210" y="172" fill="#9fb2c6" font-size="11.5" text-anchor="middle">1ª dor: pontada, localizada, rápida</text>
+          <text x="210" y="192" fill="#9fb2c6" font-size="11.5" text-anchor="middle">lâmina I → tálamo direto</text>
+          <rect x="400" y="130" width="300" height="84" rx="10" fill="#101f2b" stroke="#244a5c"/>
+          <text x="550" y="152" fill="#ff9ea6" font-size="12.5" text-anchor="middle" font-weight="700">C → PALEOespinotalâmico · SUBSTÂNCIA P</text>
+          <text x="550" y="172" fill="#9fb2c6" font-size="11.5" text-anchor="middle">2ª dor: queimação, difusa, lenta</text>
+          <text x="550" y="192" fill="#9fb2c6" font-size="11.5" text-anchor="middle">via formação reticular (por isso o cortejo)</text>
+        </svg>
+        <div class="svgcap">A via clássica de 3 neurônios — decore onde CRUZA (2º neurônio, na medula) e o par fibra→trato→neurotransmissor.</div>
+      </div>
+      <h3>Decálogo da avaliação da dor (a T11 pediu na discursiva com esse nome!)</h3>
+      <p><span class="k2">L</span>ocalização · <span class="k2">I</span>ntensidade (EVN/EVA) · <span class="k2">I</span>rradiação (localizada/irradiada/referida) · <span class="k2">D</span>uração · <span class="k2">E</span>volução (súbita × insidiosa) · <span class="k2">R</span>elação com funções orgânicas · <span class="k2">A</span>gravantes · <span class="k2">M</span>anifestações concomitantes · <span class="k2">C</span>aráter · <span class="k2">A</span>tenuantes — o LIIDERAMCA. Na discursiva, LISTE os 10.</p>
+      <h3>Teoria do portão (Melzack & Wall) — a Q4 da T11</h3>
+      <div class="svgbox">
+        <svg viewBox="0 0 760 250" role="img" aria-label="Teoria do portão">
+          <defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#38d39f"/></marker><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ff6b6b"/></marker></defs>
+          <rect x="300" y="80" width="180" height="96" rx="12" fill="#3a2a12" stroke="#6a5a26"/>
+          <text x="390" y="104" fill="#ffe1ad" font-size="13" text-anchor="middle" font-weight="700">PORTÃO</text>
+          <text x="390" y="122" fill="#d8c08a" font-size="11" text-anchor="middle">interneurônio INIBITÓRIO</text>
+          <text x="390" y="138" fill="#d8c08a" font-size="11" text-anchor="middle">subst. gelatinosa de Rolando</text>
+          <text x="390" y="154" fill="#d8c08a" font-size="11" text-anchor="middle">(lâmina II) · GABA</text>
+          <rect x="20" y="30" width="220" height="52" rx="10" fill="#123326" stroke="#1f5a41"/>
+          <text x="130" y="52" fill="#7ff0c0" font-size="13" text-anchor="middle" font-weight="700">Fibras GROSSAS Aβ</text>
+          <text x="130" y="70" fill="#9fd4bb" font-size="11" text-anchor="middle">tato · pressão · vibração</text>
+          <rect x="20" y="170" width="220" height="52" rx="10" fill="#3a1f23" stroke="#6f2f36"/>
+          <text x="130" y="192" fill="#ff9ea6" font-size="13" text-anchor="middle" font-weight="700">Fibras FINAS Aδ e C</text>
+          <text x="130" y="210" fill="#e2a8ad" font-size="11" text-anchor="middle">dor · temperatura</text>
+          <line x1="240" y1="56" x2="298" y2="104" stroke="#38d39f" stroke-width="2.5" marker-end="url(#ag)"/>
+          <text x="252" y="66" fill="#38d39f" font-size="12" font-weight="700">EXCITAM (+)</text>
+          <line x1="240" y1="196" x2="298" y2="152" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#arr)"/>
+          <text x="248" y="212" fill="#ff6b6b" font-size="12" font-weight="700">INIBEM (−)</text>
+          <rect x="540" y="52" width="200" height="60" rx="10" fill="#123326" stroke="#1f5a41"/>
+          <text x="640" y="76" fill="#7ff0c0" font-size="12.5" text-anchor="middle" font-weight="700">Portão FECHA</text>
+          <text x="640" y="94" fill="#9fd4bb" font-size="11" text-anchor="middle">dor NÃO sobe → alívio</text>
+          <rect x="540" y="140" width="200" height="60" rx="10" fill="#3a1f23" stroke="#6f2f36"/>
+          <text x="640" y="164" fill="#ff9ea6" font-size="12.5" text-anchor="middle" font-weight="700">Portão ABRE</text>
+          <text x="640" y="182" fill="#e2a8ad" font-size="11" text-anchor="middle">dor sobe ao encéfalo</text>
+          <line x1="480" y1="104" x2="538" y2="82" stroke="#38d39f" stroke-width="2" marker-end="url(#ag)"/>
+          <line x1="480" y1="152" x2="538" y2="170" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+        </svg>
+        <div class="svgcap">Aβ (tato) EXCITA o interneurônio inibitório → fecha o portão (por isso esfregar/massagear/TENS alivia). Aδ/C INIBEM o inibitório ("inibem a inibição") → abrem o portão. Tudo na lâmina II do corno dorsal.</div>
+      </div>
+      <p><b>Modulação descendente</b> (complemento): substância cinzenta periaquedutal → núcleo magno da rafe → corno dorsal, com <b>serotonina, noradrenalina e endorfinas</b> — é onde agem opioides e antidepressivos duais. Glutamato/aspartato = EXCITATÓRIOS (pegadinha da sua APF: não são inibitórios).</p>
+    </div>
+
+    <div class="panel">
+      <h2>2 · SP2 — Dor neuropática & neuropatia diabética</h2>
+      <h3>Conceito e semiologia</h3>
+      <ul>
+        <li>Dor por <b>lesão ou disfunção do sistema somatossensorial</b> (SNC ou SNP); persiste além do evento; mecanismo-chave: <b>impulsos ectópicos por redistribuição de canais de Na⁺</b> + sensibilização central.</li>
+        <li>Vocabulário (cai em associação): <b>parestesia</b> (formigamento espontâneo) · <b>disestesia</b> (sensação anormal desagradável) · <b>alodinia</b> (dor a estímulo que não dói — roçar do lençol) · <b>hiperalgesia</b> (dor exagerada a estímulo doloroso) · <b>hiperpatia</b> (resposta explosiva e persistente) · <b>hipoestesia/anestesia</b> (sinais negativos).</li>
+      </ul>
+      <h3>Neuropatia diabética (o coração da SP2 — e da discursiva 2 da T11)</h3>
+      <table>
+        <tr><th>Item</th><th>O que responder</th></tr>
+        <tr><td><b>Fisiopatologia</b></td><td>4 vias: <b>poliol</b> (glicose→sorbitol via aldose redutase → estresse osmótico/oxidativo) · <b>AGEs</b>/glicação · <b>microvascular</b> (isquemia do nervo) · inflamatória/neurodegenerativa</td></tr>
+        <tr><td><b>Forma mais comum</b></td><td><b>Polineuropatia sensitivo-motora distal e simétrica (PSD)</b> — "em bota e luva", começa pelos pés, fibras finas (dor/temperatura) e grossas (vibração/propriocepção). Autonômica: taquicardia FIXA, hipotensão postural, gastroparesia</td></tr>
+        <tr><td><b>Rastreio</b></td><td><span class="hl">No DIAGNÓSTICO do DM2 (e 5 anos após o diagnóstico no DM1) e ANUALMENTE</span>: <b>monofilamento 10 g</b> (protetora) + teste de fibras grossas (<b>diapasão 128 Hz</b>/vibração, propriocepção, reflexo aquileu) + fibras finas (térmica/pinprick). <b>ENMG NÃO é para todos</b> — confirma casos atípicos/dúvida</td></tr>
+        <tr><td><b>Diagnóstico</b></td><td>Clínico: sintomas + ≥2 testes alterados; excluir outras causas (B12, hipotireoidismo, álcool)</td></tr>
+        <tr><td><b>Tratamento</b></td><td><b>1ª linha (3 classes): gabapentinoides (pregabalina/gabapentina) · IRSN (duloxetina) · tricíclicos (amitriptilina)</b>. Sem resposta com dose otimizada → <span class="hl">ASSOCIAR classes diferentes</span> (não pular direto para opioide). Tramadol/opioide = resgate/3ª linha. <b>Controle glicêmico retarda a progressão</b>; <b>ácido alfa-lipoico</b> = potencial modificador (antioxidante — Q8 da T11). Não farmacológico: cessar tabagismo/álcool, cuidado com os pés, calçados, fisioterapia</td></tr>
+        <tr><td><b>Escolha por comorbidade</b></td><td><span class="hl">Cardiopata/pós-IAM/idoso arritmia: amitriptilina CONTRAINDICADA → duloxetina</span> · insônia importante/dor noturna: pregabalina ou ADT à noite · depressão associada: duloxetina · glaucoma/próstata/constipação: evitar ADT</td></tr>
+        <tr><td><b>Complicações</b></td><td>Perda de sensibilidade protetora → <b>úlcera plantar indolor</b> → infecção/osteomielite → <b>amputação</b> · <b>pé de Charcot</b> (artropatia neuropática: pé quente, edemaciado, deformado — conduta precoce: <b>descarga/imobilização</b>) · quedas, atrofia</td></tr>
+      </table>
+      <p><b>Dor/sensação fantasma</b> (caso do membro amputado): teorias periférica (neuroma/ectópicos), medular (sensibilização/reorganização) e central-cerebral (remapeamento cortical — Ramachandran) → <b>terapia do espelho</b>.</p>
+    </div>
+
+    <div class="panel">
+      <h2>3 · SP3 — Dor nociplástica: fibromialgia × miofascial, escalas e APS</h2>
+      <h3>Fibromialgia (a Q9–12 da T11 veio TODA daqui)</h3>
+      <ul>
+        <li><b>Quadro:</b> mulher 35–60, dor DIFUSA e migratória &gt;3 meses + fadiga + <b>sono não reparador</b> + sintomas cognitivos ("fibrofog"); <span class="hl">exame físico e laboratório NORMAIS</span> (VHS/PCR normais — se alterados, procure outra doença: polimialgia, hipotireoidismo, AR, LES).</li>
+        <li><b>Critérios:</b> ACR 2016 = IDG/WPI ≥7 + EGS/SSS ≥5 (ou WPI 4–6 + SSS ≥9), dor generalizada em <b>≥4 de 5 regiões</b>, ≥3 meses, <b>não exclui outras doenças</b>; tender points (11/18) = ACR 1990, dispensáveis. AAPT 2019: ≥6 de 9 regiões + fadiga OU sono.</li>
+        <li><b>Fisiopatologia:</b> sensibilização CENTRAL — ↑glutamato e substância P (~3× no líquor), ↓serotonina/noradrenalina (falha da inibição descendente), eixo sono–dor. Tríade que explica tudo: <span class="hl">exames normais + AINE falha + antidepressivo funciona</span>.</li>
+        <li><b>Tratamento (SBR 2026):</b> base = <b>educação + exercício</b> (aeróbico 2×/sem 30–60′ + força — única recomendação FORTE) + TCC. Fármacos SIM: <b>amitriptilina 25–50 mg/noite · duloxetina 60 mg · pregabalina 300–600 mg · ciclobenzaprina 5–10 mg/noite</b>. <b>NÃO:</b> <span class="hl">opioides (fortemente contra!), AINE como base, ISRS, VENLAFAXINA, GABAPENTINA, BZD</span>, canabinoides. EVA/EVN é útil no diagnóstico E no seguimento (Q9/Q12 da T11). Repouso prolongado PIORA.</li>
+      </ul>
+      <h3>FM × Síndrome miofascial (tabela da Verônica — Q10 da T11)</h3>
+      <table>
+        <tr><th></th><th>Fibromialgia</th><th>Sd. miofascial</th></tr>
+        <tr><td>Distribuição</td><td><b>Difusa, simétrica</b></td><td><b>Localizada/regional, assimétrica</b></td></tr>
+        <tr><td>Quem</td><td>&gt;80% mulheres, 35–60 a</td><td>Ambos os sexos, qualquer idade</td></tr>
+        <tr><td>Ponto</td><td><b>Tender point</b> (dói com ~4 kg, SEM dor referida)</td><td><b>Trigger point</b> (banda tensa, limiar ~2 kg, <b>COM dor referida</b> + twitch + sinal do pulo)</td></tr>
+        <tr><td>Fraqueza</td><td>Incomum</td><td><b>Comum</b></td></tr>
+        <tr><td>Mecanismo</td><td>Sensibilização central</td><td>Periférico: crise energética do PG (contração→isquemia→↓ATP→Ca²⁺ preso→contratura)</td></tr>
+        <tr><td>Tratamento</td><td>Ver SBR acima</td><td>Agulhamento/alongamento do PG, calor, correção postural ± infiltração</td></tr>
+      </table>
+      <p>PG <b>ativo</b> = dor espontânea; <b>latente</b> = dói só à palpação.</p>
+      <h3>Escalas de dor (decore o par escala→população)</h3>
+      <p>Adulto lúcido: <b>EVN/EVA</b> · criança/dificuldade verbal: <b>Faces</b> · neonato–2 anos: <b>NIPS</b> · <b>demência avançada: PAINAD</b> · adulto sedado/VM: <b>BPS</b> · criança em VM: Comfort-B · <span class="hl">RASS = SEDAÇÃO, não é escala de dor</span>.</p>
+      <h3>Automedicação + APS</h3>
+      <p>Tetos: paracetamol ~2–3 g/d ambulatorial (hepatotóxico; máx 4 g agudo) · dipirona 4 g/d · AINE crônico em idoso/anticoagulado = caso-problema clássico (HDA + IRA + ↑PA). Abordagem integral: MCCP (explorar a experiência da doença, plano comum), metas FUNCIONAIS (não "dor zero"), retornos programados, equipe interdisciplinar, desprescrição negociada.</p>
+    </div>
+
+    <div class="panel">
+      <h2>4 · SP4 — Dor visceral, referida × irradiada e nefrolitíase</h2>
+      <h3>Dor visceral em 6 linhas</h3>
+      <ul>
+        <li>Dói com: <b>distensão, isquemia, espasmo, inflamação</b> — cortar/queimar víscera NÃO dói.</li>
+        <li>Mal localizada (pouca representação cortical + convergência + pouca experiência) e vem com <b>cortejo autonômico</b> (sudorese, náusea, palidez, hipotensão).</li>
+        <li>Folheto <b>parietal</b> das serosas = inervação somática → dor LOCALIZADA que piora ao movimento (Blumberg; pericardite melhora inclinado à frente; pleurite → respiração superficial).</li>
+        <li><span class="hl">Comportamento: INQUIETO = visceral pura (cólica renal) · IMÓVEL = peritonite (parietal)</span>.</li>
+        <li>Apendicite em 2 tempos: periumbilical (visceral REFERIDA, T9–T10) → FID (parietal localizada) — foi a discursiva 1 da T11!</li>
+        <li>Mapa segmentar: coração→braço E/mandíbula · pâncreas (T5–T9)→dorso · diafragma (frênico C3–C5)→ombro · rim/ureter (T10–L1)→virilha/testículo.</li>
+      </ul>
+      <div class="svgbox">
+        <svg viewBox="0 0 760 220" role="img" aria-label="Referida × irradiada">
+          <rect x="10" y="14" width="360" height="192" rx="12" fill="#101f2b" stroke="#244a5c"/>
+          <text x="190" y="40" fill="#8ab8ff" font-size="14" text-anchor="middle" font-weight="800">DOR REFERIDA</text>
+          <circle cx="80" cy="92" r="22" fill="#3a1f23" stroke="#ff6b6b"/><text x="80" y="97" fill="#ff9ea6" font-size="11" text-anchor="middle">víscera</text>
+          <circle cx="80" cy="160" r="22" fill="#12324a" stroke="#4c8dff"/><text x="80" y="165" fill="#9cc4f5" font-size="11" text-anchor="middle">pele</text>
+          <rect x="160" y="108" width="86" height="40" rx="9" fill="#3a2a12" stroke="#6a5a26"/><text x="203" y="126" fill="#ffe1ad" font-size="10.5" text-anchor="middle">MESMO neurônio</text><text x="203" y="140" fill="#ffe1ad" font-size="10.5" text-anchor="middle">de 2ª ordem</text>
+          <line x1="102" y1="98" x2="158" y2="122" stroke="#ff6b6b" stroke-width="2"/>
+          <line x1="102" y1="154" x2="158" y2="134" stroke="#4c8dff" stroke-width="2"/>
+          <line x1="246" y1="128" x2="300" y2="128" stroke="#ffb454" stroke-width="2.5"/>
+          <rect x="300" y="106" width="62" height="44" rx="9" fill="#161f2b" stroke="#2a3a4d"/><text x="331" y="124" fill="#dfe9f4" font-size="10.5" text-anchor="middle">córtex erra</text><text x="331" y="139" fill="#dfe9f4" font-size="10.5" text-anchor="middle">o endereço</text>
+          <text x="190" y="196" fill="#9fb2c6" font-size="11.5" text-anchor="middle">convergência no dermátomo · IAM → braço E · SEM trajeto de nervo</text>
+          <rect x="390" y="14" width="360" height="192" rx="12" fill="#101f2b" stroke="#244a5c"/>
+          <text x="570" y="40" fill="#ff9ea6" font-size="14" text-anchor="middle" font-weight="800">DOR IRRADIADA</text>
+          <circle cx="450" cy="100" r="22" fill="#3a1f23" stroke="#ff6b6b"/><text x="450" y="105" fill="#ff9ea6" font-size="10" text-anchor="middle">raiz/hérnia</text>
+          <path d="M472 106 C 520 120, 560 140, 700 168" stroke="#ff6b6b" stroke-width="3.5" fill="none" stroke-dasharray="7 5"/>
+          <text x="596" y="132" fill="#ffb454" font-size="11.5" text-anchor="middle">dor DESCE pelo trajeto do nervo</text>
+          <text x="570" y="196" fill="#9fb2c6" font-size="11.5" text-anchor="middle">ciática · em choque (Aδ) · piora com Valsalva · Lasègue/Bragard +</text>
+        </svg>
+        <div class="svgcap">Referida = fios cruzados na central (convergência, dermátomo). Irradiada = o próprio cabo comprimido dispara ao longo do trajeto.</div>
+      </div>
+      <h3>Nefrolitíase — o essencial (Diretriz SBN 2025 + Goldman, citados na T11)</h3>
+      <table>
+        <tr><th>Tipo de cálculo</th><th>Assinatura</th></tr>
+        <tr><td><b>Oxalato de cálcio (70–80%)</b></td><td>O mais comum; radiopaco; hipercalciúria/hipocitratúria/hiperoxalúria; cristais di-hidratados no EAS</td></tr>
+        <tr><td><b>Estruvita</b></td><td>Germes UREOLÍTICOS (<b>Proteus</b>, Klebsiella — <span class="hl">E. coli NÃO</span>), pH ≥ 7, <b>coraliforme</b></td></tr>
+        <tr><td><b>Ácido úrico</b></td><td><b>Radiotransparente</b>, pH persistentemente ácido, hiperuricosúria/síndrome metabólica — <b>dissolve com alcalinização (pH &gt; 6,5)</b></td></tr>
+        <tr><td><b>Cistina</b></td><td>Autossômico recessivo (COLA), cristais <b>hexagonais</b>, jovem</td></tr>
+      </table>
+      <ul>
+        <li><b>Diagnóstico:</b> cólica lombar + irradiação p/ virilha/testículo + Giordano + hematúria; dor = <b>visceral (referida)</b> — não "irradiada somática" (Q13 da T11). Exame preferencial: <b>TC de abdome/pelve SEM contraste</b> (S/E &gt;95%; a SBN 2025 aceita USG+RX de entrada). Ausência de hematúria NÃO exclui. Densidade &gt;1.000 UH = cálculo duro (resiste à LECO).</li>
+        <li><b>Crise no PA:</b> <b>AINE parenteral 1ª linha</b> (cetoprofeno IV/diclofenaco IM — ↓pressão intraluminal; tão ou mais eficaz que opioide) + dipirona ± opioide resgate + antiemético + <b>normovolemia</b> (NUNCA "soro aberto p/ empurrar a pedra" nem diurético).</li>
+        <li><b>Eliminação espontânea (Goldman):</b> ≤5 mm ~70% · 5–7 ~60% · 7–9 ~48% · ≥9 ~25% (menor + mais distal = sai). <b>Alta pós-cólica de cálculo pequeno: analgésico simples ± AINE curto + TANSULOSINA (terapia expulsiva, distal &lt;10 mm) + líquidos + retorno se febre/vômito/anúria</b> (Q14 da T11 — e cuidado: AINE prolongado em ulceroso, NÃO).</li>
+        <li><span class="hl">Pielonefrite obstrutiva = pus sob pressão:</span> estabilização + culturas + <b>ATB IV imediato + DESCOMPRESSÃO urgente (duplo J ou nefrostomia)</b>; tratamento definitivo do cálculo só depois; <b>LECO contraindicada na infecção</b> (Q15 da T11, literal).</li>
+        <li><b>Cirurgia:</b> LECO &lt;2 cm · URS (distais) · NLP &gt;2 cm/coraliforme.</li>
+        <li><b>Prevenção:</b> líquidos ~30 mL/kg/d (diurese ≥2–2,5 L) · <b>↓SÓDIO</b> e proteína animal · <span class="hl">cálcio dietético NORMAL (restringir PIORA!)</span> · cítricos/frutas · tiazídico (hipercalciúria) · citrato de K (hipocitratúria/úrico) · alopurinol (hiperuricosúria com cálculo de Ca) · urina 24 h ×2 nos recorrentes.</li>
+        <li><b>AINEs — colaterais que a prova ama:</b> TGI = COX-1 (↓muco/HCO₃) · rim = COX-2 (IRA no idoso/desidratado/DM/HAS; dipirona e paracetamol POUPAM) · ibuprofeno ANULA o AAS · pós-SCA 3–6 m sem AINE · dengue: AAS/AINE contraindicados · gestação 3º tri = D (ducto arterioso) · dipirona: agranulocitose imunoalérgica NÃO dose-dependente · AAS: suspender 7 d pré-op, Reye.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · SP5 — Dor oncológica, escada, opioides e cefaleias</h2>
+      <h3>Dor oncológica</h3>
+      <p><b>MISTA</b> (nociceptiva + neuropática); <b>metástase ÓSSEA = causa mais comum</b> (mama/próstata/pulmão/mieloma; endotelina→RANKL→osteoclasto→ATP/H⁺→TRPV1); 30–50% em tratamento, 60–90% avançada; dimensão biopsicossocial = <b>dor total</b> (física+emocional+social+espiritual). <b>BTcP</b>: pico &lt;3 min, 15–60 min, 1–4×/d SOBRE basal controlada → resgate de ação rápida; basal descontrolada → subir a dose fixa.</p>
+      <div class="svgbox">
+        <svg viewBox="0 0 760 250" role="img" aria-label="Escada analgésica da OMS">
+          <rect x="20" y="185" width="230" height="52" rx="8" fill="#123326" stroke="#1f5a41"/>
+          <text x="135" y="205" fill="#7ff0c0" font-size="12.5" text-anchor="middle" font-weight="800">1º · Dor LEVE (1–3)</text>
+          <text x="135" y="223" fill="#9fd4bb" font-size="11" text-anchor="middle">dipirona/paracetamol/AINE ± adjuvante</text>
+          <rect x="200" y="120" width="250" height="52" rx="8" fill="#3a2a12" stroke="#6a5a26"/>
+          <text x="325" y="140" fill="#ffe1ad" font-size="12.5" text-anchor="middle" font-weight="800">2º · MODERADA (4–6)</text>
+          <text x="325" y="158" fill="#d8c08a" font-size="11" text-anchor="middle">opioide FRACO (codeína/tramadol) + não opioide ± adj</text>
+          <rect x="392" y="55" width="250" height="52" rx="8" fill="#3a1f23" stroke="#6f2f36"/>
+          <text x="517" y="75" fill="#ff9ea6" font-size="12.5" text-anchor="middle" font-weight="800">3º · INTENSA (7–10)</text>
+          <text x="517" y="93" fill="#e2a8ad" font-size="11" text-anchor="middle">opioide FORTE (morfina/oxicodona…) + não opioide ± adj</text>
+          <rect x="562" y="6" width="186" height="40" rx="8" fill="#221a2e" stroke="#4c3a6b"/>
+          <text x="655" y="23" fill="#cbb7f0" font-size="11.5" text-anchor="middle" font-weight="800">"4º" intervencionista</text>
+          <text x="655" y="38" fill="#a893d1" font-size="10.5" text-anchor="middle">bloqueios (plexo celíaco) · intratecal</text>
+          <text x="30" y="30" fill="#dfe9f4" font-size="12.5" font-weight="700">Dor 8/10 de entrada?</text>
+          <text x="30" y="48" fill="#ffb454" font-size="12.5" font-weight="800">→ ELEVADOR: começa no 3º</text>
+          <text x="30" y="86" fill="#9fb2c6" font-size="11.5">Princípios: pela BOCA ·</text>
+          <text x="30" y="102" fill="#9fb2c6" font-size="11.5">pelo RELÓGIO (fixo + resgate) ·</text>
+          <text x="30" y="118" fill="#9fb2c6" font-size="11.5">pela ESCADA · p/ o INDIVÍDUO ·</text>
+          <text x="30" y="134" fill="#9fb2c6" font-size="11.5">c/ ADJUVANTES · DETALHES</text>
+          <text x="30" y="160" fill="#8aa0b5" font-size="11">Alivia ~80% (não opioide continua nos degraus 2–3)</text>
+        </svg>
+        <div class="svgcap">A escada da OMS (com o 4º degrau da SBED — o rabisco do quadro da abertura). Adjuvante entra em QUALQUER degrau.</div>
+      </div>
+      <h3>Opioides — os números que decidem a prova</h3>
+      <ul>
+        <li><b>Titulação:</b> morfina LI <b>5–10 mg VO 4/4 h</b> ("start low, go slow"; 3 T's: Titulação-ajusTes-Transição) → meta ↓30–50% da dor → converter p/ liberação prolongada. <b>Resgate = 10% da dose de 24 h</b>, até 1/1 h.</li>
+        <li><b>Conversões:</b> morfina <b>EV = VO ÷ 3</b> (10 EV = 30 VO) · equianalgesia (ref. 30 mg morfina VO): codeína 200 · tramadol 150 · oxicodona 20 · metadona 4 · fentanil TD 12,5 µg/h. <b>Rotação: dose equianalgésica − 25–50%</b> (tolerância cruzada incompleta).</li>
+        <li><b>Colaterais:</b> náusea/sedação toleram em <b>3–10 dias</b> (antiemético no início); <span class="hl">constipação NUNCA tolera → laxante profilático junto, sempre</span> (Q17 da T11, literal); miose e convulsões também não toleram. Depressão respiratória = o mais temido, mas NÃO é "frequente e inevitável" em dose titulada.</li>
+        <li><b>Tetos:</b> codeína 240 mg/d · tramadol 400 mg/d (serotoninérgico: nunca com antidepressivo; "febre" que não cede a antitérmico) · morfina sem teto farmacológico.</li>
+        <li><b>Especiais:</b> IR → <b>fentanil</b> (sem metabólito ativo; morfina acumula M6G) · meperidina = NUNCA rotina (normeperidina convulsa; naloxona não reverte) · metadona = QTc, meia-vida variável, escolha na dependência · codeína = pró-fármaco CYP2D6 (fluoxetina bloqueia) · gestação: FORTES = B, codeína/tramadol = C.</li>
+        <li><b>Desmame (SBED — Q18 da T11):</b> descontinuar quando <b>a causa da dor resolveu OU sem resposta mesmo após rotação</b>; lenta 10%/semana (rápida 25–50% a cada 2–3 d); sem BZD; dependência → metadona.</li>
+      </ul>
+      <div class="svgbox">
+        <svg viewBox="0 0 760 190" role="img" aria-label="Intoxicação × abstinência">
+          <rect x="15" y="12" width="355" height="166" rx="12" fill="#101f2b" stroke="#244a5c"/>
+          <text x="192" y="38" fill="#ff9ea6" font-size="14" text-anchor="middle" font-weight="800">INTOXICAÇÃO</text>
+          <circle cx="120" cy="80" r="26" fill="#e8eef5"/><circle cx="120" cy="80" r="4.5" fill="#0f1720"/>
+          <text x="120" y="128" fill="#dfe9f4" font-size="11.5" text-anchor="middle" font-weight="700">MIOSE puntiforme</text>
+          <text x="255" y="70" fill="#cdd9e6" font-size="11.5" text-anchor="middle">+ bradipneia (FR↓)</text>
+          <text x="255" y="88" fill="#cdd9e6" font-size="11.5" text-anchor="middle">+ sedação/coma</text>
+          <text x="255" y="112" fill="#38d39f" font-size="12" text-anchor="middle" font-weight="800">→ NALOXONA IV titulada</text>
+          <text x="192" y="158" fill="#8aa0b5" font-size="10.5" text-anchor="middle">meia-vida curta: repetir · não reverte normeperidina</text>
+          <rect x="390" y="12" width="355" height="166" rx="12" fill="#101f2b" stroke="#244a5c"/>
+          <text x="567" y="38" fill="#ffe1ad" font-size="14" text-anchor="middle" font-weight="800">ABSTINÊNCIA</text>
+          <circle cx="495" cy="80" r="26" fill="#e8eef5"/><circle cx="495" cy="80" r="15" fill="#0f1720"/>
+          <text x="495" y="128" fill="#dfe9f4" font-size="11.5" text-anchor="middle" font-weight="700">MIDRÍASE</text>
+          <text x="640" y="62" fill="#cdd9e6" font-size="11.5" text-anchor="middle">+ piloereção + diarreia</text>
+          <text x="640" y="80" fill="#cdd9e6" font-size="11.5" text-anchor="middle">+ dores, ↑PA/FC, agitação</text>
+          <text x="640" y="104" fill="#ffb454" font-size="11.5" text-anchor="middle" font-weight="700">fases: 3–4 h · 8–10 h · 1–3 d · 6 m</text>
+          <text x="567" y="158" fill="#8aa0b5" font-size="10.5" text-anchor="middle">desmame gradual · sem benzodiazepínico</text>
+        </svg>
+        <div class="svgcap">A pupila decide em 1 segundo: miose = intoxicado (naloxona) · midríase = em falta (desmame).</div>
+      </div>
+      <h3>Adjuvantes e recursos</h3>
+      <p>Neuropático: ADT/gabapentinoide · <b>dexametasona</b>: compressão medular, HIC, dor óssea · <b>radioterapia antálgica</b> (alívio até 90% na metástase óssea) · radiofármacos (Sr-89/Sm-153, lesão osteoblástica) · <b>pâncreas → bloqueio/neurólise do plexo celíaco</b> · bomba intratecal · OIH (dor PIORA com mais dose, difusa) → reduzir/rotacionar.</p>
+      <h3>Cefaleias (a discursiva 5 da T11 — 10 sub-itens!)</h3>
+      <table>
+        <tr><th></th><th>Migrânea</th><th>Tensional</th><th>Em salvas</th></tr>
+        <tr><td>Dor</td><td>Unilateral, PULSÁTIL, mod-forte, 4–72 h, piora c/ atividade (quer ficar quieto no escuro)</td><td>Bilateral, aperto/"capacete", leve-mod, sem piora c/ atividade</td><td>Periorbitária EXCRUCIANTE, 15–180 min, noturna, em salvas; AGITAÇÃO</td></tr>
+        <tr><td>Acompanha</td><td>Náusea/vômito OU foto+fonofobia; aura 5–60 min (depressão alastrante)</td><td>Sem náusea (foto OU fono no máx)</td><td>Autonômicos ipsilaterais: lacrimejamento, rinorreia, ptose, miose</td></tr>
+        <tr><td>Crise</td><td>AINE/dipirona → <b>triptano</b> ± antiemético · <span class="hl">NUNCA opioide</span></td><td>Analgésico/AINE</td><td><b>O₂ 100% 12–15 L/min + sumatriptano SC</b> (Q19 da T11)</td></tr>
+        <tr><td>Profilaxia</td><td>≥4 crises/mês: propranolol · amitriptilina · topiramato · valproato (NÃO fértil) · flunarizina · anti-CGRP/botox (crônica)</td><td>Amitriptilina</td><td><b>Verapamil</b> (+ corticoide ponte)</td></tr>
+      </table>
+      <ul>
+        <li><b>Estado migranoso</b> (crise &gt;72 h, refratária, vômitos): hidratação + antiemético IV + <span class="hl">DEXAMETASONA IV</span> (Q20 da T11 — a resposta que a veterana errou) — não BZD, não opioide de rotina.</li>
+        <li><b>MOH (uso excessivo):</b> analgésico simples ≥15 d/mês OU triptano/opioide/combinado ≥10 d/mês, &gt;3 meses → é O mecanismo de piora/cronificação → retirar + iniciar profilaxia.</li>
+        <li><b>Migrânea CRÔNICA:</b> cefaleia <span class="hl">≥15 dias/mês por &gt;3 meses, sendo ≥8 dias com características de migrânea</span> (a resposta que ficou em branco na T11!). Fatores de cronificação: uso excessivo de analgésicos, alta frequência de crises, obesidade, depressão/ansiedade, distúrbios do sono, cafeína.</li>
+        <li><b>Red flags</b> (secundária): trovoada/"pior da vida" (HSA → TC sem contraste JÁ; líquor se TC normal), &gt;50 anos, mudança de padrão, febre+rigidez de nuca, déficit focal/papiledema, <b>câncer/imunossupressão</b>, matinal progressiva + vômito em jato (HIC), gestação, anticoagulado. Nunca punção antes da imagem.</li>
+        <li><b>Precauções (doc da tutora!):</b> triptano contraindicado em DCV estabelecida (IAM/AVC), HAS não controlada, Wolff-Parkinson-White, migrânea hemiplégica/basilar; risco serotoninérgico com ADT/ISRS/IRSN; não usar com ergotamínico &lt;24 h · ergotamina: gravidez = X · <b>opioides/barbitúricos: SEM indicação em crise de migrânea</b> · propranolol: contraindicado em ASMA, bloqueio, IC descompensada, DM insulinodependente (cautela) · valproato/topiramato: contraindicados na GRAVIDEZ · flunarizina: contraindicada no PARKINSON (e cuidado com depressão) · anti-CGRP: suspender ≥6 meses antes de engravidar.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Fontes</h2>
+      <ul class="src">
+        <li><b>Prova real T11</b> (25/03/2026, tutora Ana Elisa) — <code>Tutoria/Tutoria-provaT11-UC13.pdf</code> · Síntese da veterana — <code>Tutoria/Tutoria UC13.pdf</code> · Precauções no tratamento da enxaqueca — <code>Tutoria/Precaução tratamento enxaqueca.docx</code> · Guia de Cuidados Paliativos 2025.</li>
+        <li>Seus 5 guias de SP (em <code>Tutoria/</code>) + APF SP1 gabaritada + APFs de veteranos · aulas da Verônica (Fisio 1–5) e da Vânia (AINEs, corticoides, opioides + caderno Ana&Lou) · diretrizes: SBN Nefrolitíase 2025, SBR Fibromialgia 2026, SBED/Recomendações opioides, SBD 2023 (neuropatia) · Goldman-Cecil, Harrison, Porto, ICHD-3.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ============ VÉSPERA ============ -->
+  <section id="vespera">
+    <div class="panel">
+      <h2>⚡ Números para decorar (5 minutos antes de dormir)</h2>
+      <table>
+        <tr><th>Item</th><th>Número</th></tr>
+        <tr><td>Dor crônica</td><td>&gt; 3 meses (90 dias)</td></tr>
+        <tr><td>Fibras Aδ × C</td><td>12–30 m/s (glutamato/neo) × 0,5–2 m/s (subst. P/paleo)</td></tr>
+        <tr><td>Rastreio neuropatia DM</td><td>DM2: no diagnóstico · DM1: 5 anos após · sempre ANUAL · monofilamento 10 g + diapasão 128 Hz</td></tr>
+        <tr><td>FM (ACR 2016)</td><td>WPI ≥7 + SSS ≥5 (ou 4–6 + ≥9) · ≥4 de 5 regiões · ≥3 meses · tender 4 kg × trigger 2 kg</td></tr>
+        <tr><td>FM fármacos</td><td>Amitriptilina 25–50/noite · duloxetina 60 · pregabalina 300–600 · ciclobenzaprina 5–10/noite</td></tr>
+        <tr><td>Eliminação do cálculo</td><td>≤5 mm 70% · 5–7 60% · 7–9 48% · ≥9 25% · TEM: tansulosina 0,4 mg, distal &lt;10 mm, 4–6 sem</td></tr>
+        <tr><td>LECO × NLP</td><td>LECO &lt;2 cm (não na infecção!) · NLP &gt;2 cm/coraliforme · &gt;1.000 UH resiste</td></tr>
+        <tr><td>Prevenção litíase</td><td>Líquido 30 mL/kg · ↓Na · cálcio NORMAL · cítricos · tiazídico/citrato/alopurinol</td></tr>
+        <tr><td>Morfina</td><td>Titular 5–10 mg VO 4/4 h · resgate 10% de 24 h · EV = VO ÷ 3 · rotação −25–50%</td></tr>
+        <tr><td>Equianalgesia (30 morfina VO)</td><td>Codeína 200 · tramadol 150 · oxicodona 20 · metadona 4 · fentanil TD 12,5 µg/h</td></tr>
+        <tr><td>Tetos</td><td>Codeína 240 mg/d · tramadol 400 mg/d · paracetamol 4 g agudo/2–3 g crônico · dipirona 4 g</td></tr>
+        <tr><td>Desmame opioide</td><td>10%/semana (lento) · 25–50% a cada 2–3 d (rápido) · sem BZD</td></tr>
+        <tr><td>BTcP</td><td>Pico &lt;3 min · 15–60 min · 1–4×/dia · sobre basal CONTROLADA</td></tr>
+        <tr><td>Migrânea</td><td>Crise 4–72 h · aura 5–60 min · profilaxia se ≥4 crises/mês</td></tr>
+        <tr><td>Migrânea crônica</td><td>≥15 d/mês &gt;3 meses, ≥8 com cara de migrânea</td></tr>
+        <tr><td>MOH</td><td>Analgésico ≥15 d/mês OU triptano/opioide ≥10 d/mês</td></tr>
+        <tr><td>Salvas</td><td>15–180 min · O₂ 100% 12–15 L/min + suma SC · profilaxia verapamil</td></tr>
+        <tr><td>Estado migranoso</td><td>&gt;72 h → dexametasona IV + hidratação + antiemético</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <h2>⚡ 20 pegadinhas-ouro (leia na quarta de manhã)</h2>
+      <ul>
+        <li>① Limiar de dor é INVERSAMENTE proporcional à reação (limiar alto = hiporreativo).</li>
+        <li>② Glutamato e substância P são EXCITATÓRIOS; quem inibe é GABA/5-HT/NA/endorfina.</li>
+        <li>③ Portão: Aβ EXCITA o interneurônio inibitório (fecha); Aδ/C INIBEM o inibitório (abrem). Lâmina II (Rolando).</li>
+        <li>④ Dor pode existir sem lesão demonstrável (IASP) — e dor aguda PODE cronificar.</li>
+        <li>⑤ IAM→braço = REFERIDA (convergência/dermátomo) · hérnia→perna = IRRADIADA (trajeto, Valsalva, Lasègue).</li>
+        <li>⑥ Cardiopata com dor neuropática: amitriptilina NÃO → duloxetina. Gabapentina otimizada sem resposta → ASSOCIAR (não trocar por opioide).</li>
+        <li>⑦ ENMG não é rastreio de rotina; monofilamento avalia fibra GROSSA (protetora) — associar teste de fibras finas.</li>
+        <li>⑧ Charcot precoce = pé quente/edemaciado → DESCARGA/imobilização (não é infecção!).</li>
+        <li>⑨ FM: exames NORMAIS (VHS alto = procure outra doença); EVA vale p/ diagnóstico E seguimento; repouso PIORA.</li>
+        <li>⑩ FM: venlafaxina ≠ duloxetina; gabapentina ≠ pregabalina; opioide NUNCA; tender (4 kg, sem referida) × trigger (2 kg, COM referida).</li>
+        <li>⑪ RASS mede SEDAÇÃO; demência avançada = PAINAD; sedado em VM = BPS.</li>
+        <li>⑫ Inquieto = cólica (visceral) · imóvel = peritonite (parietal). Cortar víscera não dói; distender dói.</li>
+        <li>⑬ Cólica renal: TC SEM contraste; RX normal não exclui (ácido úrico é transparente); E. coli NÃO faz estruvita (Proteus faz).</li>
+        <li>⑭ Soro aberto e diurético NÃO expulsam cálculo; quem trata a cólica é AINE (1ª linha) — mas AINE sai da prescrição se LRA/úlcera.</li>
+        <li>⑮ Pus sob pressão: ATB SOZINHO não resolve — desobstrução urgente (duplo J/nefrostomia); LECO proibida na infecção.</li>
+        <li>⑯ Restringir cálcio na litíase PIORA (cálcio normal; restringe SÓDIO).</li>
+        <li>⑰ Constipação por opioide NÃO tolera → laxante do dia 1 ao fim; náusea tolera em dias (antiemético no começo).</li>
+        <li>⑱ Miose+bradipneia+sedação = intoxicação → naloxona · midríase+diarreia+piloereção = abstinência → desmame (sem BZD).</li>
+        <li>⑲ Dor 8/10 oncológica = degrau 3 DIRETO; resgate 10%; EV = VO÷3; rotação com redução de 25–50%; IR → fentanil.</li>
+        <li>⑳ Migrânea piorando com analgésico diário = MOH (não "dilatação arterial") → retirar + profilaxia; crise &gt;72 h = dexametasona IV; opioide NUNCA em migrânea; salvas = O₂ + suma SC; propranolol não no asmático; valproato/topiramato não na gestante.</li>
+      </ul>
+      <div class="warn"><b>Checklist de 30 min antes:</b> reler esta lista + tabela de números → folhear os roteiros das 5 discursivas (só os quadros "o corretor procura") → respirar. Na prova: sublinhe CORRETA/INCORRETA, resolva primeiro as objetivas da SP que você mais domina, e na discursiva responda POR ITENS (a tutora corrige por item — quem lista, pontua).</div>
+    </div>
+  </section>
+
+  <!-- ============ SIMULADO ============ -->
+  <section id="quizsec">
+    <div class="scorebar">
+      <span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">20</span></span>
+      <div class="bar"><i id="fill"></i></div>
+      <button class="btn" onclick="resetQuiz()">Zerar</button>
+    </div>
+    <div class="note" style="margin-top:0"><b>Formato idêntico à prova real da T11:</b> 20 objetivas, todas <b>A–D</b>, "assinale a CORRETA" (com 1 associação de colunas), em blocos de 4 por SP na ordem SP1→SP5. Depois, as <b>5 discursivas-caso</b> (uma por SP) com roteiro de correção por pesos — escreva à mão ANTES de abrir o roteiro.</div>
+    <div id="quiz"></div>
+
+    <div class="panel"><h2>✍️ Discursivas — uma por SP (como na prova real)</h2><p class="src">Na T11 valiam ~40 pontos cada. Responda por itens: a tutora corrige item a item — quem lista, pontua.</p></div>
+
+    <div class="q">
+      <div class="qhead"><div class="qnum">D1</div><span class="pill d">SP1 · Dor</span><span class="pill o">40 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Mulher, 38 anos, procura o PA com dor abdominal há 10 horas. Iniciou como dor contínua, mal localizada, "em aperto" no epigástrio/hipocôndrio direito, com náuseas. Há 3 horas a dor intensificou (8/10), localizou-se no hipocôndrio direito, piora com a inspiração profunda e com a palpação (Murphy positivo), e a paciente passou a senti-la também na região da escápula direita. Fez dipirona sem melhora. Nega febre.</span>
+        <b>a)</b> Identifique os tipos de dor presentes nas DUAS fases do quadro e na queixa escapular. <b>(10)</b><br>
+        <b>b)</b> Explique por que a dor inicial era mal localizada e por que a dor pode ser sentida na escápula. <b>(10)</b><br>
+        <b>c)</b> Descreva a via de condução da dor rápida e da dor lenta (fibras, tratos e neurotransmissores). <b>(10)</b><br>
+        <b>d)</b> Cite os aspectos do decálogo da avaliação da dor que devem ser investigados na anamnese. <b>(10)</b>
+      </div>
+      <button class="btn" onclick="tg('rd1')">Mostrar/ocultar roteiro</button>
+      <div id="rd1" style="display:none;margin-top:12px"><table>
+        <tr><th>Item</th><th>O corretor procura</th></tr>
+        <tr><td><b>a</b></td><td>Fase 1 = dor VISCERAL (distensão/inflamação da vesícula: mal localizada, profunda, com náuseas) (4) · fase 2 = dor SOMÁTICA PARIETAL (peritônio parietal inflamado: localizada, piora com movimento/inspiração/palpação) (4) · escápula = dor REFERIDA (2)</td></tr>
+        <tr><td><b>b</b></td><td>Mal localizada: pouca representação cortical das vísceras + CONVERGÊNCIA de aferentes viscerais e somáticos nos mesmos neurônios de 2ª ordem + pouca experiência prévia com os órgãos (6) · escápula: convergência segmentar — aferentes da vesícula/diafragma entram nos mesmos segmentos dos dermátomos escapulares (frênico C3–C5/T5–T9) → o córtex "erra o endereço"; não segue trajeto de nervo (4)</td></tr>
+        <tr><td><b>c</b></td><td>Rápida: fibras Aδ mielínicas (12–30 m/s) → lâmina I → decussa → trato NEOespinotalâmico → tálamo → córtex; neurotransmissor GLUTAMATO; dor em pontada, localizada (5) · Lenta: fibras C amielínicas (0,5–2 m/s) → lâminas II–III/V → trato PALEOespinotalâmico → formação reticular → tálamo → córtex; SUBSTÂNCIA P; queimação, difusa, com cortejo (5)</td></tr>
+        <tr><td><b>d</b></td><td>Os 10: localização · intensidade (EVN/EVA) · irradiação (localizada/irradiada/referida) · duração · evolução (súbita×insidiosa) · relação com funções orgânicas (alimentação gordurosa!) · fatores agravantes · manifestações concomitantes · caráter · fatores atenuantes (1 ponto cada)</td></tr>
+      </table></div>
+    </div>
+
+    <div class="q">
+      <div class="qhead"><div class="qnum">D2</div><span class="pill d">SP2 · Neuropatia diabética</span><span class="pill o">40 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 61 anos, DM2 há 14 anos com controle irregular, hipertenso, com IAM há 3 anos. Refere queimação e formigamento em ambos os pés há 8 meses, pior à noite, atrapalhando o sono, com episódios de "choque". Notou calosidade sob o 1º metatarso e uma pequena ferida indolor no local.</span>
+        <b>a)</b> Descreva como deveria ter sido feito o rastreamento da neuropatia periférica diabética (momento de início e métodos). <b>(10)</b><br>
+        <b>b)</b> Explique como se dá o diagnóstico e o papel da eletroneuromiografia. <b>(10)</b><br>
+        <b>c)</b> Proponha o tratamento farmacológico (justificando a escolha frente às comorbidades) e as medidas não farmacológicas. <b>(10)</b><br>
+        <b>d)</b> Liste as principais complicações da neuropatia diabética e o mecanismo de cada uma. <b>(10)</b>
+      </div>
+      <button class="btn" onclick="tg('rd2')">Mostrar/ocultar roteiro</button>
+      <div id="rd2" style="display:none;margin-top:12px"><table>
+        <tr><th>Item</th><th>O corretor procura</th></tr>
+        <tr><td><b>a</b></td><td>Início: NO DIAGNÓSTICO do DM2 (DM1: 5 anos após) e ANUALMENTE (4) · métodos: monofilamento 10 g (sensibilidade protetora) + sensibilidade vibratória (diapasão 128 Hz) + reflexo aquileu + propriocepção (fibras grossas) + térmica/pinprick (fibras finas) ± sudomotora (6)</td></tr>
+        <tr><td><b>b</b></td><td>Diagnóstico CLÍNICO: sintomas típicos + ≥2 testes alterados, com exclusão de outras causas (B12, hipotireoidismo, álcool) (6) · ENMG NÃO é rastreio de rotina — reservada a apresentações atípicas/dúvida diagnóstica (avalia fibras grossas; normal não exclui neuropatia de fibras finas) (4)</td></tr>
+        <tr><td><b>c</b></td><td>1ª linha: gabapentinoide (pregabalina — ajuda o sono), duloxetina ou ADT — mas AQUI: <b>amitriptilina CONTRAINDICADA (pós-IAM)</b> → preferir DULOXETINA e/ou pregabalina; sem resposta em dose otimizada → ASSOCIAR classes; opioide só resgate (6) · não farmacológico: CONTROLE GLICÊMICO (retarda progressão), cessar tabagismo/álcool, cuidados com os pés/calçado adequado, inspeção diária, fisioterapia; ácido alfa-lipoico como potencial modificador (4)</td></tr>
+        <tr><td><b>d</b></td><td>Úlcera plantar: perda da sensibilidade protetora + pontos de pressão → trauma repetido indolor (3) · infecção/osteomielite → amputação (2) · pé de CHARCOT: artropatia neuropática por microtraumas não percebidos (pé quente/edemaciado/deformado) → descarga/imobilização precoce (3) · atrofia/fraqueza → apoio inadequado; anidrose → fissuras; quedas (2)</td></tr>
+      </table></div>
+    </div>
+
+    <div class="q">
+      <div class="qhead"><div class="qnum">D3</div><span class="pill d">SP3 · FM × miofascial</span><span class="pill o">40 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Mulher, 44 anos, dor musculoesquelética difusa e bilateral há 14 meses, "que muda de lugar", com fadiga, sono não reparador e dificuldade de concentração. Sem rigidez matinal prolongada, sem artrite. Exame: dor difusa à palpação, sem pontos-gatilho ou bandas tensas. Hemograma, VHS, PCR, TSH e FAN normais. Usa ibuprofeno quase diariamente, sem alívio.</span>
+        <b>a)</b> Diagnóstico mais provável + critérios diagnósticos atuais. <b>(10)</b><br>
+        <b>b)</b> Diferencie fibromialgia de síndrome miofascial (fisiopatologia e exame físico). <b>(10)</b><br>
+        <b>c)</b> Monte a abordagem terapêutica completa (não farmacológica e farmacológica), citando o que NÃO deve ser usado — inclusive comentando o ibuprofeno diário. <b>(10)</b><br>
+        <b>d)</b> Diagnósticos diferenciais e exames de exclusão pertinentes na APS. <b>(10)</b>
+      </div>
+      <button class="btn" onclick="tg('rd3')">Mostrar/ocultar roteiro</button>
+      <div id="rd3" style="display:none;margin-top:12px"><table>
+        <tr><th>Item</th><th>O corretor procura</th></tr>
+        <tr><td><b>a</b></td><td>FIBROMIALGIA: dor difusa &gt;3 meses + fadiga + sono não reparador + sintomas cognitivos + exames normais (4) · ACR 2016: WPI ≥7 + SSS ≥5 (ou WPI 4–6 + SSS ≥9), dor em ≥4 de 5 regiões, ≥3 meses; não exclui outras doenças; tender points dispensáveis (6)</td></tr>
+        <tr><td><b>b</b></td><td>FM = SENSIBILIZAÇÃO CENTRAL: ↑glutamato/substância P, ↓5-HT/NA (falha da inibição descendente) → difusa, simétrica, tender points (4 kg) SEM dor referida, fraqueza incomum (5) · SMF = mecanismo PERIFÉRICO: crise energética do ponto-gatilho (contração→isquemia→↓ATP→contratura) → dor regional, banda tensa, trigger point (2 kg) COM dor referida + twitch/sinal do pulo, fraqueza comum (5)</td></tr>
+        <tr><td><b>c</b></td><td>Base: EDUCAÇÃO + EXERCÍCIO (aeróbico 2×/sem 30–60′ + força — recomendação forte) + TCC, higiene do sono (4) · fármacos SBR 2026: amitriptilina 25–50 mg/noite OU duloxetina 60 mg OU pregabalina 300–600 mg (ciclobenzaprina p/ sono) (3) · NÃO usar: opioides, AINE como base (ação central — ibuprofeno diário deve ser DESPRESCRITO: sem eficácia + risco GI/renal/PA), ISRS, venlafaxina, gabapentina, BZD (3)</td></tr>
+        <tr><td><b>d</b></td><td>Hipotireoidismo (TSH) · artrite reumatoide (clínica + FR/anti-CCP/VHS/PCR) · LES (FAN) · polimialgia reumática (idoso + VHS↑ + rigidez de cinturas) · miopatias (CK) · deficiência de vitamina D · apneia do sono (4+) · reforçar: na FM os exames vêm NORMAIS — alteração pede outra causa (até 10)</td></tr>
+      </table></div>
+    </div>
+
+    <div class="q">
+      <div class="qhead"><div class="qnum">D4</div><span class="pill d">SP4 · Nefrolitíase</span><span class="pill o">40 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 31 anos, dor lombar direita súbita 9/10, em cólica, irradiando para a região inguinal e o testículo direito, com náuseas e vômito. Inquieto, sudoreico, Giordano positivo à direita, afebril, hemodinamicamente estável. TC sem contraste: cálculo único de 5 mm no terço distal do ureter direito, discreta hidroureteronefrose, densidade 450 UH. EAS: hematúria (3+), nitrito negativo, cristais de oxalato de cálcio di-hidratado. Creatinina 1,0.</span>
+        <b>a)</b> Classifique a dor e explique a topografia (testículo). <b>(8)</b><br>
+        <b>b)</b> Prescreva o atendimento no PA (com doses e vias). <b>(8)</b><br>
+        <b>c)</b> Programe a alta: terapia expulsiva (fármaco, condições, prazo) e orientações. <b>(8)</b><br>
+        <b>d)</b> Prevenção secundária: dieta e quando investigar/medicar. <b>(8)</b><br>
+        <b>e)</b> Ele retorna em 72 h com febre 39,1 °C e calafrios: diagnóstico, por que é emergência e os DOIS pilares da conduta (+ por que LECO está contraindicada agora). <b>(8)</b>
+      </div>
+      <button class="btn" onclick="tg('rd4')">Mostrar/ocultar roteiro</button>
+      <div id="rd4" style="display:none;margin-top:12px"><table>
+        <tr><th>Item</th><th>O corretor procura</th></tr>
+        <tr><td><b>a</b></td><td>Dor VISCERAL do trato urinário (distensão/espasmo ureteral), aguda, nociceptiva; inquietação = sem irritação peritoneal (3) · testículo: convergência segmentar T10–L1 (mapa da dor referida — "irradiação típica" da cólica, sem compressão de nervo) (5)</td></tr>
+        <tr><td><b>b</b></td><td>Jejum + acesso venoso (1) · AINE parenteral 1ª linha: cetoprofeno 100 mg IV ou diclofenaco 75 mg IM (3) · dipirona 1–2 g IV (1) · antiemético (ondansetrona 4–8 mg IV) (1) · opioide de resgate titulado (tramadol/morfina) se refratário (1) · SF moderado — normovolemia, sem "soro aberto"; coar urina (1)</td></tr>
+        <tr><td><b>c</b></td><td>Cálculo distal &lt;10 mm + dor controlada + sem infecção + função renal normal = TERAPIA EXPULSIVA: <b>tansulosina 0,4 mg/noite por 4–6 semanas</b> + analgesia VO por alguns dias + líquidos (5) · retorno imediato se febre, dor refratária, vômitos ou anúria; reavaliação com imagem; ~70% de chance de eliminação (5 mm distal) (3)</td></tr>
+        <tr><td><b>d</b></td><td>Líquido ~30 mL/kg/d (diurese ≥2–2,5 L) · REDUZIR SÓDIO e proteína animal · CÁLCIO DIETÉTICO NORMAL (restrição piora!) · ↓oxalato se hiperoxalúria · cítricos/frutas (5) · investigação metabólica (urina 24 h ×2 + Ca/PTH) se recorrência/alto risco → dirigidos: tiazídico (hipercalciúria), citrato de K (hipocitratúria), alopurinol (hiperuricosúria) (3)</td></tr>
+        <tr><td><b>e</b></td><td>PIELONEFRITE OBSTRUTIVA = "pus sob pressão": infecção a montante de ureter obstruído → sepse/perda renal (3) · pilares: ① culturas + ATB IV imediato (ceftriaxona; grave: pip-tazo/meropenem) ② DESCOMPRESSÃO URGENTE (duplo J ou nefrostomia); cálculo definitivo depois (4) · LECO contraindicada: infecção ativa — fragmentar dissemina bactérias e não desobstrui (1)</td></tr>
+      </table></div>
+    </div>
+
+    <div class="q">
+      <div class="qhead"><div class="qnum">D5</div><span class="pill d">SP5 · Migrânea + opioides</span><span class="pill o">40 pontos · responda objetivamente (a–j)</span></div>
+      <div class="stem">
+        <span class="cx">Mulher, 36 anos, asmática, em idade fértil sem contracepção, com migrânea desde os 18. No último ano as crises aumentaram: hoje tem cefaleia em ~18 dias/mês e usa dipirona + AINE quase diariamente. Há 4 dias está com crise contínua, pulsátil, com vômitos e incapacidade; usou dipirona, AINE e metoclopramida VO sem melhora. Exame neurológico normal, sem febre.</span>
+        <b>a)</b> Diagnósticos atuais (2). <b>(4)</b>
+        <b>b)</b> Mecanismo da piora progressiva do quadro. <b>(4)</b>
+        <b>c)</b> Nome da complicação da crise atual (&gt;72 h) e conduta imediata na urgência. <b>(4)</b>
+        <b>d)</b> Medicação intravenosa indicada neste cenário. <b>(4)</b>
+        <b>e)</b> Por que opioide NÃO é boa opção aqui? <b>(4)</b>
+        <b>f)</b> Conduta quanto ao uso crônico de analgésicos. <b>(4)</b>
+        <b>g)</b> Cite 3 opções de profilaxia ADEQUADAS PARA ELA (justifique as exclusões). <b>(4)</b>
+        <b>h)</b> Qual o critério de migrânea crônica? <b>(4)</b>
+        <b>i)</b> Cite 2 fatores de risco para cronificação. <b>(4)</b>
+        <b>j)</b> Que orientação essencial dar para o seguimento ambulatorial? <b>(4)</b>
+      </div>
+      <button class="btn" onclick="tg('rd5')">Mostrar/ocultar roteiro</button>
+      <div id="rd5" style="display:none;margin-top:12px"><table>
+        <tr><th>Item</th><th>Resposta-padrão</th></tr>
+        <tr><td><b>a</b></td><td>① Migrânea CRÔNICA ② Cefaleia por uso excessivo de analgésicos (MOH) sobreposta</td></tr>
+        <tr><td><b>b</b></td><td>USO EXCESSIVO DE ANALGÉSICOS (≥15 d/mês de analgésico simples) → sensibilização central e cronificação — o analgésico vira o combustível da cefaleia (NÃO responder "dilatação arterial": teoria vascular superada; mecanismo da migrânea = sistema trigeminovascular/CGRP)</td></tr>
+        <tr><td><b>c</b></td><td>ESTADO MIGRANOSO (crise &gt;72 h) → urgência: hidratação IV + antiemético IV (metoclopramida) + analgesia parenteral, ambiente escuro/calmo</td></tr>
+        <tr><td><b>d</b></td><td><b>DEXAMETASONA IV</b> (aborta e reduz recorrência) — foi a resposta da prova T11</td></tr>
+        <tr><td><b>e</b></td><td>Opioide não tem indicação em migrânea: baixa eficácia, sedação, náusea, risco de dependência e de PIORAR a cronificação/MOH (recomendação formal contra, em qualquer idade)</td></tr>
+        <tr><td><b>f</b></td><td>RETIRAR/desprescrever o analgésico em excesso (abrupta ou gradual) + diário de cefaleia + INICIAR PROFILAXIA — tratar a dor de rebote transitória</td></tr>
+        <tr><td><b>g</b></td><td>Adequadas: AMITRIPTILINA · FLUNARIZINA · anti-CGRP/toxina botulínica (migrânea crônica); candesartana aceitável. Excluir: PROPRANOLOL (asmática!) · VALPROATO e TOPIRAMATO (idade fértil sem contracepção — teratogênicos)</td></tr>
+        <tr><td><b>h</b></td><td>Cefaleia ≥15 dias/mês por &gt;3 meses, sendo ≥8 dias/mês com características de migrânea (o item que ficou em branco na T11!)</td></tr>
+        <tr><td><b>i</b></td><td>Uso excessivo de analgésicos · alta frequência de crises · obesidade · depressão/ansiedade · distúrbios do sono · cafeína em excesso (2 quaisquer)</td></tr>
+        <tr><td><b>j</b></td><td>Vigiar RED FLAGS (mudança de padrão, início súbito, déficit focal, febre+rigidez, &gt;50 anos) + diário de cefaleia + adesão à profilaxia + limitar analgésico de crise (&lt;10–15 d/mês)</td></tr>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flash">
+    <div class="panel"><h2>Flashcards — clique para virar</h2><div class="fcgrid" id="fcbox"></div></div>
+  </section>
+
+  <div class="foot">UC13 · Prova final de tutoria (09/09/2026) · guia + simulado no padrão da prova real (T11) · gerado em 07/09/2026 · vai dar bom, Otto 🚀</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+function tg(id){const e=document.getElementById(id);e.style.display=(e.style.display==='block'?'none':'block');}
+
+const QS=[
+ {sp:"SP1", stem:"Sobre os conceitos fundamentais de dor, assinale a CORRETA:",
+  opts:["A dor, por definição, exige lesão tecidual demonstrável, e sua intensidade é proporcional à gravidade da lesão.",
+  "A dor é uma experiência sensorial E emocional desagradável associada a dano tecidual real OU potencial — podendo ocorrer sem lesão demonstrável; a nocicepção é o componente fisiológico, com as etapas de transdução, transmissão, modulação e percepção.",
+  "O limiar de dor é diretamente proporcional à reação à dor: quem tem limiar alto reage mais.",
+  "Nocicepção é o componente afetivo-emocional da experiência dolorosa."],
+  ans:1,
+  why:"Definição IASP completa (sensorial + emocional; dano real OU potencial; pode não haver lesão) + os 4 processos da nocicepção. O limiar é INVERSAMENTE proporcional à reação (limiar alto = hiporreativo).",
+  trap:"As três erradas são as pegadinhas literais da sua APF de SP1: 'exige lesão', 'proporcional à lesão' e o limiar invertido. A discursiva 1 da T11 começou pedindo exatamente esses conceitos."},
+
+ {sp:"SP1", stem:"<span class='cx'>Homem, 28 anos, corta o antebraço: sente imediatamente dor aguda em pontada, bem localizada, e retira o braço; segundos depois, permanece uma dor em queimação, mais difusa.</span> Sobre a condução dessas duas dores, assinale a CORRETA:",
+  opts:["A 1ª dor (pontada) é conduzida por fibras C amielínicas via trato paleoespinotalâmico, com liberação de substância P.",
+  "A 2ª dor (queimação) é conduzida por fibras Aβ mielínicas grossas via colunas dorsais.",
+  "A 1ª dor é conduzida por fibras Aδ mielínicas finas, com liberação de GLUTAMATO, ascendendo pelo trato NEOespinotalâmico até o tálamo e o córtex; a 2ª dor viaja por fibras C, com SUBSTÂNCIA P, pelo trato paleoespinotalâmico (via formação reticular).",
+  "Ambas utilizam o trato vestibuloespinal, diferindo apenas na velocidade."],
+  ans:2,
+  why:"O par completo: Aδ (12–30 m/s, pontada, localizada) → lâmina I → decussa → neoespinotalâmico → tálamo/córtex, glutamato · C (0,5–2 m/s, queimação, difusa) → paleoespinotalâmico → formação reticular → tálamo, substância P (por isso o cortejo emocional/autonômico da dor lenta).",
+  trap:"A Q1 da T11 cobrou exatamente 'glutamato + neoespinotalâmico'. Decore o par cruzado: rápida-glutamato-neo × lenta-substância P-paleo. Vestibuloespinal é via MOTORA (distrator da T11)."},
+
+ {sp:"SP1", stem:"<span class='cx'>Paciente com dor em queimação persistente no pé, meses após lesão traumática do nervo tibial, com hiperalgesia e alodinia locais.</span> O mecanismo fisiopatológico que melhor explica essa dor é:",
+  opts:["Ativação transitória de nociceptores cutâneos íntegros por estímulos mecânicos.",
+  "Estímulo nociceptivo visceral por distensão de víscera oca.",
+  "Processo inflamatório periférico autolimitado, sem alteração neural.",
+  "Lesão das vias nociceptivas com desaferentação, brotamento e hiperexcitabilidade neuronal (impulsos ectópicos por redistribuição de canais de sódio) — dor NEUROPÁTICA."],
+  ans:3,
+  why:"Dor após lesão de nervo + queimação + alodinia/hiperalgesia = neuropática: o gerador é o próprio sistema somatossensorial lesado (ectópicos por canais de Na⁺, sensibilização central), não um nociceptor avisando lesão tecidual atual.",
+  trap:"É a Q2 da T11 (gabarito D, literal). Alodinia = dor a estímulo inócuo — marca de sensibilização, não de 'inflamação simples'. Se o caso tiver lesão de NERVO + descritores elétricos, feche neuropática."},
+
+ {sp:"SP1", stem:"Sobre a Teoria do Portão (Melzack & Wall), assinale a CORRETA:",
+  opts:["A ativação das fibras finas Aδ e C excita os interneurônios inibitórios da substância gelatinosa, fechando o portão.",
+  "O fechamento do portão ocorre quando fibras mielínicas GROSSAS (Aβ — tato e pressão) ativam interneurônios INIBITÓRIOS que impedem a passagem dos impulsos dolorosos — base do alívio por massagem/fricção/TENS.",
+  "A abertura do portão é mediada exclusivamente por opioides endógenos em receptores µ do sistema límbico.",
+  "A fricção de uma área dolorosa aumenta a dor, pois estimula as fibras de condução lenta."],
+  ans:1,
+  why:"Aβ EXCITA o interneurônio inibitório (GABA) da lâmina II (substância gelatinosa de Rolando) → portão fecha → dor não sobe. Aδ/C fazem o oposto: INIBEM o inibitório ('desinibição') → portão abre. Explica massagem, fricção e TENS.",
+  trap:"Q4 da T11, gabarito B literal. A banca inverte quem abre e quem fecha — grave: GROSSA fecha, FINA abre. E modulação descendente (PAG/rafe, 5-HT/NA/endorfina) é OUTRO sistema, complementar."},
+
+ {sp:"SP2", stem:"Sobre a fisiopatologia e as formas clínicas da neuropatia diabética, assinale a CORRETA:",
+  opts:["A hiperglicemia ativa a via dos polióis (aldose redutase → sorbitol), gera AGEs e dano microvascular do nervo; a forma mais comum é a polineuropatia sensitivo-motora DISTAL e SIMÉTRICA ('bota e luva'), e a forma autonômica pode cursar com taquicardia fixa e hipotensão postural.",
+  "A forma mais comum é a mononeuropatia motora proximal aguda.",
+  "A neuropatia diabética poupa caracteristicamente as fibras finas, acometendo apenas vibração e propriocepção.",
+  "O mecanismo é exclusivamente autoimune, independente do controle glicêmico."],
+  ans:0,
+  why:"As 4 vias (poliol/sorbitol, AGEs, microvascular-isquêmica, inflamatória) convergem para lesão do nervo; a PSD distal e simétrica é a forma mais prevalente (começa pelos pés, fibras finas E grossas); autonômica = taquicardia fixa, gastroparesia, hipotensão postural. Controle glicêmico RETARDA a progressão.",
+  trap:"As APFs de veteranos de SP2 cobraram poliol/sorbitol e 'PSD = mais comum' + 'taquicardia fixa'. Se aparecer 'poupa fibras finas', descarte: a dor/queimação É de fibra fina."},
+
+ {sp:"SP2", stem:"<span class='cx'>Homem, 52 anos, diagnóstico recente de DM2, assintomático.</span> Sobre o rastreamento da neuropatia periférica diabética, assinale a CORRETA:",
+  opts:["Deve começar apenas 5 anos após o diagnóstico, como em qualquer diabetes.",
+  "Basta o monofilamento de 10 g anual, que avalia todas as fibras.",
+  "Deve começar JÁ, no momento do diagnóstico do DM2 (no DM1, 5 anos após), repetindo-se ANUALMENTE, combinando testes de fibras GROSSAS (monofilamento 10 g, diapasão 128 Hz, aquileu, propriocepção) e de fibras FINAS (térmica/pinprick).",
+  "A eletroneuromiografia deve ser solicitada para todos os pacientes no rastreio."],
+  ans:2,
+  why:"DM2 já pode chegar com anos de hiperglicemia silenciosa → rastrear NO diagnóstico (DM1: 5 anos depois) e anualmente, combinando fibras grossas + finas. ENMG fica para casos atípicos/dúvida — e um resultado normal não exclui neuropatia de fibras finas.",
+  trap:"Q6 da T11 (gabarito: associar fibras finas + grossas). Os '5 anos' valem para o DM1 — transplantar isso para o DM2 é a pegadinha. E monofilamento sozinho só enxerga a sensibilidade protetora (grossa)."},
+
+ {sp:"SP2", stem:"<span class='cx'>Mulher, 63 anos, DM2, dor neuropática intensa (EVA 9) com insônia. Infarto do miocárdio há 2 anos, em uso de AAS e estatina.</span> A melhor opção terapêutica inicial é:",
+  opts:["Amitriptilina, o tricíclico de referência.",
+  "Tramadol de uso contínuo.",
+  "AINE em dose plena por 30 dias.",
+  "Duloxetina (podendo associar pregabalina à noite) — os tricíclicos são contraindicados na cardiopatia isquêmica."],
+  ans:3,
+  why:"1ª linha da dor neuropática = gabapentinoides, duloxetina (IRSN) e tricíclicos — mas a ESCOLHA é pela comorbidade: pós-IAM/arritmia → amitriptilina FORA (cardiotoxicidade, arritmogênica) → duloxetina; pregabalina ajuda dor + sono. Opioide não é manutenção; AINE não trata dor neuropática.",
+  trap:"Foi a Q5 da T11 — e foi um dos pontos perdidos pela veterana. A alternativa 'pregabalina como primeira linha OBRIGATÓRIA' também estava errada lá pelo absolutismo: as 3 classes são 1ª linha, a comorbidade decide."},
+
+ {sp:"SP2", stem:"<span class='cx'>Paciente com neuropatia diabética dolorosa mantém EVA 6 após 8 semanas de gabapentina em dose otimizada, sem efeitos adversos relevantes.</span> A próxima melhor conduta é:",
+  opts:["Introduzir opioide forte de uso contínuo.",
+  "ASSOCIAR um fármaco de outra classe de 1ª linha (duloxetina ou antidepressivo tricíclico) à gabapentina.",
+  "Substituir a gabapentina por pregabalina, obrigatoriamente.",
+  "Introduzir AINE para analgesia adicional."],
+  ans:1,
+  why:"Resposta parcial com dose otimizada → terapia COMBINADA de classes diferentes (mecanismos complementares: canal de cálcio + inibição descendente 5-HT/NA). Opioide fica como resgate/3ª linha; trocar gabapentina→pregabalina é troca 'lateral' (mesma classe); AINE não age em dor neuropática.",
+  trap:"Q7 da T11, gabarito literal 'associar duloxetina ou ADT'. Guarde o algoritmo: otimiza → associa → só depois pensa em opioide fraco. E ácido alfa-lipoico (Q8 de lá) é o 'modificador de progressão' antioxidante."},
+
+ {sp:"SP3", stem:"<span class='cx'>Mulher, 42 anos, dor difusa há 10 meses + fadiga + sono não reparador + dificuldade de concentração. Exame sem artrite; dor à palpação difusa. Hemograma, VHS, PCR, TSH e FAN normais.</span> Assinale a CORRETA:",
+  opts:["O diagnóstico de fibromialgia exige a contagem de tender points (11/18) como critério obrigatório.",
+  "Espera-se encontrar provas inflamatórias elevadas na fibromialgia.",
+  "O diagnóstico é CLÍNICO (ACR 2016: WPI + SSS, dor em ≥4 de 5 regiões, ≥3 meses), os exames são caracteristicamente NORMAIS — servem para excluir diferenciais — e o diagnóstico não é excluído pela coexistência de outras doenças.",
+  "O tratamento de base são os anti-inflamatórios, dado o mecanismo inflamatório periférico."],
+  ans:2,
+  why:"FM = dor nociplástica, sensibilização central: exames normais por definição (VHS/PCR alterados = procure outra doença). ACR 2016 aposentou a obrigatoriedade dos tender points e permite comorbidade (FM + AR podem coexistir). AINE não é base — o problema é central.",
+  trap:"Q9 da T11 (gabarito: 'EVA é útil para mensurar e acompanhar' — mesma família). As armadilhas fixas: tender points obrigatórios (não), exames alterados (não), AINE/opioide de base (nunca)."},
+
+ {sp:"SP3", stem:"<span class='cx'>Caso 1: mulher, 38 anos, dor difusa + fadiga + sono ruim há 8 meses, SEM pontos-gatilho, exames normais. Caso 2: homem, 45 anos, dor cervical LOCALIZADA com irradiação ao ombro, com ponto doloroso bem delimitado que REPRODUZ a dor à palpação, em banda muscular tensa.</span> Assinale a CORRETA:",
+  opts:["Ambos os quadros são compatíveis com fibromialgia.",
+  "O caso 1 é compatível com FIBROMIALGIA; o caso 2 sugere SÍNDROME MIOFASCIAL (trigger point em banda tensa com dor referida).",
+  "O caso 1 sugere síndrome miofascial e o caso 2, fibromialgia.",
+  "Ambos exigem exames laboratoriais alterados para confirmação."],
+  ans:1,
+  why:"FM: difusa, simétrica, mulher 35–60, tender points (doem com ~4 kg) SEM dor referida, exames normais. SMF: regional/assimétrica, TRIGGER point (limiar ~2 kg) em banda tensa, COM dor referida + twitch + sinal do pulo, fraqueza comum — mecanismo periférico (crise energética do PG).",
+  trap:"Q10 da T11, quase literal. O detalhe que decide: ponto que REFERE dor ao apertar = trigger (miofascial); tender da FM dói LOCAL, sem referir."},
+
+ {sp:"SP3", stem:"Sobre o manejo da fibromialgia (diretriz SBR 2026), assinale a CORRETA:",
+  opts:["Opioides de longa duração são prioritários dada a intensidade da dor.",
+  "O tratamento combina medidas NÃO farmacológicas centrais (educação + EXERCÍCIO físico aeróbico e de força + TCC) com fármacos de ação central: amitriptilina, duloxetina, pregabalina ou ciclobenzaprina.",
+  "Venlafaxina e gabapentina são as opções de primeira linha recomendadas.",
+  "O repouso prolongado é fundamental para evitar piora da dor."],
+  ans:1,
+  why:"Educação + exercício = a única recomendação FORTE (EULAR/SBR); fármacos SIM: amitriptilina 25–50 mg/noite, duloxetina 60 mg, pregabalina 300–600 mg, ciclobenzaprina à noite. NÃO: opioides (fortemente contra), AINE de base, ISRS, VENLAFAXINA, GABAPENTINA, BZD. Repouso PIORA (descondicionamento).",
+  trap:"Q11 da T11 (gabarito: não farmacológico + antidepressivos/neuromoduladores). As duas trocas de irmãos que a SBR reprova: venlafaxina NO LUGAR DE duloxetina e gabapentina NO LUGAR DE pregabalina — sua 'divergência da venlafaxina' da SP3 virou alternativa."},
+
+ {sp:"SP3", stem:"Sobre as escalas de avaliação da dor, assinale a CORRETA:",
+  opts:["A escala RASS é o instrumento de escolha para quantificar dor no adulto lúcido.",
+  "No idoso com demência avançada não verbal, a intensidade deve ser aferida pela EVA padrão.",
+  "Adulto lúcido: EVN/EVA · demência avançada: PAINAD · adulto sedado em ventilação mecânica: BPS · neonato: NIPS — e a EVA/EVN serve tanto para o diagnóstico quanto para monitorar a resposta ao tratamento.",
+  "A avaliação da dor não influencia a conduta terapêutica."],
+  ans:2,
+  why:"O par escala→população: EVN/EVA (lúcido), Faces (criança/dificuldade verbal), NIPS (neonato–2a), PAINAD (demência avançada), BPS (adulto sedado/VM), Comfort-B (criança em VM). RASS mede SEDAÇÃO, não dor. E a Q12 da T11: EVA é útil para mensurar E monitorar (a avaliação MUDA conduta).",
+  trap:"As bancas trocam a POPULAÇÃO das escalas comportamentais. Âncoras: demência = PAINAD · VM adulto = BPS · RASS = sedação (nunca dor)."},
+
+ {sp:"SP4", stem:"<span class='cx'>Homem, 42 anos, dor lombar esquerda súbita em cólica, forte, com dor em fossa ilíaca e testículo ipsilaterais, náuseas e um vômito. Giordano positivo à esquerda, sem irritação peritoneal. Está inquieto na maca.</span> Sobre a classificação da dor e a investigação (Diretrizes Brasileiras de Nefrolitíase, 2025), assinale a CORRETA:",
+  opts:["Trata-se de dor irradiada puramente somática; o padrão-ouro é a urografia excretora.",
+  "A dor visceral típica alivia com repouso, e a clínica clássica dispensa exames de imagem.",
+  "Trata-se de dor VISCERAL do trato urinário com dor REFERIDA ao testículo (convergência segmentar T10–L1); a investigação preferencial é a TC de abdome e pelve SEM contraste.",
+  "A irradiação ao testículo indica compressão nervosa direta; a conduta inicial é hidratação vigorosa para forçar a eliminação."],
+  ans:2,
+  why:"Cólica ureteral = dor visceral (distensão/espasmo) com projeção segmentar ao dermátomo genital (T10–L1) — mecanismo de dor referida, sem nervo comprimido. Paciente INQUIETO (sem peritonite). TC sem contraste: S/E >95%, mede, localiza e estima densidade (a SBN 2025 aceita USG+RX de entrada).",
+  trap:"Q13 da T11, gabarito C literal. Dois vícios que reprovam: chamar de 'irradiada' (não é raiz/nervo) e 'soro aberto para empurrar a pedra' (hidratação vigorosa NÃO acelera eliminação e piora a distensão)."},
+
+ {sp:"SP4", stem:"<span class='cx'>Homem, 55 anos, hipertenso, com HISTÓRICO DE ÚLCERA GÁSTRICA, recebe alta após cólica renal por cálculo de 4 mm em ureter distal.</span> A prescrição domiciliar mais alinhada às evidências é:",
+  opts:["Analgésicos simples (dipirona/paracetamol) + terapia expulsiva com alfabloqueador (tansulosina) + líquidos + sinais de retorno — evitando AINE prolongado pelo risco péptico.",
+  "Ureteroscopia imediata, pois cálculos ureterais não são eliminados espontaneamente.",
+  "Opioide potente profilático para evitar retorno à emergência.",
+  "AINE por 15 dias para garantir a eliminação, independentemente do histórico de úlcera."],
+  ans:0,
+  why:"Cálculo distal de 4 mm: ~70–80% de eliminação espontânea → manejo expectante com analgesia simples + tansulosina (TEM, distal <10 mm) + hidratação normal + retorno se febre/vômito/anúria. Em ulceroso, AINE prolongado é o erro embutido (COX-1); opioide profilático não existe.",
+  trap:"Q14 da T11, gabarito A literal. A alternativa 'AINE 15 dias' pesca quem decorou 'AINE 1ª linha na CRISE' e esquece que na ALTA de um ulceroso a regra muda — crise ≠ manutenção."},
+
+ {sp:"SP4", stem:"<span class='cx'>Mulher, 45 anos, cólica renal há 24 h evolui com febre 38,9 °C, calafrios, FC 112, PA 90×60. TC: cálculo de 8 mm IMPACTADO em ureter proximal com hidronefrose importante. Leucocitose e creatinina 1,8 (prévia 0,9).</span> Diante da pielonefrite obstrutiva, a conduta imediata e definitiva mais adequada é:",
+  opts:["Litotripsia extracorpórea (LECO) de urgência para fragmentar o cálculo e drenar a infecção.",
+  "Internação para hidratação, opioides e observação por 48 h aguardando eliminação espontânea.",
+  "Estabilização hemodinâmica com cristaloides + antibioticoterapia IV imediata + DESCOMPRESSÃO urgente da via urinária (duplo J ou nefrostomia percutânea); tratamento definitivo do cálculo após resolver a infecção.",
+  "Ureteroscopia flexível imediata com laser para retirada completa ('stone-free') no mesmo tempo."],
+  ans:2,
+  why:"'Pus sob pressão': infecção atrás de obstrução = emergência urológica com risco de sepse e perda renal. ATB sozinho não alcança a coleção; o pilar duplo é ATB IV (pós-culturas) + DESOBSTRUIR JÁ (duplo J/nefrostomia). Manipulação definitiva (LECO/URS 'stone-free') fica para depois — fragmentar em vigência de infecção dissemina bactéria.",
+  trap:"Q15 da T11, gabarito C literal — enunciado praticamente idêntico. Se a questão tiver febre + obstrução, risque de cara qualquer alternativa com LECO ou 'observar'."},
+
+ {sp:"SP4", stem:"Relacione as características (Coluna 1) aos tipos de cálculo (Coluna 2):<br>1. Radiolucente ao RX simples, associado a pH urinário persistentemente ÁCIDO e hiperuricosúria.<br>2. Associado a germes ureolíticos (Proteus, Klebsiella), pH ≥ 7,0 e aspecto coraliforme.<br>3. Defeito autossômico recessivo no transporte de aminoácidos dibásicos; cristais hexagonais.<br>4. Tipo MAIS COMUM, radiopaco, associado a hipercalciúria idiopática e hiperoxalúria.<br><br>Coluna 2: (&nbsp;) Oxalato de cálcio · (&nbsp;) Estruvita · (&nbsp;) Ácido úrico · (&nbsp;) Cistina<br>Assinale a sequência correta:",
+  opts:["4 – 2 – 1 – 3",
+  "4 – 1 – 2 – 3",
+  "2 – 4 – 1 – 3",
+  "1 – 2 – 4 – 3"],
+  ans:0,
+  why:"Oxalato de cálcio = 4 (70–80%, radiopaco, hipercalciúria) · estruvita = 2 (urease → pH alcalino → coraliforme; E. coli NÃO produz urease) · ácido úrico = 1 (radiotransparente + pH ácido — dissolve alcalinizando) · cistina = 3 (COLA, hexagonais, jovem).",
+  trap:"A T11 trouxe EXATAMENTE esta associação (Q16). Âncoras rápidas: 'coral' = estruvita/Proteus · 'invisível no RX + urina ácida' = úrico · 'hexágono/criança-jovem' = cistina · 'o resto' = oxalato de cálcio."},
+
+ {sp:"SP5", stem:"Sobre os efeitos colaterais do uso crônico de opioides, assinale a CORRETA:",
+  opts:["A tolerância à constipação desenvolve-se rapidamente, dispensando laxantes após a primeira semana.",
+  "A tolerância à sedação e às náuseas geralmente se desenvolve em poucos dias (3 a 10), enquanto a CONSTIPAÇÃO persiste e exige tratamento proativo (laxante profilático) por todo o tratamento.",
+  "A depressão respiratória é evento frequente e inevitável em todos os pacientes em uso de morfina para dor oncológica.",
+  "Prurido e boca seca são sinais de alergia grave e exigem interrupção imediata de qualquer opioide."],
+  ans:1,
+  why:"Graus de tolerância (G&G): ALTA para náusea, sedação, euforia, depressão respiratória; NENHUMA para constipação (µ2 intestinal não internaliza), miose e convulsões → laxante junto, do início ao fim. Depressão respiratória grave é rara com titulação correta; prurido = liberação de histamina, não alergia.",
+  trap:"Q17 da T11, gabarito B literal. 'Constipação tolera' e 'depressão respiratória inevitável' são os dois distratores fixos — um subtrata o intestino, o outro assusta e subtrata a dor."},
+
+ {sp:"SP5", stem:"Segundo as recomendações da Sociedade Brasileira para Estudo da Dor (SBED), a descontinuação/desmame do opioide está corretamente indicada quando:",
+  opts:["O paciente atinge dor zero, mas deseja manter o uso por medo do retorno da dor.",
+  "O custo do tratamento aumenta, mesmo com excelente controle álgico.",
+  "Apenas diante de sinais de vício psicológico, independentemente da evolução da dor.",
+  "O quadro doloroso que motivou a prescrição está RESOLVIDO, ou o paciente permanece SEM RESPOSTA mesmo após rotação de opioides — fazendo então retirada gradual (ex.: 10% da dose/semana), evitando benzodiazepínicos no processo."],
+  ans:3,
+  why:"Razões de descontinuar (SBED): causa resolvida, ausência de resposta (mesmo após rotação), efeitos intoleráveis ou comportamentos aberrantes. Desmame lento 10%/semana (rápido: 25–50% a cada 2–3 dias), mais devagar em ansiosos/cardiopatas, SEM sedativos/BZD; se surgir abstinência ou dor, segurar a dose e ir mais devagar.",
+  trap:"Q18 da T11, gabarito D literal. 'Manter porque o paciente quer', 'suspender pelo custo' e 'só se viciar' erram o critério: quem manda é o BALANÇO dor×resposta×efeitos."},
+
+ {sp:"SP5", stem:"<span class='cx'>Homem, 39 anos, em crise de cefaleia em salvas no pronto atendimento: dor periorbitária direita excruciante há 30 minutos, com lacrimejamento e congestão nasal ipsilaterais, andando agitado pela sala.</span> A melhor abordagem abortiva imediata é:",
+  opts:["Dipirona intravenosa e observação.",
+  "OXIGÊNIO a 100% em alto fluxo (12–15 L/min em máscara, 15–20 min) — idealmente somado a sumatriptano SUBCUTÂNEO; a profilaxia da salva será feita com verapamil.",
+  "Naproxeno oral em dose plena.",
+  "Prednisona oral isolada como abortivo da crise."],
+  ans:1,
+  why:"Crise de salvas dura 15–180 min — analgésico VO não chega a tempo. Abortivos com evidência: O₂ 100% alto fluxo + sumatriptano SC (ou intranasal). Profilaxia: VERAPAMIL (1ª linha, com ECG), com corticoide apenas como 'ponte' no início da salva — não como abortivo isolado.",
+  trap:"Q19 da T11 (gabarito: oxigênio em alto fluxo — as alternativas eram exatamente dipirona/naproxeno/prednisona). E lembre o comportamento: salvas = AGITADO; migrânea = quieto no escuro."},
+
+ {sp:"SP5", stem:"<span class='cx'>Paciente de 33 anos com migrânea apresenta cefaleia contínua há 5 dias (períodos de alívio inferiores a 12 h), com vômitos e desidratação. Já recebeu dipirona, AINE e metoclopramida IV, sem melhora.</span> O próximo passo mais apropriado é:",
+  opts:["Alta com analgesia oral e retorno se piora.",
+  "Prescrever benzodiazepínico para dormir e cessar a crise.",
+  "Introduzir DEXAMETASONA intravenosa (estado migranoso: crise >72 h refratária) mantendo hidratação e antiemético IV.",
+  "Iniciar opioide intravenoso como padrão para crises refratárias de migrânea."],
+  ans:2,
+  why:"Crise >72 h = ESTADO MIGRANOSO: hidratação IV + antiemético IV + corticoide (dexametasona IV — aborta e previne recorrência). Opioide não tem indicação em migrânea (baixa eficácia + cronificação/MOH) e BZD não trata a crise.",
+  trap:"Q20 da T11 — e a resposta que a veterana ERROU (marcou BZD; o gabarito corrigido foi dexametasona). Some com o resto do caso típico: se a paciente usar analgésico ≥15 d/mês, o diagnóstico de fundo é MOH e o plano definitivo é retirar + profilaxia."}
+];
+</script>
+<script>
+const state={answered:0,hits:0};
+function renderQuiz(){
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=QS.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  QS.forEach((q,i)=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{
+      optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';
+    });
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill e">'+q.sp+'</span><span class="pill o">A–D · padrão T11</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/QS.length*100)+'%';
+  }));
+}
+function resetQuiz(){document.querySelectorAll('#quiz .q').forEach(q=>delete q.dataset.done);renderQuiz();}
+renderQuiz();
+
+const FC=[
+ ["IASP · nocicepção · limiar","Dor = experiência sensorial E emocional, dano real OU potencial (pode não haver lesão!). Nocicepção = componente fisiológico: TRANSDUÇÃO → TRANSMISSÃO → MODULAÇÃO → PERCEPÇÃO. Limiar INVERSAMENTE proporcional à reação (alto = hiporreativo)"],
+ ["Fibras e vias da dor","RÁPIDA: Aδ mielínica (12–30 m/s) → NEOespinotalâmico → GLUTAMATO → pontada localizada · LENTA: C amielínica (0,5–2) → PALEOespinotalâmico (via formação reticular) → SUBSTÂNCIA P → queimação difusa. Cruza no 2º neurônio (corno dorsal)"],
+ ["Teoria do portão","Lâmina II (subst. gelatinosa de Rolando). Aβ (tato/pressão) EXCITAM interneurônio inibitório → FECHAM o portão (massagem/TENS). Aδ/C INIBEM o inibitório → ABREM. Modulação descendente = outro sistema (PAG/rafe: 5-HT, NA, endorfinas)"],
+ ["Decálogo da dor (discursiva!)","Localização · Intensidade (EVN/EVA) · Irradiação (localizada/irradiada/referida) · Duração · Evolução (súbita×insidiosa) · Relação c/ funções orgânicas · Agravantes · Manifestações concomitantes · Caráter · Atenuantes — liste os 10"],
+ ["4 tipos fisiopatológicos de dor","NOCICEPTIVA (lesão real, alivia removendo causa) · NEUROPÁTICA (lesão do sistema somatossensorial; queimação/choque; alodinia; ectópicos por canais de Na⁺) · MISTA (câncer, zóster) · NOCIPLÁSTICA (sensibilização central sem lesão: FM, SII, cefaleias). Crônica >3 meses"],
+ ["Neuropatia diabética — fisiopatologia + formas","4 vias: POLIOL (aldose redutase→sorbitol) · AGEs · microvascular · inflamatória. Mais comum: polineuropatia sensitivo-motora DISTAL SIMÉTRICA (bota-e-luva). Autonômica: taquicardia FIXA, hipotensão postural, gastroparesia"],
+ ["Rastreio da neuropatia DM","DM2: NO diagnóstico · DM1: 5 anos após · sempre ANUAL. Fibras grossas: monofilamento 10 g + diapasão 128 Hz + aquileu + propriocepção · fibras finas: térmica/pinprick. ENMG só atípicos (normal não exclui fibra fina)"],
+ ["Dor neuropática — tratamento","1ª linha (3 classes): gabapentinoides · duloxetina · tricíclicos. CARDIOPATA: sem amitriptilina → duloxetina. Dose otimizada sem resposta → ASSOCIAR classes. Opioide = resgate. Ácido alfa-lipoico = modificador. Controle glicêmico retarda"],
+ ["Complicações do pé diabético","Perda de sensibilidade protetora → úlcera indolor → infecção/osteomielite → amputação · pé de CHARCOT (quente, edemaciado, deformado) → DESCARGA/imobilização precoce · anidrose→fissuras · atrofia→apoio inadequado"],
+ ["Fibromialgia — diagnóstico","Clínico! ACR 2016: WPI ≥7 + SSS ≥5 (ou 4–6 + ≥9) · dor ≥4 de 5 regiões · ≥3 meses · NÃO exclui outras doenças · tender points dispensáveis · exames NORMAIS (VHS↑ = outra doença: polimialgia, hipotireoidismo, AR, LES)"],
+ ["FM × Miofascial","FM: difusa/simétrica · >80% ♀ 35–60 · tender 4 kg SEM referida · fraqueza incomum · central (↑glutamato/subst P, ↓5-HT/NA) || SMF: regional/assimétrica · trigger 2 kg em banda tensa COM referida + twitch + sinal do pulo · fraqueza comum · periférica (crise energética)"],
+ ["FM — tratamento SBR 2026","SIM: educação + EXERCÍCIO (única rec. forte) + TCC · amitriptilina 25–50/noite · duloxetina 60 · pregabalina 300–600 · ciclobenzaprina 5–10/noite. NÃO: opioide (forte!), AINE de base, ISRS, VENLAFAXINA, GABAPENTINA, BZD. Repouso piora"],
+ ["Escalas de dor","Lúcido: EVN/EVA (diagnóstico E seguimento) · criança: Faces · neonato–2a: NIPS · demência avançada: PAINAD · adulto sedado/VM: BPS · criança VM: Comfort-B · RASS = SEDAÇÃO (não é dor!)"],
+ ["Cólica renal — dor e imagem","Dor VISCERAL + referida ao testículo/virilha (convergência T10–L1) · paciente INQUIETO · TC SEM contraste (S/E >95%; SBN 2025 aceita USG+RX de entrada) · hematúria ausente NÃO exclui · >1.000 UH = duro (resiste LECO)"],
+ ["Cólica — crise e alta","CRISE: AINE parenteral 1ª linha (↓pressão intraluminal) + dipirona ± opioide resgate + antiemético + NORMOvolemia (sem soro aberto/diurético). ALTA (cálculo pequeno distal): analgésico simples + TANSULOSINA 0,4 mg 4–6 sem + líquidos + sinais de retorno (ulceroso: sem AINE prolongado)"],
+ ["Pus sob pressão","Pielonefrite obstrutiva = EMERGÊNCIA: estabilizar + culturas + ATB IV JÁ + DESCOMPRESSÃO urgente (duplo J/nefrostomia). Cálculo definitivo só depois. LECO CONTRAINDICADA na infecção ativa"],
+ ["Tipos de cálculo","OXALATO DE CÁLCIO 70–80% (radiopaco, hipercalciúria — cálcio dietético NORMAL, ↓sódio!) · ESTRUVITA (urease: Proteus/Klebsiella — E. coli NÃO; pH ≥7; coraliforme) · ÚRICO (radiotransparente, pH ácido, dissolve com citrato pH>6,5) · CISTINA (AR, hexagonais, jovem)"],
+ ["Escada da OMS + princípios","1º leve: não opioide ± adj · 2º moderada: FRACO + não opioide · 3º intensa: FORTE + não opioide · 4º intervencionista (plexo celíaco no ca de pâncreas). Dor 8/10 = 3º DIRETO. Boca · Relógio (fixo + resgate) · Escada · Indivíduo · Adjuvantes · Detalhes"],
+ ["Morfina — números","Titulação: 5–10 mg VO 4/4 h (LI) → LC quando estável · RESGATE = 10% da dose de 24 h (até 1/1 h) · EV = VO ÷ 3 · rotação: equianalgésica − 25–50% · IR: morfina acumula M6G → FENTANIL · desmame 10%/semana, sem BZD"],
+ ["Opioides — colaterais e tolerância","Náusea/sedação toleram em 3–10 d (antiemético no início) · CONSTIPAÇÃO/miose/convulsão NÃO toleram → laxante SEMPRE · intoxicação: MIOSE + bradipneia + coma → naloxona titulada · abstinência: MIDRÍASE + diarreia + piloereção · codeína máx 240 · tramadol máx 400 (serotoninérgico!)"],
+ ["Cefaleias primárias — as 3","MIGRÂNEA: 4–72 h, unilateral pulsátil, náusea/foto+fono, quieto no escuro; crise AINE→TRIPTANO (nunca opioide!); profilaxia ≥4/mês: propranolol (não no asmático!)/amitriptilina/topiramato/valproato (não fértil)/flunarizina (não no Parkinson) · TENSIONAL: bilateral, aperto, sem náusea · SALVAS: ♂, 15–180 min, autonômicos + AGITADO → O₂ 100% + suma SC; profilaxia VERAPAMIL"],
+ ["Migrânea crônica · MOH · estado migranoso","CRÔNICA: ≥15 d/mês >3 meses, ≥8 com cara de migrânea · MOH: analgésico ≥15 d/mês OU triptano/opioide ≥10 d/mês → retirar + profilaxia (é O mecanismo de piora!) · ESTADO MIGRANOSO: >72 h → hidratação + antiemético IV + DEXAMETASONA IV · red flags: trovoada, >50 a, padrão novo, febre+nuca, déficit, câncer, HIC matinal"]
+];
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back">'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+</script>
+</body>
+</html>
