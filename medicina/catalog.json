@@ -151,5 +151,41 @@
     "data": "2026-08-29",
     "arquivo": "5-fase/hp-abdomen/clinica/hp-andrea-hpc-guia.html",
     "origem": "5_fase/HP/Abdomen/andrea/HP_Andrea_HPc_Guia.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Leitura Dirigida · Artigos da Vânia · UC13",
+    "tipo": "material",
+    "data": "2026-09-07",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-leitura-dirigida-artigos.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_Leitura_Dirigida_Artigos.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Farmaco UC13 · Roteiros do podcast (Ep. 1–4)",
+    "tipo": "material",
+    "data": "2026-09-01",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-podcast-roteiros.html",
+    "origem": "5_fase/UC13/Podcast Farmaco/UC13_Farmaco_Podcast_Roteiros.html"
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Podcast Farmaco UC13 · 5 episódios",
+    "tipo": "material",
+    "data": "2026-09-07",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-podcast.html",
+    "origem": ""
+  },
+  {
+    "uc": "UC13",
+    "materia": "Farmacologia",
+    "titulo": "Simuladão PM · Farmaco UC13",
+    "tipo": "simulado",
+    "data": "2026-09-07",
+    "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-simuladao-pm.html",
+    "origem": "5_fase/UC13/UC13_Farmaco_Simuladao_PM.html"
   }
 ]

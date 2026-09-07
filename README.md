@@ -8,6 +8,7 @@ Resume
 - `medicina/` — guias de estudo do 5º período de Medicina (UNIFEBE, 2026.2), páginas HTML autocontidas em `medicina/5-fase/<uc>/<materia>/`.
 - `medicina/catalog.json` — catálogo dos guias (UC, matéria, título, tipo, data, arquivo).
 - `medicina/build.py` — gera `medicina/index.html` a partir do catálogo (Python 3, sem dependências).
+- `medicina/5-fase/uc13/farmaco/podcast/` — episódios do podcast em MP3 (player em `uc13-farmaco-podcast.html`; áudio é a única exceção à regra "só HTML").
 - `.nojekyll` — Pages serve os arquivos como estão, sem Jekyll.
 
 ### Como adicionar um guia novo

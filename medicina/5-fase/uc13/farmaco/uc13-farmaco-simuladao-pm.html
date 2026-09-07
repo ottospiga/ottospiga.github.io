@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simuladão PM · Farmaco UC13</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#7c2d12;--accent-soft:#fee8de;--line:#e2e8f0;--ok:#15803d;--ok-soft:#dcfce7;--red:#b91c1c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:15.5px}
+.wrap{max-width:820px;margin:0 auto;padding:22px 16px 90px}
+header{background:linear-gradient(135deg,#7c2d12,#9a3412);color:#fff;border-radius:16px;padding:22px 24px;margin-bottom:14px}
+header h1{margin:0 0 6px;font-size:22px}header .sub{opacity:.93;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.q{border-left:4px solid var(--accent);padding:4px 0 4px 14px;margin:18px 0}
+.q .n{font-weight:800;color:var(--accent);font-size:13px}
+.en{margin:4px 0 8px;white-space:pre-line}
+.alts button{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:5px 0;font-size:14.5px;cursor:pointer}
+.alts button.sel{background:var(--accent-soft);border-color:var(--accent)}
+.alts button.certa{background:var(--ok-soft);border-color:var(--ok);font-weight:600}
+.alts button.errada{background:#fee2e2;border-color:var(--red)}
+textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14px;font-family:inherit;resize:vertical}
+.gab{display:none;background:var(--ok-soft);border-radius:9px;padding:10px 13px;margin-top:8px;font-size:14px;white-space:pre-line}
+.gab .check{color:#14532d}
+body.revealed .gab{display:block}
+.peso{font-size:12px;color:var(--muted);font-weight:600}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center;z-index:10}
+.bar button{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 22px;font-size:15px;font-weight:700;cursor:pointer}
+.bar .t{font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;color:var(--accent)}
+.note{background:#fef9c3;border:1px solid #f5e79b;border-radius:10px;padding:10px 14px;font-size:13.5px;margin:8px 0}
+.checklist{font-size:13px;color:var(--muted);margin-top:6px}
+h2{font-size:16px;margin:22px 0 4px;color:var(--accent)}
+</style></head><body><div class="wrap">
+<header><h1>📝 Simuladão estilo PM — Farmaco UC13</h1>
+<div class="sub">Formato REAL da PM: maioria discursiva. 10 QDs (7,0) + 6 objetivas (3,0). Inédito — nenhuma questão é cópia do banco. Feche o material, cronometre 1h30, responda à MÃO as QDs.</div></header>
+
+<div class="note"><b>Como pontuar a QD (o critério dela):</b> fármaco certo <b>+ dose + posologia (+ duração/via quando o caso pede) + o "porquê"</b>. Faltou a dose = perde metade. Escreveu certo mas sem justificar = perde o "porquê". Seja objetivo e escreva a posologia sempre.</div>
+
+<h2>PARTE I — Discursivas (0,7 cada · 7,0)</h2>
+
+<div class="q"><div class="n">QD1 <span class="peso">· 0,7</span></div>
+<div class="en">Homem, 58 anos, hipertenso em uso de losartana, chega à UBS com crise de gota (podagra) muito dolorosa. Qual AINE é comumente empregado nessa situação na atenção básica, com dose, posologia e via? Há alguma ressalva pela hipertensão?</div>
+<textarea placeholder="Sua resposta à mão / aqui..."></textarea>
+<div class="gab"><b>Modelo:</b> Cetoprofeno 100 mg/2 mL IM (apresentação parenteral do SUS para a crise de gota na UBS; alívio rápido). Ressalva: AINE em hipertenso pode ↑PA e antagonizar o anti-hipertensivo (interação farmacodinâmica) — usar pelo menor tempo possível. <span class="checklist">✓ fármaco ✓ dose 100 mg ✓ via IM ✓ ressalva HAS</span></div></div>
+
+<div class="q"><div class="n">QD2 <span class="peso">· 0,7</span></div>
+<div class="en">Paciente com neuralgia do trigêmeo. Qual o fármaco de 1ª escolha, sua dose/posologia em monoterapia e o mecanismo de ação? Cite uma interação farmacocinética importante dele.</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Carbamazepina, 600–1200 mg/dia fracionada (à noite; titular do baixo). Mecanismo: bloqueio de canais de SÓDIO → reduz a neurotransmissão álgica. Interação: é INDUTORA potente da CYP450 (e autoindução) → reduz o nível de contraceptivos, tramadol, canabinoides etc. <span class="checklist">✓ fármaco ✓ faixa ✓ canal Na⁺ ✓ indução CYP</span></div></div>
+
+<div class="q"><div class="n">QD3 <span class="peso">· 0,7</span></div>
+<div class="en">Mulher, 30 anos, gestante (28 sem), com febre de 38,5 °C. Qual antitérmico é seguro, com dose e posologia? Por que os AINEs e o AAS são evitados, e qual o risco hepático do fármaco escolhido em superdose?</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Paracetamol 500–750 mg VO 6/6h (máx 2 g/dia crônico). Seguro na gestação e não lesa TGI. AINEs/AAS evitados (fechamento precoce do canal arterial no 3º trim., risco de sangramento/oligoâmnio). Superdose: CYP2E1 → NAPQI → esgota glutationa → necrose hepática; antídoto NAC. <span class="checklist">✓ paracetamol ✓ dose ✓ por que não AINE ✓ NAPQI/NAC</span></div></div>
+
+<div class="q"><div class="n">QD4 <span class="peso">· 0,7</span></div>
+<div class="en">Enfermeiro de UTI, 40 anos, com dependência de fentanila, inicia tratamento ambulatorial. Qual o fármaco de escolha, sua dose/posologia e o objetivo terapêutico? Por que ele, e não a morfina?</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Metadona (desintoxicação: ~15–30 mg/dia, entrega supervisionada, redução semanal). Objetivo: opioide de LONGA duração de ação para minimizar a síndrome de abstinência e permitir desmame gradual. Escolhe-se pela meia-vida longa (estabilidade); a morfina é de curta ação e não serve para substituição. <span class="checklist">✓ metadona ✓ dose ✓ objetivo (longa ação/abstinência)</span></div></div>
+
+<div class="q"><div class="n">QD5 <span class="peso">· 0,7</span></div>
+<div class="en">Explique por que a codeína pode apresentar FALHA terapêutica mesmo administrada corretamente, e cite DUAS situações que causam essa falha. Qual a conduta (fármaco, dose, posologia)?</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> A codeína é pró-fármaco: precisa ser convertida em morfina pela CYP2D6. Falha quando: (1) hipoexpressão/polimorfismo da CYP2D6; (2) uso de INIBIDOR da 2D6 (fluoxetina, duloxetina). Conduta: trocar por morfina 5–10 mg VO 4/4h. <span class="checklist">✓ pró-fármaco/2D6 ✓ 2 causas ✓ morfina c/ dose</span></div></div>
+
+<div class="q"><div class="n">QD6 <span class="peso">· 0,7</span></div>
+<div class="en">Por que a morfina pode causar convulsões em alguns pacientes? Descreva a via metabólica e os metabólitos envolvidos.</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> A morfina é conjugada com ácido glicurônico (UGT), gerando M3G (convulsivante) e M6G (analgésico). O M3G se acumula (p. ex. na insuficiência renal) e atravessa a BHE, sobretudo se ela estiver INFLAMADA → convulsão. Depende de fatores individuais (polimorfismo). <span class="checklist">✓ UGT ✓ M3G/M6G ✓ acúmulo renal/BHE</span></div></div>
+
+<div class="q"><div class="n">QD7 <span class="peso">· 0,7</span></div>
+<div class="en">Paciente será submetido à retirada de corticoide após uso crônico. Qual exame deve ser solicitado antes de suspender e por quê? Como deve ser feita a retirada?</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Dosagem de ACTH (e cortisol) sérico. O corticoide exógeno crônico suprime o eixo HHA (↓CRH/ACTH e ↓cortisol endógeno); a dosagem avalia a recuperação do eixo antes de zerar. Retirada LENTA e gradual (↓10–20% a cada 1–2 semanas; dosar ACTH ao chegar perto de ~5 mg de prednisona) para evitar insuficiência adrenal. <span class="checklist">✓ ACTH ✓ supressão do eixo ✓ desmame lento</span></div></div>
+
+<div class="q"><div class="n">QD8 <span class="peso">· 0,7</span></div>
+<div class="en">Paciente com neuropatia diabética em uso de FLUOXETINA para depressão. Qual a 1ª escolha para a dor (dose e posologia) e por que NÃO usar duloxetina nem tramadol neste caso?</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Pregabalina 75 mg 12/12h, titulando até 300–600 mg/dia (÷2) [gabapentina 900–3600 ÷3 também vale]. Não usar duloxetina/tramadol: somam efeito serotoninérgico ao ISRS → risco de síndrome serotoninérgica; a fluoxetina ainda inibe a CYP2D6. O gabapentinoide age no canal de Ca²⁺ (α2δ), sem essa interação. <span class="checklist">✓ pregabalina c/ dose ✓ risco serotoninérgico ✓ 2D6</span></div></div>
+
+<div class="q"><div class="n">QD9 <span class="peso">· 0,7</span></div>
+<div class="en">Descreva os três "Ts" da boa prática com opioides (titulação, ajuste, transição) e explique, na titulação, por que se começa com fármaco de curta ação e quando ela deve ser encerrada.</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> Titulação (teste, "começar baixo e devagar"), ajuste (individualização) e transição (redução gradual). Usa-se CURTA ação no início (permite ajuste fino e menos EA) e converte-se para LONGA ação quando a dose efetiva é atingida e estável. Encerra-se: ao alcançar a dose ótima; sem resposta após aumento de 2–3 doses; ou por EA intolerável. <span class="checklist">✓ 3 Ts ✓ curta→longa ✓ critérios de parada</span></div></div>
+
+<div class="q"><div class="n">QD10 <span class="peso">· 0,7</span></div>
+<div class="en">Por que o uso crônico de AINEs pode causar problemas renais? Descreva a cadeia fisiopatológica e cite dois efeitos renais/eletrolíticos esperados.</div>
+<textarea></textarea>
+<div class="gab"><b>Modelo:</b> As prostaglandinas (PGI2/PGE2, via COX) dilatam a vasculatura renal e mantêm a perfusão/TFG, sobretudo quando o fluxo já está reduzido (idoso, IC, hipovolemia). O AINE inibe a COX → ↓PGs → vasoconstrição renal → ↓perfusão → IRA hemodinâmica. Efeitos: retenção de Na⁺/água (edema, ↑PA) e HIPERcalemia (↓renina/aldosterona). <span class="checklist">✓ ↓PG→↓perfusão ✓ IRA ✓ 2 efeitos (edema/↑PA, hipercalemia)</span></div></div>
+
+<h2>PARTE II — Objetivas (0,5 cada · 3,0)</h2>
+
+<div class="q" data-obj="1"><div class="n">1 <span class="peso">· 0,5</span></div>
+<div class="en">Sobre interações e metabolismo dos opioides, assinale a correta:</div>
+<div class="alts">
+<button>A) O fenobarbital, indutor da CYP, aumenta o efeito analgésico da codeína ao acelerar sua conversão em morfina</button>
+<button>B) A fluoxetina, inibidora da CYP2D6, reduz o efeito analgésico da codeína</button>
+<button>C) A morfina sofre extenso metabolismo pela CYP2D6, gerando metabólito inativo</button>
+<button>D) A metadona possui poucas interações medicamentosas, sendo ideal na polifarmácia</button></div>
+<div class="gab"><b>B.</b> Fluoxetina inibe a 2D6 → menos morfina formada → falha. A: indutor desvia a codeína para a via inativa (↓efeito, não ↑). C: morfina é UGT (conjugação), não CYP2D6. D: metadona tem MUITAS interações CYP.</div></div>
+
+<div class="q" data-obj="2"><div class="n">2 <span class="peso">· 0,5</span></div>
+<div class="en">Sobre o AAS em dose antiplaquetária (100 mg/dia), assinale a correta:</div>
+<div class="alts">
+<button>A) Atua como anticoagulante, inibindo fatores da cascata da coagulação</button>
+<button>B) Inibe reversivelmente a COX-2 endotelial, reduzindo a prostaciclina</button>
+<button>C) Inibe irreversivelmente a COX-1 plaquetária, reduzindo o TXA2 durante toda a vida da plaqueta (7–10 dias)</button>
+<button>D) Deve ser suspenso 24 h antes de cirurgias, pois seu efeito é rapidamente reversível</button></div>
+<div class="gab"><b>C.</b> AAS acetila irreversivelmente a COX-1 da plaqueta (anucleada) → efeito dura a vida dela, ~7–10 dias (por isso suspende ~7 dias antes de cirurgia). É antiAGREGANTE, não anticoagulante.</div></div>
+
+<div class="q" data-obj="3"><div class="n">3 <span class="peso">· 0,5</span></div>
+<div class="en">Sobre a farmacocinética dos glicocorticoides, assinale a correta:</div>
+<div class="alts">
+<button>A) A prednisona é ativada em prednisolona pela CYP3A4</button>
+<button>B) A fração LIGADA às proteínas plasmáticas é a biologicamente ativa</button>
+<button>C) A prednisona é convertida em prednisolona pela enzima 11β-hidroxidesidrogenase hepática; no hepatopata grave prefere-se a prednisolona</button>
+<button>D) A meia-vida plasmática do corticoide é igual à sua duração de ação biológica</button></div>
+<div class="gab"><b>C.</b> Ativação por 11β-HSD (não CYP3A4). Ativo = fração LIVRE (~10%). Meia-vida plasmática ≠ vida biológica (medida pela supressão do ACTH).</div></div>
+
+<div class="q" data-obj="4"><div class="n">4 <span class="peso">· 0,5</span></div>
+<div class="en">Sobre os antidepressivos na dor neuropática, assinale a correta:</div>
+<div class="alts">
+<button>A) Só reduzem a dor em pacientes deprimidos</button>
+<button>B) Reduzem a dor mesmo em não deprimidos, por aumentar noradrenalina/serotonina e reforçar o controle inibitório descendente</button>
+<button>C) Os ISRS (fluoxetina) são a 1ª linha da dor neuropática, superiores aos tricíclicos</button>
+<button>D) A duloxetina deve ser administrada à noite por causar sonolência</button></div>
+<div class="gab"><b>B.</b> Analgesia independe da depressão (via descendente NA/5-HT). ISRS é INFERIOR ao tricíclico. Duloxetina é de MANHÃ (causa insônia).</div></div>
+
+<div class="q" data-obj="5"><div class="n">5 <span class="peso">· 0,5</span></div>
+<div class="en">Sobre a terapia com corticoide em dias alternados e a supressão do eixo, assinale a correta:</div>
+<div class="alts">
+<button>A) Doses de 40–60 mg/dia de prednisona suprimem o eixo HHA; o esquema em dias alternados ajuda a poupá-lo</button>
+<button>B) A terapia em dias alternados previne totalmente a osteoporose e a catarata</button>
+<button>C) No esquema em dias alternados usa-se corticoide de ação longa (dexametasona)</button>
+<button>D) Abaixo de 20 mg/dia de prednisona o eixo já está totalmente suprimido</button></div>
+<div class="gab"><b>A.</b> 40–60 mg/d suprime o eixo; dias alternados (GC de ação MÉDIA, de manhã) poupam mas NÃO previnem osteoporose/catarata. Abaixo de ~7,5 mg/d o eixo em geral se mantém.</div></div>
+
+<div class="q" data-obj="6"><div class="n">6 <span class="peso">· 0,5</span></div>
+<div class="en">Assinale a alternativa com associação, dose e posologia CORRETAS na dor neuropática:</div>
+<div class="alts">
+<button>A) Gabapentina 300 mg 2×/dia + amitriptilina 100 mg pela manhã</button>
+<button>B) Pregabalina 150 mg 2×/dia + gabapentina 300 mg 3×/dia</button>
+<button>C) Gabapentina 300 mg 3×/dia + amitriptilina 100 mg à noite</button>
+<button>D) Duloxetina 30 mg 2×/dia + tramadol em paciente usando sertralina</button></div>
+<div class="gab"><b>C.</b> Gabapentina SEMPRE ÷3 (transportador saturável) + amitriptilina à NOITE (sonolência). A: gabapentina em 2 tomadas e amitriptilina de manhã, errados. B: gabapentinoides NUNCA juntos. D: duloxetina é 1×/dia manhã e somar a sertralina/tramadol = risco serotoninérgico.</div></div>
+
+<div class="bar">
+<span class="t" id="timer">1:30:00</span>
+<button id="rev" onclick="reveal()">Entregar e corrigir</button>
+</div>
+
+<script>
+const answers={1:1,2:2,3:2,4:1,5:0,6:2}; // índice da correta (0=A)
+document.querySelectorAll('.q[data-obj] .alts').forEach(g=>{
+  const obj=g.parentElement.dataset.obj;
+  g.querySelectorAll('button').forEach((b,j)=>b.onclick=()=>{
+    if(document.body.classList.contains('revealed'))return;
+    g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');b.dataset.pick=j;g.dataset.pick=j;
+  });
+});
+function reveal(){
+  document.body.classList.add('revealed');
+  let ok=0;
+  document.querySelectorAll('.q[data-obj]').forEach(q=>{
+    const obj=q.dataset.obj, g=q.querySelector('.alts'), corr=answers[obj], pick=g.dataset.pick;
+    g.querySelectorAll('button').forEach((b,j)=>{b.disabled=true;if(j===corr)b.classList.add('certa');if(String(j)===pick&&j!==corr)b.classList.add('errada');});
+    if(String(corr)===pick)ok++;
+  });
+  clearInterval(TIMER);
+  document.getElementById('rev').textContent=`Objetivas: ${ok}/6 · agora corrija as QDs pelos modelos`;
+  window.scrollTo(0,0);
+}
+let t=5400;const TIMER=setInterval(()=>{t--;if(t<0){clearInterval(TIMER);return;}const h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;document.getElementById('timer').textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;},1000);
+</script>
+</div></body></html>

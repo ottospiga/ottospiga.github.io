@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast Farmaco UC13 · 5 episódios</title>
+  <style>
+    :root{
+      --bg:#0f1720; --card:#161f2b; --line:#2a3a4d;
+      --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --blue:#4c8dff;
+      --shadow:0 6px 24px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:var(--bg); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      padding:24px 16px 40px; display:flex; justify-content:center;
+    }
+    main{width:100%; max-width:720px}
+    nav{display:flex; gap:18px; margin-bottom:20px; font-size:14px}
+    nav a{color:var(--blue); text-decoration:none}
+    nav a:hover{text-decoration:underline}
+    .kicker{color:var(--tealo); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase}
+    h1{font-size:clamp(24px,6vw,34px); margin:6px 0 4px}
+    .sub{color:var(--mut); font-size:14px; margin-bottom:20px}
+    .eps{display:grid; gap:14px}
+    .ep{
+      background:var(--card); border:1px solid var(--line); border-radius:14px;
+      padding:16px 18px; box-shadow:var(--shadow);
+    }
+    .ep h2{font-size:16px; margin-bottom:10px}
+    .ep h2 span{color:var(--tealo); margin-right:8px}
+    audio{width:100%; display:block}
+    footer{margin-top:26px; color:var(--mut); font-size:13px}
+    footer a{color:var(--blue); text-decoration:none}
+  </style>
+</head>
+<body>
+  <main>
+    <nav><a href="../../../index.html">← Medicina</a><a href="uc13-farmaco-podcast-roteiros.html">Roteiros (texto)</a></nav>
+    <p class="kicker">Farmacologia · UC13</p>
+    <h1>Podcast Farmaco UC13</h1>
+    <p class="sub">5 episódios de revisão pra A1 — aperte o play (os áudios só carregam quando você toca).</p>
+    <div class="eps">
+      <div class="ep">
+        <h2><span>Ep. 1</span>Opioides</h2>
+        <audio controls preload="none" src="podcast/ep1-opioides.mp3"></audio>
+      </div>
+      <div class="ep">
+        <h2><span>Ep. 2</span>AINEs</h2>
+        <audio controls preload="none" src="podcast/ep2-aines.mp3"></audio>
+      </div>
+      <div class="ep">
+        <h2><span>Ep. 3</span>Corticoides</h2>
+        <audio controls preload="none" src="podcast/ep3-corticoides.mp3"></audio>
+      </div>
+      <div class="ep">
+        <h2><span>Ep. 4</span>Dor Neuropática &amp; Canabinoides</h2>
+        <audio controls preload="none" src="podcast/ep4-dor-neuropatica-e-canabinoides.mp3"></audio>
+      </div>
+      <div class="ep">
+        <h2><span>Ep. 5</span>Véspera — Radar completo</h2>
+        <audio controls preload="none" src="podcast/ep5-vespera-radar-completo.mp3"></audio>
+      </div>
+    </div>
+    <footer>Roteiros dos episódios em <a href="uc13-farmaco-podcast-roteiros.html">texto</a>.</footer>
+  </main>
+</body>
+</html>

@@ -48,6 +48,7 @@ TIPO_LABELS = {
     "flashcards": "flashcards",
     "banco": "banco de questões",
     "simulado": "simulado",
+    "material": "material de apoio",
 }
 
 
@@ -72,6 +73,8 @@ def infer_tipo(filename):
         return "banco"
     if any(t.startswith("simulad") for t in tokens):
         return "simulado"
+    if any(t in ("podcast", "roteiro", "roteiros", "transcricao", "transcricoes", "leitura", "material") for t in tokens):
+        return "material"
     if any(re.fullmatch(r"sp\d+", t) for t in tokens) or "inicial" in tokens or "aprofundamento" in tokens:
         return "guia-sp"
     if any(re.fullmatch(r"[ab]\d", t) for t in tokens) or "revisao" in tokens or "guia" in tokens:
@@ -214,6 +217,7 @@ PAGE_TOP = """<!DOCTYPE html>
     .b-flashcards{color:var(--purple); background:rgba(198,179,255,.12); border:1px solid rgba(198,179,255,.35)}
     .b-banco{color:var(--amber); background:rgba(255,180,84,.12); border:1px solid rgba(255,180,84,.35)}
     .b-simulado{color:var(--green); background:rgba(56,211,159,.12); border:1px solid rgba(56,211,159,.35)}
+    .b-material{color:var(--mut); background:rgba(159,178,198,.12); border:1px solid rgba(159,178,198,.35)}
     .data{color:var(--mut); font-size:13px}
     .abrir{color:var(--tealo); font-weight:600; font-size:13px; margin-left:auto; white-space:nowrap}
     footer{margin-top:34px; color:var(--mut); font-size:13px}
