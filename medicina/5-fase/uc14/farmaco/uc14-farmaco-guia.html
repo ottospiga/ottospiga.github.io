@@ -1672,4 +1672,5 @@ renderQuiz('sp4-quiz',LIST_SP4);
 document.querySelectorAll('#sp4-flt button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#sp4-flt button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=b.dataset.f;applyFilter('sp4-quiz',LIST_SP4,q=>f==='all'||(f==='OF'&&q.selo==='OF')||(f==='VE'&&(q.selo==='VE'||q.selo==='IN'))||(f==='discursiva'&&q.tipo==='discursiva')||(f==='T11'&&q.prova.startsWith('T11')));}));
 
 document.getElementById('aul-busca').addEventListener('input',e=>{const v=e.target.value.toLowerCase();document.querySelectorAll('.seg').forEach(p=>p.classList.toggle('hide',v&&!p.textContent.toLowerCase().includes(v)));});
-</script></body></html>
+</script><!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>

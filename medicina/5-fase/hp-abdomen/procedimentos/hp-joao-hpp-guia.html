@@ -1087,5 +1087,6 @@ FY.forEach(f=>{const p=document.createElement('div');p.className='panel';p.inner
 document.querySelectorAll('figure.fig img').forEach(im=>im.addEventListener('click',()=>{lb.querySelector('img').src=im.src;lb.querySelector('.cap').textContent=(im.closest('figure').querySelector('figcaption')||{}).textContent||'';lb.classList.add('on');}));
 lb.addEventListener('click',()=>lb.classList.remove('on'));document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on');});})();
 </script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
 </body>
 </html>
