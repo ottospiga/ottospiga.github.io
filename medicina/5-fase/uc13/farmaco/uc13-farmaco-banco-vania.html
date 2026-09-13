@@ -284,7 +284,7 @@ com:"GABARITO DEDUZIDO da prova corrigida: o veterano da T9 marcou 'e' (II, III 
 {b:"opi",t:"obj",fonte:"PM T9 Q1 (figura · corrigida 2×)",conf:"o",
 e:"(Figura da metabolização codeína/morfina do slide) Observe a figura e analise as sentenças:\nI. A metabolização de fase 2 (UGT2B7) é a via predominante de biotransformação hepática tanto para a morfina como para a codeína.\nII. Pacientes com polimorfismo genético que SUPEREXPRESSAM a CYP2D6 têm BAIXA resposta analgésica ao usar codeína.\nIII. Em pacientes que fazem uso crônico de CARBAMAZEPINA é esperado que o paciente tenha baixa eficácia ao usar codeína.\nIV. A CYP3A4 é a responsável pela conversão em metabólitos INATIVOS, tanto para a morfina como para a codeína.",
 alts:["I e II","I, II e IV","II e III","I e IV","I, II, III e IV"],g:3,
-com:"GABARITO DELA (duas cópias corrigidas da PM T9: ambas 'd' com CERTO): I e IV. A II é a falsa clássica: quem SUPEREXPRESSA a 2D6 converte MAIS codeína em morfina → resposta AUMENTADA (risco de intoxicação!); baixa resposta = HIPOexpressão ou INIBIDOR da 2D6 (fluoxetina — é a QD oficial da falha da codeína). A III parece verdadeira pela lógica do desvio (CBZ induz CYP3A4 → mais rota inativa), MAS ela corrigiu como FALSA nas duas provas — a regra dela: quem decide a eficácia da codeína é a CYP2D6 (polimorfismo/inibição), e 'indução de CYP não altera' (mesmo mantra do gabarito em vermelho da PM T5 sobre a morfina). Em prova, siga o gabarito dela: I e IV = leitura direta da figura (UGT2B7 predominante; CYP3A4 → norcodeína/normorfina INATIVOS)."},
+com:"GABARITO DELA (duas cópias corrigidas da PM T9: ambas 'd' com CERTO): I e IV. A II é a falsa clássica: quem SUPEREXPRESSA a 2D6 converte MAIS codeína em morfina → resposta AUMENTADA (risco de intoxicação!); baixa resposta = HIPOexpressão ou INIBIDOR da 2D6 (fluoxetina — é a QD oficial da falha da codeína). A III parece verdadeira pela lógica do desvio (CBZ induz CYP3A4 → mais rota inativa), MAS ela corrigiu como FALSA nas duas provas — a regra dela: quem decide a eficácia da codeína é a CYP2D6 (polimorfismo/inibição), e 'indução de CYP não altera' (mesmo mantra do gabarito em vermelho da PM T5 sobre a morfina). Em prova, siga o gabarito dela: I e IV = leitura direta da figura (UGT2B7 predominante; CYP3A4 → norcodeína/normorfina INATIVOS). ⚠️ ATUALIZAÇÃO (PM T11 Q17): a MESMA relação caiu como discursiva ('resposta da codeína + carbamazepina?') e a farmacologia padrão é REDUÇÃO da analgesia (indução do 3A4 desvia p/ inativo → menos morfina) — ou seja, o CONTEÚDO da III é o mecanismo correto; a divergência é da correção dela. Veja a QD 'PM T11 Q17' no filtro de PMs."},
 
 // QDs de opioides
 {b:"opi",t:"qd",fonte:"PM T7 QD6 (oficial)",conf:"o",
@@ -696,6 +696,37 @@ com:"Ela usa o paracetamol como o 'seguro para o estômago' (não inibe COX-1 pe
 e:"Qual o analgésico de escolha, dose e posologia, para dor de intensidade média no âmbito domiciliar (pós-procedimento), disponível no SUS? Pode-se associar um AINE?",
 resp:"TRAMADOL 50 mg VO 6/6h (opioide fraco, SUS). Associação com AINE (ex.: dipirona) é possível pelo efeito poupador de opioide — mas a combinação em UM comprimido (opioide+AINE) é de rede privada; no SUS vêm separados.",
 com:"Não confundir: dipirona 1 g foi a resposta quando a pergunta era 'analgésico do SUS' pura (a dipirona 'pena' como analgésico). Se pede OPIOIDE fraco domiciliar → tramadol 50 mg 6/6h."},
+
+// ===== PMs T10 e T11 (adicionadas 11/09) — PMs completas com gabarito e correção. Reciclam MUITO entre si — é o poço da melhoria. =====
+{b:"opi",t:"qd",fonte:"PM T11 Q17 (oficial) ⚠️",conf:"o",
+e:"Qual a resposta analgésica esperada em pacientes que usam codeína associada à CARBAMAZEPINA? Explique.",
+resp:"REDUZIDA (risco de falha analgésica). A carbamazepina é INDUTORA da CYP3A4; sob indução, a codeína é desviada para a via da 3A4 (norcodeína, INATIVA), sobrando menos codeína para a CYP2D6 formar MORFINA (o metabólito ativo) → menos morfina → menos analgesia.",
+com:"⚠️ DIVERGÊNCIA — VALE CONFIRMAR NA VISTA DE PROVA. Acima está a resposta farmacologicamente correta (indução de CYP reduz o efeito de um pró-fármaco). PORÉM: na questão-figura (PM T9) a sentença 'carbamazepina crônica → baixa eficácia da codeína' aparece tratada como FALSA, e um veterano que respondeu 'AUMENTADA' recebeu boa parte da nota (0,6/0,8, com ela anotando 'qual?'). A posição dela é, no mínimo, ambígua. Estude o mecanismo padrão (REDUZIDA); se cair, é exatamente o tipo de questão para levantar no diálogo com a docente."},
+
+{b:"aine",t:"qd",fonte:"PM T11 Q12 (oficial)",conf:"o",
+e:"Paciente usou nimesulida 100 mg 2×/dia por 8 dias (trauma no joelho) e apresenta ↑ de transaminases (ALT/AST), ↑ de creatinina e PA 150×90. Essas alterações têm relação com a nimesulida? Explique.",
+resp:"SIM. (1) Fígado: a nimesulida tem HEPATOTOXICIDADE conhecida (↑ALT/AST) — é o motivo da contraindicação em menores de 12 anos. (2) Rim/PA: ao inibir a COX-2, reduz PGI2/PGE2 que mantêm a vasodilatação e a perfusão renal → ↓TFG e ↑creatinina, com retenção de Na⁺/água → ↑PA.",
+com:"Junta os dois eixos que ela adora: fígado (nimesulida) + rim/PA (mecanismo das prostaglandinas, direto do artigo do Batlouni)."},
+
+{b:"neuro",t:"qd",fonte:"PM T10 Q11 · T11 Q11 (oficial)",conf:"o",
+e:"Paciente com neuropatia diabética há 20 dias em uso de gabapentina 100 mg 3×/dia (300 mg/dia), ainda com muita dor. Qual a conduta? Cite dois efeitos adversos justificados pelo mecanismo.",
+resp:"AUMENTAR a dose — 300 mg/dia é subterapêutico; a faixa efetiva é 900–3600 mg/dia (÷3, por causa do transportador intestinal saturável). EAs (pelo bloqueio dos canais de Ca²⁺): sonolência/letargia e tontura/ataxia (também edema de MMII e ganho de peso).",
+com:"Pegadinha de DOSE: o fármaco está certo, a dose é que está baixa. Conduta = titular para cima, NÃO trocar de fármaco."},
+
+{b:"opi",t:"qd",fonte:"PM T10 Q18 (oficial)",conf:"o",
+e:"Explique mecanisticamente por que há manifestações clínicas significativas quando o opioide é retirado ABRUPTAMENTE em usuários crônicos.",
+resp:"No uso crônico o opioide inibe tonicamente o sistema noradrenérgico (locus coeruleus) e a célula compensa com up-regulation da adenilato ciclase (AMPc 'represado'). Na retirada abrupta some a inibição → HIPERATIVIDADE adrenérgica de rebote: rinorreia, lacrimejamento, midríase, piloereção, cãibras, diarreia, taquicardia, ansiedade. A readministração do opioide suprime rapidamente os sintomas.",
+com:"Ideia-chave: abstinência = REBOTE do que o opioide vinha suprimindo (tônus simpático/AMPc). É o espelho dos efeitos agudos."},
+
+{b:"opi",t:"qd",fonte:"PM T10 Q12 (oficial)",conf:"o",
+e:"A fentanila IV libera pouca ou quase nenhuma histamina, ao contrário da morfina IV. Qual manifestação clínica é observada quando há essa liberação de histamina (pela morfina)?",
+resp:"PRURIDO (coceira), tipicamente OROFACIAL e mais intenso na via parenteral; pode vir com rubor/urticária e, em suscetíveis, broncoespasmo. Por isso prefere-se a fentanila quando se quer evitar a liberação histamínica.",
+com:"É o par da T12 Q14 (fentanila = baixo prurido). Morfina libera histamina → prurido; fentanila não."},
+
+{b:"cort",t:"obj",fonte:"PM T11 Q6 (oficial)",conf:"o",
+e:"A.X., 52 anos, usa prednisona 40 mg/dia há 2 anos (tumor cerebral). Qual alteração é provável decorrente do uso CRÔNICO?",
+alts:["Osteoporose por ↓reabsorção intestinal de cálcio e ↑eliminação renal, com ativação dos osteoclastos pela osteoprotegerina","Aumento da suscetibilidade a infecções pelo AUMENTO da lipocortina-1 e consequente inibição das vias COX e LOX","Hiperglicemia decorrente do aumento da resistência hepática à insulina e do aumento da glicogênese","Atrofia e fraqueza muscular por aumento do catabolismo proteico, e ganho de peso por alteração do metabolismo lipídico e do balanço hidroeletrolítico"],g:3,
+com:"GABARITO: D — miopatia esteroide (catabolismo proteico) + redistribuição de gordura/retenção (fácies cushingoide, ganho de peso). A: 'osteoprotegerina ATIVA osteoclasto' é falso — a OPG INIBE (o corticoide reduz a OPG, liberando o RANKL). B: a lipocortina até aumenta, mas o ↑infecção vem da IMUNOSSUPRESSÃO, não dessa via. C: é gliconeogênESE (não 'glicogênese') e resistência PERIFÉRICA à insulina."},
 ];
 </script>
 <script>

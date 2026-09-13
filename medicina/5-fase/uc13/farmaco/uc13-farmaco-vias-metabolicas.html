@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vias Metabólicas · Farmaco UC13</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;--line:#e2e8f0;--ok:#15803d;--ok-soft:#dcfce7;--red:#b91c1c;--red-soft:#fee2e2;--gray:#94a3b8;--gray-soft:#eef1f4;--warn:#a16207;--warn-soft:#fef9c3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:15.5px}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 80px}
+header{background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;border-radius:16px;padding:22px 24px;margin-bottom:14px}
+header h1{margin:0 0 6px;font-size:22px}header .sub{opacity:.93;font-size:14px}
+.nav{position:sticky;top:0;background:var(--bg);padding:8px 0;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);z-index:5;margin-bottom:6px}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:14px 0}
+h2{font-size:18px;margin:24px 0 2px;display:flex;align-items:center;gap:8px;scroll-margin-top:58px}
+.pill{cursor:pointer}
+.svgwrap{overflow-x:auto;margin:6px 0 4px}
+svg.diag{width:100%;height:auto;min-width:640px;max-width:980px;display:block}
+.bx{stroke-width:1.5}
+.bx-parent{fill:var(--accent-soft);stroke:var(--accent)}
+.bx-ativo{fill:var(--ok-soft);stroke:var(--ok)}
+.bx-toxico{fill:var(--red-soft);stroke:var(--red)}
+.bx-inativo{fill:var(--gray-soft);stroke:var(--gray)}
+.bx-warn{fill:var(--warn-soft);stroke:var(--warn)}
+text.bt{font-size:15px;font-weight:700;fill:#1a2332}
+text.bs{font-size:11.5px;fill:#5a6a7e}
+text.enz{font-size:12.5px;font-style:italic;fill:#0c4a5e;font-weight:600}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin:4px 0 2px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:14px;height:14px;border-radius:4px;border:1.5px solid}
+.d-parent{background:var(--accent-soft);border-color:var(--accent)}
+.d-ativo{background:var(--ok-soft);border-color:var(--ok)}
+.d-toxico{background:var(--red-soft);border-color:var(--red)}
+.d-inativo{background:var(--gray-soft);border-color:var(--gray)}
+.lei{background:var(--warn-soft);border-left:4px solid var(--warn);border-radius:0 10px 10px 0;padding:9px 13px;margin:8px 0;font-size:14px}
+.lei b{color:#7c5008}
+.exc{font-size:13.5px;color:#0c4a5e;background:#eaf4f8;border-radius:8px;padding:7px 12px;margin:6px 0}
+.exc b{color:#0c4a5e}
+ul{margin:6px 0;padding-left:20px}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0}
+th{background:var(--accent-soft);color:#0c4a5e;padding:6px 9px;border:1px solid var(--line);text-align:left}
+td{padding:6px 9px;border:1px solid var(--line);vertical-align:top}
+.note{background:var(--accent-soft);border:1px solid #bae6fd;border-radius:10px;padding:10px 14px;font-size:13.5px;margin:10px 0}
+</style></head><body><div class="wrap">
+<header><h1>🧬 Vias metabólicas dos fármacos — UC13</h1>
+<div class="sub">Fase 1 (CYP, oxidação) × Fase 2 (conjugação). Quem vira o quê, por qual enzima, e o que é a "lei de prova" de cada um.</div></header>
+
+<div class="card note"><b>Como ler:</b> as setas são reações; o nome sobre a seta é a <b>enzima</b>. A cor da caixa diz o destino do metabólito.
+<div class="leg" style="margin-top:8px">
+<span><span class="dot d-parent"></span> fármaco original</span>
+<span><span class="dot d-ativo"></span> metabólito ATIVO / desejado</span>
+<span><span class="dot d-toxico"></span> metabólito TÓXICO</span>
+<span><span class="dot d-inativo"></span> metabólito INATIVO</span>
+</div></div>
+
+<div class="nav">
+<span class="pill" onclick="go('cod')">Codeína / Morfina ⭐</span>
+<span class="pill" onclick="go('tram')">Tramadol</span>
+<span class="pill" onclick="go('para')">Paracetamol</span>
+<span class="pill" onclick="go('pred')">Prednisona</span>
+<span class="pill" onclick="go('dip')">Dipirona</span>
+<span class="pill" onclick="go('cbz')">Carbamazepina</span>
+<span class="pill" onclick="go('neuro')">Gaba · ADT · Duloxetina · CBD</span>
+<span class="pill" onclick="go('prot')">Proteínas plasmáticas</span>
+<span class="pill" onclick="go('resumo')">Fase 1 × Fase 2</span>
+</div>
+<script>function go(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="aB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0e7490"/></marker>
+<marker id="aGray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker>
+<marker id="aG" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#15803d"/></marker>
+<marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#b91c1c"/></marker>
+</defs></svg>
+
+<!-- ============ CODEINA / MORFINA ============ -->
+<h2 id="cod">⭐ Codeína & Morfina <span style="font-size:12px;color:var(--muted)">· a figura que ela já cobrou 2×</span></h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 960 380" role="img">
+<!-- Codeína parent -->
+<g><rect class="bx bx-parent" x="10" y="162" width="130" height="56" rx="8"/><text class="bt" x="75" y="186" text-anchor="middle">Codeína</text><text class="bs" x="75" y="204" text-anchor="middle">pró-fármaco</text></g>
+<!-- arrows from codeína -->
+<line x1="140" y1="176" x2="352" y2="80" stroke="#94a3b8" stroke-width="2" marker-end="url(#aGray)"/>
+<text class="enz" x="200" y="118">CYP3A4</text>
+<line x1="140" y1="190" x2="342" y2="190" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="180" y="182">CYP2D6 (~10%)</text>
+<line x1="140" y1="206" x2="322" y2="312" stroke="#94a3b8" stroke-width="2" marker-end="url(#aGray)"/>
+<text class="enz" x="150" y="270">UGT2B7 (fase 2)</text>
+<!-- Norcodeína -->
+<g><rect class="bx bx-inativo" x="352" y="52" width="210" height="52" rx="8"/><text class="bt" x="457" y="74" text-anchor="middle">Norcodeína</text><text class="bs" x="457" y="92" text-anchor="middle">INATIVA</text></g>
+<!-- Morfina -->
+<g><rect class="bx bx-ativo" x="342" y="162" width="150" height="56" rx="8"/><text class="bt" x="417" y="186" text-anchor="middle">MORFINA</text><text class="bs" x="417" y="204" text-anchor="middle">ativa — o efeito real</text></g>
+<!-- Cod-6-glic -->
+<g><rect class="bx bx-inativo" x="300" y="312" width="270" height="50" rx="8"/><text class="bt" x="435" y="333" text-anchor="middle">Codeína-6-glicuronídeo</text><text class="bs" x="435" y="351" text-anchor="middle">via predominante · inativa</text></g>
+<!-- from morfina to M6G / M3G -->
+<line x1="492" y1="178" x2="742" y2="120" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="560" y="140">UGT2B7</text>
+<line x1="492" y1="202" x2="742" y2="272" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#aR)"/>
+<text class="enz" x="560" y="258">UGT2B7</text>
+<!-- M6G -->
+<g><rect class="bx bx-ativo" x="742" y="92" width="208" height="56" rx="8"/><text class="bt" x="846" y="116" text-anchor="middle">M6G</text><text class="bs" x="846" y="134" text-anchor="middle">analgésico potente</text></g>
+<!-- M3G -->
+<g><rect class="bx bx-toxico" x="742" y="252" width="208" height="56" rx="8"/><text class="bt" x="846" y="276" text-anchor="middle">M3G</text><text class="bs" x="846" y="294" text-anchor="middle">CONVULSIVANTE (sem analgesia)</text></g>
+</svg></div>
+<div class="lei"><b>Leis de prova:</b> a via <b>predominante é a de fase 2 (UGT2B7)</b>. A <b>CYP2D6</b> ativa a codeína em morfina (o efeito). A <b>CYP3A4</b> gera metabólitos <b>inativos</b> (norcodeína / normorfina). A morfina NÃO usa CYP — é conjugada (UGT) → M3G (convulsiona, entra na BHE inflamada) e M6G (analgésico).</div>
+<ul>
+<li><b>Superexpressão da 2D6</b> → mais morfina → risco de intoxicação. <b>Hipoexpressão OU inibidor da 2D6</b> (fluoxetina, duloxetina) → falha analgésica.</li>
+<li><b>Carbamazepina (indutor da 3A4)</b> → desvia a codeína para a via inativa → <b>menos morfina → analgesia reduzida</b> <span style="color:var(--warn)">(⚠️ ponto de divergência na correção dela — veja o Banco, QD "PM T11 Q17")</span>.</li>
+<li>Convulsão por morfina = acúmulo de <b>M3G</b> (ex.: insuficiência renal); atravessa a BHE sobretudo quando ela está inflamada.</li>
+</ul>
+<div class="exc">💧 <b>Excreção:</b> RENAL (urina) — os glicuronídeos M3G/M6G saem pelo rim. Por isso <b>acumulam na insuficiência renal</b> (mais convulsão/sedação). Reduzir dose/alongar intervalo no renal crônico.</div>
+</div>
+
+<!-- ============ TRAMADOL ============ -->
+<h2 id="tram">Tramadol</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 960 250" role="img">
+<g><rect class="bx bx-parent" x="10" y="96" width="130" height="56" rx="8"/><text class="bt" x="75" y="120" text-anchor="middle">Tramadol</text><text class="bs" x="75" y="138" text-anchor="middle">pró-fármaco</text></g>
+<line x1="140" y1="112" x2="352" y2="74" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="200" y="80">CYP2D6</text>
+<line x1="140" y1="136" x2="352" y2="182" stroke="#94a3b8" stroke-width="2" marker-end="url(#aGray)"/>
+<text class="enz" x="200" y="176">CYP3A4</text>
+<g><rect class="bx bx-ativo" x="352" y="48" width="250" height="56" rx="8"/><text class="bt" x="477" y="72" text-anchor="middle">M1 (O-desmetiltramadol)</text><text class="bs" x="477" y="90" text-anchor="middle">ativo — afinidade μ</text></g>
+<g><rect class="bx bx-inativo" x="352" y="158" width="250" height="50" rx="8"/><text class="bt" x="477" y="179" text-anchor="middle">N-desmetiltramadol</text><text class="bs" x="477" y="197" text-anchor="middle">inativo</text></g>
+<g><rect class="bx bx-warn" x="648" y="86" width="300" height="76" rx="8"/><text class="bt" x="798" y="110" text-anchor="middle">+ ação própria (não-opioide):</text><text class="bs" x="798" y="130" text-anchor="middle">inibe recaptação de 5-HT e NA</text><text class="bs" x="798" y="147" text-anchor="middle">→ risco de síndrome serotoninérgica</text></g>
+<line x1="602" y1="124" x2="648" y2="124" stroke="#a16207" stroke-width="2" stroke-dasharray="4 3"/>
+</svg></div>
+<div class="lei"><b>Lei:</b> o tramadol é <b>dual</b> — vira M1 (opioide, pela 2D6) <b>e</b> inibe recaptação de serotonina/noradrenalina. Hipertermia + agitação + rigidez em quem usa tramadol = <b>síndrome serotoninérgica</b> (faça a "prova real da dipirona": não baixou = não é febre) → medidas físicas + suspender.</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — ~90% pela urina (o M1 ativo e o tramadol). Ajustar na insuficiência renal e hepática.</div>
+</div>
+
+<!-- ============ PARACETAMOL ============ -->
+<h2 id="para">Paracetamol</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 960 330" role="img">
+<g><rect class="bx bx-parent" x="10" y="132" width="150" height="56" rx="8"/><text class="bt" x="85" y="156" text-anchor="middle">Paracetamol</text></g>
+<line x1="160" y1="146" x2="352" y2="92" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#aGray)"/>
+<text class="enz" x="180" y="104">UGT / sulfo (~90%)</text>
+<line x1="160" y1="174" x2="352" y2="226" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#aR)"/>
+<text class="enz" x="185" y="214">CYP2E1 (fração)</text>
+<g><rect class="bx bx-inativo" x="352" y="64" width="330" height="56" rx="8"/><text class="bt" x="517" y="88" text-anchor="middle">Glicuronídeo + sulfato</text><text class="bs" x="517" y="106" text-anchor="middle">fase 2 · INATIVOS → urina</text></g>
+<g><rect class="bx bx-toxico" x="352" y="204" width="250" height="54" rx="8"/><text class="bt" x="477" y="227" text-anchor="middle">NAPQI</text><text class="bs" x="477" y="245" text-anchor="middle">reativo · TÓXICO</text></g>
+<!-- NAPQI → 2 destinos -->
+<line x1="602" y1="218" x2="726" y2="150" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="612" y="170">+ glutationa</text>
+<line x1="602" y1="244" x2="726" y2="292" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#aR)"/>
+<text class="enz" x="596" y="292">glutationa esgotada</text>
+<g><rect class="bx bx-ativo" x="726" y="120" width="224" height="60" rx="8"/><text class="bt" x="838" y="143" text-anchor="middle">Mercapturato</text><text class="bs" x="838" y="161" text-anchor="middle">inócuo → urina</text></g>
+<g><rect class="bx bx-toxico" x="726" y="266" width="224" height="56" rx="8"/><text class="bt" x="838" y="289" text-anchor="middle">NECROSE hepática</text><text class="bs" x="838" y="307" text-anchor="middle">liga proteínas do hepatócito</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> a maioria vira conjugado <b>inativo</b> (fase 2). Uma fração vira <b>NAPQI</b> (CYP2E1), normalmente neutralizado pela <b>glutationa</b>. Em <b>superdose, álcool ou indutor de CYP</b> (ex.: carbamazepina), a glutationa esgota → NAPQI causa <b>necrose hepática</b>. Antídoto: <b>NAC (N-acetilcisteína)</b>, que repõe glutationa. Teto: 2 g/dia crônico · 4 g/dia agudo. Não lesa o estômago (não inibe COX-1 periférica).</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — os conjugados (glicuronídeo, sulfato e o mercapturato) saem pela urina.</div>
+</div>
+
+<!-- ============ PREDNISONA ============ -->
+<h2 id="pred">Prednisona → Prednisolona (corticoides)</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 820 150" role="img">
+<g><rect class="bx bx-parent" x="10" y="46" width="190" height="58" rx="8"/><text class="bt" x="105" y="70" text-anchor="middle">Prednisona</text><text class="bs" x="105" y="88" text-anchor="middle">pró-fármaco (fraca)</text></g>
+<line x1="200" y1="75" x2="432" y2="75" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="235" y="66">11β-HSD (fígado)</text>
+<text class="bs" x="316" y="98" text-anchor="middle" style="fill:#b91c1c">NÃO é CYP3A4</text>
+<g><rect class="bx bx-ativo" x="432" y="46" width="210" height="58" rx="8"/><text class="bt" x="537" y="70" text-anchor="middle">Prednisolona</text><text class="bs" x="537" y="88" text-anchor="middle">forma ativa</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> a prednisona é ativada no fígado pela <b>11β-hidroxidesidrogenase</b> (não CYP3A4). Por isso, no <b>hepatopata grave, criança e no quadro agudo</b> prefere-se dar a <b>prednisolona</b> (já ativa) direto. O mesmo vale para cortisona → hidrocortisona.</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — inativada no fígado (conjugação) e eliminada pela urina.</div>
+</div>
+
+<!-- ============ DIPIRONA ============ -->
+<h2 id="dip">Dipirona</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 820 140" role="img">
+<g><rect class="bx bx-parent" x="10" y="42" width="150" height="56" rx="8"/><text class="bt" x="85" y="66" text-anchor="middle">Dipirona</text><text class="bs" x="85" y="84" text-anchor="middle">pró-fármaco</text></g>
+<line x1="160" y1="70" x2="352" y2="70" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="185" y="62">hidrólise</text>
+<g><rect class="bx bx-ativo" x="352" y="42" width="230" height="56" rx="8"/><text class="bt" x="467" y="66" text-anchor="middle">4-MAA (ativo)</text><text class="bs" x="467" y="84" text-anchor="middle">→ depois 4-AA</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> ela avisou que <b>NÃO cobra o nome do metabólito</b>. O que importa: a dipirona age no <b>SNC</b> (a "COX-3" dela) e, no corno dorsal, via <b>NMDA + 5-HT1</b> medular — por isso é adjuvante na dor neuropática agudizada. Não é anti-inflamatória. EA nº1: hipotensão.</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — os metabólitos saem pela urina (pode dar cor avermelhada à urina, achado clássico e inofensivo).</div>
+</div>
+
+<!-- ============ CARBAMAZEPINA ============ -->
+<h2 id="cbz">Carbamazepina</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 820 180" role="img">
+<g><rect class="bx bx-parent" x="10" y="60" width="180" height="58" rx="8"/><text class="bt" x="100" y="84" text-anchor="middle">Carbamazepina</text></g>
+<line x1="190" y1="89" x2="392" y2="89" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="230" y="80">CYP3A4</text>
+<g><rect class="bx bx-ativo" x="392" y="60" width="250" height="58" rx="8"/><text class="bt" x="517" y="82" text-anchor="middle">10,11-epóxido</text><text class="bs" x="517" y="100" text-anchor="middle">metabólito ATIVO</text></g>
+<!-- autoinducao loop -->
+<path d="M100,118 C100,160 290,160 290,118" fill="none" stroke="#a16207" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#aB)"/>
+<text class="enz" x="120" y="152" style="fill:#a16207">autoindução (induz a própria enzima)</text>
+</svg></div>
+<div class="lei"><b>Lei:</b> é <b>INDUTORA potente da CYP3A4</b> (e autoinduz — a dose precisa subir com o tempo). Consequência de prova: <b>derruba o nível</b> de contraceptivos, tramadol, canabinoides (CBD/THC → subterapêutico) e <b>desvia a codeína para a via inativa</b>. Se a questão disser que ela "aumenta a meia-vida" dos outros fármacos, está invertido — ela REDUZ. Substituta com o mesmo alvo (Na⁺) sem induzir CYP = lamotrigina.</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — metabolizada no fígado (epóxido) e eliminada pela urina (e parte nas fezes).</div>
+</div>
+
+<!-- ============ NEUROPATICOS ============ -->
+<h2 id="neuro">Dor neuropática — o que acontece com cada um</h2>
+
+<div class="card">
+<h3 style="font-size:15px;margin:2px 0 4px;color:#0c4a5e">Gabapentina & Pregabalina — o caso especial (quase não metabolizam)</h3>
+<div class="svgwrap"><svg class="diag" viewBox="0 0 940 150" role="img">
+<g><rect class="bx bx-parent" x="10" y="46" width="200" height="60" rx="8"/><text class="bt" x="110" y="70" text-anchor="middle">Gabapentina /</text><text class="bt" x="110" y="90" text-anchor="middle">Pregabalina</text></g>
+<line x1="210" y1="76" x2="392" y2="76" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#aGray)"/>
+<text class="enz" x="222" y="66">sem metabolismo hepático</text>
+<g><rect class="bx bx-inativo" x="392" y="46" width="270" height="60" rx="8"/><text class="bt" x="527" y="70" text-anchor="middle">RIM → excreção INALTERADA</text><text class="bs" x="527" y="90" text-anchor="middle">o fármaco sai como entrou</text></g>
+<g><rect class="bx bx-warn" x="684" y="34" width="246" height="84" rx="8"/><text class="bs" x="696" y="56" style="font-size:12px">• sem CYP · sem ligação proteica</text><text class="bs" x="696" y="76" style="font-size:12px">• ajustar dose na insuficiência renal</text><text class="bs" x="696" y="96" style="font-size:12px">• gabapentina: transportador saturável → ÷3;</text><text class="bs" x="696" y="112" style="font-size:12px">&nbsp;&nbsp;pregabalina absorção linear → ÷2</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> gabapentinoides <b>não usam CYP nem ligam proteína</b> — saem inalterados pelo rim. Consequência: <b>zero interação por CYP ou por deslocamento proteico</b>; o único ajuste é na função renal. Por isso são a escolha quando o paciente já usa muitos fármacos (ex.: ISRS).</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL, 100% INALTERADA (não sofre metabolismo). É o mais "renal" de todos — dose ajustada só pela função renal.</div>
+
+<h3 style="font-size:15px;margin:16px 0 4px;color:#0c4a5e">Amitriptilina (tricíclico) — tem metabólito ativo</h3>
+<div class="svgwrap"><svg class="diag" viewBox="0 0 940 150" role="img">
+<g><rect class="bx bx-parent" x="10" y="46" width="170" height="58" rx="8"/><text class="bt" x="95" y="80" text-anchor="middle">Amitriptilina</text></g>
+<line x1="180" y1="75" x2="372" y2="75" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="200" y="66">CYP (desmetilação)</text>
+<g><rect class="bx bx-ativo" x="372" y="46" width="220" height="58" rx="8"/><text class="bt" x="482" y="70" text-anchor="middle">Nortriptilina</text><text class="bs" x="482" y="88" text-anchor="middle">metabólito ATIVO</text></g>
+<line x1="592" y1="75" x2="700" y2="75" stroke="#94a3b8" stroke-width="2" marker-end="url(#aGray)"/>
+<text class="enz" x="600" y="66">CYP2D6</text>
+<g><rect class="bx bx-inativo" x="700" y="46" width="230" height="58" rx="8"/><text class="bt" x="815" y="70" text-anchor="middle">Hidroxi-metabólitos</text><text class="bs" x="815" y="88" text-anchor="middle">inativos → urina</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> a amitriptilina vira <b>nortriptilina (ativa)</b> — por isso a nortriptilina é usada direto como opção com <b>menos efeito anticolinérgico</b>. Alta ligação proteica; metabolizada por CYP (2D6 entre outras) → <b>metabolizador lento da 2D6 acumula</b> (mais anticolinérgico, cardiotoxicidade na overdose). Faixa na dor: 50–150 mg à noite.</div>
+<div class="exc">💧 <b>Excreção:</b> RENAL — metabolizada no fígado (CYP) e os metabólitos saem pela urina.</div>
+
+<h3 style="font-size:15px;margin:16px 0 4px;color:#0c4a5e">Duloxetina (IRSN) — a que inibe a 2D6</h3>
+<div class="svgwrap"><svg class="diag" viewBox="0 0 940 190" role="img">
+<g><rect class="bx bx-parent" x="10" y="60" width="150" height="58" rx="8"/><text class="bt" x="85" y="94" text-anchor="middle">Duloxetina</text></g>
+<line x1="160" y1="89" x2="352" y2="89" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#aGray)"/>
+<text class="enz" x="172" y="80">CYP1A2 (principal) + 2D6</text>
+<g><rect class="bx bx-inativo" x="352" y="60" width="250" height="58" rx="8"/><text class="bt" x="477" y="84" text-anchor="middle">Metabólitos inativos</text><text class="bs" x="477" y="102" text-anchor="middle">→ urina</text></g>
+<line x1="85" y1="118" x2="85" y2="150" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 3"/>
+<line x1="85" y1="150" x2="352" y2="150" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#aR)"/>
+<text class="enz" x="120" y="142" style="fill:#b91c1c">ela própria INIBE a CYP2D6</text>
+<g><rect class="bx bx-toxico" x="352" y="128" width="360" height="44" rx="8"/><text class="bs" x="532" y="155" text-anchor="middle" style="font-size:13px">↓ ativação da CODEÍNA → falha analgésica (T12 Q1)</text></g>
+</svg></div>
+<div class="lei"><b>Lei:</b> a duloxetina é metabolizada pela <b>CYP1A2</b> (e 2D6) e é <b>inibidora moderada da 2D6</b> → não associar com codeína (bloqueia a ativação em morfina). <b>Fumante tem ~50% menos duloxetina no sangue</b> (o cigarro induz a 1A2). Alta ligação proteica; não somar com ISRS/tramadol (serotoninérgico). 60–120 mg pela manhã.</div>
+<div class="exc">💧 <b>Excreção:</b> predominantemente RENAL (~70% urina, ~20% fezes), toda como metabólito — quase nada inalterado.</div>
+
+<h3 style="font-size:15px;margin:16px 0 4px;color:#0c4a5e">Canabinoides (THC / CBD)</h3>
+<div class="svgwrap"><svg class="diag" viewBox="0 0 960 170" role="img">
+<g><rect class="bx bx-parent" x="10" y="56" width="140" height="58" rx="8"/><text class="bt" x="80" y="80" text-anchor="middle">THC / CBD</text><text class="bs" x="80" y="98" text-anchor="middle">lipofílicos</text></g>
+<line x1="150" y1="85" x2="332" y2="85" stroke="#15803d" stroke-width="2.5" marker-end="url(#aG)"/>
+<text class="enz" x="160" y="76">CYP3A4 · 2C9 · 2C19</text>
+<g><rect class="bx bx-ativo" x="332" y="56" width="200" height="58" rx="8"/><text class="bt" x="432" y="80" text-anchor="middle">11-OH-THC</text><text class="bs" x="432" y="98" text-anchor="middle">metabólito ativo</text></g>
+<line x1="532" y1="85" x2="640" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#aGray)"/>
+<g><rect class="bx bx-inativo" x="640" y="56" width="200" height="58" rx="8"/><text class="bt" x="740" y="80" text-anchor="middle">THC-COOH</text><text class="bs" x="740" y="98" text-anchor="middle">inativo (fica no cabelo)</text></g>
+</svg></div>
+<div class="lei"><b>Leis:</b> (1) muito <b>lipofílicos</b> → acumulam em gordura e tecido queratinizado (cabelo) → <b>detectáveis dias após parar</b> — NÃO são "excretados inalterados na urina" (pegadinha). (2) O <b>CBD inibe várias CYPs</b> (pode subir o nível de outros fármacos). (3) A <b>carbamazepina (indutor de 3A4) derruba o THC/CBD para nível subterapêutico</b> — é o caso da dor do membro fantasma. (4) Baixa biodisponibilidade oral (1ª passagem) → subdose por custo é comum. Dose de prova: CBD 10 mg/kg/dia ÷2.</div>
+<div class="exc">💧 <b>Excreção:</b> predominantemente BILIAR/FEZES (~65%), pouca urina (~20%) — o oposto do resto. Por serem lipofílicos, ficam armazenados (gordura/cabelo) e são detectáveis por dias/semanas.</div>
+</div>
+
+<!-- ============ PROTEINAS PLASMATICAS ============ -->
+<h2 id="prot">🔗 Ligação às proteínas plasmáticas</h2>
+<div class="card">
+<div class="svgwrap"><svg class="diag" viewBox="0 0 960 250" role="img">
+<!-- fração livre vs ligada -->
+<text class="enz" x="20" y="28" style="font-style:normal;font-size:13px;fill:#1a2332">No sangue, o fármaco fica em equilíbrio entre duas frações:</text>
+<!-- LIVRE -->
+<g><rect class="bx bx-ativo" x="20" y="46" width="250" height="72" rx="8"/><text class="bt" x="145" y="76" text-anchor="middle">Fração LIVRE</text><text class="bs" x="145" y="96" text-anchor="middle">a única ATIVA — age, é metabolizada e excretada</text></g>
+<!-- LIGADA -->
+<g><rect class="bx bx-inativo" x="20" y="132" width="250" height="90" rx="8"/><text class="bt" x="145" y="160" text-anchor="middle">Fração LIGADA</text><text class="bs" x="145" y="180" text-anchor="middle">inativa · "reservatório" circulante</text><text class="bs" x="145" y="197" text-anchor="middle">não age enquanto presa</text></g>
+<!-- equilibrio arrow -->
+<line x1="145" y1="118" x2="145" y2="132" stroke="#94a3b8" stroke-width="2"/>
+<text class="enz" x="185" y="128">⇅ equilíbrio</text>
+<!-- proteinas -->
+<line x1="270" y1="177" x2="360" y2="120" stroke="#0e7490" stroke-width="2" marker-end="url(#aB)"/>
+<line x1="270" y1="177" x2="360" y2="177" stroke="#0e7490" stroke-width="2" marker-end="url(#aB)"/>
+<line x1="270" y1="177" x2="360" y2="234" stroke="#0e7490" stroke-width="2" marker-end="url(#aB)"/>
+<g><rect class="bx bx-parent" x="360" y="92" width="290" height="54" rx="8"/><text class="bt" x="505" y="114" text-anchor="middle">Transcortina (CBG)</text><text class="bs" x="505" y="132" text-anchor="middle">alta afinidade · baixa capacidade — corticoides</text></g>
+<g><rect class="bx bx-parent" x="360" y="150" width="290" height="54" rx="8"/><text class="bt" x="505" y="172" text-anchor="middle">Albumina</text><text class="bs" x="505" y="190" text-anchor="middle">baixa afinidade · alta capacidade — AINEs, muitos</text></g>
+<g><rect class="bx bx-parent" x="360" y="208" width="290" height="40" rx="8"/><text class="bt" x="505" y="233" text-anchor="middle" style="font-size:13px">α1-glicoproteína ácida — fentanila, metadona</text></g>
+<!-- nota -->
+<g><rect class="bx bx-warn" x="672" y="92" width="278" height="112" rx="8"/><text class="bs" x="684" y="116" style="font-size:12.5px">Desloca da proteína → ↑ fração livre:</text><text class="bs" x="684" y="136" style="font-size:12.5px">• AINE desloca a varfarina (albumina)</text><text class="bs" x="684" y="156" style="font-size:12.5px">• hipoalbuminemia / hepatopatia</text><text class="bs" x="684" y="176" style="font-size:12.5px">→ mais efeito e mais toxicidade</text><text class="bs" x="684" y="196" style="font-size:12.5px">na MESMA dose.</text></g>
+</svg></div>
+<div class="lei"><b>Lei mestra:</b> só a <b>fração LIVRE</b> age, é metabolizada e excretada. Quem está ligado a proteína é reservatório inerte. Deslocar da proteína (ou ter menos proteína) = <b>mais fármaco livre → mais efeito/toxicidade</b> sem mudar a dose.</div>
+<table>
+<tr><th>Classe / fármaco</th><th>Proteína e grau de ligação</th><th>O que ela cobra</th></tr>
+<tr><td><b>Corticoides</b></td><td><b>Transcortina (CBG)</b> — alta afinidade, baixa capacidade (carrega o cortisol e, em dose baixa, os corticoides) + <b>albumina</b> (assume quando a dose sobe). Naturais >90% ligados.</td><td>T12: "corticoides ligam-se a >90% (transcortina + albumina)". Sintéticos (dexa etc.) ~70% ligados → <b>mais fração livre</b> → efeito/EA já em doses menores.</td></tr>
+<tr><td><b>CBG diminuída</b></td><td>hepatopatia, hipotireoidismo, obesidade ↓ CBG · gravidez/estrogênio ↑ CBG</td><td>↓CBG → ↑ corticoide livre → mais efeito/EA. Mais um motivo para preferir prednisolona no hepatopata.</td></tr>
+<tr><td><b>AINEs</b></td><td><b>Albumina</b>, altíssima ligação (~90–99%)</td><td>Deslocam e são deslocados: <b>AINE + varfarina</b> → ↑varfarina livre → sangramento. Hipoalbuminemia → ↑fração livre.</td></tr>
+<tr><td><b>Opioides</b></td><td>Morfina: baixa (~30–35%, albumina). <b>Fentanila e metadona: alta</b> (albumina + α1-glicoproteína ácida) + lipofilia</td><td>Alta ligação + lipofilia = <b>depósito no tecido adiposo</b> (fentanila/metadona) → titular do baixo.</td></tr>
+<tr><td><b>Neuropáticos</b></td><td><b>Gabapentina/pregabalina ≈ 0%</b> (não ligam proteína, excreção renal inalterada). Tricíclicos e duloxetina: alta ligação.</td><td>Gabapentinoides não têm interação por deslocamento proteico nem por CYP — só ajuste renal.</td></tr>
+</table>
+</div>
+
+<!-- ============ RESUMO ============ -->
+<h2 id="resumo">Fase 1 (CYP) × Fase 2 (conjugação) — o quadro que decide</h2>
+<div class="card">
+<table>
+<tr><th style="width:50%">Fase 1 — CYP (oxidação)</th><th>Fase 2 — Conjugação</th></tr>
+<tr><td>Pode gerar metabólito <b>ativo</b> OU inativo. <b>Sofre indução/inibição</b> (é aqui que moram as interações).</td><td>Glicuronidação (UGT), sulfatação. Em geral gera metabólito <b>inativo/eliminável</b>; <b>não sofre indução/inibição de CYP</b>.</td></tr>
+<tr><td>• <b>Codeína → morfina</b> (CYP2D6, ativação)<br>• <b>Tramadol → M1</b> (CYP2D6)<br>• <b>Paracetamol → NAPQI</b> (CYP2E1, tóxico)<br>• <b>Carbamazepina</b> (3A4, autoindução)</td><td>• <b>Morfina → M3G / M6G</b> (UGT2B7)<br>• Codeína → codeína-6-glicuronídeo (UGT)<br>• Paracetamol → glicuronídeo/sulfato (maioria)<br>• <b>Morfina não usa CYP</b> → indutor/inibidor de CYP não a altera</td></tr>
+</table>
+<div class="lei" style="margin-top:12px"><b>A frase-lei dela:</b> "a inibição ou indução da CYP <b>não altera</b> a biodisponibilidade da morfina" — porque a morfina é conjugada (fase 2), não oxidada por CYP.</div>
+<h3 style="font-size:15px;margin:14px 0 4px">Indutores × Inibidores de CYP (para as interações)</h3>
+<table>
+<tr><th>Indutores (↓ nível do fármaco-alvo)</th><th>Inibidores (↑ nível do fármaco-alvo)</th></tr>
+<tr><td>Carbamazepina, fenobarbital, fenitoína, rifampicina, álcool crônico</td><td>Fluoxetina e duloxetina (2D6), cetoconazol, claritromicina, suco de toranja (3A4)</td></tr>
+</table>
+<ul>
+<li>Fármaco <b>ATIVO</b> + inibidor de CYP → <b>mais efeito/toxicidade</b>. + indutor → menos efeito.</li>
+<li><b>Pró-fármaco</b> (codeína, tramadol, dipirona, prednisona) + inibidor da enzima que o ATIVA → <b>falha</b>. + indutor da via que o INATIVA → também falha.</li>
+</ul>
+</div>
+
+<footer style="color:var(--muted);font-size:12px;text-align:center;margin-top:24px">Mapa das vias metabólicas · UC13 Farmaco · complementa a Estratégia, o Banco e a Leitura Dirigida</footer>
+</div></body></html>
