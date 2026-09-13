@@ -154,6 +154,11 @@ def strip_accents(s):
     return "".join(c for c in unicodedata.normalize("NFD", s) if not unicodedata.combining(c))
 
 
+def slugify(s):
+    s = re.sub(r"[^a-z0-9]+", "-", strip_accents(s).lower()).strip("-")
+    return s or "x"
+
+
 def esc(s):
     return html.escape(str(s), quote=True)
 
@@ -221,6 +226,22 @@ PAGE_TOP = """<!DOCTYPE html>
     .data{color:var(--mut); font-size:13px}
     .abrir{color:var(--tealo); font-weight:600; font-size:13px; margin-left:auto; white-space:nowrap}
     footer{margin-top:34px; color:var(--mut); font-size:13px}
+    html{scroll-behavior:smooth}
+    section.uc, .materia{scroll-margin-top:12px}
+    .sidenav .tree{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:18px}
+    .sidenav summary{cursor:pointer; color:var(--tealo); font-weight:600; font-size:14px}
+    .sidenav ul{list-style:none; margin-top:6px}
+    .sidenav li{margin:2px 0}
+    .sidenav a{display:block; text-decoration:none; color:var(--ink); font-size:14px; font-weight:600; padding:4px 8px; border-radius:8px}
+    .sidenav ul ul a{color:var(--mut); font-weight:400; font-size:13px; padding-left:20px}
+    .sidenav a:hover{color:var(--tealo); background:rgba(18,211,176,.08)}
+    @media(min-width:980px){
+      main{max-width:1120px}
+      .layout{display:grid; grid-template-columns:220px minmax(0,1fr); gap:28px; align-items:start}
+      .sidenav{position:sticky; top:16px; max-height:calc(100vh - 32px); overflow:auto}
+      .sidenav .tree{margin-bottom:0}
+      .sidenav summary{display:none}
+    }
   </style>
 </head>
 <body>
@@ -252,6 +273,19 @@ PAGE_BOTTOM = """  <footer>atualizado em {updated} · {n} guias</footer>
     }});
     document.getElementById('vazio').hidden = cards.some(function(c){{ return !c.hidden; }});
   }});
+  var tree = document.querySelector('.tree');
+  if (tree && window.innerWidth < 980) tree.removeAttribute('open');
+  window.addEventListener('resize', function(){{
+    if (tree && window.innerWidth >= 980) tree.setAttribute('open', '');
+  }});
+  document.querySelectorAll('.sidenav a').forEach(function(a){{
+    a.addEventListener('click', function(){{
+      if (busca.value) {{ busca.value = ''; busca.dispatchEvent(new Event('input')); }}
+      if (tree && window.innerWidth < 980) tree.removeAttribute('open');
+      var alvo = document.querySelector(a.getAttribute('href'));
+      if (alvo) alvo.scrollIntoView({{behavior: 'smooth', block: 'start'}});
+    }});
+  }});
 </script>
 </body>
 </html>
@@ -265,10 +299,20 @@ def render_index(entries):
     uc_order = [u for u in UC_ORDER if u in ucs] + [u for u in ucs if u not in UC_ORDER]
 
     out = [PAGE_TOP]
+    out.append('  <div class="layout">\n    <aside class="sidenav">\n      <details class="tree" open>\n'
+               '        <summary>Navegar por UC e matéria</summary>\n        <ul>\n')
     for uc in uc_order:
-        out.append('  <section class="uc">\n    <h2>{}</h2>\n'.format(esc(uc)))
+        us = slugify(uc)
+        out.append('          <li><a href="#uc-{}">{}</a>\n            <ul>\n'.format(us, esc(uc)))
+        for materia in ucs[uc]:
+            out.append('              <li><a href="#m-{}-{}">{}</a></li>\n'.format(us, slugify(materia), esc(materia)))
+        out.append('            </ul>\n          </li>\n')
+    out.append('        </ul>\n      </details>\n    </aside>\n    <div class="conteudo">\n')
+    for uc in uc_order:
+        us = slugify(uc)
+        out.append('  <section class="uc" id="uc-{}">\n    <h2>{}</h2>\n'.format(us, esc(uc)))
         for materia, items in ucs[uc].items():
-            out.append('    <div class="materia">\n      <h3>{}</h3>\n      <div class="cards">\n'.format(esc(materia)))
+            out.append('    <div class="materia" id="m-{}-{}">\n      <h3>{}</h3>\n      <div class="cards">\n'.format(us, slugify(materia), esc(materia)))
             for e in items:
                 tipo = e["tipo"]
                 label = TIPO_LABELS.get(tipo, tipo)
@@ -290,6 +334,7 @@ def render_index(entries):
                 )
             out.append('      </div>\n    </div>\n')
         out.append('  </section>\n')
+    out.append('    </div>\n  </div>\n')
     out.append(PAGE_BOTTOM.format(updated=date.today().strftime("%d/%m/%Y"), n=len(entries)))
     return "".join(out)
 
