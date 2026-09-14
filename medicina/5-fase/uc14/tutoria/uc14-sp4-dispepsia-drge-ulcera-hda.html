@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC14 · SP4 — Dispepsia, DRGE, Úlcera e HDA · Guia + Simulado APF</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tblwrap{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .fig{background:#0f1a24;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+  .fig svg{max-width:100%;height:auto}
+  .fig .cap{font-size:12.5px;color:var(--mut);margin-top:6px}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;min-width:120px;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .chip.on{color:var(--ink);border-color:var(--teal);background:#12302a}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.r{background:#2b2113;color:#ffd79e;border:1px solid #6a5a26}
+  .pill.i{background:#1a2e26;color:#8fe4d2;border:1px solid #1f5a41}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:180px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45;flex-direction:column}
+  .fc .back small{display:block;color:#8fb8a8;font-size:11px;margin-bottom:4px;font-weight:700}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIV</span>
+    <h1>SP4 — Dispepsia, DRGE, úlcera péptica, H. pylori e HDA · <span style="color:var(--tealo)">Guia + Simulado da APF</span></h1>
+    <div class="sub">Fechamento + APF: <b>quarta 07/10/2026, 13h20</b> (tutora Ana Elisa). Resumo (≈30 min) → banco de 21 questões: as <b>4 da APF real da SP4 (2026.1)</b>, as <b>4 da prova final</b> desta SP e <b>13 inéditas</b> → <b>2 descritivas reais</b> (APF + prova final) com roteiro → mapa mental e flashcards. Fontes: APF SP4 e prova final da veterana, resumo de tutoria da veterana, ementa UC XIV 2026, IV Consenso Brasileiro de H. pylori, Goldman-Cecil, frases da Vânia (IBP/anti-H2/antiácidos).</div>
+  </header>
+  <div class="tabs" id="tabs"><button class="tab active" data-t="resumo">📖 Resumo</button><button class="tab" data-t="quizsec">📝 Simulado (21 + 2 descritivas)</button><button class="tab" data-t="mapa">🧠 Mapa mental</button><button class="tab" data-t="flash">🎴 Flashcards</button></div>
+  <section id="resumo" class="active">
+    <div class="panel">
+      <h2>0 · Como essa APF é cobrada (raio-X da veterana)</h2>
+      <p>A <b>APF real da SP4</b> mudou de formato: <span class="k2">4 objetivas A–D curtas + 1 discursiva (a/b/c)</span>. Objetivas: quadro típico de <b>DRGE</b> · <b>sinal de alarme</b> (vômito "em borra de café") · <b>dispepsia funcional = diagnóstico de exclusão</b> · AINE → <b>úlcera péptica</b>. Discursiva: homem de 48 anos com dispepsia + AINE + hematêmese + melena + FC 104/PA 100×60 → duas hipóteses, dois sinais de gravidade, conduta inicial na APS. A veterana gabaritou (10).</p>
+      <p>Na <b>prova final</b> a SP4 entrou com 4 objetivas (dispepsia funcional com EDA normal e Hp negativo → <b>procinético + dieta</b> · pirose sem alarme → <b>IBP 4–8 semanas como teste terapêutico</b> · úlcera gástrica com bordas elevadas → <b>aguardar histopatológico</b> · controle de erradicação → <b>teste respiratório ≥ 4 semanas após</b>) e a <b>4ª discursiva</b> (homem de 51 anos, úlcera duodenal + urease positiva + anemia ferropriva + sangue oculto: abordagem inicial + esquema de erradicação → seguimento → complicações). A veterana errou a Q13 (marcou IBP; gabarito procinético).</p>
+      <div class="note"><b>Tradução prática:</b> a banca quer que você (1) separe <b>dispepsia funcional × DRGE × úlcera</b> pela clínica, (2) saiba <b>quem vai para EDA</b> (alarme, &gt; 45–50 anos, falha do teste terapêutico), (3) escreva o <b>esquema de erradicação do H. pylori com doses e duração</b> e o controle de cura, (4) reconheça e conduza a <b>HDA</b> como emergência. Doses de IBP/anti-H2 = ponte com a Farmaco da Vânia.</div>
+      <p class="src">Ementa 2026 da SP4 "Um dia eu mudo de vida!": Patologia: esôfago e estômago não neoplásicos, malformações · Lab: exames na DRGE, coprológico funcional, sangue oculto, antígeno/anticorpo para H. pylori · Fisio: gastrites · Farmaco: anti-H2, IBP, antiácidos · Conferência: parasitoses na criança.</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Dispepsia — o mapa de decisão</h2>
+      <p><b>Dispepsia</b> = dor/queimação epigástrica, plenitude pós-prandial ou saciedade precoce. 60–70% é <b>funcional</b>; o resto: úlcera péptica (10–15%), DRGE, câncer gástrico (&lt; 2%), fármacos (AINE, ferro, bifosfonato), biliar, pancreática, celíaca.</p>
+      <div class="fig">
+        <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect width="700" height="250" fill="#0f1a24" rx="12"/>
+          <g font-size="11" fill="#e8eef5">
+            <rect x="240" y="12" width="220" height="40" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="350" y="30" text-anchor="middle" font-weight="700">DISPEPSIA não investigada</text>
+            <text x="350" y="45" text-anchor="middle" font-size="10.5" fill="#cdd9e6">suspender AINE · álcool · café · fumo</text>
+            <line x1="350" y1="52" x2="350" y2="72" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar4)"/>
+            <rect x="200" y="75" width="300" height="46" rx="9" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="350" y="93" text-anchor="middle" font-weight="700" fill="#ffd79e">ALARME? ou idade &gt; 45–50 anos?</text>
+            <text x="350" y="110" text-anchor="middle" font-size="10" fill="#ffe1ad">disfagia/odinofagia · perda de peso · anemia · hematêmese/melena · vômitos persistentes · massa · hist. familiar de CA gástrico</text>
+            <line x1="240" y1="121" x2="130" y2="150" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar4)"/>
+            <line x1="460" y1="121" x2="570" y2="150" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar4)"/>
+            <text x="165" y="140" fill="#ff9ea6" font-weight="700" font-size="11">SIM</text>
+            <text x="520" y="140" fill="#8fe4d2" font-weight="700" font-size="11">NÃO</text>
+            <rect x="15" y="155" width="240" height="80" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="135" y="175" text-anchor="middle" font-weight="700" fill="#ff9ea6">EDA com biópsia (+ urease)</text>
+            <text x="135" y="192" text-anchor="middle" font-size="10.5" fill="#ffd0d4">úlcera gástrica → SEMPRE biopsiar</text>
+            <text x="135" y="207" text-anchor="middle" font-size="10.5" fill="#ffd0d4">úlcera duodenal → urease, sem biópsia da úlcera</text>
+            <text x="135" y="222" text-anchor="middle" font-size="10.5" fill="#ffd0d4">normal + Hp − → dispepsia funcional</text>
+            <rect x="275" y="155" width="205" height="80" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="377" y="175" text-anchor="middle" font-weight="700" fill="#8fe4d2">Pirose/regurgitação dominante</text>
+            <text x="377" y="192" text-anchor="middle" font-size="10.5" fill="#d9f2e6">= DRGE clínica → IBP 4–8 sem</text>
+            <text x="377" y="207" text-anchor="middle" font-size="10.5" fill="#d9f2e6">(teste terapêutico) + medidas</text>
+            <text x="377" y="222" text-anchor="middle" font-size="10.5" fill="#d9f2e6">falhou → EDA · pHmetria = padrão-ouro</text>
+            <rect x="495" y="155" width="190" height="80" rx="9" fill="#101f2b" stroke="#244a5c"/>
+            <text x="590" y="175" text-anchor="middle" font-weight="700" fill="#93cbe0">Dor/plenitude epigástrica</text>
+            <text x="590" y="192" text-anchor="middle" font-size="10.5" fill="#cfe4f5">"test-and-treat" H. pylori</text>
+            <text x="590" y="207" text-anchor="middle" font-size="10.5" fill="#cfe4f5">(antígeno fecal / respiratório)</text>
+            <text x="590" y="222" text-anchor="middle" font-size="10.5" fill="#cfe4f5">ou IBP 4–8 sem → falhou → EDA</text>
+          </g>
+        </svg>
+        <div class="cap">Quem vai para a endoscopia: alarme ou idade. O resto trata primeiro (IBP como teste terapêutico ou test-and-treat de H. pylori).</div>
+      </div>
+      <h3>Dispepsia funcional (Roma IV) — diagnóstico de exclusão (APF Q3)</h3>
+      <ul>
+        <li>≥ 1 de: plenitude pós-prandial, saciedade precoce, dor ou queimação epigástrica, <b>sem doença orgânica</b> que explique (EDA normal), nos últimos 3 meses com início ≥ 6 meses. Dois subtipos: <b>síndrome do desconforto pós-prandial</b> (plenitude/saciedade, relacionada à refeição — alteração de acomodação/esvaziamento) e <b>síndrome da dor epigástrica</b> (dor/queimação, hipersensibilidade visceral).</li>
+        <li><b>Tratamento por subtipo (Q13 da prova — a veterana errou)</b>: <b>desconforto pós-prandial → procinético</b> (domperidona 10 mg antes das refeições; metoclopramida curto prazo) + fracionar refeições, evitar gordura/café/álcool; <b>dor epigástrica → IBP</b> 4–8 semanas; H. pylori + → erradicar; refratária → neuromodulador (amitriptilina 10–25 mg, mirtazapina, buspirona) + psicoterapia. Nunca cirurgia.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>2 · DRGE</h2>
+      <ul>
+        <li><b>Fisiopatologia</b>: relaxamentos transitórios do EEI (causa nº 1), hipotonia do EEI, <b>hérnia de hiato</b>, ↑ pressão abdominal (obesidade, gestação), esvaziamento lento; falha da depuração (peristalse, saliva/bicarbonato) e da resistência epitelial. Álcool, tabaco, café, chocolate, gordura, hortelã, nitratos e bloqueadores de Ca relaxam o EEI.</li>
+        <li><b>Clínica (APF Q1)</b>: <b>pirose</b> (queimação retroesternal 30–60 min pós-prandial, piora ao deitar/inclinar) + <b>regurgitação</b> = típicas — diagnóstico clínico. Atípicas: dor torácica não cardíaca, globus, rouquidão, tosse crônica, asma, laringite, erosão dentária, pneumonias de repetição.</li>
+        <li><b>Diagnóstico</b>: clínico + <b>teste terapêutico com IBP 4–8 semanas</b> (Q14 da prova). <b>EDA</b> só se alarme (disfagia, odinofagia, emagrecimento, sangramento, anemia, vômitos, &gt; 45–50 anos, história familiar), refratariedade ou para ver complicações (esofagite Los Angeles A–D, Barrett, estenose) — <b>EDA normal não exclui DRGE</b> (70% é não erosiva). <b>pHmetria de 24 h (± impedância) = padrão-ouro</b> quando EDA normal e sintomas refratários/atípicos ou antes de cirurgia; <b>manometria</b> antes da cirurgia (afasta acalasia, posiciona a pHmetria).</li>
+        <li><b>Tratamento</b>: medidas (elevar cabeceira 15–20 cm, não deitar &lt; 2–3 h após comer, perder peso, fracionar, evitar gatilhos, parar de fumar) + <b>IBP em dose plena 30–60 min antes do café da manhã por 4–8 semanas</b> (omeprazol 20–40 mg, pantoprazol 40, esomeprazol 40) → sem resposta: dobrar/dividir 2×/dia, trocar IBP, EDA/pHmetria. Anti-H2 (famotidina) e antiácidos/alginato para alívio pontual/noturno; procinético se esvaziamento lento. <b>Cirurgia (fundoplicatura de Nissen)</b>: refratário confirmado por pHmetria, hérnia grande, complicações, jovem que não quer IBP por décadas.</li>
+        <li><b>Complicações</b>: esofagite erosiva, úlcera, estenose péptica (disfagia progressiva a sólidos), <b>esôfago de Barrett</b> (metaplasia intestinal → displasia → adenocarcinoma; vigilância endoscópica a cada 3–5 anos; IBP contínuo), HDA, anemia, extraesofágicas.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Úlcera péptica e H. pylori</h2>
+      <div class="tblwrap"><table>
+        <tr><th></th><th>Úlcera DUODENAL (mais comum)</th><th>Úlcera GÁSTRICA</th></tr>
+        <tr><td>Causa</td><td><b>H. pylori 90%</b>; hipersecreção ácida; Zollinger-Ellison se múltiplas/refratárias</td><td>H. pylori 70% + <b>AINE/AAS</b> (↓ prostaglandinas → ↓ muco/bicarbonato/fluxo); defesa da mucosa ↓</td></tr>
+        <tr><td>Dor</td><td>Epigástrica em queimação <b>2–3 h após comer e à noite/madrugada, MELHORA com alimento e antiácido</b>; ganho de peso</td><td><b>PIORA com a refeição</b>, náusea, anorexia, <b>perda de peso</b></td></tr>
+        <tr><td>Malignidade</td><td>Praticamente nunca → não biopsiar a úlcera (só pesquisar Hp)</td><td><b>Pode ser câncer</b> → biópsias múltiplas SEMPRE + EDA de controle em 8–12 semanas até cicatrizar</td></tr>
+        <tr><td>Idade/sexo</td><td>Jovem–meia-idade, homem</td><td>Mais velho</td></tr>
+      </table></div>
+      <ul>
+        <li><b>Diagnóstico</b>: <b>EDA</b> (padrão-ouro) com <b>teste da urease</b> na biópsia antral ± histologia. Não invasivos para Hp: <b>teste respiratório da ureia-¹³C</b> e <b>antígeno fecal</b> (ambos exigem <b>suspender IBP 2 semanas e ATB/bismuto 4 semanas</b> antes — falso-negativo). <b>Sorologia (anti-Hp IgG) NÃO serve para controle de cura</b> (fica positiva anos) — Lab da ementa. Sangue oculto nas fezes: sangramento crônico; coprológico funcional: má digestão.</li>
+        <li><b>Tratamento da úlcera</b>: <b>IBP dose plena (omeprazol 40 mg/d) por 4 semanas (duodenal) a 8 semanas (gástrica)</b>; suspender AINE/AAS (se AAS indispensável: manter com IBP), parar de fumar; sucralfato (1 g 4×/d — barreira) e antiácidos como adjuvantes; anti-H2 são inferiores. Vonoprazana = alternativa ao IBP.</li>
+        <li><b>Erradicação do H. pylori (Brasil, consenso 2018/2022)</b> — <b>indicações</b>: úlcera péptica ativa ou cicatrizada, linfoma MALT, dispepsia funcional/não investigada (test-and-treat), gastrite atrófica/metaplasia, parente de 1º grau com CA gástrico, pós-gastrectomia, uso crônico de AINE/AAS, PTI, anemia ferropriva inexplicada. <b>1ª linha: IBP dose dobrada 2×/d + amoxicilina 1 g 2×/d + claritromicina 500 mg 2×/d por 14 dias</b>. Alternativa/alergia à penicilina ou alta resistência à claritro: <b>quádrupla com bismuto</b> (IBP + subcitrato de bismuto 120 mg 4×/d + tetraciclina 500 mg 4×/d + metronidazol 400–500 mg 3×/d, 10–14 dias) — a veterana usou esta e a tutora aceitou. 2ª linha: IBP + amoxicilina + levofloxacino 500 mg/d 14 dias. Retratamento nunca repete claritromicina.</li>
+        <li><b>Controle de cura (Q16 da prova)</b>: <b>teste respiratório ou antígeno fecal ≥ 4 semanas após terminar o ATB e ≥ 2 semanas sem IBP</b>. EDA de controle só na úlcera gástrica (cicatrização/biópsia). Sorologia nunca.</li>
+        <li><b>Complicações (discursiva 4-c)</b>: <b>hemorragia (a mais comum, 15–20%)</b> — hematêmese/melena; <b>perfuração</b> (abdome agudo perfurativo, pneumoperitônio, Jobert) — anterior duodenal; <b>penetração</b> (pâncreas: dor no dorso, amilase ↑); <b>obstrução pilórica</b> (vômitos pós-prandiais tardios, saciedade, alcalose hipoclorêmica); malignização (gástrica). Cirurgia: intratabilidade, complicações; vagotomia + piloroplastia/antrectomia.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Hemorragia digestiva alta — a emergência da SP (discursiva da APF)</h2>
+      <p>Sangramento proximal ao ângulo de Treitz. Causas: <b>úlcera péptica (nº 1, 40–50%)</b>, varizes esofagogástricas (cirrose), esofagite erosiva, Mallory-Weiss (laceração pós-vômito), gastropatia por AINE, Dieulafoy, angiodisplasia, neoplasia. <b>Hematêmese</b> (vivo ou "borra de café" — sinal de alarme, APF Q2) e <b>melena</b> (≥ 50–100 mL, 8 h no TGI); hematoquezia só se maciça. <b>Ureia ↑ desproporcional à creatinina</b> (absorção de sangue) sugere HDA.</p>
+      <div class="fig">
+        <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect width="700" height="210" fill="#0f1a24" rx="12"/>
+          <g font-size="10.5" fill="#e8eef5">
+            <rect x="12" y="15" width="160" height="80" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="92" y="33" text-anchor="middle" font-weight="700" fill="#ff9ea6" font-size="11.5">1 · ABC e gravidade</text>
+            <text x="92" y="50" text-anchor="middle" fill="#ffd0d4">2 acessos calibrosos · SF/RL</text>
+            <text x="92" y="64" text-anchor="middle" fill="#ffd0d4">FC &gt; 100, PAS &lt; 100, síncope,</text>
+            <text x="92" y="78" text-anchor="middle" fill="#ffd0d4">hematêmese vivo, Hb ↓ = grave</text>
+            <text x="92" y="91" text-anchor="middle" fill="#ffd0d4">IOT se rebaixado + sangrando</text>
+            <line x1="172" y1="55" x2="188" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar5)"/>
+            <rect x="190" y="15" width="160" height="80" rx="9" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="270" y="33" text-anchor="middle" font-weight="700" fill="#ffd79e" font-size="11.5">2 · Lab e sangue</text>
+            <text x="270" y="50" text-anchor="middle" fill="#ffe1ad">Hb, plaquetas, INR, ureia/Cr,</text>
+            <text x="270" y="64" text-anchor="middle" fill="#ffe1ad">tipagem + prova cruzada</text>
+            <text x="270" y="78" text-anchor="middle" fill="#ffe1ad">transfundir se Hb &lt; 7 (meta 7–9;</text>
+            <text x="270" y="91" text-anchor="middle" fill="#ffe1ad">cardiopata &lt; 8, meta 9–10)</text>
+            <line x1="350" y1="55" x2="366" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar5)"/>
+            <rect x="368" y="15" width="160" height="80" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="448" y="33" text-anchor="middle" font-weight="700" fill="#8fe4d2" font-size="11.5">3 · Fármacos</text>
+            <text x="448" y="50" text-anchor="middle" fill="#d9f2e6">IBP EV: omeprazol/pantoprazol</text>
+            <text x="448" y="64" text-anchor="middle" fill="#d9f2e6">80 mg bolus + 8 mg/h (72 h)</text>
+            <text x="448" y="78" text-anchor="middle" fill="#d9f2e6">varizes: terlipressina/octreotida</text>
+            <text x="448" y="91" text-anchor="middle" fill="#d9f2e6">+ ceftriaxona · eritromicina pré-EDA</text>
+            <line x1="528" y1="55" x2="544" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar5)"/>
+            <rect x="546" y="15" width="142" height="80" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="617" y="33" text-anchor="middle" font-weight="700" fill="#8ab8ff" font-size="11.5">4 · EDA ≤ 24 h</text>
+            <text x="617" y="50" text-anchor="middle" fill="#cfe4f5">(≤ 12 h se instável,</text>
+            <text x="617" y="64" text-anchor="middle" fill="#cfe4f5">após estabilizar)</text>
+            <text x="617" y="78" text-anchor="middle" fill="#cfe4f5">diagnóstico + hemostasia</text>
+            <text x="617" y="91" text-anchor="middle" fill="#cfe4f5">clipe/térmico + adrenalina</text>
+            <rect x="12" y="115" width="676" height="88" rx="9" fill="#101f2b" stroke="#244a5c"/>
+            <text x="350" y="134" text-anchor="middle" font-weight="700" fill="#93cbe0" font-size="11.5">Forrest (úlcera) → risco de ressangrar → o que fazer</text>
+            <text x="350" y="152" text-anchor="middle" fill="#cfe4f5">Ia jato · Ib babação · IIa vaso visível · IIb coágulo aderido = ALTO risco → terapia endoscópica dupla + IBP EV 72 h + internar</text>
+            <text x="350" y="168" text-anchor="middle" fill="#cfe4f5">IIc hematina · III base limpa = BAIXO risco → IBP oral, alta precoce, tratar H. pylori</text>
+            <text x="350" y="184" text-anchor="middle" fill="#ffd79e">Ressangrou → 2ª EDA → falhou → embolização → cirurgia</text><text x="350" y="197" text-anchor="middle" fill="#ffd79e" font-size="10">Depois: erradicar Hp · suspender AINE · reintroduzir AAS em 3–7 d se indicação cardiovascular</text>
+          </g>
+        </svg>
+        <div class="cap">Sequência da HDA. Na APS (discursiva da APF): estabilizar (acesso, volume), dieta zero, IBP EV se disponível e <b>encaminhar de ambulância</b> para hospital com endoscopia.</div>
+      </div>
+      <p><b>Sinais de gravidade (APF discursiva-b)</b>: taquicardia (&gt; 100), hipotensão/PA 100×60 ou ortostase, palidez, tontura/síncope, hematêmese de sangue vivo, melena volumosa, Hb &lt; 8, idade &gt; 60, comorbidades, anticoagulante. Escores: Glasgow-Blatchford (pré-EDA: 0–1 pode ir para casa), Rockall.</p>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Gastrites (Fisio/Pato) e o que a Lab pede</h2>
+      <ul>
+        <li><b>Gastrite aguda (erosiva)</b>: AINE/AAS (↓PG), álcool, estresse (UTI: queimado — Curling; TCE — Cushing; profilaxia com IBP em ventilação/coagulopatia), isquemia. <b>Crônica</b>: <b>tipo B (antral, H. pylori — a mais comum)</b> → gastrite atrófica multifocal → metaplasia intestinal → displasia → adenocarcinoma (cascata de Correa) e linfoma MALT; <b>tipo A (autoimune, corpo/fundo)</b>: anti-célula parietal/anti-fator intrínseco → acloridria, <b>anemia perniciosa (B12)</b>, gastrina ↑, tumor neuroendócrino.</li>
+        <li><b>H. pylori</b>: bacilo gram-negativo espiralado, urease (neutraliza o ácido com amônia — base do teste da urease e do respiratório), flagelos, CagA/VacA. Metade da população; transmissão oral-oral/fecal-oral na infância.</li>
+        <li><b>Malformações (Pato)</b>: atresia de esôfago/fístula traqueoesofágica (sialorreia, engasgo no RN), <b>estenose hipertrófica do piloro</b> (vômitos em jato não biliosos 3–6 semanas, oliva palpável, alcalose hipoclorêmica), divertículo de Zenker, pâncreas anular, hérnia diafragmática.</li>
+        <li><b>Lab</b>: sangue oculto (imunoquímico) — rastreio de CCR e sangramento crônico, positivo em úlcera/esofagite/DRGE erosiva; coprológico funcional (gordura, fibras, amido → má digestão/absorção); Hp: urease na biópsia, respiratório ¹³C, antígeno fecal (ativo) × sorologia (só contato).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>6 · As 12 pegadinhas desta SP</h2>
+      <ul>
+        <li>① Pirose + regurgitação pós-prandial, piora ao deitar = <b>DRGE</b>; diagnóstico é clínico; <b>IBP 4–8 semanas = teste terapêutico</b>. EDA só com alarme/falha; pHmetria = padrão-ouro, não a EDA.</li>
+        <li>② Vômito "em borra de café", melena, disfagia, emagrecimento, anemia = <b>alarme → EDA</b>. Café em excesso e queimação não são alarme.</li>
+        <li>③ Dispepsia funcional = <b>ausência de doença orgânica</b> (EDA normal); não é "sempre AINE", não tem alteração estrutural, não é cirúrgica.</li>
+        <li>④ Funcional tipo <b>desconforto pós-prandial (plenitude/distensão) → procinético</b>; tipo dor epigástrica → IBP. (Q13 da prova: a veterana errou marcando IBP.)</li>
+        <li>⑤ AINE crônico → <b>úlcera péptica</b> (não celíaca, não diverticulite). Duodenal melhora com comida; gástrica piora e emagrece.</li>
+        <li>⑥ <b>Úlcera gástrica = biopsiar SEMPRE</b> e EDA de controle em 8–12 semanas; a banca (Q15) quer "aguardar o histopatológico" antes de definir conduta, e não tratar Hp às cegas nem operar.</li>
+        <li>⑦ Controle de erradicação: <b>respiratório/antígeno fecal ≥ 4 semanas após o ATB, sem IBP por 2 semanas</b>. Sorologia nunca; EDA só na gástrica.</li>
+        <li>⑧ Esquema Hp com doses: IBP 2×/d + amoxicilina 1 g 2×/d + claritro 500 mg 2×/d, <b>14 dias</b>; ou quádrupla com bismuto. Escreva doses e duração na discursiva.</li>
+        <li>⑨ HDA na APS: <b>acesso calibroso + volume + dieta zero + IBP EV + ambulância</b>; EDA em ≤ 24 h. Transfusão restritiva (Hb &lt; 7).</li>
+        <li>⑩ Ureia ↑ com creatinina normal em quem tem melena = sangue digerido (HDA), não insuficiência renal.</li>
+        <li>⑪ Anemia ferropriva (VCM 72) + sangue oculto + úlcera duodenal = perda crônica; tratar a úlcera, erradicar Hp, repor ferro e <b>investigar cólon se &gt; 45–50 anos</b>.</li>
+        <li>⑫ Testes de Hp (respiratório, fecal, urease) dão falso-negativo com <b>IBP (suspender 2 sem) e ATB/bismuto (4 sem)</b>.</li>
+      </ul>
+    </div>
+</section>
+  <section id="quizsec">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">21</span></span><div class="bar"><i id="fill"></i></div><button class="btn" onclick="resetQuiz()">Zerar</button></div>
+    <div class="note" style="margin-top:0"><b>Modo simulado:</b> a APF real da SP4 mudou de formato — <b>4 objetivas A–D + 1 discursiva (a/b/c)</b>. Faça as <b>Q1–Q4 (APF real)</b> + a <b>descritiva D1 (APF real)</b> em 30 min; depois as <b>Q5–Q8 (prova final)</b>, as <b>Q9–Q21 (inéditas)</b> e a <b>descritiva D2 (prova final)</b>. Os dois roteiros de correção trazem o que a veterana escreveu e o que a tutora cobrou.</div>
+    <div class="chips" id="chips"></div>
+    <div id="quiz"></div>
+    
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D1</div><span class="pill r">Descritiva · APF real da SP4</span><span class="pill o">HDA na atenção primária · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Paciente masculino, 48 anos, procura a Unidade Básica de Saúde com queixa de dor na região epigástrica há aproximadamente 3 meses. Refere dor em queimação, de intensidade moderada, intermitente, associada a episódios frequentes de azia e sensação de retorno de alimento para a garganta (regurgitação), com piora após refeições volumosas e ao deitar. Relata hábitos alimentares irregulares, consumo excessivo de café e ingestão frequente de alimentos gordurosos. Faz uso eventual de álcool e nega tabagismo. Refere ainda uso frequente de anti-inflamatórios não esteroidais (AINEs), devido a dor lombar crônica. Nos últimos 3 dias, apresenta piora importante da dor epigástrica, associada a episódio de vômito escuro ("em borra de café"), além de fezes enegrecidas (melena), fraqueza e tontura. Ao exame físico: estado geral regular, levemente pálido, FC 104 bpm, PA 100×60 mmHg, abdome com dor à palpação em epigástrio, sem sinais de irritação peritoneal.</span>
+        <b>a)</b> Cite duas hipóteses diagnósticas principais para o quadro do paciente. <b>(30)</b>
+        <br><b>b)</b> Identifique dois sinais de gravidade presentes no caso. <b>(30)</b>
+        <br><b>c)</b> Descreva a conduta inicial na atenção primária diante desse paciente. <b>(40)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot1">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot1" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Hemorragia digestiva alta por úlcera péptica (gástrica/duodenal) associada a AINE ± H. pylori</b> (15) e <b>DRGE</b> (pirose + regurgitação pós-prandial e ao deitar) / gastropatia erosiva por AINE (15). A veterana escreveu "HDA e úlcera péptica" e levou nota cheia. Aceitável citar esofagite erosiva/Mallory-Weiss como diferencial de HDA.</td><td>30</td></tr>
+          <tr><td><b>b</b></td><td>Dois de: <b>hematêmese em borra de café</b> · <b>melena</b> · <b>taquicardia (FC 104)</b> · <b>hipotensão/PA 100×60 (tendência a choque)</b> · palidez, fraqueza e tontura (hipovolemia/anemia aguda) (15 cada). Melhor resposta: os hemodinâmicos (taquicardia + hipotensão) — são os que definem instabilidade.</td><td>30</td></tr>
+          <tr><td><b>c</b></td><td><b>Estabilização</b>: acesso venoso calibroso (2), reposição volêmica com cristaloide (SF/RL), monitorização de PA/FC/SpO₂, decúbito, dieta zero (12) · <b>medidas</b>: suspender AINE/AAS e álcool; IBP EV (omeprazol/pantoprazol 80 mg em bolus) se disponível, ou VO em dose alta até a transferência (8) · <b>exames se possíveis</b>: hemograma, tipagem, ureia/creatinina, coagulograma (4) · <b>encaminhamento imediato por ambulância/SAMU</b> para hospital com endoscopia — EDA nas primeiras 12–24 h após estabilização, com tratamento endoscópico; "estar atento a sinais de choque" (12) · após a fase aguda: erradicar H. pylori, IBP 4–8 semanas, orientar dieta/refluxo, reavaliar necessidade do AINE (4). A veterana respondeu "hidratação com RL, dieta zero, atenção a sinais de choque, IBP IV, EDA até 12 h após estabilização" — nota cheia.</td><td>40</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="q" id="descritiva2">
+      <div class="qhead"><div class="qnum">D2</div><span class="pill d">Descritiva · prova final real (29/04/2026)</span><span class="pill o">Úlcera duodenal + H. pylori + anemia · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 51 anos, procura atendimento na atenção básica com queixa de fadiga progressiva há 3 meses. Refere também dor epigástrica em queimação, de caráter intermitente, com melhora após alimentação e recorrência no período noturno. Nega hematêmese ou melena. Paciente hipertenso, sem outras comorbidades conhecidas. Ao exame físico: bom estado geral, levemente hipocorado (+/4+), PA 120/80 mmHg, FC 82 bpm. Abdome com discreta dor à palpação em epigástrio, sem sinais de irritação peritoneal. Exames laboratoriais mostram: Hb 10,2 g/dL, VCM 72 fL. Pesquisa de sangue oculto nas fezes positiva. Endoscopia Digestiva Alta com presença de úlcera duodenal com teste da urease positivo.</span>
+        <b>a)</b> Descreva a abordagem inicial desse paciente na atenção primária e indique o tratamento medicamentoso adequado. <b>(40)</b>
+        <br><b>b)</b> Descreva como deve ser realizado o seguimento ambulatorial deste paciente. <b>(30)</b>
+        <br><b>c)</b> Cite as principais complicações das úlceras pépticas. <b>(30)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot2">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot2" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Interpretação</b>: úlcera duodenal por H. pylori com <b>anemia ferropriva</b> (VCM 72) por perda crônica (sangue oculto +) (6) · <b>orientações</b>: suspender AINE/AAS, álcool, café em excesso, tabaco; fracionar refeições (6) · <b>erradicação do H. pylori com doses e duração</b>: IBP dose dobrada (omeprazol 40 mg 2×/d) + amoxicilina 1 g 2×/d + claritromicina 500 mg 2×/d por <b>14 dias</b> — ou quádrupla com bismuto (IBP + bismuto 120 mg 4×/d + tetraciclina 500 mg 4×/d + metronidazol 500 mg 3×/d, 10–14 d), que foi o esquema que a veterana escreveu e a tutora aceitou (16) · <b>manter IBP dose plena até completar 4–8 semanas</b> para cicatrização (4) · <b>sulfato ferroso</b> 120–200 mg de ferro elementar/dia por 3–6 meses após normalizar Hb; ferritina/ferro sérico para confirmar (4) · avaliar colonoscopia (idade &gt; 45–50 + sangue oculto) e checar se o paciente usa AAS/AINE para a HAS-dor (4).</td><td>40</td></tr>
+          <tr><td><b>b</b></td><td><b>Controle de cura: teste respiratório da ureia ou antígeno fecal ≥ 4 semanas após o término dos antibióticos, com IBP suspenso há ≥ 2 semanas</b> (12) · não usar sorologia; <b>úlcera duodenal não exige EDA de controle</b> (só a gástrica) (6) · se persistir Hp: 2ª linha (IBP + amoxicilina + levofloxacino 14 d), nunca repetir claritromicina (4) · seguimento da anemia: hemograma em 4–8 semanas (resposta de Hb ≥ 1–2 g/dL), ferritina ao fim; investigar cólon se não melhorar (4) · retorno para adesão/efeitos adversos, orientar sinais de alarme (hematêmese, melena, dor súbita intensa, vômitos persistentes) e reavaliar uso de AINE (4). A veterana escreveu "teste de urease ou antígeno fecal após tratamento" — sem o prazo de 4 semanas, nota parcial.</td><td>30</td></tr>
+          <tr><td><b>c</b></td><td><b>Hemorragia digestiva alta</b> (mais comum: hematêmese/melena) (8) · <b>perfuração</b> → abdome agudo perfurativo com pneumoperitônio (8) · <b>penetração</b> em órgão adjacente (pâncreas → pancreatite/dor no dorso) (5) · <b>obstrução pilórica/estenose</b> (vômitos tardios, saciedade, alcalose hipoclorêmica) (5) · <b>malignização</b> (úlcera gástrica) e intratabilidade/recidiva (4). A veterana citou HDA e perfuração — faltaram obstrução e penetração.</td><td>30</td></tr>
+        </table></div>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto · 60–79 = revisar seções 3 e 4 · &lt; 60 = refazer o resumo. Na discursiva de tutoria, <b>esquema com doses + duração + controle de cura com prazo</b> são os pontos que separam 30 de 40.</div>
+      </div>
+    </div>
+
+  </section>
+  <section id="mapa"><div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>🧭 Dispepsia — decisão</summary><ul>
+        <li>Alarme ou &gt; 45–50 a → EDA (+ urease; gástrica → biópsia sempre)</li>
+        <li>Sem alarme: pirose dominante → IBP 4–8 sem (teste terapêutico); dor/plenitude → test-and-treat Hp ou IBP</li>
+        <li>Funcional = EDA normal (Roma IV); desconforto pós-prandial → procinético; dor epigástrica → IBP; refratária → amitriptilina</li>
+      </ul></details>
+      <details><summary>🔥 DRGE</summary><ul>
+        <li>Relaxamento transitório do EEI, hérnia de hiato, obesidade; gatilhos: álcool, fumo, café, chocolate, gordura</li>
+        <li>Típicos: pirose + regurgitação; atípicos: tosse, rouquidão, asma, dor torácica</li>
+        <li>Diagnóstico clínico; IBP 4–8 sem; EDA se alarme/falha (normal não exclui); pHmetria = padrão-ouro; manometria pré-op</li>
+        <li>Medidas: cabeceira, não deitar &lt; 2–3 h, peso; Nissen se refratário documentado</li>
+        <li>Complicações: esofagite, estenose, Barrett (vigilância), HDA</li>
+      </ul></details>
+      <details><summary>🕳️ Úlcera péptica</summary><ul>
+        <li>Duodenal: Hp 90%, melhora com comida, noturna, benigna</li>
+        <li>Gástrica: Hp + AINE, piora com comida, emagrece, biópsia sempre + EDA controle 8–12 sem</li>
+        <li>IBP 4 sem (duodenal) / 8 sem (gástrica) + erradicar Hp + parar AINE/fumo; sucralfato adjuvante</li>
+        <li>Complicações: hemorragia, perfuração, penetração, obstrução, malignização</li>
+      </ul></details>
+      <details><summary>🦠 H. pylori</summary><ul>
+        <li>Testes ativos: urease, respiratório, antígeno fecal (sem IBP 2 sem, sem ATB 4 sem); sorologia = contato</li>
+        <li>Indicações: úlcera, MALT, dispepsia, atrofia, parente CA gástrico, AINE crônico, PTI, ferropriva</li>
+        <li>1ª linha: IBP 2×/d + amoxi 1 g 2×/d + claritro 500 2×/d, 14 d; ou quádrupla bismuto; 2ª: levofloxacino</li>
+        <li>Cura: respiratório/fecal ≥ 4 sem após ATB, 2 sem sem IBP; EDA só gástrica</li>
+      </ul></details>
+      <details><summary>🩸 HDA</summary><ul>
+        <li>Úlcera nº 1; varizes, esofagite, Mallory-Weiss. Hematêmese/borra de café, melena; ureia ↑</li>
+        <li>ABC: 2 acessos, cristaloide, IOT se rebaixado, Hb &lt; 7 (cardiopata &lt; 8), IBP EV 80 + 8 mg/h, EDA ≤ 24 h</li>
+        <li>Forrest Ia/Ib/IIa/IIb → terapia dupla + IBP EV 72 h; IIc/III → oral, alta</li>
+        <li>Varizes: terlipressina + ceftriaxona + ligadura; Blakemore se refratário</li>
+        <li>APS: estabilizar + dieta zero + IBP + ambulância</li>
+      </ul></details>
+      <details><summary>🧫 Gastrites e malformações</summary><ul>
+        <li>Aguda erosiva: AINE, álcool, estresse (Curling/Cushing)</li>
+        <li>Crônica B (Hp, antro → Correa → CA/MALT) · A (autoimune, corpo → B12, gastrina ↑, carcinoide)</li>
+        <li>EHP: 3–6 sem, vômito em jato não bilioso, oliva, alcalose hipoclorêmica → USG → piloromiotomia</li>
+        <li>Lab: sangue oculto, coprológico funcional, Hp ativo × sorologia</li>
+      </ul></details>
+</div></div></section>
+  <section id="flash"><div class="panel"><h2>Flashcards — clique para virar</h2><p class="src">Um fato por cartão. A pergunta fica visível no verso.</p><div class="fcgrid" id="fcbox"></div></div></section>
+  <div class="foot">UC14 · SP4 — Dispepsia, DRGE, úlcera e HDA · 14/09/2026 · APF 07/10 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+const QS=[
+ /* ===== APF REAL SP4 ===== */
+ {src:"APF", obj:"DRGE · quadro típico", stem:"<span class='cx'>Paciente de 48 anos apresenta dor epigástrica em queimação há 3 meses, associada a azia e regurgitação, com piora após refeições e ao deitar.</span> O quadro é mais compatível com:",
+  opts:["Síndrome do intestino irritável","Doença do refluxo gastroesofágico (DRGE)","Pancreatite aguda","Colecistite aguda"], ans:1,
+  why:"Pirose (azia) + regurgitação, pós-prandial e ao deitar, crônicas = sintomas típicos de DRGE — diagnóstico clínico, teste terapêutico com IBP. SII é dor abdominal baixa que muda com a evacuação; pancreatite e colecistite são agudas e com dor intensa.",
+  trap:"Questão de aquecimento — mas 'queimação epigástrica' também aparece na úlcera duodenal e na dispepsia funcional; o que fecha DRGE é 'regurgitação + piora ao deitar'."},
+
+ {src:"APF", obj:"Sinal de alarme", stem:"No caso clínico apresentado, qual achado seria considerado um sinal de alarme para doença orgânica potencialmente grave?",
+  opts:["Dor epigástrica intermitente","Uso de café em excesso","Vômito em 'borra de café'","Sensação de queimação"], ans:2,
+  why:"Borra de café = sangue digerido = hemorragia digestiva alta → alarme (junto com melena, disfagia, odinofagia, emagrecimento, anemia, vômitos persistentes, massa, > 45–50 anos, história familiar de CA gástrico) → EDA. Dor intermitente, queimação e café são sintomas/fatores comuns, não alarme.",
+  trap:"Alarme = sinal de que a lesão pode ser orgânica/grave. Sintoma dispéptico em si nunca é alarme."},
+
+ {src:"APF", obj:"Dispepsia funcional", stem:"Sobre a dispepsia funcional, assinale a alternativa correta:",
+  opts:["É diagnosticada na ausência de doença orgânica que explique os sintomas","Está associada exclusivamente ao uso de AINEs","Sempre apresenta alteração estrutural identificável","Necessita obrigatoriamente de tratamento cirúrgico"], ans:0,
+  why:"Roma IV: sintomas dispépticos crônicos (≥ 3 meses, início ≥ 6 meses) sem doença estrutural/metabólica que os explique — diagnóstico de exclusão, EDA normal. Fisiopatologia multifatorial (motilidade, acomodação, hipersensibilidade, psicossocial, Hp). Tratamento clínico.",
+  trap:"'Exclusivamente', 'sempre', 'obrigatoriamente' — advérbios absolutos quase sempre marcam a alternativa errada."},
+
+ {src:"APF", obj:"AINE · complicação", stem:"O uso frequente de anti-inflamatórios não esteroidais (AINEs) pode levar a qual complicação gastrointestinal?",
+  opts:["Síndrome do intestino curto","Doença celíaca","Diverticulite","Doença ulcerosa péptica"], ans:3,
+  why:"AINE inibe COX-1 → ↓ prostaglandinas → ↓ muco, bicarbonato e fluxo mucoso → erosões e úlcera (gástrica > duodenal), com risco de sangramento e perfuração. Ponte com a Vânia: idoso, dose alta, AAS/corticoide/anticoagulante associados = maior risco → IBP profilático.",
+  trap:"Intestino curto é pós-ressecção; celíaca é autoimune; diverticulite não tem relação causal com AINE (embora AINE aumente risco de perfuração)."},
+
+ /* ===== PROVA FINAL — SP4 (Q13–Q16) ===== */
+ {src:"Prova", obj:"Dispepsia funcional · tratamento", stem:"<span class='cx'>Paciente feminina, 32 anos, sem comorbidades, refere dor epigástrica recorrente há 6 meses, associada à sensação de plenitude pós-prandial e distensão abdominal. Nega perda ponderal, vômitos persistentes, disfagia ou sangramento digestivo. Exame físico normal. Endoscopia digestiva alta sem alterações. Teste para H. pylori negativo.</span> Qual a melhor conduta inicial?",
+  opts:["Iniciar IBP em dose plena por 8 semanas","Prescrever procinético e orientar medidas dietéticas","Encaminhar para nova endoscopia com biópsia ampliada","Iniciar erradicação empírica para H. pylori"], ans:1,
+  why:"GABARITO DA TUTORA: B. Dispepsia funcional (EDA normal, Hp negativo) com predomínio de plenitude pós-prandial e distensão = síndrome do desconforto pós-prandial → procinético (domperidona) + fracionar refeições/evitar gordura. IBP seria a 1ª escolha na síndrome da dor epigástrica.",
+  trap:"A veterana marcou A. A banca decide pelo SUBTIPO de Roma IV: plenitude/distensão → procinético; dor/queimação → IBP. Leia qual sintoma domina."},
+
+ {src:"Prova", obj:"DRGE · abordagem inicial", stem:"<span class='cx'>Homem, 35 anos, relata pirose retroesternal há 4 meses, principalmente após refeições volumosas e ao deitar. Refere melhora parcial com uso esporádico de antiácidos. Nega disfagia, odinofagia ou perda de peso. Sem sinais de alarme.</span> Qual a melhor abordagem inicial?",
+  opts:["Solicitar endoscopia digestiva alta","Iniciar IBP por 4 a 8 semanas como teste terapêutico","Realizar pHmetria esofágica de 24 horas","Prescrever bloqueador H2 em dose máxima por tempo indeterminado"], ans:1,
+  why:"DRGE típica, jovem, sem alarme → tratamento empírico com IBP (omeprazol 20–40 mg antes do café) por 4–8 semanas + medidas comportamentais. Resposta confirma o diagnóstico. EDA/pHmetria só se alarme, falha ou pré-operatório.",
+  trap:"Anti-H2 'em dose máxima por tempo indeterminado' — taquifilaxia e inferioridade ao IBP. E pHmetria é padrão-ouro, mas não é exame INICIAL."},
+
+ {src:"Prova", obj:"Úlcera gástrica · conduta", stem:"<span class='cx'>Paciente masculino, 58 anos, tabagista, com dor epigástrica contínua, piora após alimentação e perda de 6 kg nos últimos 3 meses. Endoscopia mostra úlcera gástrica de bordas elevadas e fundo irregular na pequena curvatura. Biópsias foram realizadas.</span> Qual a conduta mais adequada após esse achado inicial?",
+  opts:["Iniciar IBP e repetir endoscopia apenas se persistirem sintomas","Iniciar tratamento para H. pylori independentemente do resultado histológico","Aguardar resultado histopatológico e, se negativo para neoplasia, tratar com IBP e Sucralfato","Encaminhar diretamente para gastrectomia parcial"], ans:2,
+  why:"GABARITO DA TUTORA: C. Úlcera gástrica com aspecto suspeito (bordas elevadas, fundo irregular, emagrecimento, > 50 anos) = afastar câncer é a prioridade: a conduta se define pelo histopatológico. Se benigna: IBP 8 semanas (± sucralfato), erradicar Hp se a biópsia mostrar, EDA de controle até cicatrizar. Cirurgia só se câncer confirmado/estadiado.",
+  trap:"Divergência para saber jogar: muitos tratariam Hp já se a urease fosse positiva — mas a banca considerou que, com biópsia colhida e aspecto suspeito, a decisão espera o resultado. 'Independentemente do histológico' e 'gastrectomia direta' são os extremos errados."},
+
+ {src:"Prova", obj:"H. pylori · controle de cura", stem:"<span class='cx'>Homem, 40 anos, com história de dor epigástrica em queimação há meses, com melhora após alimentação e recorrência durante a madrugada. Sem sinais de alarme. Teste respiratório positivo para H. pylori. Iniciado tratamento erradicador.</span> Qual a melhor estratégia para confirmação de erradicação da bactéria?",
+  opts:["Endoscopia com biópsia após 2 semanas do término do tratamento","Teste respiratório da ureia após pelo menos 4 semanas do término do tratamento","Sorologia para H. pylori após 4 semanas","Teste de antígeno fecal imediatamente após o término da terapia"], ans:1,
+  why:"Controle de cura: teste respiratório ¹³C ou antígeno fecal ≥ 4 semanas após o fim do ATB e ≥ 2 semanas sem IBP (evita falso-negativo). Sorologia permanece positiva por anos; EDA só na úlcera gástrica; 'imediatamente' dá falso-negativo.",
+  trap:"Os dois detalhes que a banca cobra: '≥ 4 semanas' e 'não sorologia'."},
+
+ /* ===== INÉDITAS ===== */
+ {src:"Inédita", obj:"Úlcera duodenal × gástrica", stem:"Associe a característica à úlcera mais provável:<br>1. Dor que melhora com alimentação e acorda o paciente às 2–3 h da madrugada.<br>2. Dor que piora com a refeição, com anorexia e perda de peso.<br>3. Deve ser sempre biopsiada e reendoscopada até cicatrizar.<br>4. Praticamente nunca é maligna; basta pesquisar H. pylori.",
+  opts:["1-duodenal · 2-gástrica · 3-gástrica · 4-duodenal","1-gástrica · 2-duodenal · 3-duodenal · 4-gástrica","1-duodenal · 2-gástrica · 3-duodenal · 4-gástrica","1-gástrica · 2-gástrica · 3-duodenal · 4-duodenal"], ans:0,
+  why:"Duodenal: alimento tampona o ácido → melhora; dor noturna por secreção basal; benigna (Hp 90%). Gástrica: alimento estimula secreção contra mucosa lesada → piora, emagrece; pode ser câncer → biópsia sempre + controle endoscópico.",
+  trap:"Mnemônico: Duodenal = Dá fome (come e melhora); Gástrica = Gera aversão à comida."},
+
+ {src:"Inédita", obj:"Erradicação · esquema", stem:"<span class='cx'>Mulher, 44 anos, úlcera duodenal com teste da urease positivo, sem alergias, nunca usou macrolídeo.</span> Assinale o esquema de erradicação de PRIMEIRA linha recomendado no Brasil:",
+  opts:["Omeprazol 20 mg 1×/dia + amoxicilina 500 mg 2×/dia por 7 dias.","Omeprazol 40 mg 2×/dia + amoxicilina 1 g 2×/dia + claritromicina 500 mg 2×/dia por 14 dias.","Omeprazol 20 mg 1×/dia + metronidazol 250 mg 2×/dia por 5 dias.","Ciprofloxacino 500 mg 2×/dia + IBP por 10 dias."], ans:1,
+  why:"Consenso brasileiro: tríplice com IBP dose dobrada + amoxicilina 1 g 2×/d + claritromicina 500 mg 2×/d por 14 dias (ou quádrupla com bismuto: IBP + bismuto + tetraciclina + metronidazol 10–14 d). Esquemas de 7 dias e doses baixas falham; cipro não faz parte.",
+  trap:"Na discursiva, escrever 'IBP + 2 antibióticos' sem doses e sem '14 dias' perde metade do item."},
+
+ {src:"Inédita", obj:"Hp · falso-negativo", stem:"<span class='cx'>Homem, 50 anos, dispepsia, em uso de pantoprazol 40 mg/dia há 3 semanas. O médico solicita antígeno fecal para H. pylori, que vem negativo.</span> Assinale a correta:",
+  opts:["O resultado exclui infecção; manter o IBP.","O IBP reduz a carga bacteriana e causa falso-negativo nos testes de urease, respiratório e antígeno fecal; o teste deve ser repetido após suspender o IBP por 2 semanas (e ATB/bismuto por 4 semanas), ou usar sorologia apenas para triagem inicial.","Deve-se tratar empiricamente o H. pylori, pois o teste é irrelevante.","A sorologia é o melhor exame para confirmar infecção ativa nesse caso."], ans:1,
+  why:"IBP, ATB e bismuto suprimem a bactéria → falso-negativo nos testes de infecção ativa. Sorologia não sofre esse efeito, mas não distingue ativa de passada — só serve como triagem inicial em quem nunca tratou.",
+  trap:"'Sorologia confirma infecção ativa' é sempre falso."},
+
+ {src:"Inédita", obj:"HDA · manejo", stem:"<span class='cx'>Homem, 62 anos, cardiopata, hematêmese volumosa há 1 h, PA 85×50, FC 124, confuso. Hb 6,8. Usa AAS e diclofenaco.</span> Assinale a sequência correta:",
+  opts:["EDA imediata antes de qualquer medida, pois a hemostasia é o que salva.","Dois acessos calibrosos, cristaloide, proteger via aérea (IOT se rebaixado), transfundir (cardiopata: Hb < 8, meta 9–10), tipagem, IBP EV em bolus + infusão, suspender AINE, EDA nas primeiras 12–24 h após estabilização inicial.","Sonda de Blakemore imediata.","Alta com omeprazol oral, pois HDA por AINE é autolimitada."], ans:1,
+  why:"Sequência: estabilizar → sangue/lab → IBP EV → EDA precoce (≤ 24 h; instável: ≤ 12 h, mas não antes da ressuscitação inicial). Blakemore é para varizes refratárias. Cardiopata tem limiar transfusional mais alto (Hb < 8).",
+  trap:"'EDA antes de estabilizar' mata na sala de endoscopia. A ordem é ABC → EDA."},
+
+ {src:"Inédita", obj:"HDA · Forrest", stem:"<span class='cx'>Após ressuscitação, a EDA mostra úlcera duodenal com vaso visível não sangrante no fundo (Forrest IIa).</span> Assinale a correta:",
+  opts:["Lesão de baixo risco; alta com IBP oral.","Lesão de alto risco de ressangramento: terapia endoscópica combinada (adrenalina + clipe ou térmico), IBP EV 72 h (80 mg + 8 mg/h), internação, pesquisa e erradicação de H. pylori, e reintrodução do AAS em 3–7 dias se indicação cardiovascular forte.","Cirurgia imediata (vagotomia + piloroplastia).","Repetir EDA em 24 h apenas se ressangrar, sem tratar agora."], ans:1,
+  why:"Forrest Ia, Ib, IIa, IIb = alto risco → tratar endoscopicamente (sempre dupla terapia; adrenalina isolada não basta) + IBP EV. IIc/III = baixo risco → IBP oral, alta. Ressangramento → 2ª EDA → embolização → cirurgia.",
+  trap:"Adrenalina sozinha não é terapia definitiva; e 'base limpa' (III) é o único que vai para casa cedo."},
+
+ {src:"Inédita", obj:"DRGE · investigação", stem:"<span class='cx'>Mulher, 52 anos, pirose há 2 anos, usa omeprazol 40 mg 2×/dia corretamente há 12 semanas sem melhora. EDA: sem esofagite, sem hérnia, sem Barrett.</span> Qual o próximo passo mais adequado?",
+  opts:["Dobrar novamente a dose do IBP por tempo indefinido.","pHmetria esofágica de 24 h com impedância (idealmente fora do IBP) + manometria, para confirmar refluxo patológico e afastar pirose funcional/hipersensibilidade e acalasia antes de qualquer cirurgia.","Fundoplicatura de Nissen imediata.","Iniciar bloqueador H2 e alta."], ans:1,
+  why:"Refratária com EDA normal = DRGE não erosiva verdadeira, pirose funcional ou hipersensibilidade ao refluxo — só a pHmetria/impedância separa; manometria exclui acalasia e é pré-operatória obrigatória. Cirurgia sem documentação objetiva é erro.",
+  trap:"EDA normal não exclui DRGE — mas também não a confirma. Padrão-ouro é a pHmetria."},
+
+ {src:"Inédita", obj:"Barrett", stem:"Sobre o esôfago de Barrett, assinale a INCORRETA:",
+  opts:["É a substituição do epitélio escamoso do esôfago distal por epitélio colunar com metaplasia intestinal (células caliciformes), consequência de refluxo crônico.","Aumenta o risco de adenocarcinoma de esôfago, e por isso exige vigilância endoscópica com biópsias.","O tratamento com IBP contínuo reduz sintomas e, provavelmente, a progressão; displasia de alto grau é tratada por ablação/ressecção endoscópica.","A displasia é o principal preditor de progressão para câncer.","A metaplasia regride completamente com 8 semanas de IBP, dispensando seguimento."], ans:4,
+  why:"Barrett não regride de forma confiável com IBP; o seguimento endoscópico (3–5 anos sem displasia; mais frequente com displasia de baixo grau; ablação na de alto grau) é obrigatório. As demais alternativas estão corretas.",
+  trap:"'Dispensa seguimento' é a alternativa-isca de sempre em lesão pré-maligna."},
+
+ {src:"Inédita", obj:"Gastrite autoimune", stem:"<span class='cx'>Mulher, 60 anos, cansaço, parestesias em pés, glossite. Hb 9, VCM 112, B12 baixa. EDA: atrofia de corpo e fundo com antro preservado; anti-célula parietal e anti-fator intrínseco positivos.</span> Assinale a correta:",
+  opts:["Gastrite tipo B por H. pylori; erradicar.","Gastrite atrófica autoimune (tipo A) com anemia perniciosa: repor B12 parenteral, vigiar tumor neuroendócrino e adenocarcinoma gástrico por EDA periódica; a gastrina sérica estará elevada.","Doença celíaca; retirar glúten.","Úlcera duodenal; IBP."], ans:1,
+  why:"Tipo A: autoimune contra células parietais (corpo/fundo) → acloridria → gastrina ↑ (hiperplasia de células ECL → carcinoide) e perda de fator intrínseco → deficiência de B12 (anemia macrocítica + neuropatia). Tipo B (Hp) é antral.",
+  trap:"Corpo/fundo = autoimune; antro = H. pylori. VCM alto + neuropatia = B12, não ferro."},
+
+ {src:"Inédita", obj:"Estenose hipertrófica do piloro", stem:"<span class='cx'>Lactente de 5 semanas, vômitos em jato, não biliosos, após as mamadas, com fome logo após vomitar; desidratado; massa palpável em epigástrio ('oliva'). Gasometria: alcalose metabólica hipoclorêmica e hipocalêmica.</span> Assinale a correta:",
+  opts:["Refluxo fisiológico do lactente; posicionamento e espessamento da dieta.","Estenose hipertrófica do piloro: USG confirma (músculo > 3–4 mm, canal > 15–17 mm); corrigir volume/eletrólitos e depois piloromiotomia de Fredet-Ramstedt.","Atresia duodenal; cirurgia imediata.","Alergia à proteína do leite de vaca."], ans:1,
+  why:"Vômito não bilioso em jato + oliva + alcalose hipoclorêmica em lactente de 3–6 semanas = EHP (malformação da ementa). Vômito bilioso indicaria obstrução abaixo da papila (atresia duodenal, volvo). Corrigir hidroeletrolítico ANTES de operar.",
+  trap:"'Não bilioso' localiza a obstrução acima da papila. Alcalose hipoclorêmica é a marca do vômito gástrico."},
+
+ {src:"Inédita", obj:"Integrativa · anemia + úlcera", stem:"<span class='cx'>Homem, 51 anos, hipertenso, fadiga há 3 meses, dor epigástrica em queimação que melhora ao comer e volta à noite. Hb 10,2, VCM 72, sangue oculto positivo. EDA: úlcera duodenal, urease positiva.</span> Assinale a INCORRETA:",
+  opts:["A anemia é ferropriva por perda crônica pela úlcera; deve-se repor sulfato ferroso e, pela idade e sangue oculto positivo, considerar colonoscopia para excluir lesão colônica sincrônica.","A conduta inclui IBP dose plena + erradicação do H. pylori (tríplice 14 dias) + suspender AINE/AAS, álcool e tabaco.","O controle de cura será feito com teste respiratório ou antígeno fecal ≥ 4 semanas após o antibiótico, sem IBP por 2 semanas.","A úlcera duodenal precisa de nova EDA com biópsias para excluir malignidade antes de tratar.","As principais complicações da úlcera são hemorragia, perfuração, penetração e obstrução pilórica."], ans:3,
+  why:"Úlcera duodenal praticamente nunca é maligna — não exige biópsia nem EDA de controle (diferente da gástrica). O resto reproduz a discursiva 4 da prova final.",
+  trap:"Não confunda a regra da GÁSTRICA (biópsia sempre) com a duodenal."},
+
+ {src:"Inédita", obj:"Proposições · Hp e testes", stem:"Julgue as proposições:<br>I. O teste da urease na biópsia se baseia na produção de amônia pela bactéria, que alcaliniza o meio e muda a cor do indicador.<br>II. A sorologia IgG para H. pylori é útil para controle de cura, pois negativa rapidamente após a erradicação.<br>III. Indicações de erradicação incluem úlcera péptica, linfoma MALT, dispepsia funcional, parente de 1º grau com câncer gástrico e uso crônico de AINE/AAS.<br>IV. A cascata de Correa (gastrite crônica → atrofia → metaplasia intestinal → displasia → adenocarcinoma) é o modelo da carcinogênese gástrica associada ao H. pylori.",
+  opts:["Apenas I, III e IV estão corretas.","Apenas I e II estão corretas.","Apenas II e IV estão corretas.","Todas estão corretas.","Apenas III e IV estão corretas."], ans:0,
+  why:"II é falsa: IgG persiste por anos após a cura. I, III e IV são corretas.",
+  trap:"Sorologia = 'já teve contato'; nunca 'está curado'."},
+
+ {src:"Inédita", obj:"Perfuração", stem:"<span class='cx'>Homem, 45 anos, úlcera duodenal em tratamento irregular, dor epigástrica súbita 'em punhalada' há 3 h, agora difusa; abdome em tábua; RX de tórax em pé com ar subdiafragmático.</span> Assinale a correta:",
+  opts:["Aumentar a dose do IBP e reavaliar em 24 h.","Úlcera péptica perfurada (abdome agudo perfurativo): jejum, SNG, hidratação, ATB EV de amplo espectro, IBP EV e laparotomia/laparoscopia de urgência (rafia + patch de omento); erradicar H. pylori depois.","EDA de urgência para hemostasia.","TC com contraste para confirmar antes de operar, sempre."], ans:1,
+  why:"Ponte com a SP1: perfuração = complicação cirúrgica da úlcera. Pneumoperitônio + peritonite = cirurgia; EDA é contraindicada (insufla ar pela perfuração). TC só se RX negativo e dúvida.",
+  trap:"Hemorragia → EDA; perfuração → cirurgia. Nunca EDA em perfuração."},
+
+ {src:"Inédita", obj:"Fármacos · ponte com a Vânia", stem:"Sobre os fármacos da dispepsia, assinale a INCORRETA:",
+  opts:["IBPs inibem irreversivelmente a H⁺/K⁺-ATPase e devem ser tomados 30–60 min antes da refeição para atuar nas bombas ativas.","O uso crônico de IBP associa-se a hipomagnesemia, deficiência de B12, maior risco de fraturas, infecção por C. difficile e pneumonia.","Bloqueadores H2 (famotidina) têm eficácia inferior aos IBPs e desenvolvem taquifilaxia; são úteis para sintomas noturnos.","Antiácidos (hidróxido de Al/Mg) neutralizam o ácido e aliviam rápido; alumínio constipa, magnésio dá diarreia.","O sucralfato deve ser administrado junto com os antiácidos e o IBP, pois precisa de pH alcalino para se ativar."], ans:4,
+  why:"Sucralfato precisa de pH ÁCIDO para polimerizar e aderir à úlcera — deve ser dado longe de antiácidos/IBP (e longe de outros fármacos, pois reduz absorção). As demais são corretas (frases-lei da Vânia).",
+  trap:"Sucralfato + antiácido é combinação que a Vânia usa como distrator de prova."}
+];
+
+const FC=[
+ ["Dispepsia — sinais de alarme (→ EDA)","Disfagia/odinofagia · perda de peso · anemia · hematêmese/melena ('borra de café') · vômitos persistentes · massa · início > 45–50 a · história familiar de CA gástrico."],
+ ["Dispepsia funcional (Roma IV)","≥ 1 de plenitude pós-prandial, saciedade precoce, dor/queimação epigástrica, sem doença orgânica (EDA normal), 3 meses/início 6 meses. Diagnóstico de exclusão."],
+ ["Funcional — tratamento por subtipo","Desconforto pós-prandial (plenitude/distensão) → PROCINÉTICO + fracionar dieta. Dor epigástrica → IBP 4–8 sem. Hp+ → erradicar. Refratária → amitriptilina/mirtazapina."],
+ ["DRGE — diagnóstico","Clínico (pirose + regurgitação). Teste terapêutico: IBP 4–8 sem. EDA só alarme/falha (normal não exclui). pHmetria 24 h = padrão-ouro. Manometria pré-cirurgia."],
+ ["DRGE — tratamento","Cabeceira 15–20 cm, não deitar < 2–3 h, peso, gatilhos. IBP 30–60 min antes do café, 4–8 sem → dobrar/trocar → EDA/pHmetria. Nissen se refratário documentado."],
+ ["Barrett","Metaplasia intestinal do esôfago distal → adenocarcinoma. IBP contínuo + vigilância endoscópica (3–5 a). Displasia alto grau → ablação/ressecção endoscópica."],
+ ["Úlcera duodenal × gástrica","Duodenal: Hp 90%, melhora com comida, noturna, benigna. Gástrica: Hp + AINE, piora com comida, emagrece, PODE SER CÂNCER → biópsia sempre + EDA de controle 8–12 sem."],
+ ["AINE e úlcera","↓ COX-1 → ↓ PG → ↓ muco/bicarbonato/fluxo. Risco: idoso, dose alta, AAS/corticoide/anticoagulante, úlcera prévia → IBP profilático ou coxibe."],
+ ["Testes para H. pylori","Ativa: urease na biópsia, respiratório ¹³C, antígeno fecal (suspender IBP 2 sem, ATB/bismuto 4 sem). Sorologia IgG = só contato; nunca para cura."],
+ ["Erradicação — 1ª linha (Brasil)","IBP dose dobrada 2×/d + amoxicilina 1 g 2×/d + claritromicina 500 mg 2×/d, 14 dias. Alternativa: quádrupla com bismuto (IBP + bismuto + tetraciclina + metronidazol 10–14 d). 2ª linha: levofloxacino."],
+ ["Indicações de erradicação","Úlcera péptica · linfoma MALT · dispepsia funcional (test-and-treat) · gastrite atrófica · parente 1º grau com CA gástrico · AINE/AAS crônico · PTI · anemia ferropriva inexplicada."],
+ ["Controle de cura do Hp","Teste respiratório ou antígeno fecal ≥ 4 semanas após o ATB e ≥ 2 semanas sem IBP. Sorologia nunca. EDA só na úlcera gástrica."],
+ ["Tratamento da úlcera","IBP dose plena 4 sem (duodenal) / 8 sem (gástrica) + erradicar Hp + parar AINE/AAS/fumo. Sucralfato (pH ácido, longe de antiácido) e antiácidos = adjuvantes."],
+ ["Complicações da úlcera","Hemorragia (nº 1) · perfuração (abdome agudo, pneumoperitônio → cirurgia) · penetração (pâncreas, dor no dorso) · obstrução pilórica (vômitos tardios, alcalose hipoclorêmica) · malignização (gástrica)."],
+ ["HDA — causas e sinais","Úlcera (nº 1), varizes, esofagite, Mallory-Weiss, AINE, Dieulafoy. Hematêmese/borra de café, melena; ureia ↑ desproporcional. Grave: FC > 100, PAS < 100, síncope, Hb < 8."],
+ ["HDA — manejo","2 acessos + cristaloide · IOT se rebaixado · Hb < 7 transfunde (cardiopata < 8) · IBP EV 80 mg + 8 mg/h · EDA ≤ 24 h (≤ 12 h se instável) · varizes: terlipressina + ceftriaxona + ligadura."],
+ ["Forrest","Ia jato · Ib babação · IIa vaso visível · IIb coágulo = alto risco → terapia dupla + IBP EV 72 h. IIc hematina · III base limpa = baixo risco → IBP VO, alta."],
+ ["Gastrite A × B","A (autoimune): corpo/fundo, anti-célula parietal/FI, B12 ↓ (perniciosa), gastrina ↑, carcinoide. B (Hp): antro, cascata de Correa → CA gástrico, MALT."],
+ ["Estenose hipertrófica do piloro","3–6 semanas, vômito em jato NÃO bilioso, oliva, alcalose hipoclorêmica hipocalêmica. USG. Corrigir eletrólitos → piloromiotomia."],
+ ["Fármacos (Vânia)","IBP 30–60 min antes da refeição; crônico: Mg ↓, B12 ↓, fratura, C. difficile. Anti-H2: taquifilaxia, noturno. Antiácido: Al constipa, Mg solta. Sucralfato: pH ácido, longe dos outros."]
+];
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const SRC_LBL={APF:"APF real 2026.1",Prova:"Prova final 2026.1",Inédita:"Inédita",SP1:"SP1",SP2:"SP2",SP3:"SP3",SP4:"SP4"};
+const SRC_CLS={APF:"r",Prova:"d",Inédita:"i",SP1:"e",SP2:"e",SP3:"e",SP4:"e"};
+const SRC_ORDER=["Todas","APF","Prova","Inédita","SP1","SP2","SP3","SP4"].filter(k=>k==="Todas"||QS.some(q=>q.src===k));
+let filter="Todas";
+const state={answered:0,hits:0};
+function buildChips(){
+  const box=document.getElementById('chips');
+  const counts={Todas:QS.length};QS.forEach(q=>counts[q.src]=(counts[q.src]||0)+1);
+  SRC_ORDER.forEach(k=>{
+    const c=document.createElement('button');c.className='chip'+(k===filter?' on':'');
+    c.textContent=(k==="Todas"?"Todas":SRC_LBL[k])+' · '+counts[k];
+    c.addEventListener('click',()=>{filter=k;renderQuiz();});box.appendChild(c);
+  });
+}
+function renderQuiz(){
+  document.querySelectorAll('#chips .chip').forEach((c,i)=>c.classList.toggle('on',SRC_ORDER[i]===filter));
+  const list=QS.map((q,i)=>({q,i})).filter(x=>filter==="Todas"||x.q.src===filter);
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i})=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';});
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill '+SRC_CLS[q.src]+'">'+SRC_LBL[q.src]+'</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){renderQuiz();}
+buildChips();renderQuiz();
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back"><small>'+c[0]+'</small>'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+document.querySelectorAll('.rotbtn').forEach(b=>b.addEventListener('click',()=>{const r=document.getElementById(b.dataset.r);r.style.display=(r.style.display==='block'?'none':'block');}));
+
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

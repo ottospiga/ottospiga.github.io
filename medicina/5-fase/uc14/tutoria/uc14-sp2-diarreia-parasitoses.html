@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC14 · SP2 — Diarreia e Parasitoses · Guia + Simulado APF</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tblwrap{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .fig{background:#0f1a24;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+  .fig svg{max-width:100%;height:auto}
+  .fig .cap{font-size:12.5px;color:var(--mut);margin-top:6px}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;min-width:120px;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .chip.on{color:var(--ink);border-color:var(--teal);background:#12302a}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.r{background:#2b2113;color:#ffd79e;border:1px solid #6a5a26}
+  .pill.i{background:#1a2e26;color:#8fe4d2;border:1px solid #1f5a41}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:180px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45;flex-direction:column}
+  .fc .back small{display:block;color:#8fb8a8;font-size:11px;margin-bottom:4px;font-weight:700}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIV</span>
+    <h1>SP2 — Diarreia, desidratação e parasitoses · <span style="color:var(--tealo)">Guia + Simulado da APF</span></h1>
+    <div class="sub">Fechamento + APF: <b>quarta 23/09/2026, 13h20</b> (tutora Ana Elisa). Resumo (≈30 min) → banco de 26 questões: as <b>10 da APF real da SP2 (2026.1)</b>, as <b>4 da prova final</b> desta SP e <b>12 inéditas</b> → descritiva real com roteiro → mapa mental e flashcards. Fontes: APF SP2 e prova final da veterana, resumo de tutoria da veterana, Manejo do Paciente com Diarreia (MS), Guia Prático de Diarreia Aguda (SBP), frases da Vânia (aula 04/09), Goldman-Cecil.</div>
+  </header>
+  <div class="tabs" id="tabs"><button class="tab active" data-t="resumo">📖 Resumo</button><button class="tab" data-t="quizsec">📝 Simulado (26 + descritiva)</button><button class="tab" data-t="mapa">🧠 Mapa mental</button><button class="tab" data-t="flash">🎴 Flashcards</button></div>
+  <section id="resumo" class="active">
+    <div class="panel">
+      <h2>0 · Como essa APF é cobrada (raio-X da veterana)</h2>
+      <p>A <b>APF real da SP2 (08/04/2026)</b> teve <span class="k2">10 questões a–d</span>, e o eixo foi o <b>"Manejo do Paciente com Diarreia" do Ministério da Saúde</b> + o guia da <b>SBP</b>: classificação da desidratação e plano (A/B/C), <b>zinco</b>, volumes do <b>Plano C</b>, as "Regras de Ouro" da alta, sinais de retorno imediato, quando dar antibiótico, oxiuríase (albendazol repetido em 2 semanas), mecanismo da giardíase, associação parasito × espoliação, probiótico × prebiótico. A veterana errou <b>zinco × probiótico</b> e o <b>volume do Plano C</b>.</p>
+      <p>Na <b>prova final</b> a SP2 entrou com 4 objetivas (classificação/plano, etiologia viral e autolimitada, quimioprofilaxia em massa OMS &gt; 20%/&gt; 50%, mecanismo secretor da cólera) e a <b>2ª discursiva</b> (criança de 5 anos com prurido anal e diarreia há 20 dias: classificação por duração → enterobíase + fita gomada → tratamento e posologia → medidas de controle). A veterana perdeu ponto escrevendo "albendazol por 14 dias".</p>
+      <div class="note"><b>Tradução prática:</b> decore os <b>números do MS</b> (planos, volumes, zinco, SRO 50–100 mL/kg) e a <b>tabela de parasitoses</b> (agente → transmissão → clínica → diagnóstico → droga). O resto é raciocínio: viral × bacteriana, secretora × osmótica, quando pedir exame, quando dar ATB.</div>
+      <p class="src">Ementa 2026 da SP2 "Por que isso aconteceu comigo?": Patologia: fígado e vesícula (inflamatório/infeccioso/neoplásico) · Lab: hemograma infeccioso, amilase/lipase, transaminases, GGT, FA, TAP/RNI, líquido ascítico · Fisio: fisiopatologia das diarreias · Farmaco: antidiarreicos, antissecretores, soro, pro/pré/simbióticos, antiflatulentos, DII · Conferência: diarreias na criança.</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Definições e classificação por tempo</h2>
+      <p><b>Diarreia</b> = ≥ 3 evacuações amolecidas/líquidas em 24 h (ou ↓ da consistência habitual). <b>Disenteria</b> = diarreia com <b>sangue</b> visível (± muco/pus) → invasão da mucosa.</p>
+      <div class="tblwrap"><table>
+        <tr><th>Duração</th><th>Nome</th><th>Causa dominante</th><th>Pensar em</th></tr>
+        <tr><td>&lt; 14 dias</td><td><b>Aguda</b></td><td>&gt; 90% infecciosa, <b>viral e autolimitada</b> (resolve em até 7 dias)</td><td>Rotavírus (criança), norovírus (adulto/surtos), E. coli, Salmonella, Shigella, Campylobacter, toxinas (S. aureus)</td></tr>
+        <tr><td>14–30 dias</td><td><b>Persistente</b></td><td>Aguda que não resolveu; alto risco de desnutrição</td><td>Giardia, Cryptosporidium, intolerância à lactose pós-infecciosa, desnutrição, HIV</td></tr>
+        <tr><td>&gt; 30 dias</td><td><b>Crônica</b></td><td>Maioria NÃO infecciosa</td><td>SII, DII, doença celíaca, má absorção, parasitose crônica, fármacos, câncer colorretal</td></tr>
+      </table></div>
+      <div class="warn"><b>Pegadinha da discursiva:</b> diarreia "há 20 dias" = <b>persistente</b> (a veterana acertou). "Há 5 semanas" = crônica. Não invente "subaguda".</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Mecanismos fisiopatológicos — a tabela que resolve a Fisio e a Q8 da prova</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <rect width="700" height="250" fill="#0f1a24" rx="12"/>
+          <g font-size="11" fill="#cdd9e6">
+            <rect x="15" y="15" width="160" height="220" rx="10" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="95" y="38" text-anchor="middle" font-weight="700" fill="#8ab8ff" font-size="12.5">SECRETORA</text>
+            <text x="95" y="58" text-anchor="middle">toxina → ↑AMPc/GMPc</text>
+            <text x="95" y="73" text-anchor="middle">→ cripta SECRETA Cl⁻</text>
+            <text x="95" y="88" text-anchor="middle">→ vilo não absorve Na⁺</text>
+            <text x="95" y="112" text-anchor="middle" fill="#ffd79e" font-weight="700">NÃO cessa com jejum</text>
+            <text x="95" y="130" text-anchor="middle">volume ALTO · pH normal</text>
+            <text x="95" y="145" text-anchor="middle">gap osmótico &lt; 50</text>
+            <text x="95" y="170" text-anchor="middle" fill="#8fe4d2">cólera · ETEC · rotavírus</text>
+            <text x="95" y="185" text-anchor="middle" fill="#8fe4d2">VIPoma · carcinoide</text>
+            <text x="95" y="200" text-anchor="middle" fill="#8fe4d2">sais biliares no cólon</text>
+
+            <rect x="185" y="15" width="160" height="220" rx="10" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="265" y="38" text-anchor="middle" font-weight="700" fill="#ffd79e" font-size="12.5">OSMÓTICA</text>
+            <text x="265" y="58" text-anchor="middle">soluto não absorvido</text>
+            <text x="265" y="73" text-anchor="middle">"puxa" água (passivo)</text>
+            <text x="265" y="112" text-anchor="middle" fill="#ffd79e" font-weight="700">CESSA com jejum</text>
+            <text x="265" y="130" text-anchor="middle">volume menor · pH ÁCIDO</text>
+            <text x="265" y="145" text-anchor="middle">gap osmótico &gt; 125</text>
+            <text x="265" y="170" text-anchor="middle" fill="#8fe4d2">intolerância à lactose</text>
+            <text x="265" y="185" text-anchor="middle" fill="#8fe4d2">laxante osmótico · sorbitol</text>
+            <text x="265" y="200" text-anchor="middle" fill="#8fe4d2">pós-rotavírus (lactase ↓)</text>
+
+            <rect x="355" y="15" width="160" height="220" rx="10" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="435" y="38" text-anchor="middle" font-weight="700" fill="#ff9ea6" font-size="12.5">INFLAMATÓRIA</text>
+            <text x="435" y="58" text-anchor="middle">invasão / lesão da mucosa</text>
+            <text x="435" y="73" text-anchor="middle">exsudato: sangue, muco, pus</text>
+            <text x="435" y="112" text-anchor="middle" fill="#ffd79e" font-weight="700">FEBRE + dor + tenesmo</text>
+            <text x="435" y="130" text-anchor="middle">leucócitos fecais +</text>
+            <text x="435" y="145" text-anchor="middle">= DISENTERIA</text>
+            <text x="435" y="170" text-anchor="middle" fill="#8fe4d2">Shigella · Salmonella · EHEC</text>
+            <text x="435" y="185" text-anchor="middle" fill="#8fe4d2">Campylobacter · C. difficile</text>
+            <text x="435" y="200" text-anchor="middle" fill="#8fe4d2">E. histolytica · DII</text>
+
+            <rect x="525" y="15" width="160" height="220" rx="10" fill="#123326" stroke="#1f5a41"/>
+            <text x="605" y="38" text-anchor="middle" font-weight="700" fill="#8fe4d2" font-size="12.5">MOTORA / DISABSORTIVA</text>
+            <text x="605" y="58" text-anchor="middle">trânsito rápido ou</text>
+            <text x="605" y="73" text-anchor="middle">área absortiva ↓</text>
+            <text x="605" y="112" text-anchor="middle" fill="#ffd79e" font-weight="700">ESTEATORREIA</text>
+            <text x="605" y="130" text-anchor="middle">fezes gordurosas, flutuam</text>
+            <text x="605" y="145" text-anchor="middle">perda de peso, ↓vit ADEK</text>
+            <text x="605" y="170" text-anchor="middle" fill="#8fe4d2">SII · hipertireoidismo</text>
+            <text x="605" y="185" text-anchor="middle" fill="#8fe4d2">celíaca · Crohn · Giardia</text>
+            <text x="605" y="200" text-anchor="middle" fill="#8fe4d2">pancreatite crônica</text>
+          </g>
+        </svg>
+        <div class="cap">Os 4 mecanismos. A pergunta-chave da prova: "melhora com jejum?" — osmótica sim, secretora não.</div>
+      </div>
+      <p><b>Cólera / ETEC (Q8 da prova)</b>: toxina ativa a adenilato-ciclase → ↑AMPc → canal CFTR secreta Cl⁻ na cripta e bloqueia absorção de NaCl no vilo → diarreia aquosa de grande volume ("água de arroz"), pH alcalino, <b>não melhora com jejum</b>. <b>Por que a SRO funciona?</b> O cotransportador <b>SGLT-1 (Na⁺-glicose)</b> do vilo fica intacto — glicose "arrasta" sódio e água. Por isso a SRO precisa de glicose e é de <b>osmolaridade reduzida</b> (245 mOsm/L; Na 75 mEq/L).</p>
+      <p><b>Rotavírus</b>: destrói o enterócito maduro do vilo (↓ lactase → componente osmótico) + proteína NSP4 (enterotoxina → secretor). <b>Giardia (Q4 da APF)</b>: trofozoíto <b>adere</b> à mucosa duodeno-jejunal → atrofia vilositária, ↓ dissacaridases, consumo de sais biliares → <b>má absorção/esteatorreia</b>; não invade nem ulcera.</p>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Avaliar a criança: desidratação e planos do MS (o coração da APF)</h2>
+      <div class="tblwrap"><table>
+        <tr><th></th><th>Sem desidratação → <span class="k2">PLANO A</span></th><th>Com desidratação → <span class="hl">PLANO B</span></th><th>Desidratação GRAVE → <span style="color:#ff9ea6;font-weight:700">PLANO C</span></th></tr>
+        <tr><td>Estado geral</td><td>Bem, alerta</td><td><b>Irritado, inquieto</b></td><td><b>Letárgico / inconsciente</b></td></tr>
+        <tr><td>Olhos</td><td>Normais</td><td>Fundos</td><td>Muito fundos</td></tr>
+        <tr><td>Lágrimas</td><td>Presentes</td><td>Ausentes</td><td>Ausentes</td></tr>
+        <tr><td>Boca/língua</td><td>Úmidas</td><td>Secas</td><td>Muito secas</td></tr>
+        <tr><td>Sede</td><td>Bebe normal</td><td><b>Sedento, bebe avidamente</b></td><td><b>Bebe mal / não consegue</b></td></tr>
+        <tr><td>Sinal da prega</td><td>Desaparece rápido</td><td>Desaparece <b>lentamente</b></td><td>Muito lentamente (&gt; 2 s)</td></tr>
+        <tr><td>Pulso / enchimento capilar</td><td>Normal</td><td>Normal ou rápido</td><td>Fraco/ausente · &gt; 3–5 s</td></tr>
+        <tr><td><b>Decisão</b></td><td>≤ 1 sinal da coluna B</td><td><b>≥ 2 sinais</b> (incluindo ≥ 1 em negrito)</td><td>≥ 2 sinais da coluna C (incluindo ≥ 1 em negrito)</td></tr>
+        <tr><td><b>Onde</b></td><td>Domicílio</td><td>Unidade de saúde, observado</td><td>Hospital (iniciar na UBS)</td></tr>
+      </table></div>
+      <h3>Plano A — em casa (as "Regras de Ouro", Q7 da APF)</h3>
+      <ul>
+        <li>① <b>Aumentar líquidos</b>: água, soro caseiro, SRO após cada evacuação (<b>&lt; 1 ano: 50–100 mL · &gt; 1 ano: 100–200 mL</b>) · ② <b>manter a alimentação habitual e o aleitamento materno</b> (não "descansar o intestino") · ③ <b>zinco 10–14 dias</b> · ④ <b>sinais de alerta para retornar</b>.</li>
+        <li><b>Zinco (OMS/SBP — Q2 da APF, Q2 da prova de Farmaco)</b>: <b>&lt; 6 meses: 10 mg/dia · ≥ 6 meses: 20 mg/dia, por 10–14 dias</b>. Reduz duração/gravidade e previne novos episódios nos 2–3 meses seguintes. Probiótico NÃO é a resposta dessa pergunta.</li>
+        <li><b>Retornar imediatamente se (Q8 da APF)</b>: não consegue beber/mamar ou <b>recusa alimentar</b> · <b>vômitos repetidos</b> · <b>sangue nas fezes</b> · <b>muita sede</b> · piora ou sem melhora em 2 dias · febre alta · muito doente. Febre baixa que cede e fezes menos líquidas <b>não</b> são sinais de falha.</li>
+      </ul>
+      <h3>Plano B — TRO na unidade</h3>
+      <ul>
+        <li><b>SRO 50–100 mL/kg em 4 horas</b>, em pequenos volumes frequentes (colher/copo), com a criança <b>observada</b>; manter aleitamento; outros alimentos só após reidratar. Reavaliar a cada 1–2 h (pesar).</li>
+        <li>Vômitos: parar 10 min e recomeçar mais devagar; <b>ondansetrona 0,15 mg/kg dose única</b> (SBP) se vômitos atrapalham a TRO. Se persistir: <b>SRO por sonda nasogástrica (gastróclise) 20–30 mL/kg/h</b>. Melhorou → alta com Plano A. Piorou → Plano C.</li>
+      </ul>
+      <h3>Plano C — venoso (Q6 da APF — a que a veterana errou)</h3>
+      <div class="tblwrap"><table>
+        <tr><th>Fase</th><th>&lt; 1 ano</th><th>&gt; 1 ano</th></tr>
+        <tr><td><b>Expansão rápida</b> (SF 0,9% ou RL)</td><td><b>30 mL/kg em 1 h</b></td><td><b>30 mL/kg em 30 min</b></td></tr>
+        <tr><td><b>Depois</b></td><td><b>70 mL/kg em 5 h</b></td><td><b>70 mL/kg em 2 h 30</b></td></tr>
+        <tr><td>Total</td><td>100 mL/kg em 6 h</td><td>100 mL/kg em 3 h</td></tr>
+      </table></div>
+      <p>Reavaliar a cada 15–30 min; oferecer SRO assim que conseguir beber (≈ 5 mL/kg/h); depois manutenção/reposição (Holliday-Segar + perdas) e voltar ao Plano A. Alternativa antiga do MS (adulto/criança maior): 20 mL/kg em 30 min, repetir até hidratar. Cardiopata/renal: volumes menores e mais lentos.</p>
+      <div class="warn"><b>Números que caem:</b> Plano B = 50–100 mL/kg/4 h · Plano C &lt; 1 ano = 30 mL/kg/1 h + 70 mL/kg/5 h · zinco 10/20 mg × 10–14 d · SRO pós-evacuação 50–100 / 100–200 mL · ondansetrona 0,15 mg/kg · perda de peso: leve &lt; 5%, moderada 5–10%, grave &gt; 10%.</div>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Quando investigar e quando dar antibiótico</h2>
+      <ul>
+        <li><b>Exame de rotina: NENHUM.</b> A maioria é viral e autolimitada (Q6 da prova). Coprocultura só para: disenteria, febre alta, toxemia, imunossuprimido, surto/interesse epidemiológico, uso recente de ATB (pesquisar toxina de <b>C. difficile</b>). EPF: diarreia persistente/crônica, viagem, creche. Leucócitos fecais/lactoferrina = inflamatória. Hemograma/eletrólitos/função renal: só no desidratado moderado-grave (ureia ↑ desproporcional, Na, K, acidose).</li>
+        <li><b>ATB só se (Q5 da APF, MS)</b>: <b>disenteria com comprometimento do estado geral</b> (Shigella: <b>cipro 15 mg/kg 12/12 h por 3 dias</b> ou azitromicina 10 mg/kg D1 + 5 mg/kg D2–5; grave/internado: ceftriaxona 50–100 mg/kg/d 3–5 d) · <b>cólera grave</b> (azitro/doxi) · imunossuprimido, &lt; 3 meses com bacteremia, febre tifoide, giardíase/amebíase confirmadas. <b>NÃO</b> por "&gt; 3 dias", rotavírus, prega positiva. Cuidado: ATB em <b>E. coli O157 (EHEC)</b> aumenta risco de <b>SHU</b>; Salmonella não invasiva prolonga o estado de portador.</li>
+        <li><b>Antidiarreicos (loperamida, difenoxilato)</b>: contraindicados em criança e em disenteria/febre (íleo, megacólon). <b>Racecadotrila</b> (antissecretor) e <b>probióticos</b> (S. boulardii, L. rhamnosus GG) podem encurtar ~1 dia — adjuvantes, nunca substituem SRO. <b>Probiótico × prebiótico (Q10 da APF)</b>: probiótico = micro-organismo vivo em quantidade adequada; prebiótico = fibra não digerível que alimenta a microbiota; simbiótico = os dois. Evidência: diarreia associada a antibiótico (S. boulardii, LGG) — não é rotina para todo mundo em ATB.</li>
+      </ul>
+      <p class="src">Frases-lei da Vânia (aula 04/09) que a tutoria pode reaproveitar: "exceto zinco e SRO, nada disso tem no SUS" · racecadotrila "não é antimotilidade" · loperamida contraindicada em disenteria · carvão ativado não é tratamento de diarreia infecciosa.</p>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Parasitoses intestinais — a tabela inteira cai</h2>
+      <div class="tblwrap"><table>
+        <tr><th>Parasita</th><th>Transmissão</th><th>Clínica-assinatura</th><th>Diagnóstico</th><th>Tratamento (1ª linha)</th></tr>
+        <tr><td><b>Enterobius vermicularis</b> (oxiúro)</td><td>Fecal-oral, autoinfecção mão-ânus-boca, poeira/roupa de cama</td><td><b>Prurido anal noturno</b>, insônia, escoriação perianal; vermes brancos finos (~1 cm); vulvovaginite na menina</td><td><b>Fita gomada (Graham)</b> pela manhã antes do banho, 3 dias; EPF é ruim</td><td><b>Albendazol 400 mg dose única, REPETIR em 2 semanas</b> (ou mebendazol 100 mg 2×/d 3 d, pamoato de pirantel). <b>Tratar toda a casa</b>, unhas curtas, roupa de cama em água quente, banho matinal</td></tr>
+        <tr><td><b>Ascaris lumbricoides</b></td><td>Ingestão de ovos (solo, alimentos)</td><td>Fase pulmonar: <b>Löffler</b> (tosse, eosinofilia, infiltrado migratório); intestinal: dor, distensão, desnutrição, <b>obstrução por bolo de áscaris</b>, migração biliar/pancreática</td><td>EPF (ovos); RX/USG na obstrução</td><td><b>Albendazol 400 mg dose única</b>; mebendazol 100 mg 2×/d 3 d; obstrução: piperazina + óleo mineral, cirurgia se falha. <b>Espoliação: competição por nutrientes + obstrução mecânica</b></td></tr>
+        <tr><td><b>Ancylostoma duodenale / Necator</b></td><td><b>Penetração cutânea</b> da larva (pé descalço)</td><td>Dermatite no local, Löffler, <b>anemia ferropriva</b> (suga sangue), hipoalbuminemia, geofagia</td><td>EPF (ovos), cultura de larvas</td><td>Albendazol 400 mg dose única (ou 3 d); mebendazol; + sulfato ferroso. <b>Espoliação: sucção de sangue</b></td></tr>
+        <tr><td><b>Strongyloides stercoralis</b></td><td>Penetração cutânea; <b>autoinfecção</b> (persiste anos)</td><td>Larva currens, urticária, epigastralgia, diarreia; <b>hiperinfecção no imunossuprimido/corticoide</b> (sepse por gram-negativo) — tratar ANTES de corticoide</td><td>EPF com <b>Baermann-Moraes</b> (larvas), sorologia</td><td><b>Ivermectina 200 µg/kg/d 2 dias</b>; alternativa albendazol 10–14 d (fraco)</td></tr>
+        <tr><td><b>Giardia lamblia</b></td><td>Fecal-oral (água, creche)</td><td><b>Diarreia persistente + esteatorreia</b>, distensão, flatulência, perda de peso, déficit de crescimento; não tem sangue nem febre</td><td>EPF (cistos, sens. 60–70% → 3 amostras), antígeno fecal (ELISA)</td><td><b>Metronidazol 15 mg/kg/d 3×/d 5–7 d</b> (adulto 250 mg 3×/d); alternativas: tinidazol/secnidazol dose única, nitazoxanida 3 d, albendazol 5 d</td></tr>
+        <tr><td><b>Entamoeba histolytica</b></td><td>Fecal-oral</td><td>Assintomática → <b>disenteria amebiana</b> (sem febre alta) → <b>abscesso hepático</b> (febre + dor HD, homem adulto)</td><td>EPF (trofozoíto com hemácias), antígeno/PCR; USG do fígado</td><td>Metronidazol 500–750 mg 3×/d 7–10 d + <b>teclozan/paromomicina</b> (cistos luminais)</td></tr>
+        <tr><td><b>Taenia saginata / solium</b></td><td>Carne bovina/suína crua (cisticerco)</td><td>Quase assintomática; proglotes nas fezes; <b>T. solium ovo → cisticercose/neurocisticercose</b></td><td>EPF/tamisação (proglotes)</td><td><b>Praziquantel 5–10 mg/kg dose única</b>; niclosamida. Neurocisticercose: albendazol + corticoide</td></tr>
+        <tr><td><b>Schistosoma mansoni</b></td><td>Cercária na água doce (caramujo)</td><td>Dermatite cercariana → febre de Katayama → forma hepatoesplênica (hipertensão portal com função hepática preservada)</td><td>Kato-Katz (ovos)</td><td><b>Praziquantel 50–60 mg/kg dose única</b></td></tr>
+        <tr><td><b>Trichuris trichiura</b></td><td>Ingestão de ovos</td><td>Disenteria crônica, <b>prolapso retal</b> na criança, anemia</td><td>EPF</td><td>Albendazol 400 mg 3 d; mebendazol</td></tr>
+      </table></div>
+      <p><b>Quimioprofilaxia em massa (OMS/SBP — Q7 da prova)</b>: para geo-helmintos, <b>prevalência &gt; 20% → albendazol/mebendazol 1×/ano; &gt; 50% → 2×/ano</b> em pré-escolares e escolares. Não substitui saneamento/educação, não é "para todos independentemente da prevalência", e nitazoxanida não é a droga de campanha. <b>Albendazol</b>: evitar no 1º trimestre e em &lt; 1 ano (usar com cautela em 12–24 meses: 200 mg).</p>
+      <div class="warn"><b>Pegadinha nº 1 (a que a veterana perdeu na discursiva):</b> enterobíase = albendazol <b>dose única + repetir em 14 dias</b> (o ovo eclode e a droga não mata ovo) — <b>não</b> é "albendazol por 14 dias". E <b>toda a família</b> trata junto.</div>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Diarreia crônica no adulto — doença celíaca, intolerância à lactose e DII (Pato + Lab + Farmaco)</h2>
+      <div class="tblwrap"><table>
+        <tr><th></th><th>Doença celíaca</th><th>Intolerância à lactose</th><th>Retocolite ulcerativa</th><th>Doença de Crohn</th></tr>
+        <tr><td>Mecanismo</td><td>Autoimune ao glúten (HLA-DQ2/DQ8) → atrofia vilositária do delgado proximal</td><td>↓ lactase → osmótica</td><td>Inflamação <b>contínua, só mucosa</b>, reto sempre, ascende</td><td><b>Transmural, salteada</b>, boca→ânus, íleo terminal; granulomas</td></tr>
+        <tr><td>Clínica</td><td>Esteatorreia, distensão, anemia ferropriva refratária, osteoporose, dermatite herpetiforme, baixa estatura</td><td>Cólica, gases, diarreia aquosa ácida após leite; <b>melhora com jejum</b></td><td><b>Diarreia com sangue e muco, tenesmo</b>, urgência</td><td>Dor em FID, diarreia (sem sangue em geral), emagrecimento, <b>fístulas, estenoses, doença perianal</b></td></tr>
+        <tr><td>Lab / diagnóstico</td><td><b>Anti-transglutaminase IgA + IgA total</b> (se IgA baixa → IgG); anti-endomísio; confirma com <b>biópsia duodenal</b> (Marsh) — em dieta com glúten</td><td>Teste do H₂ expirado; teste de tolerância à lactose (glicemia ↑ &lt; 20 mg/dL); pH fecal ácido</td><td>Colonoscopia + biópsia; calprotectina fecal ↑; p-ANCA</td><td>Colonoscopia/ileoscopia, enteroRM; ASCA; calprotectina ↑</td></tr>
+        <tr><td>Tratamento</td><td>Dieta sem glúten para sempre</td><td>Restrição/lactase exógena</td><td><b>Mesalazina/sulfassalazina</b> (5-ASA) → corticoide na crise → azatioprina → biológico; colectomia cura</td><td>Corticoide na crise (budesonida ileal) → azatioprina/MTX → anti-TNF; 5-ASA pouco efetivo; cirurgia não cura</td></tr>
+        <tr><td>Complicação-chave</td><td>Linfoma T intestinal, osteoporose</td><td>—</td><td><b>Megacólon tóxico</b>, CCR (vigilância após 8 anos)</td><td>Fístulas, abscessos, obstrução, má absorção B12</td></tr>
+      </table></div>
+      <p class="src">Frase da Vânia: sulfassalazina = DII + risco de infecção latente, CI em alergia a sulfa. Lab da ementa: exames de má absorção — gordura fecal (Sudan III), D-xilose (mucosa × pâncreas), elastase fecal (insuficiência pancreática).</p>
+    </div>
+
+    <div class="panel">
+      <h2>7 · Roteiro de conduta (para descritiva) — criança com diarreia</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 215" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect width="700" height="215" fill="#0f1a24" rx="12"/>
+          <g font-size="11" fill="#e8eef5">
+            <rect x="15" y="15" width="200" height="60" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="115" y="36" text-anchor="middle" font-weight="700">1 · CLASSIFICAR</text>
+            <text x="115" y="52" text-anchor="middle" font-size="10.5" fill="#cdd9e6">tempo (aguda/persist./crônica)</text>
+            <text x="115" y="66" text-anchor="middle" font-size="10.5" fill="#cdd9e6">sangue? febre? desidratação?</text>
+            <rect x="250" y="15" width="200" height="60" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="350" y="36" text-anchor="middle" font-weight="700">2 · PLANO A / B / C</text>
+            <text x="350" y="52" text-anchor="middle" font-size="10.5" fill="#cdd9e6">SRO · zinco · manter dieta/leite</text>
+            <text x="350" y="66" text-anchor="middle" font-size="10.5" fill="#cdd9e6">ondansetrona se vômito</text>
+            <rect x="485" y="15" width="200" height="60" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="585" y="36" text-anchor="middle" font-weight="700">3 · EXAME? ATB?</text>
+            <text x="585" y="52" text-anchor="middle" font-size="10.5" fill="#cdd9e6">só disenteria/toxemia/persistente</text>
+            <text x="585" y="66" text-anchor="middle" font-size="10.5" fill="#cdd9e6">EPF se &gt; 14 d · toxina C. diff se ATB</text>
+            <line x1="215" y1="45" x2="248" y2="45" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar2)"/>
+            <line x1="450" y1="45" x2="483" y2="45" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar2)"/>
+            <rect x="15" y="105" width="320" height="95" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="175" y="126" text-anchor="middle" font-weight="700" fill="#8fe4d2">ALTA = 4 REGRAS DE OURO por escrito</text>
+            <text x="175" y="145" text-anchor="middle" font-size="10.5" fill="#d9f2e6">① mais líquidos/SRO após cada evacuação</text>
+            <text x="175" y="160" text-anchor="middle" font-size="10.5" fill="#d9f2e6">② manter alimentação e aleitamento</text>
+            <text x="175" y="175" text-anchor="middle" font-size="10.5" fill="#d9f2e6">③ zinco 10–14 dias</text>
+            <text x="175" y="190" text-anchor="middle" font-size="10.5" fill="#d9f2e6">④ sinais de retorno imediato</text>
+            <rect x="365" y="105" width="320" height="95" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="525" y="126" text-anchor="middle" font-weight="700" fill="#ff9ea6">VOLTAR JÁ SE</text>
+            <text x="525" y="145" text-anchor="middle" font-size="10.5" fill="#ffd0d4">não bebe/mama · recusa alimentar</text>
+            <text x="525" y="160" text-anchor="middle" font-size="10.5" fill="#ffd0d4">vômitos repetidos · sangue nas fezes</text>
+            <text x="525" y="175" text-anchor="middle" font-size="10.5" fill="#ffd0d4">muita sede · febre alta · piora</text>
+            <text x="525" y="190" text-anchor="middle" font-size="10.5" fill="#ffd0d4">sem melhora em 2 dias</text>
+          </g>
+        </svg>
+        <div class="cap">Roteiro "Manejo do Paciente com Diarreia" (MS) — é isso que a discursiva e as Q7/Q8 da APF pedem.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>8 · As 12 pegadinhas desta SP</h2>
+      <ul>
+        <li>① "Irritado, olhos fundos, prega lenta, bebe avidamente" = <b>com desidratação → Plano B</b>. "Letárgico, não bebe" = grave → Plano C. Não misture (Plano C com "com desidratação").</li>
+        <li>② Suplemento que <b>reduz duração e previne recorrência</b> = <b>ZINCO</b> (10/20 mg, 10–14 d), não probiótico, não vitamina A.</li>
+        <li>③ Plano C &lt; 1 ano: <b>30 mL/kg em 1 h + 70 mL/kg em 5 h</b>. &gt; 1 ano: 30 em 30 min + 70 em 2 h 30.</li>
+        <li>④ ATB só em <b>disenteria com toxemia</b>, cólera grave, imunossuprimido — nunca "por mais de 3 dias" ou rotavírus.</li>
+        <li>⑤ Regras de ouro: <b>manter</b> alimentação e leite materno; SRO após cada evacuação; zinco; sinais de alerta. Jamais "jejum", "suspender aleitamento", "refrigerante".</li>
+        <li>⑥ Retorno imediato = recusa alimentar, vômitos repetidos, sangue, muita sede. Febre baixa que cede e fezes melhorando <b>não</b>.</li>
+        <li>⑦ Oxiúro = <b>fita gomada</b> + albendazol <b>dose única repetida em 2 semanas</b> + tratar a casa. "Albendazol 14 dias" é erro.</li>
+        <li>⑧ Giardia = <b>adesão → má absorção</b> (esteatorreia, persistente); Shigella/ameba = invasão; cólera = AMPc/secretora.</li>
+        <li>⑨ Espoliação: <b>Ancylostoma = sangue/anemia ferropriva</b>; <b>Ascaris = competição + obstrução</b>; <b>Giardia = atrofia/gordura</b>.</li>
+        <li>⑩ Probiótico = organismo <b>vivo</b>; prebiótico = <b>fibra</b>. Evidência só para cepas específicas (S. boulardii, LGG) na diarreia por ATB — não é rotina.</li>
+        <li>⑪ Quimioprofilaxia em massa: <b>&gt; 20% → anual; &gt; 50% → semestral</b>, só geo-helmintos, sem substituir saneamento.</li>
+        <li>⑫ Osmótica <b>cessa</b> com jejum (lactose); secretora <b>não</b> (cólera). Esteatorreia = celíaca/Giardia/pâncreas — pedir anti-tTG + IgA.</li>
+      </ul>
+    </div>
+</section>
+  <section id="quizsec">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">26</span></span><div class="bar"><i id="fill"></i></div><button class="btn" onclick="resetQuiz()">Zerar</button></div>
+    <div class="note" style="margin-top:0"><b>Modo simulado:</b> a APF real da SP2 teve 10 questões a–d em ~40 min. Faça primeiro as <b>Q1–Q10 (APF real 2026.1)</b> cronometrando 30 min; depois as <b>Q11–Q14 (prova final)</b> e as <b>Q15–Q26 (inéditas)</b>, que sobem de nível. A descritiva no fim é a 2ª discursiva da prova final da veterana, com roteiro de correção.</div>
+    <div class="chips" id="chips"></div>
+    <div id="quiz"></div>
+    
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D</div><span class="pill d">Descritiva · prova final real (29/04/2026)</span><span class="pill o">Diarreia persistente + enterobíase · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">L.P., 5 anos, é levado à UBS com queixa de dor abdominal periumbilical e diarreia intermitente há 20 dias. A mãe relata que a criança apresenta prurido anal intenso, principalmente à noite, o que prejudica o sono. Não há febre ou perda de peso significativa. No exame físico, nota-se apenas escoriações leves na região perianal.</span>
+        <b>a)</b> Como a diarreia desta criança deve ser classificada quanto à duração? <b>(15)</b>
+        <br><b>b)</b> Qual a principal suspeita diagnóstica para o prurido anal e qual o método diagnóstico padrão-ouro (específico) para este parasita? <b>(25)</b>
+        <br><b>c)</b> Qual o tratamento de primeira linha para esta parasitose e qual a orientação importante sobre o esquema posológico para evitar recidivas? <b>(35)</b>
+        <br><b>d)</b> Cite duas medidas de controle ambiental/higiene que a família deve adotar para interromper o ciclo de transmissão. <b>(25)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Diarreia persistente</b> (14–30 dias) — citar os cortes: aguda &lt; 14 d, persistente 14–30 d, crônica &gt; 30 d. A veterana acertou.</td><td>15</td></tr>
+          <tr><td><b>b</b></td><td><b>Enterobíase (oxiuríase, <i>Enterobius vermicularis</i>)</b> — prurido anal noturno pela postura de ovos na margem anal (10) · padrão-ouro: <b>método da fita gomada / fita adesiva (Graham)</b>, colhida pela manhã antes do banho e da evacuação, idealmente em 3 dias consecutivos; EPF comum tem baixa sensibilidade porque os ovos não são eliminados nas fezes (15).</td><td>25</td></tr>
+          <tr><td><b>c</b></td><td><b>Albendazol 400 mg VO em dose única</b> (ou mebendazol 100 mg 2×/dia por 3 dias, ou pamoato de pirantel 10 mg/kg) (15) · <b>repetir a dose após 14 dias</b>, porque o anti-helmíntico não mata os ovos — a segunda dose elimina os vermes que eclodiram nesse intervalo (15) · <b>tratar simultaneamente todos os contactantes domiciliares</b> (5). A veterana escreveu "albendazol por 14 dias" — perdeu o item.</td><td>35</td></tr>
+          <tr><td><b>d</b></td><td>Duas de: lavar roupas de cama, toalhas e roupas íntimas em água quente e não sacudi-las; banho matinal ao acordar (remove os ovos perianais); unhas curtas e limpas, lavar as mãos após o banheiro e antes das refeições, evitar levar as mãos à boca/coçar; limpar quartos e banheiros (aspirar poeira); trocar a roupa íntima diariamente; tratar todos da casa ao mesmo tempo (12,5 cada).</td><td>25</td></tr>
+        </table></div>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto · 60–79 = revisar a tabela de parasitoses e os números do MS · &lt; 60 = refazer o resumo + flashcards. Numa discursiva de tutoria, escreva o nome do parasita em latim, a dose, a via e o intervalo — é assim que se ganha o item inteiro.</div>
+      </div>
+    </div>
+
+  </section>
+  <section id="mapa"><div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>💧 Diarreia — definições</summary><ul>
+        <li>≥ 3 evacuações líquidas/24 h · disenteria = sangue · aguda &lt; 14 d · persistente 14–30 d · crônica &gt; 30 d</li>
+        <li>Aguda: viral, autolimitada; crônica: SII, DII, celíaca, má absorção, parasitose crônica</li>
+      </ul></details>
+      <details><summary>⚙️ Mecanismos</summary><ul>
+        <li>Secretora (cólera/AMPc, ETEC, rotavírus NSP4): volume alto, não cessa com jejum, pH normal</li>
+        <li>Osmótica (lactose, laxante, pós-rotavírus): cessa com jejum, pH ácido</li>
+        <li>Inflamatória (Shigella, Salmonella, EHEC, Campylobacter, C. difficile, ameba, DII): febre, sangue, leucócitos fecais</li>
+        <li>Motora/disabsortiva (SII, celíaca, Giardia, pâncreas): esteatorreia</li>
+        <li>SRO funciona porque SGLT-1 fica intacto</li>
+      </ul></details>
+      <details><summary>🧒 Desidratação e planos do MS</summary><ul>
+        <li>Sem (≤ 1 sinal) → Plano A em casa: SRO pós-evacuação (50–100 / 100–200 mL), manter dieta e leite, zinco 10–14 d, sinais de retorno</li>
+        <li>Com (≥ 2: irritado, olhos fundos, sem lágrimas, boca seca, sedento, prega lenta) → Plano B: SRO 50–100 mL/kg/4 h na unidade; vômito → ondansetrona 0,15 mg/kg → gastróclise</li>
+        <li>Grave (letárgico, não bebe, prega &gt; 2 s, pulso fraco) → Plano C: &lt; 1 a 30 mL/kg/1 h + 70/5 h · &gt; 1 a 30/30 min + 70/2 h 30</li>
+        <li>Zinco: 10 mg (&lt; 6 m) / 20 mg (≥ 6 m) por 10–14 d</li>
+        <li>Retorno: não bebe, recusa alimentar, vômitos repetidos, sangue, muita sede, febre alta, piora/sem melhora 2 d</li>
+      </ul></details>
+      <details><summary>💊 Exames e fármacos</summary><ul>
+        <li>Sem exame de rotina; coprocultura na disenteria/toxemia/surto; EPF se &gt; 14 d; toxina C. difficile se ATB</li>
+        <li>ATB: disenteria + toxemia (cipro 3 d / azitro / ceftriaxona), cólera grave, imunossuprimido; EHEC → SHU</li>
+        <li>Nunca loperamida em criança/disenteria; racecadotrila e probióticos (S. boulardii, LGG) = adjuvantes</li>
+        <li>Probiótico = vivo · prebiótico = fibra · simbiótico = ambos</li>
+      </ul></details>
+      <details><summary>🪱 Parasitoses</summary><ul>
+        <li>Oxiúro: prurido noturno · fita gomada · albendazol DU + repetir 14 d · tratar a casa</li>
+        <li>Ascaris: Löffler, obstrução · albendazol DU</li>
+        <li>Ancylostoma: pele → anemia ferropriva · albendazol + ferro</li>
+        <li>Strongyloides: autoinfecção, larva currens, hiperinfecção com corticoide · Baermann · ivermectina</li>
+        <li>Giardia: adesão → má absorção, persistente · metronidazol 5–7 d</li>
+        <li>Ameba: disenteria sem febre alta, abscesso hepático · metronidazol + teclozan</li>
+        <li>Taenia: carne → teníase (praziquantel); ovos T. solium → neurocisticercose</li>
+        <li>Schistosoma: água doce, hepatoesplênica · praziquantel</li>
+        <li>Profilaxia em massa: &gt; 20% anual · &gt; 50% semestral</li>
+      </ul></details>
+      <details><summary>🧬 Diarreia crônica</summary><ul>
+        <li>Celíaca: anti-tTG IgA + IgA total + biópsia duodenal (com glúten); dieta sem glúten</li>
+        <li>Lactose: H₂ expirado; cessa com jejum</li>
+        <li>RCU: contínua, mucosa, reto, sangue/tenesmo, megacólon tóxico; 5-ASA; colectomia cura</li>
+        <li>Crohn: transmural, salteada, íleo, fístulas; corticoide → azatioprina → anti-TNF</li>
+        <li>Calprotectina fecal separa DII de SII</li>
+      </ul></details>
+</div></div></section>
+  <section id="flash"><div class="panel"><h2>Flashcards — clique para virar</h2><p class="src">Um fato por cartão. A pergunta fica visível no verso.</p><div class="fcgrid" id="fcbox"></div></div></section>
+  <div class="foot">UC14 · SP2 — Diarreia e parasitoses · 14/09/2026 · APF 23/09 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+const QS=[
+ /* ===== APF REAL SP2 (08/04/2026) ===== */
+ {src:"APF", obj:"Desidratação · planos MS", stem:"<span class='cx'>Um lactente de 8 meses apresenta diarreia aquosa e vômitos há 2 dias. Ao exame físico: irritado, olhos encovados, sinal da prega desaparece lentamente e bebe água avidamente.</span> Qual a classificação da desidratação e o plano de tratamento inicial segundo o Ministério da Saúde?",
+  opts:["Sem desidratação; Plano A.","Com desidratação; Plano B.","Desidratação grave; Plano C.","Com desidratação; Plano C."], ans:1,
+  why:"Irritado + olhos fundos + prega lenta + sede ávida = ≥ 2 sinais da coluna 'com desidratação' (nenhum de gravidade: não está letárgico, consegue beber, prega não é > 2 s) → Plano B: SRO 50–100 mL/kg em 4 h na unidade, observado.",
+  trap:"'Bebe avidamente' é sinal de COM desidratação; 'bebe mal/não consegue' é o grave. A alternativa D cruza classificação certa com plano errado — leia os dois pedaços."},
+
+ {src:"APF", obj:"Zinco", stem:"A OMS e a SBP recomendam o uso de qual suplemento na diarreia aguda para reduzir a duração do episódio e prevenir novos eventos nos meses seguintes?",
+  opts:["Vitamina A.","Ferro quelato.","Zinco.","Probióticos."], ans:2,
+  why:"Zinco 10 mg/dia (< 6 meses) ou 20 mg/dia (≥ 6 meses) por 10–14 dias: reduz duração e gravidade do episódio e a incidência de novos episódios nos 2–3 meses seguintes. É a única suplementação com recomendação formal OMS/MS/SBP.",
+  trap:"A veterana marcou probióticos. Probiótico pode encurtar ~1 dia em cepas específicas, mas 'prevenir novos eventos nos meses seguintes' é a assinatura do zinco."},
+
+ {src:"APF", obj:"Parasitoses · oxiúro", stem:"<span class='cx'>Paciente de 5 anos apresenta prurido anal intenso, principalmente noturno. A mãe relata ter observado pequenos vermes brancos e finos na região perianal.</span> Qual o provável diagnóstico e o tratamento de primeira escolha?",
+  opts:["Ascaridíase; Albendazol dose única.","Oxiuríase; Albendazol ou Mebendazol com repetição em 2 semanas.","Giardíase; Nitazoxanida por 3 dias.","Amebíase; Ivermectina."], ans:1,
+  why:"Enterobius vermicularis: prurido anal noturno (fêmea põe ovos na margem anal à noite) + vermes brancos finos. Albendazol 400 mg dose única ou mebendazol, repetindo em 14 dias porque a droga não mata ovos; tratar os contactantes.",
+  trap:"'Dose única' sem repetição (alternativa A) é a isca. E ivermectina não é droga de amebíase — é de estrongiloidíase/escabiose."},
+
+ {src:"APF", obj:"Fisiopatologia · Giardia", stem:"<span class='cx'>Um paciente com diarreia persistente (mais de 14 dias) e síndrome de má absorção (esteatorreia) tem cistos de Giardia lamblia identificados no EPF.</span> Qual o mecanismo fisiopatológico dessa diarreia?",
+  opts:["Invasão da mucosa colônica com formação de úlceras.","Produção de enterotoxinas que aumentam o AMP cíclico.","Má absorção por adesão do parasito à mucosa do intestino delgado.","Hiperperistaltismo por irritação do plexo mientérico."], ans:2,
+  why:"O trofozoíto adere (disco suctorial) à mucosa do duodeno/jejuno → atrofia vilositária, ↓ dissacaridases e consumo de sais biliares → má absorção de gordura/lactose. Não invade (A = ameba/Shigella), não é toxina (B = cólera/ETEC).",
+  trap:"Giardia vive no DELGADO proximal, não no cólon — qualquer alternativa com 'colônica' já cai."},
+
+ {src:"APF", obj:"Antibiótico", stem:"De acordo com o manejo do Ministério da Saúde, em qual situação o uso de antibióticos está formalmente indicado na diarreia aguda?",
+  opts:["Em todos os casos de diarreia por mais de 3 dias.","Apenas em casos de diarreia com sangue (disenteria) e comprometimento do estado geral ou cólera grave.","Quando há isolamento de Rotavírus nas fezes.","Se houver sinal da prega positivo e olhos fundos."], ans:1,
+  why:"A maioria é viral e autolimitada. ATB (cipro 3 dias; azitro; ceftriaxona se internado) só na disenteria com toxemia (Shigella), cólera grave, imunossuprimidos, < 3 meses com suspeita de bacteremia. Desidratação se trata com SRO, não com ATB.",
+  trap:"Duração e desidratação NUNCA são critérios de ATB. Rotavírus é vírus."},
+
+ {src:"APF", obj:"Plano C · volumes", stem:"Sobre o Plano C de reidratação para menores de 1 ano com desidratação grave, qual a orientação de volume e tempo para a fase de expansão inicial com Soro Fisiológico 0,9%?",
+  opts:["20 mL/kg em 30 minutos, seguido de 70 mL/kg em 12 horas.","50 mL/kg em 1 hora.","100 mL/kg em 3 horas.","30 mL/kg em 1 hora, seguido de 70 mL/kg em 5 horas."], ans:3,
+  why:"Esquema do MS para < 1 ano: 30 mL/kg em 1 h + 70 mL/kg em 5 h (100 mL/kg em 6 h). Para > 1 ano: 30 mL/kg em 30 min + 70 mL/kg em 2 h 30 (100 mL/kg em 3 h).",
+  trap:"A veterana errou aqui (marcou A). '100 mL/kg em 3 horas' é o TOTAL do esquema de > 1 ano — a banca desloca a idade para pegar quem decorou pela metade."},
+
+ {src:"APF", obj:"Plano A · regras de ouro", stem:"<span class='cx'>Um lactente de 1 ano, após ser avaliado e classificado como 'Sem Sinais de Desidratação', recebe alta da unidade de saúde.</span> De acordo com o 'Manejo do Paciente com Diarreia' (MS), quais são as quatro orientações fundamentais (Regras de Ouro) que devem ser entregues por escrito à mãe para o tratamento no domicílio?",
+  opts:["Iniciar antibioticoterapia profilática; suspender o aleitamento materno para 'descansar o intestino'; oferecer apenas água pura; retornar em 24h.","Aumentar a ingestão de líquidos; manter a alimentação habitual; administrar zinco por 10 a 14 dias; orientar sinais de alerta para retorno imediato.","Oferecer Soro de Reidratação Oral (SRO) apenas se houver vômitos; manter jejum de sólidos por 12h; usar antitérmico se febre; retornar se a diarreia durar mais de 2 dias.","Suspender sucos e frutas; oferecer refrigerante de limão sem gás; iniciar probióticos; retornar se houver febre acima de 38,5°C."], ans:1,
+  why:"Plano A = líquidos extras (SRO após cada evacuação: 50–100 mL < 1 ano, 100–200 mL > 1 ano) + manter alimentação e aleitamento + zinco 10–14 d + sinais de retorno. Tudo por escrito.",
+  trap:"Qualquer alternativa com 'jejum', 'suspender aleitamento', 'refrigerante' ou 'ATB profilático' está automaticamente errada."},
+
+ {src:"APF", obj:"Sinais de retorno", stem:"Durante a orientação de alta de uma criança com diarreia aguda, o médico deve ser incisivo sobre os sinais que indicam falha no tratamento domiciliar. Segundo o guia da SBP e o manual do Ministério da Saúde, a mãe deve ser orientada a retornar imediatamente ao serviço de saúde se a criança apresentar qual dos seguintes sinais?",
+  opts:["Diminuição da consistência das fezes, mantendo a aceitação de líquidos.","Febre baixa (37,8°C) que cede com antitérmico comum.","Recusa alimentar, vômitos repetidos, sangue nas fezes ou muita sede.","Presença de flatulência e distensão abdominal leve após ingestão de zinco."], ans:2,
+  why:"Sinais de alerta do MS: não consegue beber/mamar, recusa alimentar, vômitos repetidos, sangue nas fezes, muita sede, piora ou sem melhora em 2 dias, febre alta, muito doente. Os demais itens são evolução esperada ou efeito menor.",
+  trap:"'Fezes menos consistentes com boa aceitação de líquido' é o curso natural — a banca coloca para ver se você sabe o que NÃO é alarme."},
+
+ {src:"APF", obj:"Parasitoses · espoliação", stem:"Determinadas parasitoses intestinais podem levar a quadros de desnutrição e anemia por mecanismos fisiopatológicos distintos. Relacione o parasito ao seu mecanismo de espoliação principal:<br>I. <i>Ancylostoma duodenale</i> · II. <i>Ascaris lumbricoides</i> · III. <i>Giardia lamblia</i><br>( ) Competição direta por nutrientes e possibilidade de obstrução mecânica por carga parasitária elevada.<br>( ) Lesão direta da mucosa com sucção de sangue e consumo de hemoglobina, levando à anemia ferropriva.<br>( ) Atrofia vilositária e consumo de sais biliares, prejudicando a solubilização e absorção de gorduras (esteatorreia).<br>A ordem correta de cima para baixo é:",
+  opts:["I, II, III.","II, I, III.","III, II, I.","II, III, I."], ans:1,
+  why:"Competição + obstrução = Ascaris (II); sucção de sangue/anemia ferropriva = Ancylostoma (I); atrofia vilositária + sais biliares = Giardia (III). Logo II, I, III.",
+  trap:"Ancylostoma é o 'vampiro' (anemia ferropriva); Ascaris é o 'ladrão de comida' que entope; Giardia é o 'tapete' que gruda no vilo."},
+
+ {src:"APF", obj:"Pro/prebióticos", stem:"<span class='cx'>Um paciente de 28 anos, em tratamento para pneumonia comunitária com Amoxicilina + Clavulanato há 5 dias, comparece à consulta de retorno na Unidade Básica de Saúde queixando-se de episódios de fezes amolecidas e distensão abdominal iniciados após o terceiro dia de antibiótico. Durante a consulta, ele questiona o médico sobre a diferença entre probióticos e prebióticos e se o uso dessas substâncias poderia ajudar no seu caso.</span> Assinale a alternativa correta:",
+  opts:["Prebióticos são microrganismos vivos que, quando administrados em quantidades adequadas, conferem benefício à saúde do hospedeiro.","O uso de probióticos específicos (como <i>Saccharomyces boulardii</i> ou <i>Lactobacillus rhamnosus GG</i>) tem evidência de benefício na redução da duração da diarreia associada a antibióticos.","Prebióticos são fibras digeríveis pelo ser humano que substituem a necessidade de uma microbiota intestinal funcional.","Probióticos devem ser indicados rotineiramente para todos os pacientes em uso de antibióticos na APS, independentemente da presença de sintomas."], ans:1,
+  why:"Probiótico = micro-organismo vivo (A descreve probiótico com o nome errado). Prebiótico = fibra NÃO digerível que alimenta a microbiota (C erra duas vezes). Evidência existe para cepas específicas na diarreia associada a ATB (B) — não como rotina universal (D).",
+  trap:"Troca de definição (A) é a pegadinha clássica; 'rotineiramente para todos' (D) é sempre errado em questão de evidência."},
+
+ /* ===== PROVA FINAL — SP2 (Q5–Q8) ===== */
+ {src:"Prova", obj:"Desidratação · planos", stem:"<span class='cx'>Um lactente de 10 meses apresenta quadro de diarreia aquosa há 3 dias. Ao exame físico, a criança está irritada, com olhos fundos, lágrimas ausentes e sinal da prega que desaparece lentamente. Ao oferecer água, a criança bebe avidamente.</span> Qual a classificação e a conduta imediata segundo o Ministério da Saúde?",
+  opts:["Sem desidratação; iniciar Plano A em domicílio com SRO e Zinco.","Com desidratação; iniciar Plano B com Terapia de Reidratação Oral (TRO) na Unidade de Saúde.","Desidratação grave; iniciar Plano C com expansão venosa imediata (Soro Fisiológico 0,9%).","Diarreia persistente; prescrever antibióticos e encaminhamento hospitalar."], ans:1,
+  why:"Mesmo caso da APF, reciclado: irritado + olhos fundos + sem lágrimas + prega lenta + sede ávida = com desidratação → Plano B (SRO 50–100 mL/kg em 4 h, observado na unidade). 3 dias não é persistente (> 14 d).",
+  trap:"A banca recicla o caso entre APF e prova final. Quem decorou a tabela de sinais fecha em 10 segundos."},
+
+ {src:"Prova", obj:"Etiologia", stem:"Sobre a etiologia da diarreia aguda na infância, qual das seguintes afirmações está correta de acordo com o Guia Prático da Sociedade Brasileira de Pediatria?",
+  opts:["A maioria dos casos é causada por vírus e resolve-se em até 7 dias, sendo quadros autolimitados.","A presença de sangue nas fezes (disenteria) é causada principalmente por rotavírus.","A investigação etiológica (coprocultura) é obrigatória em todos os casos de diarreia na Atenção Primária a Saúde.","Parasitas como a <i>Giardia lamblia</i> são as causas mais comuns de diarreia aquosa explosiva nas primeiras 48 horas."], ans:0,
+  why:"Viral (rotavírus, norovírus, adenovírus) e autolimitada é a regra. Disenteria = bactéria invasiva (Shigella, Campylobacter, Salmonella, EHEC) ou ameba — nunca rotavírus. Coprocultura não é rotina. Giardia dá diarreia persistente/esteatorreia, não aguda explosiva.",
+  trap:"'Obrigatória em todos os casos' e 'rotavírus com sangue' são as duas inversões clássicas."},
+
+ {src:"Prova", obj:"Parasitoses · profilaxia em massa", stem:"No manejo das parasitoses intestinais, a Organização Mundial da Saúde (OMS) e a Sociedade Brasileira de Pediatria recomendam estratégias específicas. Assinale a alternativa correta:",
+  opts:["O tratamento comunitário anual com Albendazol ou Mebendazol é indicado para todas as crianças e adultos, independentemente da prevalência da região, como medida de higiene pessoal.","A quimioprofilaxia em massa deve ser realizada exclusivamente em crianças menores de 12 meses, utilizando-se Nitazoxanida devido ao seu amplo espectro de ação contra protozoários e helmintos.","O tratamento comunitário dispensa a necessidade de investimentos em educação sanitária e saneamento básico, visto que a medicação interrompe definitivamente o ciclo de transmissão.","Em comunidades onde a prevalência de geo-helmintos é superior a 20%, recomenda-se o tratamento em massa (quimioprofilaxia) uma vez ao ano; se a prevalência for superior a 50%, o tratamento deve ser semestral."], ans:3,
+  why:"OMS: > 20% → 1×/ano; > 50% → 2×/ano, com albendazol/mebendazol, em pré-escolares e escolares, sem substituir saneamento e educação. Albendazol é evitado em < 12 meses; nitazoxanida não é droga de campanha.",
+  trap:"Números 20/50 e 'anual/semestral' — decore. 'Independentemente da prevalência' e 'dispensa saneamento' são sempre falsos."},
+
+ {src:"Prova", obj:"Fisiopatologia · secretora", stem:"<span class='cx'>A diarreia aguda pode ser desencadeada por diferentes mecanismos fisiopatológicos que alteram o balanço de água e eletrólitos no lúmen intestinal. Considere o caso de uma criança com diarreia aquosa de grande volume, pH fecal alcalino e que não apresenta melhora com o jejum. Ao analisar o mecanismo de ação da toxina do <i>Vibrio cholerae</i>, observa-se que ela promove a ativação da enzima adenilato ciclase, elevando os níveis intracelulares de AMP cíclico (AMPc).</span> Qual é o processo fisiopatológico predominante neste caso?",
+  opts:["Diarreia Osmótica: Ocorre por deficiência de lactase, onde solutos não absorvidos retêm água no lúmen; o hiato osmótico fecal está aumentado e o quadro regride com o jejum.","Diarreia Secretora: Ocorre pela secreção ativa de íons cloreto (Cl-) pelas criptas e inibição da absorção de sódio (Na+) pelas vilosidades; não regride com o jejum.","Diarreia Inflamatória: Caracteriza-se pela destruição da mucosa por patógenos invasivos, resultando em exsudação de proteínas e sangue, com dor abdominal intensa.","Diarreia Motora: Resulta do aumento do peristaltismo, reduzindo o tempo de contato do quimo com a mucosa, comum na Síndrome do Intestino Irritável."], ans:1,
+  why:"Toxina colérica → AMPc → CFTR secreta Cl⁻ + bloqueio da absorção de NaCl → grande volume, pH normal/alcalino, gap osmótico baixo, NÃO cessa com jejum. Osmótica (lactose) é o oposto: cessa com jejum, pH ácido.",
+  trap:"'Não melhora com jejum' + 'grande volume' fecha secretora antes mesmo de ler AMPc."},
+
+ /* ===== INÉDITAS ===== */
+ {src:"Inédita", obj:"Plano B · vômitos", stem:"<span class='cx'>Menina, 2 anos, 12 kg, diarreia aquosa há 2 dias, classificada como 'com desidratação'. Iniciada TRO na unidade, mas vomita a cada tentativa de SRO.</span> Assinale a conduta mais adequada:",
+  opts:["Trocar imediatamente para Plano C com SF 0,9% 30 mL/kg em 30 min, pois vômito define desidratação grave.","Pausar 10 minutos, reoferecer SRO em volumes menores e mais frequentes; considerar ondansetrona 0,15 mg/kg dose única; se os vômitos persistirem, SRO por sonda nasogástrica (gastróclise) 20–30 mL/kg/h.","Suspender a TRO, prescrever metoclopramida e liberar para casa com Plano A.","Prescrever loperamida para reduzir as perdas e manter a TRO."], ans:1,
+  why:"Vômito não é sinal de gravidade nem indica Plano C. A sequência do MS/SBP: fracionar e desacelerar a SRO → ondansetrona dose única (SBP) → gastróclise. Plano C só se piorar para desidratação grave ou falha da gastróclise.",
+  trap:"Metoclopramida (extrapiramidal em criança) e loperamida (contraindicada em < 2–6 anos, íleo) são as iscas farmacológicas."},
+
+ {src:"Inédita", obj:"Disenteria · ATB", stem:"<span class='cx'>Menino, 4 anos, febre 39,5 °C, diarreia com sangue e muco há 36 h, tenesmo, prostrado, sem desidratação grave. Frequenta creche onde há outros casos.</span> Assinale a correta:",
+  opts:["Diarreia viral típica; apenas Plano A e zinco.","Disenteria com comprometimento do estado geral — provável Shigella: SRO/zinco + antibiótico (ciprofloxacino 15 mg/kg 12/12 h por 3 dias ou azitromicina), sem antidiarreico; coprocultura se disponível.","Deve-se prescrever loperamida para conter o sangramento e reavaliar em 48 h.","Iniciar metronidazol empírico, pois disenteria em criança é sempre amebiana."], ans:1,
+  why:"Sangue + febre alta + toxemia = indicação formal de ATB no manual do MS (Shigella é a principal causa de disenteria em creche). Antimotilidade é contraindicado (íleo, megacólon, prolonga infecção). Amebíase dá disenteria sem febre alta e é menos comum em criança pequena.",
+  trap:"'Sempre amebiana' é generalização falsa; Shigella é a nº 1 de disenteria infantil."},
+
+ {src:"Inédita", obj:"Parasitoses · estrongiloidíase", stem:"<span class='cx'>Homem, 58 anos, lavrador, vai iniciar prednisona em dose alta para uma doença reumatológica. Refere epigastralgia e diarreia intermitente há anos, com eosinofilia persistente no hemograma e lesões urticariformes lineares migratórias na região glútea.</span> Assinale a correta:",
+  opts:["Trata-se provavelmente de ascaridíase; albendazol dose única e iniciar o corticoide.","Trata-se provavelmente de estrongiloidíase (larva currens, eosinofilia, autoinfecção); deve-se pesquisar larvas (Baermann-Moraes) e tratar com ivermectina ANTES do corticoide, pelo risco de síndrome de hiperinfecção com sepse por gram-negativos.","O quadro é típico de enterobíase; fita gomada e mebendazol.","A eosinofilia indica alergia à prednisona; trocar por outro imunossupressor."], ans:1,
+  why:"Strongyloides: única helmintíase com autoinfecção → persiste décadas; corticoide/imunossupressão → hiperinfecção disseminada (larvas carregam bactérias entéricas → sepse/meningite). Diagnóstico por Baermann-Moraes ou sorologia; tratamento ivermectina 200 µg/kg 2 dias. Regra: rastrear/tratar antes de imunossuprimir.",
+  trap:"'Larva currens' (urticária linear que migra rápido) é a assinatura do Strongyloides; Ascaris não dá lesão cutânea."},
+
+ {src:"Inédita", obj:"Parasitoses · ancilostomíase", stem:"<span class='cx'>Menina, 9 anos, zona rural, anda descalça. Palidez, cansaço, geofagia. Hb 8,1 g/dL, VCM 65 fL, ferritina baixa, eosinofilia. EPF: ovos de ancilostomídeo.</span> Assinale a correta:",
+  opts:["A anemia decorre de hemólise pela toxina do verme; tratar com praziquantel.","A anemia é ferropriva por sucção de sangue na mucosa do delgado; tratar com albendazol (400 mg/dia por 3 dias ou dose única) + sulfato ferroso, e orientar uso de calçados.","O parasita é adquirido por ingestão de carne mal cozida.","O diagnóstico exige fita gomada, pois o EPF é insensível."], ans:1,
+  why:"Ancylostoma/Necator: larva penetra a pele (pé descalço) → pulmão → delgado, onde se fixa e suga sangue → anemia ferropriva + hipoalbuminemia. EPF mostra ovos. Albendazol/mebendazol + ferro + calçado/saneamento.",
+  trap:"Praziquantel é de Taenia/Schistosoma; carne = Taenia; fita gomada = oxiúro. A banca embaralha as 'assinaturas'."},
+
+ {src:"Inédita", obj:"Parasitoses · amebíase", stem:"<span class='cx'>Homem, 35 anos, diarreia com sangue e muco há 10 dias, sem febre alta, cólicas; há 3 dias febre 39 °C, dor em hipocôndrio direito e hepatomegalia dolorosa. USG: coleção hepática única no lobo direito de 6 cm.</span> Assinale a correta:",
+  opts:["Colangite aguda; ATB + CPRE urgente.","Amebíase com abscesso hepático amebiano: metronidazol 750 mg 3×/dia por 10 dias seguido de amebicida luminal (teclozan/paromomicina); drenagem só se grande, lobo esquerdo, ou sem resposta em 72 h.","Colecistite aguda; colecistectomia precoce.","Giardíase; metronidazol 5 dias."], ans:1,
+  why:"Disenteria sem febre alta + abscesso hepático único no lobo direito em homem adulto = E. histolytica. Metronidazol (tecidual) + amebicida luminal para os cistos (evita recidiva/transmissão). Drenagem percutânea só em abscesso grande (> 5–10 cm), lobo esquerdo (risco pericárdico), sem resposta.",
+  trap:"Sem icterícia e sem colédoco dilatado → não é colangite. 'Só metronidazol' sem luminal deixa cistos — a banca gosta desse detalhe."},
+
+ {src:"Inédita", obj:"Fisiopatologia · osmótica", stem:"<span class='cx'>Lactente de 11 meses, 5 dias após rotavírus, mantém diarreia líquida ácida (pH fecal 5), explosiva, com assadura perianal, que melhora quando fica em jejum e piora com o leite. Sem sangue, afebril, bem hidratado.</span> Assinale a correta:",
+  opts:["Diarreia secretora persistente por toxina; antibiótico.","Intolerância secundária à lactose por lesão do vilo (↓ lactase) — diarreia osmótica: continuar aleitamento materno; se fórmula, usar fórmula sem lactose temporariamente (2–4 semanas); não é indicação de ATB nem de suspender alimentação.","Doença celíaca; retirar glúten.","Alergia à proteína do leite de vaca; suspender aleitamento materno."], ans:1,
+  why:"Rotavírus destrói o enterócito maduro (que carrega a lactase) → lactose não digerida → osmótica: pH ácido, cessa com jejum, piora com leite, dermatite perianal. Aleitamento materno se mantém sempre; fórmula sem lactose por curto período se fórmula.",
+  trap:"'Melhora com jejum + pH ácido' = osmótica. Suspender leite materno nunca é resposta."},
+
+ {src:"Inédita", obj:"Diarreia crônica · celíaca", stem:"<span class='cx'>Mulher, 29 anos, diarreia crônica com fezes volumosas e gordurosas há 8 meses, distensão, perda de 6 kg, anemia ferropriva refratária ao ferro oral, lesões vesiculares pruriginosas em cotovelos.</span> Qual a conduta diagnóstica correta?",
+  opts:["Iniciar dieta sem glúten como teste terapêutico e, se melhorar, fechar o diagnóstico.","Dosar anti-transglutaminase IgA junto com IgA sérica total, mantendo a paciente em dieta COM glúten, e confirmar com biópsia duodenal por endoscopia.","Solicitar teste do hidrogênio expirado para lactose, pois é a causa mais comum de esteatorreia.","Colonoscopia com biópsias, pois esteatorreia indica doença de Crohn colônica."], ans:1,
+  why:"Esteatorreia + anemia ferropriva refratária + dermatite herpetiforme = doença celíaca. Sorologia (anti-tTG IgA; IgA total para excluir deficiência de IgA, que dá falso-negativo) e biópsia duodenal, ambas com a paciente ingerindo glúten — retirar antes negativa os testes.",
+  trap:"'Tirar o glúten e ver' é o erro clássico: some a sorologia e a biópsia normaliza. Lactose não dá esteatorreia nem perda de peso."},
+
+ {src:"Inédita", obj:"DII", stem:"Sobre as doenças inflamatórias intestinais, assinale a alternativa INCORRETA:",
+  opts:["Na retocolite ulcerativa a inflamação é contínua, restrita à mucosa, começa no reto e se estende proximalmente; a colectomia total é curativa.","Na doença de Crohn a inflamação é transmural e salteada, pode acometer qualquer segmento (íleo terminal é o mais comum) e cursa com fístulas, estenoses e doença perianal.","Calprotectina fecal elevada ajuda a diferenciar doença inflamatória de síndrome do intestino irritável.","A sulfassalazina/mesalazina é a base do tratamento de manutenção da retocolite leve-moderada.","Loperamida em altas doses é o tratamento de escolha da crise grave de retocolite, por reduzir o número de evacuações."], ans:4,
+  why:"Antimotilidade na colite grave precipita megacólon tóxico — contraindicada. Crise grave = corticoide EV (± ciclosporina/infliximabe), e colectomia se refratária. As demais estão corretas.",
+  trap:"Loperamida é contraindicada em toda diarreia inflamatória/disenteria — em RCU, Shigella, C. difficile."},
+
+ {src:"Inédita", obj:"Adulto · C. difficile", stem:"<span class='cx'>Mulher, 72 anos, internada há 10 dias por pneumonia em uso de ceftriaxona, evolui com diarreia aquosa profusa (8×/dia), febre 38,5 °C, dor abdominal, leucócitos 24.000 e distensão.</span> Assinale a correta:",
+  opts:["Diarreia osmótica por dieta enteral; suspender a dieta.","Colite por Clostridioides difficile: pesquisar toxina/PCR nas fezes, suspender o antibiótico desencadeante se possível, tratar com vancomicina oral (ou fidaxomicina), evitar antimotilidade e vigiar megacólon tóxico.","Iniciar loperamida e probiótico, sem necessidade de exames.","Metronidazol EV é a primeira escolha em todos os casos."], ans:1,
+  why:"ATB recente + diarreia aquosa + febre + leucocitose importante (> 15–20 mil) em idosa internada = C. difficile até prova em contrário. Vanco VO 125 mg 6/6 h 10 d (ou fidaxomicina); metronidazol só se indisponível/leve; grave-fulminante: vanco VO alta dose + metronidazol EV. Nunca antimotilidade.",
+  trap:"Leucocitose desproporcional é a dica de C. difficile grave; loperamida e 'sem exames' são a armadilha dupla."},
+
+ {src:"Inédita", obj:"Semiologia · semiologia da desidratação", stem:"Julgue as proposições sobre a avaliação da criança com diarreia:<br>I. A perda de peso é o parâmetro mais objetivo do grau de desidratação: leve < 5%, moderada 5–10%, grave > 10%.<br>II. O sinal da prega que desaparece em mais de 2 segundos, pulso fraco e incapacidade de beber caracterizam desidratação grave.<br>III. A presença de febre alta contraindica a terapia de reidratação oral.<br>IV. Na SRO de osmolaridade reduzida (OMS), a glicose é essencial porque o cotransporte Na⁺-glicose (SGLT-1) permanece funcional mesmo na diarreia secretora.",
+  opts:["Apenas I, II e IV estão corretas.","Apenas I e III estão corretas.","Apenas II e IV estão corretas.","Apenas I, II e III estão corretas.","Todas estão corretas."], ans:0,
+  why:"I, II e IV são corretas. III é falsa: febre não contraindica TRO — só desidratação grave, choque, íleo/distensão importante, rebaixamento de consciência e vômitos incoercíveis apesar de gastróclise levam ao venoso.",
+  trap:"A racionalidade da SRO (SGLT-1 intacto) é a ponte Fisio–Farmaco que a Vânia e a tutoria adoram."},
+
+ {src:"Inédita", obj:"Teníase / cisticercose", stem:"<span class='cx'>Homem, 30 anos, eliminou 'fitas brancas' móveis nas fezes; come carne de porco malpassada. Assintomático. Mora com a filha de 6 anos, que teve uma crise convulsiva recente.</span> Assinale a correta:",
+  opts:["Teníase por <i>Taenia solium</i>; tratar com praziquantel dose única (ou niclosamida). A filha deve ser investigada para neurocisticercose (TC/RM), pois a ingestão de OVOS eliminados pelo portador causa cisticercose — a carne causa apenas teníase.","Teníase; a filha tem convulsão por ingestão de carne de porco.","Ascaridíase; albendazol.","Esquistossomose; praziquantel 50 mg/kg."], ans:0,
+  why:"Ciclo da T. solium: carne com cisticerco → teníase intestinal (portador); ovos nas fezes do portador → ingeridos por outra pessoa (ou autoinfecção) → cisticercose (SNC = neurocisticercose, principal causa de epilepsia adquirida em áreas endêmicas). Tratar o portador é medida de saúde pública.",
+  trap:"'Carne causa cisticercose' é o erro conceitual clássico: carne → teníase; OVOS → cisticercose."},
+
+ {src:"Inédita", obj:"Integrativa · criança", stem:"<span class='cx'>Menino, 3 anos, 14 kg, creche, diarreia aquosa há 4 dias, 6 evacuações/dia, sem sangue, febre 38 °C no 1º dia. Hoje: alerta, olhos levemente fundos, lágrimas presentes, boca úmida, prega desaparece rápido, bebe normalmente. Perdeu 300 g.</span> Assinale a conduta correta:",
+  opts:["Plano B na unidade por 4 h, pois há um sinal de desidratação (olhos fundos).","Sem desidratação (≤ 1 sinal, perda < 5%): Plano A em casa — SRO 100–200 mL após cada evacuação, manter dieta e leite, zinco 20 mg/dia por 10–14 dias, sinais de retorno por escrito; sem exames, sem ATB, sem antidiarreico.","Coprocultura e ciprofloxacino, pois frequenta creche.","Plano C, pois já são 4 dias de diarreia."], ans:1,
+  why:"Um sinal isolado (olhos levemente fundos) com os demais normais e perda de ~2% do peso = sem desidratação → Plano A completo. Creche e duração não mudam nada sem sangue/toxemia.",
+  trap:"Precisa de ≥ 2 sinais para 'com desidratação'. E o volume de SRO pós-evacuação muda com a idade: > 1 ano = 100–200 mL."}
+];
+
+const FC=[
+ ["Classificação por tempo","Aguda < 14 d · Persistente 14–30 d · Crônica > 30 d. Aguda = > 90% infecciosa, viral, autolimitada (≤ 7 d)."],
+ ["Sinais de 'com desidratação' (Plano B)","Irritado/inquieto · olhos fundos · sem lágrimas · boca seca · SEDENTO, bebe avidamente · prega lenta. ≥ 2 sinais."],
+ ["Sinais de desidratação GRAVE (Plano C)","Letárgico/inconsciente · olhos muito fundos · BEBE MAL ou não consegue · prega > 2 s · pulso fraco/ausente · enchimento capilar > 3–5 s."],
+ ["Plano A — as 4 Regras de Ouro","① + líquidos/SRO após cada evacuação (< 1 a: 50–100 mL; > 1 a: 100–200 mL) · ② manter alimentação e aleitamento · ③ zinco 10–14 d · ④ sinais de retorno."],
+ ["Zinco na diarreia","< 6 meses: 10 mg/dia · ≥ 6 meses: 20 mg/dia · 10–14 dias. Reduz duração/gravidade e previne novos episódios por 2–3 meses. (OMS/MS/SBP)"],
+ ["Plano B — volume","SRO 50–100 mL/kg em 4 h, fracionada, criança observada na unidade. Vômito: pausa 10 min, ondansetrona 0,15 mg/kg, gastróclise 20–30 mL/kg/h."],
+ ["Plano C — volumes","< 1 ano: 30 mL/kg em 1 h + 70 mL/kg em 5 h. > 1 ano: 30 mL/kg em 30 min + 70 mL/kg em 2 h 30. SF 0,9% ou RL. Reavaliar 15–30 min."],
+ ["Retorno imediato (sinais de alerta)","Não bebe/mama · recusa alimentar · vômitos repetidos · sangue nas fezes · muita sede · febre alta · piora ou sem melhora em 2 dias."],
+ ["Quando dar antibiótico","Disenteria + toxemia (Shigella: cipro 15 mg/kg 12/12 h 3 d ou azitro) · cólera grave · imunossuprimido · < 3 m com bacteremia. NÃO: duração, rotavírus, desidratação. Cuidado EHEC → SHU."],
+ ["Secretora × osmótica","Secretora (cólera, AMPc): volume alto, pH normal, NÃO cessa com jejum. Osmótica (lactose, laxante): volume menor, pH ácido, CESSA com jejum."],
+ ["Por que a SRO funciona na cólera?","SGLT-1 (Na⁺-glicose) do vilo fica intacto: glicose arrasta Na⁺ e água. SRO de osmolaridade reduzida: 245 mOsm/L, Na 75."],
+ ["Giardia — mecanismo e tratamento","Adesão ao duodeno/jejuno → atrofia vilositária → má absorção/esteatorreia, diarreia persistente. EPF 3 amostras ou antígeno. Metronidazol 5–7 d (ou tinidazol dose única, nitazoxanida)."],
+ ["Oxiúro (Enterobius)","Prurido anal noturno · fita gomada (Graham) · albendazol 400 mg dose única + REPETIR em 2 semanas · tratar toda a casa · unhas, roupa de cama quente."],
+ ["Ascaris","Ovos ingeridos · Löffler (pulmão) · obstrução por bolo de áscaris · albendazol dose única. Espoliação = competição + obstrução."],
+ ["Ancylostoma / Necator","Penetração cutânea (pé descalço) · anemia ferropriva por sucção de sangue · EPF ovos · albendazol + ferro + calçado."],
+ ["Strongyloides","Autoinfecção (persiste anos) · larva currens · eosinofilia · hiperinfecção com corticoide/imunossupressão · Baermann-Moraes · IVERMECTINA 2 dias. Tratar antes do corticoide."],
+ ["Entamoeba histolytica","Disenteria sem febre alta · abscesso hepático (lobo D, homem) · metronidazol 7–10 d + amebicida luminal (teclozan)."],
+ ["Taenia","Carne crua → teníase (praziquantel dose única). OVOS de T. solium → cisticercose/neurocisticercose (albendazol + corticoide)."],
+ ["Quimioprofilaxia em massa (OMS)","Geo-helmintos: prevalência > 20% → albendazol/mebendazol 1×/ano; > 50% → 2×/ano. Não substitui saneamento."],
+ ["Probiótico × prebiótico","Probiótico = micro-organismo VIVO em quantidade adequada. Prebiótico = fibra não digerível que alimenta a microbiota. Simbiótico = ambos. Evidência: S. boulardii / LGG na diarreia por ATB."],
+ ["Doença celíaca — diagnóstico","Anti-transglutaminase IgA + IgA total (se ↓ → IgG) + biópsia duodenal, TUDO com glúten na dieta. Esteatorreia, anemia ferropriva refratária, dermatite herpetiforme."],
+ ["RCU × Crohn","RCU: contínua, mucosa, reto → sangue/muco/tenesmo, megacólon tóxico, colectomia cura; 5-ASA. Crohn: transmural, salteada, íleo, fístulas/estenoses/perianal; corticoide → imunossupressor → anti-TNF."],
+ ["C. difficile","ATB recente + diarreia + febre + leucocitose alta. Toxina/PCR fecal. Vanco VO (ou fidaxomicina); sem antimotilidade; vigiar megacólon."]
+];
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const SRC_LBL={APF:"APF real 2026.1",Prova:"Prova final 2026.1",Inédita:"Inédita",SP1:"SP1",SP2:"SP2",SP3:"SP3",SP4:"SP4"};
+const SRC_CLS={APF:"r",Prova:"d",Inédita:"i",SP1:"e",SP2:"e",SP3:"e",SP4:"e"};
+const SRC_ORDER=["Todas","APF","Prova","Inédita","SP1","SP2","SP3","SP4"].filter(k=>k==="Todas"||QS.some(q=>q.src===k));
+let filter="Todas";
+const state={answered:0,hits:0};
+function buildChips(){
+  const box=document.getElementById('chips');
+  const counts={Todas:QS.length};QS.forEach(q=>counts[q.src]=(counts[q.src]||0)+1);
+  SRC_ORDER.forEach(k=>{
+    const c=document.createElement('button');c.className='chip'+(k===filter?' on':'');
+    c.textContent=(k==="Todas"?"Todas":SRC_LBL[k])+' · '+counts[k];
+    c.addEventListener('click',()=>{filter=k;renderQuiz();});box.appendChild(c);
+  });
+}
+function renderQuiz(){
+  document.querySelectorAll('#chips .chip').forEach((c,i)=>c.classList.toggle('on',SRC_ORDER[i]===filter));
+  const list=QS.map((q,i)=>({q,i})).filter(x=>filter==="Todas"||x.q.src===filter);
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i})=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';});
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill '+SRC_CLS[q.src]+'">'+SRC_LBL[q.src]+'</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){renderQuiz();}
+buildChips();renderQuiz();
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back"><small>'+c[0]+'</small>'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+document.querySelectorAll('.rotbtn').forEach(b=>b.addEventListener('click',()=>{const r=document.getElementById(b.dataset.r);r.style.display=(r.style.display==='block'?'none':'block');}));
+
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

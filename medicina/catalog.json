@@ -223,5 +223,50 @@
     "data": "2026-09-11",
     "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-guia.html",
     "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Guia.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · Prova Final de Tutoria · Guia + Simuladão",
+    "tipo": "simulado",
+    "data": "2026-09-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-prova-final-tutoria-guia-simulado.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_ProvaFinal_Tutoria_Guia_Simulado.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · SP1 — Abdome Agudo · Guia + Simulado APF",
+    "tipo": "guia-sp",
+    "data": "2026-09-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp1-abdome-agudo.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP1_Abdome_Agudo.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · SP2 — Diarreia e Parasitoses · Guia + Simulado APF",
+    "tipo": "guia-sp",
+    "data": "2026-09-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp2-diarreia-parasitoses.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP2_Diarreia_Parasitoses.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · SP3 — Icterícia, Vias Biliares e Pancreatite · Guia + Simulado APF",
+    "tipo": "guia-sp",
+    "data": "2026-09-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp3-ictericia-biliar-pancreatite.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP3_Ictericia_Biliar_Pancreatite.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · SP4 — Dispepsia, DRGE, Úlcera e HDA · Guia + Simulado APF",
+    "tipo": "guia-sp",
+    "data": "2026-09-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp4-dispepsia-drge-ulcera-hda.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP4_Dispepsia_DRGE_Ulcera_HDA.html"
   }
 ]

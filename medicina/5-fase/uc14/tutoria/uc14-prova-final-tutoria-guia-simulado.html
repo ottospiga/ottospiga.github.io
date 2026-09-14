@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC14 · Prova Final de Tutoria · Guia + Simuladão</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tblwrap{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .fig{background:#0f1a24;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+  .fig svg{max-width:100%;height:auto}
+  .fig .cap{font-size:12.5px;color:var(--mut);margin-top:6px}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;min-width:120px;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .chip.on{color:var(--ink);border-color:var(--teal);background:#12302a}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.r{background:#2b2113;color:#ffd79e;border:1px solid #6a5a26}
+  .pill.i{background:#1a2e26;color:#8fe4d2;border:1px solid #1f5a41}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:180px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45;flex-direction:column}
+  .fc .back small{display:block;color:#8fb8a8;font-size:11px;margin-bottom:4px;font-weight:700}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIV</span>
+    <h1>Prova final de tutoria da UC14 · <span style="color:var(--tealo)">Raio-X + tabela-mestre + simuladão</span></h1>
+    <div class="sub">Prova final da tutoria (80% da nota): após o fechamento da SP4 (07/10) — data a confirmar com a Ana Elisa. Formato real decodificado da turma anterior: <b>16 objetivas A–D (4 por SP) + 4 discursivas (a–e)</b>. Aqui: raio-X do formato e dos erros da veterana, tabela-mestre da UC, os 40 fatos que decidem a prova, método para a discursiva, plano de revisão e um <b>simuladão inédito no formato real</b>. O conteúdo completo, as APFs reais e as questões reais da prova estão nos 4 guias por SP.</div>
+  </header>
+  <div class="tabs" id="tabs"><button class="tab active" data-t="resumo">📖 Resumo</button><button class="tab" data-t="quizsec">📝 Simuladão (16 + 4 discursivas)</button><button class="tab" data-t="mapa">🧠 Mapa mental</button><button class="tab" data-t="flash">🎴 Flashcards</button></div>
+  <section id="resumo" class="active">
+    <div class="panel">
+      <h2>0 · Raio-X da prova final de tutoria da UC14 (formato real, 29/04/2026)</h2>
+      <div class="tblwrap"><table>
+        <tr><th>Parte</th><th>Formato real (turma anterior)</th><th>O que isso significa para você</th></tr>
+        <tr><td><b>Objetiva</b></td><td><b>16 questões A–D</b>, em <b>4 blocos de 4, na ordem das SPs</b> (Q1–4 abdome agudo · Q5–8 diarreia · Q9–12 icterícia/biliar · Q13–16 dispepsia). Gabarito preenchido em tabela na 1ª página. Casos de 3–8 linhas, "assinale a correta", quase sem INCORRETA/proposições.</td><td>Ritmo: <b>~3 min por questão</b>. Ler o caso procurando a <b>palavra-chave</b> (lactato, ar livre, "melhora com jejum", colúria, borra de café). Reciclagem alta: várias questões vieram <b>das APFs com o mesmo caso</b>.</td></tr>
+        <tr><td><b>Discursiva</b></td><td><b>4 questões, uma por SP</b>, cada uma com caso longo + <b>3 a 5 itens (a–e)</b>: diagnóstico sindrômico/etiológico → sequência diagnóstica/exames → diferenciais → conduta/tratamento com doses → seguimento/complicações. Corrigida item a item; a tutora anota o que faltou.</td><td>Escreva <b>em itens numerados</b>, com <b>nome da síndrome + justificativa pelos achados do caso</b>, e <b>fármaco + dose + via + duração</b>. Resposta certa sem justificativa = nota parcial (aconteceu 3× com a veterana).</td></tr>
+        <tr><td><b>Peso</b></td><td>Tutoria: prova final = <b>80%</b> da nota (APFs 10% + participação 10%). Metade objetiva, metade discursiva.</td><td>&lt; 60% = PM da tutoria por SP específica. Cada bloco vale o mesmo — não abandone a SP que você menos gosta.</td></tr>
+      </table></div>
+      <p><b>Onde a veterana perdeu ponto</b> (e onde a banca é exigente): colangite → <b>CPRE</b> e não colecistectomia (2×) · <b>procinético</b> na dispepsia tipo desconforto pós-prandial · diagnóstico sem justificar com os achados · "albendazol por 14 dias" (é dose única repetida) · seguimento do Hp sem o prazo de 4 semanas · complicações da úlcera incompletas (esqueceu obstrução/penetração) · USG "mostra fezes impactadas" (não é papel da USG na obstrução) · Mirizzi em vez de "síndrome colestática".</p>
+      <div class="note"><b>Como usar este guia:</b> ele NÃO repete os resumos das SPs — os 4 guias por SP têm o conteúdo, as APFs reais e as questões reais da prova final. Aqui estão (1) a tabela-mestre da UC, (2) os 40 fatos que decidem a prova, (3) o método para a discursiva e (4) um <b>simuladão inédito no formato real</b>: 16 objetivas + 4 discursivas com roteiro.</div>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Tabela-mestre da UC14 — síndrome → assinatura → exame → conduta</h2>
+      <div class="tblwrap"><table>
+        <tr><th>SP</th><th>Quadro</th><th>Assinatura</th><th>Exame-chave</th><th>Conduta</th></tr>
+        <tr><td rowspan="7"><b>1</b></td><td>Apendicite</td><td>Periumbilical → FID, Blumberg, febre baixa</td><td>Clínico; USG (criança/gestante) / TC (adulto)</td><td>Apendicectomia + ATB</td></tr>
+        <tr><td>Colecistite</td><td>HD &gt; 6 h, febre, Murphy</td><td>USG</td><td>ATB + colecistectomia &lt; 72 h</td></tr>
+        <tr><td>Colangite</td><td>Charcot → Reynolds</td><td>USG (colédoco dilatado)</td><td>ATB + <b>CPRE urgente</b></td></tr>
+        <tr><td>Diverticulite</td><td>Idoso, FIE, febre, massa</td><td><b>TC com contraste</b> (nunca colonoscopia aguda)</td><td>Clínico ± drenagem; Hinchey III–IV cirurgia</td></tr>
+        <tr><td>Perfurativo</td><td>AINE, dor súbita, tábua, Jobert</td><td>RX tórax em pé (ar livre); TC se dúvida</td><td>Laparotomia + ATB + IBP</td></tr>
+        <tr><td>Obstrutivo</td><td>Cólica + distensão + parada de gases; bridas/hérnia/câncer</td><td>RX 3 incidências (inicial) → TC (melhor)</td><td>Bridas sem sofrimento: SNG 48–72 h; dor contínua/lactato/peritonite → cirurgia</td></tr>
+        <tr><td>Vascular / hemorrágico</td><td>FA + dor desproporcional + lactato / choque + β-hCG</td><td>Angio-TC / FAST</td><td>Heparina + revascularizar / cirurgia</td></tr>
+        <tr><td rowspan="4"><b>2</b></td><td>Diarreia aguda</td><td>Viral, autolimitada; classificar desidratação</td><td>Nenhum de rotina</td><td>Plano A/B/C + zinco; ATB só disenteria + toxemia</td></tr>
+        <tr><td>Desidratação</td><td>A: ≤ 1 sinal · B: irritado, olhos fundos, sedento, prega lenta · C: letárgico, não bebe</td><td>Clínico (peso)</td><td>A: SRO pós-evacuação · B: 50–100 mL/kg/4 h · C: 30 + 70 mL/kg (1 h + 5 h &lt; 1 a)</td></tr>
+        <tr><td>Persistente / esteatorreia</td><td>Giardia (adesão), celíaca</td><td>EPF/antígeno · anti-tTG + IgA</td><td>Metronidazol 5–7 d · dieta sem glúten</td></tr>
+        <tr><td>Parasitoses</td><td>Oxiúro prurido noturno · Ascaris obstrução · Ancylostoma anemia · Strongyloides autoinfecção</td><td>Fita gomada · EPF · Baermann</td><td>Albendazol DU (+ repetir 14 d no oxiúro) · ivermectina (Strongyloides) · praziquantel (Taenia)</td></tr>
+        <tr><td rowspan="4"><b>3</b></td><td>Icterícia</td><td>Indireta (hemólise/Gilbert) · hepatocelular (ALT ≫ FA) · colestática (FA/GGT ≫ ALT, colúria/acolia)</td><td>BT/frações + enzimas + INR; <b>USG 1º</b></td><td>Pela causa; via biliar dilatada → colangioRM → CPRE</td></tr>
+        <tr><td>Colelitíase</td><td>Cólica pós-gordura &lt; 6 h</td><td>USG</td><td>Sintomática → colecistectomia; assintomática só se pólipo ≥ 1 cm, &gt; 3 cm, porcelana, microlitíase…</td></tr>
+        <tr><td>Pancreatite</td><td>Dor em faixa, lipase ≥ 3×; cálculo nº 1</td><td>2 de 3; USG; TC &gt; 72 h</td><td>Volume + analgesia + dieta precoce; sem ATB; CPRE só colangite/obstrução; colecistectomia mesma internação</td></tr>
+        <tr><td>Hepatites</td><td>A/E fecal-oral aguda · B vertical/sexual · C parenteral crônica</td><td>IgM anti-HAV · HBsAg/anti-HBc/anti-HBs · anti-HCV → RNA</td><td>Suporte / tenofovir / DAAs; gravidade = INR/encefalopatia</td></tr>
+        <tr><td rowspan="4"><b>4</b></td><td>DRGE</td><td>Pirose + regurgitação, piora ao deitar</td><td>Clínico → IBP 4–8 sem; EDA se alarme; pHmetria padrão-ouro</td><td>Medidas + IBP; Nissen se refratário documentado</td></tr>
+        <tr><td>Dispepsia funcional</td><td>EDA normal, Hp −</td><td>Exclusão (Roma IV)</td><td>Plenitude → procinético; dor → IBP; refratária → amitriptilina</td></tr>
+        <tr><td>Úlcera péptica</td><td>Duodenal melhora com comida; gástrica piora, emagrece</td><td>EDA + urease; gástrica → biópsia + controle</td><td>IBP 4–8 sem + erradicar Hp (tríplice 14 d) + parar AINE; cura: respiratório/fecal ≥ 4 sem</td></tr>
+        <tr><td>HDA</td><td>Hematêmese/melena, FC ↑, PA ↓, ureia ↑</td><td>EDA ≤ 24 h (Forrest)</td><td>ABC + IBP EV + endoscopia; varizes: terlipressina + ligadura</td></tr>
+      </table></div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Os 40 fatos que decidem a prova (10 por SP)</h2>
+      <h3>SP1 — Abdome agudo</h3>
+      <ul>
+        <li>① Dor ≥ 6 h persistente = cirúrgico até prova em contrário; cólica biliar que passa em 2 h não é.</li>
+        <li>② FA + dor desproporcional + lactato ↑ + abdome flácido = isquemia mesentérica → <b>angio-TC</b>.</li>
+        <li>③ Ar livre + tábua em usuário de AINE = <b>laparotomia</b>, não IBP nem TC para confirmar.</li>
+        <li>④ Colecistite = ATB + colecistectomia precoce; colangite = ATB + <b>CPRE urgente</b>.</li>
+        <li>⑤ Gravidade na pancreatite = hipotensão/falência orgânica; nunca a lipase.</li>
+        <li>⑥ Obstrução: dor <b>contínua</b>, febre, peritonite, lactato = estrangulamento → cirurgia; bridas sem sofrimento = SNG 48–72 h.</li>
+        <li>⑦ Diverticulite = TC com contraste; <b>colonoscopia proibida na fase aguda</b> (6–8 semanas depois).</li>
+        <li>⑧ Jobert = pneumoperitônio; Murphy = vesícula; Blumberg = peritonite; Cullen/Grey-Turner = pancreatite grave/hemoperitônio; Gersuny = fecaloma.</li>
+        <li>⑨ "Exame inicial" na obstrução/peritonite = <b>RX 3 incidências</b>; "melhor exame" = TC. Idoso: atípico, TC segura.</li>
+        <li>⑩ Mulher fértil: β-hCG antes da TC; instável + FAST + → cirurgia sem TC.</li>
+      </ul>
+      <h3>SP2 — Diarreia e parasitoses</h3>
+      <ul>
+        <li>⑪ Aguda &lt; 14 d · persistente 14–30 d · crônica &gt; 30 d. &gt; 90% viral, autolimitada, sem exame.</li>
+        <li>⑫ Com desidratação (≥ 2 sinais: irritado, olhos fundos, sedento, prega lenta) → <b>Plano B 50–100 mL/kg/4 h</b>; grave (letárgico, não bebe) → <b>Plano C 30 + 70 mL/kg</b>.</li>
+        <li>⑬ <b>Zinco</b> 10/20 mg × 10–14 d reduz duração e previne recorrência (não probiótico).</li>
+        <li>⑭ Regras de ouro: líquidos/SRO, manter dieta e leite, zinco, sinais de retorno (recusa, vômitos repetidos, sangue, muita sede).</li>
+        <li>⑮ ATB só disenteria + toxemia (cipro 3 d), cólera grave, imunossuprimido. Nunca loperamida em criança/disenteria.</li>
+        <li>⑯ Secretora (cólera, AMPc) não cessa com jejum; osmótica (lactose) cessa. SRO funciona pelo SGLT-1.</li>
+        <li>⑰ Giardia = adesão → má absorção; Shigella/ameba = invasão; Ancylostoma = anemia; Ascaris = obstrução.</li>
+        <li>⑱ Oxiúro: fita gomada; albendazol dose única + <b>repetir em 14 dias</b>; tratar a casa.</li>
+        <li>⑲ Strongyloides: ivermectina antes de corticoide (hiperinfecção). Taenia: carne → teníase; ovos → cisticercose.</li>
+        <li>⑳ Quimioprofilaxia em massa: &gt; 20% anual, &gt; 50% semestral. Probiótico = vivo; prebiótico = fibra.</li>
+      </ul>
+      <h3>SP3 — Icterícia, vias biliares, pâncreas</h3>
+      <ul>
+        <li>㉑ Indireta = hemólise/Gilbert (sem colúria); direta = coledocolitíase/colestase (colúria + acolia); hepatocelular = ALT ≫ FA.</li>
+        <li>㉒ FA é a primeira a subir na obstrução; USG é o 1º exame de todo ictérico; Courvoisier = tumor.</li>
+        <li>㉓ Charcot = dor + febre + icterícia; Reynolds = + hipotensão + confusão (não hiperamilasemia).</li>
+        <li>㉔ Colelitíase assintomática só opera se: pólipo ≥ 1 cm, cálculo &gt; 3 cm, porcelana, falciforme, bariátrica, microlitíase.</li>
+        <li>㉕ Jejum prolongado, NPT e octreotida são RISCO (alitiásica), não proteção. CCK contrai a vesícula.</li>
+        <li>㉖ Pancreatite: etiologia nº 1 = <b>cálculo</b>; diagnóstico 2 de 3; lipase mais específica.</li>
+        <li>㉗ Conduta: jejum curto + analgesia + volume + USG; <b>sem ATB profilático</b>; dieta precoce; TC &gt; 72 h.</li>
+        <li>㉘ CPRE na pancreatite só se colangite/obstrução persistente; colecistectomia na mesma internação (leve).</li>
+        <li>㉙ Pseudocisto &gt; 4 semanas; drenar se sintomático/&gt; 6 cm. Necrose infectada = ATB + step-up tardio.</li>
+        <li>㉚ Hepatite B: HBsAg (infecção), anti-HBc (contato), anti-HBs (imunidade); C: anti-HCV → RNA; A: IgM.</li>
+      </ul>
+      <h3>SP4 — Dispepsia, DRGE, úlcera, HDA</h3>
+      <ul>
+        <li>㉛ Alarme (disfagia, emagrecimento, anemia, sangramento, vômitos, &gt; 45–50 a) → EDA; sem alarme → IBP 4–8 sem (teste) ou test-and-treat.</li>
+        <li>㉜ DRGE é diagnóstico clínico; EDA normal não exclui; pHmetria = padrão-ouro; Nissen só refratário documentado.</li>
+        <li>㉝ Dispepsia funcional = exclusão; plenitude → <b>procinético</b>; dor → IBP.</li>
+        <li>㉞ Duodenal melhora com comida e é benigna; gástrica piora, emagrece e <b>sempre biopsia + EDA de controle</b>.</li>
+        <li>㉟ Erradicação: IBP 2×/d + amoxicilina 1 g 2×/d + claritro 500 mg 2×/d, <b>14 dias</b> (ou quádrupla com bismuto).</li>
+        <li>㊱ Controle de cura: respiratório/antígeno fecal <b>≥ 4 semanas após ATB, 2 semanas sem IBP</b>; sorologia nunca.</li>
+        <li>㊲ Complicações da úlcera: hemorragia (nº 1), perfuração, penetração, obstrução, malignização.</li>
+        <li>㊳ HDA: 2 acessos + volume + Hb &lt; 7 transfunde + IBP EV + EDA ≤ 24 h; APS → ambulância.</li>
+        <li>㊴ Forrest Ia–IIb = alto risco → terapia dupla + IBP EV 72 h; IIc/III → oral e alta.</li>
+        <li>㊵ Gastrite A (autoimune, corpo, B12) × B (Hp, antro, Correa → CA). EHP: vômito não bilioso em jato, alcalose hipoclorêmica.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Método para a discursiva (o que a Ana Elisa corrige)</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect width="700" height="170" fill="#0f1a24" rx="12"/>
+          <g font-size="10.5" fill="#e8eef5">
+            <rect x="12" y="20" width="125" height="120" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="74" y="40" text-anchor="middle" font-weight="700" fill="#8ab8ff">a) DIAGNÓSTICO</text>
+            <text x="74" y="58" text-anchor="middle">síndrome + etiologia</text>
+            <text x="74" y="74" text-anchor="middle" fill="#ffd79e">+ "porque": 3–4</text>
+            <text x="74" y="88" text-anchor="middle" fill="#ffd79e">achados do caso</text>
+            <text x="74" y="110" text-anchor="middle" fill="#8fe4d2">nome preciso, não</text>
+            <text x="74" y="124" text-anchor="middle" fill="#8fe4d2">raridade (Mirizzi)</text>
+            <line x1="137" y1="80" x2="150" y2="80" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar6)"/>
+            <rect x="152" y="20" width="125" height="120" rx="9" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="214" y="40" text-anchor="middle" font-weight="700" fill="#ffd79e">b) INVESTIGAÇÃO</text>
+            <text x="214" y="58" text-anchor="middle">em SEQUÊNCIA:</text>
+            <text x="214" y="74" text-anchor="middle">estabilizar → história/EF</text>
+            <text x="214" y="88" text-anchor="middle">→ lab → imagem (1º → melhor)</text>
+            <text x="214" y="110" text-anchor="middle" fill="#8fe4d2">diga O QUE cada exame</text>
+            <text x="214" y="124" text-anchor="middle" fill="#8fe4d2">mostra / diferencia</text>
+            <line x1="277" y1="80" x2="290" y2="80" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar6)"/>
+            <rect x="292" y="20" width="125" height="120" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="354" y="40" text-anchor="middle" font-weight="700" fill="#8fe4d2">c) DIFERENCIAIS</text>
+            <text x="354" y="58" text-anchor="middle">≥ 4 hipóteses e,</text>
+            <text x="354" y="74" text-anchor="middle">para CADA uma,</text>
+            <text x="354" y="88" text-anchor="middle">o achado que afasta</text>
+            <text x="354" y="110" text-anchor="middle" fill="#ffd79e">"ectópica: afastada</text>
+            <text x="354" y="124" text-anchor="middle" fill="#ffd79e">por histerectomia"</text>
+            <line x1="417" y1="80" x2="430" y2="80" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar6)"/>
+            <rect x="432" y="20" width="125" height="120" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="494" y="40" text-anchor="middle" font-weight="700" fill="#ff9ea6">d) CONDUTA</text>
+            <text x="494" y="58" text-anchor="middle">itens numerados:</text>
+            <text x="494" y="74" text-anchor="middle">dieta · volume · analgesia</text>
+            <text x="494" y="88" text-anchor="middle">· ATB · sonda · exames</text>
+            <text x="494" y="110" text-anchor="middle" fill="#ffd79e">FÁRMACO + DOSE +</text>
+            <text x="494" y="124" text-anchor="middle" fill="#ffd79e">VIA + DURAÇÃO</text>
+            <line x1="557" y1="80" x2="570" y2="80" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar6)"/>
+            <rect x="572" y="20" width="116" height="120" rx="9" fill="#101f2b" stroke="#244a5c"/>
+            <text x="630" y="40" text-anchor="middle" font-weight="700" fill="#93cbe0">e) SEGUIMENTO</text>
+            <text x="630" y="58" text-anchor="middle">critérios de sucesso</text>
+            <text x="630" y="74" text-anchor="middle">e de FALHA (com</text>
+            <text x="630" y="88" text-anchor="middle">tempo: 48–72 h, 4 sem)</text>
+            <text x="630" y="110" text-anchor="middle" fill="#8fe4d2">complicações:</text>
+            <text x="630" y="124" text-anchor="middle" fill="#8fe4d2">liste TODAS</text>
+          </g>
+        </svg>
+        <div class="cap">Esqueleto de resposta que cobre os itens a–e como a tutora corrige. Tempo: ~12 min por discursiva.</div>
+      </div>
+      <ul>
+        <li><b>Gestão da prova (≈ 2 h)</b>: objetivas primeiro em 45–50 min (marque as duvidosas, não trave); discursivas em 4 × 12 min; 10 min finais para reler as duvidosas e conferir a tabela de gabarito.</li>
+        <li><b>Frases que valem ponto</b>: "diagnóstico é clínico, imagem confirma" · "exame inicial RX / melhor exame TC" · "USG é o primeiro exame das vias biliares" · "sem antibiótico profilático" · "controle de cura ≥ 4 semanas após, sem IBP" · "tratar todos os contactantes" · "manter aleitamento".</li>
+        <li><b>Erros que custam caro</b>: resposta de uma palavra sem justificativa · esquema sem dose/duração · listar exames sem dizer o que cada um mostra · citar tratamento sem critério de falha · confundir vesícula (colecistectomia) com colédoco (CPRE).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Plano de revisão para a prova (weekend-âncora)</h2>
+      <ul>
+        <li><b>Fim de semana −2</b>: reler os 4 guias por SP (resumo + pegadinhas), 1 h cada; refazer só as questões erradas das APFs.</li>
+        <li><b>Fim de semana −1</b>: <b>simuladão deste guia cronometrado</b> (16 obj + 4 discursivas escritas à mão, 2 h) → corrigir pelos roteiros → anotar erros por classe (conteúdo / formato / interpretação / atenção).</li>
+        <li><b>Brechas da semana</b>: flashcards dos 4 guias (10 min) + tabela-mestre (seção 1) + os 40 fatos (seção 2).</li>
+        <li><b>Véspera</b>: só os 40 fatos + "onde a veterana perdeu ponto". Dormir.</li>
+      </ul>
+    </div>
+</section>
+  <section id="quizsec">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">16</span></span><div class="bar"><i id="fill"></i></div><button class="btn" onclick="resetQuiz()">Zerar</button></div>
+    <div class="note" style="margin-top:0"><b>Simuladão no formato real:</b> <b>16 objetivas A–D em 4 blocos por SP</b> (chips filtram por SP) + <b>4 discursivas inéditas</b> (uma por SP, itens a–e, com roteiro de correção). Cronometre <b>2 h</b>: 50 min para as objetivas, 12 min por discursiva escrita à mão, 10 min de revisão. As questões REAIS da prova final da veterana estão nos guias de cada SP (chip "Prova final 2026.1").</div>
+    <div class="chips" id="chips"></div>
+    <div id="quiz"></div>
+    
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D1</div><span class="pill e">SP1</span><span class="pill o">Discursiva inédita · abdome agudo inflamatório complicado · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 72 anos, hipertenso, constipação crônica com uso de laxantes, dor em fossa ilíaca esquerda há 4 dias, progressiva, febre 38,6 °C, náuseas, parada de flatos há 24 h. Ao exame: FC 108, PA 110×70, Tax 38,5 °C; abdome distendido, dor intensa em FIE com defesa localizada e massa dolorosa de ~6 cm; sem peritonite difusa. Leucócitos 18.500 com desvio, PCR 190, lactato 1,8, creatinina 1,3. RX de abdome: distensão de cólon, sem pneumoperitônio. TC com contraste: espessamento do sigmoide com divertículos, coleção pericólica de 5 cm com nível líquido, sem ar livre.</span>
+        <b>a)</b> Diagnóstico sindrômico e etiológico, com justificativa pelos achados. <b>(20)</b>
+        <br><b>b)</b> Classifique a gravidade (estágio) e explique por que o exame de imagem escolhido foi a TC e não a colonoscopia. <b>(20)</b>
+        <br><b>c)</b> Cite quatro diagnósticos diferenciais e o achado que afasta cada um. <b>(20)</b>
+        <br><b>d)</b> Descreva a conduta inicial completa (prescrição em itens) e o tratamento dirigido à complicação. <b>(25)</b>
+        <br><b>e)</b> Indique quando este paciente precisaria de cirurgia de urgência e qual o seguimento após a alta. <b>(15)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot1">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot1" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Abdome agudo inflamatório</b> (6) por <b>diverticulite aguda de sigmoide complicada com abscesso pericólico</b> (6) · justificar: idoso constipado (terreno), dor em FIE progressiva + febre + massa + leucocitose/PCR (inflamatório), TC com divertículos, espessamento e coleção de 5 cm (abscesso); parada de flatos por íleo reflexo/compressão, sem pneumoperitônio (não perfurativo livre) (8).</td><td>20</td></tr>
+          <tr><td><b>b</b></td><td><b>Hinchey I (abscesso pericólico)</b> — ou Ib/II conforme classificação modificada; não é III (peritonite purulenta) nem IV (fecal) (8) · <b>TC com contraste</b>: confirma, mede o abscesso, define estágio, guia drenagem percutânea e exclui perfuração livre/outras causas (6) · <b>colonoscopia é contraindicada na fase aguda</b> (insuflação em parede inflamada → perfuração) e não avalia o pericólon; deve ser feita <b>6–8 semanas depois</b> para excluir neoplasia (6).</td><td>20</td></tr>
+          <tr><td><b>c</b></td><td>Quatro de: <b>neoplasia de sigmoide perfurada/obstrutiva</b> (TC sem massa tumoral; colonoscopia tardia confirma) · <b>obstrução intestinal por brida/volvo</b> (sem cirurgia prévia, RX sem níveis de delgado, TC mostra causa inflamatória) · <b>apendicite</b> (dor à direita; aqui é FIE) · <b>colite isquêmica</b> (sangramento, lactato ↑, perfil vascular — lactato normal) · <b>doença inflamatória intestinal</b> (diarreia crônica, jovem) · <b>pielonefrite/cólica renal esquerda</b> (EAS, Giordano, sem massa) · <b>patologia ginecológica</b> (não se aplica: homem) · <b>hérnia encarcerada</b> (orifícios herniários livres) (5 cada).</td><td>20</td></tr>
+          <tr><td><b>d</b></td><td>Prescrição: 1) internação, dieta zero → líquida conforme evolução (2) · 2) acesso venoso + SF/RL para normovolemia (Cr 1,3) (3) · 3) analgesia: dipirona 1 g EV 6/6 h ± opioide (tramadol/morfina) (3) · 4) antiemético (1) · 5) <b>ATB EV cobrindo gram-negativos e anaeróbios</b>: ceftriaxona 1–2 g/d + metronidazol 500 mg 8/8 h, ou pip-tazo 4,5 g 6/6 h (6) · 6) SNG se vômitos/distensão (1) · 7) profilaxia de TEV, controle glicêmico/pressórico (2) · 8) exames seriados: hemograma, PCR, função renal, lactato (2) · <b>tratamento da complicação: abscesso ≥ 4 cm → drenagem percutânea guiada por TC/USG</b> + ATB; &lt; 4 cm → só ATB (5).</td><td>25</td></tr>
+          <tr><td><b>e</b></td><td><b>Cirurgia de urgência</b> se: peritonite difusa/perfuração livre (Hinchey III–IV), sepse/instabilidade apesar do tratamento, falha da drenagem/ATB em 48–72 h, obstrução persistente, fístula — técnica: sigmoidectomia à Hartmann (ou ressecção com anastomose ± ileostomia) (9) · <b>Seguimento</b>: colonoscopia em 6–8 semanas (excluir câncer), dieta rica em fibras, tratar constipação (PEG), avaliar sigmoidectomia eletiva se episódios recorrentes/complicados, imunossuprimido ou fístula (6).</td><td>15</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="q" id="descritiva2">
+      <div class="qhead"><div class="qnum">D2</div><span class="pill e">SP2</span><span class="pill o">Discursiva inédita · diarreia na criança · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Menina de 14 meses, 10 kg, frequenta creche, é trazida à UBS com diarreia aquosa há 3 dias (7–8 evacuações/dia, sem sangue), vômitos (4 episódios nas últimas 6 h) e febre de 38 °C no primeiro dia. Mãe suspendeu o leite "para não piorar". Ao exame: irritada, chorando sem lágrimas, olhos fundos, boca seca, sinal da prega desaparece lentamente, bebe o soro oferecido com avidez, pulso cheio, enchimento capilar 2 s. Peso anterior: 10,6 kg.</span>
+        <b>a)</b> Classifique a diarreia (duração e tipo provável) e o grau de desidratação, justificando com os sinais do exame e o peso. <b>(20)</b>
+        <br><b>b)</b> Descreva o plano de tratamento indicado, com volumes, tempo, local e o que fazer com os vômitos. <b>(30)</b>
+        <br><b>c)</b> Esta criança precisa de exames complementares ou antibiótico? Justifique e diga em que situações seriam indicados. <b>(20)</b>
+        <br><b>d)</b> Após a reidratação, escreva as orientações de alta (as regras de ouro) e os sinais de retorno imediato. <b>(20)</b>
+        <br><b>e)</b> Se a diarreia persistisse por mais de 14 dias com fezes gordurosas e distensão, qual a principal hipótese, como confirmar e tratar? <b>(10)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot2">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot2" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Diarreia aguda</b> (&lt; 14 dias), provavelmente <b>viral (rotavírus/norovírus)</b> — aquosa, sem sangue, febre baixa, creche (6) · <b>com desidratação (moderada)</b>: ≥ 2 sinais da coluna B — irritada, sem lágrimas, olhos fundos, boca seca, prega lenta, <b>sede ávida</b>; sem sinais de gravidade (não letárgica, bebe, pulso cheio, enchimento capilar normal) (10) · perda de peso 600 g = <b>~6% (5–10% = moderada)</b>, coerente (4).</td><td>20</td></tr>
+          <tr><td><b>b</b></td><td><b>Plano B</b> na unidade, criança observada (5) · <b>SRO 50–100 mL/kg em 4 h = 500–1.000 mL</b>, em pequenos volumes frequentes (colher/copo/seringa), reavaliação a cada 1–2 h e peso ao fim (10) · manter aleitamento materno (se houver); outros alimentos só após reidratar (3) · <b>vômitos</b>: pausar 10 min e retomar mais devagar; <b>ondansetrona 0,15 mg/kg (≈ 1,5–2 mg) VO/IV dose única</b>; se persistirem → <b>gastróclise (SRO por SNG 20–30 mL/kg/h)</b>; piora/sinais de gravidade → Plano C (30 mL/kg em 30 min + 70 mL/kg em 2 h 30, &gt; 1 ano) (9) · ao melhorar → alta com Plano A (3).</td><td>30</td></tr>
+          <tr><td><b>c</b></td><td><b>Não</b>: quadro viral típico, sem sangue, sem toxemia, sem imunossupressão → exames e ATB não estão indicados; manejo é clínico (8) · <b>exames</b> seriam indicados se: desidratação grave (eletrólitos, ureia/creatinina, gasometria), disenteria/toxemia/surto (coprocultura), diarreia persistente (EPF), uso recente de ATB (toxina C. difficile) (6) · <b>ATB</b> apenas em disenteria com comprometimento do estado geral (Shigella: cipro/azitro/ceftriaxona), cólera grave, imunossuprimidos, &lt; 3 meses com suspeita de bacteremia; loperamida contraindicada (6).</td><td>20</td></tr>
+          <tr><td><b>d</b></td><td>Por escrito: ① <b>líquidos extras/SRO 100–200 mL após cada evacuação</b> (&gt; 1 ano) (5) · ② <b>manter alimentação habitual e o leite</b> — corrigir a mãe: não suspender (5) · ③ <b>zinco 20 mg/dia por 10–14 dias</b> (5) · ④ <b>retornar imediatamente se</b>: não consegue beber/mamar, recusa alimentar, vômitos repetidos, sangue nas fezes, muita sede, febre alta, piora ou sem melhora em 2 dias (5).</td><td>20</td></tr>
+          <tr><td><b>e</b></td><td><b>Giardíase</b> (diarreia persistente + esteatorreia + distensão em criança de creche) (4) · confirmar: <b>EPF em 3 amostras (cistos) ou antígeno fecal</b> (3) · tratar: <b>metronidazol 15 mg/kg/dia 3×/dia por 5–7 dias</b> (ou tinidazol/nitazoxanida) + higiene/creche (3). Aceitável citar intolerância secundária à lactose como diferencial.</td><td>10</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="q" id="descritiva3">
+      <div class="qhead"><div class="qnum">D3</div><span class="pill e">SP3</span><span class="pill o">Discursiva inédita · pancreatite aguda biliar · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Mulher, 46 anos, obesa, multípara, dor epigástrica intensa em faixa com irradiação para o dorso há 8 h, iniciada após churrasco, vômitos, melhora parcial ao inclinar-se para a frente. Episódios prévios de dor em HD pós-alimentar. Ao exame: FC 104, PA 128×80, Tax 37,6 °C, dor epigástrica sem irritação peritoneal. Amilase 1.850 U/L, lipase 3.200 U/L (VR &lt; 60), BT 2,4 (BD 1,7), FA 260, ALT 310, leucócitos 14.000, Hct 46%, ureia 52, creatinina 1,1, PCR 40. USG: colelitíase múltipla, colédoco 7 mm, sem cálculo visível no colédoco.</span>
+        <b>a)</b> Estabeleça o diagnóstico com base nos critérios formais e aponte a etiologia mais provável, justificando. <b>(20)</b>
+        <br><b>b)</b> Avalie a gravidade neste momento: cite os preditores presentes, como classificar e o que define pancreatite grave. <b>(20)</b>
+        <br><b>c)</b> Prescreva a conduta inicial (itens) e diga quando indicar TC e antibiótico. <b>(25)</b>
+        <br><b>d)</b> Discuta a indicação de CPRE nesta paciente e o momento da colecistectomia. <b>(20)</b>
+        <br><b>e)</b> Cite as principais complicações locais e sistêmicas e como se conduz a necrose infectada. <b>(15)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot3">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot3" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Pancreatite aguda</b> pelos critérios de Atlanta: <b>2 de 3</b> — dor típica (epigástrica em faixa, dorso, melhora inclinada) + <b>lipase &gt; 3× LSN</b> (aqui &gt; 50×) — imagem não necessária para o diagnóstico (10) · <b>etiologia biliar</b>: mulher, obesa, multípara (4 F), cólicas biliares prévias, colelitíase à USG, <b>ALT &gt; 150 (3× = VPP &gt; 95% para biliar)</b>, BT/FA elevadas, colédoco discretamente dilatado (10). Álcool não citado; TG não medidos (citar como diferencial).</td><td>20</td></tr>
+          <tr><td><b>b</b></td><td>Preditores presentes: <b>Hct 46% (hemoconcentração)</b>, <b>ureia 52 (&gt; 45)</b>, taquicardia (1 critério de SIRS), obesidade, leucocitose (8) · ausentes: hipotensão, hipoxemia, Cr normal, PCR ainda baixa (&lt; 8 h) (2) · classificação: <b>Atlanta 2012</b> — leve (sem falência/complicação), moderada (falência transitória &lt; 48 h ou complicação local), <b>grave = falência orgânica persistente &gt; 48 h (Marshall ≥ 2)</b>; escores BISAP (BUN &gt; 25, alteração mental, SIRS, idade &gt; 60, derrame), Ranson, APACHE II (8) · neste momento: potencialmente moderada — vigiar 48 h com ureia/Hct/diurese/PCR (2).</td><td>20</td></tr>
+          <tr><td><b>c</b></td><td>1) internação, monitorização, diurese (2) · 2) <b>hidratação venosa com Ringer lactato</b> guiada por metas (ex.: 5–10 mL/kg/h inicial, diurese &gt; 0,5 mL/kg/h, queda de ureia/Hct), evitando sobrecarga (6) · 3) <b>analgesia</b>: dipirona ± opioide (morfina/tramadol) (3) · 4) antiemético (1) · 5) <b>jejum curto → dieta oral hipogordurosa em 24–48 h</b> quando dor/vômitos permitirem; enteral por sonda se não tolerar (4) · 6) <b>sem antibiótico profilático</b> (3) · 7) O₂ se necessário, profilaxia de TEV, controle glicêmico (1) · <b>TC com contraste só após 48–72 h</b> (necrose) ou dúvida diagnóstica/deterioração (3) · <b>ATB</b> apenas se necrose infectada (febre persistente/piora após 7–10 d, gás na coleção, punção positiva) ou colangite (2).</td><td>25</td></tr>
+          <tr><td><b>d</b></td><td><b>CPRE NÃO está indicada agora</b>: sem colangite (afebril, sem Charcot) e sem obstrução persistente (BT 2,4, cálculo não visto) — a maioria dos cálculos já migrou; CPRE adiciona risco (pancreatite pós-CPRE, perfuração) (8) · indicar CPRE (24–72 h) se surgir <b>colangite</b> ou <b>obstrução biliar persistente</b> (BT/FA subindo, colédoco dilatando, cálculo visto em colangioRM/eco-EDA) (6) · <b>colecistectomia videolaparoscópica na mesma internação</b> após resolução clínica (pancreatite leve) — alta sem operar = 20–30% de recorrência; se grave/necrosante → adiar 4–6 semanas até coleções resolverem; colangiografia intraoperatória para o colédoco (6).</td><td>20</td></tr>
+          <tr><td><b>e</b></td><td><b>Locais</b>: coleção líquida aguda → <b>pseudocisto</b> (&gt; 4 sem), necrose pancreática/peripancreática (estéril → infectada), abscesso, trombose de veia esplênica (varizes gástricas), pseudoaneurisma, íleo, ascite pancreática (6) · <b>sistêmicas</b>: SIRS, choque, SDRA/derrame pleural, IRA, hipocalcemia, hiperglicemia, CIVD, falência múltipla (4) · <b>necrose infectada</b>: suspeitar com febre/piora tardia e gás na TC; punção guiada se dúvida; <b>ATB com penetração pancreática (carbapenêmico)</b> + <b>step-up</b>: drenagem percutânea/endoscópica → necrosectomia minimamente invasiva, idealmente após 4 semanas ("walled-off") (5).</td><td>15</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="q" id="descritiva4">
+      <div class="qhead"><div class="qnum">D4</div><span class="pill e">SP4</span><span class="pill o">Discursiva inédita · dispepsia com alarme e úlcera gástrica · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Homem, 61 anos, tabagista, usa diclofenaco quase diariamente por artrose. Dor epigástrica em queimação há 5 meses, que piora após as refeições, com náuseas, saciedade precoce e perda de 6 kg. Um episódio de fezes escuras há 2 semanas. Sem hematêmese. Ao exame: hipocorado (+/4+), PA 130×80, FC 88, dor epigástrica à palpação sem irritação peritoneal. Hb 10,8 g/dL, VCM 74 fL. Endoscopia: úlcera de 2 cm na pequena curvatura do antro, bordas regulares, fundo com fibrina; teste da urease positivo; biópsias colhidas (bordas e fundo).</span>
+        <b>a)</b> Quais eram os sinais de alarme que indicaram endoscopia e por que a úlcera gástrica exige biópsia? <b>(20)</b>
+        <br><b>b)</b> Descreva o tratamento completo (não farmacológico, IBP e erradicação do H. pylori com esquema, doses e duração). <b>(30)</b>
+        <br><b>c)</b> Como será o seguimento: controle de cura do H. pylori, controle endoscópico e da anemia? <b>(25)</b>
+        <br><b>d)</b> Se o paciente chegasse ao PS com hematêmese e PA 85×50, descreva a conduta inicial e o papel da endoscopia. <b>(25)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot4">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot4" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td>Alarme: <b>perda de peso</b>, <b>anemia ferropriva</b> (Hb 10,8, VCM 74), <b>melena</b>, idade &gt; 45–50 anos, saciedade precoce, uso de AINE (8) · biópsia obrigatória porque <b>úlcera gástrica pode ser adenocarcinoma ulcerado</b> (5–10%), mesmo com aspecto benigno; biópsias múltiplas das bordas e do fundo, e <b>EDA de controle em 8–12 semanas até cicatrização completa</b> (12). Diferente da duodenal (praticamente nunca maligna).</td><td>20</td></tr>
+          <tr><td><b>b</b></td><td><b>Não farmacológico</b>: suspender diclofenaco (substituir por analgésico não AINE/ paracetamol; se AINE indispensável → coxibe + IBP), parar de fumar, reduzir álcool/café, fracionar refeições (8) · <b>IBP dose plena por 8 semanas</b> (omeprazol 40 mg/d) para úlcera gástrica (6) · <b>erradicação</b>: IBP dose dobrada 2×/d + <b>amoxicilina 1 g 2×/d + claritromicina 500 mg 2×/d por 14 dias</b>; alternativa quádrupla com bismuto (IBP + bismuto 120 mg 4×/d + tetraciclina 500 mg 4×/d + metronidazol 500 mg 3×/d, 10–14 d); alergia à penicilina → quádrupla (12) · sucralfato/antiácido como adjuvantes; <b>sulfato ferroso</b> 120–200 mg Fe/dia por 3–6 meses após normalizar Hb (4).</td><td>30</td></tr>
+          <tr><td><b>c</b></td><td><b>Controle de cura</b>: teste respiratório da ureia ou antígeno fecal <b>≥ 4 semanas após o fim dos antibióticos e ≥ 2 semanas sem IBP</b>; sorologia não serve (8) · falha → 2ª linha (IBP + amoxicilina + levofloxacino 500 mg/d 14 d), nunca repetir claritromicina (3) · <b>EDA de controle em 8–12 semanas com novas biópsias</b> até cicatrizar (úlcera gástrica); se não cicatrizar → suspeitar de câncer, AINE oculto, Zollinger-Ellison (8) · <b>anemia</b>: hemograma em 4–8 semanas (Hb ↑ ≥ 1–2 g/dL), ferritina ao final; pela idade e sangue oculto/melena, <b>colonoscopia</b> para excluir lesão colônica se não houver melhora ou como rastreio (6).</td><td>25</td></tr>
+          <tr><td><b>d</b></td><td><b>HDA com instabilidade</b>: 2 acessos calibrosos, cristaloide, monitorização, O₂; <b>proteger via aérea/IOT se rebaixamento</b>; tipagem + prova cruzada; transfundir se Hb &lt; 7 (ou &lt; 8 se cardiopata) com meta 7–9; corrigir coagulopatia; sonda vesical (10) · <b>IBP EV</b>: omeprazol/pantoprazol 80 mg bolus + 8 mg/h (ou 40 mg 12/12 h) (4) · suspender AINE; eritromicina pré-EDA opcional (1) · <b>EDA nas primeiras 12–24 h após estabilização</b>: diagnóstico + classificação de Forrest + hemostasia (adrenalina + clipe/térmico) nas lesões de alto risco (Ia–IIb); ressangramento → 2ª EDA → embolização → cirurgia (8) · depois: IBP EV 72 h, erradicar Hp, dieta, escore de Rockall/Blatchford (2).</td><td>25</td></tr>
+        </table></div>
+        <div class="warn">Simule de verdade: escreva as 4 discursivas à mão em 50 minutos e corrija pelos roteiros. ≥ 80 em cada = pronto; a que ficar &lt; 60 manda você de volta ao guia daquela SP.</div>
+      </div>
+    </div>
+
+  </section>
+  <section id="mapa"><div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>🗺️ A UC14 em uma tela</summary><ul>
+        <li>SP1 Abdome agudo: 5 síndromes → assinatura → exame → clínico × cirúrgico</li>
+        <li>SP2 Diarreia: classificar tempo + desidratação → Plano A/B/C + zinco → ATB só disenteria → parasitoses (tabela)</li>
+        <li>SP3 Icterícia: 3 síndromes pelo lab → USG → árvore biliar (vesícula/cístico/colédoco/papila) → pancreatite (2 de 3, clínico)</li>
+        <li>SP4 Dispepsia: alarme → EDA; DRGE (IBP teste); úlcera (Hp, doses, cura ≥ 4 sem); HDA (ABC + IBP + EDA ≤ 24 h)</li>
+      </ul></details>
+      <details><summary>🔪 SP1 — quando é cirurgia</summary><ul>
+        <li>Sempre: perfurativo, hemorrágico, apendicite, estrangulamento, isquemia com necrose, Hinchey III–IV</li>
+        <li>Nunca de entrada: pancreatite, diverticulite simples, bridas sem sofrimento, cólica biliar</li>
+        <li>Endoscópico/radiológico: colangite (CPRE), abscesso (drenagem), volvo de sigmoide (descompressão), colecistostomia</li>
+      </ul></details>
+      <details><summary>💧 SP2 — números do MS</summary><ul>
+        <li>B: 50–100 mL/kg/4 h · C: 30 + 70 mL/kg (1 h + 5 h &lt; 1 a; 30 min + 2 h 30 &gt; 1 a) · zinco 10/20 mg × 10–14 d · SRO pós-evacuação 50–100 / 100–200 mL · ondansetrona 0,15 mg/kg</li>
+        <li>Oxiúro albendazol DU + 14 d · Giardia metronidazol 5–7 d · Strongyloides ivermectina · Taenia praziquantel · profilaxia em massa &gt; 20%/&gt; 50%</li>
+      </ul></details>
+      <details><summary>🟡 SP3 — pares que caem</summary><ul>
+        <li>Indireta/hemólise × direta/coledocolitíase · FA primeira a subir · Charcot × Reynolds · vesícula (colecistectomia) × colédoco (CPRE)</li>
+        <li>Pancreatite: cálculo nº 1 · lipase · sem ATB · dieta precoce · CPRE só colangite · colecistectomia mesma internação · pseudocisto &gt; 4 sem</li>
+        <li>HBsAg/anti-HBc/anti-HBs · anti-HCV → RNA · GASA ≥ 1,1 · PBE PMN ≥ 250</li>
+      </ul></details>
+      <details><summary>🔥 SP4 — sequências</summary><ul>
+        <li>Alarme → EDA; sem alarme → IBP 4–8 sem / test-and-treat</li>
+        <li>Funcional: plenitude → procinético; dor → IBP</li>
+        <li>Gástrica: biópsia + controle; duodenal: só Hp</li>
+        <li>Hp: tríplice 14 d → cura ≥ 4 sem sem IBP (respiratório/fecal)</li>
+        <li>HDA: ABC → sangue → IBP EV → EDA ≤ 24 h → Forrest</li>
+      </ul></details>
+      <details><summary>✍️ Discursiva — esqueleto</summary><ul>
+        <li>a) síndrome + etiologia + "porque" (achados) · b) sequência: estabilizar → história/EF → lab → imagem (inicial → melhor) · c) ≥ 4 diferenciais + o que afasta · d) prescrição em itens com dose/via/duração · e) critérios de falha com tempo + complicações completas</li>
+      </ul></details>
+</div></div></section>
+  <section id="flash"><div class="panel"><h2>Flashcards — clique para virar</h2><p class="src">Um fato por cartão. A pergunta fica visível no verso.</p><div class="fcgrid" id="fcbox"></div></div></section>
+  <div class="foot">UC14 · Prova final de tutoria · guia + simuladão · 14/09/2026 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+const QS=[
+ /* ===== SP1 ===== */
+ {src:"SP1", obj:"Abdome agudo · inflamatório", stem:"<span class='cx'>Mulher, 68 anos, constipada crônica, dor em fossa ilíaca esquerda há 3 dias, febre 38,4 °C, massa dolorosa palpável em FIE, leucócitos 16.000. Sem peritonite difusa, estável.</span> Qual o exame de escolha e a conduta inicial?",
+  opts:["Colonoscopia para confirmar diverticulite e excluir câncer; antibiótico após o exame.","TC de abdome com contraste para confirmar e estadiar diverticulite aguda; jejum/dieta líquida, analgesia e antibiótico cobrindo gram-negativos e anaeróbios; colonoscopia só após 6–8 semanas.","Laparotomia exploradora imediata com colectomia à Hartmann.","USG de abdome e alta com analgésico."], ans:1,
+  why:"Diverticulite aguda: TC com contraste confirma, classifica (Hinchey) e detecta abscesso. Colonoscopia é contraindicada na fase aguda. Cirurgia só em Hinchey III–IV/instável.",
+  trap:"'Excluir câncer' é verdade — mas 6–8 semanas depois."},
+
+ {src:"SP1", obj:"Abdome agudo · obstrutivo", stem:"<span class='cx'>Homem, 74 anos, apendicectomia e colectomia prévias, cólica abdominal, distensão e vômitos biliosos há 24 h, sem flatos. Afebril, RHA metálicos, sem defesa, lactato 1,4. RX: níveis hidroaéreos em delgado, sem gás no cólon.</span> A conduta inicial mais adequada é:",
+  opts:["Laparotomia de urgência, pois toda obstrução completa é cirúrgica.","Jejum, sonda nasogástrica em sifonagem, hidratação venosa com correção de potássio, analgesia e reavaliação seriada por 48–72 h, com TC para definir causa e sofrimento de alça; cirurgia se dor contínua, febre, peritonite, lactato ↑ ou ausência de resolução.","Enema e laxante osmótico.","Colonoscopia descompressiva."], ans:1,
+  why:"Bridas (cirurgia prévia) sem sinais de estrangulamento → conservador 48–72 h (70–80% resolvem). Critérios de cirurgia: dor contínua, febre, taquicardia, peritonite, leucocitose, lactato, alça fechada/estrangulamento na TC, falha em 72 h.",
+  trap:"Laxante/enema em obstrução mecânica é contraindicado. Colonoscopia descomprime volvo de sigmoide, não brida de delgado."},
+
+ {src:"SP1", obj:"Abdome agudo · vascular", stem:"<span class='cx'>Mulher, 81 anos, FA crônica sem anticoagulação, dor abdominal súbita e intensa há 4 h, difusa, vomitou e evacuou uma vez. Abdome pouco doloroso e flácido; lactato 5,2; leucócitos 21.000.</span> Assinale a correta:",
+  opts:["A ausência de defesa abdominal afasta causa cirúrgica; observar.","A dor desproporcional ao exame em cardiopata com FA sugere isquemia mesentérica aguda embólica; solicitar angio-TC imediatamente, iniciar reposição volêmica, heparina e antibiótico, e acionar cirurgia vascular/geral para revascularização e avaliação de viabilidade intestinal.","Colonoscopia para investigar a evacuação.","Gastrografin e RX seriados."], ans:1,
+  why:"Tríade clássica: FA + dor desproporcional + lactato. Angio-TC diagnostica; tratamento é revascularizar cedo (mortalidade 50–70%).",
+  trap:"'Abdome flácido' é o sinal da isquemia precoce, não de benignidade."},
+
+ {src:"SP1", obj:"Abdome agudo · sinais", stem:"Um paciente com dor abdominal súbita apresenta timpanismo à percussão sobre a área hepática. Esse achado, o nome do sinal e a implicação são, respectivamente:",
+  opts:["Perda da macicez hepática · sinal de Jobert · pneumoperitônio → abdome agudo perfurativo, cirurgia.","Dor à descompressão · sinal de Blumberg · peritonite → observação.","Interrupção inspiratória · sinal de Murphy · colecistite → CPRE.","Equimose periumbilical · sinal de Cullen · pancreatite leve → alta."], ans:0,
+  why:"Jobert = ar interposto entre fígado e parede = pneumoperitônio = perfuração de víscera oca → laparotomia. As demais misturam sinais com condutas erradas.",
+  trap:"Cada alternativa tem uma parte certa e uma errada — leia até o fim."},
+
+ /* ===== SP2 ===== */
+ {src:"SP2", obj:"Diarreia · desidratação", stem:"<span class='cx'>Lactente de 7 meses, 8 kg, diarreia há 2 dias, vômitos. Letárgico, olhos muito fundos, prega cutânea desaparece em mais de 2 segundos, não consegue beber, pulso fino.</span> Classificação e conduta imediata:",
+  opts:["Com desidratação; Plano B com SRO 50–100 mL/kg em 4 h.","Desidratação grave; Plano C: SF 0,9% ou RL 30 mL/kg em 1 h seguido de 70 mL/kg em 5 h, reavaliando a cada 15–30 min, SRO assim que conseguir beber; ATB não indicado sem disenteria.","Sem desidratação; Plano A com zinco.","Desidratação grave; ceftriaxona e Plano B."], ans:1,
+  why:"Letargia + não consegue beber + prega > 2 s + pulso fraco = grave → Plano C; < 1 ano: 30 mL/kg/1 h + 70 mL/kg/5 h. Sem sangue/toxemia não há ATB.",
+  trap:"'Não consegue beber' é o sinal que proíbe o Plano B."},
+
+ {src:"SP2", obj:"Diarreia · alta e retorno", stem:"<span class='cx'>Menino de 3 anos, diarreia aquosa há 1 dia, sem desidratação, será liberado com Plano A.</span> Assinale a orientação CORRETA a ser entregue por escrito:",
+  opts:["Suspender leite e frutas, oferecer refrigerante sem gás, retornar em 1 semana.","Oferecer SRO 100–200 mL após cada evacuação, manter a alimentação habitual, zinco 20 mg/dia por 10–14 dias, e retornar imediatamente se recusa alimentar, vômitos repetidos, sangue nas fezes ou muita sede.","Iniciar ciprofloxacino profilático por 3 dias.","Loperamida 2 mg após cada evacuação."], ans:1,
+  why:"Regras de ouro do MS. Antidiarreico e ATB profilático estão errados; > 1 ano = 100–200 mL de SRO por evacuação; zinco 20 mg (≥ 6 meses).",
+  trap:"Volume de SRO por evacuação muda com a idade (< 1 ano: 50–100 mL)."},
+
+ {src:"SP2", obj:"Parasitoses", stem:"<span class='cx'>Menina de 6 anos, prurido anal noturno, irritabilidade, vermes brancos finos vistos pela mãe. Irmão de 2 anos com os mesmos sintomas.</span> Assinale a correta:",
+  opts:["Enterobíase: diagnóstico pela fita gomada (Graham); albendazol 400 mg dose única repetida em 2 semanas para toda a família; roupa de cama em água quente, unhas curtas, banho matinal.","Ascaridíase: EPF e albendazol por 14 dias.","Giardíase: metronidazol por 5 dias só para a paciente.","Estrongiloidíase: ivermectina."], ans:0,
+  why:"Prurido anal noturno + vermes finos brancos = Enterobius. Dose única + repetição em 14 dias (ovos), tratar contactantes, higiene ambiental.",
+  trap:"'Albendazol por 14 dias' foi o erro da veterana na discursiva real."},
+
+ {src:"SP2", obj:"Diarreia · fisiopatologia", stem:"<span class='cx'>Adulto com diarreia aquosa volumosa há 24 h após viagem, sem sangue, sem febre, que persiste mesmo em jejum, com pH fecal normal.</span> O mecanismo predominante e sua base são:",
+  opts:["Osmótico — soluto não absorvido retém água; cessaria com jejum.","Secretor — enterotoxina (ex.: ETEC/cólera) ativa adenilato-ciclase → ↑AMPc → secreção de Cl⁻ pelas criptas e bloqueio da absorção de NaCl; não cessa com jejum; SRO funciona pelo cotransporte Na⁺-glicose preservado.","Inflamatório — invasão da mucosa com sangue e leucócitos fecais.","Motor — hipertireoidismo."], ans:1,
+  why:"Aquosa volumosa + persiste no jejum + pH normal = secretora (toxina). Osmótica cessa no jejum e tem pH ácido; inflamatória tem sangue/febre.",
+  trap:"'Persiste em jejum' é a chave — Q8 da prova real reciclada."},
+
+ /* ===== SP3 ===== */
+ {src:"SP3", obj:"Icterícia · laboratório", stem:"<span class='cx'>Mulher, 45 anos, icterícia há 4 dias com colúria, acolia e prurido, dor em HD pós-alimentar. BT 9 (BD 7), FA 580, GGT 410, ALT 120, INR 1,1. USG: colelitíase, colédoco 11 mm com imagem hiperecogênica no interior.</span> Assinale a correta:",
+  opts:["Icterícia hepatocelular por hepatite viral; sorologias.","Síndrome colestática obstrutiva por coledocolitíase (alto risco: cálculo visto + colédoco dilatado + BT > 4): CPRE com esfincterotomia e extração, seguida de colecistectomia videolaparoscópica na mesma internação.","Icterícia indireta por hemólise; Coombs.","Síndrome de Gilbert."], ans:1,
+  why:"BD predominante + FA/GGT ≫ ALT + colúria/acolia + colédoco dilatado com cálculo = coledocolitíase de alto risco → CPRE direto (sem colangioRM) → colecistectomia.",
+  trap:"Alto risco pula a colangioRM; risco intermediário (dilatado sem cálculo visto) não."},
+
+ {src:"SP3", obj:"Pancreatite", stem:"<span class='cx'>Homem, 38 anos, etilista, dor epigástrica em faixa há 10 h, vômitos, lipase 2.100 (VR < 60), estável, sem falência orgânica, PCR 60. USG: sem cálculos, via biliar normal.</span> Assinale a conduta INCORRETA:",
+  opts:["Hidratação venosa com Ringer lactato guiada por metas (diurese > 0,5 mL/kg/h).","Analgesia com dipirona e, se necessário, opioide.","Iniciar dieta oral hipogordurosa em 24–48 h assim que tolerar.","Iniciar imipenem profilático para prevenir infecção da necrose.","Não solicitar TC nas primeiras 48–72 h, salvo dúvida diagnóstica ou deterioração."], ans:3,
+  why:"ATB profilático não reduz infecção de necrose nem mortalidade e seleciona germes/fungos. Só com necrose infectada documentada/suspeita tardia. As demais estão corretas.",
+  trap:"Meropenem/imipenem 'profilático' é a alternativa-isca que já derrubou a veterana na APF."},
+
+ {src:"SP3", obj:"Colangite", stem:"<span class='cx'>Homem, 70 anos, dor em HD, febre 39,5 °C com calafrios, icterícia, confuso, PA 80×50. BT 8, FA 700, leucócitos 25.000. USG: colédoco 14 mm.</span> A conduta que reduz mortalidade é:",
+  opts:["Colecistectomia videolaparoscópica de urgência.","Ressuscitação volêmica, hemoculturas, antibiótico EV de amplo espectro (ex.: piperacilina-tazobactam) e drenagem biliar urgente por CPRE (esfincterotomia ± prótese); colecistectomia eletiva após a resolução.","Observação com jejum e analgesia por 48 h.","Colangiorressonância antes de qualquer tratamento."], ans:1,
+  why:"Pêntade de Reynolds = colangite grave: drenagem urgente + ATB. Imagem adicional atrasa; colecistectomia não desobstrui.",
+  trap:"Mesma pegadinha da APF SP1 Q4 e da prova Q12 — a que a veterana errou duas vezes."},
+
+ {src:"SP3", obj:"Hepatites", stem:"<span class='cx'>Mulher, 30 anos, doadora de sangue, assintomática: HBsAg negativo, anti-HBc total positivo, anti-HBs positivo, anti-HCV negativo.</span> A interpretação correta é:",
+  opts:["Hepatite B aguda; encaminhar para tratamento antiviral.","Infecção prévia pelo HBV, resolvida, com imunidade (anti-HBc + anti-HBs, HBsAg negativo); sem tratamento; vacinada não teria anti-HBc.","Vacinada contra hepatite B.","Hepatite B crônica replicativa."], ans:1,
+  why:"HBsAg negativo exclui infecção atual; anti-HBc positivo prova contato; anti-HBs = imunidade. Vacina induz só anti-HBs.",
+  trap:"Anti-HBc é o marcador que diferencia 'curada' de 'vacinada'."},
+
+ /* ===== SP4 ===== */
+ {src:"SP4", obj:"Dispepsia · alarme", stem:"<span class='cx'>Homem, 56 anos, dor epigástrica há 4 meses, saciedade precoce, perda de 7 kg, anemia (Hb 10,5).</span> A conduta inicial mais adequada é:",
+  opts:["IBP por 8 semanas como teste terapêutico.","Test-and-treat para H. pylori com antígeno fecal.","Endoscopia digestiva alta com biópsias, pois há sinais de alarme (perda de peso, anemia, idade > 45–50 anos).","Procinético e medidas dietéticas."], ans:2,
+  why:"Alarme = EDA antes de qualquer tratamento empírico. Perda de peso + anemia + idade = risco de neoplasia gástrica.",
+  trap:"Teste terapêutico é só para quem NÃO tem alarme."},
+
+ {src:"SP4", obj:"Úlcera · Hp", stem:"<span class='cx'>Mulher, 39 anos, úlcera duodenal na EDA com urease positiva, sem alergias.</span> Assinale a prescrição correta e o seguimento:",
+  opts:["Omeprazol 20 mg/dia por 2 semanas; repetir EDA em 1 mês.","Omeprazol 40 mg 2×/dia + amoxicilina 1 g 2×/dia + claritromicina 500 mg 2×/dia por 14 dias, mantendo IBP até 4 semanas; controle de cura com teste respiratório ou antígeno fecal ≥ 4 semanas após o antibiótico e 2 semanas sem IBP; sem EDA de controle (úlcera duodenal).","Sorologia para H. pylori após 4 semanas para confirmar cura.","Metronidazol 400 mg 3×/dia isolado por 7 dias."], ans:1,
+  why:"Tríplice 14 dias; cura com teste ativo ≥ 4 semanas; duodenal não exige EDA de controle; sorologia nunca para cura.",
+  trap:"Todos os detalhes (doses, 14 d, 4 semanas, sem IBP) aparecem na discursiva real da prova."},
+
+ {src:"SP4", obj:"HDA", stem:"<span class='cx'>Homem, 66 anos, hematêmese e melena, PA 90×60, FC 120, usa AAS. Hb 7,5.</span> A sequência correta é:",
+  opts:["EDA imediata na sala de emergência antes de acesso venoso.","Dois acessos calibrosos, cristaloide, tipagem e transfusão (Hb < 7–8 conforme comorbidade), IBP EV 80 mg em bolus + infusão, suspender AAS temporariamente, EDA nas primeiras 12–24 h após estabilização inicial, com terapia endoscópica se Forrest Ia–IIb.","Alta com omeprazol oral e retorno em 7 dias.","Laparotomia imediata."], ans:1,
+  why:"ABC → sangue → IBP EV → EDA precoce. Cirurgia só após falha endoscópica e da embolização.",
+  trap:"'EDA antes de estabilizar' e 'laparotomia' são os dois extremos errados."},
+
+ {src:"SP4", obj:"DRGE", stem:"<span class='cx'>Mulher, 41 anos, pirose e regurgitação há 6 meses, piora ao deitar, sem disfagia, sem perda de peso, exame normal.</span> Assinale a correta:",
+  opts:["Solicitar pHmetria de 24 h antes de tratar, pois é o padrão-ouro.","DRGE clínica sem alarme: medidas comportamentais (elevar cabeceira, não deitar < 2–3 h após comer, reduzir peso/gatilhos) + IBP em dose plena 30–60 min antes do café por 4–8 semanas como teste terapêutico; EDA se alarme, falha ou recorrência precoce.","EDA obrigatória em toda DRGE para confirmar esofagite.","Fundoplicatura de Nissen."], ans:1,
+  why:"Diagnóstico clínico + teste terapêutico. pHmetria é padrão-ouro, mas reservada a refratários/pré-operatório; EDA normal não exclui (70% não erosiva).",
+  trap:"'Padrão-ouro' não é sinônimo de 'primeiro exame'."}
+];
+
+const FC=[
+ ["Formato da prova final","16 objetivas A–D (4 por SP, na ordem SP1→SP4) + 4 discursivas (1 por SP, itens a–e). 80% da nota da tutoria. Metade/metade."],
+ ["Regra das 6 h","Dor abdominal intensa ≥ 6 h = cirúrgica até prova em contrário."],
+ ["Isquemia mesentérica","FA + dor desproporcional + lactato ↑ + abdome flácido → angio-TC → heparina + revascularização."],
+ ["Perfurativo","AINE + dor súbita + tábua + Jobert → RX tórax em pé (ar livre) → laparotomia + ATB + IBP."],
+ ["Obstrutivo — quando operar","Dor contínua, febre, peritonite, leucocitose, lactato/acidose, alça fechada, falha em 48–72 h. Bridas sem sofrimento: SNG + volume + K + analgesia."],
+ ["Colecistite × colangite","Colecistite (cístico): ATB + colecistectomia < 72 h. Colangite (colédoco, Charcot/Reynolds): ATB + CPRE urgente. Não confundir!"],
+ ["Diverticulite","Idoso, FIE, febre, massa → TC com contraste. Colonoscopia só após 6–8 semanas. Hinchey III–IV → cirurgia."],
+ ["RX × TC","'Exame inicial' na obstrução/perfuração = RX 3 incidências. 'Melhor exame' = TC com contraste. Vascular = angio-TC. Biliar/gestante/pelve = USG."],
+ ["Planos A/B/C","A: SRO pós-evacuação + dieta + zinco + sinais de retorno. B (≥ 2 sinais): SRO 50–100 mL/kg/4 h. C (letárgico, não bebe): 30 + 70 mL/kg (1 h + 5 h < 1 ano; 30 min + 2 h 30 > 1 ano)."],
+ ["Zinco","< 6 m: 10 mg · ≥ 6 m: 20 mg · 10–14 dias. Reduz duração e previne recorrência."],
+ ["ATB na diarreia","Só disenteria + toxemia (cipro 15 mg/kg 12/12 h 3 d / azitro), cólera grave, imunossuprimido. Nunca por duração ou rotavírus."],
+ ["Secretora × osmótica","Secretora (cólera/AMPc): não cessa no jejum, pH normal. Osmótica (lactose): cessa, pH ácido. SRO = SGLT-1."],
+ ["Oxiúro","Fita gomada. Albendazol 400 mg dose única + repetir 14 d. Tratar a casa. Roupa de cama quente, unhas, banho matinal."],
+ ["Espoliação parasitária","Ancylostoma = sangue/ferropriva · Ascaris = competição + obstrução · Giardia = atrofia/esteatorreia · Strongyloides = autoinfecção/hiperinfecção."],
+ ["Icterícia — 3 síndromes","Indireta: hemólise/Gilbert, sem colúria. Hepatocelular: ALT ≫ FA. Colestática: FA/GGT ≫ ALT, colúria + acolia + prurido, USG dilatada."],
+ ["Charcot / Reynolds","Dor HD + febre com calafrios + icterícia (+ hipotensão + confusão = Reynolds). Hiperamilasemia não entra."],
+ ["Pancreatite — 5 regras","Cálculo nº 1 · 2 de 3 · gravidade = falência orgânica · sem ATB profilático · dieta precoce; CPRE só colangite/obstrução; colecistectomia mesma internação."],
+ ["Colelitíase assintomática — operar se","Pólipo ≥ 1 cm · cálculo > 3 cm · porcelana · falciforme · transplante · bariátrica · microlitíase."],
+ ["Hepatite B — sorologia","HBsAg = infecção · anti-HBc = contato · anti-HBs = imunidade. Vacinado: só anti-HBs. Curado: anti-HBc + anti-HBs."],
+ ["Dispepsia — alarme","Disfagia · perda de peso · anemia · hematêmese/melena · vômitos · massa · > 45–50 a · hist. familiar → EDA. Sem alarme → IBP 4–8 sem ou test-and-treat."],
+ ["Dispepsia funcional","EDA normal (exclusão). Plenitude → procinético. Dor → IBP. Refratária → amitriptilina."],
+ ["Úlcera gástrica × duodenal","Gástrica: piora com comida, biópsia SEMPRE + EDA controle. Duodenal: melhora com comida, benigna, só urease."],
+ ["Erradicação do Hp","IBP 2×/d + amoxicilina 1 g 2×/d + claritro 500 mg 2×/d × 14 d (ou quádrupla bismuto). Cura: respiratório/fecal ≥ 4 sem após ATB, 2 sem sem IBP. Sorologia nunca."],
+ ["HDA — manejo","2 acessos + cristaloide · Hb < 7 (cardiopata < 8) · IBP EV 80 + 8 mg/h · EDA ≤ 24 h · Forrest Ia–IIb = terapia dupla. APS: estabilizar + ambulância."]
+];
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const SRC_LBL={APF:"APF real 2026.1",Prova:"Prova final 2026.1",Inédita:"Inédita",SP1:"SP1",SP2:"SP2",SP3:"SP3",SP4:"SP4"};
+const SRC_CLS={APF:"r",Prova:"d",Inédita:"i",SP1:"e",SP2:"e",SP3:"e",SP4:"e"};
+const SRC_ORDER=["Todas","APF","Prova","Inédita","SP1","SP2","SP3","SP4"].filter(k=>k==="Todas"||QS.some(q=>q.src===k));
+let filter="Todas";
+const state={answered:0,hits:0};
+function buildChips(){
+  const box=document.getElementById('chips');
+  const counts={Todas:QS.length};QS.forEach(q=>counts[q.src]=(counts[q.src]||0)+1);
+  SRC_ORDER.forEach(k=>{
+    const c=document.createElement('button');c.className='chip'+(k===filter?' on':'');
+    c.textContent=(k==="Todas"?"Todas":SRC_LBL[k])+' · '+counts[k];
+    c.addEventListener('click',()=>{filter=k;renderQuiz();});box.appendChild(c);
+  });
+}
+function renderQuiz(){
+  document.querySelectorAll('#chips .chip').forEach((c,i)=>c.classList.toggle('on',SRC_ORDER[i]===filter));
+  const list=QS.map((q,i)=>({q,i})).filter(x=>filter==="Todas"||x.q.src===filter);
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i})=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';});
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill '+SRC_CLS[q.src]+'">'+SRC_LBL[q.src]+'</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){renderQuiz();}
+buildChips();renderQuiz();
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back"><small>'+c[0]+'</small>'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+document.querySelectorAll('.rotbtn').forEach(b=>b.addEventListener('click',()=>{const r=document.getElementById(b.dataset.r);r.style.display=(r.style.display==='block'?'none':'block');}));
+
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC14 · SP1 — Abdome Agudo · Guia + Simulado APF</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tblwrap{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .fig{background:#0f1a24;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+  .fig svg{max-width:100%;height:auto}
+  .fig .cap{font-size:12.5px;color:var(--mut);margin-top:6px}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;min-width:120px;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .chip.on{color:var(--ink);border-color:var(--teal);background:#12302a}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.r{background:#2b2113;color:#ffd79e;border:1px solid #6a5a26}
+  .pill.i{background:#1a2e26;color:#8fe4d2;border:1px solid #1f5a41}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:180px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45;flex-direction:column}
+  .fc .back small{display:block;color:#8fb8a8;font-size:11px;margin-bottom:4px;font-weight:700}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIV</span>
+    <h1>SP1 — Abdome Agudo · <span style="color:var(--tealo)">Guia + Simulado da APF</span></h1>
+    <div class="sub">Fechamento + APF: <b>quarta 16/09/2026, 13h20</b> (tutora Ana Elisa). Resumo (≈30 min) → banco de 30 questões: as <b>10 da APF real da SP1 (2026.1)</b>, as <b>7 da prova final</b> que caem nesta SP e <b>13 inéditas</b> → descritiva no formato da prova final → mapa mental e flashcards. Fontes: APF SP1 e prova final da veterana, resumo de tutoria da veterana, ementa UC XIV 2026, Goldman-Cecil, Rotinas em Cirurgia Digestiva.</div>
+  </header>
+  <div class="tabs" id="tabs"><button class="tab active" data-t="resumo">📖 Resumo</button><button class="tab" data-t="quizsec">📝 Simulado (30 + descritiva)</button><button class="tab" data-t="mapa">🧠 Mapa mental</button><button class="tab" data-t="flash">🎴 Flashcards</button></div>
+  <section id="resumo" class="active">
+
+    <div class="panel">
+      <h2>0 · Como essa APF é cobrada (raio-X da veterana)</h2>
+      <p>A <b>APF real da SP1 de 2026.1</b> teve <span class="k2">10 questões, todas A–D</span>, mini-caso de 2–3 linhas + "qual a melhor conduta / exame / diagnóstico?", sem descritiva. Tema por tema: <span class="hl">isquemia mesentérica (angio-TC) · úlcera perfurada (ar livre → laparotomia) · colecistite (ATB + colecistectomia precoce) · colangite (CPRE urgente) · pancreatite (critério de gravidade) · obstrução (o que sugere estrangulamento) · diverticulite (TC com contraste) · cólica biliar × colecistite · sinal de Jobert · idoso atípico</span>. A veterana tirou 8 — errou exatamente <b>colangite → CPRE</b> (marcou colecistectomia) e a de obstrução.</p>
+      <p>Na <b>prova final</b> (80% da nota, 16 objetivas A–D + 4 discursivas em itens a–e), a SP1 entrou com 7 objetivas (diverticulite, RX na obstrução, pancreatite que complica, exame inicial na peritonite, colecistite → colecistectomia na mesma internação, USG como 1º exame, colangite → CPRE) e a <b>1ª discursiva inteira</b> (abdome agudo obstrutivo por bridas: diagnóstico sindrômico → sequência diagnóstica → diferenciais → RX × USG × TC → conservador × cirurgia).</p>
+      <div class="note"><b>Tradução prática:</b> a Ana Elisa cobra <b>raciocínio de conduta</b>, não decoreba: para cada uma das 5 síndromes, saber (1) o quadro-assinatura, (2) o exame que confirma, (3) o que define gravidade, (4) clínico × cirúrgico. Isso é o esqueleto deste resumo.</div>
+      <p class="src">Ementa oficial da SP1 (UC XIV 2026): Anatomia seccional do tórax · Patologia: delgado e cólon — processos inflamatórios e infecciosos · Laboratório: exames na diarreia (intolerância à lactose, doença celíaca) · Farmaco: laxantes, coleréticos e colagogos · Fisiopatologia da litíase biliar · Conferência Saúde da Criança: constipação. Se o quadro da abertura trouxe objetivos diferentes, me manda que eu ajusto o guia.</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · O que é abdome agudo — e a regra das 6 horas</h2>
+      <p><b>Abdome agudo</b> = síndrome de <span class="hl">dor abdominal de início súbito ou progressivo, não traumática, com menos de 7 dias (geralmente &lt; 48 h)</span>, que exige <b>decisão terapêutica rápida</b> — clínica ou cirúrgica. Duas frases-lei do resumo da veterana que viram questão:</p>
+      <ul>
+        <li><span class="k2">"Não passa sozinho, mas nem todo abdome agudo é cirúrgico"</span> → pancreatite, diverticulite não complicada e obstrução por bridas sem sofrimento de alça são tratados <b>clinicamente</b>.</li>
+        <li><span class="k2">Dor intensa persistindo ≥ 6 horas = forte indicativo de cirurgia</span> (regra clássica de Cope). O contrário também vale: dor que <b>cede sozinha em 1–2 h</b> (cólica biliar) não é abdome agudo cirúrgico.</li>
+      </ul>
+      <h3>Classificação em 5 síndromes (a espinha dorsal da SP)</h3>
+      <div class="tblwrap"><table>
+        <tr><th style="width:110px">Síndrome</th><th>Assinatura clínica</th><th>Exame-chave</th><th>Conduta</th></tr>
+        <tr><td><b>Inflamatório</b></td><td>Dor <b>insidiosa e progressiva</b>, febre, náuseas, localiza-se; pode virar peritonite</td><td>USG (vias biliares, apendicite em criança/gestante) · TC (adulto, diverticulite)</td><td>Apendicite/colecistite → cirurgia · pancreatite → clínico · diverticulite simples → clínico</td></tr>
+        <tr><td><b>Perfurativo</b></td><td>Dor <b>súbita, lancinante</b>, difusa em minutos, <b>abdome em tábua</b>, RHA abolidos</td><td>RX tórax PA em pé / abdome ortostático: <b>pneumoperitônio</b> (TC vê sempre)</td><td><b>Laparotomia de urgência</b> + ATB + IBP (se úlcera)</td></tr>
+        <tr><td><b>Obstrutivo</b></td><td><b>Tríade</b>: cólica + distensão + parada de gases/fezes; vômitos (fecaloides se baixa); RHA ↑ metálicos → depois ↓</td><td>RX abdome agudo: níveis hidroaéreos "em escada" (em pé), "empilhamento de moedas" (deitado) · TC = melhor</td><td>Bridas sem sofrimento: <b>SNG + jejum + hidratação + analgesia</b>; estrangulamento/alça fechada → cirurgia</td></tr>
+        <tr><td><b>Vascular</b></td><td>Idoso, FA/cardiopata; <b>dor desproporcional ao exame</b> (abdome flácido), lactato ↑, evacuação sanguinolenta tardia</td><td><b>Angio-TC</b> (angiografia = padrão-ouro)</td><td>Anticoagulação, reposição, ATB; ressecção se necrose/peritonite</td></tr>
+        <tr><td><b>Hemorrágico</b></td><td>Dor difusa + <b>choque hipovolêmico</b> (hipotensão, taquicardia, palidez); Cullen/Grey-Turner; gravidez ectópica rota, AAA roto, baço</td><td>β-hCG · USG (FAST) · TC com contraste se estável</td><td>Estabilizar + <b>cirurgia</b></td></tr>
+      </table></div>
+      <div class="warn"><b>Pegadinha da tabela:</b> "abdome em tábua" existe no <b>perfurativo e no hemorrágico</b> (e em qualquer peritonite avançada). No <b>vascular</b> é o oposto: <span class="hl">muita dor, pouco exame</span> — abdome flácido é a assinatura (Q1 da APF).</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Semiologia que a banca usa como distrator</h2>
+      <h3>Dor visceral × parietal (ponte com a SP4 da UC13)</h3>
+      <ul>
+        <li><b>Visceral</b>: difusa, mal localizada, em cólica, com cortejo autonômico; paciente <b>inquieto</b>. Fase 1 da apendicite (periumbilical).</li>
+        <li><b>Parietal (peritonite)</b>: localizada, contínua, piora ao mover/tossir; paciente <b>imóvel</b>; defesa involuntária, Blumberg +. Fase 2 da apendicite (FID).</li>
+        <li><b>Referida</b>: colecistite → ombro/escápula direita; pâncreas → dorso "em faixa"; irritação diafragmática (sangue, pus) → ombro (sinal de Kehr).</li>
+      </ul>
+      <h3>Sinais com nome — os que já caíram ou vão cair</h3>
+      <div class="tblwrap"><table>
+        <tr><th>Sinal</th><th>O que é</th><th>Aponta para</th></tr>
+        <tr><td><b>Jobert</b></td><td>Perda da macicez hepática à percussão (timpanismo sobre o fígado)</td><td><b>Pneumoperitônio → perfurativo</b> (Q9 da APF)</td></tr>
+        <tr><td><b>Murphy</b></td><td>Interrupção da inspiração à palpação do ponto cístico</td><td>Colecistite aguda</td></tr>
+        <tr><td><b>Blumberg</b></td><td>Dor à descompressão brusca (McBurney)</td><td>Peritonite (apendicite)</td></tr>
+        <tr><td><b>Rovsing</b></td><td>Palpar FIE dói na FID</td><td>Apendicite</td></tr>
+        <tr><td><b>Psoas / Obturador</b></td><td>Dor à extensão da coxa / rotação interna</td><td>Apendicite retrocecal / pélvica</td></tr>
+        <tr><td><b>Cullen / Grey-Turner</b></td><td>Equimose periumbilical / nos flancos</td><td>Pancreatite grave (necro-hemorrágica) · hemoperitônio</td></tr>
+        <tr><td><b>Gersuny</b></td><td>Massa moldável que recupera a forma lentamente</td><td>Fecaloma</td></tr>
+        <tr><td><b>Kehr</b></td><td>Dor no ombro esquerdo com irritação diafragmática</td><td>Ruptura esplênica / hemoperitônio</td></tr>
+        <tr><td><b>Tríade de Charcot</b> → <b>Pêntade de Reynolds</b></td><td>Dor HD + febre com calafrios + icterícia → + hipotensão + confusão</td><td>Colangite → colangite grave (supurativa)</td></tr>
+      </table></div>
+
+      <div class="fig">
+        <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <rect x="0" y="0" width="640" height="330" fill="#0f1a24" rx="12"/>
+          <!-- abdomen outline -->
+          <ellipse cx="200" cy="165" rx="150" ry="140" fill="#14212e" stroke="#2a3a4d" stroke-width="2"/>
+          <line x1="200" y1="25" x2="200" y2="305" stroke="#3b5670" stroke-dasharray="5,4"/>
+          <line x1="50" y1="118" x2="350" y2="118" stroke="#3b5670" stroke-dasharray="5,4"/>
+          <line x1="50" y1="212" x2="350" y2="212" stroke="#3b5670" stroke-dasharray="5,4"/>
+          <circle cx="200" cy="165" r="6" fill="#4c8dff"/>
+          <!-- labels inside -->
+          <text x="120" y="60" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">HIPOCÔNDRIO D</text>
+          <text x="120" y="76" fill="#cdd9e6" font-size="10" text-anchor="middle">colecistite · colangite</text>
+          <text x="120" y="90" fill="#cdd9e6" font-size="10" text-anchor="middle">cólica biliar · hepatite</text>
+          <text x="120" y="104" fill="#cdd9e6" font-size="10" text-anchor="middle">úlcera duodenal · pneumonia base D</text>
+          <text x="280" y="60" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">HIPOCÔNDRIO E</text>
+          <text x="280" y="76" fill="#cdd9e6" font-size="10" text-anchor="middle">baço (ruptura, infarto)</text>
+          <text x="280" y="90" fill="#cdd9e6" font-size="10" text-anchor="middle">pancreatite (cauda)</text>
+          <text x="280" y="104" fill="#cdd9e6" font-size="10" text-anchor="middle">IAM inferior · pneumonia</text>
+          <text x="200" y="140" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">EPIGÁSTRIO / MESO</text>
+          <text x="200" y="155" fill="#cdd9e6" font-size="10" text-anchor="middle">úlcera perfurada · pancreatite</text>
+          <text x="200" y="182" fill="#cdd9e6" font-size="10" text-anchor="middle">apendicite inicial · isquemia</text>
+          <text x="200" y="196" fill="#cdd9e6" font-size="10" text-anchor="middle">mesentérica · obstrução · AAA</text>
+          <text x="120" y="240" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">FID</text>
+          <text x="120" y="256" fill="#cdd9e6" font-size="10" text-anchor="middle">apendicite · ileíte (Crohn)</text>
+          <text x="120" y="270" fill="#cdd9e6" font-size="10" text-anchor="middle">ectópica · torção ovariana</text>
+          <text x="120" y="284" fill="#cdd9e6" font-size="10" text-anchor="middle">cólica renal · adenite</text>
+          <text x="280" y="240" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">FIE</text>
+          <text x="280" y="256" fill="#cdd9e6" font-size="10" text-anchor="middle">DIVERTICULITE</text>
+          <text x="280" y="270" fill="#cdd9e6" font-size="10" text-anchor="middle">ectópica · torção ovariana</text>
+          <text x="280" y="284" fill="#cdd9e6" font-size="10" text-anchor="middle">cólica renal · colite</text>
+          <!-- legend right -->
+          <text x="380" y="50" fill="#8fe4d2" font-size="12" font-weight="700">Difusa desde o início:</text>
+          <text x="380" y="68" fill="#cdd9e6" font-size="11">• perfuração (peritonite química)</text>
+          <text x="380" y="84" fill="#cdd9e6" font-size="11">• isquemia mesentérica</text>
+          <text x="380" y="100" fill="#cdd9e6" font-size="11">• obstrução (cólica difusa)</text>
+          <text x="380" y="116" fill="#cdd9e6" font-size="11">• hemoperitônio · GECA · CAD</text>
+          <text x="380" y="150" fill="#8fe4d2" font-size="12" font-weight="700">Migra:</text>
+          <text x="380" y="168" fill="#cdd9e6" font-size="11">periumbilical → FID = apendicite</text>
+          <text x="380" y="184" fill="#cdd9e6" font-size="11">epigástrio → difusa = úlcera perfurada</text>
+          <text x="380" y="218" fill="#8fe4d2" font-size="12" font-weight="700">Irradia:</text>
+          <text x="380" y="236" fill="#cdd9e6" font-size="11">HD → ombro/escápula D = vesícula</text>
+          <text x="380" y="252" fill="#cdd9e6" font-size="11">epigástrio → dorso "em faixa" = pâncreas</text>
+          <text x="380" y="268" fill="#cdd9e6" font-size="11">flanco → virilha = ureter</text>
+          <text x="380" y="284" fill="#cdd9e6" font-size="11">ombro E (Kehr) = baço / diafragma</text>
+        </svg>
+        <div class="cap">Mapa topográfico da dor: onde dói × o que pensar. O ponto azul é a cicatriz umbilical.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Abdome agudo INFLAMATÓRIO — as 5 causas que caem</h2>
+      <h3>3.1 Apendicite aguda (causa cirúrgica mais comum)</h3>
+      <ul>
+        <li>Obstrução do lúmen (fecalito, hiperplasia linfoide) → distensão → dor <b>visceral periumbilical</b> → 12–24 h depois <b>migra para FID</b> (parietal): Blumberg, Rovsing, defesa. Febre baixa, anorexia, leucocitose com desvio.</li>
+        <li>Diagnóstico é <b>clínico</b> (escores Alvarado/AIR). Imagem quando dúvida: <b>USG</b> em criança/gestante/magro; <b>TC com contraste</b> no adulto (S/E &gt; 95%). RX pode mostrar fecalito (calcificação) — mas RX não é o exame para apendicite.</li>
+        <li>Conduta: <b>apendicectomia</b> (videolaparoscópica) + ATB (cefalosporina + metronidazol ou ampi-sulbactam). Abscesso/plastrão &gt; 5 dias: drenagem + ATB, apendicectomia de intervalo.</li>
+      </ul>
+      <h3>3.2 Colecistite aguda × cólica biliar × colangite — o trio que mais derruba</h3>
+      <div class="tblwrap"><table>
+        <tr><th></th><th>Cólica biliar</th><th>Colecistite aguda</th><th>Colangite aguda</th></tr>
+        <tr><td><b>Mecanismo</b></td><td>Cálculo impacta transitoriamente no cístico</td><td>Cístico obstruído &gt; 90% → distensão, isquemia, infecção 2ª (E. coli, Klebsiella)</td><td>Obstrução do <b>colédoco</b> (coledocolitíase) + infecção da via biliar</td></tr>
+        <tr><td><b>Dor</b></td><td>HD/epigástrio pós-gordura, <b>&lt; 6 h (30 min–2 h típico), melhora espontânea</b></td><td>HD contínua <b>&gt; 6 h</b>, irradia p/ escápula D</td><td>HD + <b>febre com calafrios + icterícia</b> (Charcot)</td></tr>
+        <tr><td><b>Exame/lab</b></td><td>Sem febre, sem Murphy, leucograma normal</td><td><b>Murphy +</b>, febre, leucocitose, PCR ↑; bilirrubina normal ou pouco ↑</td><td>↑ bilirrubina direta, FA, GGT; leucocitose; hemocultura +</td></tr>
+        <tr><td><b>Imagem</b></td><td>USG: cálculos</td><td><b>USG</b> (1º exame sempre): parede &gt; 3–4 mm, líquido perivesicular, Murphy ultrassonográfico</td><td>USG: colédoco dilatado (&gt; 6 mm) ± cálculo; colangioRM se dúvida</td></tr>
+        <tr><td><b>Conduta</b></td><td>Analgesia (AINE/escopolamina) → colecistectomia eletiva</td><td>Jejum, hidratação, analgesia, <b>ATB</b> (ceftriaxona + metronidazol / pip-tazo) + <b>colecistectomia precoce (&lt; 72 h, na mesma internação)</b>; grave/não cirúrgico → colecistostomia percutânea</td><td>ATB + <b>descompressão biliar urgente por CPRE</b> (esfincterotomia + extração); colecistectomia só depois de estabilizar</td></tr>
+      </table></div>
+      <div class="warn"><b>A pegadinha que a veterana errou (Q4 da APF e Q12 da prova):</b> HD + febre + icterícia + hipotensão = <b>colangite</b>. A resposta é <span class="hl">CPRE urgente</span> (drenar a via biliar), <b>não</b> colecistectomia imediata — a vesícula não é o problema, o colédoco obstruído e infectado é. Operar depois.</div>
+      <p><b>Colecistite: quando é "grave"?</b> (Tokyo) Grau III = disfunção orgânica (hipotensão precisando droga, confusão, PaO₂/FiO₂ &lt; 300, Cr &gt; 2, plaquetas &lt; 100 mil). Grau II = leucócitos &gt; 18 mil, massa palpável, &gt; 72 h de evolução, sinais de inflamação local marcada (gangrena, enfisematosa, abscesso). Na prova: "sem sinais de perfuração ou gangrena, estável" → <b>colecistectomia videolaparoscópica na mesma internação</b> (Q10 da prova final).</p>
+      <h3>3.3 Pancreatite aguda</h3>
+      <ul>
+        <li>Causas: <b>biliar (mais comum)</b> e <b>álcool</b>; depois hipertrigliceridemia (&gt; 1.000), pós-CPRE, drogas, idiopática.</li>
+        <li><b>Diagnóstico = 2 de 3</b>: dor epigástrica típica irradiando p/ dorso + <b>amilase ou lipase ≥ 3× o limite superior</b> + imagem compatível. <span class="hl">Lipase é mais específica e fica elevada por mais tempo</span> (amilase sobe e cai rápido). A magnitude da enzima <b>não</b> mede gravidade.</li>
+        <li><b>Gravidade</b> (Atlanta revisada): leve (sem falência de órgão) · moderada (falência transitória &lt; 48 h ou complicação local) · grave (falência persistente &gt; 48 h). Sinais de alarme na admissão: <b>hipotensão</b>, taquicardia, oligúria, hematócrito ↑ (hemoconcentração), <b>ureia/BUN ↑</b>, PCR &gt; 150 em 48 h, SIRS, derrame pleural, Cullen/Grey-Turner. Escores: Ranson, APACHE II, BISAP (BUN &gt; 25, alt. mental, SIRS, idade &gt; 60, derrame pleural).</li>
+        <li>Conduta: <b>clínica</b> — hidratação venosa vigorosa (Ringer lactato), analgesia (dipirona → opioide, sem medo de morfina), jejum curto com <b>dieta precoce</b> (24–48 h) quando tolerar, <b>sem ATB profilático</b>. Biliar com colangite/obstrução persistente → <b>CPRE</b>. Biliar leve → colecistectomia <b>na mesma internação</b>. Necrose infectada → ATB (carbapenêmico) + necrosectomia tardia (&gt; 4 semanas), preferencialmente minimamente invasiva.</li>
+      </ul>
+      <div class="note"><b>Q5 da APF e Q3 da prova</b> viraram a mesma ideia: pancreatite "clínica" que evolui com <b>hipotensão, oligúria, distensão</b> = <span class="k2">abdome agudo clínico com evolução para complicação sistêmica grave</span> — não vira "cirúrgico" por isso, e o critério de gravidade presente é a <b>hipotensão</b> (não a dor nem a lipase).</div>
+      <h3>3.4 Diverticulite aguda</h3>
+      <ul>
+        <li>Idoso, dor em <b>QIE/FIE</b> ("apendicite do lado esquerdo"), febre, alteração do hábito, massa palpável, leucocitose. Constipação crônica e uso de laxantes são o terreno (Q1 da prova).</li>
+        <li>Exame: <b>TC de abdome com contraste</b> (Q7 da APF). <span class="hl">Colonoscopia é CONTRAINDICADA na fase aguda</span> (risco de perfuração) — faz-se 6–8 semanas depois para excluir neoplasia.</li>
+        <li>Hinchey: I abscesso pericólico · II abscesso pélvico/à distância · III peritonite purulenta · IV peritonite fecal. Não complicada: dieta + ATB (cipro + metro ou amoxi-clav; em imunocompetente leve, até sem ATB) ambulatorial. Abscesso &gt; 4 cm: drenagem percutânea. III/IV: cirurgia (Hartmann ou ressecção com anastomose ± ileostomia).</li>
+      </ul>
+      <h3>3.5 Distratores que a banca usa</h3>
+      <p><b>Meckel</b> (jovem, sangramento indolor) · <b>Crohn</b> (diarreia crônica prévia) · <b>intussuscepção</b> (criança, geleia de framboesa) · <b>gravidez ectópica</b> (β-hCG antes de qualquer TC) · não abdominais: IAM inferior, pneumonia de base, CAD, herpes-zóster, crise falciforme. <b>Idoso</b>: apresentação atípica, pouca febre/leucocitose, mais causas graves — TC é segura.</p>
+    </div>
+
+    <div class="panel">
+      <h2>4 · PERFURATIVO — o mais "rápido" de todos</h2>
+      <ul>
+        <li>Causas: <b>úlcera péptica</b> (usuário de AINE/AAS, H. pylori — Q2 da APF), diverticulite, neoplasia perfurada, corpo estranho, febre tifoide, amebíase, iatrogenia (colonoscopia).</li>
+        <li>Quadro: dor <b>súbita, lancinante, "em punhalada"</b>, epigástrica que fica <b>difusa em minutos</b> (peritonite química por suco gástrico/bile); depois de horas vira bacteriana → sepse. <b>Abdome em tábua</b>, RHA abolidos, <b>Jobert +</b>, paciente imóvel. Perfuração alta extravasa bile/suco gástrico/pancreático; baixa extravasa fezes (mais séptica).</li>
+        <li>Diagnóstico: <b>RX de tórax PA em ortostase</b> (ou abdome em pé / decúbito lateral E): <span class="hl">ar livre subdiafragmático — 5–10 mL já aparecem, mas RX normal NÃO exclui</span>; <b>TC identifica sempre</b> e é o exame se RX negativo e suspeita alta.</li>
+        <li>Conduta: jejum, SNG, hidratação, ATB de amplo espectro (cobrir gram-negativo + anaeróbio), IBP EV se úlcera, e <b>laparotomia/laparoscopia de urgência</b> (rafia + patch de omento na úlcera). Não é "IBP e observação" (Q2).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · OBSTRUTIVO — tríade, altura e o "quando operar"</h2>
+      <ul>
+        <li><b>Tríade</b>: dor em <b>cólica</b> + <b>distensão</b> + <b>parada de eliminação de gases e fezes</b>. Vômitos precoces e biliosos na obstrução alta; tardios e <b>fecaloides</b> na baixa. RHA <b>aumentados e metálicos</b> no início (luta), <b>abolidos</b> depois (fadiga/isquemia). Toque retal: ampola vazia.</li>
+        <li><b>Altura</b> — divisor = válvula ileocecal. <b>Delgado (alta)</b>: <span class="k2">bridas/aderências pós-operatórias (nº 1 no adulto)</span>, hérnias encarceradas (nº 2; nº 1 em quem nunca operou), neoplasia, Crohn, intussuscepção, bolo de áscaris, íleo biliar. <b>Cólon (baixa)</b>: <span class="k2">câncer colorretal (nº 1)</span>, volvo de sigmoide (idoso, megacólon chagásico), diverticulite, fecaloma.</li>
+        <li><b>RX de abdome agudo (3 incidências: ortostase, decúbito dorsal e tórax)</b> = exame inicial da banca: <span class="hl">níveis hidroaéreos "em escada" (em pé)</span>, alças distendidas com <b>"empilhamento de moedas"</b> (válvulas coniventes, deitado), ausência de gás no cólon/reto (obstrução completa). Volvo de sigmoide = "grão de café" / "U invertido". <b>TC com contraste = melhor exame</b>: nível, causa, ponto de transição ("sinal do bico"), sofrimento de alça.</li>
+        <li><b>Íleo paralítico (adinâmico)</b> é o diferencial: pós-operatório, opioide, hipocalemia, sepse — distensão sem cólica, RHA <b>diminuídos desde o início</b>, gás distribuído em delgado E cólon (inclusive reto).</li>
+      </ul>
+      <h3>O que sugere estrangulamento (= operar)</h3>
+      <p><span class="k2">Dor contínua e intensa em vez de cólica</span> (Q6 da APF) · febre · taquicardia · <b>irritação peritoneal</b> · leucocitose · <b>acidose / lactato ↑</b> · hérnia irredutível dolorosa · alça fechada na TC (volvo, hérnia interna). Obstrução <b>completa</b> de cólon também não espera (ceco &gt; 12 cm perfura).</p>
+      <h3>Conduta</h3>
+      <ul>
+        <li><b>Bridas parciais sem sofrimento</b> (a discursiva da prova): <b>dieta zero + SNG aberta + hidratação venosa com correção de K/Na + analgesia (evitar opioide em excesso) + reavaliação seriada</b> por 48–72 h; melhora em 70–80%. Contraste hidrossolúvel VO (gastrografin) ajuda diagnóstico e trânsito.</li>
+        <li><b>Falha</b> do conservador = não resolveu em 48–72 h, ou surgiu qualquer sinal de estrangulamento/sepse/choque → <b>laparotomia (lise de bridas ± enterectomia)</b>.</li>
+        <li>Hérnia encarcerada, volvo (descompressão endoscópica primeiro se sigmoide sem sofrimento, depois sigmoidectomia), câncer obstrutivo, obstrução em alça fechada → cirurgia / endoscopia de entrada.</li>
+        <li><b>Fecaloma</b>: diagnóstico pelo toque retal (Gersuny), tratamento = <b>desimpactação manual</b> + enemas; depois tratar a constipação.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>6 · VASCULAR (isquemia mesentérica) — "muita dor, pouco exame"</h2>
+      <ul>
+        <li><b>Perfil</b>: idoso, <b>fibrilação atrial sem anticoagulação</b> (embolia da a. mesentérica superior = causa nº 1), IAM recente, aterosclerose (trombose arterial), estado de baixo fluxo/choque/vasopressor (isquemia não oclusiva), trombofilia/cirrose (trombose venosa mesentérica — mais jovem, subagudo).</li>
+        <li><b>Quadro</b>: dor <b>súbita, intensa, difusa, desproporcional ao exame físico</b> (abdome flácido, pouco doloroso — Q1 da APF), esvaziamento intestinal reflexo no início, depois distensão, sangue nas fezes, peritonite e choque quando já há necrose. Crônica: "angina mesentérica" (dor pós-prandial + medo de comer + emagrecimento).</li>
+        <li><b>Laboratório</b>: <b>lactato ↑</b> e acidose metabólica, leucocitose intensa (&gt; 15–20 mil), amilase/LDH/CPK ↑ — todos <b>tardios e inespecíficos</b>; lactato normal não exclui.</li>
+        <li><b>Diagnóstico</b>: <span class="k2">angio-TC de abdome</span> (1ª escolha, rápida, vê o vaso e a alça); angiografia = padrão-ouro e permite tratamento (trombólise/vasodilatador). USG/RX não fazem o diagnóstico. <b>Não há irritação peritoneal até necrose</b>.</li>
+        <li><b>Conduta</b>: reposição volêmica, <b>anticoagulação com heparina</b>, ATB de amplo espectro (translocação), suspender vasoconstritores, analgesia; revascularização (embolectomia/endovascular) + <b>laparotomia com ressecção</b> de alça necrosada se peritonite/necrose ("second look" em 24–48 h). Mortalidade 50–70%: o que salva é <b>suspeitar cedo</b>.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>7 · HEMORRÁGICO — sangue livre na cavidade</h2>
+      <ul>
+        <li>Causas não traumáticas: <b>gravidez ectópica rota</b> (nº 1 em mulher jovem), <b>aneurisma de aorta abdominal roto</b> (tríade: dor abdominal/lombar + massa pulsátil + hipotensão em homem &gt; 60, tabagista, hipertenso), ruptura espontânea de baço (mononucleose, malária), cisto ovariano hemorrágico, tumor hepático (adenoma, CHC) roto.</li>
+        <li>Quadro: dor difusa + <b>choque hipovolêmico</b> (taquicardia, hipotensão, palidez, sudorese, rebaixamento); irritação peritoneal pode demorar; Kehr; Cullen/Grey-Turner tardios.</li>
+        <li>Diagnóstico: <b>β-hCG</b> em toda mulher fértil; <b>USG à beira-leito (FAST)</b> mostra líquido livre; TC com contraste apenas se estável. Instável com FAST + → <b>cirurgia direto</b>, sem TC.</li>
+        <li>Conduta: 2 acessos calibrosos, reposição/hemoderivados, tipagem, e <b>cirurgia</b> (salpingectomia, esplenectomia, reparo do aneurisma aberto ou endovascular).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>8 · Exames: quem pede o quê — a tabela que resolve metade da APF</h2>
+      <div class="tblwrap"><table>
+        <tr><th>Exame</th><th>É o de escolha para…</th><th>Armadilha</th></tr>
+        <tr><td><b>RX abdome agudo (3 incidências)</b> + tórax PA em pé</td><td><b>Obstrução</b> (níveis hidroaéreos, empilhamento de moedas) · <b>Perfuração</b> (pneumoperitônio) · corpo estranho · fecalito/cálculo radiopaco. Barato, disponível: <b>exame INICIAL</b> na banca da Ana Elisa (Q2 e Q4 da prova)</td><td>Normal não exclui perfuração nem isquemia. Não serve para apendicite, colecistite, diverticulite</td></tr>
+        <tr><td><b>USG de abdome</b></td><td><b>Vias biliares</b> (colelitíase, colecistite: 1º exame sempre — Q11 da prova) · gestante/criança (apendicite) · pelve/ginecológico · líquido livre (FAST) · hidronefrose</td><td>Operador-dependente, gás atrapalha. Não é exame de obstrução, perfuração, diverticulite ou isquemia</td></tr>
+        <tr><td><b>TC de abdome com contraste EV</b></td><td><b>Diverticulite</b> · apendicite no adulto · obstrução (nível, causa, sofrimento) · pancreatite (após 72 h para necrose) · perfuração com RX negativo · hemorrágico estável · abscessos. "Melhor exame" na maioria das síndromes</td><td>Contraste: cuidado com Cr ↑/alergia. Não pedir em instável (vai pro centro cirúrgico). Idoso NÃO é contraindicação (Q10 da APF)</td></tr>
+        <tr><td><b>Angio-TC</b></td><td><b>Isquemia mesentérica</b> · AAA · sangramento ativo</td><td>Pedir de cara quando o perfil é vascular — não "TC simples" nem RX</td></tr>
+        <tr><td><b>CPRE</b></td><td><b>Terapêutica</b>: colangite (drenagem urgente), coledocolitíase confirmada, pancreatite biliar com obstrução/colangite</td><td><b>Não é exame diagnóstico de rotina</b> (Q11-D): invasiva, causa pancreatite. Para diagnosticar → colangioRM ou ecoendoscopia</td></tr>
+        <tr><td><b>Colonoscopia</b></td><td>Após 6–8 semanas de diverticulite; investigação de obstrução colônica <b>estável</b> / neoplasia; descompressão de volvo de sigmoide</td><td><b>Contraindicada na diverticulite aguda</b> e na suspeita de perfuração (Q1 e Q7 da APF)</td></tr>
+        <tr><td><b>Laboratório mínimo</b></td><td>Hemograma, PCR, amilase/lipase, ureia/Cr, Na/K, gasometria + <b>lactato</b>, bilirrubinas/FA/GGT/TGO/TGP, EAS, <b>β-hCG</b>, tipagem, glicemia, coagulograma</td><td>Lactato 6 na Q1 da APF = isquemia até prova em contrário; lactato normal não tranquiliza</td></tr>
+      </table></div>
+      <div class="divg"><b>Divergência que você precisa saber jogar:</b> na prova final (Q4), mulher com peritonite difusa, hipotensa, em uso de diclofenaco — o gabarito oficial da tutora foi <b>"Radiografia em 3 incidências"</b> como exame <u>inicial</u>, não a TC. A lógica da banca: a suspeita é <b>perfuração por AINE</b>, e o primeiro passo diagnóstico barato e rápido é RX procurando pneumoperitônio; TC é o "melhor", mas não o "inicial". Regra para a APF: <span class="hl">se a pergunta for "exame INICIAL" com suspeita de perfuração/obstrução → RX; se for "melhor exame / exame de escolha / confirmação" → TC (com contraste) ou angio-TC no vascular</span>. Na diverticulite e na isquemia a própria APF já pediu TC direto.</div>
+    </div>
+
+    <div class="panel">
+      <h2>9 · Sequência diagnóstica e conduta inicial (roteiro para descritiva)</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect x="0" y="0" width="700" height="300" fill="#0f1a24" rx="12"/>
+          <g font-size="11.5" fill="#e8eef5">
+            <rect x="15" y="20" width="130" height="58" rx="9" fill="#12324a" stroke="#2a4d7a"/><text x="80" y="42" text-anchor="middle" font-weight="700">1 · ABC + monitor</text><text x="80" y="58" text-anchor="middle" font-size="10.5" fill="#cdd9e6">acesso, volume, SSVV,</text><text x="80" y="71" text-anchor="middle" font-size="10.5" fill="#cdd9e6">analgesia NÃO atrasa</text>
+            <rect x="165" y="20" width="130" height="58" rx="9" fill="#12324a" stroke="#2a4d7a"/><text x="230" y="42" text-anchor="middle" font-weight="700">2 · Anamnese + EF</text><text x="230" y="58" text-anchor="middle" font-size="10.5" fill="#cdd9e6">início, caráter, migração,</text><text x="230" y="71" text-anchor="middle" font-size="10.5" fill="#cdd9e6">cirurgias, AINE, FA, toque retal</text>
+            <rect x="315" y="20" width="130" height="58" rx="9" fill="#12324a" stroke="#2a4d7a"/><text x="380" y="42" text-anchor="middle" font-weight="700">3 · Laboratório</text><text x="380" y="58" text-anchor="middle" font-size="10.5" fill="#cdd9e6">HMG, PCR, lipase, função</text><text x="380" y="71" text-anchor="middle" font-size="10.5" fill="#cdd9e6">renal, lactato, β-hCG, EAS</text>
+            <rect x="465" y="20" width="220" height="58" rx="9" fill="#12324a" stroke="#2a4d7a"/><text x="575" y="42" text-anchor="middle" font-weight="700">4 · Imagem dirigida à hipótese</text><text x="575" y="58" text-anchor="middle" font-size="10.5" fill="#cdd9e6">RX (obstr/perf) · USG (biliar/pelve/gestante)</text><text x="575" y="71" text-anchor="middle" font-size="10.5" fill="#cdd9e6">TC c/ contraste (o resto) · angio-TC (vascular)</text>
+            <line x1="145" y1="49" x2="163" y2="49" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar)"/>
+            <line x1="295" y1="49" x2="313" y2="49" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar)"/>
+            <line x1="445" y1="49" x2="463" y2="49" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar)"/>
+            <line x1="350" y1="78" x2="350" y2="108" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar)"/>
+            <rect x="200" y="110" width="300" height="40" rx="9" fill="#2b2113" stroke="#6a5a26"/><text x="350" y="128" text-anchor="middle" font-weight="700" fill="#ffe1ad">INSTÁVEL (choque) + peritonite / FAST+ / pneumoperitônio?</text><text x="350" y="143" text-anchor="middle" font-size="10.5" fill="#ffe1ad">→ centro cirúrgico SEM esperar TC</text>
+            <line x1="350" y1="150" x2="350" y2="178" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar)"/>
+            <text x="362" y="170" text-anchor="start" font-size="10.5" fill="#9fb2c6">se estável ↓</text>
+            <rect x="15" y="185" width="205" height="95" rx="9" fill="#123326" stroke="#1f5a41"/><text x="117" y="205" text-anchor="middle" font-weight="700" fill="#8fe4d2">CLÍNICO</text><text x="117" y="222" text-anchor="middle" font-size="10.5" fill="#d9f2e6">pancreatite · diverticulite simples</text><text x="117" y="236" text-anchor="middle" font-size="10.5" fill="#d9f2e6">bridas sem sofrimento (SNG)</text><text x="117" y="250" text-anchor="middle" font-size="10.5" fill="#d9f2e6">cólica biliar · íleo paralítico</text><text x="117" y="264" text-anchor="middle" font-size="10.5" fill="#d9f2e6">colecistite → ATB e opera precoce</text>
+            <rect x="245" y="185" width="205" height="95" rx="9" fill="#101f2b" stroke="#244a5c"/><text x="347" y="205" text-anchor="middle" font-weight="700" fill="#93cbe0">ENDOSCÓPICO / RADIOLÓGICO</text><text x="347" y="222" text-anchor="middle" font-size="10.5" fill="#cfe4f5">colangite → CPRE urgente</text><text x="347" y="236" text-anchor="middle" font-size="10.5" fill="#cfe4f5">abscesso → drenagem percutânea</text><text x="347" y="250" text-anchor="middle" font-size="10.5" fill="#cfe4f5">volvo sigmoide → descompressão</text><text x="347" y="264" text-anchor="middle" font-size="10.5" fill="#cfe4f5">colecistostomia se grave/não cirúrgico</text>
+            <rect x="475" y="185" width="210" height="95" rx="9" fill="#3a1f23" stroke="#6f2f36"/><text x="580" y="205" text-anchor="middle" font-weight="700" fill="#ff9ea6">CIRÚRGICO</text><text x="580" y="222" text-anchor="middle" font-size="10.5" fill="#ffd0d4">perfurativo · hemorrágico</text><text x="580" y="236" text-anchor="middle" font-size="10.5" fill="#ffd0d4">apendicite · estrangulamento</text><text x="580" y="250" text-anchor="middle" font-size="10.5" fill="#ffd0d4">isquemia com necrose/peritonite</text><text x="580" y="264" text-anchor="middle" font-size="10.5" fill="#ffd0d4">diverticulite Hinchey III–IV</text>
+          </g>
+        </svg>
+        <div class="cap">Sequência que a descritiva pede ("desde a admissão até a definição etiológica") e o destino final por síndrome.</div>
+      </div>
+      <p><b>Prescrição inicial padrão do abdome agudo</b> (serve para qualquer item "conduta inicial"): 1) dieta zero · 2) acesso venoso + SF/RL para normovolemia · 3) analgesia (dipirona ± opioide — <span class="hl">analgesia NÃO mascara o diagnóstico</span>, isso é mito) · 4) antiemético · 5) SNG se vômitos/distensão · 6) ATB EV se foco infeccioso ou perfuração · 7) sonda vesical se choque · 8) exames + imagem · 9) avaliação do cirurgião · 10) profilaxia de TEV. Prova terapêutica de cólica (escopolamina) só na dor visceral sem peritonite.</p>
+    </div>
+
+<div class="panel">
+      <h2>10 · Constipação e obstipação — o que a SP1 traz de "não cirúrgico"</h2>
+      <p class="src">Entra pela conferência de Saúde da Criança e pela Farmaco (laxantes — já no guia da Vânia). Na prova final foi o <b>terreno</b> de diverticulite (Q1) e fecaloma (Q2).</p>
+      <ul>
+        <li><b>Roma IV</b>: ≥ 2 de {&lt; 3 evacuações/sem, esforço, Bristol 1–2, evacuação incompleta, manobras manuais} em ≥ 25% por ≥ 3 meses. Primária (funcional) × secundária (opioide, anticolinérgico, hipotireoidismo, DM, Chagas, neoplasia).</li>
+        <li><b>Alarme → colonoscopia</b>: início &gt; 50 a, sangue/anemia, perda de peso, fezes em fita, história familiar de CCR.</li>
+        <li><b>Complicações</b>: fecaloma (toque retal/Gersuny → desimpactação manual + enema), megacólon, úlcera estercoral, volvo de sigmoide, cólon catártico por abuso de laxante.</li>
+        <li><b>Escada</b>: fibras 25–30 g + líquido + hábito (sentar após refeição) → psyllium → <b>PEG (1ª escolha, seguro crônico e na gravidez)</b> / lactulose → estimulante (bisacodil, sene) curto → biofeedback/prucaloprida.</li>
+        <li><b>Criança</b>: 95% funcional (retenção pós-dor, desfralde). Desimpactação PEG 1–1,5 g/kg/d 3–6 dias → manutenção 0,4–0,8 g/kg/d por meses. Hirschsprung: mecônio &gt; 48 h, ampola vazia, déficit de crescimento.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>11 · As 15 pegadinhas desta SP — leia 2 vezes</h2>
+      <ul>
+        <li>① FA sem anticoagulação + dor súbita desproporcional + lactato ↑ + abdome flácido = <b>isquemia mesentérica → angio-TC</b>, não laparotomia às cegas nem colonoscopia.</li>
+        <li>② Ar livre subdiafragmático no usuário de AINE = <b>laparotomia de urgência</b>, não IBP + observação, e não "TC para confirmar".</li>
+        <li>③ Colecistite = <b>ATB + colecistectomia precoce (mesma internação)</b>; não "só ATB", não CPRE.</li>
+        <li>④ HD + febre + icterícia (+ hipotensão) = <b>colangite → CPRE urgente</b>; colecistectomia só depois.</li>
+        <li>⑤ Critério de gravidade na pancreatite = <b>hipotensão/falência orgânica</b>, nunca a dor nem o valor da lipase.</li>
+        <li>⑥ Obstrução: <b>dor contínua (não em cólica)</b>, febre, peritonite, lactato = estrangulamento → cirurgia. Distensão e vômito são da tríade, não de gravidade.</li>
+        <li>⑦ Idoso, QIE, febre, massa = diverticulite → <b>TC com contraste</b>; colonoscopia é proibida na fase aguda.</li>
+        <li>⑧ Dor no HD pós-gordura, 2 h, melhora sozinha, sem febre = <b>cólica biliar</b>, não colecistite (&gt; 6 h, febre, Murphy).</li>
+        <li>⑨ Jobert = perda da macicez hepática = pneumoperitônio. Não confundir com Murphy (colecistite), Blumberg (peritonite), Cullen (pancreatite/hemorrágico).</li>
+        <li>⑩ Idoso: apresentação <b>atípica e inflamação menos exuberante</b>; TC é segura; apendicite é mais comum no jovem.</li>
+        <li>⑪ "Exame inicial" na suspeita de obstrução/perfuração = <b>RX de abdome agudo</b>; "melhor exame" = TC.</li>
+        <li>⑫ CPRE é <b>terapêutica</b>; colangioRM/ecoendoscopia diagnosticam. USG é sempre o 1º exame das vias biliares.</li>
+        <li>⑬ Pancreatite: dieta precoce, sem ATB profilático, colecistectomia na mesma internação se biliar leve.</li>
+        <li>⑭ Bridas sem sofrimento: <b>conservador (SNG, jejum, volume, analgesia) por 48–72 h</b>; falha ou sinal de sofrimento → laparotomia.</li>
+        <li>⑮ Mulher em idade fértil com dor abdominal: <b>β-hCG antes da TC</b>. Instável com FAST positivo: cirurgia sem TC.</li>
+      </ul>
+    </div>
+
+  </section>
+  <section id="quizsec">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">30</span></span><div class="bar"><i id="fill"></i></div><button class="btn" onclick="resetQuiz()">Zerar</button></div>
+    <div class="note" style="margin-top:0"><b>Modo simulado:</b> a APF real tem 10 questões A–D em ~40 min. Sugestão: faça primeiro as <b>Q1–Q10 (APF real 2026.1)</b> cronometrando 30 min sem olhar o resumo; depois as <b>Q11–Q17 (prova final)</b> e as <b>Q18–Q30 (inéditas)</b>, que sobem de nível (INCORRETA, proposições, A–E). A descritiva no fim é a 1ª questão discursiva da prova final da veterana, com roteiro de correção.</div>
+    <div class="chips" id="chips"></div>
+    <div id="quiz"></div>
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D</div><span class="pill d">Descritiva · prova final real (29/04/2026)</span><span class="pill o">Abdome agudo obstrutivo · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Paciente feminina, 64 anos, com antecedente de histerectomia total há 15 anos, dá entrada no pronto atendimento com quadro de dor abdominal há 3 dias. Refere dor abdominal em cólica, difusa, de intensidade progressiva, associada a distensão abdominal importante, náuseas e vômitos inicialmente alimentares, evoluindo para biliosos nas últimas 24 horas. Relata parada de eliminação de fezes e flatos há 48 horas. Ao exame físico: desidratada (++/4+); PA 100×60 mmHg; FC 105 bpm; Temp 37,5 °C. Abdome distendido, timpânico, doloroso difusamente. Ruídos hidroaéreos aumentados, metálicos. Sem sinais claros de irritação peritoneal. Toque retal: ampola vazia. Exames: leucócitos 14.200/mm³; ureia 68 mg/dL; creatinina 1,5 mg/dL; sódio 130 mEq/L; potássio 3,1 mEq/L; lactato 2,2 mmol/L. Radiografia de abdome (ortostase e decúbito): distensão de alças de intestino delgado, múltiplos níveis hidroaéreos "em escada", ausência de gás distal. TC de abdome com contraste: dilatação de alças de delgado (&gt; 3 cm), transição abrupta em região de íleo distal, presença de "sinal do bico", sem pneumoperitônio.</span>
+        <b>a)</b> Qual o diagnóstico sindrômico e a principal hipótese etiológica? Justifique. <b>(20)</b>
+        <br><b>b)</b> Descreva a sequência diagnóstica ideal para um paciente com suspeita de abdome agudo, desde a admissão até a definição etiológica. <b>(20)</b>
+        <br><b>c)</b> Quais são os principais diagnósticos diferenciais que devem ser considerados neste caso e quais achados clínicos ajudam a afastá-los? <b>(20)</b>
+        <br><b>d)</b> Explique o papel dos exames de imagem neste caso, comparando radiografia, ultrassonografia e tomografia. <b>(20)</b>
+        <br><b>e)</b> Discuta os critérios que permitem optar por tratamento conservador e os fatores que predizem falha desse tratamento. <b>(20)</b>
+      </div>
+      <button class="btn" onclick="document.getElementById('rot').style.display=(document.getElementById('rot').style.display==='block'?'none':'block')">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Abdome agudo obstrutivo</b> de <b>intestino delgado (obstrução alta/baixa do delgado, mecânica, completa)</b> (6) · etiologia: <b>bridas/aderências pós-operatórias</b> — causa nº 1 de obstrução de delgado no adulto; a histerectomia é a cirurgia pélvica que gera aderências no íleo distal (6) · justificar com: tríade (cólica + distensão + parada de flatos/fezes), vômitos que progridem para biliosos (obstrução do delgado), RHA metálicos (fase de luta), ampola vazia, níveis em escada sem gás distal, transição abrupta com "sinal do bico" em íleo distal na TC (8). A veterana escreveu só "obstrutivo por aderência/brida após histerectomia" e levou nota parcial — <b>justifique com os achados</b>.</td><td>20</td></tr>
+          <tr><td><b>b</b></td><td>1) <b>Estabilização</b>: acesso venoso, volume, monitorização (PA 100×60, FC 105, desidratada) e <b>analgesia precoce</b> (não mascara) (4) · 2) <b>anamnese dirigida</b> (início/caráter/migração, cirurgias prévias, hábito intestinal, AINE, cardiopatia) + <b>exame físico completo com toque retal e orifícios herniários</b> (4) · 3) <b>laboratório</b>: hemograma, PCR, eletrólitos, função renal, gasometria + lactato, amilase/lipase, hepatograma, EAS, β-hCG se fértil, tipagem (4) · 4) <b>imagem escalonada</b>: RX de abdome agudo (3 incidências) como inicial → USG se hipótese biliar/pélvica → <b>TC com contraste</b> para definir nível, causa e sofrimento de alça (5) · 5) avaliação do cirurgião, reavaliação seriada e definição clínico × cirúrgico (3). A veterana citou tudo mas fora de ordem e sem estabilização — a banca quer <b>sequência</b>.</td><td>20</td></tr>
+          <tr><td><b>c</b></td><td><b>Íleo paralítico/adinâmico</b>: afastado pela cólica, RHA metálicos e ponto de transição (gás no cólon estaria presente) (4) · <b>hérnia encarcerada</b>: afastada pelo exame dos orifícios herniários (4) · <b>obstrução colônica</b> (neoplasia, volvo de sigmoide): afastada pela distensão central de delgado com válvulas coniventes e ausência de gás colônico + transição em íleo (4) · <b>isquemia mesentérica</b>: sem FA, lactato só discretamente elevado, dor em cólica e não desproporcional (3) · <b>apendicite/diverticulite/peritonite</b>: sem irritação peritoneal, febre baixa (3) · <b>gravidez ectópica</b>: histerectomia/idade (2). Citar ao menos 4 diferenciais com o achado que afasta cada um.</td><td>20</td></tr>
+          <tr><td><b>d</b></td><td><b>RX abdome agudo</b>: inicial, rápido, barato; mostra distensão de delgado, níveis hidroaéreos "em escada" (ortostase), "empilhamento de moedas" (decúbito), ausência de gás distal, e exclui pneumoperitônio (tórax em pé); sensibilidade ~70%, não mostra causa nem sofrimento (7) · <b>USG</b>: papel limitado na obstrução (gás atrapalha); útil para líquido livre, vesícula, pelve, gestante/criança e para alças dilatadas com peristalse "de vaivém"; operador-dependente (5) · <b>TC com contraste EV</b>: <b>exame de escolha</b> — confirma, mostra nível (transição abrupta, "sinal do bico"), causa (brida = transição sem massa), grau (completa × parcial), sinais de sofrimento (espessamento, pneumatose, ausência de realce, líquido livre, gás portal) e complicações; sensibilidade &gt; 90% (8). A veterana escreveu que a USG "mostra fezes impactadas" — errado.</td><td>20</td></tr>
+          <tr><td><b>e</b></td><td><b>Conservador</b> se: obstrução <b>parcial</b> ou completa <b>sem sinais de sofrimento</b>, por bridas, paciente estável, sem peritonite, sem febre/leucocitose intensa, lactato normal ou pouco alterado → <b>jejum + SNG em sifonagem + hidratação venosa com correção de K/Na + analgesia + reavaliação clínica seriada (6/6 h) por 48–72 h</b>; contraste hidrossolúvel VO pode ser diagnóstico e terapêutico (10) · <b>Falha / cirurgia</b>: sem melhora em 48–72 h (SNG com débito alto, sem flatos, RX sem progressão do contraste ao cólon em 24 h), <b>dor que vira contínua</b>, irritação peritoneal, febre, taquicardia persistente, leucocitose crescente, <b>acidose/lactato ↑</b>, instabilidade, sinais tomográficos de estrangulamento/alça fechada, obstrução completa em virgem de cirurgia (não é brida!), hérnia encarcerada (10). A veterana respondeu "conservador com analgesia, volume e SNG; falha se dor persistir, choque ou desidratação severa" — faltou <b>tempo (48–72 h)</b> e os <b>critérios de estrangulamento</b>.</td><td>20</td></tr>
+        </table></div>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto · 60–79 = revisar seções 5, 8 e 9 do resumo · &lt; 60 = refazer o resumo + flashcards antes de reatacar. Escreva de verdade, em itens, com os achados do caso — a Ana Elisa corrige item a item e desconta resposta sem justificativa.</div>
+      </div>
+    </div>
+  
+  </section>
+  <section id="mapa"><div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+
+      <details open><summary>🧭 Abdome agudo — definição e regra de ouro</summary><ul>
+        <li>Dor abdominal não traumática, súbita/progressiva, &lt; 7 dias (geralmente &lt; 48 h), exige decisão rápida</li>
+        <li>Dor ≥ 6 h persistente → cirúrgico até prova em contrário · nem todo abdome agudo é cirúrgico</li>
+        <li>5 síndromes: inflamatório · perfurativo · obstrutivo · vascular · hemorrágico</li>
+        <li>Sempre: ABC → anamnese/EF (toque retal, hérnias) → lab (lactato, β-hCG) → imagem dirigida → cirurgião</li>
+      </ul></details>
+
+      <details><summary>🔥 Inflamatório</summary><ul>
+        <li><b>Apendicite</b>: periumbilical → FID; Blumberg/Rovsing/psoas; clínico ± USG (criança/gestante)/TC (adulto); apendicectomia + ATB</li>
+        <li><b>Colecistite</b>: HD &gt; 6 h, febre, Murphy; USG (parede &gt; 3–4 mm, líquido perivesicular); ATB + colecistectomia &lt; 72 h; grave → colecistostomia</li>
+        <li><b>Cólica biliar</b>: pós-gordura, &lt; 6 h, some sozinha, sem febre; USG; colecistectomia eletiva</li>
+        <li><b>Colangite</b>: Charcot (dor + febre/calafrio + icterícia) → Reynolds (+ hipotensão + confusão); ATB + CPRE urgente</li>
+        <li><b>Pancreatite</b>: 2 de 3 (dor, enzima ≥ 3×, imagem); lipase &gt; amilase; gravidade = falência orgânica (hipotensão, oligúria, BUN ↑, Hct ↑); clínico: RL, analgesia, dieta precoce, sem ATB; biliar → colecistectomia mesma internação; colangite → CPRE</li>
+        <li><b>Diverticulite</b>: idoso, FIE, febre, massa; TC com contraste; colonoscopia proibida na fase aguda (6–8 sem depois); Hinchey I–II clínico/drenagem, III–IV cirurgia</li>
+      </ul></details>
+
+      <details><summary>💥 Perfurativo</summary><ul>
+        <li>Úlcera péptica (AINE/H. pylori), diverticulite, neoplasia, corpo estranho, febre tifoide, colonoscopia</li>
+        <li>Dor súbita "em punhalada" → difusa em minutos; abdome em tábua; RHA abolidos; <b>Jobert +</b></li>
+        <li>RX tórax PA em pé / abdome ortostático: pneumoperitônio (5–10 mL); normal não exclui; TC vê sempre</li>
+        <li>Jejum, SNG, volume, ATB amplo, IBP EV → <b>laparotomia de urgência</b></li>
+      </ul></details>
+
+      <details><summary>🧱 Obstrutivo</summary><ul>
+        <li>Tríade: cólica + distensão + parada de gases/fezes · vômitos biliosos (alta) → fecaloides (baixa) · RHA metálicos → abolidos</li>
+        <li>Delgado: bridas (nº 1) · hérnia (nº 2) · neoplasia · Crohn · intussuscepção · íleo biliar · áscaris | Cólon: câncer (nº 1) · volvo sigmoide · diverticulite · fecaloma</li>
+        <li>RX 3 incidências (inicial): níveis em escada, empilhamento de moedas, sem gás distal · TC com contraste (melhor): nível, causa, sofrimento</li>
+        <li>Estrangulamento: dor contínua, febre, peritonite, leucocitose, lactato/acidose, alça fechada → cirurgia</li>
+        <li>Bridas sem sofrimento: jejum + SNG + volume/K + analgesia + reavaliação por 48–72 h (70–80% resolvem)</li>
+        <li>Íleo paralítico: sem cólica, RHA ↓ desde o início, gás em delgado E cólon/reto; tratar a causa (opioide, K, sepse)</li>
+        <li>Fecaloma: toque retal (Gersuny) → desimpactação manual + enema</li>
+      </ul></details>
+
+      <details><summary>🩸 Vascular (isquemia mesentérica)</summary><ul>
+        <li>FA sem anticoagulação (embolia AMS), aterosclerose (trombose), baixo fluxo (não oclusiva), trombose venosa (trombofilia, cirrose)</li>
+        <li>Dor súbita desproporcional ao exame (abdome flácido); depois sangue nas fezes, peritonite, choque</li>
+        <li>Lactato ↑, acidose, leucocitose — tardios; angio-TC = 1ª escolha; angiografia = padrão-ouro</li>
+        <li>Volume, heparina, ATB, suspender vasopressor; revascularização + ressecção de necrose; second look</li>
+      </ul></details>
+
+      <details><summary>🆘 Hemorrágico</summary><ul>
+        <li>Ectópica rota (β-hCG!), AAA roto (dor + massa pulsátil + hipotensão), baço, cisto ovariano, tumor hepático</li>
+        <li>Dor difusa + choque hipovolêmico; Kehr; Cullen/Grey-Turner tardios</li>
+        <li>FAST à beira-leito; TC só se estável; instável + FAST + → cirurgia direto</li>
+      </ul></details>
+
+      <details><summary>🔬 Exames — quem pede o quê</summary><ul>
+        <li>RX abdome agudo + tórax PA em pé: obstrução, perfuração (inicial)</li>
+        <li>USG: vias biliares (1º sempre), gestante/criança, pelve, FAST</li>
+        <li>TC com contraste: diverticulite, apendicite adulto, obstrução, pancreatite (necrose &gt; 72 h), perfuração com RX negativo</li>
+        <li>Angio-TC: isquemia mesentérica, AAA</li>
+        <li>CPRE: terapêutica (colangite, coledocolitíase) — não é diagnóstico de rotina</li>
+        <li>Colonoscopia: nunca na diverticulite aguda; após 6–8 semanas</li>
+      </ul></details>
+
+      <details><summary>👴 Idoso e especiais</summary><ul>
+        <li>Idoso: atípico, inflamação menos exuberante, sem febre/leucocitose, mais causas graves; TC segura</li>
+        <li>Gestante: apendicite nº 1; USG → RM; ectópica antes de tudo</li>
+        <li>Imunossuprimido: peritonite silenciosa; imagem precoce</li>
+        <li>Criança: intussuscepção, Meckel, volvo de intestino médio</li>
+      </ul></details>
+
+      <details><summary>🚽 Constipação</summary><ul>
+        <li>Roma IV; primária × secundária (opioide, hipotireoidismo, Chagas, neoplasia)</li>
+        <li>Alarme: &gt; 50 anos início recente, sangue/anemia, perda de peso, fezes em fita, história familiar → colonoscopia</li>
+        <li>Complicações: fecaloma, megacólon, úlcera estercoral, volvo, cólon catártico</li>
+        <li>Escada: fibras/líquido/hábito → formadores de massa → PEG (1ª escolha) / lactulose → estimulantes curto prazo → amaciantes → biofeedback/prucaloprida</li>
+        <li>Criança: 95% funcional; PEG desimpactação 1–1,5 g/kg/d → manutenção 0,4–0,8 g/kg/d; alarme = Hirschsprung</li>
+      </ul></details>
+
+    </div></div></section>
+  <section id="flash"><div class="panel"><h2>Flashcards — clique para virar</h2><p class="src">Um fato por cartão. A pergunta fica visível no verso.</p><div class="fcgrid" id="fcbox"></div></div></section>
+  <div class="foot">UC14 · SP1 — Abdome agudo · v2 (sem Feynman, resumo enxuto) · 14/09/2026 · APF 16/09 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+const QS=[
+ /* ===== APF REAL SP1 (01/04/2026) ===== */
+ {src:"APF", obj:"Vascular", stem:"<span class='cx'>Homem, 72 anos, fibrilação atrial, sem anticoagulação, apresenta dor abdominal súbita, difusa, intensa, iniciada há 3 horas. Refere náuseas, sem vômitos. Ao exame: abdome flácido, pouco doloroso. Lactato: 6,0 mmol/L.</span> Qual a melhor conduta inicial?",
+  opts:["Laparotomia exploradora imediata","Angio-TC","Colonoscopia","Antibioticoterapia isolada"], ans:1,
+  why:"FA sem anticoagulação + dor súbita desproporcional ao exame (abdome flácido) + lactato 6 = isquemia mesentérica aguda por embolia da a. mesentérica superior até prova em contrário. O exame que confirma e guia a revascularização é a angio-TC. Laparotomia direta só se peritonite/instabilidade (aqui não há); colonoscopia e ATB isolado não fazem diagnóstico.",
+  trap:"'Muita dor, pouco exame' é a assinatura do vascular. A alternativa A seduz porque 'é grave' — mas grave e sem peritonite = imagem primeiro. Q1 da APF real: a veterana acertou."},
+
+ {src:"APF", obj:"Perfurativo", stem:"<span class='cx'>Paciente de 58 anos, usuário crônico de AINE, apresenta dor súbita epigástrica intensa, seguida de dor difusa. Ao exame: abdome em tábua. RX de tórax: ar livre subdiafragmático.</span> Qual a conduta?",
+  opts:["IBP e observação","Antibiótico e alta","Laparotomia de urgência","TC para confirmação"], ans:2,
+  why:"Úlcera péptica perfurada: AINE + dor súbita epigástrica que difunde + abdome em tábua + pneumoperitônio no RX. Diagnóstico já está fechado — a conduta é jejum, SNG, volume, ATB, IBP EV e laparotomia/laparoscopia de urgência (rafia + patch de omento).",
+  trap:"'TC para confirmação' é a casca de banana: com ar livre no RX e peritonite, não se atrasa cirurgia para confirmar o que já está confirmado. IBP trata a úlcera, não a perfuração."},
+
+ {src:"APF", obj:"Inflamatório · vias biliares", stem:"<span class='cx'>Paciente com dor em hipocôndrio direito há 36 h, febre, leucocitose e USG mostrando vesícula distendida com parede espessada.</span> Melhor conduta:",
+  opts:["Alta com analgésico","Antibioticoterapia + colecistectomia precoce","Apenas antibiótico","CPRE"], ans:1,
+  why:"Colecistite aguda calculosa (dor > 6 h + febre + leucocitose + USG com parede espessada). Tratamento = ATB (cobrir enterobactérias) + colecistectomia videolaparoscópica precoce, idealmente nas primeiras 72 h, na mesma internação. 'Só ATB' deixa a vesícula gangrenar; CPRE é para colédoco/colangite.",
+  trap:"Alternativa D é o isca para quem confunde vesícula (cístico) com via biliar principal (colédoco). Sem icterícia e sem colédoco dilatado → não é colangite → não é CPRE."},
+
+ {src:"APF", obj:"Inflamatório · colangite", stem:"<span class='cx'>Paciente com dor em HD, febre e icterícia. Evoluiu com hipotensão.</span> Qual o próximo passo?",
+  opts:["Colecistectomia imediata","CPRE urgente","TC com contraste","Alta"], ans:1,
+  why:"Tríade de Charcot (dor HD + febre + icterícia) evoluindo com hipotensão = pêntade de Reynolds = colangite aguda grave (supurativa). O que mata é a via biliar obstruída e infectada sob pressão: ATB EV + descompressão biliar URGENTE por CPRE (esfincterotomia + extração de cálculo/prótese). Colecistectomia vem depois de estabilizar.",
+  trap:"Foi exatamente a questão que a veterana errou (marcou colecistectomia). Icterícia + febre = colédoco, não vesícula. TC atrasaria a drenagem num paciente já hipotenso."},
+
+ {src:"APF", obj:"Inflamatório · pancreatite", stem:"<span class='cx'>Homem, 50 anos, dor epigástrica irradiada para dorso, lipase 3× o normal. PA 90×60 mmHg.</span> Critério de gravidade presente:",
+  opts:["Dor","Lipase","Hipotensão","Náusea"], ans:2,
+  why:"Pancreatite aguda confirmada (dor típica + lipase ≥ 3×). Gravidade é definida por falência orgânica (Atlanta) — hipotensão/choque, insuficiência respiratória, renal. A intensidade da dor e o valor da enzima NÃO se correlacionam com gravidade; náusea é sintoma universal.",
+  trap:"A banca coloca 'Lipase' porque o aluno acha que 3× é 'muito'. O valor da enzima serve para diagnóstico, nunca para prognóstico — frase-lei."},
+
+ {src:"APF", obj:"Obstrutivo · estrangulamento", stem:"<span class='cx'>Paciente com distensão abdominal, vômitos e parada de eliminação de gases. RX: níveis hidroaéreos.</span> Qual fator sugere gravidade?",
+  opts:["Distensão","Vômitos","Dor contínua e não em cólica","Náuseas"], ans:2,
+  why:"Obstrução intestinal mecânica (tríade + níveis hidroaéreos). Distensão, vômitos e náuseas fazem parte de QUALQUER obstrução. O que muda o prognóstico é o sinal de sofrimento de alça (estrangulamento): dor que deixa de ser em cólica e vira contínua e intensa, junto com febre, taquicardia, irritação peritoneal, leucocitose e acidose/lactato.",
+  trap:"A veterana errou esta também. Guarde: cólica = alça lutando (ok); contínua = alça isquemiando (opera)."},
+
+ {src:"APF", obj:"Inflamatório · diverticulite", stem:"<span class='cx'>Idoso com dor em QIE, febre e massa palpável.</span> Exame de escolha:",
+  opts:["USG","RX","TC com contraste","Colonoscopia"], ans:2,
+  why:"Diverticulite aguda ('apendicite do lado esquerdo'): idoso, FIE/QIE, febre, massa (plastrão/abscesso). O exame de escolha é a TC de abdome com contraste — confirma, estadia (Hinchey) e guia drenagem. USG é operador-dependente e o gás atrapalha; RX só afasta perfuração.",
+  trap:"Colonoscopia na diverticulite AGUDA é contraindicada (insuflação → perfuração). Ela entra 6–8 semanas depois, para excluir neoplasia."},
+
+ {src:"APF", obj:"Cólica biliar × colecistite", stem:"<span class='cx'>Mulher, 40 anos, dor em HD desencadeada por alimentação gordurosa, duração de 2 horas, melhora espontânea.</span> Qual diagnóstico a pensar?",
+  opts:["Colecistite","Cólica biliar","Pancreatite","Hepatite"], ans:1,
+  why:"Cólica biliar = cálculo impacta transitoriamente no cístico após refeição gordurosa (CCK contrai a vesícula), dor de 30 min a poucas horas que resolve sozinha, sem febre, sem Murphy persistente, leucograma normal. Colecistite exigiria dor > 6 h + febre + leucocitose. Conduta: USG → colecistectomia eletiva.",
+  trap:"'Melhora espontânea em 2 h' é a palavra-chave que exclui colecistite. Pancreatite irradiaria para o dorso e não passaria em 2 h; hepatite não dá dor em cólica pós-gordura."},
+
+ {src:"APF", obj:"Semiologia · Jobert", stem:"O sinal de Jobert é um achado semiológico crítico no abdome agudo. O que ele indica e em qual síndrome é mais comum?",
+  opts:["Perda da macicez hepática, indicando pneumoperitônio na síndrome perfurativa","Dor à descompressão brusca no ponto de McBurney, indicando apendicite","Equimose periumbilical, indicando pancreatite hemorrágica","Interrupção da inspiração à palpação do ponto cístico, indicando colecistite"], ans:0,
+  why:"Jobert = timpanismo à percussão sobre a área hepática (o ar livre se interpõe entre o fígado e a parede) = pneumoperitônio = abdome agudo perfurativo. B descreve Blumberg, C descreve Cullen, D descreve Murphy.",
+  trap:"Questão de 'troca de nomes' — a banca adora. Monte a tabela mental: Jobert-perfuração · Murphy-vesícula · Blumberg-peritonite · Cullen/Grey-Turner-pancreatite grave ou hemoperitônio · Gersuny-fecaloma · Kehr-baço."},
+
+ {src:"APF", obj:"Idoso", stem:"Em pacientes idosos (> 60 anos), qual característica do abdome agudo torna o diagnóstico especialmente desafiador?",
+  opts:["A dor ser sempre de intensidade máxima desde o início. Pelo contrário, a sensibilidade dolorosa diminuída em idosos pode mascarar a gravidade do quadro.","A impossibilidade de realizar tomografia computadorizada nessa faixa etária. A TC é segura e frequentemente necessária em idosos, não havendo contraindicação absoluta pela idade.","A incidência de apendicite ser maior do que em jovens. Embora ocorra, a apendicite é estatisticamente mais comum em indivíduos jovens.","Apresentação clínica frequentemente atípica e sinais inflamatórios menos exuberantes."], ans:3,
+  why:"No idoso a dor é vaga e subestimada, há menos febre e leucocitose, menos defesa mesmo com peritonite, comorbidades e demência atrapalham a história — e a proporção de causas graves (isquemia, AAA, câncer obstrutivo) é maior. Por isso: limiar baixo para TC e internação.",
+  trap:"A própria questão já 'refuta' A, B e C no texto — leia a alternativa inteira. Na prova real isso vem sem a explicação: idade NÃO contraindica TC; apendicite é do jovem; dor no idoso é MENOR, não maior."},
+
+ /* ===== PROVA FINAL DA TUTORIA (29/04/2026) — questões da SP1 ===== */
+ {src:"Prova", obj:"Inflamatório · diverticulite", stem:"<span class='cx'>Uma paciente de 64 anos chega ao pronto-socorro com queixa de 2 dias de dor no quadrante inferior esquerdo do abdome, febre e diarreia, além de náuseas e vômitos. Ela nega viagens recentes e uso de antibióticos. Ela admite muitos anos de obstipação e uso intermitente de laxantes. Sua história patológica pregressa é notável por hipertensão arterial. Os achados notáveis no exame físico são temperatura de 37,6 °C e frequência cardíaca de 105 bpm. O exame cardíaco mostra taquicardia regular e sopro mesossistólico (2+/6+). O abdome dela está flácido, com dor à palpação do quadrante inferior esquerdo do abdome. Não há distensão nem descompressão dolorosa. No toque retal, não há fezes na abóbada retal e nem algum sinal de sangramento, mas ela tem hemorroidas internas palpáveis.</span> O diagnóstico mais provável é:",
+  opts:["Diverticulite colônica aguda","Divertículo de Meckel","Colite de Crohn","Intussuscepção colônica"], ans:0,
+  why:"Idosa + constipação crônica (terreno da doença diverticular) + dor em QIE + febre + leucocitose presumida + sem peritonite difusa = diverticulite não complicada. Meckel é do jovem e sangra (ou obstrui); Crohn tem diarreia crônica e história prévia; intussuscepção é da criança ou de adulto com lesão-guia, em cólica intermitente.",
+  trap:"A diarreia é distrator: diverticulite pode dar diarreia por irritação do sigmoide. O que fecha é a TOPOGRAFIA (QIE) + idade + constipação."},
+
+ {src:"Prova", obj:"Obstrutivo · exame inicial", stem:"<span class='cx'>Um homem de 82 anos é encaminhado ao pronto-socorro de uma casa de repouso. Queixa-se de distensão abdominal e obstipação progressiva. Ele não elimina flatos nem fezes há 2 dias. Sua história é notável por demência e um acidente vascular encefálico anterior. Ele usa laxantes para obstipação há muitos anos. Seus outros medicamentos incluem clopidogrel e AAS. Ao exame físico, você descobre que ele está afebril, com pressão arterial de 155/93 mmHg e taquicardia (110 bpm). O abdome está distendido e timpânico à percussão, com dor difusa à palpação. Os ruídos intestinais são reduzidos. Um pequeno volume de fezes na abóbada retal. Os exames laboratoriais com níveis normais de leucócitos e hemoglobina.</span> O próximo passo é:",
+  opts:["Laparotomia exploratória","Radiografias abdominais","Cintilografia para detecção de hemorragia digestiva","Angiografia mesentérica"], ans:1,
+  why:"Idoso acamado, constipação crônica, distensão timpânica, parada de flatos: pensar em obstrução colônica (fecaloma, volvo de sigmoide, neoplasia) ou pseudo-obstrução (Ogilvie). Sem peritonite, sem leucocitose, estável → o próximo passo é o RX de abdome agudo (mostra distensão colônica, 'grão de café' do volvo, fecaloma). Laparotomia sem diagnóstico não; hemorragia e isquemia não são a hipótese (Hb normal, sem sangue, dor não desproporcional).",
+  trap:"AAS + clopidogrel no enunciado é isca para 'sangramento' (alternativa C). A queixa é obstrutiva, não hemorrágica. E note: a banca usa RX como 'próximo passo', TC como 'melhor exame'."},
+
+ {src:"Prova", obj:"Inflamatório · pancreatite", stem:"<span class='cx'>Homem de 60 anos, etilista, apresenta dor epigástrica intensa irradiada para dorso, associada a vômitos. Exame físico: abdome doloroso em epigástrio, sem sinais de irritação peritoneal. Hemodinamicamente estável. Laboratório: amilase elevada. Após 48 h, evolui com hipotensão, distensão abdominal, oligúria e piora da dor.</span> Qual a melhor interpretação dentro do conceito de abdome agudo?",
+  opts:["Abdome agudo exclusivamente cirúrgico desde o início","Abdome agudo clínico com possível evolução para complicações graves sistêmicas","Abdome agudo perfurativo inicial","Abdome agudo obstrutivo"], ans:1,
+  why:"Pancreatite aguda alcoólica: abdome agudo inflamatório de tratamento CLÍNICO (volume, analgesia, dieta precoce). A evolução com hipotensão + oligúria em 48 h = falência orgânica = pancreatite grave — complicação SISTÊMICA, que continua sendo manejada clinicamente (UTI), não vira 'cirúrgico' por isso. Cirurgia só para necrose infectada tardia ou síndrome compartimental.",
+  trap:"Piorar não significa 'virou cirúrgico'. A distensão é por íleo paralítico/ascite, não obstrução mecânica (alternativa D)."},
+
+ {src:"Prova", obj:"Perfurativo · exame inicial", stem:"<span class='cx'>Uma mulher com 31 anos de idade procurou atendimento de urgência relatando um quadro de dor abdominal de início abrupto, difusa, contínua, intensa, com duração de cerca de seis horas, acompanhada de vômitos. Referiu também que tem utilizado diclofenaco de sódio, 50 mg de 8/8 horas, há aproximadamente um mês, para tratamento de lombalgia. Ao exame físico: frequência cardíaca = 120 bpm, pressão arterial = 90×60 mmHg, temperatura axilar = 38,2 °C. Ao exame do abdome, verifica-se a presença de aumento da tensão da parede abdominal, com dor intensa e difusa à percussão e à palpação superficial, dificultando a palpação profunda. Ruídos hidroaéreos diminuídos.</span> O exame complementar mais indicado para a investigação diagnóstica inicial da paciente é a:",
+  opts:["Tomografia Computadorizada de Abdome","Ressonância Magnética de Abdome","Radiografia em 3 incidências","Ultrassonografia Abdominal Total"], ans:2,
+  why:"AINE por 1 mês + dor súbita difusa contínua + abdome em tábua + RHA ↓ + febre + taquicardia = úlcera perfurada com peritonite. GABARITO OFICIAL DA TUTORA: radiografia de abdome agudo em 3 incidências (ortostase, decúbito e tórax PA em pé) — exame INICIAL, rápido e barato, procurando pneumoperitônio, que já autoriza a laparotomia. RM nunca é urgência; USG não vê ar livre.",
+  trap:"Divergência para você jogar: muitos bancos (e o Goldman) responderiam TC. Nesta banca, 'investigação inicial' = RX; 'melhor exame/confirmação' = TC. Paciente hipotensa e com peritonite tampouco deveria ir ao tomógrafo — vai ao RX na sala e ao centro cirúrgico."},
+
+ {src:"Prova", obj:"Inflamatório · colecistite", stem:"<span class='cx'>Paciente de 63 anos, diabético, internado com colecistite aguda calculosa sem sinais de perfuração ou gangrena, recebe hidratação venosa, analgesia e antibiótico. Ele está hemodinamicamente estável.</span> Qual é a melhor conduta definitiva?",
+  opts:["Colecistectomia videolaparoscópica na mesma internação","Alta hospitalar com antibiótico oral por 14 dias e cirurgia apenas se houver recidiva","Observação clínica isolada, pois a maioria dos casos resolve sem tratamento definitivo","Colecistostomia percutânea como primeira escolha, mesmo sendo bom candidato cirúrgico"], ans:0,
+  why:"Colecistite aguda em paciente estável e operável = colecistectomia videolaparoscópica precoce, na mesma internação (idealmente < 72 h do início). 'Esfriar' com ATB e operar depois aumenta complicações e recidivas. Colecistostomia percutânea é para o grave/não candidato à cirurgia.",
+  trap:"'Diabético' está lá para tentar te empurrar para a colecistostomia (D) — mas ele é bom candidato e estável. Diabético é, na verdade, motivo a MAIS para não postergar (colecistite enfisematosa)."},
+
+ {src:"Prova", obj:"Inflamatório · imagem biliar", stem:"<span class='cx'>Homem de 55 anos chega ao pronto-socorro com dor em hipocôndrio direito há 8 horas, febre e náuseas. O residente suspeita de colecistite aguda calculosa e pergunta qual é o exame de imagem inicial mais apropriado.</span>",
+  opts:["Tomografia computadorizada de abdome com contraste, em todos os casos","Colangiorressonância magnética como primeiro exame","Ultrassonografia abdominal","CPRE diagnóstica de rotina"], ans:2,
+  why:"USG é o primeiro exame de qualquer suspeita biliar: vê cálculo, parede > 3–4 mm, líquido perivesicular, Murphy ultrassonográfico, colédoco dilatado. Sensibilidade > 90% para colelitíase, sem radiação, à beira-leito. TC/colangioRM ficam para dúvida ou complicação; CPRE é terapêutica.",
+  trap:"'CPRE diagnóstica de rotina' é sempre errada — invasiva, causa pancreatite. Se precisar 'ver o colédoco' sem intenção terapêutica: colangioRM ou ecoendoscopia."},
+
+ {src:"Prova", obj:"Inflamatório · colangite", stem:"<span class='cx'>Homem de 68 anos, diabético, procura o pronto-socorro com dor em hipocôndrio direito há 24 horas, febre alta com calafrios e icterícia progressiva. Ao exame, está confuso, hipotenso (PA 88×54 mmHg), taquicárdico e com dor à palpação em quadrante superior direito. Exames laboratoriais mostram leucocitose, bilirrubina total e fosfatase alcalina elevadas. A ultrassonografia evidencia dilatação de vias biliares extra-hepáticas e provável cálculo em colédoco.</span> Diante da principal hipótese diagnóstica, assinale a alternativa que apresenta a melhor conduta terapêutica inicial e definitiva:",
+  opts:["Observação clínica por 24 a 48 horas, pois a maioria dos casos regride apenas com jejum e analgesia","Alta com antibiótico oral e programação ambulatorial de colecistectomia eletiva em 30 dias","Analgesia, hidratação venosa, antibioticoterapia de amplo espectro, colecistectomia videolaparoscópica imediata","Analgesia, hidratação venosa, antibioticoterapia de amplo espectro e descompressão biliar urgente por CPRE, com tratamento definitivo da causa após estabilização"], ans:3,
+  why:"Pêntade de Reynolds completa (Charcot + hipotensão + confusão) com coledocolitíase na USG = colangite aguda grave (Tokyo grau III). Conduta: suporte + ATB EV de amplo espectro + DRENAGEM BILIAR URGENTE (CPRE com esfincterotomia; se falhar, drenagem transparieto-hepática ou cirúrgica). Colecistectomia é feita depois, eletivamente, para evitar recorrência.",
+  trap:"Mesma pegadinha da Q4 da APF, agora em versão longa — a veterana caiu de novo (marcou C). Colecistectomia 'imediata' num paciente séptico com colédoco obstruído não resolve a obstrução e mata."},
+
+ /* ===== INÉDITAS — nível APF/prova final ===== */
+ {src:"Inédita", obj:"Inflamatório · apendicite", stem:"<span class='cx'>Homem, 22 anos, dor periumbilical mal definida há 18 h, com anorexia e náuseas, que nas últimas 6 h se localizou na fossa ilíaca direita e piora ao andar. Tax 37,9 °C. Exame: dor à descompressão brusca em McBurney, Rovsing positivo. Leucócitos 14.500 com desvio.</span> Assinale a correta:",
+  opts:["A migração da dor traduz a passagem da dor visceral (distensão do apêndice, fibras C, T10) para dor parietal (irritação do peritônio parietal da FID); o diagnóstico é clínico e a conduta é apendicectomia com antibiótico.","O quadro exige TC antes de qualquer decisão, pois o diagnóstico de apendicite nunca é clínico.","A ausência de febre alta afasta apendicite e sugere adenite mesentérica; deve-se liberar com analgesia.","Deve-se iniciar antibiótico e reavaliar em 48 h, reservando a cirurgia para quem não responder."], ans:0,
+  why:"Sequência clássica de Murphy: anorexia → dor periumbilical (visceral) → náusea → migração para FID (parietal) → febre baixa → leucocitose. Em homem jovem com quadro típico, o diagnóstico é clínico (Alvarado alto) e a conduta é apendicectomia + ATB (cefalosporina + metronidazol). Imagem entra em mulher (ginecológico), criança, idoso ou dúvida.",
+  trap:"Febre em apendicite é BAIXA (37,5–38,5); febre alta pensa em perfuração/abscesso. ATB isolado existe como opção em apendicite não complicada selecionada, mas não é a resposta esperada na tutoria da UNIFEBE — e nunca 'reavaliar em 48 h' com peritonite localizada."},
+
+ {src:"Inédita", obj:"Obstrutivo · íleo × mecânica", stem:"Sobre a diferenciação entre obstrução intestinal mecânica e íleo paralítico (adinâmico), assinale a alternativa INCORRETA:",
+  opts:["No íleo paralítico, os ruídos hidroaéreos estão diminuídos ou abolidos desde o início, enquanto na obstrução mecânica são inicialmente aumentados e metálicos.","No íleo paralítico o RX mostra gás distribuído em delgado e cólon, inclusive no reto; na obstrução mecânica completa há ausência de gás distal ao ponto de obstrução.","Pós-operatório, hipocalemia, opioides e sepse são causas clássicas de íleo paralítico, cujo tratamento é dirigido à causa, com SNG e correção hidroeletrolítica.","A dor em cólica intensa e intermitente é característica do íleo paralítico, enquanto a obstrução mecânica cursa com desconforto contínuo e leve.","Na obstrução mecânica de delgado, o RX em decúbito pode mostrar o 'empilhamento de moedas' (válvulas coniventes) e, em ortostase, níveis hidroaéreos em escada."], ans:3,
+  why:"É o inverso: CÓLICA intermitente é da obstrução MECÂNICA (alça lutando contra o obstáculo); o íleo paralítico dá distensão com desconforto difuso e leve, sem cólica, porque não há peristalse. As demais alternativas estão corretas.",
+  trap:"Questão 'INCORRETA' com 4 verdades bem escritas e 1 troca sutil. Leia procurando a inversão — a banca troca 'cólica' de lado."},
+
+ {src:"Inédita", obj:"Vascular · conduta", stem:"<span class='cx'>Mulher, 78 anos, IAM há 3 semanas, chega com dor abdominal difusa intensa há 5 h, um episódio de evacuação líquida sanguinolenta, abdome levemente distendido, sem defesa. Lactato 4,8; leucócitos 22.000; pH 7,28. Angio-TC: falha de enchimento na a. mesentérica superior a 4 cm da origem, alças de delgado com espessamento parietal, sem pneumatose, sem pneumoperitônio.</span> Qual a conduta mais adequada?",
+  opts:["Colonoscopia para investigar a enterorragia antes de qualquer intervenção","Antibiótico oral e observação em enfermaria, pois não há pneumoperitônio","Reposição volêmica, anticoagulação plena com heparina, antibiótico EV de amplo espectro, suspensão de vasoconstritores e revascularização urgente (embolectomia cirúrgica ou endovascular), com laparotomia e ressecção se houver alça inviável","Laparotomia com ressecção extensa de delgado sem tentativa de revascularização, seguida de anticoagulação apenas após 7 dias"], ans:2,
+  why:"Isquemia mesentérica aguda por embolia (IAM recente = trombo mural; embolia poupa os primeiros cm da AMS — 'a 4 cm da origem' é típico). Sem necrose transmural ainda (sem pneumatose/pneumoperitônio) → a janela é de revascularizar: volume, heparina, ATB (translocação), suspender vasopressor, embolectomia; ressecar só alça inviável, com second look em 24–48 h.",
+  trap:"Enterorragia aqui é da mucosa isquêmica descamando, não indicação de colonoscopia. 'Sem pneumoperitônio' não tranquiliza: isquemia mata antes de perfurar."},
+
+ {src:"Inédita", obj:"Inflamatório · pancreatite biliar", stem:"<span class='cx'>Mulher, 45 anos, obesa, dor epigástrica em faixa há 12 h, vômitos, lipase 1.800 U/L (VR < 60). USG: colelitíase múltipla, colédoco 5 mm, sem dilatação de vias biliares. Bilirrubina total 1,1; PCR 40; hemodinamicamente estável, sem falência orgânica.</span> Sobre a conduta, assinale a correta:",
+  opts:["Iniciar antibiótico profilático (imipenem) para prevenir infecção da necrose, obrigatório em toda pancreatite.","Manter jejum absoluto por pelo menos 7 dias e nutrição parenteral, pois a alimentação precoce estimula o pâncreas.","Solicitar CPRE de urgência nas primeiras 24 h, indicada em toda pancreatite biliar.","Hidratação venosa (Ringer lactato), analgesia, dieta oral precoce assim que tolerar, sem antibiótico profilático, e colecistectomia videolaparoscópica na mesma internação, após a resolução do quadro.","Colecistectomia de urgência nas primeiras 24 h para retirar a causa e abortar a pancreatite."], ans:3,
+  why:"Pancreatite biliar leve (sem falência orgânica, sem colangite, sem obstrução persistente): suporte (RL, analgesia), dieta precoce (24–48 h), sem ATB profilático (não reduz infecção de necrose e seleciona germes) e colecistectomia na MESMA internação (recorrência de 20–30% se alta sem operar). CPRE urgente só se colangite ou obstrução biliar persistente (bilirrubina/colédoco subindo).",
+  trap:"Três mitos numa questão: ATB profilático (não), jejum prolongado (não — dieta precoce reduz infecção), CPRE para toda pancreatite biliar (não). E cirurgia na fase aguda inflamada também não: opera depois de resolvido, mas antes da alta."},
+
+ {src:"Inédita", obj:"Obstrutivo · hérnia", stem:"<span class='cx'>Homem, 70 anos, nunca operado, com hérnia inguinal direita redutível há anos. Há 10 h a hérnia ficou irredutível e dolorosa; evoluiu com cólica abdominal, vômitos e parada de flatos. Ao exame: massa inguinal tensa, eritematosa, muito dolorosa; abdome distendido; Tax 38,3 °C; leucócitos 17.000; lactato 3,5.</span> Assinale a correta:",
+  opts:["Trata-se de hérnia encarcerada com obstrução de delgado; a conduta é tentativa de redução manual sob sedação e alta se bem-sucedida.","Trata-se de hérnia estrangulada (encarcerada com sofrimento vascular — febre, eritema local, leucocitose, lactato); a redução manual está contraindicada e a conduta é cirurgia de urgência com avaliação da viabilidade da alça.","A causa mais provável da obstrução neste paciente são bridas, devendo-se tentar tratamento conservador com SNG por 72 h.","Deve-se solicitar TC de abdome antes de qualquer decisão, mesmo com o diagnóstico clínico evidente, pois a cirurgia sem imagem é contraindicada."], ans:1,
+  why:"Hérnia é a causa nº 1 de obstrução de delgado em quem NUNCA operou (bridas exigem cirurgia prévia). Sinais de estrangulamento — pele eritematosa, febre, leucocitose, lactato, dor contínua — contraindicam a redução manual (reduziria alça necrosada para dentro) e obrigam cirurgia imediata (inguinotomia ± laparotomia, ressecção se inviável).",
+  trap:"'Nunca operado' é a chave: exclui bridas (C). Redução manual só em hérnia encarcerada RECENTE sem sinais inflamatórios locais/sistêmicos."},
+
+ {src:"Inédita", obj:"Hemorrágico · ectópica", stem:"<span class='cx'>Mulher, 28 anos, dor em fossa ilíaca esquerda súbita há 2 h, com dor referida no ombro esquerdo e tontura. Atraso menstrual de 6 semanas, sangramento vaginal discreto. PA 84×50, FC 128, pálida, abdome doloroso difusamente com defesa. Hb 8,2.</span> A sequência de conduta mais adequada é:",
+  opts:["TC de abdome com contraste para identificar a origem do sangramento e, depois, cirurgia.","Dois acessos calibrosos, reposição volêmica/hemoderivados, β-hCG e USG à beira-leito (FAST) mostrando líquido livre → laparotomia/laparoscopia imediata por gravidez ectópica rota.","Metotrexato intramuscular, por se tratar de gravidez ectópica em paciente jovem que deseja preservar a fertilidade.","Observação com analgesia e repetição do β-hCG em 48 h para avaliar a duplicação.","Colonoscopia de urgência pela hipótese de diverticulite perfurada."], ans:1,
+  why:"Abdome agudo hemorrágico: mulher fértil + atraso menstrual + dor pélvica + sinal de Kehr (sangue irritando o diafragma) + choque hipovolêmico = gravidez ectópica ROTA. Instável = não vai ao tomógrafo: estabilizar, confirmar com β-hCG + FAST e operar. Metotrexato e expectante são apenas para ectópica ÍNTEGRA, estável, com β-hCG baixo.",
+  trap:"Toda mulher em idade fértil com dor abdominal: β-hCG ANTES da TC. 'Ombro esquerdo' aqui não é cardíaco — é Kehr, sangue sob o diafragma."},
+
+ {src:"Inédita", obj:"Semiologia", stem:"Julgue as proposições:<br>I. O paciente com peritonite tende a ficar imóvel, com respiração superficial, pois a mobilização do peritônio parietal (inervação somática) piora a dor; o paciente com cólica visceral pura fica inquieto, sem posição de alívio.<br>II. O sinal de Murphy positivo é específico de coledocolitíase e indica CPRE.<br>III. A tríade de Charcot (dor no hipocôndrio direito, febre com calafrios e icterícia) define colangite aguda; o acréscimo de hipotensão e confusão mental (pêntade de Reynolds) indica forma grave.<br>IV. Os sinais de Cullen e Grey-Turner são precoces e sensíveis para pancreatite aguda, devendo ser pesquisados para o diagnóstico.",
+  opts:["Apenas I e III estão corretas.","Apenas I, II e III estão corretas.","Apenas II e IV estão corretas.","Apenas III e IV estão corretas.","Todas estão corretas."], ans:0,
+  why:"I e III são frases-lei. II está errada: Murphy é da COLECISTITE (vesícula/cístico), não do colédoco — não indica CPRE. IV está errada: Cullen/Grey-Turner são TARDIOS (24–72 h), raros (< 3%) e indicam pancreatite necro-hemorrágica GRAVE — são sinais de prognóstico, não de diagnóstico.",
+  trap:"Cuidado com 'sensível e precoce' colado em sinal raro — a banca usa para inflar alternativas."},
+
+ {src:"Inédita", obj:"Exames · associação", stem:"Associe cada situação clínica ao exame de imagem de escolha:<br>1. Dor no HD há 10 h com febre e Murphy positivo.<br>2. FA sem anticoagulação, dor súbita desproporcional, lactato 5.<br>3. Idoso com dor em FIE, febre e massa palpável.<br>4. Cólica + distensão + parada de flatos, estável, primeiro exame ao chegar.<br>5. Mulher jovem instável com atraso menstrual e dor pélvica.",
+  opts:["1-USG · 2-angio-TC · 3-TC com contraste · 4-RX de abdome agudo · 5-FAST (USG à beira-leito)","1-TC · 2-RX · 3-colonoscopia · 4-USG · 5-TC com contraste","1-USG · 2-TC sem contraste · 3-USG · 4-TC · 5-RM","1-CPRE · 2-angiografia · 3-TC · 4-RX · 5-USG transvaginal ambulatorial","1-USG · 2-angio-TC · 3-colonoscopia · 4-TC · 5-FAST"], ans:0,
+  why:"Vias biliares = USG (sempre 1º). Vascular = angio-TC. Diverticulite = TC com contraste (colonoscopia proibida na fase aguda). Obstrução, exame INICIAL = RX de abdome agudo (TC é o 'melhor', não o 'primeiro'). Instável com suspeita de hemoperitônio = FAST na sala, sem TC.",
+  trap:"A alternativa E acerta 4 e erra 1 (colonoscopia na diverticulite) — as associações são feitas para você deslizar num item só. Confira TODOS."},
+
+ {src:"Inédita", obj:"Hemorrágico · AAA", stem:"<span class='cx'>Homem, 74 anos, tabagista, hipertenso, dor abdominal e lombar súbita e intensa há 40 min, sudorese, PA 80×40, FC 120. Abdome com massa pulsátil em mesogástrio, dolorosa. Sem peritonite franca.</span> Assinale a correta:",
+  opts:["A hipótese principal é cólica renal esquerda; deve-se administrar AINE parenteral e solicitar TC sem contraste.","Trata-se da tríade clássica de aneurisma de aorta abdominal roto (dor + massa pulsátil + hipotensão); a conduta é acionar cirurgia vascular imediatamente, com reposição volêmica cautelosa (hipotensão permissiva) e reparo aberto ou endovascular de urgência — TC apenas se houver estabilidade.","Deve-se realizar angiografia diagnóstica eletiva após controle pressórico com nitroprussiato.","A ausência de irritação peritoneal permite observação em enfermaria com nova avaliação em 6 h."], ans:1,
+  why:"AAA roto = abdome agudo hemorrágico retroperitoneal; mortalidade > 50% mesmo operando. Instável: nada de exames demorados — cirurgia. Hipotensão permissiva (PAS ~80–90) evita 'estourar' o tamponamento. Idoso hipertenso tabagista com 'primeira cólica renal da vida' = pensar em aorta.",
+  trap:"AINE em hipotenso com sangramento é dupla contraindicação (rim + plaquetas). E nunca 'observar' choque."},
+
+ {src:"Inédita", obj:"Obstrutivo · volvo", stem:"<span class='cx'>Homem, 80 anos, institucionalizado, constipação crônica, distensão abdominal enorme e assimétrica há 2 dias, sem flatos, dor leve, sem febre, sem peritonite. RX: alça colônica muito distendida em 'U invertido' / 'grão de café' apontando para o hipocôndrio direito.</span> Conduta inicial mais adequada:",
+  opts:["Laparotomia imediata com sigmoidectomia, pois o volvo nunca se resolve sem cirurgia.","Descompressão endoscópica (retossigmoidoscopia/colonoscopia) com sonda retal, seguida de sigmoidectomia eletiva na mesma internação pelo alto risco de recidiva; cirurgia de urgência apenas se sinais de sofrimento de alça ou falha da descompressão.","Enema de fosfato e laxante osmótico em altas doses.","Observação com dieta zero por 5 dias, aguardando resolução espontânea."], ans:1,
+  why:"Volvo de sigmoide (idoso constipado, megacólon, 'grão de café' no RX): sem sinais de isquemia/perfuração → descompressão endoscópica (sucesso ~80%), mas recidiva ~50–60%, por isso sigmoidectomia eletiva na mesma internação. Sofrimento de alça, peritonite ou falha → cirurgia de urgência (Hartmann).",
+  trap:"Volvo de CECO é diferente: não descomprime por endoscopia — vai direto para cirurgia (hemicolectomia D). Enema em volvo é contraindicado (perfuração)."},
+
+ {src:"Inédita", obj:"Inflamatório · diverticulite", stem:"Sobre o manejo da diverticulite aguda, assinale a alternativa INCORRETA:",
+  opts:["A diverticulite não complicada em paciente imunocompetente, com boa aceitação oral e sem comorbidades, pode ser tratada ambulatorialmente com dieta e antibiótico oral (ex.: ciprofloxacino + metronidazol ou amoxicilina-clavulanato).","A colonoscopia deve ser realizada na fase aguda para confirmar o diagnóstico e afastar neoplasia.","Abscessos maiores que 4 cm (Hinchey I–II) são tratados com antibiótico e drenagem percutânea guiada por imagem.","Peritonite purulenta ou fecal (Hinchey III–IV) exige cirurgia de urgência, classicamente pela técnica de Hartmann (ressecção + colostomia terminal) ou ressecção com anastomose primária em casos selecionados.","Após 6–8 semanas da resolução do episódio, recomenda-se colonoscopia para excluir neoplasia colorretal."], ans:1,
+  why:"Colonoscopia na fase aguda é CONTRAINDICADA (insuflação de ar + parede inflamada = perfuração). Ela é feita 6–8 semanas depois. As demais alternativas reproduzem o manejo por estágio de Hinchey.",
+  trap:"A alternativa E existe justamente para você comparar com a B e perceber que a diferença é o TEMPO. Uma é certa, a outra é o erro."},
+
+ {src:"Inédita", obj:"Constipação", stem:"<span class='cx'>Menino, 4 anos, evacua a cada 4–5 dias fezes duras e volumosas, com dor e sangue vivo na superfície das fezes; escape fecal na roupa; começou após o desfralde. Cresce bem, eliminou mecônio nas primeiras 24 h de vida, exame abdominal com massa fecal palpável em FIE, ampola retal cheia de fezes.</span> Assinale a correta:",
+  opts:["O quadro sugere doença de Hirschsprung, indicando biópsia retal antes de qualquer tratamento.","Trata-se de constipação funcional com impactação fecal; a conduta é desimpactação (ex.: PEG oral 1–1,5 g/kg/dia por 3–6 dias) seguida de manutenção com PEG por meses, treino de toalete após as refeições e ajuste dietético.","A presença de sangue nas fezes indica colonoscopia de urgência.","O tratamento de escolha é óleo mineral em dose alta, seguro em qualquer idade.","Deve-se restringir fibras e líquidos até resolver a impactação."], ans:1,
+  why:"Constipação funcional (95% na infância): início após evento retentivo (desfralde), ampola CHEIA, crescimento normal, mecônio em < 48 h — tudo contra Hirschsprung (ampola vazia, mecônio tardio, déficit de crescimento). Sangue vivo = fissura anal. Tratamento: desimpactar → manter PEG (0,4–0,8 g/kg/d) por meses → reflexo gastrocólico (sentar após refeições, pés apoiados).",
+  trap:"Óleo mineral em criança pequena/acamado tem risco de aspiração (pneumonia lipoídica) — não é 'seguro em qualquer idade'. E escape fecal é sinal de impactação, não de diarreia."},
+
+ {src:"Inédita", obj:"Obstrutivo · integrativa", stem:"<span class='cx'>Mulher, 71 anos, emagrecimento de 8 kg em 4 meses e fezes afiladas com sangue oculto positivo. Há 3 dias: cólica, distensão progressiva e parada de flatos; vômitos fecaloides há 12 h. Exame: distensão importante, timpanismo, dor difusa, sem defesa; sem hérnias; nunca operada. RX: cólon muito distendido com ceco de 13 cm; pouco gás em delgado. TC: lesão estenosante em sigmoide com dilatação a montante, sem líquido livre, sem pneumatose.</span> Assinale a correta:",
+  opts:["A causa mais provável é brida; instituir SNG, jejum e hidratação por 72 h.","Trata-se de obstrução colônica baixa por neoplasia de sigmoide em alça fechada (válvula ileocecal competente); o ceco de 13 cm indica risco iminente de perfuração, exigindo descompressão/cirurgia de urgência (ressecção à Hartmann, ou prótese endoscópica como ponte se disponível), não tratamento conservador prolongado.","Como não há peritonite, a paciente deve receber laxante osmótico e enema para resolver a obstrução.","A colonoscopia completa deve preceder qualquer decisão, para estadiar o tumor."], ans:1,
+  why:"Sinais de alarme (emagrecimento, fezes em fita, sangue oculto) + obstrução baixa + 'nunca operada, sem hérnias' = câncer colorretal, causa nº 1 de obstrução de cólon. Válvula ileocecal competente cria alça fechada; ceco > 12 cm = perfuração iminente (lei de Laplace). Não se espera 72 h: descompressão cirúrgica (Hartmann) ou stent como ponte.",
+  trap:"'Sem peritonite' não autoriza conservador quando há alça fechada. Laxante/enema em obstrução mecânica completa é contraindicado. Junta tudo da SP: causa por idade, altura, sinais de alarme, quando operar."}
+];
+const FC=[
+ ["Regra das 6 horas","Dor abdominal intensa persistindo ≥ 6 h = forte indicativo de cirurgia. Dor que some sozinha em 1–2 h (cólica biliar) não é abdome agudo cirúrgico."],
+ ["As 5 síndromes do abdome agudo","Inflamatório · Perfurativo · Obstrutivo · Vascular · Hemorrágico. Nem todo abdome agudo é cirúrgico: pancreatite, diverticulite simples e bridas sem sofrimento são clínicos."],
+ ["Sinal de Jobert","Perda da macicez hepática (timpanismo sobre o fígado) = pneumoperitônio = abdome agudo PERFURATIVO."],
+ ["Sinal de Murphy","Interrupção da inspiração à palpação do ponto cístico = COLECISTITE aguda (não é colédoco, não indica CPRE)."],
+ ["Tríade de Charcot → Pêntade de Reynolds","Dor HD + febre com calafrios + icterícia = colangite. + hipotensão + confusão = colangite grave. Conduta: ATB + CPRE URGENTE."],
+ ["Cullen / Grey-Turner / Gersuny / Kehr","Cullen periumbilical e Grey-Turner flancos = pancreatite necro-hemorrágica ou hemoperitônio (tardios). Gersuny = fecaloma. Kehr = dor no ombro E por sangue sob o diafragma (baço)."],
+ ["Cólica biliar × colecistite","Cólica: pós-gordura, < 6 h, some sozinha, sem febre → colecistectomia eletiva. Colecistite: > 6 h, febre, Murphy, leucocitose, USG parede > 3–4 mm → ATB + colecistectomia < 72 h."],
+ ["Colangite: por que CPRE e não colecistectomia?","O problema é o COLÉDOCO obstruído e infectado sob pressão. Drenar primeiro (CPRE com esfincterotomia); operar a vesícula depois de estabilizar. Pegadinha que a veterana errou 2×."],
+ ["Pancreatite: diagnóstico 2 de 3","Dor epigástrica típica irradiando ao dorso · amilase/lipase ≥ 3× (lipase mais específica e dura mais) · imagem compatível. Valor da enzima NÃO mede gravidade."],
+ ["Pancreatite: o que define gravidade","Falência orgânica (hipotensão, oligúria/Cr ↑, insuf. respiratória) persistente > 48 h. Alarme na chegada: hipotensão, BUN ↑, Hct ↑, SIRS, derrame pleural, PCR > 150 em 48 h. Sem ATB profilático; dieta precoce; biliar → colecistectomia mesma internação."],
+ ["Tríade da obstrução + o sinal de estrangulamento","Cólica + distensão + parada de gases/fezes. Estrangulamento = dor CONTÍNUA (não cólica), febre, taquicardia, peritonite, leucocitose, lactato/acidose → cirurgia."],
+ ["Causas de obstrução por segmento","Delgado: bridas (nº 1 em operado) · hérnia (nº 1 em nunca operado) · neoplasia · Crohn · intussuscepção · íleo biliar. Cólon: câncer (nº 1) · volvo de sigmoide · diverticulite · fecaloma."],
+ ["RX de abdome agudo na obstrução","3 incidências (ortostase, decúbito, tórax PA). Níveis hidroaéreos 'em escada' (em pé), 'empilhamento de moedas' (deitado), sem gás distal. Volvo sigmoide = 'grão de café'. Exame INICIAL; TC = melhor."],
+ ["Bridas sem sofrimento: conduta","Dieta zero + SNG em sifonagem + hidratação venosa com K/Na + analgesia + reavaliação seriada por 48–72 h (70–80% resolvem). Falha ou sinal de estrangulamento → laparotomia."],
+ ["Íleo paralítico × obstrução mecânica","Íleo: sem cólica, RHA ↓ desde o início, gás em delgado E cólon/reto; causas: pós-op, opioide, hipoK, sepse. Mecânica: cólica, RHA metálicos → abolidos, sem gás distal."],
+ ["Isquemia mesentérica: assinatura","Idoso com FA sem anticoagulação (ou IAM, aterosclerose, choque). Dor súbita DESPROPORCIONAL ao exame (abdome flácido), lactato ↑. Exame: angio-TC. Conduta: volume, heparina, ATB, revascularizar, ressecar necrose."],
+ ["Perfuração: quadro e exame","AINE/úlcera: dor súbita 'em punhalada' que difunde em minutos, abdome em tábua, RHA abolidos, Jobert. RX tórax em pé: ar subdiafragmático (normal não exclui; TC vê sempre). Conduta: laparotomia de urgência + ATB + IBP."],
+ ["Hemorrágico: as 3 causas e a regra","Gravidez ectópica rota (β-hCG!), AAA roto (dor + massa pulsátil + hipotensão), baço. Instável + FAST positivo → cirurgia SEM TC."],
+ ["Diverticulite: exame e o 'nunca'","TC com contraste. NUNCA colonoscopia na fase aguda → fazer após 6–8 semanas. Hinchey I–II clínico/drenagem; III–IV cirurgia (Hartmann)."],
+ ["Idoso com abdome agudo","Apresentação atípica, inflamação menos exuberante (pouca febre/leucocitose/defesa), mais causas graves. TC é segura — idade não contraindica. Apendicite é do jovem."],
+ ["Prescrição inicial universal","Dieta zero · acesso + SF/RL · analgesia (NÃO mascara!) · antiemético · SNG se vômito/distensão · ATB se foco/perfuração · sonda vesical se choque · exames + imagem · cirurgião · profilaxia TEV."],
+ ["Constipação: alarmes e escada","Alarme: início > 50 a, sangue/anemia, perda de peso, fezes em fita, história familiar → colonoscopia. Escada: fibras/líquido/hábito → psyllium → PEG (1ª escolha) / lactulose → estimulante curto → biofeedback."],
+ ["Criança constipada: PEG","Desimpactação PEG 1–1,5 g/kg/dia 3–6 dias → manutenção 0,4–0,8 g/kg/dia por meses + sentar após refeições. Hirschsprung: mecônio > 48 h, ampola vazia, déficit de crescimento."]
+];
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const SRC_LBL={APF:"APF real 2026.1",Prova:"Prova final 2026.1",Inédita:"Inédita",SP1:"SP1",SP2:"SP2",SP3:"SP3",SP4:"SP4"};
+const SRC_CLS={APF:"r",Prova:"d",Inédita:"i",SP1:"e",SP2:"e",SP3:"e",SP4:"e"};
+const SRC_ORDER=["Todas","APF","Prova","Inédita","SP1","SP2","SP3","SP4"].filter(k=>k==="Todas"||QS.some(q=>q.src===k));
+let filter="Todas";
+const state={answered:0,hits:0};
+function buildChips(){
+  const box=document.getElementById('chips');
+  const counts={Todas:QS.length};QS.forEach(q=>counts[q.src]=(counts[q.src]||0)+1);
+  SRC_ORDER.forEach(k=>{
+    const c=document.createElement('button');c.className='chip'+(k===filter?' on':'');
+    c.textContent=(k==="Todas"?"Todas":SRC_LBL[k])+' · '+counts[k];
+    c.addEventListener('click',()=>{filter=k;renderQuiz();});box.appendChild(c);
+  });
+}
+function renderQuiz(){
+  document.querySelectorAll('#chips .chip').forEach((c,i)=>c.classList.toggle('on',SRC_ORDER[i]===filter));
+  const list=QS.map((q,i)=>({q,i})).filter(x=>filter==="Todas"||x.q.src===filter);
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i})=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';});
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill '+SRC_CLS[q.src]+'">'+SRC_LBL[q.src]+'</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){renderQuiz();}
+buildChips();renderQuiz();
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back"><small>'+c[0]+'</small>'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+document.querySelectorAll('.rotbtn').forEach(b=>b.addEventListener('click',()=>{const r=document.getElementById(b.dataset.r);r.style.display=(r.style.display==='block'?'none':'block');}));
+
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

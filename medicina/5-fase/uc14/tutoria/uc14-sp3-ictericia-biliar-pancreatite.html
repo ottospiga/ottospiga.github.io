@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC14 · SP3 — Icterícia, Vias Biliares e Pancreatite · Guia + Simulado APF</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
+    --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --teal:#0fb89a;
+    --blue:#4c8dff; --amber:#ffb454; --red:#ff6b6b; --green:#38d39f;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0c141d,#0f1720 240px);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+  header.top{display:flex;flex-direction:column;gap:6px;padding:22px 20px;border-radius:18px;
+    background:radial-gradient(120% 140% at 0% 0%,#12324a,#132030 60%);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tealo);font-weight:700}
+  h1{font-size:22px;margin:2px 0 2px;line-height:1.2}
+  .sub{color:var(--mut);font-size:14px}
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:14px;padding:8px;margin:10px 0}
+  .tab{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:8px 13px;border-radius:10px;font-size:13.5px;font-weight:700}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:var(--card2);color:var(--ink);border-color:var(--line)}
+  section{display:none}
+  section.active{display:block}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .panel h2{font-size:15.5px;margin:0 0 8px;color:#8fe4d2}
+  .panel h3{font-size:14px;margin:12px 0 4px;color:#dfe9f4}
+  .panel p{margin:6px 0;color:#cdd9e6;font-size:14px}
+  .panel ul{margin:6px 0;padding-left:18px}
+  .panel li{font-size:13.7px;color:#c9d6e3;margin:4px 0}
+  .hl{color:#ffd79e}
+  .k2{color:#7ff0c0;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.3px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;color:#cdd9e6;vertical-align:top}
+  th{background:#12202e;color:#dfe9f4}
+  .tblwrap{overflow-x:auto}
+  .warn{background:#2b2113;border:1px solid #6a5a26;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#ffe1ad;margin:8px 0}
+  .note{background:#101f2b;border:1px solid #244a5c;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#cfe4f5;margin:8px 0}
+  .divg{background:#221a2e;border:1px solid #4c3a6b;border-radius:11px;padding:10px 13px;font-size:13.5px;color:#e3d5ff;margin:8px 0}
+  .fig{background:#0f1a24;border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+  .fig svg{max-width:100%;height:auto}
+  .fig .cap{font-size:12.5px;color:var(--mut);margin-top:6px}
+
+  .scorebar{display:flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .scorebar .lbl{font-size:12.5px;color:var(--mut)}
+  .scorebar .val{font-weight:800;font-size:16px}
+  .bar{flex:1;min-width:120px;height:8px;background:#1e2b3a;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+  .btn{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3b5670}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .chip.on{color:var(--ink);border-color:var(--teal);background:#12302a}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .qnum{font-weight:800;color:#fff;background:linear-gradient(135deg,var(--teal),var(--blue));width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;font-weight:700}
+  .pill.o{background:#10222e;color:#93cbe0;border:1px solid #244a5c;font-weight:600}
+  .pill.d{background:#3a1f23;color:#ff9ea6;border:1px solid #6f2f36}
+  .pill.e{background:#122b40;color:#8ab8ff;border:1px solid #2a4d7a}
+  .pill.r{background:#2b2113;color:#ffd79e;border:1px solid #6a5a26}
+  .pill.i{background:#1a2e26;color:#8fe4d2;border:1px solid #1f5a41}
+  .stem{font-size:14.8px;color:#eef3f9;margin:4px 0 12px}
+  .stem .cx{display:block;background:#0f1a24;border-left:3px solid var(--blue);padding:9px 12px;border-radius:8px;margin-bottom:10px;color:#d7e3ef;font-size:14px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:10px 12px;font-size:13.8px;color:var(--ink);transition:.15s;font-family:inherit}
+  .opt:hover{border-color:#3b5670;background:#1f2d3d}
+  .opt .k{font-weight:800;color:var(--mut);flex:0 0 auto;width:18px}
+  .opt.correct{border-color:var(--green);background:#123326}
+  .opt.wrong{border-color:var(--red);background:#331b1f}
+  .opt.disabled{cursor:default;opacity:.96}
+  .fb{margin-top:12px;border-radius:11px;padding:12px 14px;font-size:13.6px;display:none}
+  .fb.show{display:block}
+  .fb.ok{background:#0f2a20;border:1px solid #1f5a41}
+  .fb.no{background:#2a1a1d;border:1px solid #5a2b31}
+  .fb .verdict{font-weight:800;margin-bottom:4px}
+  .fb .why{color:#dbe6f0}
+  .fb .trap{margin-top:8px;padding-top:8px;border-top:1px dashed #3a4e60;color:#ffd79e}
+
+  .map details{margin:8px 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px 14px}
+  .map summary{cursor:pointer;font-weight:800;color:#dfe9f4;padding:8px 0;font-size:14.2px}
+  .map ul{margin:4px 0 10px;padding-left:18px}
+  .map li{font-size:13.5px;color:#c9d6e3;margin:4px 0}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .fc{perspective:900px;cursor:pointer;height:180px}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .inner{transform:rotateY(180deg)}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);
+    padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.4px}
+  .fc .front{background:linear-gradient(135deg,#12324a,#151f2c);color:#dfe9f4;font-weight:700}
+  .fc .back{background:#123326;border-color:#1f5a41;color:#d9f2e6;transform:rotateY(180deg);overflow:auto;font-size:12.8px;line-height:1.45;flex-direction:column}
+  .fc .back small{display:block;color:#8fb8a8;font-size:11px;margin-bottom:4px;font-weight:700}
+  .foot{color:#7f93a8;font-size:12px;text-align:center;margin-top:22px}
+  .src{color:#8aa0b5;font-size:12.5px}
+  @media(max-width:520px){h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kicker">UNIFEBE · Medicina · 5º período · UC XIV</span>
+    <h1>SP3 — Icterícia, vias biliares, pancreatite e hepatites · <span style="color:var(--tealo)">Guia + Simulado da APF</span></h1>
+    <div class="sub">Fechamento + APF: <b>quarta 30/09/2026, 13h20</b> (tutora Ana Elisa). Resumo (≈30 min) → banco de 24 questões: as <b>7 da APF real da SP3 (2026.1)</b>, as <b>4 da prova final</b> desta SP e <b>13 inéditas</b> → descritiva real com roteiro e anotações da tutora → mapa mental e flashcards. Fontes: APF SP3 e prova final da veterana, resumo de tutoria da veterana, ementa UC XIV 2026 (hepatites/Lab, cirrose/Fisio), Goldman-Cecil, Atlanta 2012, Tokyo 2018, PCDT hepatites (MS).</div>
+  </header>
+  <div class="tabs" id="tabs"><button class="tab active" data-t="resumo">📖 Resumo</button><button class="tab" data-t="quizsec">📝 Simulado (24 + descritiva)</button><button class="tab" data-t="mapa">🧠 Mapa mental</button><button class="tab" data-t="flash">🎴 Flashcards</button></div>
+  <section id="resumo" class="active">
+    <div class="panel">
+      <h2>0 · Como essa APF é cobrada (raio-X da veterana)</h2>
+      <p>A <b>APF real da SP3 (15/04/2026)</b> teve <span class="k2">7 questões A–E</span>, todas de <b>vias biliares e pâncreas</b>: pólipo de vesícula &gt; 1 cm → colecistectomia · microlitíase em mulher jovem → colecistectomia · proposições sobre icterícia obstrutiva (Charcot × Reynolds) · etiologia mais comum da pancreatite (<b>colelitíase</b>) · conduta na pancreatite leve (<b>dieta zero + analgesia + USG</b>, sem ATB) · coledocolitíase = tríade de Charcot · afirmativas sobre vesícula (USG vê parede/líquido; TC menos sensível para cálculo). A veterana errou <b>álcool × cálculo</b> e <b>meropenem na pancreatite</b>.</p>
+      <p>Na <b>prova final</b> a SP3 entrou com 4 objetivas (icterícia indireta = hemólise / direta = coledocolitíase; colecistite estável → colecistectomia na mesma internação; USG como 1º exame; colangite → CPRE) e a <b>3ª discursiva</b> (mulher de 27 anos com dor em HD pós-gordura, icterícia progressiva, colúria: síndrome → hipóteses → exames para separar indireta/colestática/hepatocelular → conduta e encaminhamento). A veterana escreveu "síndrome de Mirizzi" — a tutora corrigiu para <b>síndrome colestática (icterícia obstrutiva)</b>.</p>
+      <div class="note"><b>Tradução prática:</b> três blocos — (1) <b>icterícia</b>: classificar em pré/intra/pós-hepática pelo par bilirrubina + FA/GGT + transaminases; (2) <b>árvore biliar</b>: onde está a pedra define a doença, o exame e a conduta; (3) <b>pancreatite</b>: 2 de 3, gravidade = falência orgânica, tratamento clínico. Hepatites virais entram pela ementa (Lab) — sorologia básica no fim.</div>
+      <p class="src">Ementa 2026 da SP3 "Tristes lembranças…": Patologia: hepatites alcoólica e não alcoólica, pâncreas inflamatório e neoplásico · Lab: exames de diagnóstico inicial e seguimento das hepatites virais · Fisio: hepatopatia alcoólica e cirrose · Farmaco: antieméticos, hepatoprotetores, enzimas pancreáticas · Conferência: hepatites na criança.</p>
+    </div>
+
+    <div class="panel">
+      <h2>1 · Icterícia — metabolismo da bilirrubina e as 3 síndromes</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8fb8a8"/></marker></defs>
+          <rect width="700" height="260" fill="#0f1a24" rx="12"/>
+          <g font-size="11" fill="#e8eef5">
+            <rect x="15" y="20" width="150" height="70" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="90" y="40" text-anchor="middle" font-weight="700" fill="#ff9ea6">1 · HEMÁCIA → HEME</text>
+            <text x="90" y="57" text-anchor="middle" font-size="10.5" fill="#ffd0d4">baço/macrófago: heme-oxigenase</text>
+            <text x="90" y="71" text-anchor="middle" font-size="10.5" fill="#ffd0d4">→ biliverdina → BILIRRUBINA</text>
+            <text x="90" y="84" text-anchor="middle" font-size="10.5" fill="#ffd0d4">INDIRETA (lipossolúvel, + albumina)</text>
+            <line x1="165" y1="55" x2="198" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar3)"/>
+            <rect x="200" y="20" width="160" height="70" rx="9" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="280" y="40" text-anchor="middle" font-weight="700" fill="#ffd79e">2 · HEPATÓCITO</text>
+            <text x="280" y="57" text-anchor="middle" font-size="10.5" fill="#ffe1ad">captação → conjugação (UGT1A1)</text>
+            <text x="280" y="71" text-anchor="middle" font-size="10.5" fill="#ffe1ad">→ BILIRRUBINA DIRETA</text>
+            <text x="280" y="84" text-anchor="middle" font-size="10.5" fill="#ffe1ad">(hidrossolúvel → colúria)</text>
+            <line x1="360" y1="55" x2="393" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar3)"/>
+            <rect x="395" y="20" width="150" height="70" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="470" y="40" text-anchor="middle" font-weight="700" fill="#8fe4d2">3 · VIA BILIAR → INTESTINO</text>
+            <text x="470" y="57" text-anchor="middle" font-size="10.5" fill="#d9f2e6">bactérias → urobilinogênio</text>
+            <text x="470" y="71" text-anchor="middle" font-size="10.5" fill="#d9f2e6">→ estercobilina (fezes)</text>
+            <text x="470" y="84" text-anchor="middle" font-size="10.5" fill="#d9f2e6">↺ êntero-hepática · urina</text>
+            <line x1="545" y1="55" x2="578" y2="55" stroke="#8fb8a8" stroke-width="2" marker-end="url(#ar3)"/>
+            <rect x="580" y="20" width="105" height="70" rx="9" fill="#12324a" stroke="#2a4d7a"/>
+            <text x="632" y="45" text-anchor="middle" font-weight="700" fill="#8ab8ff">FEZES</text>
+            <text x="632" y="62" text-anchor="middle" font-size="10.5" fill="#cfe4f5">cor normal =</text>
+            <text x="632" y="76" text-anchor="middle" font-size="10.5" fill="#cfe4f5">bile chegou</text>
+            <!-- síndromes -->
+            <rect x="15" y="110" width="215" height="135" rx="9" fill="#3a1f23" stroke="#6f2f36"/>
+            <text x="122" y="130" text-anchor="middle" font-weight="700" fill="#ff9ea6">PRÉ-HEPÁTICA (indireta)</text>
+            <text x="122" y="148" text-anchor="middle" font-size="10.5">hemólise · hematoma · eritropoese ineficaz</text>
+            <text x="122" y="162" text-anchor="middle" font-size="10.5">Gilbert / Crigler-Najjar (↓UGT)</text>
+            <text x="122" y="180" text-anchor="middle" font-size="10.5" fill="#ffd79e">BI ↑ · BD normal · FA/ALT normais</text>
+            <text x="122" y="194" text-anchor="middle" font-size="10.5" fill="#ffd79e">SEM colúria · fezes normais</text>
+            <text x="122" y="208" text-anchor="middle" font-size="10.5">hemólise: LDH ↑, haptoglobina ↓,</text>
+            <text x="122" y="222" text-anchor="middle" font-size="10.5">reticulócitos ↑, anemia, esplenomegalia</text>
+            <text x="122" y="238" text-anchor="middle" font-size="10.5" fill="#8fe4d2">BI raramente &gt; 5 mg/dL</text>
+            <rect x="242" y="110" width="215" height="135" rx="9" fill="#2b2113" stroke="#6a5a26"/>
+            <text x="349" y="130" text-anchor="middle" font-weight="700" fill="#ffd79e">HEPATOCELULAR (mista)</text>
+            <text x="349" y="148" text-anchor="middle" font-size="10.5">hepatites virais, álcool, drogas</text>
+            <text x="349" y="162" text-anchor="middle" font-size="10.5">(paracetamol), autoimune, cirrose</text>
+            <text x="349" y="180" text-anchor="middle" font-size="10.5" fill="#ffd79e">ALT/AST ≫ FA · BD e BI ↑</text>
+            <text x="349" y="194" text-anchor="middle" font-size="10.5" fill="#ffd79e">colúria + · pródromo viral</text>
+            <text x="349" y="208" text-anchor="middle" font-size="10.5">ALT &gt; 1.000: viral, isquêmica, tóxica</text>
+            <text x="349" y="222" text-anchor="middle" font-size="10.5">AST/ALT &gt; 2, AST &lt; 300: álcool</text>
+            <text x="349" y="238" text-anchor="middle" font-size="10.5" fill="#8fe4d2">gravidade: INR ↑, albumina ↓, encefalopatia</text>
+            <rect x="469" y="110" width="216" height="135" rx="9" fill="#123326" stroke="#1f5a41"/>
+            <text x="577" y="130" text-anchor="middle" font-weight="700" fill="#8fe4d2">COLESTÁTICA / OBSTRUTIVA (direta)</text>
+            <text x="577" y="148" text-anchor="middle" font-size="10.5">coledocolitíase · tumor de cabeça de</text>
+            <text x="577" y="162" text-anchor="middle" font-size="10.5">pâncreas/papila · colangite · CEP/CBP</text>
+            <text x="577" y="180" text-anchor="middle" font-size="10.5" fill="#ffd79e">FA/GGT ≫ ALT · BD ↑ · colúria</text>
+            <text x="577" y="194" text-anchor="middle" font-size="10.5" fill="#ffd79e">ACOLIA · PRURIDO · ↓vit ADEK</text>
+            <text x="577" y="208" text-anchor="middle" font-size="10.5">USG: via biliar dilatada (&gt; 6 mm)</text>
+            <text x="577" y="222" text-anchor="middle" font-size="10.5">Courvoisier (vesícula indolor) = tumor</text>
+            <text x="577" y="238" text-anchor="middle" font-size="10.5" fill="#8fe4d2">dor+febre = pedra · indolor = câncer</text>
+          </g>
+        </svg>
+        <div class="cap">Metabolismo da bilirrubina (em cima) e as 3 síndromes ictéricas (embaixo). Colúria = bilirrubina DIRETA na urina — só existe se o fígado conjugou.</div>
+      </div>
+      <div class="tblwrap"><table>
+        <tr><th>Exame</th><th>Pré-hepática</th><th>Hepatocelular</th><th>Colestática</th></tr>
+        <tr><td>Bilirrubina predominante</td><td><b>Indireta</b> (BI &gt; 80%)</td><td>Mista</td><td><b>Direta</b> (BD &gt; 50%)</td></tr>
+        <tr><td>ALT/AST</td><td>Normais</td><td><b>↑↑↑</b> (centenas–milhares)</td><td>Normais ou ↑ leve (podem subir agudamente na passagem do cálculo)</td></tr>
+        <tr><td>FA / GGT</td><td>Normais</td><td>Normais ou ↑ leve</td><td><b>↑↑↑</b> (FA &gt; 3× — é a <b>primeira</b> a subir; GGT confirma origem hepática)</td></tr>
+        <tr><td>Urina / fezes</td><td>Sem colúria; urobilinogênio ↑</td><td>Colúria</td><td><b>Colúria + acolia</b>; urobilinogênio ausente</td></tr>
+        <tr><td>Outros</td><td>Hb ↓, reticulócitos ↑, LDH ↑, haptoglobina ↓</td><td>Sorologias, TAP/albumina (função)</td><td>USG com dilatação; prurido; TAP corrige com vit K</td></tr>
+      </table></div>
+      <div class="warn"><b>Q9 da prova final:</b> indireta ↔ <b>hemólise</b> (e Gilbert); direta ↔ <b>coledocolitíase</b>. As alternativas erradas cruzavam Gilbert com direta e colecistite com indireta (colecistite simples nem dá icterícia relevante).</div>
+    </div>
+
+    <div class="panel">
+      <h2>2 · A árvore biliar — onde está a pedra define tudo</h2>
+      <div class="fig">
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <rect width="700" height="300" fill="#0f1a24" rx="12"/>
+          <!-- liver -->
+          <path d="M40 40 Q120 15 230 40 Q280 60 260 110 Q200 130 120 120 Q40 110 40 40 Z" fill="#3a1f23" stroke="#6f2f36" stroke-width="2"/>
+          <text x="140" y="70" fill="#ff9ea6" font-size="12" font-weight="700" text-anchor="middle">FÍGADO</text>
+          <!-- hepatic ducts -->
+          <path d="M110 118 L150 150 M190 118 L150 150" stroke="#ffd79e" stroke-width="4" fill="none"/>
+          <text x="90" y="145" fill="#cdd9e6" font-size="10">ductos hepáticos D/E</text>
+          <!-- common hepatic duct -->
+          <line x1="150" y1="150" x2="150" y2="185" stroke="#ffd79e" stroke-width="5"/>
+          <text x="160" y="172" fill="#cdd9e6" font-size="10">d. hepático comum</text>
+          <!-- gallbladder -->
+          <ellipse cx="75" cy="205" rx="30" ry="45" fill="#123326" stroke="#1f5a41" stroke-width="2"/>
+          <text x="75" y="200" fill="#8fe4d2" font-size="10.5" font-weight="700" text-anchor="middle">VESÍCULA</text>
+          <text x="75" y="214" fill="#d9f2e6" font-size="9.5" text-anchor="middle">colelitíase</text>
+          <!-- cystic duct -->
+          <path d="M100 178 Q125 170 150 185" stroke="#ffd79e" stroke-width="4" fill="none"/>
+          <text x="92" y="160" fill="#cdd9e6" font-size="10">d. cístico</text>
+          <!-- common bile duct -->
+          <line x1="150" y1="185" x2="150" y2="255" stroke="#ffd79e" stroke-width="5"/>
+          <text x="160" y="225" fill="#cdd9e6" font-size="10">COLÉDOCO</text>
+          <!-- pancreas -->
+          <path d="M120 262 Q220 235 330 258 Q300 285 210 282 Q150 285 120 262 Z" fill="#2b2113" stroke="#6a5a26" stroke-width="2"/>
+          <text x="240" y="270" fill="#ffd79e" font-size="11" font-weight="700" text-anchor="middle">PÂNCREAS</text>
+          <line x1="300" y1="258" x2="160" y2="258" stroke="#ffb454" stroke-width="3"/>
+          <!-- duodenum -->
+          <path d="M150 255 Q140 290 100 295" stroke="#4c8dff" stroke-width="10" fill="none" opacity=".6"/>
+          <text x="55" y="290" fill="#8ab8ff" font-size="10">duodeno · papila</text>
+          <!-- markers -->
+          <circle cx="75" cy="205" r="7" fill="#ff6b6b"/><text x="75" y="209" font-size="9" text-anchor="middle" fill="#fff" font-weight="700">1</text>
+          <circle cx="118" cy="174" r="7" fill="#ff6b6b"/><text x="118" y="178" font-size="9" text-anchor="middle" fill="#fff" font-weight="700">2</text>
+          <circle cx="150" cy="235" r="7" fill="#ff6b6b"/><text x="150" y="239" font-size="9" text-anchor="middle" fill="#fff" font-weight="700">3</text>
+          <circle cx="150" cy="257" r="7" fill="#ff6b6b"/><text x="150" y="261" font-size="9" text-anchor="middle" fill="#fff" font-weight="700">4</text>
+          <!-- legend -->
+          <g font-size="11" fill="#cdd9e6">
+            <text x="360" y="40" fill="#8fe4d2" font-weight="700" font-size="12">Onde a pedra está → o que é:</text>
+            <text x="360" y="64"><tspan fill="#ff9ea6" font-weight="700">1 Vesícula</tspan> = colelitíase (80% assintomática) → cólica biliar</text>
+            <text x="360" y="80">   USG · colecistectomia só se sintomática/risco</text>
+            <text x="360" y="104"><tspan fill="#ff9ea6" font-weight="700">2 Cístico impactado</tspan> = COLECISTITE aguda</text>
+            <text x="360" y="120">   dor &gt; 6 h, febre, Murphy · USG · ATB + colecistectomia &lt; 72 h</text>
+            <text x="360" y="144"><tspan fill="#ff9ea6" font-weight="700">3 Colédoco</tspan> = COLEDOCOLITÍASE → icterícia obstrutiva</text>
+            <text x="360" y="160">   ± COLANGITE (Charcot/Reynolds) · USG → colangioRM/eco-EDA</text>
+            <text x="360" y="176">   CPRE terapêutica; colangite = CPRE URGENTE</text>
+            <text x="360" y="200"><tspan fill="#ff9ea6" font-weight="700">4 Papila</tspan> = PANCREATITE BILIAR (± colangite)</text>
+            <text x="360" y="216">   lipase ≥ 3× · clínico · CPRE só se colangite/obstrução</text>
+            <text x="360" y="240" fill="#ffd79e" font-weight="700">Mirizzi</text>
+            <text x="360" y="256">   pedra no cístico/infundíbulo comprime o hepático comum</text>
+            <text x="360" y="272">   → icterícia SEM pedra no colédoco (raro; diagnóstico de imagem)</text>
+            <text x="360" y="292" fill="#8ab8ff">Courvoisier: vesícula palpável indolor + icterícia = tumor periampular</text>
+          </g>
+        </svg>
+        <div class="cap">A pedra desce: vesícula → cístico → colédoco → papila. Cada parada é uma doença com exame e conduta próprios.</div>
+      </div>
+      <h3>Colelitíase</h3>
+      <ul>
+        <li><b>Cálculos de colesterol (80%)</b>: bile supersaturada (↑colesterol, ↓sais biliares/fosfolipídios) + estase + nucleação. Fatores: <b>4 F</b> (female, forty, fat, fertile), perda rápida de peso/bariátrica, NPT, estrogênio, fibratos, Crohn ileal (↓reabsorção de sais biliares), DM. <b>Pigmentares pretos</b>: hemólise, cirrose. <b>Marrons</b>: infecção/estase da via biliar (coledocolitíase primária).</li>
+        <li>80% assintomáticos → <b>não operar</b>. <b>Cólica biliar</b> (30 min–6 h pós-gordura, sem febre) → colecistectomia eletiva. <b>Operar mesmo assintomático (APF Q1–Q2)</b>: <b>pólipo ≥ 1 cm</b> (risco de câncer), <b>cálculo &gt; 3 cm</b>, vesícula em porcelana, anemia falciforme, candidato a transplante, bariátrica, <b>microlitíase/lama biliar</b> (risco de pancreatite) — a banca da UNIFEBE também aceita "paciente jovem" como argumento (anos de exposição).</li>
+        <li><b>Ácido ursodesoxicólico</b> (8–10 mg/kg/d): só cálculos pequenos de colesterol, radiotransparentes, em quem não pode operar — dissolve 50% em 6–24 meses, recidiva alta.</li>
+      </ul>
+      <h3>Colecistite aguda (calculosa 90–95%)</h3>
+      <ul>
+        <li>Cístico obstruído → distensão → isquemia da parede → inflamação → infecção secundária (E. coli, Klebsiella, Enterococcus). <b>Alitiásica</b> (5–10%): grande queimado, politrauma, UTI, NPT prolongada, jejum prolongado, sepse, imunossupressão — <b>NPT e jejum são fatores de RISCO, não protetores</b> (APF Q7-e).</li>
+        <li>Clínica: dor HD contínua &gt; 6 h, irradia à escápula, febre, náusea, <b>Murphy +</b>, leucocitose, PCR ↑; bilirrubina só levemente ↑ (se &gt; 4 mg/dL pensar em colédoco). <b>USG</b>: parede &gt; 3–4 mm, líquido perivesicular, cálculo impactado, Murphy sonográfico (S ~85–90%). TC vê complicações (gangrena, enfisematosa, perfuração) mas é <b>menos sensível para cálculo</b> (APF Q7-a). Cintilografia (HIDA) se dúvida.</li>
+        <li>Conduta: jejum, hidratação, analgesia, <b>ATB</b> (ceftriaxona + metronidazol / amoxi-clav / pip-tazo se grave) e <b>colecistectomia videolaparoscópica precoce (até 72 h, mesma internação)</b>; Tokyo III/alto risco → colecistostomia percutânea e opera depois. Laparoscopia é o padrão — "aberta sempre que possível" está errado (APF Q7-d).</li>
+      </ul>
+      <h3>Coledocolitíase e colangite</h3>
+      <ul>
+        <li>Cálculo no colédoco (secundário à vesícula em 90%). Assintomático ou cólica + <b>icterícia obstrutiva flutuante</b>, colúria, acolia; lab: BD, FA, GGT ↑ (transaminases sobem transitoriamente na passagem). <b>USG</b>: colédoco &gt; 6 mm (S para o cálculo só ~50%) → risco intermediário: <b>colangioRM ou ecoendoscopia</b>; alto risco (icterícia + colédoco dilatado + cálculo visto/colangite) → <b>CPRE direto</b>. Colangiografia intraoperatória durante a colecistectomia.</li>
+        <li><b>Colangite aguda</b> = obstrução + infecção: <b>tríade de Charcot</b> (dor HD + febre com calafrios + icterícia) → <b>pêntade de Reynolds</b> (+ hipotensão + confusão mental = grave). Hiperamilasemia NÃO faz parte da pêntade (APF Q3-IV). Conduta: hemoculturas, ATB EV (ceftriaxona + metronidazol / pip-tazo), <b>drenagem biliar urgente por CPRE</b> (esfincterotomia + extração ± prótese); falhou → drenagem transparieto-hepática ou cirúrgica. Colecistectomia depois.</li>
+        <li>Complicações da coledocolitíase: colangite, pancreatite biliar, cirrose biliar secundária (obstrução crônica), abscesso hepático.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Pancreatite aguda</h2>
+      <ul>
+        <li><b>Etiologia (APF Q4 — a que a veterana errou)</b>: <b>cálculo biliar 40–60% (nº 1)</b> &gt; álcool 25–35% &gt; hipertrigliceridemia (&gt; 1.000) &gt; pós-CPRE (5%) &gt; drogas (azatioprina, valproato, tiazídico, estrogênio), hipercalcemia, trauma, autoimune, idiopática. Mulher de meia-idade = pedra; homem etilista = álcool — mas "fator <b>mais comum</b>" é sempre <b>colelitíase</b>.</li>
+        <li><b>Fisiopatologia</b>: ativação intra-acinar precoce do tripsinogênio → autodigestão → SIRS → falência orgânica; necrose → infecção tardia (translocação).</li>
+        <li><b>Diagnóstico = 2 de 3</b>: dor epigástrica em faixa/irradiando ao dorso, melhora inclinado à frente (genupeitoral) + <b>lipase ou amilase ≥ 3× LSN</b> + imagem (USG para ver cálculo/via biliar; <b>TC com contraste só após 48–72 h</b> ou se dúvida — precoce subestima necrose). <b>Lipase</b>: mais específica, sobe em 4–8 h e permanece 8–14 dias; amilase sobe primeiro e cai em 3–5 dias (também sobe em parotidite, insuficiência renal, úlcera perfurada, isquemia, ectópica). Valor ≠ gravidade.</li>
+        <li><b>Gravidade (Atlanta 2012)</b>: leve (sem falência, sem complicação local) · moderada (falência transitória &lt; 48 h ou complicação local: coleção, necrose, pseudocisto) · <b>grave (falência orgânica persistente &gt; 48 h — Marshall ≥ 2)</b>. Preditores na admissão: <b>SIRS, BUN &gt; 20 (ureia &gt; 45), Hct &gt; 44%, Cr ↑, PCR &gt; 150 em 48 h, derrame pleural, idade &gt; 60, obesidade, BISAP ≥ 3, Ranson ≥ 3</b>. Ranson (admissão: idade &gt; 55, leuco &gt; 16 mil, glicose &gt; 200, LDH &gt; 350, AST &gt; 250; 48 h: Hct ↓ &gt; 10%, BUN ↑ &gt; 5, Ca &lt; 8, PaO₂ &lt; 60, déficit de base &gt; 4, sequestro &gt; 6 L).</li>
+        <li><b>Conduta (APF Q5)</b>: <b>dieta zero inicial + analgesia + hidratação venosa precoce (RL 5–10 mL/kg/h nas primeiras horas, meta diurese &gt; 0,5 mL/kg/h — sem exagero: objetivo-dirigida) + USG de vias biliares</b>. <b>SEM antibiótico profilático</b> (meropenem só em necrose infectada: febre persistente, piora, gás na coleção na TC, punção +). <b>Realimentação precoce</b> (24–48 h, oral, pobre em gordura; enteral por sonda se não tolerar; parenteral só se enteral impossível). Analgesia: dipirona/opioide (morfina/meperidina — sem contraindicação real). Antiemético.</li>
+        <li><b>Biliar</b>: colangite ou obstrução persistente (BT subindo, colédoco dilatado) → <b>CPRE em 24–72 h</b>; leve → <b>colecistectomia na mesma internação</b>; grave/necrosante → colecistectomia após 6 semanas.</li>
+        <li><b>Complicações</b>: coleção aguda (&lt; 4 sem) → <b>pseudocisto (&gt; 4 sem, parede fibrosa, sem epitélio)</b>: drenar se sintomático, infectado, &gt; 6 cm ou persistente &gt; 6 semanas (endoscópica transgástrica preferida) · <b>necrose</b> estéril = conservador; infectada = ATB (carbapenêmico) + <b>step-up</b> (drenagem percutânea/endoscópica → necrosectomia minimamente invasiva, idealmente &gt; 4 semanas, quando "walled-off") · sistêmicas: SDRA, IRA, choque, hipocalcemia, hiperglicemia, trombose de veia esplênica (varizes gástricas), pseudoaneurisma. <b>Cullen/Grey-Turner</b> = necro-hemorrágica, tardios e raros.</li>
+      </ul>
+      <h3>Pancreatite crônica (rápido)</h3>
+      <p>Álcool (70%) + tabaco; fibrose irreversível. <b>Tríade: esteatorreia + diabetes + calcificações</b> (RX/TC). Dor pós-prandial crônica, emagrecimento, insuficiência exócrina (esteatorreia quando &gt; 90% perdido; elastase fecal ↓) e endócrina (DM 3c). Amilase/lipase normais ou pouco ↑. Diagnóstico: <b>TC com contraste</b> (calcificações, ducto dilatado) / colangioRM / ecoendoscopia. Tratamento: abstinência, dieta hipogordurosa fracionada, <b>enzimas pancreáticas nas refeições</b> (Farmaco), vitaminas ADEK, analgesia (escada), IBP para potencializar enzimas; endoscopia/cirurgia (Puestow, Whipple) para dor refratária/obstrução. Vigilância de adenocarcinoma.</p>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Hepatites e o fígado — o que a Lab e a Fisio cobram nesta SP</h2>
+      <h3>Hepatites virais — sorologia mínima</h3>
+      <div class="tblwrap"><table>
+        <tr><th>Vírus</th><th>Transmissão</th><th>Curso</th><th>Diagnóstico inicial (APS)</th><th>Seguimento / detalhes</th></tr>
+        <tr><td><b>A</b></td><td>Fecal-oral (água/alimento, creche)</td><td>Aguda, autolimitada; nunca croniza; fulminante raro (&lt; 1%); criança quase sempre assintomática</td><td><b>Anti-HAV IgM</b> (aguda); IgG = imunidade/vacina</td><td>Vacina no calendário (15 meses); isolamento entérico; notificar</td></tr>
+        <tr><td><b>E</b></td><td>Fecal-oral (suíno, água)</td><td>Aguda; <b>fulminante em gestante</b> (20%); croniza só em imunossuprimido</td><td>Anti-HEV IgM</td><td>—</td></tr>
+        <tr><td><b>B</b></td><td>Sexual, parenteral, <b>vertical</b></td><td>Croniza 5–10% no adulto, <b>90% no RN</b>; cirrose, CHC (mesmo sem cirrose)</td><td><b>HBsAg</b> (infecção) + <b>anti-HBc total</b> (contato) + <b>anti-HBs</b> (imunidade). Aguda: HBsAg + anti-HBc IgM</td><td>Crônica = HBsAg &gt; 6 meses; HBeAg/DNA = replicação; vacina → só anti-HBs +; curada → anti-HBc + anti-HBs; RN de mãe HBsAg+: vacina + imunoglobulina em 12 h; tenofovir/entecavir</td></tr>
+        <tr><td><b>C</b></td><td>Parenteral (transfusão pré-1993, drogas IV, tatuagem); sexual/vertical raras</td><td><b>Croniza 70–85%</b>, quase sempre assintomática; cirrose em 20–30 anos; CHC</td><td><b>Anti-HCV</b> (teste rápido) → confirma com <b>HCV-RNA (PCR)</b></td><td>Genotipagem, elastografia; DAAs (sofosbuvir + velpatasvir/daclatasvir) 8–12 sem, cura &gt; 95%; sem vacina; rastrear todos ≥ 40 anos uma vez (MS)</td></tr>
+        <tr><td><b>D</b></td><td>Só com B (coinfecção/superinfecção)</td><td>Agrava a B; Amazônia</td><td>Anti-HDV em HBsAg+</td><td>Prevenção = vacina B</td></tr>
+      </table></div>
+      <p><b>Padrão laboratorial da hepatite aguda</b>: ALT/AST nas centenas–milhares (ALT &gt; AST), BD ↑, FA pouco ↑; <b>gravidade = TAP/INR &gt; 1,5, encefalopatia (hepatite fulminante), albumina</b> — não as transaminases. Álcool: AST/ALT &gt; 2, AST &lt; 300, GGT ↑, VCM ↑. Paracetamol: ALT &gt; 3.000, N-acetilcisteína. Autoimune: mulher jovem, FAN/anti-músculo liso, gamaglobulina ↑.</p>
+      <h3>Doença hepática alcoólica → cirrose (Fisio)</h3>
+      <ul>
+        <li>Esteatose (reversível) → hepatite alcoólica (icterícia, febre, AST/ALT &gt; 2, leucocitose; Maddrey ≥ 32 → corticoide) → cirrose (fibrose + nódulos de regeneração). Não alcoólica (DHGNA/MASLD): síndrome metabólica, mesma via.</li>
+        <li><b>Cirrose = insuficiência hepatocelular</b> (icterícia, albumina ↓, TAP ↑, encefalopatia, ginecomastia, eritema palmar, telangiectasias, atrofia testicular) <b>+ hipertensão portal</b> (varizes esofágicas, esplenomegalia/hiperesplenismo, ascite, circulação colateral, encefalopatia). Child-Pugh (BAETA: bilirrubina, albumina, encefalopatia, TAP, ascite) e MELD.</li>
+        <li><b>Líquido ascítico (Lab da ementa)</b>: GASA (albumina sérica − ascítica) <b>≥ 1,1 = hipertensão portal</b> (cirrose, IC, Budd-Chiari); &lt; 1,1 = peritoneal (carcinomatose, TB, pancreática). <b>PBE = polimorfonucleares ≥ 250/mm³</b> → cefotaxima/ceftriaxona + albumina; profilaxia com norfloxacino. Proteína &lt; 1 g/dL = risco de PBE.</li>
+        <li>Fisiopatologia da ascite: hipertensão sinusoidal + vasodilatação esplâncnica (NO) → hipovolemia efetiva → SRAA/ADH → retenção de Na e água. Tratamento: restrição de sódio + espironolactona (+ furosemida 100:40), paracentese de alívio com albumina se &gt; 5 L; síndrome hepatorrenal = terlipressina + albumina.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Abordagem do paciente ictérico na APS (roteiro para descritiva)</h2>
+      <ul>
+        <li><b>1) Anamnese dirigida</b>: tempo, dor (cólica pós-gordura = pedra; indolor + emagrecimento = tumor), febre/calafrios (colangite), prurido/acolia/colúria (colestase), pródromo viral, álcool, drogas/paracetamol/fitoterápicos, sexo/drogas IV/transfusão/tatuagem, gestação, história familiar (Gilbert, hemólise), doença hepática prévia.</li>
+        <li><b>2) Exame</b>: icterícia (escleras &gt; 2,5–3 mg/dL), estigmas de hepatopatia crônica, hepatomegalia dolorosa (hepatite) × <b>vesícula palpável indolor (Courvoisier = tumor)</b>, Murphy, esplenomegalia (hemólise/hipertensão portal), ascite, encefalopatia (flapping).</li>
+        <li><b>3) Laboratório</b>: <b>BT com frações, ALT/AST, FA, GGT, TAP/INR, albumina, hemograma (+ reticulócitos/LDH/haptoglobina se indireta), ureia/creatinina, amilase/lipase, EAS (bilirrubina/urobilinogênio), β-hCG</b>; sorologias (anti-HAV IgM, HBsAg/anti-HBc, anti-HCV) se padrão hepatocelular.</li>
+        <li><b>4) Imagem</b>: <b>USG de abdome = primeiro exame de todo ictérico</b> (via biliar dilatada? cálculo? massa? fígado?). Dilatada → colangioRM (ou eco-EDA) para definir a causa → CPRE terapêutica. Não dilatada com padrão hepatocelular → sorologias/biópsia. Massa → TC/RM.</li>
+        <li><b>5) Conduta e encaminhamento</b>: colestase obstrutiva por cálculo → analgesia, hidratação, jejum se náusea, <b>encaminhar à urgência/cirurgia para CPRE + colecistectomia</b>; sinais de colangite (febre, calafrios, hipotensão, confusão) = <b>emergência</b> (ATB EV + CPRE urgente); hepatite aguda sem sinais de gravidade → ambulatorial, suspender álcool/hepatotóxicos, notificar; <b>INR &gt; 1,5 ou encefalopatia → internar (fulminante)</b>; icterícia indolor progressiva + emagrecimento → TC e encaminhamento oncológico com prioridade.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>6 · As 12 pegadinhas desta SP</h2>
+      <ul>
+        <li>① Etiologia <b>mais comum</b> de pancreatite = <b>cálculo biliar</b>, mesmo com "homem de 50 anos" no enunciado. Álcool é a 2ª. (A veterana errou.)</li>
+        <li>② Pancreatite leve: <b>dieta zero + analgesia + USG</b>; <b>nunca meropenem/ATB profilático</b>; TC só após 48–72 h. (A veterana errou.)</li>
+        <li>③ Pêntade de Reynolds = Charcot + <b>hipotensão + confusão mental</b>. Hiperamilasemia não entra.</li>
+        <li>④ HD + icterícia + febre <b>sem instabilidade</b> = coledocolitíase com <b>tríade de Charcot</b> (não pêntade); "tríade de Beck" é do tamponamento cardíaco.</li>
+        <li>⑤ Pólipo de vesícula <b>≥ 1 cm</b> → colecistectomia (risco de câncer); &lt; 1 cm → USG seriada. Cálculo &gt; 3 cm, porcelana, falciforme, bariátrica, microlitíase → operar assintomático.</li>
+        <li>⑥ USG vê cálculo, parede e líquido perivesicular; <b>TC é menos sensível para cálculo</b>. USG é sempre o 1º exame de vias biliares e do ictérico.</li>
+        <li>⑦ Jejum prolongado, NPT e análogos de somatostatina são fatores de <b>risco</b> para lama/colecistite alitiásica — não protetores.</li>
+        <li>⑧ Cólica biliar: CCK liberada pela gordura <b>contrai</b> a vesícula contra o cálculo (não "inibe CCK"), ocorre 30 min–2 h após a refeição.</li>
+        <li>⑨ Colecistectomia é <b>videolaparoscópica</b> por padrão; aberta é a exceção.</li>
+        <li>⑩ Icterícia indireta = hemólise/Gilbert; direta = coledocolitíase/colestase. Colúria só existe com bilirrubina direta.</li>
+        <li>⑪ FA é a <b>primeira</b> a subir na obstrução; transaminases sobem transitoriamente na passagem do cálculo (não confunda com hepatite).</li>
+        <li>⑫ Descritiva: chame de <b>"síndrome colestática / icterícia obstrutiva por coledocolitíase"</b>; Mirizzi é diagnóstico de imagem, raro — não é a resposta de síndrome clínica.</li>
+      </ul>
+    </div>
+</section>
+  <section id="quizsec">
+    <div class="scorebar"><span class="lbl">Acertos</span><span class="val"><span id="hit">0</span>/<span id="tot">24</span></span><div class="bar"><i id="fill"></i></div><button class="btn" onclick="resetQuiz()">Zerar</button></div>
+    <div class="note" style="margin-top:0"><b>Modo simulado:</b> a APF real da SP3 teve 7 questões A–E (proposições e "assinale a CORRETA" longas). Faça primeiro as <b>Q1–Q7 (APF real 2026.1)</b> em 25 min; depois as <b>Q8–Q11 (prova final)</b> e as <b>Q12–Q24 (inéditas)</b>, que cobrem também hepatites e cirrose (ementa deste ano). A descritiva no fim é a 3ª discursiva da prova final da veterana, com roteiro de correção e as anotações da tutora.</div>
+    <div class="chips" id="chips"></div>
+    <div id="quiz"></div>
+    
+    <div class="q" id="descritiva">
+      <div class="qhead"><div class="qnum">D</div><span class="pill d">Descritiva · prova final real (29/04/2026)</span><span class="pill o">Icterícia obstrutiva na APS · 100 pontos</span></div>
+      <div class="stem">
+        <span class="cx">Mulher de 27 anos procura a Unidade de Saúde da Família por dor abdominal há cerca de 5 dias. Refere dor em hipocôndrio direito e epigástrio, de intensidade moderada, associada a náuseas e piora após alimentação, especialmente refeições gordurosas. Nas últimas 48 horas, percebeu icterícia progressiva. Relata que a urina está "mais escura do que o habitual", mas não sabe precisar desde quando, e nega alteração evidente da cor das fezes. Refere episódios semelhantes de dor nos últimos meses, com melhora espontânea. Também relata cansaço recente e sensação de fraqueza. Nega etilismo. Ao exame físico, encontra-se em bom estado geral, afebril, com escleras ictéricas e dor à palpação em hipocôndrio direito, sem sinais de irritação peritoneal.</span>
+        <b>a)</b> Qual é a principal síndrome clínica apresentada pela paciente? <b>(15)</b>
+        <br><b>b)</b> Quais hipóteses diagnósticas devem ser consideradas na investigação inicial? <b>(20)</b>
+        <br><b>c)</b> Descreva a abordagem diagnóstica inicial na atenção primária e os exames que devem ser solicitados para diferenciar icterícia não conjugada/indireta, icterícia conjugada/colestática-obstrutiva e icterícia hepatocelular. <b>(40)</b>
+        <br><b>d)</b> Descreva a conduta inicial e o encaminhamento mais adequado para essa paciente. <b>(25)</b>
+      </div>
+      <button class="btn rotbtn" data-r="rot">Mostrar/ocultar roteiro de correção</button>
+      <div id="rot" style="display:none;margin-top:12px">
+        <div class="tblwrap"><table>
+          <tr><th>Item</th><th>O corretor procura</th><th>Pts</th></tr>
+          <tr><td><b>a</b></td><td><b>Síndrome colestática (icterícia obstrutiva / hiperbilirrubinemia direta)</b> — icterícia progressiva + colúria + dor biliar pós-gordura em mulher jovem com cólicas prévias = obstrução do colédoco por cálculo (coledocolitíase) (15). A tutora corrigiu a veterana, que escreveu "síndrome de Mirizzi": Mirizzi é diagnóstico anatômico raro de imagem, não a síndrome clínica. Aceita-se "icterícia obstrutiva por coledocolitíase".</td><td>15</td></tr>
+          <tr><td><b>b</b></td><td><b>Coledocolitíase</b> (principal) (6) · <b>colangite aguda</b> incipiente (vigiar febre — Charcot) (4) · <b>colecistite aguda</b> com hiperbilirrubinemia leve (3) · <b>pancreatite aguda biliar</b> (dor epigástrica pós-alimentar) (3) · <b>hepatite viral aguda</b> (cansaço, fraqueza, mulher jovem — diferencial hepatocelular) (2) · outros aceitáveis: hepatite medicamentosa, síndrome de Mirizzi, neoplasia periampular (improvável pela idade), gravidez (β-hCG) (2). A veterana citou pancreatite, colecistite e úlcera gástrica — úlcera não explica icterícia.</td><td>20</td></tr>
+          <tr><td><b>c</b></td><td><b>Anamnese + exame</b>: tempo, dor tipo cólica pós-gordura, colúria/acolia/prurido, febre/calafrios, pródromos virais, álcool, medicamentos/fitoterápicos, sexo/drogas/transfusão, gestação, história familiar; exame: escleras, Murphy, hepatomegalia, vesícula palpável, estigmas de hepatopatia, esplenomegalia (8) · <b>Laboratório</b>: <b>bilirrubina total e frações</b> (indireta × direta), <b>FA e GGT</b> (canaliculares/colestase), <b>ALT/AST</b> (lesão hepatocelular), <b>TAP/INR e albumina</b> (função), <b>hemograma + reticulócitos/LDH/haptoglobina</b> (hemólise se indireta), <b>amilase/lipase</b> (pancreatite biliar), ureia/creatinina, <b>EAS</b> (bilirrubina/urobilinogênio), <b>β-hCG</b>, sorologias (anti-HAV IgM, HBsAg, anti-HBc, anti-HCV) se padrão hepatocelular (16) · <b>Interpretação</b>: indireta = BI &gt; 80%, enzimas normais, sem colúria (hemólise/Gilbert); colestática = BD ↑ + FA/GGT ≫ ALT + colúria/acolia; hepatocelular = ALT/AST nas centenas–milhares ≫ FA (8) · <b>Imagem</b>: <b>USG de abdome como primeiro exame</b> (cálculos, colédoco &gt; 6 mm, parede da vesícula, fígado); se dilatada sem cálculo visível → colangioRM/eco-EDA (8). A veterana listou os exames mas não disse "qual exame aumenta em cada síndrome" — a tutora anotou exatamente isso.</td><td>40</td></tr>
+          <tr><td><b>d</b></td><td><b>Conduta inicial na UBS</b>: analgesia (dipirona/escopolamina, AINE se função renal ok), antiemético, hidratação, dieta zero/hipogordurosa se náusea, orientar sinais de alarme (febre com calafrios, confusão, hipotensão, dor intensa, vômitos incoercíveis) (8) · <b>Encaminhamento</b>: <b>urgência/serviço com cirurgia e endoscopia</b> para confirmação (USG ± colangioRM) e <b>CPRE com esfincterotomia e extração do cálculo</b>, seguida de <b>colecistectomia videolaparoscópica</b> na mesma internação (10) · se surgirem febre/calafrios/hipotensão/confusão = colangite → <b>emergência</b>: ATB EV + CPRE urgente (4) · se padrão hepatocelular com INR &gt; 1,5 ou encefalopatia → internação (fulminante); hepatite viral sem gravidade → ambulatorial + notificação (3). A veterana acertou o eixo (analgesia, hidratação, hospital para CPRE).</td><td>25</td></tr>
+        </table></div>
+        <div class="warn">Autoavaliação: ≥ 80 = pronto · 60–79 = revisar seções 1, 2 e 5 · &lt; 60 = refazer o resumo. Na discursiva, use os nomes das síndromes (colestática/hepatocelular/hemolítica) e diga <b>qual exame sobe em cada uma</b> — é isso que vale o item c.</div>
+      </div>
+    </div>
+
+  </section>
+  <section id="mapa"><div class="panel"><h2>Mapa mental — clique para expandir</h2><div class="map" id="mapabox">
+      <details open><summary>🟡 Icterícia — 3 síndromes</summary><ul>
+        <li>Pré-hepática/indireta: hemólise, hematoma, Gilbert; enzimas normais, sem colúria</li>
+        <li>Hepatocelular: ALT/AST ≫ FA, mista, colúria; gravidade = INR/encefalopatia</li>
+        <li>Colestática/direta: FA/GGT ≫ ALT, BD, colúria + acolia + prurido; USG dilatada</li>
+        <li>USG = 1º exame de todo ictérico · Courvoisier = tumor · dor + febre = pedra</li>
+      </ul></details>
+      <details><summary>🟢 Árvore biliar — onde a pedra está</summary><ul>
+        <li>Vesícula: colelitíase (80% assintomática) → cólica biliar → colecistectomia eletiva</li>
+        <li>Operar assintomático: pólipo ≥ 1 cm, cálculo &gt; 3 cm, porcelana, falciforme, bariátrica, microlitíase</li>
+        <li>Cístico: colecistite (&gt; 6 h, febre, Murphy) → USG → ATB + colecistectomia &lt; 72 h; grave/inoperável → colecistostomia</li>
+        <li>Colédoco: coledocolitíase (icterícia flutuante) → USG → colangioRM/eco-EDA → CPRE; colangite (Charcot/Reynolds) → ATB + CPRE URGENTE</li>
+        <li>Papila: pancreatite biliar → clínico; CPRE só se colangite/obstrução</li>
+        <li>Mirizzi: cístico comprime hepático comum (raro)</li>
+      </ul></details>
+      <details><summary>🔥 Pancreatite aguda</summary><ul>
+        <li>Etiologia: cálculo (nº 1) &gt; álcool &gt; TG &gt; 1.000 &gt; pós-CPRE &gt; drogas</li>
+        <li>2 de 3: dor típica + lipase/amilase ≥ 3× + imagem; TC só &gt; 48–72 h</li>
+        <li>Gravidade: falência orgânica &gt; 48 h; preditores SIRS, ureia &gt; 45, Hct &gt; 44, Cr, PCR &gt; 150, derrame, idade, obesidade</li>
+        <li>Conduta: jejum curto + analgesia + RL por metas + USG; sem ATB profilático; dieta precoce; colecistectomia mesma internação (leve)</li>
+        <li>Complicações: pseudocisto (&gt; 4 sem; drenar se sintomático/&gt; 6 cm), necrose infectada (ATB + step-up), SDRA/IRA, trombose esplênica</li>
+        <li>Crônica: esteatorreia + DM + calcificações; enzimas normais; TC; enzimas + ADEK + abstinência</li>
+      </ul></details>
+      <details><summary>🦠 Hepatites virais</summary><ul>
+        <li>A/E: fecal-oral, agudas, IgM; A vacina; E grave na gestante</li>
+        <li>B: HBsAg (infecção) · anti-HBc (contato) · anti-HBs (imunidade); croniza 90% RN / 5–10% adulto; vacina + IG no RN</li>
+        <li>C: anti-HCV → RNA; croniza 70–85%; DAAs curam &gt; 95%; sem vacina</li>
+        <li>Aguda: ALT &gt; 1.000; gravidade INR/encefalopatia</li>
+      </ul></details>
+      <details><summary>🍺 Fígado alcoólico e cirrose</summary><ul>
+        <li>Esteatose → hepatite alcoólica (AST/ALT &gt; 2, Maddrey) → cirrose</li>
+        <li>Insuficiência hepatocelular + hipertensão portal; Child-Pugh (BAETA), MELD</li>
+        <li>Ascite: GASA ≥ 1,1 = portal; PBE = PMN ≥ 250 → cefotaxima + albumina</li>
+        <li>Espironolactona + furosemida 100:40, restrição de Na, paracentese com albumina</li>
+      </ul></details>
+      <details><summary>🩺 Roteiro do ictérico na APS</summary><ul>
+        <li>Anamnese dirigida → exame (Murphy, Courvoisier, estigmas) → BT/frações, ALT/AST, FA/GGT, INR/albumina, hemograma, lipase, EAS, β-hCG, sorologias</li>
+        <li>USG primeiro → dilatada? colangioRM → CPRE · não dilatada? sorologias</li>
+        <li>Encaminhar: colestase por cálculo → cirurgia/CPRE; colangite → emergência; INR &gt; 1,5/encefalopatia → internar</li>
+      </ul></details>
+</div></div></section>
+  <section id="flash"><div class="panel"><h2>Flashcards — clique para virar</h2><p class="src">Um fato por cartão. A pergunta fica visível no verso.</p><div class="fcgrid" id="fcbox"></div></div></section>
+  <div class="foot">UC14 · SP3 — Icterícia, vias biliares e pancreatite · 14/09/2026 · APF 30/09 · bons estudos, Otto 🚀</div>
+</div>
+<script>
+const QS=[
+ /* ===== APF REAL SP3 (15/04/2026) ===== */
+ {src:"APF", obj:"Colelitíase · pólipo", stem:"<span class='cx'>Homem de 87 anos, assintomático, realizou ultrassonografia abdominal para controle de esteatose hepática. Ao exame, foi detectado um pólipo de 2,3 cm de diâmetro no fundo da vesícula biliar associado à colelitíase.</span> O tratamento adequado para este paciente deverá ser:",
+  opts:["Ultrassonografia seriada a cada 6 meses.","Complementação diagnóstica com endoscopia digestiva alta.","Acompanhamento ambulatorial sem necessidade de abordagem cirúrgica.","Tratamento por colangiografia endoscópica.","Colecistectomia por via convencional ou por videolaparoscopia."], ans:4,
+  why:"Pólipo de vesícula ≥ 1 cm (ainda mais com > 2 cm, idade > 50 e cálculos associados) tem risco significativo de adenocarcinoma → colecistectomia mesmo assintomático. USG seriada é para pólipos < 1 cm. EDA e CPRE não têm papel.",
+  trap:"'87 anos e assintomático' tenta te empurrar para observar. O corte de 1 cm manda; idade avançada não contraindica laparoscopia."},
+
+ {src:"APF", obj:"Colelitíase · microlitíase", stem:"<span class='cx'>Mulher, 37 anos de idade, sem comorbidades, foi submetida à ultrassonografia de abdome total durante investigação de infertilidade. O exame demonstrou vesícula biliar com dimensão e parede de espessura normais com múltiplos microcálculos. Após o resultado do exame, foram realizados os seguintes exames laboratoriais: FA: 84 U/L; GGT: 90 U/L; TGO/AST: 34 U/L; TGP/ALT: 32 U/L.</span> Com relação à colelitíase nesta paciente, qual é a melhor conduta e a sua correta justificativa?",
+  opts:["Seguimento clínico, por estar assintomática.","Seguimento clínico devido à ausência de comorbidades.","Colangiorressonância para planejar a conduta.","Colecistectomia devido à microlitíase e idade.","Complementação diagnóstica com endoscopia digestiva alta."], ans:3,
+  why:"Gabarito da tutora: microcálculos (< 3–5 mm) passam com facilidade pelo cístico → risco maior de coledocolitíase e pancreatite biliar; paciente jovem tem décadas de exposição → colecistectomia eletiva profilática. Via biliar não dilatada e enzimas normais → não precisa de colangioRM.",
+  trap:"'Assintomática = seguir' (A) é a regra geral da colelitíase — mas microlitíase é uma das exceções clássicas, junto com pólipo ≥ 1 cm, cálculo > 3 cm, porcelana, falciforme e bariátrica."},
+
+ {src:"APF", obj:"Icterícia obstrutiva · proposições", stem:"Leia as afirmativas sobre icterícia obstrutiva:<br>I. A coledocolitíase é um dos principais fatores causais.<br>II. As neoplasias de vias biliares e de pâncreas são importantes diagnósticos diferenciais.<br>III. A colangite aguda é uma grave complicação infecciosa, com alta mortalidade se não diagnosticada e tratada precocemente.<br>IV. A pêntade de Reynolds é caracterizada por dor no hipocôndrio direito, febre, icterícia, alteração do nível de consciência e hiperamilasemia.",
+  opts:["Apenas as alternativas I, II e III estão corretas.","Apenas as alternativas I e IV estão corretas.","Apenas as alternativas I e III estão corretas.","Apenas a alternativa III está correta.","Apenas as alternativas I e IV estão corretas."], ans:0,
+  why:"I, II e III são verdadeiras. IV troca o 5º elemento: pêntade de Reynolds = Charcot (dor + febre + icterícia) + HIPOTENSÃO/choque + confusão mental. Hiperamilasemia não faz parte.",
+  trap:"A banca troca um único item da pêntade. Decore: Charcot 3 → Reynolds 5 = + choque + confusão."},
+
+ {src:"APF", obj:"Pancreatite · etiologia", stem:"<span class='cx'>Um homem de 50 anos apresenta dor abdominal súbita e intensa no epigástrio, irradiando para o dorso. A dor piora ao deitar-se de costas e melhora ao se inclinar para frente. Ele também relata náuseas e vômitos. Exames laboratoriais mostram elevação de amilase de 1040 U/L.</span> O fator etiológico mais comum para este quadro é:",
+  opts:["Consumo excessivo de álcool.","Colelitíase.","Infecção bacteriana.","Trauma abdominal.","Uso de anti-inflamatórios."], ans:1,
+  why:"Pancreatite aguda: a causa mais comum é o cálculo biliar (40–60%), seguida do álcool (25–35%). O enunciado não menciona etilismo — pergunta o fator MAIS COMUM em geral.",
+  trap:"A veterana marcou álcool por causa de 'homem de 50 anos'. Sem a palavra 'etilista' no caso, a resposta estatística é pedra."},
+
+ {src:"APF", obj:"Pancreatite · conduta", stem:"<span class='cx'>Certa paciente de 34 anos de idade procurou o pronto-socorro com queixa de dor em andar superior do abdome, de forte intensidade, em faixa, irradiada para dorso, piorada com alimentação, associada a náuseas e vômitos pós-prandiais, iniciada há poucas horas. À admissão, foram coletados exames laboratoriais que evidenciaram aumento de amilase e lipase cerca de quatro vezes acima do valor máximo de referência.</span> Nesse caso, a conduta adequada consiste em:",
+  opts:["dieta oral zero, analgesia e ecografia de abdome.","dieta oral zero, meropenem e tomografia de abdome.","analgesia, dieta oral zero e meropenem.","dieta oral zero, meropenem e ecografia de abdome.","dieta oral livre, analgesia e ecografia de abdome."], ans:0,
+  why:"Pancreatite aguda confirmada (dor típica + enzimas ≥ 3×): jejum inicial, analgesia, hidratação e USG para procurar cálculo/dilatação de via biliar (etiologia biliar em mulher jovem). Sem ATB profilático; TC só após 48–72 h ou se dúvida/gravidade.",
+  trap:"A veterana marcou B. Meropenem em qualquer alternativa = errada em pancreatite sem necrose infectada. E 'dieta livre' de entrada com vômitos também não."},
+
+ {src:"APF", obj:"Coledocolitíase · Charcot", stem:"<span class='cx'>Durante atendimento no pronto-socorro, um paciente encontra-se com dor abdominal em quadrante superior direito, icterícia, relato de um episódio de febre alta, sem instabilidade hemodinâmica, interagindo com examinador.</span> Esses achados são compatíveis com:",
+  opts:["Colelitíase e correspondem à tríade de Charcot.","Colelitíase e correspondem à tríade de Beek.","Coledocolitíase e correspondem à pêntade de Reynolds.","Coledocolitíase e correspondem à tríade de Reynolds.","Coledocolitíase e correspondem à tríade de Charcot."], ans:4,
+  why:"Icterícia = obstrução do colédoco (coledocolitíase); dor + febre + icterícia = tríade de Charcot (colangite). Sem hipotensão e sem confusão → não é pêntade de Reynolds. Colelitíase simples não dá icterícia nem febre.",
+  trap:"'Tríade de Reynolds' não existe (é pêntade); 'tríade de Beck' é do tamponamento cardíaco. Duas alternativas com nomes errados para você tropeçar."},
+
+ {src:"APF", obj:"Vesícula · afirmativas", stem:"Em relação a doenças da vesícula biliar, assinale a alternativa CORRETA:",
+  opts:["O ultrassom é um exame diagnóstico que, além de mostrar cálculos, pode mostrar outros achados de colecistite aguda, como líquido perivesicular e espessamento de parede. A tomografia também serve para a colecistite aguda, mas é menos sensível para o achado de cálculos biliares.","O jejum prolongado e o uso de análogos da somatostatina são fatores protetores e aumentam a solubilidade da bile na vesícula biliar.","A dor na forma clássica, ou seja, a cólica biliar, ocorre com a gordura em íleo, provocando inibição da CCK (colecistocinina) e ocorre em menos de 50% dos casos.","O tratamento de escolha é a colecistectomia aberta, ou convencional, sempre que possível. Em algumas exceções, podemos usar a colecistectomia videolaparoscópica.","A colecistite aguda alitiásica pode ocorrer em casos de queimaduras, politraumas, imunossupressão e diabetes, sendo que o início precoce de nutrição parenteral total é um fator protetor para estes pacientes."], ans:0,
+  why:"USG: cálculos (S > 95%), parede > 3–4 mm, líquido perivesicular, Murphy sonográfico. TC vê complicações mas perde cálculos isodensos. B: jejum e octreotida causam ESTASE (fator de risco). C: gordura no duodeno LIBERA CCK, que contrai a vesícula. D: laparoscópica é o padrão. E: NPT é fator de RISCO de alitiásica.",
+  trap:"Quatro inversões de 'protetor × risco' e 'inibe × libera'. Leia cada verbo."},
+
+ /* ===== PROVA FINAL — SP3 (Q9–Q12) ===== */
+ {src:"Prova", obj:"Icterícia · classificação", stem:"A icterícia é a coloração amarelada da pele, mucosas e escleras decorrente do aumento da bilirrubina sérica. Pode ser classificada, de forma simplificada, em icterícia indireta (não conjugada) e icterícia direta (conjugada). Com base nessa classificação, assinale a alternativa que relaciona corretamente o tipo de icterícia à doença associada:",
+  opts:["Icterícia indireta — hemólise; icterícia direta — coledocolitíase","Icterícia indireta — colecistite aguda; icterícia direta — anemia hemolítica","Icterícia indireta — pancreatite aguda biliar; icterícia direta — síndrome de Gilbert","Icterícia indireta — coledocolitíase; icterícia direta — hemólise"], ans:0,
+  why:"Indireta = produção ↑ (hemólise) ou conjugação ↓ (Gilbert, Crigler-Najjar). Direta = excreção ↓ (coledocolitíase, colestase, hepatite, Dubin-Johnson). Colecistite simples praticamente não dá icterícia.",
+  trap:"Gilbert é INDIRETA (déficit de UGT1A1) — a alternativa C inverte."},
+
+ {src:"Prova", obj:"Colecistite · conduta definitiva", stem:"<span class='cx'>Paciente de 63 anos, diabético, internado com colecistite aguda calculosa sem sinais de perfuração ou gangrena, recebe hidratação venosa, analgesia e antibiótico. Ele está hemodinamicamente estável.</span> Qual é a melhor conduta definitiva?",
+  opts:["Colecistectomia videolaparoscópica na mesma internação","Alta hospitalar com antibiótico oral por 14 dias e cirurgia apenas se houver recidiva","Observação clínica isolada, pois a maioria dos casos resolve sem tratamento definitivo","Colecistostomia percutânea como primeira escolha, mesmo sendo bom candidato cirúrgico"], ans:0,
+  why:"Colecistite aguda em paciente estável e operável = colecistectomia laparoscópica precoce (< 72 h) na mesma internação. Esfriar e operar depois aumenta complicações; colecistostomia é para o grave/inoperável.",
+  trap:"'Diabético' é isca para colecistostomia — na verdade é motivo para não adiar (risco de enfisematosa)."},
+
+ {src:"Prova", obj:"Colecistite · imagem", stem:"<span class='cx'>Homem de 55 anos chega ao pronto-socorro com dor em hipocôndrio direito há 8 horas, febre e náuseas. O residente suspeita de colecistite aguda calculosa e pergunta qual é o exame de imagem inicial mais apropriado.</span>",
+  opts:["Tomografia computadorizada de abdome com contraste, em todos os casos","Colangiorressonância magnética como primeiro exame","Ultrassonografia abdominal","CPRE diagnóstica de rotina"], ans:2,
+  why:"USG é o 1º exame de toda suspeita biliar: cálculo, parede espessada, líquido perivesicular, Murphy sonográfico, colédoco. ColangioRM entra se suspeita de coledocolitíase com risco intermediário; CPRE é terapêutica.",
+  trap:"'CPRE diagnóstica de rotina' está sempre errada — invasiva, 5% de pancreatite."},
+
+ {src:"Prova", obj:"Colangite · conduta", stem:"<span class='cx'>Homem de 68 anos, diabético, procura o pronto-socorro com dor em hipocôndrio direito há 24 horas, febre alta com calafrios e icterícia progressiva. Ao exame, está confuso, hipotenso (PA 88×54 mmHg), taquicárdico e com dor à palpação em quadrante superior direito. Exames laboratoriais mostram leucocitose, bilirrubina total e fosfatase alcalina elevadas. A ultrassonografia evidencia dilatação de vias biliares extra-hepáticas e provável cálculo em colédoco.</span> Diante da principal hipótese diagnóstica, assinale a alternativa que apresenta a melhor conduta terapêutica inicial e definitiva:",
+  opts:["Observação clínica por 24 a 48 horas, pois a maioria dos casos regride apenas com jejum e analgesia","Alta com antibiótico oral e programação ambulatorial de colecistectomia eletiva em 30 dias","Analgesia, hidratação venosa, antibioticoterapia de amplo espectro, colecistectomia videolaparoscópica imediata","Analgesia, hidratação venosa, antibioticoterapia de amplo espectro e descompressão biliar urgente por CPRE, com tratamento definitivo da causa após estabilização"], ans:3,
+  why:"Pêntade de Reynolds = colangite grave (Tokyo III): suporte + ATB EV + drenagem biliar URGENTE por CPRE. Colecistectomia depois. Operar a vesícula não desobstrui o colédoco.",
+  trap:"A veterana marcou C. Icterícia + febre = colédoco → CPRE, não vesícula → cirurgia."},
+
+ /* ===== INÉDITAS ===== */
+ {src:"Inédita", obj:"Icterícia · Gilbert", stem:"<span class='cx'>Homem, 22 anos, notou escleras amareladas após uma virose com jejum prolongado e provas na faculdade. Assintomático. BT 3,1 mg/dL (BI 2,8; BD 0,3), ALT/AST/FA/GGT normais, hemograma, reticulócitos, LDH e haptoglobina normais.</span> Assinale a correta:",
+  opts:["Hepatite viral aguda; solicitar sorologias e afastar do trabalho.","Síndrome de Gilbert: hiperbilirrubinemia indireta leve por deficiência parcial da UGT1A1, desencadeada por jejum/estresse/infecção; benigna, sem tratamento, sem necessidade de biópsia.","Coledocolitíase; USG e CPRE.","Anemia hemolítica; investigar com teste de Coombs."], ans:1,
+  why:"Indireta isolada, enzimas normais, sem hemólise (reticulócitos/LDH/haptoglobina normais), jovem, gatilho por jejum = Gilbert (5–10% da população). Só tranquilizar.",
+  trap:"Hemólise também dá indireta — o que separa é reticulócito/LDH/haptoglobina/anemia. Colestase e hepatite dariam DIRETA e enzimas alteradas."},
+
+ {src:"Inédita", obj:"Icterícia · padrão laboratorial", stem:"Associe o padrão laboratorial ao diagnóstico mais provável:<br>1. BT 12 (BD 9), FA 620, GGT 400, ALT 80, USG com colédoco de 12 mm e vesícula distendida indolor, emagrecimento de 8 kg.<br>2. BT 8 (BD 6), ALT 2.400, AST 1.900, FA 150, INR 1,2, anti-HAV IgM positivo.<br>3. BT 4 (BI 3,5), Hb 8, reticulócitos 9%, LDH 900, haptoglobina indetectável.<br>4. BT 6 (BD 4), AST 210, ALT 90, GGT 800, VCM 104, febre, leucocitose, etilismo pesado.",
+  opts:["1-tumor periampular · 2-hepatite A aguda · 3-hemólise · 4-hepatite alcoólica","1-hepatite A · 2-coledocolitíase · 3-Gilbert · 4-colangite","1-colangite · 2-hepatite alcoólica · 3-hemólise · 4-hepatite A","1-tumor periampular · 2-hepatite alcoólica · 3-Gilbert · 4-hepatite A"], ans:0,
+  why:"1: colestase + Courvoisier + emagrecimento = neoplasia periampular. 2: ALT nas milhares + IgM anti-HAV = hepatite A aguda. 3: indireta + anemia + reticulocitose + LDH ↑ + haptoglobina ↓ = hemólise. 4: AST/ALT > 2, AST < 300, GGT/VCM ↑, febre = hepatite alcoólica.",
+  trap:"AST/ALT > 2 com AST < 300 é a assinatura do álcool; ALT > 1.000 é viral/tóxica/isquêmica, nunca álcool."},
+
+ {src:"Inédita", obj:"Coledocolitíase · investigação", stem:"<span class='cx'>Mulher, 48 anos, cólica biliar há 2 dias, agora com icterícia leve (BT 3,2, BD 2,4), FA 380, GGT 290, ALT 140. Afebril, estável. USG: colelitíase múltipla, colédoco 8 mm, sem cálculo visualizado no colédoco.</span> Qual o próximo passo mais adequado?",
+  opts:["CPRE imediata, pois todo colédoco dilatado exige extração endoscópica.","Colecistectomia laparoscópica direta, sem investigar o colédoco.","Risco intermediário de coledocolitíase: colangiorressonância (ou ecoendoscopia) para confirmar; se positiva → CPRE com extração e depois colecistectomia; alternativa: colecistectomia com colangiografia intraoperatória.","Observação ambulatorial com repetição das enzimas em 30 dias."], ans:2,
+  why:"Colédoco dilatado + enzimas colestáticas sem cálculo visto e sem colangite = risco intermediário → exame não invasivo (colangioRM S ~90%) antes de expor à CPRE. Alto risco (cálculo visto no colédoco, colangite, BT > 4 + colédoco dilatado) → CPRE direto.",
+  trap:"CPRE não é exame diagnóstico de rotina (pancreatite 5%). Ignorar o colédoco e operar a vesícula deixa a pedra para trás."},
+
+ {src:"Inédita", obj:"Pancreatite · gravidade", stem:"<span class='cx'>Homem, 62 anos, obeso, pancreatite biliar há 36 h. Chega com FC 118, FR 26, Tax 38,4 °C, leucócitos 19.000, Hct 49%, ureia 78 mg/dL, Cr 2,1, PA 95×60 após 2 L de cristaloide, saturação 90% em ar ambiente, derrame pleural à esquerda.</span> Assinale a correta:",
+  opts:["Pancreatite leve, pois a lipase é apenas 4× o normal; alta com dieta.","Preditores de gravidade presentes (SIRS, hemoconcentração, ureia/creatinina elevadas, hipotensão, hipoxemia, derrame pleural, idade, obesidade): pancreatite potencialmente grave → UTI, ressuscitação volêmica guiada por metas, monitorização de falência orgânica, sem ATB profilático, TC com contraste após 72 h para avaliar necrose.","Iniciar meropenem imediatamente, pois febre e leucocitose indicam necrose infectada nas primeiras 48 h.","Laparotomia de urgência para necrosectomia precoce."], ans:1,
+  why:"Atlanta: gravidade = falência orgânica persistente > 48 h (Marshall), predita por SIRS, BUN > 20/ureia > 45, Hct > 44, Cr ↑, derrame pleural, idade > 60, obesidade. Conduta: UTI, volume guiado por metas (diurese, Hct, ureia), suporte, sem ATB profilático; necrose infectada é evento tardio (> 7–10 d) — febre precoce é SIRS estéril. Necrosectomia precoce tem mortalidade proibitiva.",
+  trap:"Valor de lipase não mede gravidade; febre + leucocitose nas primeiras 48 h = SIRS, não infecção."},
+
+ {src:"Inédita", obj:"Pancreatite · pseudocisto", stem:"<span class='cx'>Mulher, 45 anos, 6 semanas após pancreatite biliar moderada. Refere plenitude pós-prandial, dor epigástrica e vômitos. TC: coleção líquida homogênea de 9 cm, parede bem definida, retrogástrica, sem gás, sem necrose.</span> Assinale a correta:",
+  opts:["Coleção líquida aguda peripancreática; observar, pois desaparece em dias.","Necrose infectada; meropenem e necrosectomia aberta.","Pseudocisto pancreático sintomático (> 4 semanas, parede madura, > 6 cm): drenagem, preferencialmente endoscópica transgástrica (cistogastrostomia); percutânea ou cirúrgica se anatomia desfavorável.","Abscesso pancreático; drenagem percutânea e antibiótico."], ans:2,
+  why:"> 4 semanas + parede fibrosa + conteúdo líquido homogêneo = pseudocisto. Indicações de drenagem: sintomas (compressão gástrica/biliar), > 6 cm, persistência > 6 semanas, complicações (infecção, hemorragia, ruptura). Assintomático pequeno → observar.",
+  trap:"'Sem gás' e 'homogênea' afastam necrose infectada/abscesso. O tempo (> 4 sem) é o que transforma 'coleção aguda' em 'pseudocisto'."},
+
+ {src:"Inédita", obj:"Pancreatite crônica", stem:"<span class='cx'>Homem, 52 anos, etilista e tabagista, dor epigástrica crônica pós-prandial há 3 anos, perdeu 12 kg, fezes volumosas e gordurosas, glicemia de jejum 190 mg/dL. Amilase e lipase normais. RX simples: calcificações em topografia de pâncreas.</span> Assinale a correta:",
+  opts:["Amilase e lipase normais afastam doença pancreática; investigar doença celíaca.","Pancreatite crônica (tríade esteatorreia + diabetes + calcificações): abstinência de álcool e tabaco, dieta hipogordurosa fracionada, reposição de enzimas pancreáticas às refeições (+ IBP), vitaminas lipossolúveis, controle do DM, analgesia em escada; TC/colangioRM para avaliar ducto e excluir neoplasia.","Pancreatite aguda recorrente; internar com meropenem.","Câncer de pâncreas até prova em contrário; Whipple imediato."], ans:1,
+  why:"Na crônica as enzimas são normais (parênquima já fibrosado). Tríade clássica + calcificações fecham. Enzimas exógenas (lipase 25–50 mil U/refeição) tratam a esteatorreia; DM 3c; vigiar adenocarcinoma (risco ↑).",
+  trap:"'Amilase normal afasta pancreatite' é verdade só para a AGUDA. Na crônica a enzima normal é a regra."},
+
+ {src:"Inédita", obj:"Hepatite B · sorologia", stem:"Associe o perfil sorológico à interpretação:<br>1. HBsAg (+), anti-HBc IgM (+), anti-HBs (−)<br>2. HBsAg (−), anti-HBc total (+), anti-HBs (+)<br>3. HBsAg (−), anti-HBc (−), anti-HBs (+)<br>4. HBsAg (+) há 8 meses, anti-HBc IgG (+), HBeAg (+), DNA-HBV alto",
+  opts:["1-hepatite B aguda · 2-infecção prévia curada · 3-vacinado · 4-hepatite B crônica replicativa","1-vacinado · 2-hepatite aguda · 3-crônica · 4-curada","1-crônica · 2-vacinado · 3-curada · 4-aguda","1-hepatite aguda · 2-vacinado · 3-curada · 4-crônica"], ans:0,
+  why:"HBsAg = vírus presente; anti-HBc = já teve contato (IgM = agudo); anti-HBs = imunidade. Vacina só induz anti-HBs. Curada: anti-HBc + anti-HBs. Crônica: HBsAg > 6 meses; HBeAg/DNA = replicação.",
+  trap:"Anti-HBc é o que separa vacinado (negativo) de curado (positivo)."},
+
+ {src:"Inédita", obj:"Hepatite C / A", stem:"Sobre as hepatites virais, assinale a alternativa INCORRETA:",
+  opts:["A hepatite A é de transmissão fecal-oral, autolimitada, não cronifica e é prevenida por vacina.","O rastreio de hepatite C começa com anti-HCV (ou teste rápido) e a infecção ativa é confirmada pelo HCV-RNA; a maioria dos infectados cronifica e o tratamento com antivirais de ação direta cura mais de 95%.","A hepatite E é particularmente grave em gestantes, com risco de forma fulminante.","A hepatite B cronifica em cerca de 90% dos casos em adultos imunocompetentes e em menos de 5% dos recém-nascidos infectados por via vertical.","A gravidade de uma hepatite aguda é medida pelo TAP/INR e pela presença de encefalopatia, não pelo nível das transaminases."], ans:3,
+  why:"É o inverso: cronifica em 5–10% dos adultos e em ~90% dos RN (imaturidade imune) — por isso vacina + imunoglobulina nas primeiras 12 h de vida do filho de mãe HBsAg+. As demais estão corretas.",
+  trap:"A banca inverte os 90%/5% da hepatite B. Regra: quanto mais jovem na infecção, mais croniza."},
+
+ {src:"Inédita", obj:"Cirrose · ascite", stem:"<span class='cx'>Homem, 58 anos, cirrótico por álcool, chega com ascite volumosa, febre baixa e dor abdominal difusa. Paracentese diagnóstica: 480 polimorfonucleares/mm³, proteína 0,8 g/dL, GASA 1,6.</span> Assinale a correta:",
+  opts:["Ascite de origem peritoneal (carcinomatose/TB), pois o GASA é alto.","Peritonite bacteriana espontânea (PMN ≥ 250) em ascite por hipertensão portal (GASA ≥ 1,1): cefotaxima/ceftriaxona EV + albumina (1,5 g/kg no D1 e 1 g/kg no D3) e, após, profilaxia secundária com norfloxacino.","Laparotomia exploradora por peritonite secundária.","Apenas espironolactona e restrição de sódio."], ans:1,
+  why:"GASA ≥ 1,1 = hipertensão portal (cirrose). PMN ≥ 250 = PBE (monomicrobiana, E. coli). Tratamento: cefalosporina de 3ª + albumina (reduz síndrome hepatorrenal); profilaxia secundária. Peritonite secundária: PMN muito alto, polimicrobiana, proteína > 1, LDH alta, glicose baixa → TC.",
+  trap:"GASA alto = portal; GASA baixo = peritoneal. Proteína baixa (< 1) é fator de risco para PBE, não sinal de peritoneal."},
+
+ {src:"Inédita", obj:"Colecistite · Tokyo / alto risco", stem:"<span class='cx'>Mulher, 84 anos, IC classe III, DPOC com O₂ domiciliar, colecistite aguda calculosa há 4 dias, febre, leucócitos 21.000, USG com parede de 8 mm e líquido perivesicular; PA 100×60 com noradrenalina em dose baixa.</span> Qual a melhor conduta?",
+  opts:["Colecistectomia laparoscópica imediata, como em qualquer colecistite.","Antibiótico EV de amplo espectro + colecistostomia percutânea guiada por imagem (drenagem) por ser paciente de alto risco cirúrgico com colecistite grave (Tokyo III); colecistectomia eletiva após recuperação, se possível.","Antibiótico oral e alta.","CPRE com esfincterotomia, pois drena a vesícula."], ans:1,
+  why:"Tokyo grau III (disfunção orgânica — vasopressor) em paciente de altíssimo risco: drenar (colecistostomia percutânea) e tratar com ATB; cirurgia diferida. CPRE não drena a vesícula (cístico obstruído).",
+  trap:"'Colecistectomia sempre' vale para o paciente estável e operável; para o grave/inoperável a resposta é colecistostomia."},
+
+ {src:"Inédita", obj:"Pancreatite biliar · CPRE", stem:"Sobre a indicação de CPRE na pancreatite aguda biliar, assinale a correta:",
+  opts:["CPRE precoce (24–72 h) está indicada em toda pancreatite biliar para remover o cálculo causador.","CPRE precoce está indicada quando há colangite associada ou obstrução biliar persistente (icterícia progressiva, colédoco dilatado com cálculo); na pancreatite biliar leve sem obstrução, a conduta é clínica e a colecistectomia na mesma internação.","CPRE substitui a colecistectomia como tratamento definitivo em pacientes jovens.","CPRE é contraindicada em qualquer pancreatite pelo risco de piorar a inflamação."], ans:1,
+  why:"Na maioria, o cálculo já passou; CPRE só se colangite ou obstrução persistente. Sem isso, CPRE adiciona risco (pancreatite pós-CPRE, perfuração) sem benefício. Colecistectomia é o que previne recorrência.",
+  trap:"'Toda pancreatite biliar → CPRE' é mito recorrente. Guarde: colangite/obstrução = sim; leve sem obstrução = não."},
+
+ {src:"Inédita", obj:"Icterícia · Courvoisier", stem:"<span class='cx'>Homem, 67 anos, tabagista, icterícia progressiva indolor há 5 semanas, prurido, acolia, emagrecimento de 9 kg, vesícula palpável e indolor. BT 15 (BD 12), FA 900, GGT 700, ALT 95, CA 19-9 elevado.</span> Assinale a correta:",
+  opts:["Coledocolitíase; CPRE com extração e colecistectomia.","Icterícia obstrutiva de provável causa neoplásica (tumor periampular — cabeça de pâncreas/papila/colédoco distal) — sinal de Courvoisier-Terrier; TC de abdome com contraste (protocolo pancreático) para diagnóstico e estadiamento; CPRE/prótese para drenagem se necessário; encaminhamento oncológico/cirúrgico.","Hepatite viral aguda; sorologias e repouso.","Síndrome de Gilbert."], ans:1,
+  why:"Icterícia indolor + progressiva + emagrecimento + vesícula palpável indolor = obstrução maligna distal (Courvoisier). Cálculo dá dor e icterícia flutuante, com vesícula fibrosada não palpável. TC pancreática estadia; drenagem só se colangite, prurido intratável ou cirurgia adiada.",
+  trap:"'Indolor' é a palavra que separa pedra (dói) de câncer (não dói)."},
+
+ {src:"Inédita", obj:"Integrativa · árvore biliar", stem:"Julgue as proposições:<br>I. A fosfatase alcalina é geralmente a primeira enzima a se elevar na obstrução biliar, e a GGT confirma a origem hepatobiliar da FA elevada.<br>II. Na obstrução biliar completa, as fezes ficam acólicas e o urobilinogênio urinário desaparece, enquanto a bilirrubina aparece na urina (colúria).<br>III. O prolongamento do TAP na colestase crônica decorre de má absorção de vitamina K e corrige com vitamina K parenteral, ao contrário do TAP prolongado da insuficiência hepatocelular.<br>IV. A síndrome de Mirizzi é a causa mais comum de icterícia obstrutiva em adultos jovens.",
+  opts:["Apenas I, II e III estão corretas.","Apenas I e II estão corretas.","Apenas II, III e IV estão corretas.","Todas estão corretas.","Apenas I e IV estão corretas."], ans:0,
+  why:"I, II e III são frases-lei da colestase. IV é falsa: Mirizzi é rara (< 1% das colelitíases); a causa mais comum de icterícia obstrutiva é a coledocolitíase (e neoplasia no idoso).",
+  trap:"O teste da vitamina K (corrige = colestase; não corrige = fígado doente) é clássico de discursiva."}
+];
+
+const FC=[
+ ["Bilirrubina indireta × direta","Indireta: não conjugada, lipossolúvel, ligada à albumina, NÃO sai na urina. Direta: conjugada (UGT1A1), hidrossolúvel → colúria."],
+ ["Icterícia pré-hepática","Hemólise, hematoma, eritropoese ineficaz, Gilbert/Crigler-Najjar. BI ↑, enzimas normais, sem colúria. Hemólise: reticulócitos ↑, LDH ↑, haptoglobina ↓."],
+ ["Icterícia hepatocelular","Hepatites virais/álcool/drogas/autoimune. ALT/AST ≫ FA, mista, colúria. Gravidade = INR > 1,5, encefalopatia, albumina."],
+ ["Icterícia colestática/obstrutiva","Coledocolitíase, tumor periampular, colangite, CBP/CEP. FA/GGT ≫ ALT, BD ↑, colúria + acolia + prurido. USG: via biliar dilatada > 6 mm."],
+ ["Padrões de transaminases","ALT > 1.000: viral aguda, tóxica (paracetamol), isquêmica. AST/ALT > 2 com AST < 300: álcool. Passagem de cálculo: pico transitório."],
+ ["Sinal de Courvoisier-Terrier","Vesícula palpável e INDOLOR + icterícia = obstrução maligna distal (cabeça de pâncreas/papila). Pedra dói e vesícula fibrosada não palpa."],
+ ["Colelitíase — quando operar assintomático","Pólipo ≥ 1 cm · cálculo > 3 cm · vesícula em porcelana · anemia falciforme · pré-transplante · bariátrica · microlitíase/lama. Resto: só se sintomática."],
+ ["Cólica biliar × colecistite","Cólica: pós-gordura (CCK contrai), 30 min–6 h, some, sem febre → eletiva. Colecistite: > 6 h, febre, Murphy, leucocitose, USG parede > 3–4 mm → ATB + colecistectomia < 72 h."],
+ ["Colecistite alitiásica","5–10%: queimado, politrauma, UTI, NPT, jejum prolongado, sepse, imunossupressão. NPT e jejum = RISCO (estase), não proteção."],
+ ["Charcot → Reynolds","Charcot: dor HD + febre com calafrios + icterícia = colangite. Reynolds: + hipotensão + confusão = grave. (Hiperamilasemia NÃO entra.) ATB + CPRE urgente."],
+ ["Coledocolitíase — investigação por risco","Alto (cálculo visto, colangite, BT > 4 + colédoco dilatado) → CPRE. Intermediário (colédoco dilatado ou enzimas ↑) → colangioRM/eco-EDA ou colangiografia intraop. Baixo → colecistectomia."],
+ ["Pancreatite — etiologia","Cálculo biliar 40–60% (nº 1) · álcool 25–35% · TG > 1.000 · pós-CPRE · drogas · hipercalcemia · idiopática."],
+ ["Pancreatite — diagnóstico","2 de 3: dor típica (faixa, dorso, melhora inclinado) + lipase/amilase ≥ 3× + imagem. Lipase mais específica e dura mais. Valor ≠ gravidade."],
+ ["Pancreatite — gravidade (Atlanta)","Leve · moderada (falência < 48 h ou complicação local) · grave (falência > 48 h, Marshall ≥ 2). Preditores: SIRS, ureia > 45/BUN > 20, Hct > 44, Cr ↑, PCR > 150, derrame pleural, > 60 a, obesidade, BISAP ≥ 3."],
+ ["Pancreatite — conduta","Jejum curto + analgesia + RL guiado por metas + USG. SEM ATB profilático. Dieta precoce 24–48 h. TC só > 48–72 h. CPRE se colangite/obstrução. Biliar leve → colecistectomia mesma internação."],
+ ["Pseudocisto × necrose","Pseudocisto: > 4 sem, parede fibrosa, líquido; drenar se sintomático/> 6 cm/> 6 sem (endoscópico). Necrose infectada: febre tardia, gás na TC → ATB + step-up, necrosectomia > 4 sem."],
+ ["Pancreatite crônica","Álcool + tabaco. Tríade: esteatorreia + DM + calcificações. Enzimas normais. TC. Enzimas pancreáticas + IBP, ADEK, abstinência, analgesia; vigiar câncer."],
+ ["Hepatite A","Fecal-oral, autolimitada, não croniza, vacina. Diagnóstico: anti-HAV IgM. E: igual, mas fulminante em gestante."],
+ ["Hepatite B — sorologia","HBsAg = infecção · anti-HBc = contato (IgM aguda) · anti-HBs = imunidade. Vacinado: só anti-HBs. Curado: anti-HBc + anti-HBs. Crônica: HBsAg > 6 m. RN de mãe HBsAg+: vacina + IG em 12 h."],
+ ["Hepatite C","Anti-HCV → confirma com HCV-RNA. Croniza 70–85%. DAAs 8–12 sem, cura > 95%. Sem vacina. Rastrear ≥ 40 anos."],
+ ["Ascite — GASA e PBE","GASA ≥ 1,1 = hipertensão portal. PBE = PMN ≥ 250 → cefotaxima + albumina; profilaxia norfloxacino. Proteína < 1 = risco de PBE."],
+ ["Cirrose — dois eixos","Insuficiência hepatocelular (icterícia, albumina ↓, INR ↑, encefalopatia, estigmas) + hipertensão portal (varizes, esplenomegalia, ascite). Child-Pugh (BAETA) · MELD."]
+];
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const SRC_LBL={APF:"APF real 2026.1",Prova:"Prova final 2026.1",Inédita:"Inédita",SP1:"SP1",SP2:"SP2",SP3:"SP3",SP4:"SP4"};
+const SRC_CLS={APF:"r",Prova:"d",Inédita:"i",SP1:"e",SP2:"e",SP3:"e",SP4:"e"};
+const SRC_ORDER=["Todas","APF","Prova","Inédita","SP1","SP2","SP3","SP4"].filter(k=>k==="Todas"||QS.some(q=>q.src===k));
+let filter="Todas";
+const state={answered:0,hits:0};
+function buildChips(){
+  const box=document.getElementById('chips');
+  const counts={Todas:QS.length};QS.forEach(q=>counts[q.src]=(counts[q.src]||0)+1);
+  SRC_ORDER.forEach(k=>{
+    const c=document.createElement('button');c.className='chip'+(k===filter?' on':'');
+    c.textContent=(k==="Todas"?"Todas":SRC_LBL[k])+' · '+counts[k];
+    c.addEventListener('click',()=>{filter=k;renderQuiz();});box.appendChild(c);
+  });
+}
+function renderQuiz(){
+  document.querySelectorAll('#chips .chip').forEach((c,i)=>c.classList.toggle('on',SRC_ORDER[i]===filter));
+  const list=QS.map((q,i)=>({q,i})).filter(x=>filter==="Todas"||x.q.src===filter);
+  state.answered=0;state.hits=0;
+  document.getElementById('hit').textContent='0';
+  document.getElementById('tot').textContent=list.length;
+  document.getElementById('fill').style.width='0%';
+  const quiz=document.getElementById('quiz');quiz.innerHTML='';
+  list.forEach(({q,i})=>{
+    const el=document.createElement('div');el.className='q';
+    let optsHtml='';
+    q.opts.forEach((o,j)=>{optsHtml+='<button class="opt" data-i="'+i+'" data-j="'+j+'"><span class="k">'+String.fromCharCode(65+j)+'</span><span>'+o+'</span></button>';});
+    el.innerHTML='<div class="qhead"><div class="qnum">'+(i+1)+'</div><span class="pill '+SRC_CLS[q.src]+'">'+SRC_LBL[q.src]+'</span><span class="pill o">'+q.obj+'</span></div>'+
+      '<div class="stem">'+q.stem+'</div><div class="opts">'+optsHtml+'</div><div class="fb" id="fb'+i+'"></div>';
+    quiz.appendChild(el);
+  });
+  quiz.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,j=+b.dataset.j,q=QS[i];
+    const box=b.closest('.q');if(box.dataset.done)return;box.dataset.done="1";
+    box.querySelectorAll('.opt').forEach((o,k)=>{o.classList.add('disabled');if(k===q.ans)o.classList.add('correct');if(k===j&&j!==q.ans)o.classList.add('wrong');});
+    const ok=(j===q.ans);
+    const fb=document.getElementById('fb'+i);
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML='<div class="verdict" style="color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'✓ Correto':'✕ '+String.fromCharCode(65+j)+' — a correta é '+String.fromCharCode(65+q.ans))+'</div>'+
+      '<div class="why">'+q.why+'</div><div class="trap"><b>Pegadinha:</b> '+q.trap+'</div>';
+    state.answered++;if(ok)state.hits++;
+    document.getElementById('hit').textContent=state.hits;
+    document.getElementById('fill').style.width=(state.answered/list.length*100)+'%';
+  }));
+}
+function resetQuiz(){renderQuiz();}
+buildChips();renderQuiz();
+const fcbox=document.getElementById('fcbox');
+FC.forEach(c=>{
+  const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="inner"><div class="face front">'+c[0]+'</div><div class="face back"><small>'+c[0]+'</small>'+c[1]+'</div></div>';
+  d.addEventListener('click',()=>d.classList.toggle('flip'));fcbox.appendChild(d);
+});
+document.querySelectorAll('.rotbtn').forEach(b=>b.addEventListener('click',()=>{const r=document.getElementById(b.dataset.r);r.style.display=(r.style.display==='block'?'none':'block');}));
+
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>
