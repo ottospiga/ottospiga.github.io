@@ -202,7 +202,7 @@
     "materia": "Farmacologia",
     "titulo": "Vias Metabólicas · Farmaco UC13",
     "tipo": "material",
-    "data": "2026-09-11",
+    "data": "2026-09-19",
     "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-vias-metabolicas.html",
     "origem": "5_fase/UC13/UC13_Farmaco_Vias_Metabolicas.html"
   },
@@ -211,18 +211,9 @@
     "materia": "Farmacologia",
     "titulo": "UC14 · Farmaco · Banco de questões da Vânia",
     "tipo": "banco",
-    "data": "2026-09-07",
+    "data": "2026-09-19",
     "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-banco-vania.html",
     "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Banco_Vania.html"
-  },
-  {
-    "uc": "UC14",
-    "materia": "Farmacologia",
-    "titulo": "💊 Guia Farmaco UC14 — Vânia",
-    "tipo": "guia-prova",
-    "data": "2026-09-11",
-    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-guia.html",
-    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Guia.html"
   },
   {
     "uc": "UC14",
@@ -268,5 +259,68 @@
     "data": "2026-09-14",
     "arquivo": "5-fase/uc14/tutoria/uc14-sp4-dispepsia-drge-ulcera-hda.html",
     "origem": "5_fase/UC14/Tutoria/UC14_SP4_Dispepsia_DRGE_Ulcera_HDA.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · Raio-X da Vânia + Estratégia",
+    "tipo": "guia-prova",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-raio-x-vania-estrategia.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_RaioX_Vania_Estrategia.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "🎧 Transcrição · Farmaco UC14 · aula 04/09/2026",
+    "tipo": "material",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-transcricao-aula-04-09.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Transcricao_Aula_04-09.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · Vias metabólicas",
+    "tipo": "material",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-vias-metabolicas.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Vias_Metabolicas.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · SP1 Diarreia + DII — Guia v2",
+    "tipo": "guia-sp",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-sp1-diarreia-dii.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_SP1_Diarreia_DII.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · SP2 Constipação — Guia v2",
+    "tipo": "guia-sp",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-sp2-constipacao.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_SP2_Constipacao.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · SP3 Antieméticos + Hepato — Guia v2",
+    "tipo": "guia-sp",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-sp3-antiemeticos-hepato.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_SP3_Antiemeticos_Hepato.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · SP4 Dispepsia — pré-resumo",
+    "tipo": "guia-sp",
+    "data": "2026-09-17",
+    "arquivo": "5-fase/uc14/farmaco/uc14-sp4-dispepsia.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_SP4_Dispepsia.html"
   }
 ]

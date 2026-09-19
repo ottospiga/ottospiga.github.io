@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UC14 · Farmaco · Raio-X da Vânia + Estratégia</title>
+<style>:root{--bg:#f4f6f8;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;--accent-dark:#0c4a5e;
+--ok:#15803d;--ok-soft:#dcfce7;--bad:#b91c1c;--bad-soft:#fee2e2;--warn:#a16207;--warn-soft:#fef9c3;--purple:#6d28d9;--purple-soft:#ede9fe;--pink:#be185d;--line:#e2e8f0;
+--acc:#0e7490;--acc2:#0c4a5e;--blue:#0e7490;--bluebg:#e0f2f7;--okbg:#dcfce7;--redbg:#fee2e2;--warnbg:#fef9c3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:15px}
+header{max-width:960px;margin:18px auto 0;background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;border-radius:16px;padding:20px 24px}
+header h1{margin:0 0 6px;font-size:21px}
+header p{margin:0;opacity:.92;font-size:13.5px}
+header .tag{background:rgba(255,255,255,.18);color:#fff}
+.wrap{max-width:960px;margin:0 auto;padding:10px 16px 80px}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line);margin-bottom:6px}
+nav.tabs button{border:1.5px solid var(--line);background:#fff;padding:6px 13px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+nav.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:19px;margin:26px 0 6px;color:var(--ink);display:flex;align-items:center;gap:8px}
+h2::before{content:"";display:inline-block;width:6px;height:22px;border-radius:3px;background:var(--accent)}
+h3{font-size:15px;margin:16px 0 6px;color:var(--accent-dark)}
+h4{margin:12px 0 6px;font-size:14.5px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);color:var(--accent-dark)}
+tr:nth-child(even) td{background:#fafcfd}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.3px;margin-right:4px;white-space:nowrap;vertical-align:middle}
+.OF{background:var(--ok-soft);color:var(--ok)}.VE{background:#e0e7ff;color:#3730a3}.IN{background:var(--warn-soft);color:var(--warn)}.AU{background:var(--purple-soft);color:var(--purple)}
+.warn{background:var(--warn-soft);border:1px solid #f5e79b;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.ok{background:var(--ok-soft);border:1px solid #b5e3c4;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.red{background:var(--bad-soft);border:1px solid #f3b4b4;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.blue{background:var(--accent-soft);border:1px solid #bae6fd;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.peg{background:var(--bad-soft);border:1px solid #f3b4b4;border-radius:10px;padding:8px 12px;margin:8px 0;font-size:13.5px}
+.peg b:first-child{color:var(--bad)}
+mark{background:var(--warn-soft);color:#7c5008;border-radius:4px;padding:0 3px;font-weight:600}
+small,.muted{color:var(--muted)}
+ul{padding-left:20px}li{margin:4px 0}
+figure{margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:12.5px;color:var(--muted);margin-top:6px;font-style:italic}
+.dose{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--warn-soft);color:#7c5008;padding:0 5px;border-radius:4px;font-size:13px;font-weight:600}
+/* quiz */
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+.q .hd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:8px}
+.q .en{font-weight:600;margin:4px 0 8px}
+.q ol.itens{list-style:none;padding-left:0;margin:6px 0}
+.q ol.itens li{padding:4px 0;border-bottom:1px dotted var(--line);font-size:14px}
+.q .alts{list-style:none;padding:0;margin:8px 0}
+.q .alts li{padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;margin:5px 0;cursor:pointer;font-size:14.5px;line-height:1.45}
+.q .alts li:hover{border-color:var(--accent)}
+.q .alts li.right{background:var(--ok-soft);border-color:var(--ok);font-weight:600}
+.q .alts li.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.q .rev{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
+.q .rev b:first-child{color:var(--ok)}
+.q.open .rev{display:block}
+.q button{border:none;background:var(--accent-soft);color:var(--accent-dark);font-weight:700;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:13.5px;margin-top:6px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.filters button{border:1.5px solid var(--line);background:#fff;padding:5px 12px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+.filters button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+#fselo button.on{background:var(--pink);border-color:var(--pink)}
+#ftipo button.on{background:var(--warn);border-color:var(--warn)}
+.score{position:sticky;bottom:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;display:inline-block;font-size:13px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+/* flashcards */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.fc{width:100%;max-width:640px;min-height:210px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;flex-direction:column;justify-content:center}
+.fc .qq{font-weight:600;font-size:1.1rem}
+.fc .aa{display:none;margin-top:12px;padding-top:12px;border-top:2px solid var(--accent);font-size:1.25rem;color:var(--accent-dark)}
+.fc .why{display:none;font-size:.85rem;color:var(--muted);margin-top:6px}
+.fc.flip .aa,.fc.flip .why{display:block}
+.fc-ctl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.fc-ctl button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;color:var(--muted)}
+.mm{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem;white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.kpi b{display:block;font-size:1.5rem;color:var(--accent)}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.bar{display:flex;align-items:center;gap:8px;margin:4px 0}
+.bar i{display:block;height:18px;border-radius:4px;background:var(--accent)}
+.bar span{min-width:190px;font-size:.9rem}
+.bar b{font-size:.85rem}
+.cal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.day{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.day h4{margin:0 0 6px;font-size:.95rem;color:var(--accent-dark)}
+.day.we{border-color:var(--ok);background:#f0fdf4}
+.day.ex{border-color:var(--bad);background:var(--bad-soft)}
+@media print{nav.tabs{display:none}section.tab{display:block!important}.q .rev{display:block}}
+@media(max-width:600px){body{font-size:14.5px}}
+</style>
+</head>
+<body>
+<header>
+<h1>💊 Farmacologia UC14 — Raio-X da prof.ª Vânia + Estratégia da UC</h1>
+<p>Base: 6 provas de veteranos (T4, T5, T6, T7, T9, T11) + PM T7 (10/05/2024) + gabarito-só da T8 + 3 atividades (AVA/sala) + gabarito comentado de veterana (Letícia, T8) + tabelas/resumo de veterana + slides 2026 + aula de 04/09 · Montado em 07/09/2026 para o Otto (T12) · <b>Datas ainda não confirmadas estão marcadas com ❓</b></p>
+</header>
+<div class="wrap">
+<nav class="tabs">
+<button class="on" data-t="t1">⚡ Veredito em 2 min</button>
+<button data-t="t2">📐 Formato por turma</button>
+<button data-t="t3">⚖️ Pesos por tema</button>
+<button data-t="t4">♻️ Reciclagem</button>
+<button data-t="t5">🎯 RADAR de pegadinhas</button>
+<button data-t="t6">⚠️ Divergências</button>
+<button data-t="t7">🗓️ Estratégia + cronograma</button>
+</nav>
+
+<!-- ============ T1 ============ -->
+<section class="tab on" id="t1">
+<h2>Veredito em 2 minutos</h2>
+<div class="kpi">
+<div><b>12–15</b><span>objetivas por prova (0,34–0,475 cada)</span></div>
+<div><b>4–6</b><span>discursivas CURTAS (0,3–1,0 cada)</span></div>
+<div><b>~70%</b><span>das questões reaparecem (mesmo enunciado ou irmã)</span></div>
+<div><b>5,7–7,8</b><span>notas dos veteranos nas provas que vimos</span></div>
+<div><b>A–D</b><span>na T11 (2026) — antes era A–E</span></div>
+</div>
+
+<div class="card">
+<h3>O que a UC14 dela é, em uma frase</h3>
+<p>Uma prova de <b>terapêutica racional do TGI</b>: para cada queixa (diarreia, constipação, vômito, dispepsia, colestase) ela quer <b>o fármaco de escolha + dose/posologia + o porquê mecanístico + se tem no SUS</b>. O cabeçalho de TODAS as provas repete o mantra que vira critério de correção: <i>"As respostas devem estar baseadas na racionalidade terapêutica: <b>eficácia, segurança e acesso</b>. Serão consideradas corretas apenas as respostas que seguirem este critério, conforme discutido em aula."</i></p>
+<div class="red"><b>Consequência prática:</b> nas discursivas, uma resposta farmacologicamente correta mas "cara/privada" ou "não é 1ª linha" perde ponto. Ex.: T5 QD1 — o veterano respondeu <i>domperidona</i> para DRGE e levou X; ela corrigiu <i>"Omeprazol 20 mg"</i>. T5 QD5 — respondeu <i>alosetrona</i> para diarreia crônica pós-colecistectomia e levou X; correção: <i>loperamida</i>.</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>Como ela cobra (estilo)</h3>
+<ul>
+<li><b>Sentenças I–V, "assinale a que contém TODAS as corretas"</b> (metade das objetivas). O erro está em <u>uma palavra</u>: encefalin<b>as</b>×encefalin<b>ases</b>, agonista×antagonista, hipo×hipercloridria, hipotálamo×adeno-hipófise, 2C19×2C9, 20 mg×10 mg.</li>
+<li><b>Asserção–razão ("PORQUE")</b>: 2–5 por prova nas T4–T9; sumiu na T11. Pegadinha clássica: duas frases verdadeiras que <u>não se justificam</u>.</li>
+<li><b>Lacunas</b> (síndrome extrapiramidal; galactorreia) e <b>associação numérica</b> (antieméticos 1–4) — reciclam idênticas.</li>
+<li><b>Mini-casos</b> (lactente com DRGE; hospital com gastrite erosiva; constipação por antidepressivo; colecistectomia refratária a colestiramina).</li>
+<li><b>Discursivas curtas</b>: "cite o fármaco, dose e posologia" · "cite dois EA" · "explique mecanisticamente" (anemia/osteoporose por IBP; SEP por metoclopramida; cólon preguiçoso por bisacodil).</li>
+</ul>
+</div>
+<div class="card">
+<h3>Ela cobra dose e posologia? <b>SIM</b></h3>
+<p>Aparece em objetivas (como distrator numérico) e em discursivas (como item obrigatório). Números que já caíram:</p>
+<ul>
+<li>omeprazol <b>20–40 mg 1×/dia, 30–60 min antes</b> da refeição · famotidina <b>20 mg à noite</b> · sucralfato <b>1 g 4×/dia em jejum</b> · vonoprazana 10–20 mg</li>
+<li>loperamida <b>4 mg → 2 mg/evacuação, máx 16 mg</b> · racecadotrila <b>100 mg 8/8 h</b> (1,5 mg/kg 3×) · colestiramina <b>4 g até 4×/dia, ≤2–3 meses</b> · carvão 250 mg · zinco <b>10 mg (&lt;6 m) / 20 mg (&gt;6 m) 10–14 d</b></li>
+<li>lactulose <b>15–30 mL até 4×/dia</b> · macrogol 1–2×/dia · bisacodil 5 mg · prucaloprida <b>2 mg 1×/dia</b> · glicerina 2–3 g retal · lubiprostona 8–24 mcg 2×</li>
+<li>dimenidrinato <b>25–100 mg</b> · ondansetrona <b>4–8 mg</b> (8/8 ou 12/12) · bromoprida/metoclopramida <b>10 mg</b> · aprepitanto 125 mg</li>
+<li>mesalazina 1,2 g/dia 12/12 h (veterana) · sulfassalazina 500 mg 2×/dia (aparece em distrator) · UDCA 10 mg/kg/dia</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<h3>O que mudou na T11 (2026) — e por que confiar mais nela</h3>
+<ul>
+<li>Objetivas <b>A–D</b> (só as de "I–IV" ficaram A–E) e <b>14 questões × 0,43</b>; 4 discursivas curtas (0,3–0,8).</li>
+<li>Vários enunciados vieram <b>quase verbatim do Katzung cap. 62</b> (IBP: meia-vida 1 h/efeito 2–3 dias; B12/fator intrínseco; hipergastrinemia; PEG/lactulose; catárticos salinos) — sinal de que ela passou a montar questões a partir do texto-base, como fez na UC13 T11→T12.</li>
+<li>Entrou tema novo em peso: <b>hepatoprotetores/colagogos</b> (colangite → UDCA; esteatose → silimarina) — também na T9 e na PM 10/05/2024.</li>
+<li>Cabeçalho novo: <i>"O comando 'assinale a alternativa correta' refere-se que deve ser assinalada a alternativa que contém <b>todas</b> as opções corretas"</i>.</li>
+<li>Continua reciclando: 9 das 14 objetivas da T11 têm "irmã" em provas anteriores.</li>
+</ul>
+</div>
+
+<div class="warn"><b>Buraco que vale ouro:</b> <b>prova da T10</b> (out/2025) — turma do MESMO semestre que a sua (as pares fazem prova em outubro: T4, T6, T8, T10, T12). É a única que o Otto vai caçar; quando vier, o banco e os pesos são recalculados. (T8 ficou só com o gabarito e a T11 pode ter página faltando — decidimos não correr atrás.)</div>
+</section>
+
+<!-- ============ T2 ============ -->
+<section class="tab" id="t2">
+<h2>Formato por turma (o que realmente vimos)</h2>
+<table>
+<tr><th>Prova</th><th>Data</th><th>Objetivas</th><th>Discursivas</th><th>Formatos</th><th>Nota do veterano</th></tr>
+<tr><td>T4</td><td>07/10/2022</td><td>13 × 0,42 (A–E)</td><td>1 caso com 3 itens (0,5+0,5+0,5)</td><td>5 asserção-razão · 8 "I–V"</td><td>4,5 + 1,5 = 6,0</td></tr>
+<tr><td>T5</td><td>28/04/2023</td><td>12 × 0,44 (A–D/E)</td><td>6 curtas (fármaco/dose)</td><td>lacunas, associação 1–4, 3 asserção-razão, I–V</td><td>5,72 + 1,9 = 7,6</td></tr>
+<tr><td>T6</td><td>20/10/2023</td><td>15 × 0,34 (A–E)</td><td>5 (0,9 + 4×0,5)</td><td>2 asserção-razão, 6 "I–V", 6 diretas</td><td>5,7</td></tr>
+<tr><td>T7</td><td>29/04/2024</td><td>15 × 0,373 (A–E)</td><td>6 × 0,4</td><td>2 asserção-razão, 7 "I–V", lacunas, 5 diretas</td><td>≈7,8</td></tr>
+<tr><td>PM (T7?)</td><td>10/05/2024</td><td>8 × 0,5</td><td>6 × 1,0 (casos!)</td><td>recicla T5/T4; discursivas longas com dose</td><td>—</td></tr>
+<tr><td>T8</td><td>04/10/2024</td><td>12 × 0,4 (só gabarito)</td><td>4 (0,75/1,0/0,75/0,7)</td><td>QDs "justifique/por quê" (IBP×H2; omeprazol+clopidogrel; probióticos; SEP)</td><td>≈5,9</td></tr>
+<tr><td>T9</td><td>25/04/2025</td><td>12 × 0,475 (A–E)</td><td>4 (0,5/0,5/0,5/0,8)</td><td>2 asserção-razão, 5 "I–V", 5 diretas</td><td>≈5,9 (6/12 obj)</td></tr>
+<tr><td><b>T11</b></td><td><b>24/04/2026</b></td><td><b>14 × 0,43 (A–D; 2 em A–E)</b></td><td><b>4 (0,8/0,4/0,4/0,4)</b></td><td><b>0 asserção-razão · 6 "avalie as sentenças" · 6 diretas · 2 "I–IV"</b></td><td>11/14 obj (Danielli)</td></tr>
+<tr><td>T12 (você)</td><td>02/10/2026 ❓</td><td colspan="4">Expectativa: 12–14 obj A–D + 4 QD curtas, ~30% Katzung-verbatim, reciclagem ≥60% — <b>a ser refeito com a sua prova real</b></td></tr>
+</table>
+<div class="blue"><b>Padrão de semestre:</b> turmas ímpares (T5, T7, T9, T11) fazem a prova em <b>abril</b>; pares (T4, T6, T8, T10, <b>T12</b>) em <b>outubro</b>. As provas de outubro (T4, T6, T8) tendem a ter <u>mais discursivas de mecanismo</u> ("explique mecanisticamente") — treinar esse formato.</div>
+<h3>Atividades (reciclam na prova — confirmado)</h3>
+<ul>
+<li><b>Atividade B (13/04/2023, T5)</b> — 10 itens V/F "corrija as falsas": loperamida, lactulose, bisacodil, TRO, colestiramina, racecadotrila, probióticos, sulfassalazina. Itens reaparecem literalmente na T6 Q2 e T7 Q12.</li>
+<li><b>Atividade UC14 (22/09/2023, T6)</b> — bisacodil/cólon preguiçoso (asserção), fibras (asserção), constipação por imipramina (QD), diarreia por estresse (QD) → viraram T6 QD1, T6 Q12, T6 Q6.</li>
+<li><b>Atividade AVA T11 (2026)</b> — 7 objetivas: SEP lacunas, laxantes I–III e I–V, galactorreia lacunas (só bromoprida!), IBP crônico I–IV, êmese I–V. <b>Quando abrir a sua atividade do AVA, ela é o melhor preditor da prova.</b></li>
+</ul>
+</section>
+
+<!-- ============ T3 ============ -->
+<section class="tab" id="t3">
+<h2>Pesos por tema (contagem de questões em 8 avaliações)</h2>
+<div class="card">
+<div class="bar"><span>Dispepsia (IBP, H2, antiácidos, sucralfato, misoprostol, vonoprazana, CYP)</span><i style="width:31%"></i><b>≈31%</b></div>
+<div class="bar"><span>Antieméticos / pró-cinéticos (SEP, galactorreia, dimenidrinato, ondansetrona, NK1)</span><i style="width:28%"></i><b>≈28%</b></div>
+<div class="bar"><span>Constipação / laxantes</span><i style="width:21%"></i><b>≈21%</b></div>
+<div class="bar"><span>Diarreia / TRO / zinco / probióticos / DII (5-ASA)</span><i style="width:17%"></i><b>≈17%</b></div>
+<div class="bar"><span>Hepatoprotetores, colagogos, enzimas pancreáticas</span><i style="width:3%"></i><b>≈3% (mas presente em T9, T11 e PM — em alta)</b></div>
+<p class="muted">Contagem manual sobre 119 questões/itens (T4, T5, T6, T7, PM 10/05/24, T9, T11 + discursivas da T8). Uma questão com itens de dois temas foi contada nos dois.</p>
+</div>
+<div class="grid">
+<div class="card"><h3>Dentro de "dispepsia", o que mais cai</h3><ol><li>Efeitos do uso CRÔNICO de IBP (Ca/PTH, Mg, Fe, B12/fator intrínseco, pepsina/triptofano, infecções, hipergastrinemia) — <b>em 7 de 8 provas</b></li><li>Interações do omeprazol (CYP2C19 × clopidogrel; CYP3A4; CYP17 × progesterona; AAS precisa de ácido)</li><li>Farmacocinética do IBP (pró-fármaco, ativação ácida, sulfenamida, jejum, entérico, esomeprazol = enantiômero S)</li><li>Antiácidos: Mg = diarreia · Al = constipação · CaCO₃ = eructação + rebote por gastrina · NaHCO₃ = rápido, CI hipertenso</li><li>Famotidina 20 mg/noite = uso crônico/dispepsia funcional · vonoprazana reversível/sem ativação · sucralfato · misoprostol (hospital, off-label, abortivo)</li></ol></div>
+<div class="card"><h3>Dentro de "antieméticos"</h3><ol><li>Síndrome extrapiramidal: metoclopramida > bromoprida, IV > VO, D2 em fibra colinérgica nigroestriatal → ↑ACh; tratamento biperideno — <b>em TODAS as provas</b></li><li>Galactorreia = D2 na adeno-hipófise (domperidona/bromoprida/metoclopramida)</li><li>Dimenidrinato: gestante + vestibular; H1 + M1/M3; 25–100 mg; sonolência/xerostomia/retenção/constipação</li><li>Ondansetrona: 5-HT3 só; toxinas/quimio; 4–8 mg; atenção básica; NÃO vestibular; constipa</li><li>Domperidona periférica (DRGE, lactente) × bromoprida central+periférica; aprepitanto NK1 (quimio, fase tardia); quimio grave = dexametasona + ondansetrona; escopolamina = antiespasmódico</li></ol></div>
+<div class="card"><h3>Dentro de "constipação"</h3><ol><li>Bisacodil/antracênicos: irritante → cólon preguiçoso (dessensibilização/degeneração neural), ciclo vicioso, menor dose/menor tempo — <b>em 7 de 8</b></li><li>Escolha por tipo: primária = fibras/formadores + água · secundária = osmótico (lactulose = SUS; macrogol) · gestante = macrogol/PEG · &lt;10 anos = lactulose · refratária = prucaloprida (5-HT4, 2 mg)</li><li>Lactulose × PEG (fermenta × inerte) · osmóticos 24–48 h · lubiprostona ClC-2 · glicerina retal · enemas de fosfato</li></ol></div>
+<div class="card"><h3>Dentro de "diarreia/DII"</h3><ol><li>Racecadotrila: inibe encefalinASES → ↑encefalinas (μ2) — <b>a pegadinha nº 1 da UC</b></li><li>Loperamida: agonista μ2, 4→2 mg, CI infecção/intoxicação (sepse, megacólon), &lt;2 anos; crônica pós-colecistectomia refratária a colestiramina; estresse</li><li>TRO baixa osmolaridade (Na 75/glicose 75; Na-K-Cl-citrato-glicose) · zinco 10/20 mg · probióticos (S. boulardii, L. GG) + fibras SOLÚVEIS</li><li>5-ASA: sulfassalazina = mesalazina + sulfapiridina (antimicrobiana) → DII com colonização bacteriana; mesalazina = pH-dependente (não azorredutase); olsalazina = 2 mesalazinas; COX + NF-κB</li></ol></div>
+</div>
+</section>
+
+<!-- ============ T4 ============ -->
+<section class="tab" id="t4">
+<h2>Reciclagem — as "famílias" de questões que voltam</h2>
+<p>Se você dominar estas 18 famílias, cobre ≈70% de qualquer prova dela. Entre parênteses, onde cada uma já caiu.</p>
+<table>
+<tr><th>#</th><th>Família</th><th>Onde caiu</th><th>Forma típica</th></tr>
+<tr><td>1</td><td>Síndrome extrapiramidal por metoclopramida</td><td>T4 Q12 · T5 Q2, Q12 · T6 Q1 · T7 Q14 · PM Q7 · T8 QD4 · AVA T11 Q3 · T11 Q8a</td><td>lacunas / asserção-razão / "por quê"</td></tr>
+<tr><td>2</td><td>Galactorreia por bloqueio D2 na adeno-hipófise</td><td>T5 Q4 · PM Q2 · AVA T11 Q6 · T9 Q12</td><td>lacunas (idêntica)</td></tr>
+<tr><td>3</td><td>Efeitos do IBP crônico (Fe, Ca/PTH, Mg, B12, triptofano, câncer, infecção)</td><td>T4 Q6 · T5 Q9 · T6 Q13 · T7 QD5/QD6 · PM Q6 · T9 QD4 · AVA T11 Q7 · T11 Q2</td><td>I–IV (mesmos 4 itens) / discursiva mecanística</td></tr>
+<tr><td>4</td><td>Omeprazol × CYP (2C19-clopidogrel, 3A4, C17-progesterona) e AAS</td><td>T4 Q11 · T5 Q8 · T6 Q11 · T7 Q1 · T8 QD2 · T9 Q2</td><td>asserção-razão / direta</td></tr>
+<tr><td>5</td><td>Laxantes I–V (bisacodil/macrogol/antracênicos/lactulose/prebióticos)</td><td>T5 Q7 · PM Q5 · AVA T11 Q5 · T4 Q10 · T7 Q13</td><td>I–V (mesmos itens)</td></tr>
+<tr><td>6</td><td>Bisacodil → cólon preguiçoso / ciclo vicioso</td><td>T6 QD1, Q7 · Ativ T6 Q1 · T11 QD1 · AVA T11 Q4 · T9 Q6</td><td>discursiva "explique" / asserção</td></tr>
+<tr><td>7</td><td>5-ASA (sulfassalazina, olsalazina, mesalazina)</td><td>T4 Q5 · T5 Q11, QD4 · T6 Q15 · T7 Q7 · PM Q4 · T9 Q1 · T11 QD2</td><td>I–V / direta ("qual fármaco")</td></tr>
+<tr><td>8</td><td>Racecadotrila (encefalinases) e loperamida (agonista μ2)</td><td>T4 Q1, Q2 · Ativ T5 · T6 Q2 · T7 Q12 · T9 Q8, Q10 · T11 QD3</td><td>asserção / I–V / "cite contraindicado"</td></tr>
+<tr><td>9</td><td>TRO / SRO baixa osmolaridade</td><td>T4 Q3 · T5 Q6 · Ativ T5 · T7 QD3 · T9 Q8 · T11 Q13</td><td>asserção-razão / item</td></tr>
+<tr><td>10</td><td>Probióticos + fibras solúveis + água</td><td>T4 Q4 · Ativ T5/T6 · T6 Q12 · T7 QD4 · PM Q14 · T8 QD3 · T9 Q9 · T11 Q13</td><td>asserção / discursiva</td></tr>
+<tr><td>11</td><td>Dimenidrinato (gestante/vestibular) e seus EA</td><td>T4 Q13 · T5 Q1, QD2 · T6 QD5, Q8 · T7 Q3 · PM Q1 · T9 Q11</td><td>direta / QD "cite 3 EA"</td></tr>
+<tr><td>12</td><td>Associação 1–4 dos antieméticos (bromoprida/ondansetrona/metoclopramida/dimenidrinato)</td><td>T5 Q5 · PM Q3</td><td>idêntica</td></tr>
+<tr><td>13</td><td>DRGE: omeprazol (± domperidona); lactente = domperidona</td><td>T4 QD1 · T5 QD1, Q3 · T9 QD3 · PM Q12 · T11 QD4, Q6</td><td>QD dose/posologia / caso</td></tr>
+<tr><td>14</td><td>Antiácidos (Mg/Al/Ca/NaHCO₃)</td><td>T4 Q7 · T5 Q10, QD6 · T6 Q9, Q10 · T7 Q15 · PM Q8 · T9 QD1 · T11 Q4, Q5</td><td>direta / sequência</td></tr>
+<tr><td>15</td><td>Famotidina 20 mg/noite = uso crônico / dispepsia funcional</td><td>T4 Q7 · T5 Q10 · T6 QD4, Q14 · T7 Q15 · PM Q9 · T11 Q3</td><td>QD dose/posologia</td></tr>
+<tr><td>16</td><td>Escolha do laxante por população (gestante, criança, refratária, secundária)</td><td>T5 QD3 · T6 Q6, QD3 · T7 Q4, Q5, Q6 · PM Q5 · T11 Q10</td><td>direta</td></tr>
+<tr><td>17</td><td>Loperamida na diarreia crônica pós-colecistectomia refratária a colestiramina</td><td>T5 QD5 · T7 QD1 · Ativ T6 Q4</td><td>QD idêntica</td></tr>
+<tr><td>18</td><td>Hepato: UDCA (colangite/colestase) · silimarina (esteatose) · pancreatina</td><td>T9 Q4 · PM Q11 · T11 Q14</td><td>direta / sequência</td></tr>
+</table>
+</section>
+
+<!-- ============ T5 ============ -->
+<section class="tab" id="t5">
+<h2>RADAR de pegadinhas — com a evidência de onde cada uma veio</h2>
+<p>Legenda dos selos: <span class="tag OF">OFICIAL</span> gabarito visível com correção da professora · <span class="tag VE">VETERANO</span> marcação/gabarito do aluno sem correção visível · <span class="tag IN">INFERIDO</span> deduzido de slides + provas · <span class="tag AU">AULA</span> dito pela Vânia em sala (04/09/2026 ou registrado por veterana).</p>
+
+<h3>🟥 Diarreia / DII</h3>
+<table>
+<tr><th>Pegadinha</th><th>O que é verdade</th><th>Evidência</th></tr>
+<tr><td>Racecadotrila "bloqueia as encefalinas" / "aumenta a meia-vida das encefalin<b>ases</b>"</td><td>Inibe as <b>encefalinASES</b> → ↑ encefalinas (agonistas μ2/δ) → ↓ secreção de água/eletrólitos. 100 mg 8/8 h; 1,5 mg/kg 3×; máx 400 mg. Diarreia SECRETORA aguda, adjuvante da TRO.</td><td><span class="tag OF">OF</span> T7 Q12-III falsa · Ativ T5 (F) · <span class="tag VE">VE</span> T4 Q2, T9 Q10, PM T4 Q1</td></tr>
+<tr><td>Loperamida "bloqueia/antagoniza receptores opioides"</td><td><b>AGONISTA</b> μ2 (motilidade) e δ (secreção); não cruza BHE; pico 3–5 h; 4 mg → 2 mg/evacuação, máx 16 mg/dia; ↑tônus do esfíncter anal</td><td><span class="tag OF">OF</span> T4 Q1 (C: I V, II F) · T7 Q12-V falsa</td></tr>
+<tr><td>Loperamida em diarreia aguda "de intoxicação alimentar"</td><td><b>CONTRAINDICADA</b> em infecção/intoxicação (retém toxina → sepse, megacólon tóxico) e em &lt;2 anos. Usar: crônica (SII, pós-colecistectomia refratária a colestiramina, estresse), coadjuvante.</td><td><span class="tag OF">OF</span> T11 QD3 (aceita) · T5 QD5 (correção "loperamida") · T7 QD1 ✓</td></tr>
+<tr><td>Alosetrona "aumenta a atividade vagal"</td><td>Antagonista 5-HT3 → <b>↓ resposta vagal, ↓ reflexos peristálticos</b>, ↓ trânsito colônico; só SII com diarreia; 1 mg/dia (máx 2×); EA constipação</td><td><span class="tag VE">VE</span> T4 Q2-I falsa · T9 Q8-V verdadeira · <span class="tag OF">OF</span> T11 Q10 (alosetrona = diarreia SII)</td></tr>
+<tr><td>Zinco "100 mcg/dia"; "só se bacteriana"</td><td><b>10 mg (&lt;6 m) / 20 mg (&gt;6 m), 1×/dia, 10–14 dias</b>; imunomodulador + antissecretor; SC: nota oficial p/ tratar suspeita viral com zinco</td><td><span class="tag OF">OF</span> T11 Q13-I verdadeira · <span class="tag VE">VE</span> T9 Q8-II falsa · <span class="tag AU">AU</span> 04/09</td></tr>
+<tr><td>SRO "contém sacarose, magnésio"; "baixa osmolaridade causa hipernatremia/hipoglicemia"</td><td>Composição: <b>Na, K, Cl, citrato, glicose</b>. Baixa osmolaridade (Na 75, glicose 75, ~245 mOsm): menos vômito, menos evacuação, <b>menos hipernatremia</b>, menos TRV. Indicada em TODA diarreia.</td><td><span class="tag OF">OF</span> T5 Q6 (E: ambas falsas) · <span class="tag VE">VE</span> T4 Q3 (B) · T9 Q8-I V</td></tr>
+<tr><td>"Fibras solúveis digeríveis como celulose"</td><td>Solúveis = <b>não digeríveis, fermentáveis</b> (pectina, aveia, psyllium, FOS) = prebióticos; insolúveis (celulose, lignina) não fermentam, só dão volume</td><td><span class="tag VE">VE</span> T4 Q4-I falsa · <span class="tag OF">OF</span> T6 Q12 (B)</td></tr>
+<tr><td>Probióticos "com fibras insolúveis"</td><td>Probiótico + fibra <b>SOLÚVEL</b> (+ água, se constipação). Mais estudados: <b>S. boulardii, L. GG, L. reuteri</b>. Simbiótico = pro + pre (FOS).</td><td><span class="tag OF">OF</span> Ativ T5 (F) · T11 Q13-IV V</td></tr>
+<tr><td>Sulfassalazina libera "duas moléculas anti-inflamatórias"</td><td>Azorredutase → <b>mesalazina (anti-inflamatória) + sulfapiridina (ANTIMICROBIANA)</b>. Indicação-alvo dela: DII com colonização bacteriana/infecção latente (T11 QD2). EA sistêmicos vêm da sulfapiridina.</td><td><span class="tag OF">OF</span> T11 QD2 ✓ · T5 Q11 (D) · <span class="tag VE">VE</span> T9 Q1-V falsa ("infecções agudas")</td></tr>
+<tr><td>Mesalazina "hidrolisada por azorredutase"</td><td>Mesalazina = cápsula de liberação entérica <b>pH-dependente (7–8)</b>. Azorredutase só para compostos azo: sulfassalazina, olsalazina (→ 2 mesalazinas), balsalazida. SUS: mesalazina.</td><td><span class="tag VE">VE</span> PM T4 Q3 (I F) · <span class="tag AU">AU</span> veterana</td></tr>
+<tr><td>5-ASA "inibe PLA2" / "inibe COX-2 sistemicamente"</td><td>Ação <b>tópica</b>: inibe COX (PG) + <b>NF-κB</b> + funções de linfócitos/macrófagos; contraindicado se alergia grave a salicilato</td><td><span class="tag OF">OF</span> T6 Q15 (III F) · <span class="tag VE">VE</span> T9 Q1-I F</td></tr>
+<tr><td>Colestiramina "inibe secreção de água"; "esteatorreia"</td><td>Sequestra sais biliares (resina); <b>4 g até 4×/dia, ≤2–3 meses</b> (hipovitaminose A/D/E/K, adsorve outros fármacos); refratário → loperamida</td><td><span class="tag OF">OF</span> Ativ T5 (F) · T7 Q12-II V</td></tr>
+<tr><td>Carvão ativado em "infecção alimentar"</td><td>Adsorvente 250 mg: <b>intoxicação</b> (toxina no lúmen), não infecção; CI se suspeita de obstrução</td><td><span class="tag OF">OF</span> T6 Q2-I V · T7 Q12-I V · <span class="tag AU">AU</span></td></tr>
+</table>
+
+<h3>🟧 Constipação / laxantes</h3>
+<table>
+<tr><th>Pegadinha</th><th>O que é verdade</th><th>Evidência</th></tr>
+<tr><td>Bisacodil "causa dependência por receptor opioide"; cólon preguiçoso "pelo esvaziamento"</td><td>Irritante → inflamação crônica → <b>dessensibilização/degeneração das terminações mioentéricas</b> (cólon preguiçoso, melanose). Ciclo vicioso: esvazia TODO o cólon → demora a encher → paciente "se acha constipado" → repete. Menor dose, menor tempo.</td><td><span class="tag OF">OF</span> T11 QD1 · T6 QD1 · Ativ T6 Q1 (A) · T6 Q7</td></tr>
+<tr><td>Macrogol "causa desidratação, não usar em idosos/crianças"</td><td><b>Falso.</b> PEG/macrogol = inerte, não fermenta (sem cólica), <b>escolha em gestante e constipação refratária</b>; crianças (manipular). Não tem no SUS.</td><td><span class="tag OF">OF</span> T5 Q7-II F ("é recomendado!") · T7 Q4 (C macrogol) · AVA T11 Q5</td></tr>
+<tr><td>Antracênicos "bloqueiam 5-HT3"</td><td>Sene/cáscara = <b>irritantes</b> (PG/AMPc, NO/GMPc). "Chá das FOLHAS" = <b>sene</b> (cáscara-sagrada = casca). Melanose colônica.</td><td><span class="tag OF">OF</span> T5 Q7-III F · T6 Q4 (A sene)</td></tr>
+<tr><td>Lactulose "contraindicada em gestante/idoso"; "age em 2–4 h"</td><td>Lactulose (SUS, 15–30 mL até 4×) = <b>1ª linha na constipação SECUNDÁRIA</b>, crianças &lt;10 a, idosos, gestantes (dose baixa: flatulência confunde com contração); osmóticos agem em <b>24–48 h</b>; fermenta → gases/cólica; útil na encefalopatia hepática</td><td><span class="tag OF">OF</span> T7 Q5 (A) · T7 Q13-IV F · Ativ T5 (V) · <span class="tag VE">VE</span> PM T4 Q7-V F</td></tr>
+<tr><td>Formadores de massa "para constipação secundária"</td><td>Psyllium/metilcelulose/policarbofila = <b>PRIMÁRIA</b> (corrigir hábito) + ÁGUA obrigatória; ≥24 h para agir; evitar em cólon atônico/impactação. <b>Sem eficácia na secundária</b> (T6 QD3).</td><td><span class="tag OF">OF</span> T6 QD3 · T8 QD3 · T7 Q11 (A) · AVA T11 Q4-I F</td></tr>
+<tr><td>Prucaloprida "ativa canais de cloreto"; "para SII"</td><td>Prucaloprida = <b>agonista 5-HT4</b> → ↑ACh → peristalse; <b>2 mg 1×/dia</b>; SÓ constipação crônica refratária a laxantes (nunca inicial). Lubiprostona = ativa <b>ClC-2</b> (secretor), SII-C/crônica.</td><td><span class="tag OF">OF</span> T11 Q10 (A) · T11 Q12 (III F) · T7 Q6 (E) · <span class="tag VE">VE</span> T9 Q7</td></tr>
+<tr><td>Constipação por antidepressivo/opioide → "policarbofila"</td><td>Secundária → <b>osmótico (macrogol/lactulose)</b>; mecanismo do ADT = bloqueio muscarínico (não 5-HT3); SUS → lactulose</td><td><span class="tag OF">OF</span> T6 Q6 (A macrogol) · Ativ T6 Q3 (lactulose ✓; "bloqueia receptor muscarínico")</td></tr>
+<tr><td>Glicerina "via oral"; enemas "de rotina"</td><td>Glicerina = <b>só retal</b> (supositório 2–3 g / enema 5–15 mL 80%), &lt;1 h, dose única/dia; enemas de fosfato = coadjuvante de preparo/impactação; repetidos → hipoCa, hiperP, hiperNa, hipoK</td><td><span class="tag OF">OF</span> T11 Q12 (I, II V)</td></tr>
+<tr><td>Óleo mineral</td><td>Emoliente; <b>CI &lt;12 a, acamado, DRGE, disfagia</b> (pneumonia lipídica)</td><td><span class="tag AU">AU</span> slides 2026</td></tr>
+</table>
+
+<h3>🟨 Antieméticos / pró-cinéticos</h3>
+<table>
+<tr><th>Pegadinha</th><th>O que é verdade</th><th>Evidência</th></tr>
+<tr><td>SEP "por bloqueio da resposta colinérgica" / "hiperestimulação colinérgica na hipófise e mesolímbica"</td><td>Metoclopramida bloqueia <b>D2 em fibras COLINÉRGICAS nigroestriatais</b> → desinibição → ↑ACh → distonia/rigidez/inquietação; IV &gt; VO; tratamento = <b>biperideno</b> (não atropina). Galactorreia é outro sítio (adeno-hipófise).</td><td><span class="tag OF">OF</span> T6 Q1 (C) · T5 Q12 (A) · T7 Q14 (A) · T11 Q8a (atropina→biperideno) · <span class="tag VE">VE</span> T4 Q12 (B?) — ver divergências</td></tr>
+<tr><td>Galactorreia "no hipotálamo"</td><td>Bloqueio D2 na <b>ADENO-HIPÓFISE</b> → ↑prolactina. Domperidona/bromoprida/metoclopramida (metoclopramida off-label p/ lactação — T9 Q12).</td><td><span class="tag OF">OF</span> T5 Q4 (B) · PM Q2 (A) · T9 Q12 (A)</td></tr>
+<tr><td>Domperidona "mais efetiva que bromoprida porque seletiva no SNC"</td><td>Domperidona = <b>periférica</b> (não cruza BHE) → pró-cinética: ↑pressão do EEI, esvaziamento gástrico; sem ação no cólon; DRGE (lactente 6–8 m; adulto na agudização/regurgitação, associada ao IBP). EA: galactorreia, ginecomastia, ↓peso (lactente). Bromoprida = central + periférica (10 mg; SEP).</td><td><span class="tag OF">OF</span> T11 Q6 (A) · T11 QD4 (IBP + domperidona) · T5 Q3 (C) · PM Q1-IV F · PM Q12</td></tr>
+<tr><td>Dimenidrinato "5–50 mg"; ondansetrona "40 mg"</td><td>Dimenidrinato <b>25–100 mg</b>; 1ª escolha <b>gestante</b> (sialorreia/antimuscarínico) e <b>vestibular</b>; H1 + M1/M3 → sonolência, xerostomia, retenção urinária, constipação, ↑apetite. Ondansetrona <b>4–8 mg</b>.</td><td><span class="tag OF">OF</span> T7 Q3-IV F · T6 QD5 · T5 QD2</td></tr>
+<tr><td>Ondansetrona "também bloqueia muscarínico/NK1"; "para vestibular"</td><td>Só <b>5-HT3</b> (sem xerostomia); toxinas/quimio/pós-op; <b>atenção básica</b>; NÃO serve p/ vestibular; crônica → constipação. Quimio grave: <b>dexametasona + ondansetrona</b>.</td><td><span class="tag OF">OF</span> T7 Q2-V F · T6 QD2 · T7 Q8 (B) · <span class="tag VE">VE</span> T4 Q13</td></tr>
+<tr><td>Bromoprida "50 mg"; "agonista D2"</td><td>Bromoprida <b>10 mg</b> (não 50); <b>antagonista</b> D2 (+5-HT3, M); mais efetiva para toxinas; SEP (IV). Associação 1–4: 1 bromoprida · 2 ondansetrona · 3 bromoprida/metoclopramida · 4 dimenidrinato.</td><td><span class="tag OF">OF</span> T6 Q8-III F · T5 Q5 (E) · PM Q3 (E) · <span class="tag VE">VE</span> T9 Q12-b F</td></tr>
+<tr><td>Aprepitanto "para qualquer êmese"</td><td>Antagonista <b>NK1</b> (substância P); <b>só quimio</b> altamente emetogênica, fase tardia; 125 mg</td><td><span class="tag OF">OF</span> T9 QD2 · T6 Q8-V · T4 Q13-IV</td></tr>
+<tr><td>Nabilona "antagonista de receptores opioides CB1"</td><td><b>Agonista CB1</b> (canabinoide) — antiemético + orexígeno</td><td><span class="tag OF">OF</span> T7 Q2-II F · T11 Q7a</td></tr>
+<tr><td>Escopolamina "para gestante"</td><td>Antagonista M3: <b>antiespasmódico</b> (uso principal), cinetose; EA xerostomia, retenção, constipação</td><td><span class="tag OF">OF</span> T6 Q3 (D) · T7 Q2-I V</td></tr>
+<tr><td>Gengibre</td><td>Estimula secreções orais/gástricas; provável bloqueio 5-HT3 e NK1</td><td><span class="tag OF">OF</span> T7 Q2-III V</td></tr>
+</table>
+
+<h3>🟩 Dispepsia (IBP, H2, antiácidos, citoprotetores)</h3>
+<table>
+<tr><th>Pegadinha</th><th>O que é verdade</th><th>Evidência</th></tr>
+<tr><td>IBP "1 h antes para melhorar a biodisponibilidade"</td><td>Jejum (30–60 min antes da refeição) favorece a <b>bioativação nos canalículos</b> (H⁺ → sulfenamida tetracíclica → ligação covalente irreversível à H⁺/K⁺-ATPase), não a biodisponibilidade. Cápsula entérica porque o fármaco se degrada/ioniza no ácido. Meia-vida ~1 h, efeito 2–3 dias. <b>Omeprazol 20–40 mg 1×/dia = único supressor da atenção básica.</b></td><td><span class="tag OF">OF</span> T11 Q1 (C) · T6 Q14 · T7 Q15-V V · <span class="tag VE">VE</span> T4 Q8-I F</td></tr>
+<tr><td>"Pantoprazol é o mais potente"</td><td><b>Esomeprazol</b> = enantiômero S puro → mesma resposta com dose menor (dexlansoprazol idem p/ lansoprazol)</td><td><span class="tag OF">OF</span> T7 QD2 (X em pantoprazol) · T11 Q3-b F</td></tr>
+<tr><td>Omeprazol + clopidogrel "risco de sangramento"; "inibe CYP2C9"</td><td>Omeprazol/esomeprazol inibem <b>CYP2C19</b> → clopidogrel (pró-fármaco) não ativa → <b>trombose/IAM</b>; CYP3A4 → bioacumulação; <b>CYP17</b> → ↑progesterona → libido↓, ginecomastia, galactorreia; ↑pH ↓ absorção do AAS. Pantoprazol/famotidina/vonoprazana são alternativas.</td><td><span class="tag OF">OF</span> T6 Q11 (C) · T7 Q1 (C: 2C9 F) · T8 QD2 · <span class="tag VE">VE</span> T9 Q2-V F · T5 Q8 (C)</td></tr>
+<tr><td>IBP crônico: "hipercloridria induzida pela gastrina"; "barreira física"; "B12 absorvida no cólon"</td><td>Hipocloridria → ↓Ca (→PTH→osteoporose), ↓Mg (mialgia), ↓Fe, ↓B12 (↓<b>secreção</b> de fator intrínseco; absorção no <b>íleo</b>), ↓pepsina (pH&lt;4) → ↓triptofano (ansiedade/insônia), ↓HCl antimicrobiano (infecções, diarreia), <b>hipergastrinemia</b> (rebote, tumores). Agudo já dá mialgia (Mg).</td><td><span class="tag OF">OF</span> T11 Q2 (C) · T5 Q9 (A) · T7 QD5/6 · T9 QD4 · <span class="tag VE">VE</span> T6 Q13</td></tr>
+<tr><td>Famotidina "10 mg"; "ativada pela gastrina"; "para gastrite/úlcera"</td><td><b>20 mg à noite</b>, antagonista competitivo H2 (histamina), ↓&gt;50% da secreção; escolha para <b>uso crônico / dispepsia funcional / pirose matutina</b> (poupa CYP); não cicatriza úlcera</td><td><span class="tag OF">OF</span> T6 QD4 · PM Q9 · T7 Q15-II F · T11 Q3</td></tr>
+<tr><td>Vonoprazana "estimula muco e bicarbonato"</td><td>PCAB: inibe <b>reversivelmente</b> competindo com K⁺, sem bioativação, qualquer horário; úlcera/H. pylori; cara; muitas interações CYP</td><td><span class="tag OF">OF</span> T6 Q14-IV F · T7 Q15-III V · <span class="tag VE">VE</span> T4 Q8-IV V</td></tr>
+<tr><td>Antiácidos trocados</td><td><b>Mg(OH)₂</b> rápido → diarreia · <b>Al(OH)₃</b> lento → constipação · <b>CaCO₃</b> eructação + rebote via células G/gastrina · <b>NaHCO₃</b> base forte, rápido, alcalose, <b>CI hipertenso/IR</b>, rebote por ↑pH. Tomar 1 h APÓS a refeição. Uso agudo/ocasional.</td><td><span class="tag OF">OF</span> T11 Q5 (B) · T6 Q10 · T5 QD6 · T9 QD1 (correção: CaCO₃ e NaHCO₃) · <span class="tag IN">IN</span> T11 Q4 = C</td></tr>
+<tr><td>Sucralfato "hidróxido de cálcio"; "neutraliza o ácido"; "rápida dissociação"</td><td>Sacarose-octassulfato + <b>Al(OH)₃</b>; em pH ácido forma pasta viscosa (<b>lenta</b>) que adere à úlcera ~6 h; estimula PG, muco e bicarbonato; <b>1 g 4×/dia em jejum</b>; gastroprotetor <b>ambulatorial</b> associado ao IBP</td><td><span class="tag OF">OF</span> T7 Q9 (B) · T9 Q3 (C — "ambulatorial" exclui misoprostol) · T11 Q3-d</td></tr>
+<tr><td>Misoprostol "1ª linha ambulatorial"</td><td>Análogo de PGE1: ↓ácido + ↑muco/bicarbonato; <b>hospitalar/off-label</b> para úlcera por AINE; <b>abortivo</b>; diarreia/cólica</td><td><span class="tag OF">OF</span> T4 Q9 (C) · T9 Q3</td></tr>
+<tr><td>Espinheira-santa "trata úlcera/H. pylori"</td><td>Chá das folhas: ↓secreção ácida + ↑muco/bicarbonato; gastrite leve/dispepsia; <b>não</b> úlcera nem H. pylori. Couve: muco.</td><td><span class="tag OF">OF</span> T7 Q15-I V · T6 Q9</td></tr>
+<tr><td>Hospital: gastrite erosiva + regurgitação</td><td>Omeprazol IV + <b>bromoprida IV</b> (misoprostol IV não existe; ondansetrona não é pró-cinética)</td><td><span class="tag IN">IN</span> T11 Q11 (Danielli marcou A e errou → B)</td></tr>
+</table>
+
+<h3>🟦 Hepato / pâncreas (tema em alta)</h3>
+<table>
+<tr><th>Pegadinha</th><th>O que é verdade</th><th>Evidência</th></tr>
+<tr><td>"Boldo é hepatoprotetor"; "UDCA para esteatose"</td><td><b>UDCA</b> (ácido ursodesoxicólico) = colangites/colestase, dissolve cálculo de colesterol (não é 1ª linha — cirurgia), 10 mg/kg/dia · <b>Silimarina (cardo mariano)</b> = hepatoprotetor: esteatose alcoólica/não alcoólica, hepatites, toxinas · <b>Boldo (boldina)</b> = colerético/colagogo, NÃO protege · <b>Pancreatina</b> = insuficiência exócrina</td><td><span class="tag OF">OF</span> T9 Q4 (A) · PM Q11 (UDCA + pancreatina) · <span class="tag VE">VE</span> T11 Q14 (A: colangite = UDCA; esteatose = silimarina)</td></tr>
+</table>
+</section>
+
+<!-- ============ T6 ============ -->
+<section class="tab" id="t6">
+<h2>Divergências e gabaritos incertos (não escondi nada)</h2>
+<table>
+<tr><th>Onde</th><th>O problema</th><th>Como tratar no estudo</th></tr>
+<tr><td>T5 QD3 × T7 Q4 — laxante em gestante</td><td>Na T5 a resposta "policarbofila cálcica" foi aceita (C); na T7 o gabarito foi <b>macrogol</b>; o slide diz PEG/macrogol "de escolha para grávidas". O gabarito da veterana diz "macrogol ou PEG".</td><td>Responder <b>macrogol/PEG</b> (osmótico não fermentável, sem cólica). Citar policarbofila só como alternativa formadora de massa (constipação primária).</td></tr>
+<tr><td>T4 Q12 — SEP asserção-razão</td><td>O aluno marcou B e o quadro mostra "B ✗ / D circulado"; a veterana Letícia conclui <b>D</b> (I falsa: desinibição só nigroestriatal; galactorreia não é SEP).</td><td>Adotar D como <span class="tag IN">INFERIDO</span>. A lição: SEP ≠ galactorreia (sítios diferentes).</td></tr>
+<tr><td>T6 Q13 (C/D), Q14 (E/B), Q15 (C/E), Q10 (B/A), Q7 (E/C)</td><td>Quadro com duas letras (resposta do aluno + correção em vermelho) e a transcrição não separa com segurança qual é qual.</td><td>Usei slides+veterana para inferir: Q7 = E (IV e V) · Q10 = B (Al = constipação) · Q13 = C ou D (item V "CYP17 → ↑progesterona" é verdadeiro pela aula → C) · Q14 = E (IV falsa) · Q15 = C (III falsa: PLA2). Todos marcados <span class="tag IN">IN</span> no banco.</td></tr>
+<tr><td>T7 Q11 / Q12 / Q13</td><td>Texto da transcrição contradiz o quadro. Quadro: Q11 = A ✓, Q12 = B ✓, Q13 = B/C.</td><td>Q11 = A (formadores de massa: ambas V e II justifica) · Q12 = B (I, II, IV) · Q13 = B (I, III, V) <span class="tag IN">IN</span>.</td></tr>
+<tr><td>T11 Q3, Q4, Q11</td><td>Danielli errou (D, D, A). Gabarito correto não está escrito.</td><td>Q3 = A (famotidina 20 mg/noite; b: pantoprazol ✗; c: seletiva ✗; d: "rápida" ✗) · Q4 = C carbonato de cálcio (células G/gastrina) · Q11 = B omeprazol IV + bromoprida IV — todos <span class="tag IN">IN</span>.</td></tr>
+<tr><td>T9 Q7 e Q11</td><td>A aluna riscou itens que o gabarito considera verdadeiros (Q7-II "purgação em 1–3 h em altas doses de sais de Mg" e Q7-V prucaloprida 2 mg; Q11-V "5-HT3 + dexametasona e/ou bromoprida").</td><td>Confie no gabarito da professora (Q7 = C; Q11 = A), não na marcação da veterana.</td></tr>
+<tr><td>T11 Q8</td><td>Gabarito D (dimenidrinato bloqueia H1 e muscarínico → sonolência, ↑fome, xerostomia, retenção, constipação). O item C (prucaloprida 5-HT4 → ACh) também parece correto pelo slide.</td><td>Ela considerou D. Possível pegadinha em C: "estimulação vagal promove esvaziamento gastrintestinal" / "junção neuromuscular". Anotar como <span class="tag OF">OF</span> D e discutir em aula se puder.</td></tr>
+<tr><td>Veterana Letícia (gabarito de estudo)</td><td>Boa maioria coincide com os gabaritos oficiais, mas há erros dela: T6 Q4 ela marcou cáscara (gabarito: sene); T4 Q2 diz que alosetrona "aumenta vagal" é falso (correto, mas o gabarito da prova aceitou E = II, III, IV).</td><td>Selos: o que bate com correção da professora = <span class="tag OF">OF</span>; o que é só dela = <span class="tag VE">VE</span>.</td></tr>
+<tr><td>Ordem das aulas × roteiro da UC</td><td>O caderno da UC diz: SP1 laxantes/coleréticos · SP2 antidiarreicos/DII · SP3 antieméticos/hepato/pancreáticas · SP4 dispepsia. A Vânia deu <b>diarreia</b> primeiro (04/09) e já entrou em constipação.</td><td>Nomeei os guias pelo TEMA (Diarreia+DII; Constipação; Antieméticos+Hepato; Dispepsia). Você me diz a ordem real das próximas aulas.</td></tr>
+</table>
+</section>
+
+<!-- ============ T7 ============ -->
+<section class="tab" id="t7">
+<h2>Estratégia da UC14 — Farmaco</h2>
+<div class="red"><b>Datas que preciso que você confirme antes de eu fixar nos materiais:</b>
+<ul>
+<li>❓ Prova A1/A2 de Farmaco UC14: <b>sexta 02/10/2026</b>, 15h20? (na UC13 ela mudou para manhã) — e continua sendo prova única valendo 100%?</li>
+<li>❓ PM de Farmaco UC14: <b>04/12/2026</b>.</li>
+<li>❓ Aulas de Farmaco restantes: sextas <b>11/09</b> (tem aula? é SAMOQS), <b>18/09</b> e <b>25/09</b> — quais temas? (Antieméticos+hepato? Dispepsia?) A prova em 02/10 cobre as 4 SPs mesmo que a última aula seja 25/09?</li>
+<li>✅ AVA: a T12 <b>não fará</b> atividade do AVA — só a nota da prova (informado pelo Otto em 07/09).</li>
+<li>❓ Fechamentos das SPs da UC14: 16/09, 23/09, 30/09, 07/10 (quartas)? E a PM de Farmaco UC13 continua <b>16/09</b>?</li>
+</ul></div>
+
+<div class="card">
+<h3>Princípio: teste-primeiro, weekend-âncora, 4 blocos</h3>
+<p>Você só entra em Farmaco UC14 depois da PM de 16/09. Até 02/10 são <b>2 fins de semana inteiros + 1 véspera</b>. Como ela recicla ~70% e a matéria é "mais simples que a UC13" (palavras dela na aula de 04/09), a estratégia é: <b>banco antes de resumo</b> em cada bloco (você já leu os guias v2 e sabe que prefere ler primeiro — então o "teste" é o diagnóstico de 15 min, não a leitura inteira).</p>
+<ol>
+<li><b>Diagnóstico (15 min)</b>: 10 questões do bloco no banco, sem consultar. Anota a classe do erro (conteúdo / atenção / interpretação).</li>
+<li><b>Leitura do resumo do guia v2</b> (30–40 min) marcando o que errou.</li>
+<li><b>Banco completo do bloco</b> em modo prova (todas as questões OFICIAL/VETERANO do tema) + 1 discursiva escrita à mão com dose/posologia.</li>
+<li><b>Flashcards atômicos</b> do bloco no trajeto (podcast do bloco, se você quiser — funcionou na UC13).</li>
+</ol>
+<p>Ordem dos blocos pelo <b>peso × dificuldade</b>: Dispepsia (31%) → Antieméticos (28%) → Constipação (21%) → Diarreia/DII (17%) → Hepato (3%, 1 h basta). Diarreia e constipação já têm material pronto (aula dada) — então elas entram primeiro no calendário como "aquecimento", e dispepsia/antieméticos ganham os fins de semana.</p>
+</div>
+
+<h3>Cronograma proposto (weekend-âncora; brechas de 30–60′ são bônus sem culpa)</h3>
+<div class="cal">
+<div class="day"><h4>Ter 08 → Qua 09/09</h4>Prova final de tutoria UC13 (09/09). <b>Zero Farmaco UC14.</b></div>
+<div class="day"><h4>Qui 10 → Sex 11/09</h4>SAMOQS. Se der 30′: ouvir o podcast/ler as "frases-lei" da aula de 04/09 (arquivo que estou gerando). Sex 15h20: aula de Farmaco? ❓ → grava e me manda.</div>
+<div class="day we"><h4>Sáb 12 – Dom 13/09</h4><b>PM de Farmaco UC13 (16/09) é a prioridade.</b> Bônus opcional (45′): diagnóstico de 10 questões de Diarreia/DII no banco UC14 — só para sentir o estilo.</div>
+<div class="day"><h4>Seg 14 → Qua 16/09</h4>PM UC13 (16/09). Quarta à noite: abertura da SP2 UC14 (foto do quadro → me manda).</div>
+<div class="day"><h4>Qui 17 – Sex 18/09</h4>Descanso pós-PM. Sex 15h20: aula de Farmaco (tema? ❓). <b>Bloco 1 = Diarreia/DII: leitura do guia v2 (40′) + banco (40′)</b> se tiver brecha na quinta à noite.</div>
+<div class="day we"><h4>Sáb 19/09 (3 h)</h4><b>Bloco 2 = Constipação</b>: diagnóstico → guia v2 → banco → 2 discursivas escritas (cólon preguiçoso; laxante por população). Flashcards SP1+SP2.</div>
+<div class="day we"><h4>Dom 20/09 (3 h)</h4><b>Bloco 3 = Antieméticos + hepato</b> (material sai assim que você me passar a aula/slides; se ainda não tiver aula, usar guia montado dos slides de veterana + Katzung). Foco: SEP, galactorreia, dimenidrinato, ondansetrona, associação 1–4.</div>
+<div class="day"><h4>Seg 21 → Sex 25/09</h4>Brechas: flashcards (15′/dia) + 1 família de reciclagem por dia (IBP crônico; CYP; antiácidos; TRO; racecadotrila). Sex: aula (Dispepsia? ❓) → grava.</div>
+<div class="day we"><h4>Sáb 26/09 (3 h)</h4><b>Bloco 4 = Dispepsia</b> (o mais pesado): diagnóstico → guia → banco → 3 discursivas escritas (anemia/osteoporose por IBP; omeprazol×clopidogrel; famotidina crônica).</div>
+<div class="day we"><h4>Dom 27/09 (3 h)</h4>Banco completo (todas as SPs, filtro "Só OFICIAL") em modo prova + refazer só os erros. Registrar erros por família.</div>
+<div class="day ex"><h4>Qua 30/09 (noite) — SIMULADÃO ÚNICO</h4>Formato T11/T12: 14 obj A–D + 4 QD, 1h30, modo prova (eu monto inédito, com o estilo Katzung-verbatim dela). Qui 01/10: só refazer os erros + "véspera" (números + 20 pegadinhas-ouro).</div>
+<div class="day ex"><h4>Sex 02/10 ❓ — PROVA</h4>Manhã: 30′ de "véspera" (só números e pegadinhas). Depois: me manda a prova + gabarito → viro OFICIAL no banco e refaço o perfil.</div>
+</div>
+
+<div class="ok"><b>Metas mensuráveis:</b> antes do 02/10 ter feito <b>100% do banco OFICIAL</b> pelo menos 1× e os erros 2×; ≥80% no simuladão nº 2; 5 discursivas escritas com dose/posologia sem consulta. Se a nota vier abaixo do esperado, primeiro olhamos os DADOS (classe de erro por família) e só depois o plano — combinado.</div>
+
+<div class="card">
+<h3>O que já está pronto e o que vem a seguir</h3>
+<ul>
+<li>✅ Este Raio-X + estratégia.</li>
+<li>✅ <b>Guia v2 — SP1 Diarreia + DII</b> (resumo → banco selado → descritiva → flashcards → mapa) com figuras.</li>
+<li>✅ <b>Guia v2 — SP2 Constipação</b> (slides completos + aula + artigo Roma IV) — mesma estrutura.</li>
+<li>✅ <b>Guia v2 — SP3 Antieméticos + hepato/pâncreas</b> (slides de 17/09 + Consenso + revisão CINV + provas) — sem áudio ainda.</li>
+<li>✅ <b>Vias metabólicas</b> (fase I/II, absorção → excreção de cada fármaco) + mapa CYP — arquivo próprio.</li>
+<li>✅ <b>Banco de questões UC14</b> — TODAS as questões das provas antigas (T4–T11, PMs, atividades), 4 SPs, com selos e divergências.</li>
+<li>✅ Transcrição integral da aula de 04/09 + frases-lei (aba 🎧 Aulas).</li>
+<li>⏭️ SP4 (dispepsia): pré-resumo + questões já no arquivo <code>UC14_SP4_Dispepsia.html</code>; vira guia v2 quando chegarem slides/aula.</li>
+<li>⏭️ Podcast em 2 episódios, depois que ela terminar de dar a matéria.</li>
+</ul>
+</div>
+</section>
+</div>
+<script>// tabs (scoped: a nav only toggles the sections that are its siblings). Outer nav sticky at top; inner nav sticks right below it.
+function setNavOffsets(){const o=document.querySelector('nav.tabs.outer');const h=o?o.offsetHeight:0;document.documentElement.style.setProperty('--outerH',h+'px');}
+window.addEventListener('load',setNavOffsets);window.addEventListener('resize',setNavOffsets);
+document.querySelectorAll('nav.tabs').forEach(nav=>{
+  const parent=nav.parentElement;
+  const secs=[...parent.children].filter(el=>el.matches('section.tab'));
+  nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    nav.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    secs.forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); const t=document.getElementById(b.dataset.t); if(t)t.classList.add('on');
+    setNavOffsets();
+    const outer=document.querySelector('nav.tabs.outer');
+    const isOuter=nav.classList.contains('outer');
+    const target=isOuter?nav:(outer?parent:nav); // com barra externa: topo do bloco; leitura lisa: a própria barra interna fica no topo
+    const off=(outer&&!isOuter)?outer.offsetHeight:0;
+    const y=target.getBoundingClientRect().top+window.scrollY-off-4;
+    window.scrollTo({top:Math.max(0,y),behavior:'auto'});
+  }));
+});
+// quiz renderer
+function seloTag(s){const n={OF:'OFICIAL',VE:'VETERANO',IN:'INFERIDO',AU:'AULA'}[s]||s;return `<span class="tag ${s}">${n}</span>`;}
+function renderQuiz(container, list){
+  const el=document.getElementById(container); el.innerHTML='';
+  let n=0,ok=0;
+  list.forEach((q,i)=>{
+    const d=document.createElement('div'); d.className='q'; d.dataset.tema=q.tema; d.dataset.selo=q.selo; d.dataset.sp=q.sp; d.dataset.tipo=q.tipo;
+    let h=`<div class="hd"><b>#${i+1}</b> ${seloTag(q.selo)} <span>${q.prova}</span> · <span>${q.tipo}</span> · <span>${q.tema}</span></div>`;
+    h+=`<div class="en">${q.enun}</div>`;
+    if(q.itens){h+='<ol class="itens">'+q.itens.map(x=>`<li>${x}</li>`).join('')+'</ol>';}
+    if(q.alts){
+      h+='<ul class="alts">'+q.alts.map((a,k)=>{const L=String.fromCharCode(65+k);return `<li data-l="${L}"><b>${L})</b> ${a}</li>`;}).join('')+'</ul>';
+    }else{
+      h+=`<button class="show">Ver resposta esperada</button>`;
+    }
+    h+=`<div class="rev"><b>Gabarito: ${q.gab}</b><br>${q.com}</div>`;
+    d.innerHTML=h; el.appendChild(d);
+    if(q.alts){
+      const letter=(q.gab||'').trim().charAt(0).toUpperCase();
+      d.querySelectorAll('.alts li').forEach(li=>li.addEventListener('click',()=>{
+        if(d.classList.contains('open'))return;
+        d.classList.add('open'); n++;
+        if(li.dataset.l===letter){li.classList.add('right');ok++;}else{li.classList.add('wrong');const r=d.querySelector(`.alts li[data-l="${letter}"]`);if(r)r.classList.add('right');}
+        const sc=el.parentElement.querySelector('.score'); if(sc) sc.textContent=`Acertos: ${ok}/${n}`;
+      }));
+    }else{
+      d.querySelector('.show').addEventListener('click',()=>d.classList.add('open'));
+    }
+  });
+}
+function applyFilter(container, list, pred){renderQuiz(container, list.filter(pred));}
+// flashcards
+function initFlash(deck, wrapId){
+  const wrap=document.getElementById(wrapId); let i=0; let order=deck.map((_,k)=>k);
+  const card=wrap.querySelector('.fc'), q=card.querySelector('.qq'), a=card.querySelector('.aa'), w=card.querySelector('.why'), cnt=wrap.querySelector('.cnt');
+  function show(){const c=deck[order[i]]; card.classList.remove('flip'); q.textContent=c.q; a.textContent=c.a; w.textContent=c.w||''; cnt.textContent=`${i+1} / ${deck.length}`;}
+  card.addEventListener('click',()=>card.classList.toggle('flip'));
+  wrap.querySelector('.prev').addEventListener('click',()=>{i=(i-1+deck.length)%deck.length;show();});
+  wrap.querySelector('.next').addEventListener('click',()=>{i=(i+1)%deck.length;show();});
+  wrap.querySelector('.shuf').addEventListener('click',()=>{order.sort(()=>Math.random()-.5);i=0;show();});
+  document.addEventListener('keydown',e=>{if(e.key===' '){e.preventDefault();card.classList.toggle('flip');}if(e.key==='ArrowRight'){i=(i+1)%deck.length;show();}if(e.key==='ArrowLeft'){i=(i-1+deck.length)%deck.length;show();}});
+  show();
+}
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UC14 · Farmaco · Banco de questões da Vânia</title>
+<title>UC14 · Farmaco · SP2 Constipação — Guia v2</title>
 <style>:root{--bg:#f4f6f8;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;--accent-dark:#0c4a5e;
 --ok:#15803d;--ok-soft:#dcfce7;--bad:#b91c1c;--bad-soft:#fee2e2;--warn:#a16207;--warn-soft:#fef9c3;--purple:#6d28d9;--purple-soft:#ede9fe;--pink:#be185d;--line:#e2e8f0;
 --acc:#0e7490;--acc2:#0c4a5e;--blue:#0e7490;--bluebg:#e0f2f7;--okbg:#dcfce7;--redbg:#fee2e2;--warnbg:#fef9c3}
@@ -90,24 +90,208 @@ details{margin:6px 0}summary{cursor:pointer;font-weight:600}
 .day.ex{border-color:var(--bad);background:var(--bad-soft)}
 @media print{nav.tabs{display:none}section.tab{display:block!important}.q .rev{display:block}}
 @media(max-width:600px){body{font-size:14.5px}}
-
-
 </style>
 </head>
 <body>
 <header>
-<h1>🏦 Banco Vânia — Farmaco UC14 (questões reais, seladas)</h1>
-<p>Versão 3 (17/09/2026): TODAS as provas antigas (T4, T5, T6, T7, PM 2024, T9, T11 + atividades + QDs da T8) + questões inferidas dos slides da SP3, 4 SPs = <span id="tot"></span> questões. Cresce a cada SP e vira 100% OFICIAL quando você me mandar a sua prova (T12). Selos: <span class="tag OF">OFICIAL</span> gabarito com correção da professora · <span class="tag VE">VETERANO</span> marcação do aluno sem correção visível · <span class="tag IN">INFERIDO</span> deduzido de slides/provas (divergência explicada) · <span class="tag AU">AULA</span> dito em sala.</p>
+<h1>🧱 Farmaco UC14 — SP2 · Constipação e laxantes (guia v2)</h1>
+<p>Fontes: slides "farmacologia constipação 2026" (Vânia) · aula de 04/09/2026 (parte final) · artigo da pasta: <i>Diagnosis and treatment of constipation: a clinical update based on the Rome IV criteria</i>, J Coloproctol 2018 · Katzung 15ª cap. 62 · tabelas e resumo de veterana · 7 provas antigas + AVA T11. Selos: <span class="tag OF">OFICIAL</span> <span class="tag VE">VETERANO</span> <span class="tag IN">INFERIDO</span> <span class="tag AU">AULA</span> · Prova: 02/10/2026 ❓</p>
 </header>
 <div class="wrap">
+<nav class="tabs">
+<button class="on" data-t="r">📖 Resumo</button>
+<button data-t="q">📝 Questões (banco SP2)</button>
+<button data-t="d">✍️ Descritiva</button>
+<button data-t="f">🎴 Flashcards</button>
+<button data-t="m">🧠 Mapa mental</button>
+</nav>
+
+<section class="tab on" id="r">
+<div class="blue"><b>Chave da SP2:</b> ela decide o laxante pelo <b>TIPO de constipação</b> (primária × secundária) e pela <b>população</b> (gestante, criança, idoso, refratário). Decore a tabela "quem para quem" e o mecanismo do cólon preguiçoso — juntos são ~70% do que cai de constipação.</div>
+
+<h2>1. Definição, tipos e diagnóstico</h2>
 <div class="card">
-<b>Filtros</b>
-<div class="filters" id="fsp"><button class="on" data-f="all">Todas as SPs</button><button data-f="1">SP1 Diarreia/DII</button><button data-f="2">SP2 Constipação</button><button data-f="3">SP3 Antieméticos/Hepato</button><button data-f="4">SP4 Dispepsia</button></div>
-<div class="filters" id="fselo"><button class="on" data-f="all">Todos os selos</button><button data-f="OF">OFICIAL</button><button data-f="VE">VETERANO</button><button data-f="IN">INFERIDO</button></div>
-<div class="filters" id="ftipo"><button class="on" data-f="all">Todos os tipos</button><button data-f="discursiva">Discursivas</button><button data-f="asserção-razão">Asserção-razão</button><button data-f="sentenças">Sentenças I–V</button><button data-f="direta">Diretas/caso</button><button data-f="T11">Só T11 (2026)</button><button data-f="shuf">🔀 Embaralhar</button></div>
+<p>Constipação não é só frequência: <b>esforço, consistência (Bristol) e sensação de evacuação incompleta</b> contam igual. Frequência normal varia de 2×/dia a 1× a cada 2–3 dias. Manobra manual para evacuar já é constipação (<span class="tag AU">AU</span>). Motilidade depende de 3 processos: peristalse coordenada (músculo liso + SNA + hormônios), transporte de água/eletrólitos pela mucosa, reflexos evacuatórios (receptores no canal anal superior/ampola retal + esfíncter interno).</p>
+<div class="grid">
+<div>
+<h4>Primária (funcional/idiopática)</h4>
+<ul><li>Sem causa orgânica: pouca água, pouca fibra, sedentarismo; mais em mulheres (progesterona antimotilidade).</li><li>Tratamento: <b>mudança de hábito</b> (fibra 25–30 g/dia + 1,5–2,5 L de água) ± <b>formadores de massa</b>.</li></ul>
 </div>
-<p class="muted" id="nres"></p><div id="quiz"></div>
+<div>
+<h4>Secundária</h4>
+<ul><li>Fármaco (<b>antimuscarínicos</b>: ADT, anti-histamínico; <b>opioides μ2</b>; ferro, Ca, Al) ou doença (hipotireoidismo, DM, Parkinson, tetraplegia).</li><li>Hábito não resolve → laxante <b>contínuo</b>, menor dose possível: <b>osmótico</b> (lactulose no SUS; macrogol).</li></ul>
+</div>
+</div>
+<figure>
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="12">
+<rect width="720" height="200" fill="#fff"/>
+<text x="10" y="18" font-weight="700" font-size="13">Roma IV — constipação funcional (artigo 2018)</text>
+<rect x="10" y="28" width="440" height="160" rx="10" fill="#fbfaf7" stroke="#e3ded4"/>
+<text x="20" y="48" font-weight="700">≥ 2 dos critérios, em &gt;25% das evacuações:</text>
+<text x="20" y="66">• esforço · • fezes duras/grumosas (Bristol 1–2)</text>
+<text x="20" y="82">• sensação de evacuação incompleta</text>
+<text x="20" y="98">• sensação de obstrução/bloqueio anorretal</text>
+<text x="20" y="114">• manobras manuais · • &lt; 3 evacuações/semana</text>
+<text x="20" y="136" font-weight="700">Tempo: sintomas há ≥ 6 meses, critérios nos últimos 3 meses</text>
+<text x="20" y="154">Fezes moles raramente sem laxante · não preenche SII</text>
+<text x="20" y="172" font-size="11" fill="#5b6475">Subtipos: trânsito normal (59%) · obstrução de saída (25%) · trânsito lento (13%)</text>
+<!-- Bristol -->
+<text x="470" y="48" font-weight="700">Escala de Bristol</text>
+<g font-size="11">
+<rect x="470" y="56" width="230" height="18" rx="4" fill="#fbeeee"/><text x="476" y="69">1–2: bolinhas / grumosa → CONSTIPAÇÃO</text>
+<rect x="470" y="78" width="230" height="18" rx="4" fill="#eef6f2"/><text x="476" y="91">3–5: normal (4 = "salsicha lisa")</text>
+<rect x="470" y="100" width="230" height="18" rx="4" fill="#fff7e6"/><text x="476" y="113">6–7: pastosa / líquida → DIARREIA</text>
+</g>
+<text x="470" y="140" font-size="11" font-weight="700">Sinais de alarme (investigar antes de laxante):</text>
+<text x="470" y="156" font-size="11">sangue, perda de peso, anemia, &gt;50 anos início</text>
+<text x="470" y="172" font-size="11">recente, história familiar de CCR, massa</text>
+</svg>
+<figcaption>Fig. 1 — Critérios de Roma IV e escala de Bristol (slides + artigo). A Vânia cita "Roma IV e Bristol = instrumentos validados".</figcaption>
+</figure>
+<p><b>Doenças que a constipação agrava</b> (slide): angina; hemorroidas (sangramento → porta de infecção). Medida não farmacológica é <b>sempre</b> associada, seja qual for o tipo.</p>
+</div>
+
+<h2>2. Não farmacológico: água + fibras (é o "tratamento de eleição")</h2>
+<div class="card">
+<p><b>Água ≥1,5 L/dia</b> (mais no verão): o cólon descendente reabsorve água → fezes duras. <b>Fibras</b> (parte do alimento que resiste às enzimas e chega inalterada ao cólon), inseridas progressivamente (inchaço, flatulência). Efeitos da fermentação: (1) <b>AGCC</b> tróficos para o epitélio; (2) <b>↑massa bacteriana</b> (⅓ do peso fecal é bactéria). Fermentação reduz a água das fezes, mas AGCC são pró-cinéticos e a massa bacteriana amplia o volume. Fibras <b>insolúveis/pouco fermentáveis (lignina)</b> são as mais eficazes em ↑volume e ↑velocidade de trânsito.</p>
+<div class="peg"><b>Fibra solúvel SEM água = pior:</b> ela puxa a água das fezes para entumecer → fecaloma (<span class="tag AU">AU</span>). Por isso "formador de massa" só para quem <u>combina</u> beber água.</div>
+</div>
+
+<h2>3. Classes de laxantes — o quadro que cai inteiro</h2>
+<div class="card">
+<p>Laxantes agem por: ↑retenção de líquido (hidrofílico/osmótico) · ↓absorção de líquido (transporte) · ↑motilidade propulsora / ↓segmentar.</p>
+<table>
+<tr><th>Classe</th><th>Fármacos</th><th>Mecanismo</th><th>Dose / latência</th><th>Indicação dela</th><th>EA / cuidados</th><th>SUS</th></tr>
+<tr><td><b>Formadores de massa</b></td><td>psyllium (Plantago), metilcelulose, farelo, estercúlia, <b>policarbofila cálcica</b>, ágar</td><td>hidrofílicos → retêm água (gel, amolece) + proliferação bacteriana + distensão → mecanorreceptores → peristalse</td><td>≥24 h; <b>com água</b></td><td><b>Constipação PRIMÁRIA</b> (corrigir hábito); SII, diverticular</td><td>inchaço, gases; evitar em cólon atônico/impactação; <b>sem eficácia na secundária</b> (T6 QD3); acamado/angina (veterana)</td><td>não</td></tr>
+<tr><td><b>Osmóticos</b></td><td><b>lactulose</b>, <b>PEG 4000 / macrogol 3350 + eletrólitos</b> (Muvinlax®), sorbitol, manitol, sais de Mg, fosfato de Na</td><td>solúveis não absorvíveis → atraem/retêm água por osmose → distensão → purgação</td><td><b>24–48 h</b> (salinos em dose alta: 1–3 h)</td><td><b>1ª linha na SECUNDÁRIA</b>; também primária que não come fibra/água</td><td>lactulose: flatulência, cólica, diarreia, distúrbio eletrolítico · PEG: praticamente nada</td><td>lactulose <b>sim</b>; PEG não</td></tr>
+<tr><td>Lactulose</td><td>Farlac®, Lactulona® 120 mL</td><td>dissacarídeo sintético (galactose+frutose) → bactérias → ác. lático + acético (osmóticos, ↓pH → ⊣ bactérias produtoras de amônia → <b>encefalopatia hepática</b>)</td><td><span class="dose">15–30 mL até 4×/dia</span>; crônico 1×/dia</td><td>secundária; <b>crianças &lt;10 a</b> (T7 Q5), idosos, gestante em dose baixa</td><td>fermenta → gases (na gestante confunde com contração)</td><td>sim</td></tr>
+<tr><td>PEG / macrogol</td><td>Muvinlax® sachê 14 g</td><td>álcool/polímero inerte, não fermenta, não absorve; mantém osmose "por todo o tempo"</td><td>1–2×/dia</td><td><b>gestante</b> (T7 Q4); <b>refratária</b>; criança (manipular); antidepressivo (T6 Q6)</td><td>seguro; NÃO desidrata (T5 Q7-II F)</td><td>não</td></tr>
+<tr><td>Salinos</td><td>Mg(OH)₂, MgSO₄ ("sal amargo"), fosfato de Na</td><td>osmose rápida</td><td>1–3 h em dose alta</td><td>preparo de cólon</td><td>Mg = base forte → rebote ácido; "não recomendado como laxante" (veterana)</td><td>—</td></tr>
+<tr><td><b>Enemas</b></td><td>fosfato de sódio; SF</td><td>distensão retal → reflexo</td><td>minutos; 1×/semana</td><td>impactação, preparo, tetraplégico/íleo/opioide</td><td>repetidos: hipoCa, hiperP, hiperNa, hipoK; hipotônico → hipoNa</td><td>—</td></tr>
+<tr><td><b>Emolientes / lubrificantes</b></td><td>óleo mineral, docusato; <b>glicerina retal</b></td><td>↑penetração de água, amolece; glicerina = higroscópica + lubrificante</td><td>glicerina &lt;1 h (supositório 2–3 g / enema 5–15 mL 80%, 1×/dia)</td><td>glicerina: bebê que saiu do aleitamento; docusato: lavagem em tetraplégico</td><td>óleo mineral: <b>CI &lt;12 a, acamado, DRGE, disfagia, esofagectomia</b> (pneumonia lipídica); glicerina só retal; ardência</td><td>—</td></tr>
+<tr><td><b>Secretores</b></td><td><b>lubiprostona</b> (Amitiza® 8/24 mcg até 2×), linaclotida</td><td>ácido graxo derivado de PGE → ativa <b>canal de cloreto tipo 2 (ClC-2)</b> no delgado → secreção rica em Cl⁻ → ↑motilidade</td><td>—</td><td>crônica refratária a osmóticos; <b>SII-C</b></td><td>náusea, diarreia, dor; ITU, edema, dispneia; caro</td><td>não</td></tr>
+<tr><td><b>Pró-cinético</b></td><td><b>prucaloprida</b> (Resolor® 1–2 mg)</td><td><b>agonista seletivo 5-HT4</b> → ↑AMPc → ↑ACh na fibra colinérgica → peristalse propulsora (ação indireta, vagal)</td><td><span class="dose">2 mg 1×/dia</span>; 1º movimento ~2,5 h</td><td><b>só refratária a laxantes</b> ("nunca para iniciar"); associar a osmótico; oncológico com opioide</td><td>cefaleia, náusea, diarreia, dor, tontura, gases</td><td>não</td></tr>
+<tr><td><b>Estimulantes / irritantes</b></td><td><b>bisacodil 5 mg</b>, picossulfato, docusato, sene (Cassia), cáscara-sagrada (Rhamnus), ruibarbo, dantrona, ricinoleico</td><td>irritam enterócitos, neurônios entéricos e músculo liso → inflamação → acúmulo de água/eletrólitos + motilidade (PG/AMPc, NO/GMPc)</td><td>VO <b>6–12 h</b></td><td>constipação <b>aguda/esporádica</b>; preparo de exame; <b>menor dose, menor tempo</b></td><td>cólica, diarreia aquosa, distúrbio hidroeletrolítico (aldosteronismo 2º), <b>melanose colônica, degeneração neural, cólon preguiçoso</b>, dependência; esteatorreia, hipoalbuminemia, osteomalácia</td><td>—</td></tr>
+</table>
+</div>
+
+<h2>4. O mecanismo que ela mais cobra: bisacodil → ciclo vicioso → cólon preguiçoso</h2>
+<div class="card">
+<figure>
+<svg viewBox="0 0 920 300" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="12"><rect width="920" height="300" fill="#fff"/><text x="10" y="18" font-weight="700" font-size="13">Duas histórias diferentes — ela cobra as duas separadamente</text><rect x="10" y="30" width="445" height="262" rx="12" fill="#fff7e6" stroke="#b7791f"/><text x="20" y="50" font-weight="700" fill="#7a4b00">A · DEPENDÊNCIA / CICLO VICIOSO (ritmo)</text><rect x="30" y="60" width="405" height="30" rx="8" fill="#fff" stroke="#b7791f"/><text x="232.5" y="79" text-anchor="middle" font-size="11" font-weight="700">irritante esvazia TODO o cólon (o normal esvazia só o descendente)</text><path d="M232.5 90 L232.5 106" stroke="#b7791f" stroke-width="2" marker-end="url(#ar)"/><rect x="30" y="108" width="405" height="30" rx="8" fill="#fff" stroke="#b7791f"/><text x="232.5" y="127" text-anchor="middle" font-size="11">demora 2–4 dias para o cólon encher de novo</text><path d="M232.5 138 L232.5 154" stroke="#b7791f" stroke-width="2" marker-end="url(#ar)"/><rect x="30" y="156" width="405" height="30" rx="8" fill="#fff" stroke="#b7791f"/><text x="232.5" y="175" text-anchor="middle" font-size="11">usuário impaciente "se acha constipado"</text><path d="M232.5 186 L232.5 202" stroke="#b7791f" stroke-width="2" marker-end="url(#ar)"/><rect x="30" y="204" width="405" height="30" rx="8" fill="#fff" stroke="#b7791f"/><text x="232.5" y="223" text-anchor="middle" font-size="11">toma outro laxante → esvazia porções anteriores → repete</text><path d="M30 219 C 14 219, 14 75, 30 75" stroke="#b7791f" stroke-width="2" fill="none" marker-end="url(#ar)"/><text x="30" y="260" font-size="11">Esvaziamento antecipado ⇒ prejudica absorção de água/eletrólitos</text><text x="30" y="278" font-size="11" font-weight="700">⇒ menor dose eficaz, menor tempo possível (T11 QD1)</text><rect x="465" y="30" width="445" height="262" rx="12" fill="#fbeeee" stroke="#7a2e2e"/><text x="475" y="50" font-weight="700" fill="#7a2e2e">B · CÓLON PREGUIÇOSO (dano tecidual)</text><rect x="485" y="60" width="405" height="30" rx="8" fill="#fff" stroke="#7a2e2e"/><text x="687.5" y="79" text-anchor="middle" font-size="11">irritação repetida → inflamação AGUDA a cada dose</text><path d="M687.5 90 L687.5 106" stroke="#7a2e2e" stroke-width="2" marker-end="url(#ar)"/><rect x="485" y="108" width="405" height="30" rx="8" fill="#fff" stroke="#7a2e2e"/><text x="687.5" y="127" text-anchor="middle" font-size="11">inflamação CRÔNICA: dano + reparo, colágeno, fibrose</text><path d="M687.5 138 L687.5 154" stroke="#7a2e2e" stroke-width="2" marker-end="url(#ar)"/><rect x="485" y="156" width="405" height="30" rx="8" fill="#fff" stroke="#7a2e2e"/><text x="687.5" y="175" text-anchor="middle" font-size="11" font-weight="700">dessensibilização / degeneração das terminações mioentéricas</text><path d="M687.5 186 L687.5 202" stroke="#7a2e2e" stroke-width="2" marker-end="url(#ar)"/><rect x="485" y="204" width="405" height="30" rx="8" fill="#fff" stroke="#7a2e2e"/><text x="687.5" y="223" text-anchor="middle" font-size="11">bolo fecal distende a parede mas NÃO deflagra o reflexo</text><text x="485" y="260" font-size="11">+ melanose colônica (pigmento) · perda de função → constipação crônica real</text><text x="485" y="278" font-size="11" font-weight="700">Tolerância pode ser manejada com osmóticos (veterana)</text><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs></svg>
+<figcaption>Fig. 2 — A = por que vira abuso (T11 QD1, 0,5 pt "explique"); B = mecanismo do cólon preguiçoso (T6 QD1, 0,9 pt). O item "dependência por receptor opioide" é FALSO (T6 Q7-II).</figcaption>
+</figure>
+<div class="peg"><b>Antracênicos:</b> sene (<b>chá das FOLHAS</b> — T6 Q4), cáscara-sagrada (casca), ruibarbo → mesmo mecanismo irritante; <u>não</u> bloqueiam 5-HT3 (T5 Q7-III). Uso crônico → melanose colônica.</div>
+</div>
+
+<h2>5. "Quem para quem" — a tabela de decisão da Vânia</h2>
+<div class="card">
+<table>
+<tr><th>Situação</th><th>Escolha (racionalidade)</th><th>Por quê / evidência</th></tr>
+<tr><td>Primária (hábito ruim), paciente que topa beber água</td><td>fibras/prebióticos + água ± formador de massa (psyllium, metilcelulose, policarbofila) ± probiótico</td><td>corrige a causa; T7 QD4, T8 QD3, T7 Q11</td></tr>
+<tr><td>Primária, mas não toma água nem come fibra</td><td>lactulose (SUS)</td><td>veterana: "opção também para primária"</td></tr>
+<tr><td><b>Secundária</b> (ADT/imipramina, opioide, doença)</td><td><b>osmótico</b>: lactulose (atenção básica) ou macrogol</td><td>T6 Q6 (A macrogol) · Ativ T6 (lactulose ✓; ADT constipa por bloqueio muscarínico) · formadores <u>ineficazes</u> (T6 QD3)</td></tr>
+<tr><td><b>Gestante</b></td><td><b>macrogol/PEG</b> (não fermenta, sem cólica) — lactulose em dose baixa é alternativa</td><td>T7 Q4 (C) · slide "escolha para grávidas" · ⚠ T5 aceitou policarbofila</td></tr>
+<tr><td><b>Criança &lt;10 anos</b> (primária ou secundária)</td><td><b>lactulose</b> (líquida, SUS); PEG manipulado</td><td>T7 Q5 (A)</td></tr>
+<tr><td>Bebê que saiu do aleitamento e travou</td><td>supositório de glicerina (retal, &lt;1 h)</td><td>veterana</td></tr>
+<tr><td>Idoso</td><td>osmótico (lactulose/PEG); evitar óleo mineral (aspiração) e estimulante crônico</td><td>slides</td></tr>
+<tr><td>Crônica <b>refratária a lactulose/osmóticos</b></td><td><b>prucaloprida</b> 2 mg 1×/dia (+ osmótico)</td><td>T7 Q6 (E) · T11 Q10 (A)</td></tr>
+<tr><td>SII com constipação</td><td>lubiprostona (ClC-2) / linaclotida</td><td>T11 Q10-d é errada por isso; T9 Q7-IV</td></tr>
+<tr><td>Constipação <b>aguda/esporádica</b>, preparo de exame</td><td>bisacodil 5 mg (6–12 h) — menor dose, menor tempo</td><td>Ativ T5 item 3 (V)</td></tr>
+<tr><td>Impactação/reto cheio, tetraplégico, íleo, opioide</td><td>enema de fosfato / SF; docusato</td><td>T11 Q12-I</td></tr>
+<tr><td>Encefalopatia hepática</td><td>lactulose (↓pH → ⊣ bactérias produtoras de amônia)</td><td>slide</td></tr>
+</table>
+</div>
+
+<h2>🎧 O que ela FALOU na aula (04/09, minutos 67–90)</h2>
+<div class="card"><ul>
+<li>[69:17] ✔ "Na constipação <b>secundária</b> não importa o que o paciente faça — a paciente com <b>amitriptilina</b> vai usar laxante; só escolhemos o tipo."</li>
+<li>[70:00] ✔ Roma IV/Bristol: "tipo <b>4 é o ideal</b>, 3 e 5 oscilam, 6–7 diarreia, 1–2 constipado"; tenha a folha de Bristol impressa na UBS; ensine o paciente a olhar as fezes.</li>
+<li>[71:40] ✔ Dois pacientes "quase obrigatórios" para laxante: <b>angina</b> (esforço) e <b>plexo hemorroidário inflamado</b> (dor → segura → endurece → ciclo).</li>
+<li>[74:18] ✔ Fibra insolúvel arrasta a água que já tem dentro; solúvel pega água do meio → <b>garantir que beba água</b>; introdução <b>lenta e gradual</b> (gases). ⚠ "~50% do bolo fecal = bactérias mortas".</li>
+<li>[77:57] ✔ Formadores (psyllium, metilcelulose, Plantago — sachê/geleia) = "para quem bebe água mas não come fruta/verdura".</li>
+<li>[80:48] ✔ <b>Osmótico = 1ª linha da secundária</b>, para angina/hemorroida e preparo de colonoscopia; "<b>única classe eficaz e segura para uso crônico</b>".</li>
+<li>[82:52] ✔ Lactulose → ácido lático + acético; gases/cólica <b>dose-dependentes</b> → começar baixo (senão abandona); 🆕 gestante: gás confunde com contração.</li>
+<li>[86:39] ✔ Não fermentáveis (sem cólica): <b>PEG 4000, sorbitol, macrogol</b> — sachê em água, com sabor, "evacuação natural". 🆕 <b>Sulfato/hidróxido de magnésio: neutralizam o pH gástrico → rebote ácido → "nunca recomendo"</b> (leite de magnésia dos idosos — volta na SP4).</li>
+<li>[89:07] ✔ PEG/macrogol/lactulose = <b>melhores para crianças, gestantes e idosos</b>; 🆕 <b>Muvinlax não tem dose pediátrica → manipular; lactulose tem</b> (solução). [90:23] Bisacodil/estimulantes, prucaloprida, lubiprostona e enemas ficaram para a <b>próxima aula</b>.</li>
+</ul></div>
+<h2>6. Números para a véspera</h2>
+<div class="card"><ul>
+<li>Água ≥1,5 L (artigo 2–2,5 L) · fibra 25–30 g/dia · formadores ≥24 h · osmóticos 24–48 h · bisacodil VO 6–12 h · glicerina &lt;1 h · supositório CO₂ 5–30 min · prucaloprida 2,5 h · salinos dose alta 1–3 h.</li>
+<li>Lactulose 15–30 mL até 4×/dia (crônico 1×) · macrogol sachê 14 g 1–2×/dia · bisacodil 5 mg · policarbofila 500 mg · glicerina 2–3 g / enema 5–15 mL 80% · lubiprostona 8–24 mcg até 2× · prucaloprida 1–2 mg 1×/dia (artigo: 2–4 mg).</li>
+<li>Roma IV: ≥2 critérios em &gt;25% das evacuações, 3 meses, início ≥6 meses · Bristol 1–2 constipação, 6–7 diarreia.</li>
+<li>SUS: lactulose ✔ · macrogol ✘ · policarbofila ✘ · prucaloprida ✘ · lubiprostona ✘.</li>
+</ul></div>
+</section>
+
+<section class="tab" id="q">
+<h2>Banco SP2 — todas as questões de constipação que já caíram</h2>
+<div class="filters" id="flt">
+<button class="on" data-f="all">Todas</button>
+<button data-f="OF">Só OFICIAL</button>
+<button data-f="VE">Só VETERANO/INFERIDO</button>
+<button data-f="discursiva">Só discursivas</button>
+<button data-f="T11">Só T11 (2026)</button>
+</div>
+<div id="quiz"></div>
 <div class="score" id="score">Acertos: 0/0</div>
+</section>
+
+<section class="tab" id="d">
+<h2>Descritiva integrativa</h2>
+<div class="card">
+<p><b>Caso.</b> R. M., 29 anos, gestante de 24 semanas, em uso de sulfato ferroso, refere evacuar a cada 4 dias com esforço e fezes em cíbalos (Bristol 1) há 2 meses. Diz que "toma pouca água" e que a irmã lhe deu um chá de sene que "funcionou muito bem" nas últimas 3 semanas, mas agora "não faz mais efeito".</p>
+<ol>
+<li><b>(0,5)</b> Classifique a constipação (tipo) e explique dois mecanismos que contribuem para ela neste caso.</li>
+<li><b>(0,8)</b> Por que o chá de sene "parou de funcionar"? Explique mecanisticamente o que aconteceu no cólon e por que esse tipo de laxante deve ser usado na menor dose e pelo menor tempo.</li>
+<li><b>(0,7)</b> Prescreva o tratamento racional (não farmacológico + fármaco com dose/posologia), justificando a escolha para gestante e citando uma alternativa disponível no SUS.</li>
+</ol>
+<details><summary>Roteiro de correção</summary>
+<p><b>1 (0,5):</b> mista, com componente secundário (ferro oral; progesterona da gestação ↓ motilidade; útero comprimindo) sobre hábito de pouca água/fibra (primária). Explicar 2: ferro/progesterona ↓ peristalse; pouca água → cólon reabsorve → fezes duras (0,25 cada).</p>
+<p><b>2 (0,8):</b> sene = antracênico irritante: inflamação aguda → secreção de água + motilidade → purgação; esvazia TODO o cólon (normal = só descendente) → dias para encher → "acha que está constipada" → repete (ciclo/dependência) (0,3); irritação repetida → inflamação crônica → fibrose → dessensibilização/degeneração das terminações mioentéricas → bolo distende mas não dispara reflexo = cólon preguiçoso (+ melanose colônica) (0,4); por isso menor dose/menor tempo; perda de água/eletrólitos (aldosteronismo 2º) (0,1).</p>
+<p><b>3 (0,7):</b> água ≥1,5–2 L, fibra 25–30 g progressiva, atividade física (0,2); <b>macrogol/PEG 3350 + eletrólitos</b> 1 sachê (14 g) 1–2×/dia — osmótico inerte, não fermenta (sem cólica que imita contração), não absorvido, seguro na gestação, efeito 24–48 h (0,3); alternativa SUS: <b>lactulose</b> 15 mL 1–2×/dia começando baixo (fermenta → gases) (0,1); suspender sene; considerar fracionar/ajustar ferro (0,1). NÃO: bisacodil crônico, óleo mineral (aspiração), sais de Mg.</p>
+</details>
+</div>
+<div class="card">
+<h3>Discursivas curtas para treinar (todas já caíram)</h3>
+<ol>
+<li>Cite um laxante que deve ser usado na menor dose eficaz e pelo menor tempo possível e explique por que (ciclo vicioso). <small>T11 QD1</small></li>
+<li>Mecanismo da síndrome do cólon preguiçoso no uso crônico de bisacodil. <small>T6 QD1</small></li>
+<li>Dois laxantes contraindicados na constipação secundária por falta de eficácia. <small>T6 QD3</small></li>
+<li>Laxante de 1ª escolha na gestante. <small>T5 QD3 / T7 Q4</small></li>
+<li>Tratamento dietético/suplementos na constipação primária e papel na purgação. <small>T7 QD4 / PM Q14</small></li>
+<li>Paciente em uso de imipramina com constipação: há relação? Tratamento na atenção básica. <small>Ativ T6 Q3</small></li>
+</ol>
+</div>
+</section>
+
+<section class="tab" id="f">
+<h2>Flashcards atômicos — SP2</h2>
+<div class="fc-wrap" id="fcwrap">
+<div class="fc"><div class="qq"></div><div class="aa"></div><div class="why"></div></div>
+<div class="fc-ctl"><button class="prev">◀ anterior</button><span class="cnt"></span><button class="next">próximo ▶</button><button class="shuf">🔀 embaralhar</button></div>
+</div>
+</section>
+
+<section class="tab" id="m">
+<h2>Mapa mental — SP2</h2>
+<div class="mm">CONSTIPAÇÃO (frequência + esforço + Bristol 1–2 + evacuação incompleta) · Roma IV ≥2 critérios >25%, 3 m / início ≥6 m
+│
+├─ PRIMÁRIA (hábito: água/fibra; mulher/progesterona) ──► água ≥1,5 L + fibra 25–30 g (progressiva) ± FORMADORES DE MASSA (psyllium, metilcelulose, policarbofila; ≥24 h; COM ÁGUA) ± probiótico
+│
+├─ SECUNDÁRIA (antimuscarínico/ADT, opioide μ2, ferro, doença) ──► OSMÓTICO contínuo, menor dose: LACTULOSE (SUS; 15–30 mL até 4×; 24–48 h; fermenta → gases; encefalopatia hepática)
+│                                                                  ou PEG/MACROGOL (inerte, sem cólica; gestante; refratária; 1–2×/dia; não SUS)
+│
+├─ POPULAÇÕES ──► gestante = macrogol · criança <10 a = lactulose · bebê = glicerina retal (<1 h) · idoso = osmótico (nunca óleo mineral) ·
+│                 refratária = PRUCALOPRIDA 5-HT4 2 mg 1×/d (só após falha; + osmótico) · SII-C = LUBIPROSTONA ClC-2 · impactação = ENEMA fosfato
+│
+├─ ESTIMULANTES (bisacodil 5 mg, picossulfato, sene FOLHAS, cáscara CASCA, ruibarbo) ──► irritam enterócitos/neurônios/músculo → inflamação → água + motilidade (PG/AMPc, NO/GMPc) · 6–12 h
+│       agudo/esporádico · menor dose, menor tempo
+│       DEPENDÊNCIA: esvazia TODO o cólon → dias p/ encher → "constipado" → repete (não é receptor opioide)
+│       CÓLON PREGUIÇOSO: inflamação crônica → fibrose → dessensibilização/degeneração mioentérica → sem reflexo · melanose colônica · hidroeletrolítico/aldosteronismo 2º
+│
+└─ OUTROS ──► emolientes (óleo mineral: CI <12 a, acamado, DRGE → pneumonia lipídica; docusato) · salinos (Mg: rebote ácido; preparo 1–3 h) · simeticona p/ gases da fibra</div>
+</section>
 </div>
 <script>// Banco UC14 · Farmacologia (Vânia) — dados compartilhados entre o Banco e os Guias v2
 // selo: OF = OFICIAL (gabarito com correção da professora visível) · VE = VETERANO · IN = INFERIDO · AU = AULA
@@ -664,19 +848,58 @@ window.BANCO_UC14 = window.BANCO_UC14.concat([
 ]);
 </script>
 <script>
-const ALL=window.BANCO_UC14; document.getElementById('tot').textContent=ALL.length;
-// contadores nos chips
-const cnt=(pred)=>ALL.filter(pred).length;
-const tipoPred=f=>q=>f==='all'||(f==='T11'?q.prova.startsWith('T11'):(f==='direta'?(q.tipo==='direta'||q.tipo==='caso'):q.tipo===f));
-document.querySelectorAll('#fsp button').forEach(b=>{const f=b.dataset.f;b.textContent+=' ('+cnt(q=>f==='all'||String(q.sp)===f)+')';});
-document.querySelectorAll('#fselo button').forEach(b=>{const f=b.dataset.f;b.textContent+=' ('+cnt(q=>f==='all'||q.selo===f)+')';});
-document.querySelectorAll('#ftipo button').forEach(b=>{const f=b.dataset.f;if(f!=='shuf')b.textContent+=' ('+cnt(tipoPred(f))+')';});
-let fsp='all',fselo='all',ftipo='all',shuf=false;
-function run(){let L=ALL.filter(q=>(fsp==='all'||String(q.sp)===fsp)&&(fselo==='all'||q.selo===fselo)&&(ftipo==='all'||(ftipo==='T11'?q.prova.startsWith('T11'):(ftipo==='direta'?(q.tipo==='direta'||q.tipo==='caso'):q.tipo===ftipo))));if(shuf)L=L.slice().sort(()=>Math.random()-.5);document.getElementById('nres').textContent=L.length+' questões nesta seleção';renderQuiz('quiz',L);if(!L.length)document.getElementById('quiz').innerHTML='<div class="warn">Ainda sem questões deste bloco — entram assim que a aula/slides chegarem (e as suas atividades do AVA).</div>';}
-[['fsp',v=>fsp=v],['fselo',v=>fselo=v],['ftipo',v=>{if(v==='shuf'){shuf=!shuf;}else ftipo=v;}]].forEach(([id,set])=>{
- document.querySelectorAll('#'+id+' button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.f!=='shuf'){document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');}else{b.classList.toggle('on');}set(b.dataset.f);run();}));
-});
-run();
+const FLASH_SP2=[
+{q:"Constipação primária: tratamento de eleição",a:"Fibras (25–30 g) + água (≥1,5 L)",w:"± formador de massa"},
+{q:"Formadores de massa: 3 exemplos",a:"Psyllium, metilcelulose, policarbofila cálcica",w:""},
+{q:"Formadores de massa servem para constipação…",a:"PRIMÁRIA (com água)",w:"sem eficácia na secundária — T6 QD3"},
+{q:"Formadores de massa: latência",a:"≥ 24 h",w:""},
+{q:"Formadores: quando evitar",a:"Cólon atônico ou impactação fecal",w:""},
+{q:"Laxante de 1ª linha na constipação SECUNDÁRIA",a:"Osmótico (lactulose no SUS; macrogol)",w:"T6 Q6"},
+{q:"Lactulose: dose",a:"15–30 mL até 4×/dia (crônico 1×/dia)",w:""},
+{q:"Lactulose: latência",a:"24–48 h",w:"osmóticos em geral"},
+{q:"Lactulose: o que as bactérias produzem",a:"Ácido lático e acético (osmóticos, ↓ pH)",w:"→ útil na encefalopatia hepática"},
+{q:"Lactulose: EA principal",a:"Flatulência / cólica (fermentação)",w:""},
+{q:"Lactulose tem no SUS?",a:"Sim",w:"macrogol não"},
+{q:"Laxante para criança < 10 anos (primária ou secundária)",a:"Lactulose",w:"T7 Q5"},
+{q:"Laxante de escolha na gestante",a:"Macrogol / PEG",w:"não fermenta, sem cólica — T7 Q4"},
+{q:"PEG/macrogol fermenta?",a:"Não (inerte, não absorvido)",w:"por isso sem cólica/gases"},
+{q:"Macrogol causa desidratação?",a:"Não",w:"T5 Q7-II falsa"},
+{q:"Constipação refratária a lactulose: fármaco",a:"Prucaloprida",w:"T7 Q6"},
+{q:"Prucaloprida: alvo",a:"Agonista seletivo 5-HT4 (→ ↑ ACh, peristalse)",w:""},
+{q:"Prucaloprida: dose",a:"2 mg 1×/dia",w:"1º movimento ~2,5 h"},
+{q:"Prucaloprida pode iniciar o tratamento?",a:"Não — só após falha dos laxantes",w:""},
+{q:"Lubiprostona: alvo",a:"Canal de cloreto tipo 2 (ClC-2) no delgado",w:"derivado de PGE"},
+{q:"Lubiprostona: indicação",a:"SII com constipação / crônica refratária",w:"8–24 mcg até 2×"},
+{q:"Bisacodil: classe",a:"Purgativo estimulante (irritante)",w:"5 mg; 6–12 h VO"},
+{q:"Bisacodil: mecanismo",a:"Irrita enterócitos/neurônios/músculo → inflamação → água + motilidade",w:"PG/AMPc e NO/GMPc"},
+{q:"Bisacodil: regra de uso",a:"Menor dose eficaz, menor tempo possível",w:"T11 QD1"},
+{q:"Cólon preguiçoso: mecanismo",a:"Inflamação crônica → dessensibilização/degeneração neural mioentérica",w:"T6 QD1"},
+{q:"Ciclo vicioso do laxante: por quê",a:"Esvazia TODO o cólon → demora a encher → 'acha-se constipado' → repete",w:"normal esvazia só o descendente"},
+{q:"Bisacodil causa dependência por receptor opioide?",a:"Não",w:"T6 Q7-II falsa"},
+{q:"Uso crônico de antracênicos → achado na mucosa",a:"Melanose colônica",w:""},
+{q:"'Chá das folhas' purgativo",a:"Sene (Cassia senna)",w:"cáscara-sagrada = casca — T6 Q4"},
+{q:"Antracênicos bloqueiam 5-HT3?",a:"Não — são irritantes",w:"T5 Q7-III falsa"},
+{q:"Glicerina: via",a:"Só retal (supositório 2–3 g / enema 5–15 mL 80%)",w:"<1 h; 1×/dia"},
+{q:"Óleo mineral: contraindicações",a:"<12 anos, acamado, DRGE, disfagia, esofagectomia",w:"pneumonia lipídica"},
+{q:"Enema de fosfato repetido: distúrbios",a:"HipoCa, hiperP, hiperNa, hipoK",w:"hipotônico → hipoNa"},
+{q:"Sais de magnésio como laxante: problema",a:"Base forte → secreção ácida rebote",w:"'não recomendado' (veterana)"},
+{q:"Fibra solúvel sem água causa…",a:"Piora / fecaloma (puxa água das fezes)",w:""},
+{q:"Fibra mais eficaz em ↑ volume e velocidade",a:"Insolúvel pouco fermentável (lignina)",w:""},
+{q:"Fermentação de fibra: 2 efeitos",a:"AGCC tróficos + ↑ massa bacteriana",w:"⅓ do peso fecal = bactérias"},
+{q:"Antidepressivo tricíclico constipa por…",a:"Bloqueio muscarínico (M3)",w:"Ativ T6 — não 5-HT3"},
+{q:"Roma IV: quantos critérios e por quanto tempo",a:"≥2 critérios em >25% das evacuações; 3 meses (início ≥6 m)",w:""},
+{q:"Bristol 1–2 significa",a:"Constipação",w:"6–7 = diarreia"},
+{q:"Doenças agravadas pela constipação (slide)",a:"Angina e hemorroidas",w:""},
+{q:"Água mínima por dia na constipação",a:"≥ 1,5 L (artigo: 2–2,5 L)",w:"mais no verão"}
+];
+initFlash(FLASH_SP2,'fcwrap');
+const LIST_SP2=window.BANCO_UC14.filter(q=>q.sp===2);
+renderQuiz('quiz',LIST_SP2);
+document.querySelectorAll('#flt button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('#flt button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ const f=b.dataset.f;
+ applyFilter('quiz',LIST_SP2,q=>f==='all'||(f==='OF'&&q.selo==='OF')||(f==='VE'&&(q.selo==='VE'||q.selo==='IN'))||(f==='discursiva'&&q.tipo==='discursiva')||(f==='T11'&&q.prova.startsWith('T11')));
+}));
 // tabs (scoped: a nav only toggles the sections that are its siblings). Outer nav sticky at top; inner nav sticks right below it.
 function setNavOffsets(){const o=document.querySelector('nav.tabs.outer');const h=o?o.offsetHeight:0;document.documentElement.style.setProperty('--outerH',h+'px');}
 window.addEventListener('load',setNavOffsets);window.addEventListener('resize',setNavOffsets);

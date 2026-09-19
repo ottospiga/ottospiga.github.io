@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UC14 · Farmaco · Banco de questões da Vânia</title>
+<title>UC14 · Farmaco · SP3 Antieméticos + Hepato — Guia v2</title>
 <style>:root{--bg:#f4f6f8;--card:#fff;--ink:#1a2332;--muted:#5a6a7e;--accent:#0e7490;--accent-soft:#e0f2f7;--accent-dark:#0c4a5e;
 --ok:#15803d;--ok-soft:#dcfce7;--bad:#b91c1c;--bad-soft:#fee2e2;--warn:#a16207;--warn-soft:#fef9c3;--purple:#6d28d9;--purple-soft:#ede9fe;--pink:#be185d;--line:#e2e8f0;
 --acc:#0e7490;--acc2:#0c4a5e;--blue:#0e7490;--bluebg:#e0f2f7;--okbg:#dcfce7;--redbg:#fee2e2;--warnbg:#fef9c3}
@@ -90,24 +90,285 @@ details{margin:6px 0}summary{cursor:pointer;font-weight:600}
 .day.ex{border-color:var(--bad);background:var(--bad-soft)}
 @media print{nav.tabs{display:none}section.tab{display:block!important}.q .rev{display:block}}
 @media(max-width:600px){body{font-size:14.5px}}
-
-
 </style>
 </head>
 <body>
 <header>
-<h1>🏦 Banco Vânia — Farmaco UC14 (questões reais, seladas)</h1>
-<p>Versão 3 (17/09/2026): TODAS as provas antigas (T4, T5, T6, T7, PM 2024, T9, T11 + atividades + QDs da T8) + questões inferidas dos slides da SP3, 4 SPs = <span id="tot"></span> questões. Cresce a cada SP e vira 100% OFICIAL quando você me mandar a sua prova (T12). Selos: <span class="tag OF">OFICIAL</span> gabarito com correção da professora · <span class="tag VE">VETERANO</span> marcação do aluno sem correção visível · <span class="tag IN">INFERIDO</span> deduzido de slides/provas (divergência explicada) · <span class="tag AU">AULA</span> dito em sala.</p>
+<h1>🤢 Farmaco UC14 — SP3 · Antieméticos, pró-cinéticos e hepato/pâncreas (guia v2)</h1>
+<p>Fontes: slides "aula antieméticos 2026" (Vânia, pasta SP3-20260917) · Consenso Brasileiro de Náuseas e Vômitos (Rev Bras Cuid Paliat 2011) · revisão "CINV: risk and clinical management with alternative therapies" (2024) · Katzung cap. 62 · tabela de veterana · 7 provas antigas + AVA. Selos: <span class="tag OF">OFICIAL</span> <span class="tag VE">VETERANO</span> <span class="tag IN">INFERIDO</span> <span class="tag AU">AULA</span></p>
 </header>
 <div class="wrap">
+<nav class="tabs">
+<button class="on" data-t="r">📖 Resumo</button>
+<button data-t="q">📝 Questões (banco SP3)</button>
+<button data-t="d">✍️ Descritiva</button>
+<button data-t="f">🎴 Flashcards</button>
+<button data-t="m">🧠 Mapa mental</button>
+</nav>
+
+<section class="tab on" id="r">
+<div class="warn"><b>Status (17/09):</b> slides da SP3 chegaram; <b>áudio da aula ainda não</b>. Tudo abaixo é slide + provas. Quando vier o áudio, entram as frases-lei com selo <span class="tag AU">AULA</span>.</div>
+<div class="blue"><b>Chave da SP3 (≈28% da prova):</b> ela cobra <b>receptor → fármaco → situação clínica → efeito adverso</b>. Três coisas valem metade dos pontos: o <b>mecanismo da síndrome extrapiramidal</b> (lacunas, sempre igual), a <b>galactorreia por bloqueio D2 na adeno-hipófise</b> e a associação <b>"efetivo / seguro / SEP / gestante" = bromoprida / ondansetrona / metoclopramida / dimenidrinato</b>.</div>
+
+<h2>1. Fisiologia da êmese — o mapa que explica todos os fármacos</h2>
 <div class="card">
-<b>Filtros</b>
-<div class="filters" id="fsp"><button class="on" data-f="all">Todas as SPs</button><button data-f="1">SP1 Diarreia/DII</button><button data-f="2">SP2 Constipação</button><button data-f="3">SP3 Antieméticos/Hepato</button><button data-f="4">SP4 Dispepsia</button></div>
-<div class="filters" id="fselo"><button class="on" data-f="all">Todos os selos</button><button data-f="OF">OFICIAL</button><button data-f="VE">VETERANO</button><button data-f="IN">INFERIDO</button></div>
-<div class="filters" id="ftipo"><button class="on" data-f="all">Todos os tipos</button><button data-f="discursiva">Discursivas</button><button data-f="asserção-razão">Asserção-razão</button><button data-f="sentenças">Sentenças I–V</button><button data-f="direta">Diretas/caso</button><button data-f="T11">Só T11 (2026)</button><button data-f="shuf">🔀 Embaralhar</button></div>
+<p><b>Vômito</b> = expulsão rápida e forçada do conteúdo gástrico por contração sustentada da musculatura torácica/abdominal. <b>Náusea</b> = sensação desagradável da necessidade de vomitar + sinais autonômicos (sudorese fria, sialorreia, hipotonia gástrica, refluxo duodenogástrico). O comando fica no <b>bulbo</b>, perto do núcleo do trato solitário, em duas unidades:</p>
+<figure>
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="12">
+<rect width="1000" height="400" fill="#fff"/>
+<defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
+<rect x="0" y="0" width="640" height="215" fill="#eef6f9"/><text x="10" y="16" font-size="11" fill="#0e7490" font-weight="700">SNC (dentro da barreira hematoencefálica)</text>
+<rect x="0" y="215" width="640" height="185" fill="#fffaf0"/><text x="10" y="232" font-size="11" fill="#7a4b00" font-weight="700">PERIFERIA / fora da BHE</text>
+<rect x="330" y="55" width="290" height="90" rx="12" fill="#0e7490"/>
+<text x="475" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">CENTRO DO VÔMITO (CV)</text>
+<text x="475" y="98" text-anchor="middle" fill="#fff" font-size="10.5">NTS + núcleo motor dorsal do vago</text>
+<text x="475" y="115" text-anchor="middle" fill="#fff" font-size="10.5">5-HT3 · D2 · H1 · M · NK1 · ENK</text>
+<text x="475" y="132" text-anchor="middle" fill="#dbeafe" font-size="10">integra tudo → eferentes motores</text>
+<rect x="20" y="40" width="180" height="60" rx="10" fill="#fff" stroke="#0e7490"/>
+<text x="110" y="60" text-anchor="middle" font-weight="700">CÓRTEX / límbico</text>
+<text x="110" y="76" text-anchor="middle" font-size="10.5">dor, cheiro, visão, emoção,</text><text x="110" y="90" text-anchor="middle" font-size="10.5">antecipatório (GABA)</text>
+<path d="M200 70 L328 85" stroke="#555" stroke-width="2" marker-end="url(#ar3)"/>
+<rect x="20" y="130" width="180" height="60" rx="10" fill="#fff" stroke="#0e7490"/>
+<text x="110" y="150" text-anchor="middle" font-weight="700">NÚCLEOS VESTIBULARES</text>
+<text x="110" y="166" text-anchor="middle" font-size="10.5">cinetose, labirintite</text><text x="110" y="181" text-anchor="middle" font-size="10.5" fill="#b91c1c" font-weight="700">H1 · M</text>
+<path d="M200 160 L328 120" stroke="#555" stroke-width="2" marker-end="url(#ar3)"/>
+<rect x="330" y="245" width="290" height="90" rx="12" fill="#f59e0b"/>
+<text x="475" y="268" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">ZONA DE GATILHO (ZGQ)</text>
+<text x="475" y="285" text-anchor="middle" fill="#fff" font-size="10.5">área postrema — FORA da BHE</text>
+<text x="475" y="302" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700">D2 · 5-HT3 · NK1 · opioide</text>
+<text x="475" y="320" text-anchor="middle" fill="#fff7ed" font-size="10">"prova" o sangue: toxinas, fármacos, quimio, uremia</text>
+<path d="M475 245 L475 147" stroke="#555" stroke-width="2" marker-end="url(#ar3)"/>
+<rect x="20" y="255" width="240" height="110" rx="10" fill="#fff" stroke="#7a4b00"/>
+<text x="140" y="275" text-anchor="middle" font-weight="700">TGI (estômago/intestino)</text>
+<text x="140" y="291" text-anchor="middle" font-size="10.5">irritação, distensão, citotóxicos →</text>
+<text x="140" y="305" text-anchor="middle" font-size="10.5">célula enterocromafim libera 5-HT</text>
+<text x="140" y="321" text-anchor="middle" font-size="10.5" fill="#b91c1c" font-weight="700">5-HT3 no aferente vagal</text>
+<text x="140" y="337" text-anchor="middle" font-size="10.5">D2 inibe ACh mioentérico</text>
+<text x="140" y="352" text-anchor="middle" font-size="10.5">(↓ EEI, ↓ esvaziamento)</text>
+<path d="M260 300 L328 290" stroke="#555" stroke-width="2" marker-end="url(#ar3)"/>
+<path d="M260 280 C 290 200, 310 140, 328 115" stroke="#555" stroke-width="2" fill="none" marker-end="url(#ar3)"/>
+<text x="268" y="200" font-size="10" fill="#555">vago → CV</text>
+<rect x="655" y="40" width="335" height="345" rx="12" fill="#fff" stroke="#0e7490"/>
+<text x="822" y="62" text-anchor="middle" font-weight="700" fill="#0e7490" font-size="12">ONDE CADA CLASSE "CORTA" O CIRCUITO</text>
+<text x="667" y="88" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">5-HT3</tspan> ondansetrona → aferente vagal + ZGQ + CV</text>
+<text x="667" y="103" font-size="10" fill="#555">   citotóxicos, pós-op, hiperêmese</text>
+<text x="667" y="126" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">D2</tspan> metoclopramida/bromoprida → ZGQ + TGI (cruzam BHE)</text>
+<text x="667" y="141" font-size="10" fill="#555">   domperidona → só TGI + hipófise (não cruza BHE)</text>
+<text x="667" y="164" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">H1 + M</tspan> dimenidrinato, meclizina, cinarizina → vestibular</text>
+<text x="667" y="179" font-size="10" fill="#555">   cinetose, labirintite, gestante</text>
+<text x="667" y="202" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">M3</tspan> escopolamina → vestibular + antiespasmódico</text>
+<text x="667" y="225" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">NK1</tspan> aprepitanto → CV/NTS (substância P) — quimio tardia</text>
+<text x="667" y="248" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">CB1</tspan> nabilona/dronabinol (agonistas) — quimio</text>
+<text x="667" y="271" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">GABA</tspan> lorazepam → córtex (antecipatório)</text>
+<text x="667" y="294" font-size="10.5"><tspan font-weight="700" fill="#b91c1c">PG?</tspan> dexametasona → múltiplos locais (quimio)</text>
+<text x="667" y="322" font-size="10" fill="#555">Gengibre: bloqueio 5-HT3/NK1 + ↑secreções</text>
+<text x="667" y="338" font-size="10" fill="#555">Metoclopramida também: agonista 5-HT4 (pró-cinético)</text>
+<text x="667" y="362" font-size="10" fill="#555">Domperidona/hipófise: fora da BHE → ↑prolactina</text>
+</svg>
+<figcaption>Fig. 1 — Mapa topográfico da êmese (Katzung 62 + slides). Detalhe que ela cobra: a <b>ZGQ fica fora da BHE</b> (por isso "sente" toxinas no sangue) e a <b>domperidona não cruza a BHE</b> — age no TGI e na hipófise (também fora da barreira → prolactina).</figcaption>
+</figure>
+<p><b>Desencadeadores</b> (slide): faringe/esôfago, toxinas ou fármacos, dor intensa (enxaqueca), estímulo mecânico, visões/odores desagradáveis, quimioterápicos, emoção, EA de medicamentos, gravidez, disfunção vestibular. Mediadores na ZGQ: <b>dopamina, serotonina, histamina, prostaglandinas e GABA</b>.</p>
+<p><b>Classificação (Consenso):</b> agudo (&lt;24 h) · tardio (24 h–5 d, pico 2–3 d) · antecipatório (condicionado, antes da quimio → lorazepam) · de escape (breakthrough) · refratário.</p>
 </div>
-<p class="muted" id="nres"></p><div id="quiz"></div>
+
+<h2>2. Não farmacológico + fitoterapia (slides = 3 telas, cai como "cite duas medidas")</h2>
+<div class="card">
+<div class="grid">
+<div><b>Dieta (Consenso 2011):</b> fracionar em intervalos menores; ambiente tranquilo/arejado; horários fixos; pequenas porções de carboidrato e comida da preferência; <b>não deitar após comer</b> (cabeça elevada 1–2 h); evitar temperatura extrema (preferir frio/ambiente); ficar longe da cozinha (cheiro); evitar frituras, gorduras, condimentos, ácidos, açucarados, odor forte; <b>dieta rica em proteína</b> (↓ disritmia gástrica); evitar azedos (limão, picles, bala dura) e líquido <b>durante</b> a refeição — mas <b>8–10 copos entre</b> as refeições (líquidos claros: suco, chá, caldo, gelatina, gengibre, lascas de gelo); limitar cafeína/cola. Vômito contínuo: pausa 30–60 min, depois goles.</div>
+<div><b>Gengibre (Zingiber officinale)</b> — antiemético natural: gingeróis, shogaóis, zingibereno, zingerona, paradol → <b>estimulam secreções orais e gástricas</b>, normalizam motilidade, e <b>bloqueiam 5-HT3 e NK1</b>. EA: dermatite, má digestão (confunde com náusea persistente), <b>gastrite se prolongado</b>. Revisão CINV: ≥1 g/dia por 3 dias reduz vômito agudo; acupressão no ponto <b>Neiguan (P6)</b>, musicoterapia, aromaterapia também aparecem como adjuvantes.</div>
+</div>
+</div>
+
+<h2>3. As classes — tabela única (dose falada no slide em negrito)</h2>
+<div class="card">
+<table>
+<tr><th>Classe / fármaco</th><th>Mecanismo (slide)</th><th>Apresentação / dose</th><th>Indicação dela</th><th>EA / pegadinha</th><th>SUS</th></tr>
+<tr><td><b>Anti-5-HT3</b><br>Ondansetrona (Vonau®, Ondif® filme orodispersível)</td><td>bloqueio <b>competitivo e seletivo</b> 5-HT3 na periferia (aferentes vagais viscerais) e central (ZGQ + CV); inibe a sensação aferente visceral (náusea, dor, distensão)</td><td><b>IV 8 mg/dose máx</b> · VO/SL 4 e 8 mg 8/8 ou 12/12 h, <b>máx 24 mg/dia</b>; biodisp. ↑ com alimento; t½ 4–9 h; CYP1A2/2D6/3A4; excreção renal e <b>biliar</b></td><td>quimio (citotóxicos), <b>hiperêmese gestacional</b>, pós-operatório; "segura" (T5 Q5); atenção básica (T6 QD2)</td><td>cefaleia, tontura, <b>constipação</b>, arritmia (rara, QT); <b>não</b> vestibular; sem xerostomia; quimio grave → + <b>dexametasona</b> (T7 Q8). Outros: granisetrona, dolasetrona, palonosetrona (maior afinidade, t½ 40 h)</td><td>sim</td></tr>
+<tr><td><b>Antagonistas D2 / pró-cinéticos</b><br>Metoclopramida (Plasil®)<br>Bromoprida (Plamet®)</td><td>antag. <b>D2</b> (ZGQ + TGI) + antag. 5-HT3 vagal/central + <b>agonista 5-HT4</b>. No TGI a dopamina (via D2) suprime ACh mioentérica → bloquear D2 = ↑ACh = pró-cinético: ↑amplitude peristáltica do esôfago, ↑tônus/pressão do EEI, ↑esvaziamento gástrico; <b>sem efeito no cólon</b></td><td>Metoclopramida <b>10 mg cp · 5 mg inj · gotas 4 mg/mL</b><br>Bromoprida <b>10 e 20 mg · 5 mg inj · gotas 1 mg/mL</b> (não 50 mg)<br>Consenso: metoclopramida 40–120 mg/dia SC/IV</td><td>radiação, intoxicações/xenobióticos, pós-cirurgia, citotóxicos; bromoprida = "mais efetiva" (T5 Q5), regurgitação na DRGE, hospital IV (T11 Q11), gastroparesia (T11 Q7)</td><td>diarreia, sonolência, <b>galactorreia</b>, agitação, irritabilidade, tontura, <b>SEP</b> (acatisia, letargia, distonia → torcicolo, crise oculógira; parkinsonismo tardio) → tratar com <b>anticolinérgico (biperideno)</b> ou anti-histamínico. Farmacocinética: absorção rápida, <b>sulfatação + glicuronidação</b> hepática, urina</td><td>sim</td></tr>
+<tr><td>Domperidona (Motilium®)</td><td>antag. D2 com <b>pouca penetração no SNC</b>; ↑pressão do EEI, ↑esvaziamento gástrico, potencializa peristalse duodenal</td><td><b>10 mg · 1 mg/mL</b></td><td>associada a antissecretor em <b>regurgitação/pirose refratária</b>; <b>gastroparesia; DRGE</b> (lactente, adulto) — pró-cinética, não antiemética central</td><td>↑prolactina → ginecomastia, galactorreia, amenorreia; xerostomia; <b>arritmia ventricular por ↑QT</b>; SEP raríssima; sem ação no cólon (T11 Q6)</td><td>sim</td></tr>
+<tr><td><b>Anti-H1</b><br>Dimenidrinato (Dramin®), meclizina (Meclin®), cinarizina (Stugeron®), flunarizina (Vertix®), hidroxizina, prometazina</td><td>bloqueio H1 + <b>efeito antimuscarínico</b>; agem nos aferentes vestibulares e tronco cerebral</td><td>Dramin® cápsulas <b>25, 50 e 100 mg</b>; gotas; IV</td><td><b>cinetose</b>, vômito por substância de ação local no estômago, <b>náusea matinal da gravidez</b> (1ª escolha gestante), <b>labirintite</b></td><td>sedação, tontura, <b>↑apetite/peso</b>; xerostomia, retenção urinária, constipação (antimuscarínico) — "boca seca + retenção + sonolência" (T5 Q1)</td><td>sim</td></tr>
+<tr><td><b>Antimuscarínicos M3</b><br>Escopolamina/hioscina (Buscopan®), diciclomina; Tropinal® (dipirona + escopolamina + hiosciamina + homatropina)</td><td>antag. M3 — vestibular e periférico</td><td>—</td><td>cinetose; <b>uso predominante = antiespasmódico</b> (cólica gástrica, intestinal, menstrual; SII)</td><td>xerostomia (T6 Q3), retenção, taquicardia; não é antiemético de gestante (T9 Q12)</td><td>sim</td></tr>
+<tr><td><b>Anti-NK1</b><br>Aprepitanto (Emend®), netupitanto, rolapitanto, fosaprepitanto</td><td>bloqueiam a <b>substância P</b> no receptor NK1 no CV/NTS, área postrema e aferentes vagais; substância P ↑ na quimio</td><td><b>125 mg</b> (slide diz IV; VO na prática); hospitalar</td><td>prevenir/tratar vômito de quimio <b>altamente emetogênica, fase tardia</b> (T9 QD2)</td><td>fadiga, tontura, cefaleia, insônia, náusea, <b>soluço</b>; inibe CYP3A4 (↑dexa)</td><td>não</td></tr>
+<tr><td><b>Canabinoides</b><br>Nabilona (sintética, Δ9-THC), dronabinol (natural)</td><td><b>agonistas CB1</b> — modulam secreção gástrica, esvaziamento e motilidade</td><td>—</td><td>quimio (citotóxicos); orexígeno</td><td>euforia/disforia, sonolência, prostração, alucinação, boca seca, ↑apetite; autonômicos: taquicardia, hiperemia conjuntival, hipotensão ortostática. "Antagonista CB1" = F (T7 Q2)</td><td>não</td></tr>
+<tr><td><b>Corticoide</b> dexametasona (4–20 mg VO/IV)</td><td>mecanismo incerto (↓PG); múltiplos locais</td><td>4–20 mg</td><td>quimio (todos os níveis de risco), pós-op</td><td>hiperglicemia, insônia, prurido anal/vaginal e flush se IV rápido</td><td>sim</td></tr>
+<tr><td><b>Benzodiazepínico</b> lorazepam</td><td>GABA — bloqueia estímulo do córtex ao CV</td><td>—</td><td><b>náusea antecipatória</b> (Consenso)</td><td>sedação</td><td>—</td></tr>
+</table>
+<div class="peg"><b>Classificação geral (tabela Rang &amp; Dale no slide):</b> anti-5-HT3 e metoclopramida = <b>citotóxicos</b> (os mais eficazes; geralmente associados) · anti-H1 (ciclizina) e hioscina = <b>vestibular/cinetose</b> · aprepitanto = citotóxicos <b>tardios</b> · dronabinol = citotóxicos. Metoclopramida "também tem atividade 5-HT3"; prometazina "também anti-histamínica e anticolinérgica". Fenotiazinas (proclorperazina, clorpromazina) e haloperidol/droperidol = D2 na ZGQ.</div>
+</div>
+
+<h2>4. Síndrome extrapiramidal — o mecanismo que vira lacuna toda prova</h2>
+<div class="card">
+<figure>
+<svg viewBox="0 0 920 230" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="12">
+<rect width="920" height="230" fill="#fff"/>
+<defs><marker id="ar4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
+<text x="10" y="18" font-weight="700" font-size="13">Via nigroestriatal — dopamina INIBE a liberação de acetilcolina</text>
+<rect x="10" y="35" width="290" height="180" rx="12" fill="#ecfdf5" stroke="#15803d"/>
+<text x="155" y="55" text-anchor="middle" font-weight="700" fill="#15803d">NORMAL</text>
+<rect x="30" y="70" width="110" height="34" rx="8" fill="#fff" stroke="#15803d"/><text x="85" y="91" text-anchor="middle" font-size="11">neurônio DA</text>
+<rect x="160" y="70" width="120" height="34" rx="8" fill="#fff" stroke="#15803d"/><text x="220" y="91" text-anchor="middle" font-size="11">neurônio ACh</text>
+<path d="M140 87 L158 87" stroke="#15803d" stroke-width="3"/><text x="149" y="80" text-anchor="middle" font-size="14" fill="#15803d">⊣</text>
+<text x="149" y="120" text-anchor="middle" font-size="10.5">DA em D2 → ⊣ ACh</text>
+<text x="155" y="150" text-anchor="middle" font-size="11">excitatório colinérgico × inibitório dopaminérgico</text>
+<text x="155" y="170" text-anchor="middle" font-size="11" font-weight="700">= equilíbrio → movimento normal</text>
+<rect x="315" y="35" width="290" height="180" rx="12" fill="#fef2f2" stroke="#b91c1c"/>
+<text x="460" y="55" text-anchor="middle" font-weight="700" fill="#b91c1c">METOCLOPRAMIDA / BROMOPRIDA (IV &gt; VO)</text>
+<rect x="330" y="70" width="100" height="34" rx="8" fill="#fff" stroke="#b91c1c"/><text x="380" y="91" text-anchor="middle" font-size="11">D2 bloqueado</text>
+<rect x="452" y="70" width="140" height="34" rx="8" fill="#fff" stroke="#b91c1c"/><text x="522" y="91" text-anchor="middle" font-size="11" font-weight="700">ACh ↑↑ (desinibida)</text>
+<path d="M430 87 L448 87" stroke="#b91c1c" stroke-width="2" marker-end="url(#ar4)"/>
+<text x="460" y="125" text-anchor="middle" font-size="10.5">"excessiva resposta colinérgica"</text>
+<text x="460" y="150" text-anchor="middle" font-size="11">distonia aguda (torcicolo, crise oculógira),</text>
+<text x="460" y="166" text-anchor="middle" font-size="11">acatisia, letargia; parkinsonismo (tardio)</text>
+<text x="460" y="195" text-anchor="middle" font-size="10.5" fill="#555">idoso, criança, dose alta, polimorfismo CYP2D6</text>
+<rect x="620" y="35" width="290" height="180" rx="12" fill="#eef6f9" stroke="#0e7490"/>
+<text x="765" y="55" text-anchor="middle" font-weight="700" fill="#0e7490">TRATAMENTO: BIPERIDENO</text>
+<rect x="640" y="70" width="250" height="34" rx="8" fill="#fff" stroke="#0e7490"/><text x="765" y="91" text-anchor="middle" font-size="11">anticolinérgico central → bloqueia a ACh</text>
+<text x="765" y="125" text-anchor="middle" font-size="10.5">"restaura o equilíbrio excitatório-inibitório"</text>
+<text x="765" y="150" text-anchor="middle" font-size="11">(anti-histamínico também serve — slide)</text>
+<text x="765" y="180" text-anchor="middle" font-size="11" font-weight="700">domperidona: não cruza BHE → SEP raríssima</text>
+<text x="765" y="198" text-anchor="middle" font-size="10.5" fill="#555">mas hipófise está fora da BHE → prolactina ↑</text>
+</svg>
+<figcaption>Fig. 2 — Texto do slide, que é o gabarito da lacuna: "A atividade motora é regulada pelo sistema extrapiramidal e modulada pelos neurotransmissores <b>excitatórios colinérgicos</b> e <b>inibitórios dopaminérgicos</b> — a dopamina inibe a liberação de acetilcolina nos terminais colinérgicos na área nigroestriatal. O bloqueio de receptores dopaminérgicos promove uma excessiva resposta colinérgica."</figcaption>
+</figure>
+<div class="peg"><b>As 3 lacunas que ela recicla:</b> SEP = "metoclopramida – dopaminérgicos – colinérgicas – D2 – colinérgicas – acetilcolina" · Galactorreia = "bloqueio D2 na <u>adeno-hipófise</u>" (dopamina = fator inibidor de prolactina; nunca hipotálamo, nunca 'estimulação') · Associação 1–4 = bromoprida (efetivo) / ondansetrona (seguro) / bromoprida ou metoclopramida (SEP) / dimenidrinato (gestante).</div>
+<div class="peg"><b>Duas versões da mesma asserção-razão:</b> "…modulada por <u>excitatórios colinérgicos e inibitórios dopaminérgicos</u>… reduzem a atividade <u>inibitória</u> da dopamina" = verdadeira (A) · "…<u>estimulada</u> pela dopamina… causando o <u>bloqueio da resposta colinérgica</u>" = falsa (C).</div>
+</div>
+
+<h2>5. "Quem para quem" — decisão clínica + quimioterapia por risco</h2>
+<div class="card">
+<div class="grid">
+<div>
+<table>
+<tr><th>Situação</th><th>Escolha</th><th>Evidência</th></tr>
+<tr><td>Intoxicação / toxina / medicamento (vômito "efetivo")</td><td><b>bromoprida</b> (ou metoclopramida)</td><td>T5 Q5, T7 Q10</td></tr>
+<tr><td>Precisa de segurança (sem SEP, sem sedação)</td><td><b>ondansetrona</b></td><td>T5 Q5, T6 QD2</td></tr>
+<tr><td><b>Gestante</b> (náusea matinal)</td><td><b>dimenidrinato</b> (± B6); 2ª: ondansetrona (hiperêmese)</td><td>T9 Q12, slide</td></tr>
+<tr><td>Cinetose / labirintite / vestibular</td><td>dimenidrinato, meclizina, cinarizina; escopolamina</td><td>slide, T6 Q3</td></tr>
+<tr><td>DRGE com regurgitação (adulto) / lactente</td><td><b>domperidona</b> + IBP · lactente: domperidona</td><td>T11 QD4</td></tr>
+<tr><td>Gastroparesia</td><td>domperidona ou bromoprida/metoclopramida</td><td>T11 Q7</td></tr>
+<tr><td>Hospital, IV, gastrite erosiva + vômito</td><td>bromoprida/metoclopramida IV + omeprazol IV</td><td>T11 Q11</td></tr>
+<tr><td>Cólica (antiespasmódico)</td><td>escopolamina</td><td>slide</td></tr>
+<tr><td>Náusea antecipatória</td><td>lorazepam</td><td>Consenso</td></tr>
+<tr><td>Quimio altamente emetogênica, fase tardia</td><td><b>aprepitanto</b> + 5-HT3 + dexametasona</td><td>T9 QD2, slide</td></tr>
+</table>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="12">
+<rect width="440" height="300" fill="#fff"/>
+<text x="10" y="18" font-weight="700" font-size="13">Profilaxia de êmese por quimio (slide final)</text>
+<rect x="10" y="30" width="420" height="58" rx="10" fill="#7f1d1d"/><text x="20" y="50" fill="#fff" font-weight="700">ALTO risco (&gt;90%)</text><text x="20" y="67" fill="#fff" font-size="11">cisplatina, ciclofosfamida &gt;1,5 g/m², dacarbazina, carmustina</text><text x="20" y="82" fill="#fde68a" font-size="11" font-weight="700">anti-5-HT3 + dexametasona + aprepitanto nas 1ªs 24 h</text>
+<rect x="10" y="96" width="420" height="58" rx="10" fill="#c2410c"/><text x="20" y="116" fill="#fff" font-weight="700">MODERADO (30–90%)</text><text x="20" y="133" fill="#fff" font-size="11">carboplatina, oxaliplatina, doxorrubicina, irinotecano, ifosfamida</text><text x="20" y="148" fill="#fde68a" font-size="11" font-weight="700">mesmo esquema do alto OU anti-5-HT3 + dexametasona</text>
+<rect x="10" y="162" width="420" height="58" rx="10" fill="#d97706"/><text x="20" y="182" fill="#fff" font-weight="700">BAIXO (10–30%)</text><text x="20" y="199" fill="#fff" font-size="11">5-FU, gencitabina, paclitaxel, docetaxel, etoposídeo, metotrexato</text><text x="20" y="214" fill="#fff7ed" font-size="11" font-weight="700">dexametasona apenas OU metoclopramida</text>
+<rect x="10" y="228" width="420" height="58" rx="10" fill="#15803d"/><text x="20" y="248" fill="#fff" font-weight="700">MÍNIMO (&lt;10%)</text><text x="20" y="265" fill="#fff" font-size="11">bevacizumabe, bleomicina, vincristina, rituximabe, hormônios</text><text x="20" y="280" fill="#ecfdf5" font-size="11" font-weight="700">sem antiemético profilático de rotina</text>
+</svg>
+<figcaption>Fig. 3 — Escada de risco emetogênico (revisão CINV + Consenso; exemplos de fármacos das tabelas dos artigos). Palonosetrona + dexa é a opção do moderado nas diretrizes; olanzapina entra nas novas.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<h2>6. Hepatoprotetores, coleréticos e enzimas pancreáticas</h2>
+<div class="card">
+<table>
+<tr><th>Fármaco</th><th>Mecanismo / farmacocinética (slide)</th><th>Dose</th><th>Indicação</th><th>EA / pegadinha</th></tr>
+<tr><td><b>Ácido ursodesoxicólico</b> (UDCA, Ursacol® 50/150/300 mg)</td><td>ácido biliar natural (&lt;5% do pool) → <b>↓secreção hepática e ↓absorção intestinal de colesterol</b>, dissolve cálculo de colesterol, ↑secreção/fluxo biliar, estabiliza membrana canalicular, ⊣ destruição imune do hepatócito. Absorvido → <b>conjugado com glicina/taurina</b> → bile → <b>recirculação êntero-hepática</b>; <b>t½ ~100 h</b>; crônico = 30–50% do pool</td><td><b>5–10 mg/kg/dia</b> (300–600 mg/dia = 2–4 cp de 150 ou 300 mg 2×/dia); cálculo: <b>10 mg/kg/dia por 12–24 meses</b> (dissolve até 50% dos cálculos pequenos em quem não pode operar)</td><td><b>colangites / doenças colestáticas</b> (T11 Q14); cálculo de colesterol só se inoperável</td><td>diarreia ou constipação, náusea, vômito, dor abdominal, cefaleia, prurido, ↑transaminases. Não é 1ª linha para cálculo (cirurgia)</td></tr>
+<tr><td><b>Silimarina</b> (cardo mariano, <i>Silybum marianum</i>; Silimalon® 70 mg + racemetionina 100 mg)</td><td>mistura de flavonolignanos (silibina, silicristina, silidianina): ↓lesão por toxinas, <b>↓peroxidação lipídica</b>, depura radicais livres, <b>↑glutationa e SOD</b>, anti-inflamatório (<b>⊣ NF-κB</b> ativado por TNF-α). Metionina → precursora de SAMe (doador de metila)</td><td><b>280–420 mg/dia</b> (em silibina), <b>3 doses</b></td><td>hepatite viral aguda/crônica, <b>doença hepática alcoólica</b>, lesão por toxina, <b>esteatose</b> (T9 Q4, T11 Q14)</td><td>diarreia, cefaleia, dermatológicas</td></tr>
+<tr><td><b>Coleréticos/colagogos</b>: alcachofra (cinarina), <b>boldo (boldina)</b></td><td>↑produção e secreção de sais biliares → digestão de gorduras</td><td>—</td><td>dispepsia por gordura</td><td><b>não é hepatoprotetor</b> (distrator T9 Q4)</td></tr>
+<tr><td><b>Pancreatina / pancrelipase</b> (Creon®, Pankreoflat® = + simeticona, Proteobil®)</td><td>amilase + lipase + proteases em cápsula/drágea entérica; dose em UI/USP de <b>lipase</b> (10.000–25.000 UI/cáps)</td><td>iniciar <b>3 drágeas/refeição → 1–2</b>; ou 20–30.000 UI (60–90.000 USP) de lipase por refeição; individualizar por peso/gordura da dieta</td><td>insuficiência pancreática exócrina (fibrose cística, pancreatite crônica, ressecção); gases + má digestão (PM 2024)</td><td>dose alta: <b>hiperuricemia/hiperuricosúria</b> (purinas → cálculo renal), náusea, diarreia; crônico: <b>↓ácido fólico</b></td></tr>
+</table>
+<div class="peg">Sequência que caiu (T11 Q14): colangite → <b>UDCA</b>; esteatose → <b>silimarina</b>. PM 2024: colestase + insuficiência pancreática → <b>UDCA + pancreatina</b>.</div>
+</div>
+
+<h2>7. Números para a véspera</h2>
+<div class="card"><ul>
+<li>Ondansetrona 4–8 mg VO/SL 8/8 ou 12/12 h (máx 24 mg/dia) · IV 8 mg/dose · t½ 4–9 h · palonosetrona t½ 40 h, 0,25 mg IV.</li>
+<li>Metoclopramida 10 mg cp / 5 mg inj / 4 mg/mL · bromoprida 10–20 mg / 5 mg inj / 1 mg/mL · domperidona 10 mg / 1 mg/mL · dimenidrinato 25–100 mg · aprepitanto 125 mg · dexametasona 4–20 mg.</li>
+<li>UDCA 5–10 mg/kg/dia (300–600 mg), cálculo 10 mg/kg/dia 12–24 m, t½ 100 h · silimarina 280–420 mg/dia ÷3 · pancreatina 3→1–2 drágeas/refeição; 20–30.000 UI lipase.</li>
+<li>Gengibre ≥1 g/dia 3 dias · CINV: agudo &lt;24 h, tardio 24 h–5 d · risco alto &gt;90%, moderado 30–90%, baixo 10–30%, mínimo &lt;10%.</li>
+<li>SUS: ondansetrona ✔ · metoclopramida ✔ · bromoprida ✔ · domperidona ✔ · dimenidrinato ✔ · escopolamina ✔ · aprepitanto ✘ · canabinoides ✘.</li>
+</ul></div>
+</section>
+
+<section class="tab" id="q">
+<h2>Banco SP3 — antieméticos, pró-cinéticos, hepato/pâncreas (todas as questões que já caíram)</h2>
+<div class="filters" id="flt">
+<button class="on" data-f="all">Todas</button>
+<button data-f="OF">Só OFICIAL</button>
+<button data-f="VE">Só VETERANO/INFERIDO</button>
+<button data-f="discursiva">Só discursivas</button>
+<button data-f="T11">Só T11 (2026)</button>
+</div>
+<div id="quiz"></div>
 <div class="score" id="score">Acertos: 0/0</div>
+</section>
+
+<section class="tab" id="d">
+<h2>Descritiva integrativa</h2>
+<div class="card">
+<p><b>Caso.</b> J. P., 34 anos, iniciou quimioterapia com cisplatina para tumor de testículo. Recebeu ondansetrona 8 mg IV antes da infusão e não vomitou nas primeiras horas, mas no 2º e 3º dias apresentou náusea intensa e vômitos em casa. Na UPA, recebeu metoclopramida 10 mg IV e, 40 minutos depois, desenvolveu torcicolo, desvio dos olhos para cima e inquietação. Nega uso de outros medicamentos.</p>
+<ol>
+<li><b>(0,6)</b> Explique por que a ondansetrona protegeu da fase aguda mas não da fase tardia, citando o mediador de cada fase e o esquema profilático correto para cisplatina.</li>
+<li><b>(0,8)</b> Descreva mecanisticamente o quadro que apareceu após a metoclopramida (via, neurotransmissores, receptor) e indique o tratamento.</li>
+<li><b>(0,6)</b> A médica considera trocar para domperidona ou bromoprida na alta. Compare os dois quanto a barreira hematoencefálica, risco de SEP e efeito na prolactina, e diga qual seria o antiemético "seguro" para esse paciente continuar em casa.</li>
+</ol>
+<details><summary>Roteiro de correção</summary>
+<p><b>1 (0,6):</b> fase aguda (&lt;24 h) = liberação de <b>serotonina</b> pelas células enterocromafins → 5-HT3 nos aferentes vagais e ZGQ → ondansetrona bloqueia (0,2). Fase tardia (24 h–5 d) = <b>substância P / NK1</b> no NTS/área postrema (+ inflamação/PG) → anti-5-HT3 é pouco eficaz (0,2). Cisplatina = alto risco (&gt;90%): <b>anti-5-HT3 + dexametasona + aprepitanto</b> nas primeiras 24 h, com dexa (± aprepitanto) mantidos nos dias 2–3 (0,2).</p>
+<p><b>2 (0,8):</b> metoclopramida cruza a BHE e bloqueia <b>D2</b> na via <b>nigroestriatal</b>; a dopamina normalmente <b>inibe</b> a liberação de <b>acetilcolina</b> nos terminais colinérgicos; bloqueio D2 → desinibição → <b>excessiva resposta colinérgica</b> → distonia aguda (torcicolo, crise oculógira) + acatisia = <b>síndrome extrapiramidal</b>; mais comum IV, dose alta, jovens/idosos (0,6). Tratamento: <b>biperideno</b> (anticolinérgico central) ou anti-histamínico (prometazina/difenidramina), suspender o fármaco (0,2).</p>
+<p><b>3 (0,6):</b> bromoprida = antag. D2 central + periférico, cruza BHE → antiemética potente ("mais efetiva") mas mesmo risco de SEP e galactorreia (0,2). Domperidona = D2 com pouca penetração no SNC → SEP raríssima, ação pró-cinética (EEI, esvaziamento), mas a hipófise está fora da BHE → ↑prolactina igual; risco de QT (0,2). Para casa, o "seguro" é <b>ondansetrona VO/SL 8 mg 8/8 h</b> (sem SEP, sem sedação; EA constipação/cefaleia) ± dexametasona nos dias tardios (0,2).</p>
+</details>
+</div>
+<div class="card">
+<h3>Discursivas curtas para treinar (todas já caíram)</h3>
+<ol>
+<li>Complete: a SEP por metoclopramida ocorre pelo bloqueio de receptores ___ na via nigroestriatal, que normalmente inibem a liberação de ___. <small>T4/T6/T7 lacunas</small></li>
+<li>Explique a galactorreia induzida por bromoprida/metoclopramida/domperidona. <small>T9 QD / T11</small></li>
+<li>Paciente em quimioterapia altamente emetogênica com vômitos tardios apesar de ondansetrona: qual fármaco acrescentar e por quê? <small>T9 QD2</small></li>
+<li>Antiemético de escolha na gestante com náusea matinal e efeitos adversos esperados. <small>T5 Q1 / T9 Q12</small></li>
+<li>Diferencie domperidona de metoclopramida quanto a local de ação e efeitos adversos. <small>T11 Q6/Q7</small></li>
+<li>Paciente com colangite e outro com esteatose: indique o fármaco de cada um e o mecanismo. <small>T11 Q14 / T9 Q4</small></li>
+<li>Cite três medidas não farmacológicas para náusea e o mecanismo proposto do gengibre. <small>slides 2026</small></li>
+</ol>
+</div>
+</section>
+
+<section class="tab" id="f">
+<h2>Flashcards atômicos — SP3</h2>
+<div class="fc-wrap" id="fcwrap">
+<div class="fc"><div class="qq"></div><div class="aa"></div><div class="why"></div></div>
+<div class="fc-ctl"><button class="prev">◀ anterior</button><span class="cnt"></span><button class="next">próximo ▶</button><button class="shuf">🔀 embaralhar</button></div>
+</div>
+</section>
+
+<section class="tab" id="m">
+<h2>Mapa mental — SP3</h2>
+<div class="mm">ÊMESE — centro do vômito (bulbo: NTS + n. motor dorsal do vago) ◄── ZGQ (área postrema, FORA da BHE: D2, 5-HT3, NK1, opioide) ◄ sangue (toxinas, quimio, fármacos)
+│                                            ◄── vestibular (H1, M) ◄ cinetose/labirintite
+│                                            ◄── aferente vagal TGI (5-HT3; enterocromafim) ◄ irritação, citotóxicos
+│                                            ◄── córtex (GABA) ◄ dor, cheiro, emoção, antecipatório
+│
+├─ ANTI-5-HT3 ──► ONDANSETRONA 4–8 mg 8/8–12/12 h (máx 24 mg/d; IV 8 mg) · quimio, pós-op, hiperêmese · SEGURA · EA constipação, cefaleia, QT · CYP1A2/2D6/3A4, renal + biliar
+│                 palonosetrona (t½ 40 h), granisetrona · quimio grave = + DEXAMETASONA (± aprepitanto)
+│
+├─ ANTI-D2 ──► METOCLOPRAMIDA 10 mg / BROMOPRIDA 10–20 mg (cruzam BHE; + anti-5-HT3 + agonista 5-HT4) · pró-cinéticos (EEI ↑, esvaziamento ↑, cólon ✘)
+│              intoxicação/xenobiótico, radiação, pós-op, hospital IV · bromoprida = "mais efetiva"
+│              SEP: bloqueio D2 nigroestriatal → dopamina não inibe ACh → excesso colinérgico → distonia/acatisia/parkinsonismo → BIPERIDENO
+│              GALACTORREIA: bloqueio D2 na ADENO-HIPÓFISE (dopamina = ⊣ prolactina)
+│              DOMPERIDONA 10 mg: não cruza BHE → SEP raríssima; prolactina ↑ (hipófise fora da BHE); QT; DRGE/lactente/gastroparesia com IBP
+│
+├─ ANTI-H1 + antimuscarínico ──► DIMENIDRINATO 25–100 mg (= difenidramina), meclizina, cinarizina, prometazina · GESTANTE (1ª), CINETOSE, LABIRINTITE
+│                                 EA sedação, xerostomia, retenção urinária, constipação, ↑apetite/peso
+├─ ANTI-M3 ──► ESCOPOLAMINA (Buscopan, Tropinal) · antiespasmódico é o uso principal; cinetose · xerostomia
+├─ ANTI-NK1 ──► APREPITANTO 125 mg (substância P no NTS/área postrema) · quimio ALTO risco, fase TARDIA · soluço, fadiga; ⊣ CYP3A4
+├─ CANABINOIDE ──► nabilona/dronabinol = AGONISTAS CB1 · quimio, orexígeno · euforia, alucinação, taquicardia, hipotensão ortostática
+├─ OUTROS ──► dexametasona 4–20 mg (todos os riscos) · lorazepam (antecipatório) · gengibre (⊣5-HT3/NK1, ↑secreções; gastrite se crônico)
+│
+├─ QUIMIO ──► alto >90% (cisplatina): 5-HT3 + dexa + aprepitanto 24 h · moderado 30–90%: idem ou 5-HT3 + dexa · baixo 10–30%: dexa ou metoclopramida · mínimo <10%: nada
+│
+└─ HEPATO/PÂNCREAS ──► UDCA 5–10 mg/kg/d (cálculo: 10 mg/kg 12–24 m; t½ 100 h; glicina/taurina; êntero-hepático) = COLANGITE/colestase
+                       SILIMARINA 280–420 mg/d ÷3 (↓peroxidação, ↑glutationa/SOD, ⊣NF-κB) = ESTEATOSE, hepatite, álcool · boldo/alcachofra = colerético (não protege)
+                       PANCREATINA 3→1–2 drágeas/refeição (lipase 20–30.000 UI) = insuficiência exócrina · hiperuricemia, ↓ácido fólico</div>
+</section>
 </div>
 <script>// Banco UC14 · Farmacologia (Vânia) — dados compartilhados entre o Banco e os Guias v2
 // selo: OF = OFICIAL (gabarito com correção da professora visível) · VE = VETERANO · IN = INFERIDO · AU = AULA
@@ -664,19 +925,81 @@ window.BANCO_UC14 = window.BANCO_UC14.concat([
 ]);
 </script>
 <script>
-const ALL=window.BANCO_UC14; document.getElementById('tot').textContent=ALL.length;
-// contadores nos chips
-const cnt=(pred)=>ALL.filter(pred).length;
-const tipoPred=f=>q=>f==='all'||(f==='T11'?q.prova.startsWith('T11'):(f==='direta'?(q.tipo==='direta'||q.tipo==='caso'):q.tipo===f));
-document.querySelectorAll('#fsp button').forEach(b=>{const f=b.dataset.f;b.textContent+=' ('+cnt(q=>f==='all'||String(q.sp)===f)+')';});
-document.querySelectorAll('#fselo button').forEach(b=>{const f=b.dataset.f;b.textContent+=' ('+cnt(q=>f==='all'||q.selo===f)+')';});
-document.querySelectorAll('#ftipo button').forEach(b=>{const f=b.dataset.f;if(f!=='shuf')b.textContent+=' ('+cnt(tipoPred(f))+')';});
-let fsp='all',fselo='all',ftipo='all',shuf=false;
-function run(){let L=ALL.filter(q=>(fsp==='all'||String(q.sp)===fsp)&&(fselo==='all'||q.selo===fselo)&&(ftipo==='all'||(ftipo==='T11'?q.prova.startsWith('T11'):(ftipo==='direta'?(q.tipo==='direta'||q.tipo==='caso'):q.tipo===ftipo))));if(shuf)L=L.slice().sort(()=>Math.random()-.5);document.getElementById('nres').textContent=L.length+' questões nesta seleção';renderQuiz('quiz',L);if(!L.length)document.getElementById('quiz').innerHTML='<div class="warn">Ainda sem questões deste bloco — entram assim que a aula/slides chegarem (e as suas atividades do AVA).</div>';}
-[['fsp',v=>fsp=v],['fselo',v=>fselo=v],['ftipo',v=>{if(v==='shuf'){shuf=!shuf;}else ftipo=v;}]].forEach(([id,set])=>{
- document.querySelectorAll('#'+id+' button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.f!=='shuf'){document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');}else{b.classList.toggle('on');}set(b.dataset.f);run();}));
-});
-run();
+const FLASH_SP3=[
+{q:"Zona de gatilho quimiorreceptora: onde fica e por que 'sente' toxinas do sangue",a:"Área postrema, FORA da barreira hematoencefálica",w:"receptores D2, 5-HT3, NK1, opioide"},
+{q:"Centro do vômito: localização",a:"Bulbo — NTS + núcleo motor dorsal do vago",w:"integra ZGQ, vestibular, vago, córtex"},
+{q:"Mediadores da ZGQ citados no slide",a:"Dopamina, serotonina, histamina, prostaglandinas, GABA",w:""},
+{q:"Receptores do sistema vestibular envolvidos na êmese",a:"H1 e muscarínico (M)",w:"por isso anti-H1/antimuscarínicos na cinetose"},
+{q:"Ondansetrona: mecanismo",a:"Antagonista competitivo e seletivo 5-HT3 (aferente vagal + ZGQ + CV)",w:"inibe sensação aferente visceral"},
+{q:"Ondansetrona: dose VO/SL e máximo diário",a:"4–8 mg 8/8 ou 12/12 h; máx 24 mg/dia",w:"IV: 8 mg/dose"},
+{q:"Ondansetrona: EA principais",a:"Cefaleia, tontura, constipação, arritmia (rara)",w:"sem SEP, sem sedação"},
+{q:"Ondansetrona: metabolismo e excreção",a:"CYP1A2/2D6/3A4; renal e biliar; t½ 4–9 h",w:"biodisponibilidade ↑ com alimento"},
+{q:"Indicações da ondansetrona (slide)",a:"Náusea por quimioterápicos, hiperêmese gestacional, pós-operatório",w:""},
+{q:"5-HT3 antagonista com maior afinidade e t½ 40 h",a:"Palonosetrona (0,25 mg IV)",w:""},
+{q:"Metoclopramida: apresentações",a:"10 mg cp · 5 mg injetável · gotas 4 mg/mL",w:""},
+{q:"Bromoprida: apresentações",a:"10 e 20 mg · 5 mg injetável · gotas 1 mg/mL",w:"não existe 50 mg"},
+{q:"Mecanismo 'complexo' da metoclopramida (3 alvos)",a:"Antagonista D2 + antagonista 5-HT3 + agonista 5-HT4",w:""},
+{q:"Por que bloquear D2 no TGI é pró-cinético?",a:"D2 inibe a liberação de ACh mioentérica; bloqueio → ↑ACh → ↑motilidade",w:""},
+{q:"Pró-cinéticos têm efeito no cólon?",a:"Não",w:"esôfago, EEI, esvaziamento gástrico — T11 Q6"},
+{q:"Usos da metoclopramida/bromoprida (slide)",a:"Radiação, intoxicações, pós-cirurgia, citotóxicos",w:""},
+{q:"SEP: qual via e qual receptor",a:"Nigroestriatal — bloqueio D2",w:""},
+{q:"SEP: papel normal da dopamina",a:"Inibe a liberação de acetilcolina nos terminais colinérgicos",w:"bloqueio → excesso colinérgico"},
+{q:"SEP: manifestações",a:"Distonia aguda (torcicolo, crise oculógira), acatisia, letargia, parkinsonismo tardio",w:""},
+{q:"SEP: tratamento",a:"Biperideno (anticolinérgico) ou anti-histamínico",w:""},
+{q:"Galactorreia por antagonista D2: mecanismo",a:"Bloqueio D2 na adeno-hipófise → ↑prolactina",w:"dopamina = fator inibidor de prolactina"},
+{q:"Metoclopramida: metabolismo",a:"Sulfatação + glicuronidação hepática; excreção urinária",w:""},
+{q:"Domperidona: diferença-chave",a:"Antagonista D2 com pouca penetração no SNC",w:"SEP raríssima"},
+{q:"Domperidona: por que causa galactorreia se não cruza a BHE?",a:"A hipófise fica fora da BHE",w:""},
+{q:"Domperidona: indicação principal",a:"Distúrbios de motilidade: gastroparesia, DRGE (com antissecretor)",w:"regurgitação/pirose refratária"},
+{q:"Domperidona: EA cardíaco",a:"Arritmia ventricular por prolongamento do QT",w:""},
+{q:"Domperidona: apresentação",a:"10 mg cp; 1 mg/mL suspensão",w:""},
+{q:"Anti-H1 usados como antieméticos (5)",a:"Dimenidrinato, meclizina, cinarizina, flunarizina, hidroxizina (prometazina)",w:""},
+{q:"Anti-H1: onde agem",a:"Aferentes vestibulares e tronco cerebral (H1 + antimuscarínico)",w:""},
+{q:"Anti-H1: usos clínicos",a:"Cinetose, labirintite, náusea matinal da gravidez, vômito por substância local no estômago",w:""},
+{q:"Dimenidrinato: doses",a:"25, 50 e 100 mg (cápsulas)",w:""},
+{q:"Anti-H1: EA",a:"Sedação, tontura, ↑apetite, ↑peso (+ xerostomia, retenção)",w:""},
+{q:"Antiemético de 1ª escolha na gestante",a:"Dimenidrinato",w:"ondansetrona na hiperêmese"},
+{q:"Escopolamina: receptor e uso principal",a:"Antagonista M3; antiespasmódico (cinetose secundário)",w:""},
+{q:"Diciclomina: uso",a:"Antiespasmódico na síndrome do cólon irritável",w:""},
+{q:"Aprepitanto: alvo",a:"Antagonista NK1 — bloqueia substância P",w:"CV/NTS, área postrema, aferentes vagais"},
+{q:"Aprepitanto: indicação",a:"Quimio altamente emetogênica, fase tardia",w:"125 mg"},
+{q:"Aprepitanto: EA",a:"Fadiga, tontura, cefaleia, insônia, soluço",w:""},
+{q:"Nabilona/dronabinol: mecanismo",a:"Agonistas CB1",w:"'antagonista' = falso"},
+{q:"Canabinoides: EA",a:"Euforia/disforia, sonolência, alucinação, boca seca, ↑apetite; taquicardia, hipotensão ortostática",w:""},
+{q:"Quimio alto risco: esquema",a:"Anti-5-HT3 + dexametasona + aprepitanto nas primeiras 24 h",w:""},
+{q:"Quimio moderado risco: esquema",a:"Mesmo do alto OU anti-5-HT3 + dexametasona",w:""},
+{q:"Quimio baixo risco: esquema",a:"Dexametasona apenas ou metoclopramida",w:""},
+{q:"Quimio mínimo risco",a:"Sem antiemético profilático de rotina",w:""},
+{q:"Fase aguda × tardia da CINV: tempo e mediador",a:"Aguda <24 h (serotonina) · tardia 24 h–5 d (substância P)",w:""},
+{q:"Náusea antecipatória: fármaco",a:"Lorazepam (benzodiazepínico)",w:"bloqueia estímulo do córtex"},
+{q:"Gengibre: mecanismo proposto",a:"Bloqueio de 5-HT3 e NK1 + estímulo de secreções orais/gástricas",w:"gingeróis, shogaóis"},
+{q:"Gengibre: EA se prolongado",a:"Gastrite (também dermatite, má digestão)",w:""},
+{q:"Cite 3 medidas dietéticas para náusea",a:"Fracionar refeições; não deitar após comer (1–2 h); evitar gordura/frituras/odor forte; líquidos entre (não durante) as refeições",w:""},
+{q:"UDCA: efeitos",a:"↓secreção e absorção de colesterol; dissolve cálculo de colesterol; ↑fluxo biliar",w:""},
+{q:"UDCA: indicação da Vânia",a:"Colangites / doenças hepáticas colestáticas",w:"cálculo só se inoperável"},
+{q:"UDCA: dose",a:"5–10 mg/kg/dia (300–600 mg); cálculo 10 mg/kg/dia por 12–24 meses",w:""},
+{q:"UDCA: farmacocinética",a:"Conjugado com glicina/taurina, bile, recirculação êntero-hepática, t½ ~100 h",w:""},
+{q:"UDCA: EA",a:"Diarreia/constipação, náusea, dor abdominal, prurido, ↑transaminases",w:""},
+{q:"Silimarina: composição e origem",a:"Silibina + silicristina + silidianina — cardo mariano (Silybum marianum)",w:""},
+{q:"Silimarina: mecanismos (4)",a:"↓peroxidação lipídica, depura radicais livres, ↑glutationa/SOD, ⊣NF-κB (anti-inflamatório)",w:""},
+{q:"Silimarina: dose",a:"280–420 mg/dia em 3 doses",w:""},
+{q:"Silimarina: indicações",a:"Hepatite viral, doença hepática alcoólica, lesão por toxina, esteatose",w:""},
+{q:"Silimalon® tem o que além de silimarina?",a:"Racemetionina (precursora de SAMe, doador de metila)",w:""},
+{q:"Boldo/alcachofra: classe",a:"Coleréticos e colagogos (boldina, cinarina) — não hepatoprotetores",w:""},
+{q:"Pancreatina: composição",a:"Amilase + lipase + proteases",w:"Creon, Pankreoflat (+simeticona)"},
+{q:"Pancreatina: posologia",a:"3 drágeas por refeição → depois 1–2",w:"20–30.000 UI de lipase/refeição"},
+{q:"Pancreatina: EA",a:"Hiperuricemia/hiperuricosúria (purinas), náusea, diarreia; crônico: ↓ácido fólico",w:""},
+{q:"Causas de insuficiência pancreática exócrina (slide)",a:"Fibrose cística, pancreatite crônica, ressecção pancreática",w:""},
+{q:"Associação clássica: efetivo / seguro / SEP / gestante",a:"Bromoprida / ondansetrona / metoclopramida (ou bromoprida) / dimenidrinato",w:"T5 Q5"}
+];
+initFlash(FLASH_SP3,'fcwrap');
+const LIST_SP3=window.BANCO_UC14.filter(q=>q.sp===3);
+renderQuiz('quiz',LIST_SP3);
+document.querySelectorAll('#flt button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('#flt button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ const f=b.dataset.f;
+ applyFilter('quiz',LIST_SP3,q=>f==='all'||(f==='OF'&&q.selo==='OF')||(f==='VE'&&(q.selo==='VE'||q.selo==='IN'))||(f==='discursiva'&&q.tipo==='discursiva')||(f==='T11'&&q.prova.startsWith('T11')));
+}));
 // tabs (scoped: a nav only toggles the sections that are its siblings). Outer nav sticky at top; inner nav sticks right below it.
 function setNavOffsets(){const o=document.querySelector('nav.tabs.outer');const h=o?o.offsetHeight:0;document.documentElement.style.setProperty('--outerH',h+'px');}
 window.addEventListener('load',setNavOffsets);window.addEventListener('resize',setNavOffsets);
