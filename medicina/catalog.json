@@ -322,5 +322,32 @@
     "data": "2026-09-17",
     "arquivo": "5-fase/uc14/farmaco/uc14-sp4-dispepsia.html",
     "origem": "5_fase/UC14/Farmaco/UC14_SP4_Dispepsia.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · Guia Completo (SPs + Banco + Vias + Raio-X)",
+    "tipo": "guia-prova",
+    "data": "2026-09-22",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-guia-completo.html",
+    "origem": "5_fase/UC14/Farmaco/new_farmaco_uc14.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · Tabelão de fármacos",
+    "tipo": "material",
+    "data": "2026-09-22",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-tabelao-farmacos.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Tabelao_Farmacos.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Patologia",
+    "titulo": "Patologia UC14",
+    "tipo": "guia-prova",
+    "data": "2026-09-21",
+    "arquivo": "5-fase/uc14/pato/uc14-pato-guia.html",
+    "origem": "5_fase/UC14/Pato/UC14_Pato_Guia.html"
   }
 ]
