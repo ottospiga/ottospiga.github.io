@@ -105,7 +105,7 @@ button{font:inherit;color:inherit}
 
 /* barra de ferramentas */
 .tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
-.seg{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:2px;gap:2px}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:2px;gap:2px}
 .seg button{background:none;border:0;border-radius:5px;padding:5px 12px;font-size:12.5px;font-weight:500;
   color:var(--ink2);cursor:pointer;line-height:1.35}
 .seg button:hover{color:var(--ink)}
@@ -120,7 +120,7 @@ button{font:inherit;color:inherit}
 /* tabela de fármacos */
 .tbwrap{border:1px solid var(--line);border-radius:8px;overflow:hidden}
 table.tb{width:100%;border-collapse:collapse;table-layout:fixed}
-.tb col.c-nm{width:34%}.tb col.c-ps{width:30%}.tb col.c-us{width:28%}.tb col.c-ca{width:8%}
+.tb col.c-nm{width:34%}.tb col.c-ps{width:29%}.tb col.c-us{width:27%}.tb col.c-ca{width:10%}
 @media (max-width:700px){.tb col.c-nm{width:36%}.tb col.c-ps{width:30%}}
 .tb thead th{position:sticky;top:0;z-index:2;background:var(--panel2);text-align:left;padding:8px 11px;
   font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;
@@ -371,11 +371,11 @@ tr.fic td{background:var(--panel2);border-left:3px solid var(--cc);padding:12px 
 .ftab td{padding:8px 9px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.45}
 .ftab tr:last-child td{border-bottom:0}
 .ftab .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-variant-numeric:tabular-nums}
-.fam{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px dotted var(--line)}
+.fam{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px dotted var(--line)}
 .fam:last-child{border-bottom:0}
 .fam .fn{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink3);padding-top:1px}
-.fam .ff{font-weight:600;font-size:13px;line-height:1.35}
-.fam .fo{font-size:11.5px;color:var(--ink2);line-height:1.5;margin-top:3px}
+.fam .ff{display:block;font-weight:600;font-size:13px;line-height:1.35}
+.fam .fo{display:block;font-size:11.5px;color:var(--ink2);line-height:1.5;margin-top:3px}
 .frase{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px dotted var(--line)}
 .frase:last-child{border-bottom:0}
 .frase .ts{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--acc);padding-top:2px}
@@ -693,90 +693,200 @@ DZ.push(
 </script>
 <script>window.QS=window.QS||[];
 QS.push(
-{id:"T11-Q1",a:"A3",prova:"T11 · Q1",selo:"OF",tipo:"caso → conduta",tema:"Carcinoma hepatocelular",dz:["chc"],
+{id:"T11-Q1",a:"A3",prova:"T11 · Q1",turma:"T11",selo:"OF",tipo:"caso → conduta",tema:"Carcinoma hepatocelular",dz:["chc"],
  enun:"Paciente de 60 anos, com cirrose hepática, apresenta perda de peso, dor em hipocôndrio direito e fadiga. Exames mostram AFP elevada e imagem hepática com lesão focal. Qual a melhor conduta inicial para caracterização da lesão?",itens:[],
  opts:["Colonoscopia","Ultrassonografia abdominal seriada apenas","Tomografia computadorizada ou ressonância magnética","Biópsia hepática obrigatória em todos os casos","Dosagem isolada de transaminases"],ans:2,
  why:"Cirrótico + AFP ↑ + lesão focal = suspeita de CHC. USG é rastreio; quem CARACTERIZA tumor e extensão é TC/RM. A biópsia pode confirmar, mas não é obrigatória em todos (a imagem típica basta muitas vezes)."},
-{id:"T11-Q2",a:"A2",prova:"T11 · Q2",selo:"OF",tipo:"afirmativas I–V",tema:"Salmonelose",dz:["salmonela","artrite_reativa"],
+{id:"T11-Q2",a:"A2",prova:"T11 · Q2",turma:"T11",selo:"OF",tipo:"afirmativas I–V",tema:"Salmonelose",dz:["salmonela","artrite_reativa"],
  enun:"Sobre a infecção por Salmonella, analise as afirmativas. É correto apenas o que se afirma em:",
  itens:["I. A transmissão ocorre principalmente por via alimentar, associada à ingestão de alimentos contaminados.","II. A gastroenterite por Salmonella geralmente requer tratamento antibiótico para reduzir a duração dos sintomas.","III. A bacteremia é mais comum em pacientes imunossuprimidos e pode levar a infecções focais.","IV. A febre tifoide apresenta período de incubação mais prolongado e curso sistêmico.","V. A artrite reativa associada à salmonelose ocorre por invasão bacteriana direta das articulações."],
  opts:["I, II e III","II, III e V","I, IV e V","III, IV e V","I, III e IV"],ans:4,
  why:"II é falsa: gastroenterite = suporte; antibiótico só na tifoide/bacteremia ou grave. V é falsa: artrite reativa é estéril, por mimetismo molecular. Sobram I, III e IV."},
-{id:"T11-Q3",a:"A4",prova:"T11 · Q3",selo:"OF",tipo:"assinale a correta",tema:"Pancreatite aguda — mecanismo",dz:["pa"],
+{id:"T11-Q3",a:"A4",prova:"T11 · Q3",turma:"T11",selo:"OF",tipo:"assinale a correta",tema:"Pancreatite aguda — mecanismo",dz:["pa"],
  enun:"Sobre a fisiopatogênese da pancreatite aguda, assinale a alternativa correta:",itens:[],
  opts:["A ativação enzimática ocorre apenas após necrose vascular extensa, sendo consequência tardia da hemorragia pancreática.","A catepsina B atua como bloqueadora da tripsina, reduzindo a autodigestão pancreática.","A elastase e a fosfolipase A2 explicam a esteatorreia crônica por destruição progressiva das ilhotas pancreáticas.","A lesão inicial da célula acinar favorece a co-localização de zimogênios e lisossomos, permitindo ativação precoce do tripsinogênio.","A autodigestão pancreática é típica da pancreatite crônica, mas não da pancreatite aguda."],ans:3,
  why:"É a sequência do slide: lesão acinar → co-localização → catepsina B ATIVA o tripsinogênio → cascata → autodigestão. Elastase/PLA2 = necrose hemorrágica (não esteatorreia). Autodigestão é a marca da AGUDA."},
-{id:"T11-Q4",a:"A3",prova:"T11 · Q4",selo:"OF",tipo:"caso → laboratório",tema:"Doença de Wilson",dz:["wilson"],
+{id:"T11-Q4",a:"A3",prova:"T11 · Q4",turma:"T11",selo:"OF",tipo:"caso → laboratório",tema:"Doença de Wilson",dz:["wilson"],
  enun:"Paciente de 22 anos apresenta tremores, alterações comportamentais e elevação de enzimas hepáticas. Ao exame, observa-se anel acastanhado na periferia da córnea. Qual alteração laboratorial é mais esperada?",itens:[],
  opts:["Ceruloplasmina reduzida e aumento da excreção urinária de cobre","Aumento da ferritina com saturação de transferrina elevada","Elevação isolada de bilirrubina indireta","Aumento de fosfatase alcalina com GGT normal","Elevação de transaminases com sorologia positiva para hepatite viral"],ans:0,
  why:"Jovem + neuropsiquiátrico + hepatopatia + anel de Kayser-Fleischer = Wilson (ATP7B): cobre não vai para a bile nem para a ceruloplasmina → ceruloplasmina ↓ e cobre urinário ↑. A alternativa B é hemocromatose."},
-{id:"T11-Q5",a:"A2",prova:"T11 · Q5",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colite pseudomembranosa",dz:["cdiff"],
+{id:"T11-Q5",a:"A2",prova:"T11 · Q5",turma:"T11",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colite pseudomembranosa",dz:["cdiff"],
  enun:"Paciente de 65 anos, internado para tratamento de pneumonia, evolui após 5 dias de antibioticoterapia com diarreia aquosa profusa, dor abdominal em cólica e febre. Exames mostram leucocitose. Analise as assertivas. É correto apenas o que se afirma em:",
  itens:["I. O uso de antibióticos pode favorecer disbiose intestinal e proliferação de Clostridioides difficile.","II. A confirmação diagnóstica depende exclusivamente de endoscopia, pois testes de toxinas não são úteis.","III. A lesão intestinal decorre da produção de toxinas bacterianas, associadas a inflamação intensa e pseudomembranas.","IV. A primeira medida terapêutica consiste em manter o antibiótico inicial para garantir término do tratamento e associar antidiarreico.","V. A forma grave pode evoluir com megacólon tóxico e perfuração."],
  opts:["I, II e IV","I, III e V","II, III e IV","I, IV e V","III, IV e V"],ans:1,
  why:"II falsa: diagnóstico = toxinas A/B (ELISA/PCR); endoscopia só nos graves. IV falsa: primeira medida = SUSPENDER o antibiótico causal (e tratar com vancomicina oral)."},
-{id:"T11-Q6",a:"A4",prova:"T11 · Q6",selo:"OF",tipo:"afirmativas I–V",tema:"Pancreatite crônica",dz:["pc"],
+{id:"T11-Q6",a:"A4",prova:"T11 · Q6",turma:"T11",selo:"OF",tipo:"afirmativas I–V",tema:"Pancreatite crônica",dz:["pc"],
  enun:"Analise as seguintes afirmativas sobre a pancreatite crônica. É correto apenas o que se afirma em:",
  itens:["I. A pancreatite crônica cursa com destruição progressiva do parênquima pancreático.","II. A ativação intrapancreática de enzimas digestivas é o principal mecanismo fisiopatológico da pancreatite crônica.","III. A insuficiência endócrina pode ocorrer em fases mais avançadas da doença.","IV. A pancreatite crônica caracteriza-se predominantemente por processo inflamatório agudo e reversível.","V. A insuficiência exócrina pancreática está relacionada à redução da secreção de enzimas digestivas."],
  opts:["I, II e III","I, II e IV","II, III e V","I, III e V","III, IV e V"],ans:3,
  why:"II descreve a AGUDA (a veterana riscou “crônica” e escreveu “aguda”). IV é o oposto: crônica = persistente e irreversível (fibrose)."},
-{id:"T11-Q7",a:"A2",prova:"T11 · Q7",selo:"OF",tipo:"afirmativas I–V",tema:"Isquemia mesentérica",dz:["ima"],
+{id:"T11-Q7",a:"A2",prova:"T11 · Q7",turma:"T11",selo:"OF",tipo:"afirmativas I–V",tema:"Isquemia mesentérica",dz:["ima"],
  enun:"Analise as seguintes afirmativas sobre a isquemia mesentérica. É correto apenas o que se afirma em:",
  itens:["I. A ultrassonografia com Doppler é o exame de escolha inicial para confirmação diagnóstica.","II. Dor abdominal súbita e intensa, associada a náuseas e vômitos, é manifestação clínica típica da fase inicial.","III. A evolução do quadro pode incluir necrose intestinal, com risco de perfuração e peritonite.","IV. A elevação do lactato sérico reflete metabolismo anaeróbio decorrente da hipoperfusão intestinal.","V. A dor abdominal na isquemia mesentérica decorre predominantemente da ativação de fibras somáticas do peritônio parietal nas fases iniciais."],
  opts:["I, II e III","I, II e IV","II, III e IV","I, III e V","III, IV e V"],ans:2,
  why:"I falsa: exame de escolha = angioTC com contraste (Doppler é limitado). V falsa: no início a dor é visceral — por isso desproporcional ao exame; o peritônio parietal só entra na fase tardia."},
-{id:"T11-Q8",a:"A1",prova:"T11 · Q8",selo:"OF",tipo:"caso → mecanismo",tema:"Acalasia",dz:["acalasia"],
+{id:"T11-Q8",a:"A1",prova:"T11 · Q8",turma:"T11",selo:"OF",tipo:"caso → mecanismo",tema:"Acalasia",dz:["acalasia"],
  enun:"Paciente de 40 anos apresenta disfagia tanto para sólidos quanto para líquidos desde o início, associada à regurgitação sem náuseas e perda de peso. Qual o principal mecanismo fisiopatológico envolvido?",itens:[],
  opts:["Redução do tônus do esfíncter esofágico inferior por refluxo ácido","Inflamação mediada por eosinófilos com liberação de citocinas Th2","Obstrução mecânica por fibrose secundária à esofagite crônica","Aumento da pressão intra-abdominal favorecendo refluxo","Degeneração dos neurônios inibitórios do plexo mioentérico"],ans:4,
  why:"Sólidos + líquidos desde o início = motora = acalasia. Cada distrator é o mecanismo de outra doença da aula: A e D = DRGE, B = EEo, C = estenose."},
-{id:"T11-Q9",a:"A3",prova:"T11 · Q9",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colestase",dz:["colestase_intra","colestase_extra"],
+{id:"T11-Q9",a:"A3",prova:"T11 · Q9",turma:"T11",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colestase",dz:["colestase_intra","colestase_extra"],
  enun:"Paciente apresenta icterícia, prurido intenso, colúria e fezes claras. Exames laboratoriais mostram elevação de bilirrubina, fosfatase alcalina e GGT. Analise as afirmativas. É correto apenas o que se afirma em:",
  itens:["I. O quadro sugere comprometimento do fluxo biliar.","II. A colestase pode ter origem intra-hepática ou extra-hepática.","III. A ultrassonografia abdominal é o exame inicial de escolha na investigação.","IV. A principal alteração laboratorial é redução da bilirrubina sérica.","V. A colestase não interfere na digestão de gorduras."],
  opts:["I, II e III","I, III e IV","II, III e V","I, IV e V","III, IV e V"],ans:0,
  why:"IV: a bilirrubina SOBE. V: sem sais biliares no intestino não há micelas — a digestão de gorduras piora."},
-{id:"T11-Q10",a:"A4",prova:"T11 · Q10",selo:"OF",tipo:"afirmativas I–V",tema:"ADP — ressecabilidade",dz:["adp"],
+{id:"T11-Q10",a:"A4",prova:"T11 · Q10",turma:"T11",selo:"OF",tipo:"afirmativas I–V",tema:"ADP — ressecabilidade",dz:["adp"],
  enun:"Sobre os critérios de ressecabilidade e de tratamento do adenocarcinoma ductal pancreático, analise as afirmativas. É correto apenas o que se afirma em:",
  itens:["I. A ausência de metástases à distância é um dos critérios para que o tumor seja considerado ressecável.","II. O envolvimento arterial superior a 180° do tronco celíaco, artéria mesentérica superior ou artéria hepática comum é considerado critério de irressecabilidade.","III. Tumores sem comprometimento arterial e com oclusão venosa passível de reconstrução são considerados ressecáveis, independentemente de outros critérios.","IV. Para tumores avançados, o tratamento padrão é cirurgia de Whipple associada à quimioterapia.","V. A presença de ascite maligna caracteriza doença metastática e contraindica abordagem cirúrgica com intenção curativa."],
  opts:["I, II e III","I, III e IV","I, II e V","II, III e IV","III, IV e V"],ans:2,
  why:"III cai no “independentemente de outros critérios” (metástase contraindica). IV: Whipple + QT é do RESSECÁVEL; avançado = FOLFIRINOX."},
-{id:"T11-Q11",a:"A1",prova:"T11 · Q11",selo:"OF",tipo:"caso → significado",tema:"Esôfago de Barrett",dz:["barrett"],
+{id:"T11-Q11",a:"A1",prova:"T11 · Q11",turma:"T11",selo:"OF",tipo:"caso → significado",tema:"Esôfago de Barrett",dz:["barrett"],
  enun:"Paciente de 58 anos, com história de refluxo gastroesofágico crônico, realiza endoscopia digestiva alta que evidencia mucosa esofágica distal com aspecto avermelhado e aveludado. Biópsia confirma presença de células caliciformes. Qual o significado dessa alteração?",itens:[],
  opts:["Processo inflamatório agudo reversível sem risco de progressão","Metaplasia intestinal associada a aumento do risco de adenocarcinoma","Displasia de alto grau com indicação imediata de cirurgia","Hiperplasia escamosa benigna sem relevância clínica","Alteração infecciosa associada à colonização bacteriana"],ans:1,
  why:"Células caliciformes no esôfago distal = metaplasia intestinal = Barrett, lesão pré-maligna (metaplasia → displasia → adenocarcinoma). Atenção ao passar para o gabarito: na folha da veterana a marcação estava em B, mas a letra transcrita no gabarito foi outra."},
-{id:"T11-Q12",a:"A3",prova:"T11 · Q12",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colestase intra-hepática",dz:["colestase_intra"],
+{id:"T11-Q12",a:"A3",prova:"T11 · Q12",turma:"T11",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Colestase intra-hepática",dz:["colestase_intra"],
  enun:"Paciente de 58 anos apresenta, há 10 dias, icterícia progressiva, prurido intenso e fadiga. Nega dor abdominal significativa. Exames mostram elevação de bilirrubina, fosfatase alcalina e GGT. USG inicial não evidencia dilatação das vias biliares. Analise as afirmativas. É correto apenas o que se afirma em:",
  itens:["I. O quadro sugere colestase, podendo estar relacionada a comprometimento intra-hepático do fluxo biliar.","II. A ausência de dilatação de vias biliares na ultrassonografia torna improvável a hipótese de colestase.","III. A colestase pode estar associada a doenças metabólicas, autoimunes ou uso de medicamentos.","IV. A redução da excreção de sais biliares pode contribuir para prejuízo na digestão de gorduras.","V. A dor abdominal é a manifestação clínica mais constante nas formas intra-hepáticas de colestase."],
  opts:["I, III e IV","I, II e V","II, III e IV","I, IV e V","III, IV e V"],ans:0,
  why:"Sem dilatação = colestase INTRA-hepática (não afasta colestase). Dor abdominal é mais comum nas EXTRA-hepáticas. Causas intra: metabólicas (Wilson, hemocromatose), autoimunes, drogas."},
-{id:"T11-Q13A",a:"A4",prova:"T11 · Q13-A",selo:"OF",tipo:"caso",tema:"ADP de cabeça",dz:["adp"],
+{id:"T11-Q13A",a:"A4",prova:"T11 · Q13-A",turma:"T11",selo:"OF",tipo:"caso",tema:"ADP de cabeça",dz:["adp"],
  enun:"Homem de 68 anos, tabagista, apresenta icterícia progressiva indolor, associada a urina escura e fezes hipocólicas. Refere dor epigástrica com irradiação para o dorso. Ao exame, emagrecido. Hipótese diagnóstica?",
  resp:"Adenocarcinoma ductal da cabeça do pâncreas",
  why:"Tabagista + icterícia obstrutiva indolor + dor irradiada ao dorso (infiltração neural) + emagrecimento. A veterana escreveu “carcinoma hepatocelular” e a professora corrigiu para pâncreas: não há cirrose nem hepatite no caso."},
-{id:"T11-Q13B",a:"A1",prova:"T11 · Q13-B",selo:"OF",tipo:"caso",tema:"Esofagite eosinofílica",dz:["eeo"],
+{id:"T11-Q13B",a:"A1",prova:"T11 · Q13-B",turma:"T11",selo:"OF",tipo:"caso",tema:"Esofagite eosinofílica",dz:["eeo"],
  enun:"Paciente masculino, 25 anos, com história de atopia, apresenta disfagia intermitente para sólidos há alguns meses, com episódios de impactação alimentar. Nega pirose predominante. Hipótese diagnóstica?",
  resp:"Esofagite eosinofílica",why:"Jovem atópico + disfagia para sólidos intermitente + impactação, sem pirose (afasta DRGE)."},
-{id:"T11-Q13C",a:"A1",prova:"T11 · Q13-C",selo:"OF",tipo:"caso",tema:"Atresia esofágica",dz:["atresia"],
+{id:"T11-Q13C",a:"A1",prova:"T11 · Q13-C",turma:"T11",selo:"OF",tipo:"caso",tema:"Atresia esofágica",dz:["atresia"],
  enun:"Recém-nascido apresenta salivação excessiva, dificuldade para alimentação e episódios de cianose durante as tentativas de amamentação. Hipótese diagnóstica?",
  resp:"Atresia de esôfago com fístula traqueoesofágica",why:"A professora descontou de quem escreveu só “atresia esofágica” e completou “com fístula”. Nome inteiro!"},
-{id:"T11-Q13D",a:"A2",prova:"T11 · Q13-D",selo:"OF",tipo:"caso",tema:"Doença de Crohn",dz:["crohn"],
+{id:"T11-Q13D",a:"A2",prova:"T11 · Q13-D",turma:"T11",selo:"OF",tipo:"caso",tema:"Doença de Crohn",dz:["crohn"],
  enun:"Paciente de 28 anos com diarreia crônica há vários meses, dor abdominal recorrente em quadrante inferior direito e perda de peso. Episódios intermitentes de melhora e piora. Colonoscopia com áreas de mucosa normal intercaladas com ulcerações profundas. Hipótese diagnóstica?",
  resp:"Doença de Crohn",why:"QID (íleo terminal) + lesões salteadas + úlceras profundas + curso com remissões."},
-{id:"AU-C1",a:"A4",prova:"Aula · Caso 1",selo:"AU",tipo:"caso",tema:"Pancreatite aguda biliar",dz:["pa"],
+{id:"AU-C1",a:"A4",prova:"Aula · Caso 1",turma:"AULA",selo:"AU",tipo:"caso",tema:"Pancreatite aguda biliar",dz:["pa"],
  enun:"Feminina, 45 anos, colelitíase, dor intensa em epigástrio irradiada para dorso, náuseas e vômitos há 12 h. Lipase 1200 U/L (VR < 60); USG com cálculos na vesícula. (1) Diagnóstico? (2) Mecanismo? (3) Conduta inicial?",
  resp:"(1) Pancreatite aguda de origem biliar · (2) cálculo obstrui a ampola → lesão acinar → co-localização → catepsina B ativa tripsinogênio → autodigestão · (3) suporte: Ringer lactato, analgesia, dieta enteral precoce; depois tratar a litíase (colecistectomia/CPRE)",
  why:"Atlanta: dor típica + lipase > 3× já fecham 2 de 3."},
-{id:"AU-C2",a:"A4",prova:"Aula · Caso 2",selo:"AU",tipo:"caso",tema:"Cullen e Grey Turner",dz:["pa"],
+{id:"AU-C2",a:"A4",prova:"Aula · Caso 2",turma:"AULA",selo:"AU",tipo:"caso",tema:"Cullen e Grey Turner",dz:["pa"],
  enun:"Masculino, 52 anos, etilista, com pancreatite aguda, evolui com equimoses periumbilicais e em flancos. (1) O que indicam? (2) Gravidade? (3) Complicação associada?",
  resp:"(1) Sinais de Cullen (periumbilical) e Grey Turner (flancos) = hemorragia retroperitoneal · (2) pancreatite grave · (3) necrose hemorrágica (elastase + fosfolipase A2)",
  why:"São achados de gravidade, não de diagnóstico."},
-{id:"AU-C3",a:"A4",prova:"Aula · Caso 3",selo:"AU",tipo:"caso",tema:"ADP de cabeça",dz:["adp"],
+{id:"AU-C3",a:"A4",prova:"Aula · Caso 3",turma:"AULA",selo:"AU",tipo:"caso",tema:"ADP de cabeça",dz:["adp"],
  enun:"Masculino, 68 anos, tabagista, icterícia progressiva indolor, perda de peso e urina escura. (1) Hipótese? (2) Localização provável? (3) Exame inicial?",
  resp:"(1) Adenocarcinoma ductal do pâncreas · (2) cabeça (comprime o colédoco) · (3) TC de abdome contrastada, protocolo de pâncreas",
  why:"É praticamente a Q13-A da T11 — o caso da aula virou questão de prova."},
-{id:"AU-C4",a:"A4",prova:"Aula · Caso 4",selo:"AU",tipo:"caso",tema:"Pancreatite crônica",dz:["pc"],
+{id:"AU-C4",a:"A4",prova:"Aula · Caso 4",turma:"AULA",selo:"AU",tipo:"caso",tema:"Pancreatite crônica",dz:["pc"],
  enun:"Masculino, 50 anos, etilista crônico, dor abdominal recorrente há anos, pior após refeições, fezes volumosas e perda de peso. (1) Diagnóstico? (2) Alteração funcional principal? (3) Exame que confirma insuficiência exócrina?",
  resp:"(1) Pancreatite crônica alcoólica · (2) insuficiência exócrina (má digestão, esteatorreia) · (3) elastase fecal (↓, < 100 µg/g)",
  why:"Você anotou “elastase” no slide — foi a resposta dada em aula."}
+);
+
+window.QS=window.QS||[];
+QS.push(
+{id:"T10-Q1",a:"A3",prova:"T10 · Q1",turma:"T10",selo:"OF",tipo:"afirmativas I–V",tema:"Hepatites virais",dz:["hav","hbv","hcv","hdv","hev"],
+ enun:"Analise as afirmativas sobre as hepatites virais e assinale a alternativa correta:",
+ itens:["I. A hepatite A é transmitida pela via fecal-oral e não evolui para a forma crônica.","II. A hepatite B está associada a risco de cronificação, cirrose e carcinoma hepatocelular.","III. A hepatite C apresenta elevada taxa de cronificação e não possui vacina disponível.","IV. A hepatite D ocorre de forma independente da infecção pelo vírus B.","V. A hepatite E é geralmente autolimitada, mas pode causar formas fulminantes em gestantes."],
+ opts:["I e II","I, II e III","I, II, III e V","I, III e V","II, III e V"],ans:2,
+ why:"Só a IV é falsa: a hepatite D é um vírus defectivo — só existe em quem tem HBV (coinfecção ou superinfecção)."},
+{id:"T10-Q2",a:"A2",prova:"T10 · Q2",turma:"T10",selo:"OF",tipo:"caso → assinale a correta",tema:"Isquemia mesentérica",dz:["ima"],
+ enun:"Homem de 72 anos com dor abdominal intensa e desproporcional ao exame físico, vômitos e leucocitose. Gasometria com acidose metabólica e lactato elevado. Suspeita-se de isquemia mesentérica. Assinale a alternativa correta sobre esse quadro:",itens:[],
+ opts:["A isquemia mesentérica é geralmente causada por infecção viral aguda do intestino grosso.","A dor intensa decorre da ativação de fibras somáticas do peritônio.","A ressecção de segmentos comprometidos, por laparotomia, é indicada em quase todos os casos.","A principal etiologia é a embolia da artéria mesentérica superior em pacientes cardiopatas.","O exame diagnóstico inicial padrão-ouro é a ultrassonografia doppler."],ans:3,
+ why:"Embolia da AMS é a causa mais comum (fonte cardíaca: fibrilação atrial). A dor inicial é VISCERAL (por isso desproporcional); o exame de escolha é a angioTC e o padrão-ouro é a angiografia — o Doppler é limitado."},
+{id:"T10-Q3",a:"A2",prova:"T10 · Q3",turma:"T10",selo:"OF",tipo:"caso + afirmativas I–V",tema:"Salmonelose",dz:["salmonela","artrite_reativa"],
+ enun:"Homem de 35 anos com diarreia, febre e dor abdominal há 24 horas. O exame de fezes revela Salmonella entérica sorotipo Enteritidis. Analise as assertivas. É correto apenas o que se afirma em:",
+ itens:["I. O tratamento antibiótico é indicado rotineiramente para reduzir a duração da doença.","II. A gastroenterite inicia 5 a 21 dias após a infecção, geralmente causada pela ingestão de alimentos contaminados como os ovos.","III. A infecção pode estar associada ao desenvolvimento posterior de artrite reativa.","IV. A bacteremia, mais comum em imunossuprimidos, pode levar a infecções focais como osteomielite, endocardite ou abscessos.","V. A vacinação é indicada para prevenção de gastroenterite esporádica."],
+ opts:["I, II e III","III e IV","II, III e IV","I, II e V","III, IV e V"],ans:1,
+ why:"Gabarito oficial B (a veterana marcou C e a professora corrigiu). A pegadinha está na II: 5–21 dias é a incubação da FEBRE TIFOIDE; a gastroenterite começa em horas. I é falsa (gastroenterite = suporte) e V também (não há vacinação de rotina)."},
+{id:"T10-Q4",a:"A1",prova:"T10 · Q4",turma:"T10",selo:"OF",tipo:"assinale a correta",tema:"Acalasia",dz:["acalasia"],
+ enun:"Assinale a alternativa correta sobre a acalasia esofágica:",itens:[],
+ opts:["É caracterizada por hipertonia do esfíncter esofágico superior e peristaltismo aumentado.","O principal achado radiológico é o “esôfago em ampulheta”.","O mecanismo fisiopatológico central envolve degeneração dos neurônios inibitórios do plexo mioentérico (de Auerbach).","O tratamento curativo é feito exclusivamente com antibióticos.","A principal causa secundária é a infecção por Helicobacter pylori."],ans:2,
+ why:"O esfíncter é o INFERIOR e a peristalse some. O achado do bário é o “bico de pássaro” (ampulheta é distrator). A principal causa secundária é a doença de Chagas."},
+{id:"T10-Q5",a:"A1",prova:"T10 · Q5",turma:"T10",selo:"OF",tipo:"caso → assinale a INCORRETA",tema:"Esôfago de Barrett",dz:["barrett"],
+ enun:"Homem de 47 anos, obeso, com pirose e regurgitação ácida há mais de 10 anos, relata piora da queimação e disfagia progressiva para sólidos. A EDA evidencia mucosa avermelhada e aveludada no esôfago distal, com transição nítida para o epitélio esbranquiçado. Diagnóstico: esôfago de Barrett. Assinale a afirmativa INCORRETA:",itens:[],
+ opts:["O diagnóstico definitivo requer biópsia demonstrando epitélio colunar com células caliciformes.","A condição é considerada pré-maligna, pois pode evoluir para adenocarcinoma de esôfago.","O esôfago de Barrett representa uma displasia intestinal adquirida da mucosa esofágica, em resposta à agressão crônica pelo refluxo ácido.","O tratamento inclui o uso contínuo de inibidores da bomba de prótons e monitoramento endoscópico periódico.","O tratamento cirúrgico é indicado para pacientes com refluxo refratário ou complicações como a hérnia de hiato."],ans:2,
+ why:"A palavra trocada é “displasia”: Barrett é METAPLASIA intestinal. A displasia é o passo seguinte, que a vigilância procura."},
+{id:"T10-Q6",a:"A3",prova:"T10 · Q6",turma:"T10",selo:"OF",tipo:"assinale a correta",tema:"Doença de Wilson",dz:["wilson","hemocromatose"],
+ enun:"Sobre a doença de Wilson, assinale a alternativa correta:",itens:[],
+ opts:["A pigmentação bronzeada, a hepatomegalia e eventualmente insuficiência cardíaca podem ocorrer como manifestações clínicas dessa condição.","Caracteriza-se pelo aumento da ceruloplasmina sérica e pela redução da excreção urinária de cobre.","É uma doença autossômica recessiva causada por mutação no gene ATP7B, resultando em acúmulo de cobre nos tecidos.","O tratamento é feito com quelantes de ferro e suplementação de zinco.","O transplante hepático está contraindicado em casos de insuficiência hepática fulminante."],ans:2,
+ why:"A alternativa A é o quadro da HEMOCROMATOSE. No Wilson a ceruloplasmina CAI e o cobre urinário SOBE; os quelantes são de cobre (penicilamina, trientina) e o transplante é justamente indicado na insuficiência hepática aguda."},
+{id:"T10-Q7",a:"A1",prova:"T10 · Q7",turma:"T10",selo:"OF",tipo:"caso + afirmativas I–V",tema:"DRGE",dz:["drge"],
+ enun:"Homem de 46 anos com “queimação” retroesternal que piora após refeições copiosas e ao deitar-se, regurgitação ácida noturna e sem perda de peso. EDA com hiperemia e erosões no terço distal do esôfago. É correto apenas o que se afirma em:",
+ itens:["I. A redução do tônus do esfíncter esofágico inferior (EEI) é um dos principais mecanismos da DRGE.","II. O exame padrão-ouro para quantificar o refluxo ácido é a pHmetria esofágica de 24 horas.","III. A obesidade, associada ao aumento da pressão intra-abdominal, facilita o retorno do conteúdo gástrico para o esôfago.","IV. A fundoplicatura de Nissen é o tratamento cirúrgico para todos os casos, com o objetivo de excluir a possibilidade de progressão para esôfago de Barrett e carcinoma.","V. O uso de inibidores da bomba de prótons e mudanças no estilo de vida constituem a base do tratamento."],
+ opts:["I, II e IV","I, II, III e V","I, II e III","II, IV e V","I, III e V"],ans:1,
+ why:"A falsa é a IV: o Nissen é para refratários, jovens ou quem não quer medicação contínua — não para “todos os casos”."},
+{id:"T10-Q8",a:"A4",prova:"T10 · Q8",turma:"T10",selo:"OF",tipo:"caso → assinale a INCORRETA",tema:"Pancreatite aguda",dz:["pa"],
+ enun:"Mulher de 48 anos, previamente hígida, com dor abdominal intensa em faixa no epigástrio irradiada para o dorso, náuseas e vômitos há 12 horas. Amilase e lipase acima de 3 vezes o valor normal. Assinale a afirmativa INCORRETA:",itens:[],
+ opts:["O sinal de Cullen, uma equimose em flancos, é um achado de gravidade associado a hemorragia retroperitoneal.","A pancreatite aguda é um processo inflamatório súbito, que pode variar de leve a grave, e que pode ser potencialmente reversível se o fator causal for removido.","Elastase e fosfolipase A2 degradam membranas celulares e paredes vasculares, resultando em hemorragia intra/intersticial.","A litíase biliar é uma causa importante de pancreatite aguda.","A elevação da lipase não é suficiente para a confirmação do diagnóstico."],ans:0,
+ why:"Troca de nomes: CULLEN é periumbilical; equimose em FLANCOS é Grey Turner. A E é verdadeira porque Atlanta exige 2 de 3 critérios."},
+{id:"T10-Q9",a:"A3",prova:"T10 · Q9",turma:"T10",selo:"OF",tipo:"afirmativas I–V",tema:"Carcinoma hepatocelular",dz:["chc"],
+ enun:"Analise as afirmativas sobre o carcinoma hepatocelular e assinale a alternativa correta:",
+ itens:["I. O transplante somente é considerado, de acordo com critérios de Milão, se ≤ 1 tumor < 5 cm ou ≤ 3 tumores ≤ 3 cm, sem invasão vascular.","II. Hemocromatose, doença de Wilson e a exposição a aflatoxinas são considerados os principais fatores de risco para o carcinoma hepatocelular.","III. A biópsia é necessária para a confirmação do carcinoma hepatocelular, uma vez que ele pode ser confundido com estágios mais avançados de cirrose hepática.","IV. A ultrassonografia é o exame inicial de rastreamento.","V. A ressecção cirúrgica é a primeira escolha, se o paciente tem função hepática preservada e sem hipertensão portal."],
+ opts:["I, II e III","I, III e IV","I, III e V","I, IV e V","III, IV e V"],ans:3,
+ why:"Gabarito oficial D (a veterana marcou C e a professora corrigiu). II é falsa: os PRINCIPAIS fatores são hepatite B/C, álcool/cirrose e MASLD — hemocromatose, Wilson e aflatoxina estão em “outros”. III é falsa: a biópsia pode confirmar, mas não é obrigatória."},
+{id:"T10-Q10",a:"A1",prova:"T10 · Q10",turma:"T10",selo:"OF",tipo:"caso → assinale a INCORRETA",tema:"Esofagite eosinofílica",dz:["eeo"],
+ enun:"Homem de 28 anos, com rinite alérgica e asma, com episódios recorrentes de disfagia para sólidos e impactação alimentar. Nega pirose típica. Biópsia com infiltrado eosinofílico (> 15 eosinófilos por campo). Assinale a afirmativa INCORRETA sobre este caso:",itens:[],
+ opts:["O tratamento inclui dieta de exclusão, uso de inibidores da bomba de prótons e corticoides tópicos.","A esofagite eosinofílica é uma doença inflamatória crônica, imunologicamente mediada, frequentemente associada a doenças atópicas.","A endoscopia digestiva mostra achados típicos, como anéis concêntricos e sulcos longitudinais no esôfago.","A doença é mais comum em homens jovens e pode evoluir com fibrose e estenose esofágica.","A patogênese envolve uma resposta imune do tipo Th1 desencadeada classicamente por alérgenos alimentares."],ans:4,
+ why:"Th1 × Th2: a EEo é resposta Th2 (IL-5 e IL-13 → eotaxina-3). Uma letra trocada derruba a alternativa."},
+{id:"T10-Q11",a:"A4",prova:"T10 · Q11",turma:"T10",selo:"OF",tipo:"caso → assinale a correta",tema:"Pancreatite crônica",dz:["pc"],
+ enun:"Mulher de 54 anos, etilista há 20 anos, com dor epigástrica contínua e perda de peso progressiva. Refere fezes volumosas, oleosas e flutuantes. TC de abdome revela múltiplas calcificações pancreáticas. Assinale a alternativa correta:",itens:[],
+ opts:["O quadro clínico descrito é compatível com pancreatite aguda de repetição, caracterizada por inflamação reversível do parênquima.","A paciente apresenta sinais de insuficiência exócrina, típica da fase avançada da pancreatite crônica.","O etilismo é causa rara de pancreatite crônica, sendo mais associado à forma aguda.","As calcificações pancreáticas são consideradas sinal patognomônico da pancreatite aguda.","A dosagem de amilase e lipase séricas é o principal marcador laboratorial de gravidade no estágio de dano pancreático da paciente."],ans:1,
+ why:"Esteatorreia = insuficiência exócrina, da fase avançada da CRÔNICA. As calcificações são da crônica (não da aguda) e as enzimas séricas ficam normais ou baixas — não servem de marcador aqui."},
+{id:"T10-Q12",a:"A2",prova:"T10 · Q12",turma:"T10",selo:"OF",tipo:"assinale a correta",tema:"Aderências intestinais",dz:["aderencias"],
+ enun:"Assinale a alternativa correta sobre as aderências intestinais:",itens:[],
+ opts:["O tratamento é sempre cirúrgico, independentemente da gravidade.","São causadas principalmente por infecções bacterianas primárias do intestino.","Representam bandas fibrosas de tecido conjuntivo que podem causar obstrução intestinal.","O diagnóstico depende exclusivamente da colonoscopia.","São mais frequentes em crianças com infecção viral intestinal."],ans:2,
+ why:"Bandas fibrosas, quase sempre pós-operatórias. Tratamento inicial conservador (hidratação + SNG) e o exame é a TC com contraste."},
+{id:"T10-Q13",a:"A4",prova:"T10 · Q13",turma:"T10",selo:"OF",tipo:"discursiva",tema:"ADP — irressecabilidade",dz:["adp"],
+ enun:"Liste e explique os 2 critérios utilizados para classificar um adenocarcinoma de pâncreas, SEM metástase, como irressecável.",
+ resp:"(1) Invasão arterial extensa: contato > 180° da circunferência do tronco celíaco, da artéria mesentérica superior ou da artéria hepática comum — o tumor abraça o vaso e não há como ressecar com margem. (2) Invasão venosa extensa: oclusão completa da veia porta ou da veia mesentérica superior sem possibilidade de reconstrução cirúrgica.",
+ why:"A veterana respondeu “fixado a tecidos adjacentes” e a professora riscou, escrevendo “invasão arterial e oclusão venosa”. Ela quer os dois critérios VASCULARES, com o ângulo e a impossibilidade de reconstrução."}
+);
+
+window.QS=window.QS||[];
+QS.push(
+{id:"T09-Q1",a:"A2",prova:"T09 · Q1",turma:"T09",selo:"OF",tipo:"afirmativas I–V",tema:"Doenças obstrutivas",dz:["intuss","aderencias","hernias","volvulo"],
+ enun:"Analise as seguintes afirmativas e assinale a alternativa correta:",
+ itens:["I. Em adultos, a intussuscepção é geralmente idiopática, ou pode estar associada a infecções ou a tumores.","II. Cirurgias abdominais prévias são a principal causa de aderências intestinais.","III. Na hernioplastia, a hérnia é reduzida e o defeito na parede abdominal é suturado diretamente.","IV. O vólvulo pode ocorrer em qualquer parte do trato gastrointestinal, mas é mais comum no intestino delgado e no cólon.","V. A doença de Chagas pode causar megacólon secundário devido ao comprometimento dos plexos nervosos entéricos pelo protozoário Trypanosoma cruzi."],
+ opts:["II, IV e V","I, II e III","I, III e V","I e IV","I, IV e V"],ans:0,
+ why:"I é falsa: “idiopática” é a intussuscepção da CRIANÇA; no adulto quase sempre há uma lesão-guia (tumor, pólipo). III inverte os nomes: sutura direta = herniorrafia; hernioplastia usa TELA."},
+{id:"T09-Q2",a:"A4",prova:"T09 · Q2",turma:"T09",selo:"OF",tipo:"caso → diagnóstico",tema:"Pancreatite aguda",dz:["pa"],
+ enun:"Homem de 58 anos com dor abdominal intensa no epigástrio há cerca de 12 horas, com irradiação para o dorso, náuseas e vômitos. Taquicárdico, hipotenso e com leve febre. Abdome distendido e doloroso, sem rigidez. Observa-se sinal de Grey-Turner. Amilase e lipase significativamente elevadas, leucocitose e hipocalcemia. Qual o diagnóstico mais provável?",itens:[],
+ opts:["Colite isquêmica","Úlcera gástrica com perfuração","Pancreatite aguda","Doença de Crohn","Retocolite ulcerativa"],ans:2,
+ why:"Dor em faixa irradiada ao dorso + enzimas > 3× + Grey Turner (hemorragia retroperitoneal). A hipocalcemia vem da saponificação do cálcio pela necrose gordurosa."},
+{id:"T09-Q3",a:"A3",prova:"T09 · Q3",turma:"T09",selo:"OF",tipo:"assinale a EXCETO",tema:"Hepatites virais",dz:["hav","hbv","hcv","hdv","hev"],
+ enun:"As seguintes afirmativas sobre as hepatites estão corretas, EXCETO:",itens:[],
+ opts:["A transmissão da hepatite A é por via fecal-oral, por contato direto com indivíduos infectados ou por ingestão de água e alimentos contaminados.","A definição de hepatite C crônica é a presença de anti-HCV reagente por mais de 6 meses com confirmação diagnóstica com RNA-HCV detectável.","O vírus da hepatite D (VHD) depende da coinfecção com o HBV para a sua replicação.","Em gestantes, a hepatite E pode evoluir para a forma fulminante.","A hepatite B possui alta taxa (± 80%) de cronificação em adultos infectados, podendo evoluir para cirrose e carcinoma hepatocelular."],ans:4,
+ why:"Troca de letra: quem cronifica em ~80% é a hepatite C. No adulto, a B cronifica em 5–10%."},
+{id:"T09-Q4",a:"A1",prova:"T09 · Q4",turma:"T09",selo:"OF",tipo:"assinale a correta",tema:"Esôfago de Barrett",dz:["barrett"],
+ enun:"Sobre o esôfago de Barrett é correto afirmar que:",itens:[],
+ opts:["É uma metaplasia intestinal adquirida da mucosa do esôfago distal, em que o epitélio colunar com células caliciformes é substituído por um epitélio escamoso.","O esôfago de Barrett é considerado uma lesão pré-maligna, que aumenta significativamente o risco de adenocarcinoma de esôfago.","O esôfago de Barrett causa sintomas específicos como pirose e regurgitação ácida.","O diagnóstico pode ser confirmado pela endoscopia digestiva alta, sem necessidade de biópsia.","O tratamento cirúrgico é indicado para a maioria dos pacientes já com displasia de baixo grau."],ans:1,
+ why:"A alternativa A inverte a troca: o ESCAMOSO é que vira COLUNAR com células caliciformes. Barrett não tem sintoma próprio (os sintomas são da DRGE) e o diagnóstico exige biópsia."},
+{id:"T09-Q5",a:"A2",prova:"T09 · Q5",turma:"T09",selo:"OF",tipo:"caso → diagnóstico",tema:"Isquemia mesentérica",dz:["ima"],
+ enun:"Homem de 72 anos com dor abdominal súbita e intensa há 8 horas, náuseas, vômitos e diarreia. Taquicárdico, abdome flácido, porém doloroso difusamente, com Blumberg positivo. Histórico de fibrilação atrial crônica sem uso de anticoagulante. Qual a principal causa provável do quadro?",itens:[],
+ opts:["Hérnia inguinal","Colite pseudomembranosa","Obstrução intestinal por aderência","Isquemia mesentérica","Pancreatite aguda"],ans:3,
+ why:"Fibrilação atrial sem anticoagulação + dor súbita desproporcional = embolia da AMS. O Blumberg positivo já indica fase mais avançada, com peritônio irritado."},
+{id:"T09-Q6",a:"A1",prova:"T09 · Q6",turma:"T09",selo:"OF",tipo:"afirmativas I–V",tema:"Patologias do esôfago",dz:["eeo","atresia","drge","barrett","acalasia"],
+ enun:"Analise as seguintes afirmativas sobre patologias do esôfago e assinale abaixo a alternativa correta:",
+ itens:["I. Em adultos, a maioria dos casos de estenose esofágica primária é de etiologia idiopática, mas também existem formas secundárias, causadas na América Latina principalmente pela doença de Chagas.","II. A esofagite eosinofílica é uma doença inflamatória crônica do esôfago, imunologicamente mediada, geralmente em resposta a alérgenos alimentares ou aeroalérgenos.","III. As manifestações clínicas em neonatos com atresia esofágica incluem distensão abdominal, caso haja fístula traqueo-esofágica distal; salivação excessiva, dificuldade de alimentação, engasgos e cianose.","IV. Alterações no esfíncter esofagiano inferior e o aumento da pressão intra-abdominal são os principais fatores fisiopatológicos que levam à doença do refluxo gastroesofágico.","V. Traquealização esofágica, presença de sulcos longitudinais e exsudato esbranquiçado são achados endoscópicos característicos do esôfago de Barrett."],
+ opts:["I, II e V","II, III e IV","I, III e IV","III, IV e V","I, IV e V"],ans:1,
+ why:"V troca as doenças: anéis (“traquealização”), sulcos e exsudatos são da ESOFAGITE EOSINOFÍLICA — o Barrett é mucosa avermelhada e aveludada. A I descreve a acalasia (primária idiopática, secundária por Chagas), não a estenose."},
+{id:"T09-Q7",a:"A4",prova:"T09 · Q7",turma:"T09",selo:"OF",tipo:"assinale a INCORRETA",tema:"Pancreatite crônica",dz:["pc"],
+ enun:"Assinale a alternativa INCORRETA sobre a pancreatite crônica:",itens:[],
+ opts:["A pancreatite crônica é um processo inflamatório persistente que leva à destruição irreversível e progressiva do parênquima pancreático.","Dor abdominal crônica e progressiva, que piora com as refeições, esteatorreia e perda de peso são manifestações típicas da pancreatite crônica.","A insuficiência exócrina pancreática se manifesta precocemente na evolução da doença, sendo mais comum do que a insuficiência endócrina.","Calcificações pancreáticas, que podem ser observadas em TC ou RM, são achados patognomônicos da pancreatite crônica.","O alcoolismo crônico é a principal causa de pancreatite crônica."],ans:2,
+ why:"Gabarito oficial C. A insuficiência exócrina aparece TARDIAMENTE, quando já se perdeu a maior parte do parênquima — a palavra “precocemente” é a armadilha."},
+{id:"T09-Q8",a:"A3",prova:"T09 · Q8",turma:"T09",selo:"OF",tipo:"caso → diagnóstico",tema:"Hemocromatose",dz:["hemocromatose"],
+ enun:"Homem de 52 anos com fadiga progressiva, dor em articulações das mãos e perda da libido há alguns meses. Refere escurecimento gradual da pele mesmo sem exposição solar intensa. Nega etilismo. Ao exame: hiperpigmentação cutânea e hepatomegalia discreta. Ferritina sérica elevada, saturação de transferrina superior a 60% e elevação discreta das transaminases. Glicemia de jejum de 132 mg/dL. Qual o diagnóstico mais compatível?",itens:[],
+ opts:["Hemocromatose","Doença de Wilson","Colestase","Carcinoma hepatocelular","Hepatite"],ans:0,
+ why:"“Diabetes bronzeado”: pele + articulações das mãos + hipogonadismo + ferro alto com saturação > 45%. É o espelho da questão de Wilson — as duas costumam aparecer juntas como distratores."},
+{id:"T09-Q9",a:"A3",prova:"T09 · Q9",turma:"T09",selo:"OF",tipo:"caso → diagnóstico",tema:"Colestase obstrutiva",dz:["colestase_extra","colestase_intra"],
+ enun:"Paciente de 38 anos com icterícia progressiva há 10 dias, prurido intenso, acolia fecal e urina escura. Nega febre, emagrecimento ou dor abdominal. Não usa medicamentos nem consome álcool. Ao exame: icterícia e xantoma na face, sem dor à palpação. Bilirrubina direta aumentada e sorologias virais negativas. USG de abdome mostra “vias biliares intra-hepáticas livres, mas dilatadas”. Qual a hipótese diagnóstica mais provável?",itens:[],
+ opts:["Hepatite viral aguda, com predomínio de bilirrubina direta devido à lesão hepatocelular","Obstrução das vias biliares extra-hepáticas, com provável colestase obstrutiva","Hemólise intravascular crônica, com hiperbilirrubinemia indireta","Hepatite autoimune","Hemocromatose"],ans:1,
+ why:"Bilirrubina DIRETA + acolia e colúria + via biliar DILATADA = obstrução extra-hepática. Hemólise daria bilirrubina indireta, sem acolia nem colúria. O enunciado dela ficou confuso (“livres, mas dilatadas”) — o que decide é a palavra DILATADAS."},
+{id:"T09-Q10A",a:"A4",prova:"T09 · Q10-A",turma:"T09",selo:"OF",tipo:"discursiva",tema:"ADP — ressecabilidade",dz:["adp"],
+ enun:"Liste os 3 critérios utilizados para classificar a ressecabilidade do adenocarcinoma ductal do pâncreas.",
+ resp:"(1) Envolvimento vascular (contato arterial > 180° com tronco celíaco, AMS ou hepática comum; oclusão venosa de porta/VMS sem reconstrução) · (2) Extensão do tumor (invasão de estruturas críticas) · (3) Presença de metástases à distância.",
+ why:"É a lista do slide de ressecabilidade. A veterana respondeu exatamente assim e a professora aceitou."},
+{id:"T09-Q10B",a:"A4",prova:"T09 · Q10-B",turma:"T09",selo:"OF",tipo:"discursiva",tema:"ADP — prognóstico",dz:["adp"],
+ enun:"Indique por que o prognóstico do adenocarcinoma ductal pancreático é desfavorável em uma proporção alta dos pacientes.",
+ resp:"Porque os sintomas iniciais são inespecíficos (ou o tumor é assintomático), sobretudo em corpo e cauda: o diagnóstico é tardio, com o tumor já localmente avançado ou metastático — só 15–20% chegam em estágio cirúrgico. Somam-se a agressividade biológica e a reação desmoplásica, que dificulta a ressecção e a chegada da quimioterapia. Sobrevida em 5 anos ≈ 10%.",
+ why:"A veterana respondeu “é assintomático, quando diagnosticado já está avançado com lesões irressecáveis” e a professora aceitou. Vale citar também a desmoplasia e os 15–20% operáveis."}
 );
 
 window.QS=window.QS||[];
@@ -1336,16 +1446,23 @@ blocos:[
 </script>
 <script>window.EXTRA={
 kpi:[
- {n:"≈ slide",x:"as afirmativas são frases dos slides dela com uma palavra trocada (“bloqueadora”, “exclusivamente”, “redução”, “independentemente”)"},
- {n:"I–V",x:"formato dominante: “analise as afirmativas”, com 5 combinações de 3 números"},
- {n:"4 casos",x:"na última questão: nome da doença a partir de um mini-caso — vale mais que as outras"},
- {n:"4 × 4",x:"na T11 as 4 aulas pesaram igual (4 itens cada) — e o fígado veio todo em objetivas"}
+ {n:"3 provas",x:"T09, T10 e T11 — a mesma professora, três semestres seguidos, com muita coisa repetida"},
+ {n:"≈ slide",x:"a alternativa falsa é uma frase do slide com UMA palavra trocada (“displasia”, “Th1”, “precocemente”, “flancos”, “superior”)"},
+ {n:"I–V + INCORRETA",x:"os dois formatos dominantes: “analise as afirmativas” e “assinale a INCORRETA/EXCETO”"},
+ {n:"Pâncreas 3/3",x:"ressecabilidade do adenocarcinoma caiu nas três provas — duas delas como DISCURSIVA"},
+ {n:"Equilíbrio",x:"as 4 aulas pesam quase igual nas três provas (9 a 11 itens cada) — não dá para abandonar nenhuma"}
+
 ],
 formato:[
+ {prova:"T09 (verde)",data:"sem data na folha",disc:"1 discursiva com 2 itens: A) liste os 3 critérios de ressecabilidade do ADP · B) por que o prognóstico do ADP é ruim",
+  forma:"casos clínicos pedindo o diagnóstico · afirmativas I–V · “assinale a INCORRETA” · “estão corretas, EXCETO”"},
+ {prova:"T10 (laranja)",data:"sem data na folha",disc:"1 discursiva: liste e explique os 2 critérios que tornam o ADP irressecável (sem metástase)",
+  forma:"afirmativas I–V · “assinale a correta” · “assinale a INCORRETA” (3×) · casos clínicos"},
  {prova:"T11",data:"24/04/2026",disc:"1 questão com 4 casos (A–D): hipótese diagnóstica, sem justificar",
   forma:"afirmativas I–V (maioria) · caso → conduta / laboratório / mecanismo / significado · “assinale a correta”"},
  {prova:"UC13 · A1",data:"28/08/2026",disc:"2 discursivas com itens A e B (caso → diagnóstico + explique a fisiopatologia)",
   forma:"mesma professora: casos clínicos, “assinale a INCORRETA”, fotos de lâmina/TC às vezes"}
+
 ],
 regras:[
  "Gabarito só vale o da última folha — caneta azul e letra maiúscula.",
@@ -1353,20 +1470,24 @@ regras:[
  "Na questão de casos, escreva o nome completo da doença (ela descontou “atresia esofágica” sem “com fístula”)."
 ],
 familias:[
- {f:"Colestase (caiu 2×)",onde:"Q9 e Q12",forma:"caso + I–V: fluxo biliar, intra × extra, USG inicial, bilirrubina, gordura, dor"},
- {f:"Carcinoma hepatocelular",onde:"Q1",forma:"cirrótico + AFP ↑ + lesão focal → exame para caracterizar (TC/RM)"},
- {f:"Doença de Wilson",onde:"Q4",forma:"caso jovem + anel na córnea → laboratório (distrator: hemocromatose)"},
- {f:"Salmonelose + artrite reativa",onde:"Q2",forma:"I–V: transmissão, ATB na gastroenterite, bacteremia, tifoide, artrite"},
- {f:"Colite pseudomembranosa",onde:"Q5",forma:"caso pós-antibiótico + I–V (diagnóstico e primeira medida)"},
- {f:"Isquemia mesentérica",onde:"Q7",forma:"I–V: exame de escolha, clínica inicial, necrose, lactato, dor visceral × somática"},
- {f:"Doença de Crohn",onde:"Q13-D",forma:"caso → nome (QID + salteado + úlceras profundas)"},
- {f:"Pancreatite aguda",onde:"Q3",forma:"assinale a correta: sequência catepsina B → tripsina"},
- {f:"Pancreatite crônica",onde:"Q6",forma:"I–V (aguda × crônica disfarçado)"},
- {f:"Adenocarcinoma de pâncreas",onde:"Q10 e Q13-A",forma:"I–V de ressecabilidade/tratamento + caso de cabeça (icterícia indolor)"},
- {f:"Acalasia",onde:"Q8",forma:"caso → mecanismo; distratores = mecanismos de DRGE, EEo e estenose"},
- {f:"Esôfago de Barrett",onde:"Q11",forma:"caso EDA + células caliciformes → significado"},
- {f:"Esofagite eosinofílica",onde:"Q13-B",forma:"caso → nome"},
- {f:"Atresia esofágica",onde:"Q13-C",forma:"caso RN → nome completo (com fístula)"}
+ {f:"Ressecabilidade do adenocarcinoma de pâncreas",n:"3/3",onde:"T09 Q10-A e B (discursiva) · T10 Q13 (discursiva) · T11 Q10 (I–V) + Q13-A (caso)",forma:"o tema preferido dela — e o único que já caiu duas vezes como discursiva"},
+ {f:"Pancreatite aguda",n:"3/3",onde:"T09 Q2 (caso com Grey-Turner) · T10 Q8 (INCORRETA) · T11 Q3 (assinale a correta)",forma:"caso clássico ou a sequência catepsina B → tripsina"},
+ {f:"Pancreatite crônica",n:"3/3",onde:"T09 Q7 (INCORRETA) · T10 Q11 (caso → correta) · T11 Q6 (I–V)",forma:"sempre contrastando com a aguda (calcificações, enzimas, reversibilidade)"},
+ {f:"Esôfago de Barrett",n:"3/3",onde:"T09 Q4 (correta) · T10 Q5 (INCORRETA) · T11 Q11 (caso → significado)",forma:"metaplasia × displasia e o que a biópsia mostra"},
+ {f:"Isquemia mesentérica",n:"3/3",onde:"T09 Q5 (caso com FA) · T10 Q2 (caso → correta) · T11 Q7 (I–V)",forma:"dor desproporcional, embolia da AMS, angioTC × Doppler"},
+ {f:"Esofagite eosinofílica",n:"3/3",onde:"T09 Q6 (afirmativa) · T10 Q10 (INCORRETA) · T11 Q13-B (caso)",forma:"jovem atópico com impactação; Th2, anéis e ≥ 15 eosinófilos"},
+ {f:"Wilson × hemocromatose",n:"3/3",onde:"T09 Q8 (hemocromatose) · T10 Q6 (Wilson) · T11 Q4 (Wilson)",forma:"uma é sempre o distrator da outra — cobre × ferro"},
+ {f:"Hepatites virais",n:"2/3",onde:"T09 Q3 (EXCETO) · T10 Q1 (I–V)",forma:"quem cronifica, quem tem vacina, D depende da B, E na gestante"},
+ {f:"Colestase",n:"2/3",onde:"T09 Q9 (caso obstrutivo) · T11 Q9 e Q12 (duas I–V)",forma:"intra × extra pela dilatação na USG; bilirrubina, FA e GGT"},
+ {f:"Carcinoma hepatocelular",n:"2/3",onde:"T10 Q9 (I–V) · T11 Q1 (caso → conduta)",forma:"Milão, rastreio com USG, TC/RM para caracterizar"},
+ {f:"Acalasia",n:"2/3",onde:"T10 Q4 (correta) · T11 Q8 (caso → mecanismo)",forma:"neurônios inibitórios do mioentérico; bico de pássaro; Chagas"},
+ {f:"DRGE",n:"2/3",onde:"T09 Q6 (afirmativa) · T10 Q7 (I–V)",forma:"mecanismos do EEI e pHmetria; o Nissen “para todos” é falso"},
+ {f:"Salmonelose",n:"2/3",onde:"T10 Q3 (I–V) · T11 Q2 (I–V)",forma:"antibiótico só em tifoide/bacteremia; artrite reativa é estéril"},
+ {f:"Obstrutivas (bridas, hérnias, vólvulo, intussuscepção)",n:"2/3",onde:"T09 Q1 (I–V) · T10 Q12 (aderências)",forma:"herniorrafia × hernioplastia; intussuscepção do adulto tem lesão-guia"},
+ {f:"Atresia esofágica",n:"2/3",onde:"T09 Q6 (afirmativa) · T11 Q13-C (caso)",forma:"RN com salivação e cianose; a fístula distal explica a distensão"},
+ {f:"Colite pseudomembranosa",n:"1/3",onde:"T11 Q5 (caso + I–V)",forma:"diarreia pós-antibiótico, toxina A/B, suspender o ATB"},
+ {f:"Doença de Crohn",n:"1/3",onde:"T11 Q13-D (caso)",forma:"QID, salteado, úlceras profundas"}
+
 ],
 pegadinhas:[
  {p:"A gastroenterite por Salmonella geralmente requer antibiótico.",v:"Gastroenterite = suporte (hidratação). Antibiótico: casos graves/de risco, tifoide e bacteremia.",e:"T11 Q2"},
@@ -1379,8 +1500,8 @@ pegadinhas:[
  {p:"A pancreatite crônica é predominantemente aguda e reversível.",v:"Persistente e irreversível (fibrose + atrofia).",e:"T11 Q6"},
  {p:"A confirmação da colite por C. difficile depende exclusivamente de endoscopia.",v:"Diagnóstico = pesquisa de toxinas A/B (ELISA ou PCR); endoscopia só nos graves.",e:"T11 Q5"},
  {p:"A primeira medida é manter o antibiótico e associar antidiarreico.",v:"Primeira medida = suspender o antibiótico causal; tratar com vancomicina oral.",e:"T11 Q5"},
- {p:"O USG Doppler é o exame de escolha na isquemia mesentérica.",v:"Escolha = angiotomografia com contraste; padrão-ouro = angiografia; Doppler é limitado.",e:"T11 Q7"},
- {p:"A dor inicial da isquemia mesentérica vem das fibras somáticas do peritônio parietal.",v:"No início a dor é visceral — por isso é desproporcional ao exame físico.",e:"T11 Q7"},
+ {p:"O USG Doppler é o exame de escolha (ou padrão-ouro) na isquemia mesentérica.",v:"Escolha = angiotomografia com contraste; padrão-ouro = angiografia; Doppler é limitado.",e:"T11 Q7 · T10 Q2"},
+ {p:"A dor da isquemia mesentérica vem das fibras somáticas do peritônio.",v:"No início a dor é visceral — por isso é desproporcional ao exame físico.",e:"T11 Q7 · T10 Q2"},
  {p:"Na colestase, a principal alteração é a redução da bilirrubina.",v:"A bilirrubina SOBE, com FA, GGT e ácidos biliares.",e:"T11 Q9"},
  {p:"A colestase não interfere na digestão de gorduras.",v:"Sem sais biliares não há micelas: má digestão de gordura e de vitaminas A, D, E, K.",e:"T11 Q9"},
  {p:"USG sem dilatação das vias biliares torna improvável a colestase.",v:"Sem dilatação sugere colestase INTRA-hepática.",e:"T11 Q12"},
@@ -1399,6 +1520,33 @@ pegadinhas:[
  {p:"O CA 19-9 serve para rastrear câncer de pâncreas.",v:"Prognóstico e monitoramento, NÃO rastreamento.",e:"provável · slide 26"},
  {p:"Na hemocromatose a TIBC está aumentada.",v:"TIBC normal ou reduzida (transferrina já saturada).",e:"provável · resumo da veterana"},
  {p:"O anti-HBc aparece após a vacina da hepatite B.",v:"Só na infecção natural; a vacina gera apenas anti-HBs.",e:"provável · aula 25/09"},
+{p:"A hepatite D ocorre de forma independente da infecção pelo vírus B.",v:"O HDV é defectivo: só existe em quem tem HBV (coinfecção ou superinfecção).",e:"T10 Q1"},
+ {p:"A gastroenterite por Salmonella inicia 5 a 21 dias após a infecção.",v:"5–21 dias é a incubação da FEBRE TIFOIDE; a gastroenterite começa em horas.",e:"T10 Q3"},
+ {p:"A vacinação é indicada para prevenir a gastroenterite esporádica por Salmonella.",v:"Não há vacinação de rotina para isso.",e:"T10 Q3"},
+ {p:"A acalasia cursa com hipertonia do esfíncter esofágico SUPERIOR e peristaltismo aumentado.",v:"É o esfíncter INFERIOR, hipertônico e que não relaxa, com PERDA da peristalse.",e:"T10 Q4"},
+ {p:"O achado radiológico da acalasia é o “esôfago em ampulheta”.",v:"É o “bico de pássaro” na esofagografia baritada.",e:"T10 Q4"},
+ {p:"A principal causa secundária de acalasia é o Helicobacter pylori.",v:"É a doença de Chagas (na América Latina).",e:"T10 Q4"},
+ {p:"O esôfago de Barrett é uma DISPLASIA intestinal adquirida.",v:"É METAPLASIA intestinal; a displasia é o passo seguinte, que a vigilância procura.",e:"T10 Q5"},
+ {p:"No Barrett, o epitélio colunar com células caliciformes é substituído por epitélio escamoso.",v:"É o contrário: o escamoso é substituído pelo colunar com caliciformes.",e:"T09 Q4"},
+ {p:"A doença de Wilson cursa com aumento da ceruloplasmina e redução do cobre urinário.",v:"Ceruloplasmina BAIXA e cobre urinário ALTO (> 100 µg/dia).",e:"T10 Q6"},
+ {p:"O tratamento da doença de Wilson é com quelantes de ferro.",v:"Quelantes de COBRE: penicilamina (1ª) e trientina; o zinco inibe a absorção.",e:"T10 Q6"},
+ {p:"O transplante hepático é contraindicado na insuficiência hepática fulminante do Wilson.",v:"É exatamente uma das indicações principais (com a cirrose descompensada refratária).",e:"T10 Q6"},
+ {p:"Pigmentação bronzeada + hepatomegalia + insuficiência cardíaca = doença de Wilson.",v:"Esse é o quadro da HEMOCROMATOSE. Wilson = córnea (Kayser-Fleischer) + neuropsiquiátrico + fígado.",e:"T10 Q6"},
+ {p:"A fundoplicatura de Nissen é o tratamento cirúrgico para todos os casos de DRGE.",v:"Só para refratários, jovens ou quem não quer medicação contínua.",e:"T10 Q7"},
+ {p:"O sinal de Cullen é a equimose em flancos.",v:"Cullen é PERIUMBILICAL; em flancos é Grey Turner. Os dois = hemorragia retroperitoneal.",e:"T10 Q8"},
+ {p:"Hemocromatose, Wilson e aflatoxinas são os principais fatores de risco do CHC.",v:"Os principais são hepatite B/C, álcool/cirrose e MASLD — os outros entram como “outros”.",e:"T10 Q9"},
+ {p:"A biópsia é necessária para confirmar o carcinoma hepatocelular.",v:"Pode confirmar, mas nem sempre é necessária — a imagem típica costuma bastar.",e:"T10 Q9"},
+ {p:"A esofagite eosinofílica é uma resposta imune do tipo Th1.",v:"É Th2: IL-5 (eosinófilos) e IL-13 (eotaxina-3).",e:"T10 Q10"},
+ {p:"As calcificações pancreáticas são patognomônicas da pancreatite AGUDA.",v:"São da CRÔNICA. Na aguda a TC mostra edema e necrose.",e:"T10 Q11"},
+ {p:"O etilismo é causa rara de pancreatite crônica.",v:"É a principal causa da crônica.",e:"T10 Q11"},
+ {p:"Amilase e lipase são o principal marcador de gravidade na pancreatite crônica.",v:"Na crônica elas ficam normais ou baixas — não sobrou parênquima para vazar enzima.",e:"T10 Q11"},
+ {p:"O tratamento das aderências é sempre cirúrgico.",v:"Começa conservador: hidratação + sonda nasogástrica; adesiólise se completa ou complicada.",e:"T10 Q12"},
+ {p:"A insuficiência exócrina se manifesta precocemente na pancreatite crônica.",v:"Aparece TARDIAMENTE, quando a maior parte do parênquima já se perdeu.",e:"T09 Q7"},
+ {p:"Em adultos, a intussuscepção é geralmente idiopática.",v:"Idiopática é a da CRIANÇA; no adulto quase sempre há lesão-guia (tumor, pólipo).",e:"T09 Q1"},
+ {p:"Na hernioplastia o defeito da parede é suturado diretamente.",v:"Sutura direta = herniorrafia. Hernioplastia usa TELA.",e:"T09 Q1"},
+ {p:"A hepatite B cronifica em cerca de 80% dos adultos.",v:"Quem cronifica em ~80% é a C; a B cronifica em 5–10% dos adultos.",e:"T09 Q3"},
+ {p:"Traquealização, sulcos longitudinais e exsudatos esbranquiçados são achados do Barrett.",v:"São da esofagite eosinofílica. Barrett = mucosa avermelhada e aveludada.",e:"T09 Q6"},
+ {p:"A ressecção de segmentos é indicada em quase todos os casos de isquemia mesentérica.",v:"Ressecção só do que já necrosou; antes disso, suporte, heparina e revascularização.",e:"T10 Q2"},
  {p:"A MASLD é definida pelo consumo abusivo de álcool.",v:"MASLD = esteatose + pelo menos um fator cardiometabólico (obesidade, DM2, HAS, dislipidemia). Substitui DHGNA.",e:"provável · aula 25/09"},
  {p:"MASH é a esteatose simples, sem inflamação.",v:"MASH (ex-EHNA) é a forma COM inflamação e lesão do hepatócito; pode evoluir para fibrose e cirrose.",e:"provável · aula 25/09"},
  {p:"A hepatite E nunca cronifica.",v:"Geralmente não, mas pode cronificar raramente em imunossuprimidos (frase nova do slide).",e:"provável · aula 25/09"},
@@ -1417,6 +1565,18 @@ divergencias:[
  {onde:"IPMN — localização",prob:"A tabela do slide coloca a IPMN em corpo e cauda. No Robbins, a IPMN predomina na cabeça; quem prefere corpo e cauda (e mulheres) é a neoplasia cística mucinosa.",como:"Se cair a tabela, responda como no slide."},
  {onde:"RCU — profundidade",prob:"Slide: “mucosa e submucosa”. No Robbins a RCU é essencialmente mucosa, atingindo a submucosa só nos casos graves.",como:"O contraste que importa é com o Crohn transmural."}
 ],
+disc:[
+ {prova:"T09 · Q10",q:"A) Liste os 3 critérios utilizados para classificar a ressecabilidade do adenocarcinoma ductal do pâncreas. B) Indique por que o prognóstico é desfavorável em alta proporção dos pacientes.",
+  r:"A) envolvimento vascular · extensão do tumor · presença de metástases. B) sintomas iniciais inespecíficos → diagnóstico tardio (só 15–20% operáveis), agressividade e reação desmoplásica.",
+  c:"A veterana respondeu assim e a professora aceitou."},
+ {prova:"T10 · Q13",q:"Liste e explique os 2 critérios que classificam um adenocarcinoma de pâncreas SEM metástase como irressecável.",
+  r:"Invasão arterial extensa (> 180° do tronco celíaco, AMS ou hepática comum) e invasão venosa extensa (oclusão completa da porta/VMS sem possibilidade de reconstrução).",
+  c:"A veterana escreveu “fixado a tecidos adjacentes” e a professora riscou, escrevendo “invasão arterial e oclusão venosa”. Ela quer os critérios VASCULARES, com o ângulo."},
+ {prova:"T11 · Q13",q:"Quatro mini-casos (A–D): indique a hipótese diagnóstica mais provável de cada um.",
+  r:"A) adenocarcinoma da cabeça do pâncreas · B) esofagite eosinofílica · C) atresia de esôfago COM fístula traqueoesofágica · D) doença de Crohn.",
+  c:"Ela descontou de quem escreveu “atresia esofágica” sem “com fístula” e corrigiu “carcinoma hepatocelular” para pâncreas."}
+],
+nunca:["Colite isquêmica","Retocolite ulcerativa","Hepatite autoimune e hepatite isquêmica","Anomalias congênitas do pâncreas (divisum, anular, ectópico)","Neoplasias pancreáticas não-ADP (TNE, IPMN, cistoadenocarcinoma)","Esofagites infecciosa, medicamentosa e cáustica"],
 anot:[
  {s:"Aula 1 · slide 9",x:"Plexo nervoso tem dois: glandular e fluxo sanguíneo · plexo mioentérico → função de peristaltismo."},
  {s:"Aula 1 · slide 20",x:"DRGE → “pelo relaxamento do esfíncter”."},
@@ -1428,6 +1588,9 @@ anot:[
  {s:"Aula 4 · slide 36",x:"Caso 4: “elastase” (exame da insuficiência exócrina)."}
 ],
 mudou:[
+ {x:"Provas T09 (verde) e T10 (laranja) decodificadas — 21 objetivas e 3 discursivas novas no banco",d:"27/09 · raio-X refeito com a reciclagem entre as três provas"},
+ {x:"Radar de pegadinhas quase dobrou, agora com as frases falsas reais da T09 e da T10",d:"27/09"},
+ {x:"Seção “Discursivas”: as três reais, com o que ela aceitou e o que riscou",d:"27/09 · duas são sobre ressecabilidade do ADP"},
  {x:"Nomenclatura: DHGNA → MASLD e EHNA → MASH, com fator de risco cardiometabólico na definição",d:"resumo, tabela e questões refeitos"},
  {x:"Hepatite E pode cronificar raramente, em imunossuprimidos",d:"corrigido o “não cronifica” e criado um caso novo"},
  {x:"Extra-hepáticas: B = poliarterite nodosa e glomerulonefrite · C = crioglobulinemia e vasculites",d:"conteúdo novo + questão"},
@@ -1494,11 +1657,13 @@ function dzr(){
   else if(S.sort==="caiu")L=L.slice().sort(function(a,b){return (b._c*10+b._q.length)-(a._c*10+a._q.length)});
   return L;
 }
-var SO={OF:0,AU:1,IN:2};Q.forEach(function(q,i){q._o=i});Q.sort(function(a,b){return (ORD[a.a]-ORD[b.a])||(SO[a.selo]-SO[b.selo])||(a._o-b._o)});
+var SO={OF:0,AU:1,IN:2},TO={T09:0,T10:1,T11:2};Q.forEach(function(q,i){q._o=i});Q.sort(function(a,b){return (ORD[a.a]-ORD[b.a])||(SO[a.selo]-SO[b.selo])||((TO[a.turma]||0)-(TO[b.turma]||0))||(a._o-b._o)});
 DZ.sort(function(a,b){return (ORD[a.a]-ORD[b.a])});
 function qbase(){return S.a==="ALL"?Q:Q.filter(function(q){return q.a===S.a})}
 function qr(){var a=qbase();if(S.qdz)a=a.filter(function(q){return (q.dz||[]).indexOf(S.qdz)>-1});
-  if(S.qf==="all")return a; if(S.qf==="CA")return a.filter(function(q){return q.tipo==="caso"});
+  if(S.qf==="all")return a;
+  if(S.qf==="CA")return a.filter(function(q){return q.tipo==="caso"||q.tipo==="discursiva"});
+  if(/^T\d/.test(S.qf))return a.filter(function(q){return q.turma===S.qf});
   return a.filter(function(q){return q.selo===S.qf})}
 function xcount(){return aks().filter(function(k){return X[k]}).reduce(function(a,k){return a+X[k].blocos.filter(function(b){return b.t==="h"}).length},0)}
 
@@ -1568,7 +1733,7 @@ function pDz(p){
   if(!L.length){p.innerHTML=tools+'<p class="empty"><b>Nada com esse termo.</b>Limpe a busca ou troque de aula.</p>'}
   else if(S.view==="tabela"){
     p.innerHTML=tools+'<div class="tbwrap"><table class="tb"><colgroup><col class="c-nm"><col class="c-ps"><col class="c-us"><col class="c-ca"></colgroup>'+
-      '<thead><tr><th>Doença / mecanismo</th><th>Pista que decide</th><th>Exame-chave</th><th>Na T11</th></tr></thead><tbody>'+
+      '<thead><tr><th>Doença / mecanismo</th><th>Pista que decide</th><th>Exame-chave</th><th>Caiu</th></tr></thead><tbody>'+
       L.map(function(d,i){
         var op=S.open===d.id;
         var r='<tr class="row'+(op?" on":"")+'" data-i="'+i+'" style="--cc:'+ac(d.a)+'">'+
@@ -1622,9 +1787,11 @@ function letra(k){return String.fromCharCode(65+k)}
 function pQ(p){
   var base=qbase();if(S.qdz)base=base.filter(function(q){return (q.dz||[]).indexOf(S.qdz)>-1});
   var L=qr();
-  var F=[["all","Todas"],["OF","Oficial T11"],["AU","Da aula"],["IN","Inédita"],["CA","Casos"]];
+  var F=[["all","Todas"],["OF","Provas dela"],["T11","T11"],["T10","T10"],["T09","T09"],["AU","Da aula"],["IN","Inéditas"],["CA","Discursivas"]];
   var head='<div class="tools"><div class="seg">'+F.map(function(f){
-      var n=f[0]==="all"?base.length:f[0]==="CA"?base.filter(function(q){return q.tipo==="caso"}).length:base.filter(function(q){return q.selo===f[0]}).length;
+      var n=f[0]==="all"?base.length:f[0]==="CA"?base.filter(function(q){return q.tipo==="caso"||q.tipo==="discursiva"}).length
+        :/^T\d/.test(f[0])?base.filter(function(q){return q.turma===f[0]}).length
+        :base.filter(function(q){return q.selo===f[0]}).length;
       return '<button data-f="'+f[0]+'" aria-pressed="'+(S.qf===f[0])+'">'+f[1]+' ('+n+')</button>'}).join("")+'</div>'+
     (S.qdz&&DBI[S.qdz]?'<button class="rv" id="clrdz" style="margin-left:4px">'+esc(DBI[S.qdz].n)+' ✕</button>':'')+
     '<span class="tnote">'+L.length+' questões</span></div>';
@@ -1634,15 +1801,18 @@ function pQ(p){
   p.querySelectorAll(".q").forEach(function(box){wireQ(box,L.filter(function(x){return x.id===box.dataset.id})[0])});
   ctxScore(null);
 }
-function selo(q){return q.tipo==="caso"&&q.selo==="IN"?'<span class="selo CA">CASO</span>':'<span class="selo '+q.selo+'">'+(q.selo==="OF"?"T11":q.selo==="AU"?"AULA":"INÉD")+'</span>'}
+function selo(q){
+  if(q.selo==="OF")return '<span class="selo OF">'+esc(q.turma||"PROVA")+'</span>';
+  if(q.selo==="AU")return '<span class="selo AU">AULA</span>';
+  return '<span class="selo '+(q.tipo==="caso"?"CA":"IN")+'">'+(q.tipo==="caso"?"CASO":"INÉD")+'</span>'}
 function qHTML(q){
   var a=S.ans[q.id], h='<div class="q" data-id="'+esc(q.id)+'" style="border-left:3px solid '+ac(q.a)+'"><div class="qh">'+selo(q)+
     '<span class="qt">'+esc(q.tema)+'</span><span>'+esc(q.prova)+'</span><span>'+esc(q.tipo)+'</span></div>'+
     '<p class="en">'+esc(q.enun)+'</p>';
-  if(q.tipo==="caso"){
+  if(q.resp){
     var rv=!!S.rev[q.id];
     h+=(rv?'':'<button class="rv">mostrar resposta</button>')+
-      '<div class="resp"'+(rv?'':' hidden')+'><b>Resposta esperada</b><div class="ra">'+esc(q.resp)+'</div>'+
+      '<div class="resp"'+(rv?'':' hidden')+'><b>'+(q.tipo==="discursiva"?"Resposta esperada (discursiva da prova)":"Resposta esperada")+'</b><div class="ra">'+esc(q.resp)+'</div>'+
       (q.why?'<div class="rw">'+esc(q.why)+'</div>':'')+'</div>'+
       '<div class="selfg"'+(rv?'':' hidden')+'><span>Você acertou?</span>'+
       '<button data-g="1" class="'+(a===1?"ok":"")+'">acertei</button><button data-g="0" class="'+(a===0?"no":"")+'">errei</button></div>';
@@ -1656,7 +1826,7 @@ function qHTML(q){
 }
 function wireQ(box,q){
   if(!q)return;
-  if(q.tipo==="caso"){
+  if(q.resp){
     var b=box.querySelector(".rv");
     if(b)b.onclick=function(){S.rev[q.id]=1;save();b.remove();box.querySelector(".resp").hidden=false;box.querySelector(".selfg").hidden=false};
     box.querySelectorAll(".selfg button").forEach(function(g){g.onclick=function(){
@@ -1672,40 +1842,50 @@ function wireQ(box,q){
     var fb=box.querySelector(".fb");fb.innerHTML='<b>'+(k===q.ans?"Certo":"Errado")+' · gabarito '+letra(q.ans)+'</b>'+esc(q.why);
     fb.hidden=false;ctxScore(q)}});
 }
-function isOk(q){var a=S.ans[q.id];return q.tipo==="caso"?a===1:a===q.ans}
+function isOk(q){var a=S.ans[q.id];return q.resp?a===1:a===q.ans}
 
 /* ---- PROVA (raio-X) ---- */
-var PSECS=[["pv0","Veredito"],["pv1","Peso por aula"],["pv2","Formato"],["pv3","Temas que caíram"],
-           ["pv4","Radar de pegadinhas"],["pv5","Divergências"],["pv6","Suas anotações"],["pv7","O que mudou"]];
+var PSECS=[["pv0","Veredito"],["pv1","Peso por aula"],["pv2","Formato por turma"],["pv3","Temas que reciclam"],
+           ["pv4","Discursivas"],["pv5","Radar de pegadinhas"],["pv6","Divergências"],["pv7","Suas anotações"],["pv8","O que mudou"]];
+var DISC=EX.disc||[], NUNCA=EX.nunca||[];
 function pesos(){return AUL.map(function(a){var o=Q.filter(function(q){return q.a===a.k&&q.selo==="OF"});
-  return {k:a.k,n:a.n,of:o.length,ob:o.filter(function(q){return q.tipo!=="caso"}).length,ca:o.filter(function(q){return q.tipo==="caso"}).length}})}
+  return {k:a.k,n:a.n,of:o.length,ob:o.filter(function(q){return !q.resp}).length,ca:o.filter(function(q){return !!q.resp}).length}})}
 function pProva(p){
   var W=pesos(),mx=Math.max.apply(null,W.map(function(w){return w.of}))||1;
   var t=S.pq.toLowerCase(),pgs=t?PEG.filter(function(x){return (x.p+" "+x.v+" "+x.e).toLowerCase().indexOf(t)>-1}):PEG;
   p.innerHTML=
-  '<section class="psec" id="pv0"><h3>Veredito em 2 minutos</h3><p class="psub">O que a prova da veterana (T11, abril/2026) mostra sobre o jeito dela de cobrar.</p>'+
+  '<section class="psec" id="pv0"><h3>Veredito em 2 minutos</h3><p class="psub">O que as três provas dela — T09, T10 e T11 — mostram sobre o jeito de cobrar.</p>'+
     '<div class="kpirow">'+KPI.map(function(k){return '<div class="kpi"><b>'+esc(k.n)+'</b><span>'+esc(k.x)+'</span></div>'}).join("")+'</div>'+
     '<ul class="rules">'+REG.map(function(r){return '<li>'+esc(r)+'</li>'}).join("")+'</ul></section>'+
-  '<section class="psec" id="pv1"><h3>Peso por aula</h3><p class="psub">Itens da T11 por aula (objetivas + casos da última questão). Empate: cada aula rendeu 4 itens — ou seja, a aula que falta vale tanto quanto as outras.</p>'+
+  '<section class="psec" id="pv1"><h3>Peso por aula</h3><p class="psub">Itens das três provas por aula (objetivas + discursivas). É a melhor aposta de onde o peso vai cair de novo.</p>'+
     W.map(function(w){return '<div class="wbar"><span class="wl"><span class="dot" style="background:'+ac(w.k)+'"></span><span class="wt">'+esc(w.n)+'</span></span>'+
       '<span class="wv"><i style="width:'+Math.round(w.of/mx*100)+'%;background:'+ac(w.k)+'"></i></span><span class="wn">'+w.of+'</span></div>'+
-      '<p class="psub" style="margin:-2px 0 6px 18px;font-size:11.5px">'+w.ob+' objetiva(s)'+(w.ca?' + '+w.ca+' caso(s)':'')+'</p>'}).join("")+'</section>'+
+      '<p class="psub" style="margin:-2px 0 6px 18px;font-size:11.5px">'+w.ob+' objetiva(s)'+(w.ca?' + '+w.ca+' caso/discursiva':'')+'</p>'}).join("")+'</section>'+
   '<section class="psec" id="pv2"><h3>Formato</h3><p class="psub">Como as questões vieram — e o que a mesma professora fez na UC13.</p>'+
     '<div class="tbwrap"><table class="ftab"><thead><tr><th>Prova</th><th>Data</th><th>Discursiva</th><th>Formatos</th></tr></thead><tbody>'+
     FMT.map(function(f){return '<tr><td class="mono"><b>'+esc(f.prova)+'</b></td><td class="mono">'+esc(f.data)+'</td><td>'+esc(f.disc)+'</td><td>'+esc(f.forma)+'</td></tr>'}).join("")+
     '</tbody></table></div></section>'+
-  '<section class="psec" id="pv3"><h3>Temas que caíram</h3><p class="psub">Cada tema da T11 com a forma em que apareceu — a mesma prova pode voltar com outra roupa.</p>'+
-    FAM.map(function(f,i){return '<div class="fam"><span class="fn">'+(i+1)+'</span><span><span class="ff">'+esc(f.f)+'</span><span class="fo">'+esc(f.onde)+' — <b>'+esc(f.forma)+'</b></span></span></div>'}).join("")+'</section>'+
-  '<section class="psec" id="pv4"><h3>Radar de pegadinhas</h3><p class="psub">'+PEG.length+' frases no formato em que ela escreve a afirmativa falsa. As marcadas T11 caíram de verdade; as outras são as trocas mais prováveis a partir dos slides.</p>'+
+  '<section class="psec" id="pv3"><h3>Temas que reciclam</h3><p class="psub">Em quantas das três provas cada tema apareceu, e em que forma. O mesmo conteúdo volta com outra roupa: caso, I–V ou “assinale a INCORRETA”.</p>'+
+    FAM.map(function(f){return '<div class="fam"><span class="fn" style="color:'+(f.n==="3/3"?"var(--no)":f.n==="2/3"?"var(--trap)":"var(--ink3)")+';font-weight:700">'+esc(f.n||"")+'</span>'+
+      '<span><span class="ff">'+esc(f.f)+'</span><span class="fo">'+esc(f.onde)+' — <b>'+esc(f.forma)+'</b></span></span></div>'}).join("")+
+    (NUNCA.length?'<p class="gsub">Nunca apareceram nas três provas</p><p class="psub">Estude por último — mas não ignore: a aula é a mesma.</p>'+
+      NUNCA.map(function(n){return '<div class="chk"><i>·</i><span>'+esc(n)+'</span></div>'}).join(""):'')+'</section>'+
+
+  '<section class="psec" id="pv4"><h3>Discursivas</h3><p class="psub">As três discursivas reais, com o que ela aceitou e o que ela riscou. Repare: duas das três são sobre ressecabilidade do adenocarcinoma de pâncreas.</p>'+
+    DISC.map(function(d){return '<div class="dv" style="border-color:var(--line);background:var(--panel2)">'+
+      '<b style="color:var(--ink)">'+esc(d.prova)+'</b><p style="color:var(--ink)">'+esc(d.q)+'</p>'+
+      '<p style="color:var(--ok)"><b style="display:inline;color:var(--ok)">Resposta esperada:</b> '+esc(d.r)+'</p>'+
+      '<p style="color:var(--ink2)">'+esc(d.c)+'</p></div>'}).join("")+'</section>'+
+  '<section class="psec" id="pv5"><h3>Radar de pegadinhas</h3><p class="psub">'+PEG.length+' frases no formato em que ela escreve a alternativa falsa. As marcadas com T09, T10 ou T11 caíram de verdade; as outras são as trocas mais prováveis a partir dos slides.</p>'+
     '<div class="tools"><div class="srch" style="max-width:320px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" style="color:var(--ink3)">'+
     '<circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4 14 14"/></svg><input id="pqi" type="search" placeholder="filtrar pegadinha…" value="'+esc(S.pq)+'"></div>'+
     '<span class="tnote">'+pgs.length+' de '+PEG.length+'</span></div>'+
     (pgs.length?pgs.map(function(x){return '<div class="pg"><div class="pgp">✗ '+esc(x.p)+'</div><div class="pgv">'+esc(x.v)+'</div><div class="pge">'+esc(x.e)+'</div></div>'}).join(""):'<p class="empty"><b>Nada com esse termo.</b></p>')+'</section>'+
-  '<section class="psec" id="pv5"><h3>Divergências</h3><p class="psub">Onde as fontes não batem — e o que responder na prova dela.</p>'+
+  '<section class="psec" id="pv6"><h3>Divergências</h3><p class="psub">Onde as fontes não batem — e o que responder na prova dela.</p>'+
     DIV.map(function(d){return '<div class="dv"><b>'+esc(d.onde)+'</b><p>'+esc(d.prob)+'</p><p>→ '+esc(d.como)+'</p></div>'}).join("")+'</section>'+
-  '<section class="psec" id="pv6"><h3>Suas anotações nos slides</h3><p class="psub">O que você escreveu durante as aulas — é o que ela falou e não estava no slide.</p>'+
+  '<section class="psec" id="pv7"><h3>Suas anotações nos slides</h3><p class="psub">O que você escreveu durante as aulas — é o que ela falou e não estava no slide.</p>'+
     ANOT.map(function(a){return '<div class="frase"><span class="ts">'+esc(a.s.replace("Aula ","A").replace(" · slide ","·s"))+'</span><span class="fx">'+esc(a.x)+'</span></div>'}).join("")+'</section>'+
-  '<section class="psec" id="pv7"><h3>O que mudou com a aula de 25/09</h3><p class="psub">A aula de fígado saiu e o material foi conferido frase por frase com os slides. Estas são as diferenças em relação à versão provisória, feita a partir do resumo da veterana.</p>'+
+  '<section class="psec" id="pv8"><h3>O que mudou</h3><p class="psub">O histórico das atualizações deste material: o que entrou com a aula de fígado (25/09) e com as provas T09 e T10 (27/09).</p>'+
     MUDOU.map(function(f){return '<div class="chk"><i>✓</i><span>'+esc(f.x)+' <em style="font-style:normal;color:var(--ink3)">— '+esc(f.d)+'</em></span></div>'}).join("")+'</section>';
   var pi=document.getElementById("pqi");
   if(pi)pi.oninput=function(){S.pq=pi.value;var sc=p.scrollTop;pProva(p);p.scrollTop=sc;var n=document.getElementById("pqi");if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};
@@ -1714,10 +1894,10 @@ function pProva(p){
   ctxProva();
 }
 function ctxProva(){
-  var W=pesos(),counts=[KPI.length,W.length,FMT.length,FAM.length,PEG.length,DIV.length,ANOT.length,MUDOU.length];
+  var W=pesos(),counts=[KPI.length,W.length,FMT.length,FAM.length,DISC.length,PEG.length,DIV.length,ANOT.length,MUDOU.length];
   cset('<p class="cl">O raio-X da prova</p><div class="cbox" style="padding:6px 4px">'+PSECS.map(function(x,i){
     return '<button class="cidx'+(i===S.psec?" on":"")+'" data-g="'+x[0]+'"><span>'+esc(x[1])+'</span><em>'+counts[i]+'</em></button>'}).join("")+'</div>'+
-    '<div class="trap"><b>Como usar</b>Veredito e peso por aula antes de abrir o resumo. O radar de pegadinhas é a última leitura na véspera — ela escreve a falsa trocando uma palavra do slide.</div>');
+    '<div class="trap"><b>Como usar</b>Comece pelos temas que reciclam e pelas discursivas — é onde a prova se repete. O radar de pegadinhas é a última leitura na véspera: ela escreve a falsa trocando uma palavra do slide.</div>');
   document.getElementById("ctx").querySelectorAll(".cidx").forEach(function(b){b.onclick=function(){
     var n=document.getElementById(b.dataset.g),p=document.getElementById("pane");if(n)p.scrollTop=n.offsetTop-8}});
 }
@@ -1750,7 +1930,7 @@ function ctxRank(){
   var L=dzr().filter(function(d){return d._q.length}).sort(function(a,b){return (b._c*10+b._q.length)-(a._c*10+a._q.length)}).slice(0,8);
   var mx=L.length?Math.max(1,L[0]._q.length):1;
   cset('<p class="cl">O que ela mais cobra</p>'+
-    (L.length?'<div class="cbox"><h4>Na T11 e nos casos da aula <em>'+L.length+'</em></h4>'+L.map(function(d){
+    (L.length?'<div class="cbox"><h4>Nas 3 provas dela <em>'+L.length+'</em></h4>'+L.map(function(d){
       return '<button class="rank" data-d="'+d.id+'"><span class="rt">'+esc(d.n)+'</span><span class="track"><i style="width:'+Math.round(d._q.length/mx*100)+'%;background:'+ac(d.a)+'"></i></span>'+
       '<span class="rn">'+d._q.length+'×</span></button>'}).join("")+'</div>':'<p class="empty"><b>Sem histórico nesta seleção.</b></p>')+
     '<div class="trap"><b>Como ela pede o diagnóstico</b>Na questão de casos vale o nome completo e específico: “atresia de esôfago com fístula traqueoesofágica”, “adenocarcinoma ductal da cabeça do pâncreas”.</div>');
