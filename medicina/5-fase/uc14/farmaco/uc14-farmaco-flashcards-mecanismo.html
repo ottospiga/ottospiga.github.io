@@ -245,8 +245,9 @@ const CARDS=[
 {c:"dis",q:"Por que o IBP se acumula no canalículo da célula parietal?",a:"Protona no ácido, fica ionizado e não sai",s:"ibp"},
 {c:"dis",q:"IBP ativado liga-se a quê na H⁺/K⁺-ATPase?",a:"Grupos sulfidrila (cisteína) — ligação covalente",s:"ibp"},
 {c:"dis",q:"IBP inibe o HCl conforme o estímulo?",a:"Não — independente do estímulo (etapa final)",w:"Com ou sem refeição.",s:"ibp"},
-{c:"dis",q:"IBP precisa de bomba ativa: tomar quanto tempo antes da refeição?",a:"60 min antes, em jejum",t:"\"2 horas antes da refeição\"",s:"ibp_tempo"},
-{c:"dis",q:"Omeprazol/esomeprazol — enzima da interação com clopidogrel?",a:"CYP2C19",w:"O clopidogrel não é ativado → risco trombótico.",t:"\"uso crônico: CYPc17 (progesterona)\"",n:"No slide dela, CYP17 aparece na cimetidina (ginecomastia), não nos IBPs.",s:"ibp_cyp"},
+{c:"dis",q:"IBP precisa de bomba ativa: tomar quanto tempo antes da refeição?",a:"~1 h a 1h30 antes de uma refeição grande",w:"🎧 Ela critica o \"jejum ao acordar\" para todos (ex.: às 10 h para o almoço). Slide: 60 min antes, sem alimento.",t:"\"2 horas antes da refeição\"",s:"ibp_tempo"},
+{c:"dis",q:"Omeprazol/esomeprazol — enzima da interação com clopidogrel?",a:"CYP2C19",w:"O clopidogrel não é ativado → risco trombótico.",s:"ibp_cyp"},
+{c:"dis",q:"Omeprazol/esomeprazol crônico → ginecomastia e ↓ libido: qual enzima?",a:"CYP17 (↑ progesterona, ↓ testosterona)",w:"🎧 25/09: efeito do omeprazol e do esomeprazol no uso crônico.",s:"ibp_cyp17"},
 {c:"dis",q:"Esomeprazol — o que é?",a:"Enantiômero S isolado do omeprazol",s:"esome"},
 {c:"dis",q:"Vonoprazana (P-CAB) — mecanismo?",a:"Bloqueio reversível da bomba, competindo com o K⁺",w:"Sem K⁺ entrando, o H⁺ não sai para a luz.",s:"vono"},
 {c:"dis",q:"Vonoprazana precisa de ativação ácida?",a:"Não — pode tomar a qualquer hora",s:"vono"},
@@ -256,15 +257,15 @@ const CARDS=[
 {c:"dis",q:"Antiácido de dissociação LENTA (dá constipação)?",a:"Hidróxido de alumínio",s:"mgal"},
 {c:"dis",q:"Trissilicato de magnésio — mecanismo?",a:"Neutraliza + forma gel de sílica coloidal protetor",w:"Efeito prolongado; adsorve pepsina.",s:"triss"},
 {c:"dis",q:"Bicarbonato de sódio — mecanismo?",a:"Base forte absorvível, dissociação muito rápida",w:"Risco de alcalose (local e sistêmica).",s:"bicarb"},
-{c:"dis",q:"Misoprostol — mecanismo?",a:"Análogo de PGE₁ (agonista do receptor de PGE)",w:"Slide: \"agonista de receptores PGE\".",f:"\"análogo PGE2\"",t:"\"análoga da PGE2\"",s:"miso"},
+{c:"dis",q:"Misoprostol — mecanismo?",a:"Agonista de receptores de PGE (análogo de prostaglandina E)",w:"É a frase do slide. Na aula ela disse \"parecido com a PGE2\"; o Katzung diz PGE₁.",s:"miso"},
 {c:"dis",q:"Misoprostol — dois efeitos na mucosa?",a:"↓ HCl + ↑ muco e bicarbonato",w:"↓ HCl via ↓ AMPc. Úlcera por AINE; abortivo.",s:"miso"},
-{c:"dis",q:"Misoprostol ↑ muco e bicarbonato em qual célula?",a:"Células epiteliais superficiais (mucosas)",w:"Célula principal secreta pepsinogênio.",t:"\"estimula células principais a produzir muco e bicarbonato\"",s:"miso"},
+{c:"dis",q:"Misoprostol estimula muco e bicarbonato — de que células, pela fisiologia?",a:"Epiteliais superficiais (mucosas)",w:"Na aula de 25/09 ela falou \"células principais\" (a tabela da veterana também). Célula principal secreta pepsinogênio.",s:"miso"},
 {c:"dis",q:"Quelato de bismuto na úlcera — mecanismo?",a:"Adsorve pepsina + ↑ PG, muco e bicarbonato",w:"Citotóxico para H. pylori e impede a aderência dele à mucosa.",s:"bismuto_u"},
 {c:"dis",q:"Sucralfato — composição?",a:"Sacarose sulfatada + hidróxido de alumínio",s:"sucra"},
 {c:"dis",q:"Sucralfato — mecanismo?",a:"No ácido vira pasta que adere à úlcera (~6 h)",w:"Tomar 1 h ANTES da refeição. EA: constipação.",s:"sucra"},
 {c:"dis",q:"Sucralfato — além da barreira, o que estimula?",a:"Prostaglandinas e bicarbonato da mucosa",s:"sucra"},
-{c:"dis",q:"Espinheira-santa — mecanismo?",a:"↓ secreção ácida + ↑ muco/bicarbonato",w:"Não trata úlcera nem H. pylori (T7 Q15).",s:"espinheira"},
-{c:"dis",q:"Suco de couve — mecanismo gastroprotetor?",a:"↑ PGE2 + mucilagem protetora",w:"Slide (fitoterapia): ⊣ H2, ↓ ação da gastrina, antioxidante.",s:"couve"},
+{c:"dis",q:"Espinheira-santa — mecanismo?",a:"Bloqueia H2 (↓ ácido) + ↑ muco",w:"Chá das folhas; dispepsia leve. Não trata úlcera nem H. pylori (T7 Q15).",s:"espinheira"},
+{c:"dis",q:"Suco de couve — mecanismo gastroprotetor?",a:"Mucilagens revestem o estômago e ↑ muco",w:"🎧 Triturar e COAR; sem coar, a celulose (insolúvel) ajuda na constipação.",s:"couve"},
 {c:"dis",r:1,q:"Supressor ácido que compete com o K⁺ na bomba?",a:"Vonoprazana",s:"vono"},
 {c:"dis",r:1,q:"Citoprotetor análogo de prostaglandina?",a:"Misoprostol",s:"miso"}
 ];
@@ -332,19 +333,20 @@ boldo:{v:"Colerético/colagogo: alcaloides ↑ secreção de sais biliares; NÃO
 // ---- Dispepsia
 h2:{v:"Antagonista competitivo H2 → ↓ AMPc; basal e pós-prandial, linear e dose-dependente; >50% por 10 h.",k:"Competitivo no H2: ↓ secreção basal e pós-refeição, linear e dose-dependente; mais forte à noite (>90% da noturna)."},
 ibp:{v:"Pró-fármaco ativado no ácido do canalículo → sulfenamida → ligação covalente irreversível na H⁺/K⁺-ATPase; >90% em 24 h.",k:"Pró-fármaco que se acumula no canalículo ácido, vira sulfenamida e liga cisteínas da bomba; inibe 90–98% da secreção de 24 h."},
-ibp_tempo:{v:"60 min ANTES da refeição, sem alimento; efeito pleno em 3–4 dias.",k:"Tomar ~1 h antes da refeição (em geral o café da manhã), quando as bombas estão ativas."},
-ibp_cyp:{v:"CYP2C19 + CYP3A4; omeprazol e esomeprazol inibem forte (clopidogrel!); pantoprazol = menor interação.",k:"Omeprazol e esomeprazol podem ↓ a ativação do clopidogrel via CYP2C19."},
+ibp_tempo:{v:"Slide: 60 min ANTES da refeição, sem alimento. 🎧 25/09: 1 h a 1h30 antes de uma refeição grande, com os canalículos cheios de H⁺.",k:"Tomar ~1 h antes da refeição (em geral o café da manhã), quando as bombas estão ativas."},
+ibp_cyp:{v:"CYP2C19 + CYP3A4; 🎧 só omeprazol e esomeprazol inibem forte (clopidogrel!); pantoprazol = menor interação.",k:"Omeprazol e esomeprazol podem ↓ a ativação do clopidogrel via CYP2C19."},
+ibp_cyp17:{v:"🎧 25/09: omeprazol e esomeprazol inibem a CYP17 → ↑ progesterona, ↓ testosterona/estrogênio → ↓ libido, ginecomastia, distúrbio menstrual.",k:"Não descreve CYP17 para os IBPs; ginecomastia e impotência aparecem com a cimetidina (efeito antiandrogênico).",d:1},
 esome:{v:"Enantiômero S puro (o mais ativo) → dose menor.",k:"Esomeprazol = isômero S do omeprazol."},
 vono:{v:"PCAB: inibe a bomba de forma reversível, competindo com K⁺; sem ativação; pode ser com a refeição; máx 8 semanas.",k:null,kn:"Fármaco recente, sem destaque no cap. 62 — vale o slide."},
 antiacido:{v:"\"Neutralizam o ácido gástrico elevando o pH\"; não inibem secreção; 1 h DEPOIS da refeição.",k:"Bases fracas que reagem com o HCl formando sal + água; podem estimular PG da mucosa."},
 mgal:{v:"Mg(OH)₂ → MgCl₂, reação RÁPIDA (diarreia). Al(OH)₃ → AlCl₃, reação LENTA (constipação).",k:"Mg(OH)₂ e Al(OH)₃ reagem os DOIS lentamente (sem gás); Mg → diarreia, Al → constipação — por isso vêm juntos.",d:1},
 triss:{v:"Forma cloreto de Mg + sílica coloidal → efeito prolongado + adsorve pepsina (com metilcelulose: Kolantyl®).",k:null},
 bicarb:{v:"Base forte absorvível, dissociação muito rápida; risco de alcalose; CI em HAS e IR.",k:"Reage rápido com o HCl → CO₂ (eructação) + NaCl; absorvido → alcalose metabólica e sobrecarga de Na⁺."},
-miso:{v:"\"Agonista de receptores PGE\": ↓ HCl (↓ AMPc da histamina), ↑ muco e bicarbonato, ↑ fluxo da mucosa.",k:"Análogo metilado de PGE₁: ↓ AMPc estimulado pela histamina na parietal; ↑ muco, bicarbonato e fluxo sanguíneo."},
+miso:{v:"Slide: \"agonista de receptores PGE\" — ↓ HCl (↓ AMPc da histamina), ↑ muco e bicarbonato, ↑ fluxo. 🎧 25/09: \"parecido com a PGE2\", agindo nas \"células principais\".",k:"Análogo metilado de PGE₁: ↓ AMPc estimulado pela histamina na parietal; ↑ muco, bicarbonato e fluxo sanguíneo.",d:1},
 bismuto_u:{v:"Adsorve pepsina; ↑ PG, muco e bicarbonato; tóxico para o H. pylori e impede a aderência dele.",k:"Recobre úlceras (barreira contra ácido e pepsina); pode ↑ PG, muco e bicarbonato; ação antimicrobiana."},
 sucra:{v:"Sacarose + Al(OH)₃: pasta que adere à úlcera ~6 h; ↑ PG e bicarbonato; 1 h ANTES da refeição.",k:"Sacarose sulfatada + Al(OH)₃: no ácido vira pasta que adere à úlcera por até 6 h; ↑ PG e bicarbonato."},
-espinheira:{v:"↓ secreção ácida + ↑ muco/bicarbonato; gastrite leve e dispepsia, nunca úlcera nem H. pylori.",k:null},
-couve:{v:"Fitoterapia: ⊣ H2, ↓ ação da gastrina, antioxidante/protetor (Brassica oleracea).",k:null}
+espinheira:{v:"🎧 Bloqueia H2 (↓ ácido) e ↑ muco; protocolo do MS para dispepsia leve a moderada; ~2 xícaras/dia, resposta em 2–3 dias; nunca úlcera nem H. pylori.",k:null},
+couve:{v:"🎧 25/09: triturar e coar → as mucilagens revestem o estômago e ↑ muco. Slide: ⊣ H2, ↓ ação da gastrina, antioxidante.",k:null}
 };
 
 let filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],virado=false;

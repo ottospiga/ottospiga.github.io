@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Questões ABCD Farmaco UC14</title>
+<style>
+  /* Layout: coluna única estreita, mesmo visual do deck de flashcards da UC14 (teal, chips com contagem) */
+  :root{
+    --bg:#f2f6f7;--card:#ffffff;--ink:#16232b;--muted:#566b76;--line:#dde6ea;
+    --accent:#0e7490;--accent-soft:#dff1f6;--on-accent:#ffffff;
+    --ok:#15803d;--ok-soft:#e3f7e9;--bad:#b91c1c;--bad-soft:#fdecec;
+    --warn:#9a4a07;--warn-soft:#fff3dc;--warn-line:#f3c98b;--k:#7c3aed;
+    --hint:#9fb0b8;--shadow:rgba(15,40,60,.07);--sel:#e9f4f7;
+    --c-dia:#0e7490;--c-con:#a16207;--c-eme:#6d28d9;--c-hep:#15803d;--c-dis:#be123c;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e171b;--card:#15232a;--ink:#e2ecef;--muted:#93a8b2;--line:#25363e;
+      --accent:#38b2cc;--accent-soft:#12343d;--on-accent:#06181d;
+      --ok:#4ade80;--ok-soft:#12301e;--bad:#f87171;--bad-soft:#3a1718;
+      --warn:#fbbf24;--warn-soft:#33260b;--warn-line:#6b4d12;--k:#b79cff;
+      --hint:#5f7580;--shadow:rgba(0,0,0,.35);--sel:#18323a;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e171b;--card:#15232a;--ink:#e2ecef;--muted:#93a8b2;--line:#25363e;
+    --accent:#38b2cc;--accent-soft:#12343d;--on-accent:#06181d;
+    --ok:#4ade80;--ok-soft:#12301e;--bad:#f87171;--bad-soft:#3a1718;
+    --warn:#fbbf24;--warn-soft:#33260b;--warn-line:#6b4d12;--k:#b79cff;
+    --hint:#5f7580;--shadow:rgba(0,0,0,.35);--sel:#18323a;
+    color-scheme:dark;
+  }
+  [hidden]{display:none!important}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.45;padding-inline:16px}
+  .wrap{max-width:640px;margin:0 auto;padding-block:14px 40px}
+  header{text-align:center;padding-top:6px}
+  header h1{font-size:18px;margin:0;text-wrap:balance}
+  header .sub{color:var(--muted);font-size:12.5px;margin-top:3px}
+  .modes{display:flex;justify-content:center;margin:12px 0 4px}
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;background:var(--card);padding:3px;gap:3px}
+  .seg button{border:0;background:transparent;color:var(--muted);font:600 13px var(--font);padding:6px 14px;border-radius:999px;cursor:pointer}
+  .seg button.on{background:var(--accent);color:var(--on-accent)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+  .chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font:600 13px var(--font);cursor:pointer;color:var(--muted)}
+  .chip .n{font-variant-numeric:tabular-nums;opacity:.75;font-weight:500}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+  .chip.errchip{color:var(--bad)} .chip.errchip.on{background:var(--bad);border-color:var(--bad);color:var(--card)}
+  .simnote{text-align:center;color:var(--muted);font-size:13px;margin:10px auto;max-width:460px}
+  .bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin:2px 2px 8px;font-variant-numeric:tabular-nums}
+  .bar b{color:var(--ink)}
+  .prog{height:3px;background:var(--line);border-radius:3px;margin:0 2px 10px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+  #qcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;box-shadow:0 2px 10px var(--shadow)}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 9px;border-radius:6px;color:#fff}
+  .tag{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+  .tag.caiu{color:var(--accent);border-color:var(--accent)}
+  .tag.aula{color:var(--warn);border-color:var(--warn-line)}
+  .tag.katz{color:var(--k);border-color:var(--k)}
+  #stem{font-size:16.5px;font-weight:650;margin:0 0 12px;text-wrap:pretty}
+  #opts{display:grid;gap:8px}
+  .opt{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;text-align:left;width:100%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;font:15px/1.4 var(--font);cursor:pointer}
+  .opt>*{min-width:0}
+  .opt .L{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--muted)}
+  .opt:hover:not([disabled]){border-color:var(--accent)}
+  .opt.sel{border-color:var(--accent);background:var(--sel)} .opt.sel .L{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+  .opt.ok{border-color:var(--ok);background:var(--ok-soft)} .opt.ok .L{background:var(--ok);border-color:var(--ok);color:var(--card)}
+  .opt.bad{border-color:var(--bad);background:var(--bad-soft)} .opt.bad .L{background:var(--bad);border-color:var(--bad);color:var(--card)}
+  .opt[disabled]{cursor:default}
+  .opt .why{display:block;margin-top:5px;font-size:13px;color:var(--muted)}
+  .opt.ok .why{color:var(--ok)} .opt.bad .why{color:var(--bad)}
+  .next{display:flex;justify-content:flex-end;margin-top:12px;gap:8px}
+  .btn{border:none;border-radius:12px;padding:11px 18px;font:700 15px var(--font);cursor:pointer;background:var(--accent);color:var(--on-accent)}
+  .btn.sec{background:var(--accent-soft);color:var(--accent)}
+  .btn:disabled{opacity:.45;cursor:default}
+  .chip:focus-visible,.btn:focus-visible,.opt:focus-visible,.seg button:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+  #fim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 18px;text-align:center}
+  #fim h2{margin:0 0 6px;font-size:21px}
+  #fimTexto{color:var(--muted);font-size:14.5px}
+  .bysp{display:grid;gap:6px;margin:14px auto 4px;max-width:360px;text-align:left;font-size:13.5px}
+  .bysp .row{display:grid;grid-template-columns:1fr auto;gap:8px;font-variant-numeric:tabular-nums}
+  .bysp .row b{font-weight:700}
+  #fim .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  #review{margin-top:14px;display:grid;gap:10px;text-align:left}
+  .rv{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px}
+  .rv.ok{border-color:var(--ok)} .rv.bad{border-color:var(--bad)}
+  .rv .rq{font-weight:650;margin-bottom:6px}
+  .rv .ra{color:var(--muted)} .rv .ra b{color:var(--ink)}
+  .foot{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;line-height:1.5}
+  @media (prefers-reduced-motion: reduce){.prog i{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Questões A–D · Farmaco UC14</h1>
+    <div class="sub">No formato da prova da Vânia, com o porquê de cada alternativa · teclas 1–4 escolhem, Enter avança</div>
+  </header>
+
+  <div class="modes"><div class="seg" role="tablist" aria-label="Modo">
+    <button type="button" id="mTreino" class="on" role="tab" aria-selected="true">Treino</button>
+    <button type="button" id="mSim" role="tab" aria-selected="false">Simulado (14)</button>
+  </div></div>
+
+  <div class="chips" id="chips" role="toolbar" aria-label="Filtrar questões"></div>
+  <div class="simnote" id="simnote" hidden>14 questões sorteadas com o peso da prova dela (4 dispepsia · 4 êmese · 3 constipação · 2 diarreia · 1 hepato). Sem correção até o fim; cada questão vale 0,43, como na T11.</div>
+
+  <div class="bar"><span>Questão <b id="pos">–</b></span><span id="score">✅ <b id="nOk">0</b> · ❌ <b id="nErr">0</b></span></div>
+  <div class="prog"><i id="progBar"></i></div>
+
+  <div id="qcard">
+    <div class="badges"><span class="badge" id="bSp"></span><span class="tag" id="bTag"></span></div>
+    <p id="stem"></p>
+    <div id="opts" role="group" aria-label="Alternativas"></div>
+    <div class="next"><button type="button" class="btn" id="btnNext" disabled>Próxima →</button></div>
+  </div>
+
+  <div id="fim" hidden>
+    <h2 id="fimTitulo"></h2>
+    <div id="fimTexto"></div>
+    <div class="bysp" id="bysp"></div>
+    <div class="btns"><button type="button" class="btn" id="btnErradas">Refazer as que errei</button><button type="button" class="btn sec" id="btnReiniciar">Recomeçar</button></div>
+    <div id="review"></div>
+  </div>
+
+  <div class="foot">Fontes: provas T4–T11, PM e atividades (selo <b>já caiu</b>), aulas gravadas de 04/09, 19/09 e 25/09 (selo <b>aula</b>) e Katzung cap. 62 (selo <b>Katzung</b>).<br>As alternativas são embaralhadas a cada vez. Cimetidina ficou de fora (ela disse que não cobra). As erradas ficam salvas neste navegador.</div>
+</div>
+
+<script>
+// Banco ABCD — Farmaco UC14 (Vânia). sp: dia | con | eme | hep | dis
+// tag: caiu (ref = prova de origem) · aula (dito em aula, ainda não visto em prova) · katz (frase do Katzung, estilo T11)
+// o: [texto, 1 = correta, comentário curto]. Alternativas com tamanho parecido e erro em uma ou duas palavras, como nas provas dela.
+const SPS={
+  dia:{n:"Diarreia & DII",cor:"var(--c-dia)"},
+  con:{n:"Constipação",cor:"var(--c-con)"},
+  eme:{n:"Êmese",cor:"var(--c-eme)"},
+  hep:{n:"Hepato & pâncreas",cor:"var(--c-hep)"},
+  dis:{n:"Dispepsia",cor:"var(--c-dis)"}
+};
+const QS=[
+// ================= SP4 · DISPEPSIA =================
+{id:"d01",sp:"dis",tag:"caiu",ref:"T11 Q1 · T4 Q8",q:"Sobre os IBPs, avalie as sentenças e assinale a correta.",o:[
+["O omeprazol vem em cápsula de revestimento entérico porque se degrada em pH baixo; sua ativação depende de H⁺ nos canalículos da célula parietal.",1,"Frase da T11 Q1 (a correta). Ativação = protonação no canalículo → sulfenamida."],
+["O omeprazol deve ser tomado 1 h antes da refeição porque o alimento reduz a sua biodisponibilidade e a absorção no duodeno.",0,"O horário serve para a bomba estar ativa e cheia de H⁺, não para a biodisponibilidade (T4 Q8-I)."],
+["Os IBPs inibem a bomba H⁺/K⁺-ATPase de forma reversível, competindo com o potássio, e por isso podem ser tomados em qualquer horário.",0,"Isso é a vonoprazana (P-CAB). IBP = ligação covalente, irreversível."],
+["Os IBPs reduzem o sangramento da úlcera por AINE porque inibem a secreção ácida e, ao mesmo tempo, aumentam a secreção de muco e bicarbonato.",0,"IBP só suprime ácido. Muco e bicarbonato = misoprostol, bismuto, sucralfato (T11 Q1-d)."]]},
+{id:"d02",sp:"dis",tag:"caiu",ref:"T11 Q2 · T7 QD5",q:"Sobre os efeitos adversos do uso crônico de IBP, assinale a correta.",o:[
+["A supressão ácida reduz a secreção do fator intrínseco pela célula parietal, diminuindo a absorção de vitamina B12 no íleo.",1,"Correção que ela fez na T11 Q2: é SECREÇÃO do fator intrínseco e absorção no ÍLEO."],
+["A supressão ácida impede a ativação do fator intrínseco, proteína necessária para a absorção da vitamina B12 no cólon.",0,"Duas palavras erradas, as da T11: 'ativação' (é secreção) e 'cólon' (é íleo)."],
+["A hipocloridria favorece a oxidação do ferro a Fe³⁺, a forma mais bem absorvida, e por isso reduz a anemia ferropriva.",0,"Absorve-se Fe²⁺ (ferroso); o ácido mantém o ferro reduzido (por isso ferro com suco de laranja)."],
+["O risco de fratura decorre do aumento da atividade osteoblástica causado diretamente pelo IBP no tecido ósseo.",0,"↓ absorção de Ca → hipocalcemia → ↑ PTH → ↑ reabsorção óssea."]]},
+{id:"d03",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Paciente começou omeprazol há duas semanas e se queixa de dor e cãibra na panturrilha. Qual a explicação mais provável?",o:[
+["Menor absorção de magnésio, que depende de ambiente ácido",1,"🎧 É o efeito que aparece mais rápido: mialgia e fraqueza muscular."],
+["Hipercalcemia causada pelo aumento do PTH",0,"O cálcio cai (hipocalcemia), e isso é efeito crônico."],
+["Deficiência de triptofano por má digestão das proteínas da dieta",0,"Triptofano → ansiedade, depressão e insônia, a longo prazo."],
+["Inibição da CYP2C19 com acúmulo do omeprazol",0,"CYP2C19 explica a interação com o clopidogrel, não a mialgia."]]},
+{id:"d04",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Uso crônico de IBP associado a ansiedade, depressão e insônia. Qual o mecanismo explicado em aula?",o:[
+["Menos pepsina → menor absorção de triptofano → ↓ serotonina e melatonina",1,"🎧 Triptofano é essencial e precursor da serotonina, que vira melatonina."],
+["Inibição da CYP17 → acúmulo de progesterona e ↓ serotonina no SNC",0,"CYP17 explica ginecomastia e ↓ libido."],
+["Hipergastrinemia → estímulo de receptores CCK-B centrais e insônia",0,"Hipergastrinemia = risco de tumor, não de humor."],
+["Menor absorção de magnésio → hiperexcitabilidade neuronal e ansiedade",0,"Mg explica a mialgia."]]},
+{id:"d05",sp:"dis",tag:"caiu",ref:"T7 Q1 · T6 Q11 · T8 QD2",q:"Paciente pós-IAM em uso de clopidogrel precisa de supressor ácido. Assinale a correta.",o:[
+["Omeprazol e esomeprazol inibem a CYP2C19 e impedem a bioativação do clopidogrel, aumentando o risco trombótico.",1,"Alternativas mais seguras: pantoprazol ou famotidina."],
+["Omeprazol e esomeprazol inibem a CYP2C9 e potencializam a bioativação do clopidogrel, aumentando o risco hemorrágico.",0,"'2C9' foi a pegadinha da T7 Q1; e o efeito é o oposto (bloqueia a ativação)."],
+["Omeprazol e esomeprazol induzem a CYP2C19 e aceleram a eliminação do clopidogrel, reduzindo o efeito antiagregante.",0,"Eles INIBEM a CYP2C19; o clopidogrel é pró-fármaco e deixa de ser ativado."],
+["O esomeprazol é a alternativa segura por ser o enantiômero S, que não interage com a CYP2C19 nem com o clopidogrel.",0,"Esomeprazol também inibe forte a CYP2C19."]]},
+{id:"d06",sp:"dis",tag:"aula",ref:"aula 25/09 · T6 Q13-V",q:"Homem usa omeprazol há 2 anos e apresenta ginecomastia e redução da libido. Segundo a aula, o mecanismo é:",o:[
+["Inibição da CYP17 → acúmulo de progesterona e ↓ testosterona",1,"🎧 'É mais pelo omeprazol e esomeprazol, por causa da inibição da CYP17.' (O Katzung só cita ginecomastia com a cimetidina.)"],
+["Bloqueio D2 na adeno-hipófise → ↑ prolactina e ginecomastia",0,"Esse é o mecanismo da domperidona/metoclopramida."],
+["Inibição da CYP2C19 → ↓ metabolismo do estradiol e da progesterona",0,"A CYP2C19 é a do clopidogrel."],
+["Hipergastrinemia → proliferação do tecido mamário",0,"Gastrina estimula proliferação no TGI (tumores), não na mama."]]},
+{id:"d07",sp:"dis",tag:"caiu",ref:"T11 Q2-d · T5 Q9",q:"Sobre a hipergastrinemia no uso de IBP, assinale a correta.",o:[
+["As células G percebem o pH alto e secretam mais gastrina, que também estimula proliferação celular e eleva o risco de tumores.",1,"🎧 'As células não sabem do bloqueio, só veem que o pH está bom.'"],
+["É menos frequente e menos intensa com os IBPs do que com os antagonistas H2, pois os IBPs preservam a secreção basal.",0,"É o contrário: mais frequente e mais grave com IBP."],
+["Ao suspender o IBP, a hipergastrinemia leva a hipocloridria rebote, que pode durar semanas após o tratamento.",0,"O rebote é HIPERsecreção ácida."],
+["É um efeito tóxico direto do omeprazol sobre as células G, sem relação com a elevação do pH gástrico.",0,"É compensação ao pH elevado."]]},
+{id:"d08",sp:"dis",tag:"caiu",ref:"T11 Q3-b · T7 QD2",q:"Por que 10 mg de esomeprazol fazem o mesmo efeito que 20 mg de omeprazol?",o:[
+["Porque é o enantiômero S puro, que se encaixa melhor na bomba; na mistura racêmica o R atrapalha o S.",1,"🎧 Mesmo mecanismo, muda a potência. O dexlansoprazol é o mesmo raciocínio."],
+["Porque se liga à bomba de forma reversível e mais rápida, sem depender da protonação no canalículo.",0,"Todos os IBPs ligam de forma covalente e irreversível."],
+["Porque já é um fármaco ativo e não precisa ser convertido em sulfenamida no meio ácido.",0,"Todos os IBPs são pró-fármacos."],
+["Porque não é metabolizado pela CYP2C19 e por isso alcança concentrações mais altas.",0,"É inibidor forte da CYP2C19, igual ao omeprazol."]]},
+{id:"d09",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Qual IBP a Vânia descreveu como de menor interação pela CYP, mais estável no meio ácido e que se acumula na célula parietal mesmo fora do horário ideal?",o:[
+["Pantoprazol",1,"Também é boa opção com clopidogrel."],
+["Esomeprazol",0,"Mais potente, mas inibe forte a CYP2C19."],
+["Omeprazol",0,"Inibidor forte de CYP2C19 e CYP3A4."],
+["Lansoprazol",0,"Não foi o exemplo dela."]]},
+{id:"d10",sp:"dis",tag:"aula",ref:"aula 25/09 · slide",q:"A Vânia criticou o hábito de tomar omeprazol em jejum logo ao acordar. Qual foi a orientação dela?",o:[
+["Tomar 1 h a 1h30 antes de uma refeição grande, com a bomba cheia de H⁺",1,"🎧 Ex.: às 10 h para o almoço. O slide fala em 60 min antes, sem alimento."],
+["Tomar junto com a refeição, para proteger a mucosa gástrica",0,"IBP não protege: suprime ácido e precisa da bomba ativa."],
+["Tomar ao deitar, para coincidir com o pico noturno de secreção de histamina",0,"Essa é a lógica do anti-H2 (famotidina ao deitar)."],
+["Tomar 1 a 2 h depois da refeição, longe dos alimentos",0,"Isso é o antiácido."]]},
+{id:"d11",sp:"dis",tag:"aula",ref:"aula 25/09 · T11 Q1",q:"Por que a cápsula de omeprazol precisa de revestimento entérico?",o:[
+["No estômago ele seria ionizado e degradado, e molécula ionizada não é absorvida",1,"🎧 O polímero só abre em pH mais básico, no intestino."],
+["Para liberar o fármaco diretamente no canalículo da célula parietal do fundo",0,"Ele é absorvido no intestino e chega à parietal pelo sangue."],
+["Para evitar o metabolismo de primeira passagem pelas CYP2C19 e CYP3A4 hepáticas",0,"O revestimento não muda a passagem hepática."],
+["Para impedir que o fármaco interaja com os alimentos no duodeno",0,"O motivo é o ácido do estômago."]]},
+{id:"d12",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Na suspensão de omeprazol para lactentes, por que se associa bicarbonato de sódio?",o:[
+["Para neutralizar o ácido e evitar que o omeprazol seja ionizado antes do duodeno",1,"🎧 Bebê não engole cápsula; o bicarbonato faz o papel do revestimento."],
+["Para somar um efeito antiácido rápido e assim permitir reduzir a dose do omeprazol",0,"A função é proteger o fármaco do ácido."],
+["Para corrigir a alcalose metabólica que o omeprazol causa no lactente",0,"Bicarbonato causaria alcalose, não corrigiria."],
+["Para acelerar o esvaziamento gástrico e reduzir a regurgitação",0,"Quem faz isso é o pró-cinético (domperidona)."]]},
+{id:"d13",sp:"dis",tag:"katz",ref:"Katzung · T11 Q1",q:"Paciente inicia omeprazol 20 mg/dia. Quando se atinge a inibição máxima (~90%) da secreção ácida?",o:[
+["Em 3 a 5 dias, porque as bombas novas vão sendo inativadas a cada dose",1,"Meia-vida ~1 h, mas a ligação é irreversível; dose única ≈ 50–60%."],
+["Em 1 hora, porque a meia-vida plasmática do omeprazol é de 1 hora",0,"A meia-vida curta não define o tempo de efeito."],
+["Na primeira dose, porque a ligação com a bomba é irreversível",0,"Na 1ª dose só as bombas ativas naquele momento são inibidas."],
+["Só após 4 semanas, pelo acúmulo progressivo do fármaco no fígado",0,"Pleno em poucos dias."]]},
+{id:"d14",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Paciente em uso de omeprazol desenvolve infecção fúngica sistêmica. Qual antifúngico tende a falhar e por quê?",o:[
+["Itraconazol, porque depende de pH ácido para ser absorvido",1,"🎧 Trocar por fluconazol ou voriconazol. Carbonato de cálcio e AAS também são absorvidos pior."],
+["Fluconazol, porque é metabolizado pela CYP2C19 inibida",0,"O fluconazol é justamente a alternativa."],
+["Voriconazol, porque precisa de ácido para ser ativado",0,"Foi citado como alternativa ao itraconazol."],
+["Nenhum, pois o IBP não altera a absorção de outros fármacos",0,"Altera tudo que depende de ácido para ser absorvido."]]},
+{id:"d15",sp:"dis",tag:"caiu",ref:"T11 Q3 · T6 QD4 · PM Q9",q:"Sobre a famotidina, assinale a correta.",o:[
+["Antagonista competitivo e reversível do H2 da célula parietal; 20–40 mg à noite, no pico de histamina.",1,"Uso crônico / dispepsia funcional. Poupa CYP."],
+["Antagonista irreversível do H2 da célula parietal; 20–40 mg à noite, de escolha para úlcera que sangra.",0,"É reversível e não zera o ácido; úlcera que sangra = IBP."],
+["Antagonista competitivo do H2 da célula ECL; 20–40 mg pela manhã, pois reduz a liberação de histamina.",0,"O H2 é da célula PARIETAL; a histamina continua lá. Dose à noite."],
+["Inibidor da bomba H⁺/K⁺-ATPase; 20–40 mg à noite, zerando a secreção ácida noturna e diurna.",0,"Bloqueia só a via da histamina: ↓ 50–70%."]]},
+{id:"d16",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Por que a famotidina não é a escolha para uma úlcera gástrica que está sangrando?",o:[
+["Porque reduz só 50–70% da secreção: gastrina e ACh continuam estimulando",1,"🎧 Para cicatrizar, usa-se o supressor mais potente, que bloqueia a etapa final (IBP)."],
+["Porque inibe a agregação plaquetária e, com isso, piora o sangramento da úlcera",0,"Não tem esse efeito."],
+["Porque é antagonista irreversível e não pode ser suspensa",0,"É reversível."],
+["Porque não tem efeito sobre a secreção ácida noturna",0,"A secreção noturna é justamente onde ela é melhor."]]},
+{id:"d17",sp:"dis",tag:"aula",ref:"aula 25/09 · T11 Q3",q:"Paciente com dispepsia funcional (endoscopia e pH normais), sintomático, que vai precisar de tratamento longo. Qual supressor e por quê?",o:[
+["Famotidina, que reduz a secreção sem zerá-la e preserva a digestão",1,"🎧 'Quero reduzir, não quero zerar.'"],
+["Esomeprazol, que pela maior potência permite usar a menor dose",0,"Zera o ácido por anos → carências, infecções, tumores."],
+["Vonoprazana, que não depende do horário e tem poucas interações",0,"Caríssima, uso curto, casos graves e muitas interações."],
+["Misoprostol, que protege a mucosa sem alterar a digestão",0,"Hospitalar e off-label."]]},
+{id:"d18",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Em UTI, por que alguns protocolos usam anti-H2 em vez de IBP para prevenir úlcera de estresse?",o:[
+["São menos eficazes que o IBP, mas causam bem menos infecções oportunistas",1,"🎧 O IBP previne melhor, mas a supressão intensa favorece C. difficile e infecções respiratórias."],
+["São mais potentes que o IBP e agem também na secreção noturna",0,"São menos potentes."],
+["O IBP não previne úlcera de estresse, só trata úlcera péptica",0,"Previne, mas suprime demais."],
+["Os anti-H2 aumentam a produção de muco e de bicarbonato, além de reduzir o ácido",0,"Anti-H2 não mexe no muco."]]},
+{id:"d19",sp:"dis",tag:"aula",ref:"aula 25/09 · tabela",q:"Qual efeito adverso dos anti-H2 a Vânia relacionou à menor absorção de magnésio?",o:[
+["Mialgia e artralgia",1,"🎧 Começa por mialgia. É o mesmo mecanismo do IBP."],
+["Ginecomastia e impotência",0,"Isso é da cimetidina (que ela não cobra)."],
+["Galactorreia e amenorreia",0,"Galactorreia = bloqueio D2."],
+["Flatulência e diarreia",0,"Ocorrem por digestão inadequada, não pelo Mg."]]},
+{id:"d20",sp:"dis",tag:"caiu",ref:"T6 Q14 · T7 Q15 · T4 Q8",q:"Sobre a vonoprazana, assinale a correta.",o:[
+["Bloqueia a bomba de forma reversível, competindo com o K⁺, sem precisar de ativação ácida.",1,"Já é fármaco ativo; qualquer horário; ≥95% em 2–3 dias; máx 8 semanas."],
+["É pró-fármaco ativado no canalículo e se liga de forma covalente à bomba, como os IBPs.",0,"Esse é o IBP."],
+["Bloqueia a bomba de forma reversível e, além disso, estimula a secreção de muco e bicarbonato.",0,"T6 Q14-IV (falsa): não mexe no muco."],
+["É de uso contínuo por 6 meses na dispepsia leve, por ter poucas interações pela CYP.",0,"Casos graves, uso curto, muitas interações; R$ 400–600/mês."]]},
+{id:"d21",sp:"dis",tag:"aula",ref:"aula 25/09",q:"No tratamento do H. pylori, por que o IBP (ou a vonoprazana) é dado 2 vezes ao dia?",o:[
+["Para quase zerar o ácido, que degradaria antibióticos como a amoxicilina",1,"🎧 'O ácido degrada os antibióticos que a gente utiliza.'"],
+["Porque o IBP tem ação citotóxica direta sobre o H. pylori",0,"Quem é citotóxico para o H. pylori é o bismuto."],
+["Para aumentar a secreção de muco que protege a mucosa infectada pela bactéria",0,"IBP não aumenta muco."],
+["Para compensar a indução da CYP2C19 causada pelo antibiótico",0,"Não foi esse o motivo."]]},
+{id:"d22",sp:"dis",tag:"caiu",ref:"T11 Q5 · T6 Q10",q:"Diarreia (1); eructação e distensão (2); constipação (3). Qual sequência de antiácidos está correta?",o:[
+["Hidróxido de magnésio; carbonato de cálcio; hidróxido de alumínio",1,"CaCO₃ + HCl → CO₂ (eructação)."],
+["Hidróxido de alumínio; bicarbonato de sódio; hidróxido de magnésio",0,"Inverteu Mg e Al."],
+["Hidróxido de magnésio; hidróxido de alumínio; carbonato de cálcio",0,"Al não dá eructação (não gera gás)."],
+["Bicarbonato de sódio; hidróxido de magnésio; hidróxido de alumínio",0,"Mg não causa eructação."]]},
+{id:"d23",sp:"dis",tag:"caiu",ref:"T11 Q4",q:"Qual antiácido tem maior chance de causar secreção ácida rebote por estimular as células G a secretar gastrina?",o:[
+["Carbonato de cálcio",1,"🎧 Cálcio estimula gastrina (suplemento de Ca na menopausa → gastrite)."],
+["Hidróxido de alumínio",0,"Lento, constipante; não estimula gastrina."],
+["Hidróxido de magnésio",0,"Rápido, laxativo."],
+["Trissilicato de magnésio",0,"Gel protetor de efeito prolongado."]]},
+{id:"d24",sp:"dis",tag:"caiu",ref:"T9 QD1 · T5 QD6",q:"Por que o bicarbonato de sódio deve ser evitado em hipertensos e pacientes com edema?",o:[
+["Pela carga de sódio, que retém líquido; o excesso ainda causa alcalose",1,"🎧 Dissociação muito rápida e sem dose fixa ('a colher que quiserem')."],
+["Pela carga de alumínio, que retém líquido e ainda causa constipação intensa",0,"Bicarbonato de SÓDIO; alumínio é outro antiácido."],
+["Porque reage lentamente e prolonga a hipocloridria por horas",0,"Reage muito rápido."],
+["Porque inibe a CYP3A4 e acumula anti-hipertensivos",0,"Sem relação."]]},
+{id:"d25",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Por que as formulações de antiácido costumam associar hidróxido de magnésio e de alumínio?",o:[
+["O Mg age rápido e o Al dura mais; a diarreia do Mg compensa a constipação do Al",1,"🎧 Na aula: Mg 'relativamente rápido', Al 'bem lento'. (O Katzung diz que os dois reagem devagar.)"],
+["O Al age rápido e o Mg dura mais; a constipação do Mg compensa a diarreia do Al",0,"Invertido: Mg = rápido e diarreia; Al = lento e constipação."],
+["Os dois juntos inibem a bomba de prótons, além de neutralizar o ácido",0,"Antiácido só neutraliza o que já foi secretado."],
+["O Al aumenta a absorção do Mg e assim prolonga o efeito antiácido",0,"Não é esse o motivo."]]},
+{id:"d26",sp:"dis",tag:"caiu",ref:"slide · aula 25/09",q:"Quando os antiácidos devem ser tomados?",o:[
+["1 a 2 h depois das refeições, longe de outros medicamentos",1,"Complexam com fármacos e nutrientes: afastar ~2 h de ferro, tetraciclina, fluorquinolona, itraconazol."],
+["30 a 60 min antes das refeições, em jejum",0,"Esse é o horário do IBP/sucralfato."],
+["Ao deitar, para coincidir com o pico de secreção de histamina",0,"Esse é o da famotidina."],
+["Junto com o sulfato ferroso, para melhorar a absorção",0,"Antiácido atrapalha a absorção do ferro."]]},
+{id:"d27",sp:"dis",tag:"caiu",ref:"T11 Q3-d · T7 Q9 · T9 Q3",q:"Sobre o sucralfato, assinale a correta.",o:[
+["Em pH ácido forma pasta viscosa que adere à úlcera por até ~6 h, pela lenta dissociação do hidróxido de alumínio, e estimula PG e bicarbonato.",1,"🎧 'Como vários band-aids'. 1 g 4×/dia, antes das refeições; não tem no SUS; EA constipação."],
+["Em pH ácido forma pasta viscosa que adere à úlcera, pela rápida dissociação do hidróxido de alumínio, e neutraliza o ácido como um antiácido.",0,"'Rápida' foi o erro da T11 Q3-d: a dissociação é LENTA, e ele não é antiácido."],
+["Em pH ácido forma pasta viscosa que adere à úlcera por até ~6 h, pela lenta dissociação do hidróxido de cálcio, e causa diarreia.",0,"É hidróxido de ALUMÍNIO → constipação."],
+["Em pH básico forma pasta viscosa que adere à úlcera por até ~6 h e deve ser tomado depois das refeições, como os antiácidos.",0,"Precisa de pH ÁCIDO e é tomado ANTES das refeições."]]},
+{id:"d28",sp:"dis",tag:"caiu",ref:"T4 Q9 · T9 Q3 · T11 Q11",q:"Sobre o misoprostol, assinale a correta.",o:[
+["Agonista de receptores de PGE: ↓ secreção ácida e ↑ muco e bicarbonato; uso hospitalar e off-label na úlcera por AINE.",1,"Frase do slide. Na aula ela disse 'parecido com a PGE2'; o Katzung diz análogo de PGE₁."],
+["Agonista de receptores de PGE: ↓ secreção ácida e ↑ muco e bicarbonato; gastroprotetor ambulatorial de 1ª linha com AINE.",0,"É hospitalar e off-label (T9 Q3)."],
+["Agonista de receptores de PGE: ↓ secreção ácida e ↑ muco; disponível por via IV para hemorragia digestiva alta.",0,"Não existe IV (T11 Q11)."],
+["Antagonista de receptores de PGE: ↓ secreção ácida e ↑ muco e bicarbonato; seguro na gestação.",0,"É AGONISTA e é abortivo (receptores de PGE no útero)."]]},
+{id:"d29",sp:"dis",tag:"caiu",ref:"T7 Q15-I · T6 Q9 · aula 25/09",q:"Sobre a espinheira-santa, assinale a correta.",o:[
+["Chá das folhas; bloqueia H2 e ↑ muco; dispepsia leve a moderada, sem cicatrizar úlcera",1,"🎧 Está no protocolo do Ministério da Saúde; ~2 xícaras/dia, resposta em 2–3 dias."],
+["Chá da casca; bloqueia H2 e ↑ muco; indicada para erradicar o H. pylori em 7 dias",0,"É das FOLHAS e não trata H. pylori."],
+["Chá das folhas; neutraliza o ácido já secretado, como os antiácidos",0,"Bloqueia H2; não neutraliza."],
+["Chá das folhas; estimula o muco e cicatriza a úlcera causada por AINE em poucas semanas",0,"Não cicatriza úlcera."]]},
+{id:"d30",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Sobre o suco de couve na gastrite, segundo a aula, assinale a correta.",o:[
+["Triturar e coar: as mucilagens revestem o estômago e estimulam o muco",1,"🎧 Sem coar, a celulose (insolúvel) ainda ajuda na constipação."],
+["Triturar sem coar: a celulose forma a barreira protetora na mucosa",0,"Celulose é fibra insolúvel: efeito no intestino, não no estômago."],
+["Comer a folha inteira: tem o mesmo efeito protetor que o suco coado",0,"A mucilagem precisa ser liberada (triturar e coar)."],
+["Triturar e coar: o cálcio da couve neutraliza o ácido gástrico",0,"Não é efeito antiácido."]]},
+{id:"d31",sp:"dis",tag:"aula",ref:"aula 25/09",q:"Por que a Vânia diz que é errado chamar o omeprazol de 'protetor gástrico'?",o:[
+["Porque reduz o fator agressor (ácido), mas não reforça a barreira de muco",1,"🎧 Proteção é o que a barreira de muco e bicarbonato faz."],
+["Porque aumenta a secreção de pepsina e com isso piora a lesão da mucosa gástrica",0,"Com pH > 4, cai a ativação da pepsina."],
+["Porque age só no duodeno e não chega à célula parietal",0,"Age na célula parietal do estômago."],
+["Porque só protege a mucosa quando tomado junto com alimento",0,"Não é protetor em nenhuma situação."]]},
+{id:"d32",sp:"dis",tag:"caiu",ref:"slide · aula 25/09",q:"Sobre a posologia dos anti-H2, assinale a correta.",o:[
+["Famotidina 20–40 mg à noite; nizatidina 150 mg de manhã e à noite",1,"Nizatidina tem duração mais curta; também pode ser 300 mg ao deitar."],
+["Famotidina 10 mg pela manhã; nizatidina 150 mg 1×/dia em jejum",0,"'10 mg' é distrator antigo; famotidina é à noite."],
+["Famotidina 20–40 mg à noite; nizatidina 300 mg 3×/dia",0,"Nizatidina 150 mg 2× ou 300 mg ao deitar."],
+["Famotidina 40 mg 4×/dia; nizatidina 150 mg de manhã e à noite",0,"Famotidina é 1×/dia à noite."]]},
+
+// ================= SP3 · ÊMESE =================
+{id:"e01",sp:"eme",tag:"caiu",ref:"T5 Q2/Q12 · T6 Q1 · T7 Q14 · AVA T11",q:"Complete: 'A atividade motora é regulada pelo sistema extrapiramidal e modulada pelos neurotransmissores excitatórios ____ e inibitórios ____. O bloqueio de receptores ____ promove uma excessiva resposta ____.'",o:[
+["colinérgicos; dopaminérgicos; D2; colinérgica",1,"Texto do slide, cai idêntico."],
+["dopaminérgicos; colinérgicos; D2; dopaminérgica",0,"Inverteu: a ACh excita, a dopamina inibe."],
+["colinérgicos; dopaminérgicos; muscarínicos; dopaminérgica",0,"O bloqueio é D2, e a resposta excessiva é colinérgica."],
+["colinérgicos; serotoninérgicos; 5-HT3; colinérgica",0,"Serotonina não entra no mecanismo da SEP."]]},
+{id:"e02",sp:"eme",tag:"caiu",ref:"T11 Q8a · T8 QD4",q:"Paciente tem distonia e crise oculógira após metoclopramida IV. Qual o tratamento e por quê?",o:[
+["Biperideno: anticolinérgico central que bloqueia o excesso de ACh",1,"O anti-histamínico (com ação antimuscarínica) também serve, segundo o slide."],
+["Atropina: anticolinérgico periférico que bloqueia o excesso de ACh",0,"Foi o erro da T11 Q8a: corrigido para biperideno (ação central)."],
+["Bromoprida: compete com a metoclopramida pelo receptor D2",0,"Bromoprida também bloqueia D2 e piora."],
+["Domperidona: bloqueia D2 só na periferia, sem cruzar a BHE",0,"Não trata SEP."]]},
+{id:"e03",sp:"eme",tag:"caiu",ref:"T4 Q12 · aula 19/09",q:"Sobre a síndrome extrapiramidal por metoclopramida, assinale a correta.",o:[
+["É mais frequente por via IV do que VO, pela quantidade de fármaco que chega ao SNC",1,"🎧 IV ≫ VO. Mais risco em idoso, criança e dose alta."],
+["É mais frequente com domperidona do que com metoclopramida ou bromoprida",0,"Domperidona quase não cruza a BHE: SEP raríssima."],
+["É uma reação alérgica ao fármaco, tratada com corticoide e anti-histamínico de 2ª geração",0,"🎧 O paciente diz 'alergia ao Plasil', mas é acatisia."],
+["Ocorre por bloqueio D2 na adeno-hipófise, com excesso de prolactina",0,"Isso é galactorreia (outro sítio)."]]},
+{id:"e04",sp:"eme",tag:"caiu",ref:"T5 Q4 · PM Q2 · T9 Q12 · AVA T11",q:"A galactorreia causada pela bromoprida decorre do bloqueio de receptores ____ na ____.",o:[
+["D2; adeno-hipófise",1,"A dopamina é o fator inibidor da prolactina."],
+["D2; hipotálamo",0,"'Hipotálamo' foi a pegadinha da T11 Q8b."],
+["H1; neuro-hipófise",0,"Receptor e local errados."],
+["5-HT3; adeno-hipófise",0,"Não é o receptor serotoninérgico."]]},
+{id:"e05",sp:"eme",tag:"aula",ref:"aula 19/09",q:"A domperidona quase não cruza a BHE. Por que ainda assim aumenta a prolactina?",o:[
+["Porque a adeno-hipófise fica fora da BHE",1,"🎧 Em bebê aparece 'brotinho' mamário; na lactante vira recurso para aumentar o leite."],
+["Porque seu metabólito ativo cruza a BHE",0,"Não é esse o mecanismo."],
+["Porque estimula receptores de prolactina na mama",0,"Ela bloqueia D2, não estimula a mama."],
+["Porque bloqueia D2 no núcleo do hipotálamo",0,"O alvo é a adeno-hipófise."]]},
+{id:"e06",sp:"eme",tag:"caiu",ref:"T11 Q6",q:"'____ aumenta o tônus do esfíncter esofágico inferior e estimula as contrações do antro gástrico e do delgado, sem efeito clinicamente significativo no intestino grosso.' Qual fármaco?",o:[
+["Domperidona",1,"Pró-cinético D2 periférico."],
+["Ondansetrona",0,"Antagonista 5-HT3; constipa."],
+["Aprepitanto",0,"Antagonista NK1 da quimio."],
+["Dimenidrinato",0,"Anti-H1/antimuscarínico; reduz motilidade."]]},
+{id:"e07",sp:"eme",tag:"aula",ref:"aula 19/09 · T5 QD1",q:"Segundo a aula, qual é a principal indicação real da domperidona?",o:[
+["DRGE no lactente e no adulto com regurgitação",1,"🎧 'Vocês não vão ver médico prescrevendo domperidona para vômito.' No adulto, associada ao IBP."],
+["Vômito agudo por quimioterapia emetogênica",0,"Praticamente não age no centro do vômito."],
+["Cinetose e labirintite no adulto jovem",0,"Cinetose = anti-H1/antimuscarínico."],
+["Náusea matinal da gestante no 1º trimestre",0,"Essa é do dimenidrinato."]]},
+{id:"e08",sp:"eme",tag:"caiu",ref:"T11 QD4",q:"Qual associação é comumente usada na DRGE com regurgitação acentuada?",o:[
+["IBP + domperidona",1,"Base = IBP; o pró-cinético esvazia o estômago e ↓ a pressão sobre o EEI."],
+["Famotidina + ondansetrona",0,"Ondansetrona não é pró-cinética."],
+["IBP + dimenidrinato",0,"Dimenidrinato ↓ motilidade."],
+["Sucralfato + escopolamina",0,"Antiespasmódico reduz o esvaziamento."]]},
+{id:"e09",sp:"eme",tag:"caiu",ref:"T11 Q7",q:"Qual dos fármacos abaixo pode ser indicado para gastroparesia?",o:[
+["Bromoprida",1,"Antagonista D2 → ↑ ACh → ↑ motilidade gástrica."],
+["Ondansetrona",0,"Antagonista 5-HT3: ↓ vômito e ↓ motilidade."],
+["Dimenidrinato",0,"Antimuscarínico: ↓ motilidade."],
+["Nabilona",0,"Agonista CB1 (quimio, apetite)."]]},
+{id:"e10",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Na aula, como a Vânia resumiu o papel da serotonina e da dopamina na motilidade do TGI alto?",o:[
+["Serotonina acelera o vago (↑ ACh); dopamina freia (D2 ↓ ACh)",1,"🎧 Daí saem o pró-cinético, a constipação da ondansetrona e a SEP."],
+["Dopamina acelera o vago (↑ ACh); serotonina freia (5-HT3 ↓ ACh)",0,"Invertido."],
+["Serotonina freia o vago (↓ ACh); dopamina também freia (↓ ACh)",0,"A serotonina estimula."],
+["Serotonina age em M3 e dopamina em H1 no plexo mioentérico",0,"Receptores trocados."]]},
+{id:"e11",sp:"eme",tag:"caiu",ref:"T5 Q5 · PM Q3",q:"Associe: (1) mais efetivo no vômito por toxina; (2) mais seguro, usado na atenção básica; (3) maior risco de síndrome extrapiramidal; (4) escolha na náusea matinal da gestante.",o:[
+["bromoprida; ondansetrona; metoclopramida; dimenidrinato",1,"Cai idêntica (só muda a ordem)."],
+["ondansetrona; bromoprida; dimenidrinato; metoclopramida",0,"Trocou efetivo × seguro."],
+["metoclopramida; dimenidrinato; ondansetrona; bromoprida",0,"Ondansetrona tem baixo risco de SEP."],
+["dimenidrinato; ondansetrona; bromoprida; metoclopramida",0,"Dimenidrinato é para gestante/vestibular."]]},
+{id:"e12",sp:"eme",tag:"caiu",ref:"T7 Q2-V · T6 QD2 · T4 Q13",q:"Sobre a ondansetrona, assinale a correta.",o:[
+["Antagonista seletivo 5-HT3 no aferente vagal e na ZGQ; 4–8 mg a cada 8 ou 12 h; EA constipação.",1,"Segura, atenção básica; não serve para vestibular."],
+["Antagonista 5-HT3 e muscarínico no aferente vagal; 4–8 mg a cada 8 ou 12 h; EA xerostomia.",0,"Só 5-HT3; não dá xerostomia."],
+["Antagonista seletivo 5-HT3 nos núcleos vestibulares; escolha para cinetose e labirintite.",0,"Vestibular = anti-H1/antimuscarínico."],
+["Antagonista seletivo NK1 no centro do vômito; usado na fase tardia da quimioterapia.",0,"Isso é o aprepitanto."]]},
+{id:"e13",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Por que a ondansetrona causa constipação?",o:[
+["Porque há mais receptores 5-HT3 no intestino do que no estômago",1,"🎧 Bloqueou o 'acelerador' no intestino — o mesmo efeito que a alosetrona usa na SII-D."],
+["Porque bloqueia receptores muscarínicos M3 da musculatura lisa",0,"Ela não bloqueia muscarínicos."],
+["Porque bloqueia receptores D2 no plexo mioentérico do cólon",0,"Não é antagonista D2."],
+["Porque ativa canais de cloreto e aumenta a absorção de água",0,"Sem relação."]]},
+{id:"e14",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Por que metoclopramida e bromoprida são mais eficazes que a ondansetrona no vômito por toxinas?",o:[
+["Além de bloquear D2, têm antagonismo 5-HT3 expressivo",1,"🎧 O agonismo 5-HT4 'é pouco relevante'."],
+["Além de bloquear D2, são agonistas 5-HT3 potentes",0,"São antagonistas 5-HT3."],
+["Além de bloquear D2, bloqueiam H1 e M1 no tronco cerebral",0,"Isso é o dimenidrinato."],
+["Bloqueiam D2 só na periferia, sem cruzar a BHE",0,"Cruzam a BHE (daí a SEP)."]]},
+{id:"e15",sp:"eme",tag:"caiu",ref:"T5 Q1 · T7 Q3 · T9 Q11",q:"Sobre o dimenidrinato, assinale a correta.",o:[
+["Anti-H1 de 1ª geração com ação antimuscarínica; 25–100 mg; sonolência, xerostomia e retenção urinária.",1,"Dramin® 25, 50 e 100 mg; também constipa."],
+["Anti-H1 de 1ª geração com ação antimuscarínica; 5–50 mg; sonolência, xerostomia e retenção urinária.",0,"'5–50 mg' foi distrator (T7 Q3-IV): é 25–100 mg."],
+["Anti-H1 de 2ª geração, sem ação central; 25–100 mg; não causa sonolência nem xerostomia.",0,"2ª geração não cruza a BHE e não é antiemética."],
+["Antagonista 5-HT3 com ação antimuscarínica; 25–100 mg; indicado na quimio altamente emetogênica.",0,"Quimio = ondansetrona + dexametasona (± aprepitanto)."]]},
+{id:"e16",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Por que o dimenidrinato funciona na náusea matinal da gestante?",o:[
+["A náusea vem da sialorreia, e o efeito antimuscarínico seca a boca",1,"🎧 Tomar ao deitar: 'ela acorda de boca seca'. Hiperêmese é outra coisa (ondansetrona)."],
+["A náusea vem da serotonina, e ele bloqueia 5-HT3 no aferente vagal",0,"Esse é o mecanismo da ondansetrona."],
+["A náusea vem da estase gástrica, e ele acelera o esvaziamento",0,"Antimuscarínico reduz motilidade."],
+["A náusea vem do labirinto, e ele é o único que não cruza a placenta",0,"Não foi esse o argumento."]]},
+{id:"e17",sp:"eme",tag:"caiu",ref:"T6 Q3 · T9 Q12 · aula 19/09",q:"Sobre escopolamina, hiosciamina e homatropina, segundo o material dela, assinale a correta.",o:[
+["Antagonistas M3 de uso predominante antiespasmódico (cólicas viscerais)",1,"🎧 Quase não cruzam a BHE (Buscopan®). O Katzung diz que a escopolamina age no SNC e é ótima para cinetose."],
+["Antagonistas M3 de escolha na náusea matinal da gestante e na hiperêmese",0,"T9 Q12: a da gestante é o dimenidrinato."],
+["Antagonistas nicotínicos de uso predominante antiespasmódico",0,"São muscarínicos (M3)."],
+["Agonistas muscarínicos usados como pró-cinéticos",0,"São antagonistas."]]},
+{id:"e18",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Por que loratadina e fexofenadina não servem como antieméticos?",o:[
+["Porque não cruzam a BHE",1,"🎧 Anti-H1 de 2ª geração: não sedam e não agem no tronco/vestibular."],
+["Porque bloqueiam receptores H2",0,"Bloqueiam H1."],
+["Porque são agonistas de H1",0,"São antagonistas."],
+["Porque causam sedação intensa",0,"Justamente não sedam."]]},
+{id:"e19",sp:"eme",tag:"caiu",ref:"T9 QD2 · T4 Q13 · T6 Q8",q:"Sobre o aprepitanto, assinale a correta.",o:[
+["Antagonista NK1 (substância P); quimio altamente emetogênica, fase tardia, junto com ondansetrona e dexametasona.",1,"125 mg; 🎧 'é acréscimo, não substituição'."],
+["Antagonista NK1 (substância P); indicado para qualquer tipo de êmese, inclusive cinetose, gestação e pós-operatório.",0,"Indicação restrita à quimio."],
+["Agonista NK1 (substância P); quimio altamente emetogênica, fase aguda, acelerando o esvaziamento.",0,"É ANTAGONISTA e o foco é a fase tardia."],
+["Antagonista NK1 (substância P); substitui a ondansetrona na quimioterapia altamente emetogênica.",0,"'Todo paciente em quimio usa no mínimo uma ondansetrona.'"]]},
+{id:"e20",sp:"eme",tag:"caiu",ref:"T7 Q2-II · T11 Q7a",q:"Nabilona e dronabinol são:",o:[
+["Agonistas CB1, antieméticos e orexígenos",1,"Quimio e caquexia grave. Nabilona sintética; dronabinol = Δ9-THC."],
+["Antagonistas CB1, antieméticos e anorexígenos",0,"T7 Q2-II (falsa): são agonistas e dão fome."],
+["Antagonistas de receptores opioides CB1",0,"Não são opioides."],
+["Antagonistas NK1 de uso hospitalar IV",0,"NK1 = aprepitanto."]]},
+{id:"e21",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Paciente começa a vomitar já ao chegar para o 2º ciclo de quimio, antes da infusão. Qual a melhor opção?",o:[
+["Lorazepam",1,"🎧 Vômito antecipatório: ↑ GABA corta o estímulo do córtex ao centro do vômito; entra nos dias que antecedem a quimio."],
+["Dimenidrinato",0,"Vestibular/gestante."],
+["Domperidona",0,"Pró-cinético da DRGE."],
+["Escopolamina",0,"Antiespasmódico."]]},
+{id:"e22",sp:"eme",tag:"caiu",ref:"T7 Q8 · T9 Q11-V",q:"Para quimioterapia de alto risco emetogênico, qual é a associação de base?",o:[
+["Ondansetrona + dexametasona (± aprepitanto)",1,"A dexametasona segue em casa na fase tardia."],
+["Dimenidrinato + escopolamina (± lorazepam)",0,"Vestibular."],
+["Domperidona + loratadina (± gengibre)",0,"Sem efeito central."],
+["Nabilona + domperidona (± dimenidrinato)",0,"Canabinoide é adjuvante, não base."]]},
+{id:"e23",sp:"eme",tag:"caiu",ref:"T7 Q2-III · aula 19/09",q:"Sobre o gengibre como antiemético, assinale a correta.",o:[
+["Estimula a secreção gástrica e bloqueia 5-HT3 e NK1; piora a gastrite",1,"🎧 'Acentua o problema' em quem já tem azia."],
+["Inibe a secreção gástrica e bloqueia 5-HT3 e NK1; protege na gastrite",0,"Estimula a secreção ácida."],
+["Estimula a secreção gástrica e bloqueia D2; seguro na gastrite",0,"Não é antagonista D2 e piora a gastrite."],
+["Bloqueia H1 nos núcleos vestibulares; indicado para cinetose",0,"Não é anti-H1."]]},
+{id:"e24",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Por que a Vânia diz que 'não adianta tomar Dramin numa intoxicação alimentar'?",o:[
+["A toxina age via 5-HT3/D2, e o dimenidrinato bloqueia H1/M (vestibular)",1,"🎧 O desencadeante define o receptor. 'Não adianta tratar labirintite com bloqueador de 5-HT3.'"],
+["O dimenidrinato aumenta a absorção intestinal da toxina e prolonga o quadro",0,"Não foi esse o argumento."],
+["O dimenidrinato é contraindicado em qualquer quadro com diarreia",0,"O problema é o receptor errado."],
+["O dimenidrinato só funciona por via IV, e não por via oral",0,"Funciona VO."]]},
+{id:"e25",sp:"eme",tag:"aula",ref:"aula 19/09 · T11 Q8b",q:"A zona de gatilho quimiorreceptora (área postrema) é importante porque:",o:[
+["Fica fora da BHE e detecta toxinas e fármacos no sangue",1,"Tem D2, 5-HT3, NK1 e opioides."],
+["Fica dentro da BHE e responde só a estímulos vestibulares",0,"Vestibular = núcleos vestibulares."],
+["Fica fora da BHE e é o alvo exclusivo dos anti-H1",0,"Anti-H1 agem no vestibular/tronco."],
+["Fica dentro da BHE e não tem receptores dopaminérgicos D2",0,"Tem D2: é onde age a metoclopramida."]]},
+{id:"e26",sp:"eme",tag:"aula",ref:"aula 19/09",q:"Qual interação a Vânia citou para metoclopramida e bromoprida?",o:[
+["Aceleram o esvaziamento e ↓ a absorção de alimentos e fármacos",1,"🎧 Efeito de ~6–7 h; o laxante estimulante não faz isso (age no cólon)."],
+["Inibem a CYP2C19 e bloqueiam a ativação do clopidogrel no fígado",0,"Isso é omeprazol/esomeprazol."],
+["Neutralizam o ácido gástrico e ↓ a absorção do ferro",0,"Não são antiácidos."],
+["Induzem a CYP3A4 e reduzem o efeito da dexametasona",0,"Não foi citado."]]},
+
+// ================= SP2 · CONSTIPAÇÃO =================
+{id:"c01",sp:"con",tag:"caiu",ref:"T6 QD1 · Ativ T6 Q1 · T9 Q6",q:"Sobre o 'cólon preguiçoso' pelo uso crônico de bisacodil, assinale a correta.",o:[
+["A irritação repetida gera inflamação crônica e degeneração das terminações mioentéricas; o bolo distende a parede, mas não deflagra o reflexo.",1,"É o mecanismo que ela mais cobra (+ melanose colônica)."],
+["O uso repetido gera dependência de receptores opioides μ no cólon; sem o laxante, o bolo distende a parede, mas não deflagra o reflexo.",0,"T6 Q7-II (falsa): não é dependência por receptor opioide."],
+["O bisacodil bloqueia receptores 5-HT4 do plexo mioentérico; o bolo distende a parede, mas a ACh deixa de ser liberada.",0,"Bisacodil é irritante, não age em 5-HT4."],
+["O uso repetido causa só desidratação e perda de potássio, sem lesão neural; a motilidade volta ao normal com hidratação.",0,"Há dano tecidual e neural."]]},
+{id:"c02",sp:"con",tag:"caiu",ref:"T11 QD1",q:"Por que o laxante estimulante deve ser usado na menor dose e pelo menor tempo possível?",o:[
+["Esvazia todo o cólon, que demora dias para encher; o paciente se acha constipado e repete",1,"Ciclo vicioso: discursiva da T11 (0,8)."],
+["Esvazia só o reto, que enche em horas; o paciente usa mais vezes e causa hipercalcemia",0,"Esvazia o cólon INTEIRO; o distúrbio é de água/eletrólitos (↓ K)."],
+["Induz tolerância por aumento de receptores μ, exigindo doses cada vez maiores",0,"Não é opioide."],
+["É muito absorvido e hepatotóxico, e o acúmulo aparece após semanas de uso",0,"O problema é local (cólon)."]]},
+{id:"c03",sp:"con",tag:"caiu",ref:"T5 Q7-III · T6 Q4",q:"Sobre os derivados antracênicos, assinale a correta.",o:[
+["Sene (chá das folhas) e cáscara-sagrada (casca) são irritantes que causam melanose colônica",1,"T6 Q4: 'chá das folhas' = sene."],
+["Sene (chá das folhas) e cáscara-sagrada (casca) bloqueiam receptores 5-HT3 do cólon",0,"T5 Q7-III (falsa)."],
+["Sene (chá da casca) e cáscara-sagrada (folhas) são irritantes que causam melanose colônica",0,"Invertido: sene = folhas; cáscara = casca."],
+["Sene e cáscara-sagrada são osmóticos não fermentáveis, seguros para uso contínuo",0,"São irritantes (estimulantes)."]]},
+{id:"c04",sp:"con",tag:"caiu",ref:"T7 Q4 · T5 QD3",q:"Gestante com constipação. Qual a escolha segundo o slide?",o:[
+["Macrogol (PEG)",1,"Osmótico não fermentável, sem cólica. Na T5 aceitaram policarbofila, mas o slide e a T7 dizem macrogol."],
+["Bisacodil diário",0,"Irritante; menor dose e menor tempo."],
+["Óleo mineral",0,"Risco de aspiração; não é a escolha."],
+["Prucaloprida",0,"Só refratária."]]},
+{id:"c05",sp:"con",tag:"caiu",ref:"T7 Q5 · T7 Q13 · Ativ T5",q:"Sobre a lactulose, assinale a correta.",o:[
+["Dissacarídeo fermentado no cólon a ácidos lático e acético; age em 24–48 h; tem no SUS.",1,"1ª linha na constipação secundária; 15–30 mL até 4×/dia."],
+["Dissacarídeo fermentado no cólon a ácidos lático e acético; age em 2–4 h; tem no SUS.",0,"Osmóticos agem em 24–48 h."],
+["Dissacarídeo não fermentável, que por isso não causa gases; age em 24–48 h; tem no SUS.",0,"Fermenta → gases e cólica (começar com dose baixa)."],
+["Dissacarídeo fermentado no cólon; contraindicado em idosos, crianças e gestantes.",0,"É usada em < 10 anos, idosos e gestantes."]]},
+{id:"c06",sp:"con",tag:"caiu",ref:"slide · T11 Q12",q:"Por que a lactulose é usada na encefalopatia hepática?",o:[
+["O ↓ do pH no cólon inibe as bactérias produtoras de amônia",1,"Frase do slide."],
+["É absorvida e metabolizada no fígado, poupando o hepatócito",0,"Não é absorvida."],
+["Aumenta a síntese hepática de ureia a partir da amônia",0,"Não é esse o mecanismo."],
+["O ↑ do pH no cólon favorece a eliminação de amônia",0,"O pH CAI (ácidos lático e acético)."]]},
+{id:"c07",sp:"con",tag:"caiu",ref:"T6 Q6 · Ativ T6 Q3",q:"Constipação em paciente que começou antidepressivo tricíclico. Qual o tipo e a escolha?",o:[
+["Secundária (bloqueio muscarínico) → osmótico; no SUS, lactulose",1,"Macrogol também é aceito (T6 Q6)."],
+["Primária (dieta pobre em fibra) → formador de massa (policarbofila)",0,"É secundária a fármaco."],
+["Secundária (bloqueio 5-HT3) → prucaloprida como 1ª escolha",0,"O ADT bloqueia muscarínico; prucaloprida só se refratária."],
+["Secundária (bloqueio muscarínico) → bisacodil contínuo",0,"Estimulante contínuo → cólon preguiçoso."]]},
+{id:"c08",sp:"con",tag:"caiu",ref:"T6 QD3 · T7 Q11 · AVA T11 Q4",q:"Sobre os formadores de massa (psyllium, metilcelulose, estercúlia), assinale a correta.",o:[
+["Retêm água, distendem a parede e estimulam a peristalse; exigem água; 1ª escolha na constipação primária.",1,"Agem em ≥ 24 h."],
+["Retêm água, distendem a parede e estimulam a peristalse; 1ª escolha na constipação secundária a opioide.",0,"Sem eficácia na secundária (T6 QD3)."],
+["Retêm água e estimulam a peristalse em 1 a 3 h; dispensam aumento da ingestão de água.",0,"Demoram 12–84 h e EXIGEM água."],
+["Retêm água e estimulam a peristalse; são seguros no cólon atônico e na impactação fecal.",0,"Evitar: podem piorar."]]},
+{id:"c09",sp:"con",tag:"caiu",ref:"T11 Q10 · T11 Q12-III · T7 Q6",q:"Sobre a prucaloprida, assinale a correta.",o:[
+["Agonista 5-HT4 que ↑ a liberação de ACh; 2 mg 1×/dia; constipação crônica refratária a laxantes.",1,"🎧 'Nunca para iniciar.' EA: náusea e diarreia."],
+["Agonista 5-HT4 que ativa canais de cloreto tipo 2; 2 mg 1×/dia; constipação na SII.",0,"Canal de cloreto = lubiprostona."],
+["Agonista 5-HT4 que ↑ a liberação de ACh; 2 mg 1×/dia; 1ª escolha para iniciar o tratamento.",0,"Só refratária."],
+["Antagonista 5-HT3 que ↓ a liberação de ACh; 2 mg 1×/dia; constipação refratária.",0,"É agonista 5-HT4 (pró-cinético)."]]},
+{id:"c10",sp:"con",tag:"caiu",ref:"T11 Q10 · T9 Q7-IV",q:"Sobre a lubiprostona, assinale a correta.",o:[
+["Derivado de prostaglandina que ativa canais ClC-2 no delgado; SII com constipação",1,"8–24 mcg 2×/dia; não tem no SUS."],
+["Agonista 5-HT4 que ativa canais ClC-2 no delgado; constipação crônica refratária",0,"Agonista 5-HT4 = prucaloprida."],
+["Derivado de prostaglandina que age como osmótico salino no cólon",0,"É secretor (canal de cloreto)."],
+["Derivado de prostaglandina que irrita a mucosa do cólon, como o bisacodil e o sene",0,"Age no delgado, por canal de cloreto."]]},
+{id:"c11",sp:"con",tag:"caiu",ref:"T11 Q12-I/II",q:"Sobre a glicerina como laxante, assinale a correta.",o:[
+["Só via retal, higroscópica e lubrificante; age em menos de 1 h",1,"Supositório 2–3 g; muito usada em bebês na troca para fórmula."],
+["Via oral ou retal, higroscópica e lubrificante; age em menos de 1 h",0,"Só retal."],
+["Só via retal, higroscópica e lubrificante; age em 24–48 h",0,"Age em menos de 1 h."],
+["Só via retal, irritante da mucosa; causa melanose colônica",0,"Melanose = antracênicos."]]},
+{id:"c12",sp:"con",tag:"caiu",ref:"slide · tabela",q:"Sobre o óleo mineral, assinale a correta.",o:[
+["Emoliente; contraindicado em < 12 anos e idosos (pneumonia lipídica)",1,"Também evitar em acamados, DRGE e disfagia."],
+["Emoliente; é a escolha em idosos e acamados pela boa tolerância e baixo custo",0,"É contraindicado nesses grupos."],
+["Osmótico; seguro em bebês e crianças menores de 12 anos",0,"Contraindicado em bebês."],
+["Secretor; ativa canais de cloreto e amolece as fezes",0,"Isso é a lubiprostona."]]},
+{id:"c13",sp:"con",tag:"caiu",ref:"T9 Q7-II",q:"Sobre os sais de magnésio como laxantes, assinale a correta.",o:[
+["Osmóticos salinos que, em dose alta, causam purgação em 1 a 3 h",1,"A veterana riscou, mas o gabarito da T9 considera verdadeiro."],
+["Osmóticos salinos seguros na insuficiência renal crônica",0,"Evitar: o Mg acumula."],
+["Osmóticos fermentados pela microbiota a ácidos orgânicos, com ↓ do pH",0,"Não fermentam."],
+["Pró-cinéticos que ativam receptores 5-HT4 do cólon",0,"Agem por osmose."]]},
+{id:"c14",sp:"con",tag:"caiu",ref:"T11 Q12",q:"Sobre os enemas de fosfato de sódio, assinale a correta.",o:[
+["Uso pontual (preparo, impactação); repetidos dão hipocalcemia e hiperfosfatemia",1,"Ação imediata por distensão retal."],
+["Uso diário na constipação crônica; repetidos dão hipocalcemia e hiperfosfatemia",0,"Uso agudo/pontual."],
+["Uso pontual (preparo, impactação); repetidos dão hipercalcemia e hipofosfatemia",0,"Invertido: hipoCa e hiperP."],
+["Agem por irritação do delgado e por isso demoram 24–48 h",0,"Agem no reto (distensão), em minutos."]]},
+{id:"c15",sp:"con",tag:"caiu",ref:"T5 Q7-II · AVA T11 Q5",q:"Sobre o PEG/macrogol, assinale a correta.",o:[
+["Polímero inerte, não absorvido e não fermentado; retém água por osmose",1,"Escolha na gestante e na refratária; 🎧 Muvinlax® não tem dose pediátrica."],
+["Polímero que desidrata e é proibido em idosos e crianças",0,"T5 Q7-II (falsa): 'é recomendado'."],
+["Polímero fermentado no cólon a ácido lático, com ↓ do pH",0,"Quem fermenta é a lactulose."],
+["Polímero inerte; é o osmótico de 1ª linha disponível na rede do SUS hoje",0,"No SUS é a lactulose."]]},
+{id:"c16",sp:"con",tag:"caiu",ref:"T6 Q12 · T4 Q4",q:"Sobre as fibras, assinale a correta.",o:[
+["Solúveis (pectina, psyllium, FOS) fermentam e são prebióticas; insolúveis (celulose) dão volume",1,"Probiótico vai com fibra SOLÚVEL."],
+["Solúveis (celulose, lignina) fermentam e são prebióticas; insolúveis (pectina) dão volume",0,"T4 Q4-I: celulose é INSOLÚVEL."],
+["Insolúveis (celulose, lignina) fermentam e são as melhores para acompanhar probióticos",0,"Insolúveis não fermentam; probiótico vai com solúvel."],
+["Solúveis (pectina, psyllium) são digeridas e absorvidas no delgado",0,"Não são digeridas nem absorvidas."]]},
+{id:"c17",sp:"con",tag:"caiu",ref:"slide · tabela",q:"O docusato de sódio age como:",o:[
+["Surfactante que deixa a água penetrar e amolece as fezes",1,"Emoliente. 🎧 Também aparece em preparo de colonoscopia."],
+["Agonista 5-HT4 que aumenta a liberação de acetilcolina",0,"Prucaloprida."],
+["Osmótico salino que puxa água para o lúmen do cólon",0,"Sais de Mg/fosfato."],
+["Ativador de canais ClC-2 que aumenta a secreção de cloreto",0,"Lubiprostona."]]},
+{id:"c18",sp:"con",tag:"caiu",ref:"Ativ T5 · slide",q:"Constipação esporádica ou preparo de exame. Qual a escolha e a dose?",o:[
+["Bisacodil 5 mg, efeito em 6–12 h",1,"Menor dose, menor tempo. 🎧 Lactopulga® = bisacodil."],
+["Prucaloprida 2 mg, uso contínuo",0,"Só refratária crônica."],
+["Psyllium 3×/dia por 3 meses",0,"Para hábito (primária), não pontual."],
+["Lubiprostona 24 mcg 2×/dia",0,"SII-C/crônica."]]},
+{id:"c19",sp:"con",tag:"katz",ref:"Katzung cap. 62",q:"Segundo o Katzung, quais laxantes osmóticos são açúcares não absorvíveis fermentados pela microbiota, causando flatulência e cólica?",o:[
+["Sorbitol e lactulose",1,"Na aula ela disse que o sorbitol não fermenta; o Katzung o põe junto da lactulose. O PEG não fermenta em nenhuma fonte."],
+["PEG e macrogol",0,"Inertes, não fermentam."],
+["Hidróxido e sulfato de magnésio",0,"Sais (osmóticos salinos), não açúcares."],
+["Psyllium e metilcelulose",0,"Formadores de massa."]]},
+
+// ================= SP1 · DIARREIA & DII =================
+{id:"a01",sp:"dia",tag:"caiu",ref:"T7 Q12-III · T4 Q2 · T9 Q10",q:"Sobre a racecadotrila, assinale a correta.",o:[
+["Inibe as encefalinASES, aumentando a meia-vida das encefalinas, que ↓ a secreção de água",1,"Pegadinha nº 1 da UC: encefalinAS × encefalinASES."],
+["Inibe as encefalinAS, aumentando a meia-vida das encefalinases, que ↓ a secreção de água",0,"Trocou as duas palavras."],
+["Bloqueia a ação das encefalinas no intestino, reduzindo a secreção de água e eletrólitos",0,"Ela PRESERVA as encefalinas."],
+["É agonista opioide μ2 que reduz a motilidade e aumenta o tônus do esfíncter anal",0,"🎧 'Não é antimotilidade.' Agonista μ2 = loperamida."]]},
+{id:"a02",sp:"dia",tag:"caiu",ref:"T4 Q2 · PM",q:"Qual a posologia da racecadotrila no adulto?",o:[
+["100 mg de 8/8 h",1,"Máx 400 mg/dia. Criança: 1,5 mg/kg 3×/dia (sachês 10 e 30 mg)."],
+["10 mg de 12/12 h",0,"Distrator antigo."],
+["30 mg de 12/12 h",0,"Distrator antigo."],
+["4 mg, depois 2 mg/evacuação",0,"Essa é a loperamida."]]},
+{id:"a03",sp:"dia",tag:"caiu",ref:"T4 Q1 · T7 Q12-V",q:"Sobre a loperamida, assinale a correta.",o:[
+["Agonista opioide μ periférico que não cruza a BHE; 4 mg e depois 2 mg/evacuação, máx 16 mg/dia.",1,"μ2 motilidade, δ secreção; ↑ tônus do esfíncter anal; pico em 3–5 h."],
+["Antagonista opioide μ periférico que não cruza a BHE; 4 mg e depois 2 mg/evacuação, máx 16 mg/dia.",0,"Nunca 'antagonista' (T4, T7)."],
+["Agonista opioide μ central que cruza a BHE; 4 mg e depois 2 mg/evacuação, máx 16 mg/dia.",0,"Quem cruza (em dose alta) é o difenoxilato."],
+["Agonista opioide μ periférico que não cruza a BHE; 4 mg e depois 2 mg/evacuação, máx 4 mg/dia.",0,"Máx 16 mg/dia."]]},
+{id:"a04",sp:"dia",tag:"caiu",ref:"T11 QD3",q:"Diarreia por intoxicação alimentar: qual fármaco é contraindicado e por quê?",o:[
+["Loperamida: retém a toxina, com risco de sepse e megacólon",1,"Também não usar em < 2 anos."],
+["SRO: a carga de sódio causa hipernatremia na intoxicação",0,"SRO é indicado em toda diarreia."],
+["Zinco: imunossupressão e piora da infecção intestinal",0,"Zinco é imunomodulador."],
+["Carvão ativado: adsorve a toxina e prolonga a diarreia",0,"Adsorver a toxina é a indicação dele."]]},
+{id:"a05",sp:"dia",tag:"caiu",ref:"T5 QD5 · T7 QD1 · Ativ T6",q:"Diarreia crônica pós-colecistectomia refratária à colestiramina. Qual a escolha (eficácia, segurança, acesso)?",o:[
+["Loperamida",1,"Está no SUS e serve para quase toda diarreia crônica."],
+["Alosetrona",0,"Na T5 QD5 levou X: alosetrona é para SII-D."],
+["Racecadotrila",0,"Diarreia secretora aguda; cara."],
+["Sulfassalazina",0,"DII com infecção."]]},
+{id:"a06",sp:"dia",tag:"caiu",ref:"Ativ T5 · T7 Q12-II",q:"Sobre a colestiramina, assinale a correta.",o:[
+["Resina que sequestra sais biliares; 4 g até 4×/dia por no máximo 2–3 meses",1,"Risco de hipovitaminose A, D, E, K. 🎧 Desmame em 3–4 meses."],
+["Resina que inibe a secreção de água; 4 g até 4×/dia por no máximo 2–3 meses",0,"Ativ T5 (falsa): ela sequestra sais biliares."],
+["Resina que sequestra sais biliares; 4 mg 3×/dia por tempo indeterminado",0,"É 4 g (no caderno estava 4 mg) e tem limite de tempo."],
+["Resina absorvida que age no fígado; 4 g até 4×/dia por no máximo 2–3 meses",0,"Fica no lúmen e sai nas fezes."]]},
+{id:"a07",sp:"dia",tag:"caiu",ref:"T5 Q6 · T4 Q3 · T9 Q8-I",q:"Sobre o SRO de osmolaridade reduzida, assinale a correta.",o:[
+["Contém Na, K, Cl, citrato e glicose; ↓ vômitos e hipernatremia; indicado em toda diarreia",1,"Na 75 / glicose 75. Vômito intenso → SF 0,9% IV."],
+["Contém Na, K, sacarose e magnésio; ↓ vômitos e hipernatremia; indicado em toda diarreia",0,"T5 Q6 (falsa): sem sacarose e sem magnésio."],
+["Contém Na, K, Cl, citrato e glicose; causa hiponatremia e hipoglicemia na criança",0,"Reduz a HIPERnatremia."],
+["Contém Na, K, Cl, citrato e glicose; indicado só na diarreia secretora",0,"Em TODA diarreia."]]},
+{id:"a08",sp:"dia",tag:"caiu",ref:"T11 Q13-I · T9 Q8-II",q:"Sobre o zinco na diarreia infantil, assinale a correta.",o:[
+["< 6 meses 10 mg/dia; > 6 meses 20 mg/dia; por 10–14 dias",1,"Imunomodulador e antissecretor. 🎧 Na aula: '10 a 20 dias'."],
+["< 6 meses 20 mg/dia; > 6 meses 10 mg/dia; por 10–14 dias",0,"Invertido."],
+["100 mcg/dia por 3 dias, só na diarreia bacteriana",0,"T9 Q8-II (falsa); e serve na viral."],
+["< 6 meses 10 mg/dia; > 6 meses 20 mg/dia; por 3 dias",0,"São 10–14 dias."]]},
+{id:"a09",sp:"dia",tag:"caiu",ref:"T4 Q2-I · T9 Q8-V · T11 Q10",q:"Sobre a alosetrona, assinale a correta.",o:[
+["Antagonista 5-HT3 que ↓ a resposta vagal; SII com diarreia; 1 mg/dia",1,"EA constipação. Alivia, não cura. Katzung: risco de colite isquêmica."],
+["Antagonista 5-HT3 que ↑ a atividade vagal; SII com diarreia; 1 mg/dia",0,"T4 Q2-I (falsa)."],
+["Agonista 5-HT4 que ↓ a resposta vagal; SII com diarreia; 1 mg/dia",0,"Agonista 5-HT4 = prucaloprida."],
+["Antagonista 5-HT3 que ↓ a resposta vagal; diarreia infecciosa aguda",0,"Só SII-D."]]},
+{id:"a10",sp:"dia",tag:"caiu",ref:"slide · tabela",q:"Por que o difenoxilato é associado à atropina?",o:[
+["Para desestimular o abuso, pois cruza a BHE em dose alta",1,"A atropina também é antiespasmódica (diarreia com cólica)."],
+["Para potencializar a analgesia opioide em dose usual",0,"Não tem analgesia na dose usual."],
+["Para reduzir a constipação causada pelo difenoxilato",0,"A atropina também constipa."],
+["Porque a atropina é agonista μ e soma o efeito",0,"Atropina é antimuscarínica."]]},
+{id:"a11",sp:"dia",tag:"caiu",ref:"T6 Q2-I · T7 Q12-I",q:"Sobre o carvão ativado, assinale a correta.",o:[
+["Adsorve toxinas no lúmen; indicado em intoxicação leve, não em infecção",1,"250 mg. 🎧 1–2 cp com água."],
+["Mata as bactérias no lúmen; indicado na infecção alimentar bacteriana",0,"Não é antibacteriano."],
+["Adsorve toxinas no lúmen; seguro mesmo com suspeita de obstrução",0,"Contraindicado na obstrução."],
+["É absorvido e neutraliza as toxinas já presentes no sangue",0,"Não é absorvido."]]},
+{id:"a12",sp:"dia",tag:"caiu",ref:"T11 Q13-IV · Ativ T5",q:"Sobre os probióticos, assinale a correta.",o:[
+["Microrganismos vivos que devem ser associados a fibras solúveis",1,"S. boulardii, L. GG. Simbiótico = pro + prebiótico (FOS)."],
+["Microrganismos vivos que devem ser associados a fibras insolúveis",0,"Ativ T5 (falsa)."],
+["Componentes alimentares não digeríveis que nutrem a microbiota",0,"Isso é prebiótico."],
+["Fibras fermentáveis que inibem patógenos e têm efeito trófico",0,"T11 Q13-III misturava pré e pró."]]},
+{id:"a13",sp:"dia",tag:"caiu",ref:"T11 QD2 · T5 Q11",q:"Paciente com DII e biópsia mostrando colonização por bactérias patogênicas. Qual o fármaco indicado?",o:[
+["Sulfassalazina",1,"Azorredutase → mesalazina + sulfapiridina (antimicrobiana). 🎧 Infecção latente: o antibiótico de 7 dias não basta."],
+["Mesalazina",0,"Só anti-inflamatória."],
+["Olsalazina",0,"Libera 2 mesalazinas (sem antimicrobiano)."],
+["Loperamida",0,"Na DII ativa → megacólon tóxico."]]},
+{id:"a14",sp:"dia",tag:"caiu",ref:"T6 Q15 · T9 Q1-I",q:"Sobre o mecanismo dos aminossalicilatos (5-ASA), assinale a correta.",o:[
+["Ação tópica na mucosa: ⊣ COX e ⊣ NF-κB, ⊣ linfócitos e macrófagos",1,"Também remove radicais livres. Contraindicado em alergia grave a salicilato."],
+["Ação tópica na mucosa: ⊣ fosfolipase A2 e ⊣ NF-κB",0,"T6 Q15-III (falsa): não inibe PLA2."],
+["Ação sistêmica: ⊣ COX-2 seletiva, como os coxibes",0,"T9 Q1-I (falsa): é ação tópica."],
+["Ação sistêmica: antagonismo de receptores de leucotrienos na mucosa",0,"Não."]]},
+{id:"a15",sp:"dia",tag:"caiu",ref:"PM T4 Q3 · T7 Q7",q:"Sobre as formas de 5-ASA, assinale a correta.",o:[
+["Mesalazina é pH-dependente; sulfassalazina e olsalazina dependem da azorredutase",1,"Mesalazina abre em pH 7–8 (íleo/cólon)."],
+["Mesalazina depende da azorredutase; sulfassalazina e olsalazina são pH-dependentes",0,"Pegadinha da PM: invertido."],
+["Olsalazina libera sulfapiridina; sulfassalazina libera duas mesalazinas",0,"Invertido."],
+["Sulfassalazina é quase toda absorvida no delgado, antes do cólon",0,"Molécula grande, pouco absorvida."]]},
+{id:"a16",sp:"dia",tag:"caiu",ref:"slide · aula 04/09",q:"Sobre a simeticona, assinale a correta.",o:[
+["Rompe as bolhas de gás; não é absorvida; não resolve o gás da laparoscopia",1,"🎧 Gás da laparoscopia está na cavidade: deambular. Segura do neonato ao idoso."],
+["Rompe as bolhas de gás; é absorvida e interage pela CYP3A4",0,"Não é absorvida."],
+["Rompe as bolhas de gás; é a escolha para o gás pós-laparoscopia na enfermaria",0,"Não serve para esse gás."],
+["Bloqueia receptores 5-HT3 e reduz a produção de gás",0,"Age só fisicamente nas bolhas."]]},
+{id:"a17",sp:"dia",tag:"caiu",ref:"slide · tabela",q:"Sobre o subsalicilato de bismuto na diarreia, assinale a correta.",o:[
+["Antissecretor, anti-inflamatório e antimicrobiano; escurece fezes e língua",1,"Diarreia do viajante; também entra no esquema do H. pylori."],
+["Antissecretor e antagonista 5-HT3; escurece fezes e língua",0,"Não é 5-HT3."],
+["Pró-cinético e antimicrobiano; clareia as fezes",0,"Não é pró-cinético; escurece as fezes."],
+["Antissecretor e antimicrobiano; contraindicado na diarreia do viajante e no H. pylori",0,"É uma das indicações."]]},
+
+// ================= HEPATO & PÂNCREAS =================
+{id:"h01",sp:"hep",tag:"caiu",ref:"T11 Q14",q:"Colangite → ____; esteatose hepática → ____.",o:[
+["ácido ursodesoxicólico; silimarina",1,"Cai em sequência."],
+["silimarina; ácido ursodesoxicólico",0,"Invertido."],
+["boldo; pancreatina",0,"Boldo é colerético; pancreatina é enzima."],
+["pancreatina; boldo",0,"Sem relação."]]},
+{id:"h02",sp:"hep",tag:"caiu",ref:"T9 Q4 · PM Q11",q:"Sobre o ácido ursodesoxicólico, assinale a correta.",o:[
+["↓ secreção de colesterol e dissolve cálculos de colesterol; não é 1ª linha (é a cirurgia)",1,"↑ fluxo biliar; meia-vida ~100 h."],
+["↓ secreção de colesterol e dissolve cálculos pigmentares de bilirrubina em poucos meses",0,"Só cálculos de colesterol."],
+["É o hepatoprotetor de escolha na esteatose alcoólica, por sua potente ação antioxidante",0,"Esteatose = silimarina."],
+["↓ secreção de colesterol; meia-vida de 1 h, por isso várias doses ao dia",0,"~100 h (êntero-hepático)."]]},
+{id:"h03",sp:"hep",tag:"caiu",ref:"T9 Q4 · slide",q:"Sobre o boldo e a alcachofra, assinale a correta.",o:[
+["Coleréticos: ↑ secreção de sais biliares; não são hepatoprotetores",1,"Alcaloides; favorecem a digestão de gordura."],
+["Hepatoprotetores: ↓ peroxidação lipídica e ↑ glutationa",0,"Isso é a silimarina."],
+["Coleréticos: dissolvem cálculos de colesterol na vesícula biliar em meses",0,"Isso é o UDCA."],
+["Hepatoprotetores: inibem o NF-κB e reduzem a esteatose",0,"Silimarina."]]},
+{id:"h04",sp:"hep",tag:"caiu",ref:"T11 Q14 · slide",q:"Sobre a silimarina (cardo mariano), assinale a correta.",o:[
+["Antioxidante: ↓ peroxidação lipídica, ↑ glutationa e SOD, ⊣ NF-κB",1,"🎧 Silimarina = conjunto de moléculas do cardo mariano. 280–420 mg/dia ÷ 3."],
+["Colerética: ↑ secreção de sais biliares, sem ação antioxidante",0,"Boldo."],
+["Inibe a secreção e a absorção intestinal de colesterol",0,"UDCA."],
+["Repõe lipase, amilase e protease na insuficiência pancreática",0,"Pancreatina."]]},
+{id:"h05",sp:"hep",tag:"caiu",ref:"PM Q11",q:"Sobre a pancreatina (Creon®, Pankreoflat®), assinale a correta.",o:[
+["Repõe lipase, amilase e protease; dose alta → hiperuricemia",1,"Cápsula entérica, junto das refeições."],
+["Estimula o pâncreas a secretar lipase, amilase e protease",0,"É reposição."],
+["Repõe lipase e amilase; dose alta → hipouricemia",0,"Hiperuricemia/hiperuricosúria."],
+["Repõe lipase, amilase e protease; tomar longe das refeições",0,"Junto das refeições."]]},
+{id:"h06",sp:"hep",tag:"caiu",ref:"slide · raio-X",q:"Qual a posologia do ácido ursodesoxicólico para dissolver cálculo de colesterol?",o:[
+["10 mg/kg/dia por 12 a 24 meses",1,"Dissolve até ~50% dos cálculos pequenos."],
+["300 mg em dose única semanal",0,"Tratamento diário e longo."],
+["1 g 4×/dia por 7 a 14 dias",0,"Isso lembra o sucralfato."],
+["10 mg/kg/dia por 2 semanas",0,"Leva meses a anos."]]}
+];
+
+const $=id=>document.getElementById(id);
+const KEY="uc14quiz_err_v1";
+let ERR=new Set();
+try{const s=localStorage.getItem(KEY);if(s)ERR=new Set(JSON.parse(s));}catch(e){}
+function saveErr(){try{localStorage.setItem(KEY,JSON.stringify([...ERR]));}catch(e){}}
+const TAGS={caiu:"Já caiu",aula:"🎧 Da aula",katz:"📖 Katzung"};
+let modo="treino",filtro="all",fila=[],idx=0,ok=0,err=0,erradas=[],resp=[],respondida=false,escolha=-1;
+function base(k){
+  if(k==="all")return QS;
+  if(k==="err")return QS.filter(q=>ERR.has(q.id));
+  if(k.startsWith("t:"))return QS.filter(q=>q.tag===k.slice(2));
+  return QS.filter(q=>q.sp===k);
+}
+function buildChips(){
+  if(modo==="sim"){$("chips").hidden=true;return;}
+  $("chips").hidden=false;
+  if(filtro==="err"&&!ERR.size)filtro="all";
+  const list=[["all","Todas"]].concat(Object.keys(SPS).map(k=>[k,SPS[k].n]),[["t:caiu","Já caiu"],["t:aula","🎧 Da aula"],["t:katz","📖 Katzung"]]);
+  if(ERR.size)list.push(["err","❌ Minhas erradas"]);
+  $("chips").innerHTML=list.map(([k,n])=>`<button type="button" class="chip${k===filtro?" on":""}${k==="err"?" errchip":""}" data-k="${k}" aria-pressed="${k===filtro}">${n} <span class="n">${base(k).length}</span></button>`).join("");
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;start();});
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function prep(q){return {q,ord:shuffle([0,1,2,3])};}
+function simulado(){
+  const peso={dis:4,eme:4,con:3,dia:2,hep:1};let out=[];
+  for(const k in peso)out=out.concat(shuffle(QS.filter(q=>q.sp===k)).slice(0,peso[k]));
+  return shuffle(out);
+}
+function start(lista){
+  let qs=lista?lista:(modo==="sim"?simulado():shuffle(base(filtro).slice()));
+  fila=qs.map(prep);idx=0;ok=0;err=0;erradas=[];resp=[];
+  $("fim").hidden=true;$("qcard").hidden=false;
+  $("simnote").hidden=modo!=="sim";$("score").hidden=modo==="sim";
+  buildChips();mostra();
+}
+function mostra(){
+  respondida=false;escolha=-1;
+  if(idx>=fila.length)return fim();
+  const {q,ord}=fila[idx];
+  $("bSp").textContent=SPS[q.sp].n;$("bSp").style.background=SPS[q.sp].cor;
+  $("bTag").className="tag "+q.tag;$("bTag").textContent=TAGS[q.tag]+(q.ref?" · "+q.ref:"");
+  $("stem").textContent=q.q;
+  $("opts").innerHTML=ord.map((oi,i)=>`<button type="button" class="opt" data-i="${i}"><span class="L">${"ABCD"[i]}</span><span><span class="tx"></span><span class="why" hidden></span></span></button>`).join("");
+  [...$("opts").children].forEach((b,i)=>{const o=q.o[ord[i]];b.querySelector(".tx").textContent=o[0];b.querySelector(".why").textContent=o[2];b.onclick=()=>escolhe(i);});
+  $("btnNext").disabled=true;$("btnNext").textContent=idx===fila.length-1?"Ver resultado":"Próxima →";
+  $("pos").textContent=(idx+1)+" / "+fila.length;
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+  $("progBar").style.width=(fila.length?idx/fila.length*100:0)+"%";
+}
+function escolhe(i){
+  if(respondida)return;
+  const {q,ord}=fila[idx];
+  if(modo==="sim"){
+    escolha=i;[...$("opts").children].forEach((b,j)=>b.classList.toggle("sel",j===i));
+    $("btnNext").disabled=false;return;
+  }
+  respondida=true;escolha=i;corrige(q,ord,i);
+  [...$("opts").children].forEach((b,j)=>{b.disabled=true;b.querySelector(".why").hidden=false;
+    if(q.o[ord[j]][1])b.classList.add("ok");else if(j===i)b.classList.add("bad");});
+  $("btnNext").disabled=false;$("btnNext").focus({preventScroll:true});
+}
+function corrige(q,ord,i){
+  const acertou=q.o[ord[i]][1]===1;
+  if(acertou){ok++;ERR.delete(q.id);}else{err++;erradas.push(q);ERR.add(q.id);}
+  resp.push({q,ord,i,acertou});saveErr();
+  $("nOk").textContent=ok;$("nErr").textContent=err;
+}
+function proxima(){
+  if(modo==="sim"){if(escolha<0)return;const {q,ord}=fila[idx];corrige(q,ord,escolha);}
+  else if(!respondida)return;
+  idx++;mostra();
+}
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
+function fim(){
+  $("qcard").hidden=true;$("fim").hidden=false;$("progBar").style.width="100%";
+  const total=ok+err;
+  if(modo==="sim"){
+    const nota=(ok*0.43).toFixed(2).replace(".",",");
+    $("fimTitulo").textContent=`Simulado: ${ok}/${total}`;
+    $("fimTexto").textContent=`Nota nas objetivas ≈ ${nota} de 6,02 (14 × 0,43). Confira a correção abaixo.`;
+  }else{
+    $("fimTitulo").textContent=err===0?"🏆 Zerou!":`Rodada: ${ok}/${total}`;
+    $("fimTexto").textContent=err===0?"Tudo certo nessa leva.":`${err} para refazer — vai nelas até zerar.`;
+  }
+  const by={};resp.forEach(r=>{const k=r.q.sp;by[k]=by[k]||[0,0];by[k][1]++;if(r.acertou)by[k][0]++;});
+  $("bysp").innerHTML=Object.keys(SPS).filter(k=>by[k]).map(k=>`<div class="row"><span>${SPS[k].n}</span><b>${by[k][0]}/${by[k][1]}</b></div>`).join("");
+  $("btnErradas").hidden=!err;
+  $("review").innerHTML=modo==="sim"?resp.map((r,n)=>{
+    const c=r.ord.findIndex(oi=>r.q.o[oi][1]===1);const sua=r.q.o[r.ord[r.i]];const cor=r.q.o[r.ord[c]];
+    return `<div class="rv ${r.acertou?"ok":"bad"}"><div class="rq">${n+1}. ${esc(r.q.q)}</div>`+
+      `<div class="ra">${r.acertou?"✅":"❌"} Sua: <b>${"ABCD"[r.i]})</b> ${esc(sua[0])}</div>`+
+      (r.acertou?"":`<div class="ra">Certa: <b>${"ABCD"[c]})</b> ${esc(cor[0])}</div>`)+
+      `<div class="ra">${esc(r.acertou?cor[2]:sua[2]+" · "+cor[2])}</div></div>`;}).join(""):"";
+  buildChips();
+}
+function setModo(m){
+  modo=m;$("mTreino").classList.toggle("on",m==="treino");$("mSim").classList.toggle("on",m==="sim");
+  $("mTreino").setAttribute("aria-selected",m==="treino");$("mSim").setAttribute("aria-selected",m==="sim");
+  start();
+}
+$("mTreino").onclick=()=>setModo("treino");
+$("mSim").onclick=()=>setModo("sim");
+$("btnNext").onclick=proxima;
+$("btnErradas").onclick=()=>{const l=erradas.slice();modo="treino";$("mTreino").classList.add("on");$("mSim").classList.remove("on");start(l);};
+$("btnReiniciar").onclick=()=>start();
+document.addEventListener("keydown",e=>{
+  if($("qcard").hidden)return;
+  const k=e.key.toLowerCase();
+  if(k==="enter"&&e.target&&e.target.tagName==="BUTTON")return;const m={"1":0,"2":1,"3":2,"4":3,"a":0,"b":1,"c":2,"d":3}[k];
+  if(m!==undefined&&!e.metaKey&&!e.ctrlKey){escolhe(m);}
+  if((k==="enter"||k==="arrowright")&&!$("btnNext").disabled){e.preventDefault();proxima();}
+});
+start();
+</script>
+
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body>
+</html>

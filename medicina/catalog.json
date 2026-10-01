@@ -364,8 +364,17 @@
     "materia": "Farmacologia",
     "titulo": "Mecanismos Farmaco UC14",
     "tipo": "flashcards",
-    "data": "2026-09-29",
+    "data": "2026-09-30",
     "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-flashcards-mecanismo.html",
     "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Flashcards_Mecanismo.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "Questões ABCD Farmaco UC14",
+    "tipo": "banco",
+    "data": "2026-09-30",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-questoes-abcd.html",
+    "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Questoes_ABCD.html"
   }
 ]
