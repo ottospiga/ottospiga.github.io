@@ -157,6 +157,21 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--teal);padding:6p
 figure.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
 figure.fig .pl{background:var(--plate);border-radius:10px;padding:6px;overflow-x:auto}
 figure.fig svg{width:100%;height:auto;display:block;min-width:300px}
+/* classes dos esquemas (vêm do guia new_farmaco_uc14); a placa é clara nos dois temas */
+figure.fig .pl{--x-ink:#16202a;--x-ink2:#59666f;--x-ink3:#6f7d8a;--x-ok:#0f6a46;--x-okbg:#ecf9f2;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#0a5f8a;--x-accsoft:#e4eef5;--x-accink:#fff;--x-trap:#6f5511;--x-line2:#eaeff3;--x-panel:#fff}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg text{font-family:var(--body)}
+figure.fig .pl{--x-trapbg:#fdf8ea}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+.figs{grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr))!important}
+figure.fig svg{min-width:520px!important}
 figure.fig figcaption{font-size:.84rem;color:var(--muted)}
 
 /* tabela */
