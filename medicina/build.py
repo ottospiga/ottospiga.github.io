@@ -40,6 +40,7 @@ MATERIA_NAMES = {
     "anato-fisio": "Anatomia + Fisiologia",
     "pato": "Patologia",
     "farmaco": "Farmacologia",
+    "fisio": "Fisiologia",
     "lab": "Laboratório",
     "procedimentos": "Procedimentos",
     "clinica": "Clínica",
