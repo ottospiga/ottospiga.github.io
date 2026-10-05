@@ -376,5 +376,14 @@
     "data": "2026-09-30",
     "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-questoes-abcd.html",
     "origem": "5_fase/UC14/Farmaco/UC14_Farmaco_Questoes_ABCD.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Farmacologia",
+    "titulo": "UC14 · Farmaco · Central da matéria (Raio-X, Resumo, Tabela, Questões)",
+    "tipo": "guia-prova",
+    "data": "2026-10-05",
+    "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-central-guia.html",
+    "origem": ""
   }
 ]
