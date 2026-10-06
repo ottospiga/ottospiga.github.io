@@ -394,5 +394,14 @@
     "data": "2026-10-05",
     "arquivo": "5-fase/uc14/fisio/uc14-fisio-central-guia.html",
     "origem": ""
+  },
+  {
+    "uc": "UC15",
+    "materia": "Farmacologia",
+    "titulo": "UC15 · Farmaco · Central da matéria (Raio-X, Resumo, Tabela, Questões)",
+    "tipo": "guia-prova",
+    "data": "2026-10-06",
+    "arquivo": "5-fase/uc15/farmaco/uc15-farmaco-central-guia.html",
+    "origem": ""
   }
 ]

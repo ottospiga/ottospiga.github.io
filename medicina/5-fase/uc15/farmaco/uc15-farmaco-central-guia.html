@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UC15 · Farmaco · Central da matéria (Raio-X, Resumo, Tabela, Questões)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap">
+<style>
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}
+
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}
+/* UC15 · Layout: página-central da matéria — rail fixo com as 6 abas do molde à esquerda, conteúdo à direita; no celular o rail vira faixa rolável no topo. Mesma identidade teal dos guias UC13/UC14 e da Dose Diária. */
+:root{
+  --paper:#eef4f3;--card:#ffffff;--ink:#10262b;--muted:#566e76;--line:#d3e1df;
+  --teal:#0e7490;--teal-ink:#ffffff;--tealsoft:#d9eff2;--teal-deep:#0b5a70;
+  --ok:#15803d;--oksoft:#e2f3e7;--bad:#c2410c;--badsoft:#fcebe1;--amber:#b45309;--ambersoft:#fcefd6;
+  --sp1:#0369a1;--sp2:#6d28d9;--sp3:#be185d;--sp4:#b45309;--sp5:#047857;--hl:#d9c6ff;--bub:#6d28d9;
+  --plate:#ffffff;
+  --shadow:0 1px 0 rgba(16,38,43,.06),0 6px 20px -12px rgba(16,38,43,.28);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--paper:#0c1a1d;--card:#132629;--ink:#e2eef0;--muted:#94abb2;--line:#253c42;
+  --teal:#2bb6cc;--teal-ink:#06262d;--tealsoft:#123a42;--teal-deep:#7fd9e6;
+  --ok:#4ade80;--oksoft:#12311f;--bad:#fb923c;--badsoft:#3a2115;--amber:#fbbf24;--ambersoft:#372a10;
+  --sp1:#7cc4f0;--sp2:#b8a2f5;--sp3:#f39cc4;--sp4:#f5c46b;--sp5:#6ee7b7;--hl:#4c3a7a;--bub:#8b5cf6;--plate:#f4f7f7;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--paper:#0c1a1d;--card:#132629;--ink:#e2eef0;--muted:#94abb2;--line:#253c42;
+  --teal:#2bb6cc;--teal-ink:#06262d;--tealsoft:#123a42;--teal-deep:#7fd9e6;
+  --ok:#4ade80;--oksoft:#12311f;--bad:#fb923c;--badsoft:#3a2115;--amber:#fbbf24;--ambersoft:#372a10;
+  --sp1:#7cc4f0;--sp2:#b8a2f5;--sp3:#f39cc4;--sp4:#f5c46b;--sp5:#6ee7b7;--hl:#4c3a7a;--bub:#8b5cf6;--plate:#f4f7f7;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 56px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+a{color:var(--teal)}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 20px;padding-block:22px 16px}
+.crumb{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.crumb span{color:var(--teal-deep)}
+.top h1{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;letter-spacing:-.025em;margin-top:2px}
+.top h1 small{font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted);letter-spacing:0;margin-left:8px}
+.topr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:.85rem;background:var(--card);border:1px solid var(--line);white-space:nowrap;text-decoration:none;color:var(--ink)}
+.pill.amb{background:var(--ambersoft);border-color:transparent;color:var(--amber);font-weight:700}
+.pill.go{background:var(--teal);color:var(--teal-ink);border-color:transparent;font-weight:700}
+.proto{font-size:.82rem;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:16px}
+
+/* shell */
+.shell{display:grid;grid-template-columns:214px minmax(0,1fr);gap:24px;align-items:start}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;flex-direction:column;gap:4px}
+.tab{display:grid;grid-template-columns:22px 1fr;gap:2px 10px;align-items:center;text-align:left;border:0;background:transparent;border-radius:12px;padding:10px 12px}
+.tab:hover{background:var(--card)}
+.tab .ix{grid-row:span 2;font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--muted)}
+.tab b{font-weight:700;font-size:.98rem}
+.tab small{font-size:.76rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--card);box-shadow:var(--shadow)}
+.tab[aria-selected="true"] .ix,.tab[aria-selected="true"] b{color:var(--teal)}
+.railnote{font-size:.76rem;color:var(--muted);padding:12px;line-height:1.45}
+@media (max-width:820px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:14px}
+  .rail{flex-direction:row;overflow-x:auto;top:env(safe-area-inset-top,0px);background:var(--paper);z-index:5;padding-block:8px;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  .tab{flex:none;grid-template-columns:auto;padding:8px 12px}
+  .tab .ix,.tab small{display:none}
+  .railnote{display:none}
+}
+main{min-width:0}
+.pane[hidden]{display:none}
+.lede{color:var(--muted);max-width:68ch;margin:6px 0 18px}
+.pane>h2{font-size:1.7rem;letter-spacing:-.015em}
+.sec{margin-top:28px}
+.sec>h3{font-size:1.15rem;margin-bottom:10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec>h3 small{font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.grid2{grid-template-columns:minmax(0,1fr)}}
+ul.clean{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+/* chips & controls */
+.ctl{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row>.eyebrow{min-width:64px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 11px;font-size:.86rem;display:inline-flex;gap:6px;align-items:center}
+.chip .c{font-size:.72rem;background:var(--tealsoft);color:var(--teal-deep);border-radius:999px;padding:1px 7px;font-weight:700}
+.chip[aria-pressed="true"]{border-color:var(--teal);background:var(--tealsoft);font-weight:700}
+.chip[disabled]{opacity:.4;cursor:default}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:transparent;padding:7px 14px;font-size:.88rem}
+.seg button[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink);font-weight:700}
+.search{flex:1;min-width:180px;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:8px 12px}
+.count{font-size:.88rem;color:var(--muted)}
+.count b{color:var(--ink)}
+.btn{border:0;border-radius:12px;padding:10px 16px;font-weight:700;background:var(--teal);color:var(--teal-ink);box-shadow:0 3px 0 var(--teal-deep);text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--teal-deep)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.lnk{border:0;background:none;padding:0;color:var(--teal);font-weight:700;font-size:.86rem;text-decoration:underline;text-underline-offset:3px}
+.sp{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:6px;border:1.5px solid currentColor}
+.sp1{color:var(--sp1)}.sp2{color:var(--sp2)}.sp3{color:var(--sp3)}.sp4{color:var(--sp4)}
+
+/* raio-x */
+.weights{display:flex;height:34px;border-radius:10px;overflow:hidden;gap:2px}
+.weights div{display:flex;align-items:center;padding-inline:8px;font-size:.78rem;font-weight:700;color:var(--card);white-space:nowrap;overflow:hidden;min-width:0}
+.wlegend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;margin-top:8px;color:var(--muted)}
+.wlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.trick{display:flex;flex-direction:column;gap:6px}
+.trick h4{font-size:1rem}
+.trick p{margin:0;font-size:.92rem;color:var(--muted)}
+.swap{font-size:.9rem;display:flex;flex-wrap:wrap;gap:6px}
+.swap span{background:var(--paper);border-radius:8px;padding:2px 8px}
+.swap s{color:var(--bad);text-decoration-thickness:2px}
+.spblock{border-top:1px solid var(--line);padding-block:18px 4px}
+.spblock:first-child{border-top:0;padding-top:4px}
+.spblock header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.spblock h4{font-size:1.2rem}
+.hit{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;padding:7px 0;font-size:.94rem}
+.star{font-family:var(--display);font-weight:800;color:var(--amber);font-size:1rem;text-align:right}
+.may{font-size:.92rem;padding-left:18px;margin:6px 0 0;display:flex;flex-direction:column;gap:5px}
+.peg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.peg:last-child{border-bottom:0}
+.peg .x{color:var(--bad);font-weight:700}
+.peg .x::before{content:"✗ ";}
+.peg .v::before{content:"✓ ";color:var(--ok);font-weight:700}
+.peg .e{grid-column:1/-1;font-size:.8rem;color:var(--muted)}
+@media (max-width:640px){.peg{grid-template-columns:minmax(0,1fr)}}
+.fl{padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.fl:last-child{border-bottom:0}
+.fl small{color:var(--muted);display:block;font-size:.76rem}
+details.more summary{cursor:pointer;font-weight:700;color:var(--teal);padding:6px 0}
+
+/* resumo */
+.pdfcard{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:center}
+.pdfcard img{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--plate)}
+@media (max-width:560px){.pdfcard{grid-template-columns:minmax(0,1fr)}.pdfcard img{max-width:150px}}
+.heat{display:inline-flex;gap:14px;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:5px}
+.d1{background:#fde68a}.d2{background:#fb923c}.d4{background:#dc2626}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px}
+.th{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);font-size:.78rem}
+.th img{width:100%;aspect-ratio:1/1.414;object-fit:cover;object-position:top;border-radius:6px;border:1px solid var(--line);background:var(--plate);transition:transform .12s}
+.th:hover img{transform:translateY(-2px);border-color:var(--teal)}
+.th .m{display:flex;justify-content:space-between;color:var(--muted)}
+.th .m b{color:var(--amber)}
+.top14{width:100%;border-collapse:collapse;font-size:.92rem}
+.top14 td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.top14 td:first-child{font-family:var(--display);font-weight:800;color:var(--amber);width:28px;text-align:right}
+.top14 td.pv{font-size:.78rem;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+@media (max-width:420px){.figs{grid-template-columns:minmax(0,1fr)}}
+figure.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.fig .pl{background:var(--plate);border-radius:10px;padding:6px;overflow-x:auto}
+figure.fig svg{width:100%;height:auto;display:block;min-width:300px}
+/* classes dos esquemas (vêm do guia new_farmaco_uc14); a placa é clara nos dois temas */
+figure.fig .pl{--x-ink:#16202a;--x-ink2:#59666f;--x-ink3:#6f7d8a;--x-ok:#0f6a46;--x-okbg:#ecf9f2;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#0a5f8a;--x-accsoft:#e4eef5;--x-accink:#fff;--x-trap:#6f5511;--x-line2:#eaeff3;--x-panel:#fff}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg text{font-family:var(--body)}
+figure.fig .pl{--x-trapbg:#fdf8ea}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+.figs{grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr))!important}
+figure.fig svg{min-width:520px!important}
+figure.fig figcaption{font-size:.84rem;color:var(--muted)}
+
+/* tabela */
+.tblwrap{overflow-x:auto;background:var(--card);border-radius:var(--r);border:1px solid var(--line)}
+table.drugs{border-collapse:collapse;width:100%;font-size:.86rem;min-width:940px}
+table.drugs th{position:sticky;top:0;background:var(--card);text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px;border-bottom:2px solid var(--line)}
+table.drugs td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.drugs tr.g td{background:var(--paper);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-deep)}
+table.drugs td.nm{font-weight:700;min-width:150px}
+table.drugs tr.off td{opacity:.5}
+table.compact{min-width:620px}
+.sus{font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.sus.sim{background:var(--oksoft);color:var(--ok)}.sus.nao{background:var(--badsoft);color:var(--bad)}
+.qlinks{display:flex;flex-direction:column;gap:4px;white-space:nowrap}
+
+/* questões */
+.qbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:4;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:1.5px solid var(--teal);border-radius:14px;padding:10px 14px;margin-bottom:12px;box-shadow:var(--shadow)}
+@media (max-width:820px){.qbar{top:calc(env(safe-area-inset-top,0px) + 58px)}}
+.qbar .timer{font-family:var(--display);font-weight:800;font-size:1.2rem}
+.qlist{display:flex;flex-direction:column;gap:14px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.qh{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:10px;font-size:.8rem;color:var(--muted)}
+.qh .src{font-weight:700;color:var(--ink)}
+.selo{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:var(--tealsoft);color:var(--teal-deep)}
+.selo.OF{background:var(--oksoft);color:var(--ok)}
+.selo.IN,.selo.AU{background:var(--ambersoft);color:var(--amber)}
+.selo.err{background:var(--badsoft);color:var(--bad)}
+.qe{font-size:1.02rem;max-width:72ch}
+.itens{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.itens li{background:var(--paper);border-radius:10px;padding:8px 12px}
+.itens li.pq{background:none;text-align:center;font-weight:700;letter-spacing:.08em;padding:0}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.opt{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.95rem;line-height:1.42}
+.opt:hover:not([disabled]){border-color:var(--teal)}
+.opt .L{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:.8rem;color:var(--muted)}
+.opt[disabled]{cursor:default}
+.opt.sel{border-color:var(--teal);background:var(--tealsoft)}
+.opt.right{border-color:var(--ok);background:var(--oksoft)}
+.opt.right .L{background:var(--ok);border-color:var(--ok);color:var(--card)}
+.opt.wrong{border-color:var(--bad);background:var(--badsoft)}
+.opt.wrong .L{background:var(--bad);border-color:var(--bad);color:var(--card)}
+.opt .oc{grid-column:2;font-size:.84rem;color:var(--muted);margin-top:4px}
+.fb{margin-top:12px;border-radius:12px;padding:12px 14px;background:var(--paper);font-size:.93rem;display:flex;flex-direction:column;gap:8px}
+.fb .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--teal-deep)}
+.fb .go{display:flex;flex-wrap:wrap;gap:8px 16px}
+.self{display:flex;gap:8px;flex-wrap:wrap}
+.empty{color:var(--muted);padding:20px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+.result{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.result b{font-family:var(--display);font-size:1.6rem}
+
+/* leitor de PDF */
+.viewer{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.vbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line)}
+.vbar .grp{display:flex;gap:6px;align-items:center}
+.ib{border:1.5px solid var(--line);background:var(--card);border-radius:10px;min-width:36px;height:36px;padding-inline:10px;font-weight:700}
+.ib:hover{border-color:var(--teal)}
+.pgin{width:52px;text-align:center;border:1.5px solid var(--line);background:var(--card);border-radius:10px;height:36px}
+.vscroll{height:min(82vh,1100px);overflow:auto;background:var(--paper);padding:14px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.vpage{background:var(--plate);box-shadow:var(--shadow);border-radius:4px;position:relative;flex:none;max-width:none}
+.vpage canvas{display:block;width:100%;height:100%;border-radius:4px}
+.vpage .pn{position:absolute;right:8px;bottom:6px;font-size:.72rem;color:#566e76;background:rgba(255,255,255,.85);padding:1px 6px;border-radius:6px}
+.vbar .count{white-space:nowrap}
+@media (max-width:560px){.vbar{gap:8px}.vbar .grp{flex-wrap:wrap;gap:4px}.ib{min-width:32px;height:32px;padding-inline:8px}.pgin{width:44px;height:32px}.vscroll{padding:8px;height:72vh}}
+.vmsg{color:var(--muted);padding:30px;text-align:center}
+.toast{font-size:.85rem;color:var(--muted)}
+
+/* uma por vez */
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.qnav .count{flex:1;text-align:center}
+.prog{height:6px;border-radius:999px;background:var(--tealsoft);overflow:hidden;margin-bottom:12px}
+.prog i{display:block;height:100%;background:var(--teal);transition:width .2s}
+.kbd{font-size:.76rem;color:var(--muted);text-align:center;margin-top:8px}
+@media (hover:none){.kbd{display:none}}
+
+/* véspera */
+.vhero{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.vhero h3{font-size:1.35rem}
+.vhero p{margin:4px 0 0;color:var(--muted)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.cdrug{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.84rem;display:flex;flex-direction:column;gap:2px;min-width:0}
+.cdrug b{font-size:.92rem}
+.cdrug span{color:var(--muted)}
+.cdrug.off{opacity:.5}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.sp5{color:var(--sp5)}.spg{color:var(--muted)}
+.bub{display:inline-grid;place-items:center;width:22px;height:22px;justify-self:start;border-radius:50%;background:var(--bub);color:#fff;font-size:.74rem;font-weight:700;font-family:var(--body);flex:none}
+.bub.pg{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--bad)}
+.st{color:var(--amber);font-weight:700}
+.hlsw{display:inline-block;width:26px;height:12px;border-radius:3px;background:var(--hl);vertical-align:-1px;margin-right:6px}
+.heat{align-items:center}.heat>span{display:inline-flex;gap:6px;align-items:center}
+.hit{grid-template-columns:30px minmax(0,1fr) auto!important;align-items:start}
+.hit .pv,.top14 .pv{display:block;font-size:.76rem;color:var(--muted)}
+.top14 td:first-child{width:34px;text-align:center}
+.th .m b{color:var(--bub)}
+.alg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.alg h4{font-size:1rem;margin-bottom:4px}.alg p{margin:0;font-size:.92rem;color:var(--muted)}
+.par{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:4px 14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.par:last-child{border-bottom:0}.par .pb{font-weight:700}
+.par .v::before{content:"✓ ";color:var(--ok);font-weight:700}.par .x{color:var(--muted)}.par .x::before{content:"✗ ";color:var(--bad);font-weight:700}
+@media (max-width:640px){.par{grid-template-columns:minmax(0,1fr)}}
+.como{margin-top:4px!important;color:var(--ink)!important}
+.sus.hosp{background:var(--tealsoft);color:var(--teal-deep)}.sus.prog{background:var(--ambersoft);color:var(--amber)}
+.rres{margin-top:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--tealsoft);border-radius:14px;padding:14px 16px}
+.rres b{font-family:var(--display);font-size:1.6rem;margin-right:10px}
+.doses td:first-child{font-family:var(--body)!important;font-weight:700!important;color:var(--ink)!important;width:auto!important;text-align:left!important;white-space:nowrap}
+.qe i,.opt i,.itens i{font-style:italic}
+.fb b{font-weight:700}
+
+</style>
+</head><body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="crumb"><a href="../../../" style="color:inherit;text-decoration:none">Medicina</a> › 5ª fase › UC15 › <span>Farmacologia</span></div>
+      <h1>Farmacologia <small>Vânia · UC15 · antimicrobianos</small></h1>
+    </div>
+    <div class="topr">
+      <span class="pill amb" id="cd">Prova 27/11</span>
+      <a class="pill go" href="https://claude.ai/artifact/MCSWuzLbhBYNU7bh2SzKTt" target="_blank" rel="noopener">Dose Diária ↗</a>
+    </div>
+  </header>
+  <div class="shell">
+    <nav class="rail" role="tablist" aria-label="Abas da matéria" id="rail"></nav>
+    <main id="main">
+      <section class="pane" id="p-raiox" hidden></section>
+      <section class="pane" id="p-resumo" hidden></section>
+      <section class="pane" id="p-tabela" hidden></section>
+      <section class="pane" id="p-antigas" hidden></section>
+      <section class="pane" id="p-treino" hidden></section>
+      <section class="pane" id="p-vespera" hidden></section>
+    </main>
+  </div>
+</div>
+<script src="central/data.js"></script>
+<script src="central/pdf.min.js"></script>
+<script>
+const U=window.UC;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const norm=s=>String(s||'').replace(/<[^>]+>/g,' ').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const SPN={1:'Uso racional · ITU baixa',2:'Sulfas · quinolonas',3:'β-lactâmicos',4:'Parede não-β · síntese proteica',5:'Tuberculose'};
+const SPS=[1,2,3,4,5];
+const spTag=n=>typeof n==='number'||/^\d$/.test(n)?`<span class="sp sp${n}">SP${n}</span>`:`<span class="sp spg">${esc(n)}</span>`;
+const PDF='central/resumo.pdf';
+const NP=U.res.pages;
+const matchQ=(q,text)=>{if(!q)return true;const t=norm(text);return norm(q).split('|').map(s=>s.trim()).filter(Boolean).some(s=>t.includes(s))};
+
+/* ---------- contagem regressiva ---------- */
+(()=>{const alvo=new Date(2026,10,27);const hoje=new Date();hoje.setHours(0,0,0,0);const d=Math.round((alvo-hoje)/864e5);
+  const el=$('#cd');if(el)el.textContent=d>1?`Prova 27/11 · faltam ${d} dias`:d===1?'Prova amanhã':d===0?'Prova hoje':'Prova 27/11'})();
+
+/* ---------- progresso (só neste navegador) ---------- */
+const KEY='uc15hub_v1';
+let PR={};try{PR=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){PR={}}
+const saveP=()=>{try{localStorage.setItem(KEY,JSON.stringify(PR))}catch(e){}};
+const mark=(id,ok)=>{PR[id]={ok,t:Date.now()};saveP()};
+
+/* ---------- abas ---------- */
+const TABS=[
+ {id:'raiox',t:'Raio-X da prova',s:'como ela pensa e engana'},
+ {id:'resumo',t:'Resumo',s:'PDF grifado · '+NP+' págs'},
+ {id:'tabela',t:'Tabela',s:U.drugs.length+' fármacos'},
+ {id:'antigas',t:'Questões antigas',s:U.banco.length+' · T1 → T11'},
+ {id:'treino',t:'Treino ABCD',s:U.abcd.length+' no estilo T11'},
+ {id:'vespera',t:'Véspera',s:'revisão do dia da prova'}
+];
+$('#rail').innerHTML=TABS.map((t,i)=>`<button class="tab" role="tab" id="tab-${t.id}" aria-controls="p-${t.id}" aria-selected="false" data-t="${t.id}"><span class="ix">${i+1}</span><b>${t.t}</b><small>${t.s}</small></button>`).join('')+
+ `<p class="railnote">O progresso das questões fica salvo neste navegador. A Dose Diária guarda o dela entre aparelhos.</p>`;
+const built={};
+function go(id,opts){
+  if(!TABS.find(t=>t.id===id))id='raiox';
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
+  document.querySelectorAll('.pane').forEach(p=>p.hidden=p.id!=='p-'+id);
+  if(!built[id]){BUILD[id]();built[id]=true}
+  window.scrollTo({top:0});
+  if(opts&&HOOK[id])HOOK[id](opts);
+  try{if(location.hash!=='#'+id)history.replaceState(null,'','#'+id)}catch(e){}
+}
+$('#rail').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)go(b.dataset.t)});
+const BUILD={},HOOK={};
+
+/* ---------- raio-X ---------- */
+const RX=U.rx;
+const TRUQUES=[
+ {h:'Semana trocada',p:'Mesma frase da gestante, só muda a idade gestacional.',x:[['nitrofurantoína com 37–38 semanas','até 36 semanas'],['"a partir de 25 semanas" (V)','"38 semanas" (F)']]},
+ {h:'Tratamento anterior trocado',p:'O fármaco que o paciente já usou decide se a quinolona ainda serve.',x:[['já usou NORfloxacino → cipro','mesma classe: falso'],['já usou nitrofurantoína → cipro','outra classe: verdadeiro']]},
+ {h:'Alergia trocada',p:'Imediata tira todo β-lactâmico; tardia devolve a cefalosporina oral.',x:[['azitromicina na alergia TARDIA','é na IMEDIATA'],['cefalexina na anafilaxia','contraindicada']]},
+ {h:'Lugar trocado',p:'Ambulatório × hospital muda o fármaco inteiro.',x:[['cefoxitina no ambulatório','é hospitalar'],['metronidazol "no hospital"','T7 × T11'],['imipenem para Pseudomonas sem ESBL','ceftazidima']]},
+ {h:'Mecanismo ou palavra emprestada',p:'Cola o mecanismo de um fármaco em outro, ou troca um prefixo.',x:[['sinergismo farmacoCINÉTICO','farmacoDINÂMICO'],['conjugados glicuronídeos','acetilados'],['"o etambutol rompe a membrana"','pirazinamida'],['vancomicina "na membrana"','transglicosilase']]},
+ {h:'Dose ou tempo trocado',p:'A dose certa de outro fármaco, ou o intervalo errado.',x:[['tigeciclina 100 mg 2×/dia','50 mg 12/12 h'],['imipenem 1 g 12/12 h','6/6–8/8 h'],['doxiciclina 200 mg','100 mg 12/12 h']]}
+];
+const SPCOL={1:'var(--sp1)',2:'var(--sp2)',3:'var(--sp3)',4:'var(--sp4)',5:'var(--sp5)'};
+function trickHTML(){return TRUQUES.map(t=>`<div class="box trick"><h4>${t.h}</h4><p>${t.p}</p><div class="swap">${t.x.map(([a,b])=>`<span><s>${esc(a)}</s>${b?' → '+esc(b):''}</span>`).join('')}</div></div>`).join('')}
+function pegHTML(list){return list.map(p=>`<div class="peg"><div class="x">${esc(p.p)}</div><div class="v">${esc(p.v)}</div><div class="e">${spTag(+p.sp.slice(2))} ${esc(p.e)}</div></div>`).join('')}
+const bub=(n,peg)=>`<span class="bub${peg?' pg':''}">${n}</span>`;
+
+BUILD.raiox=()=>{
+  const el=$('#p-raiox');
+  const tot=RX.pesos.reduce((a,b)=>a+b.all,0);
+  el.innerHTML=`<h2>Raio-X da prova</h2>
+  <p class="lede">Como a Vânia monta a prova de antimicrobianos, onde ela coloca a pegadinha e o que volta de uma turma para outra. Fonte: provas T1 a T11, o plano de melhoria de 2026 e a transcrição das aulas antigas.</p>
+  <div class="sec"><h3>Como ela monta a prova</h3><div class="box"><ul class="clean">${RX.veredito.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+  <div class="sec"><h3>Onde cai mais <small>peso de cada SP somando todas as aparições</small></h3>
+    <div class="weights">${RX.pesos.map(s=>`<div style="flex:${s.all};background:${SPCOL[s.sp]}" title="SP${s.sp} ${SPN[s.sp]}">${Math.round(s.all/tot*100)}%</div>`).join('')}</div>
+    <div class="wlegend">${RX.pesos.map(s=>`<span><i style="background:${SPCOL[s.sp]}"></i>SP${s.sp} · ${SPN[s.sp]} <b class="num">${s.novo}</b> na T10/T11</span>`).join('')}</div></div>
+  <div class="sec"><h3>Como ela pensa <small>a ordem das perguntas que decide toda questão de "qual antibiótico"</small></h3>
+    <div class="alg">${RX.algoritmo.map(a=>`<div class="box"><h4>${a.t}</h4><p>${a.x}</p></div>`).join('')}</div></div>
+  <div class="sec"><h3>Como ela faz a pegadinha <small>pega uma frase que já foi verdadeira e troca uma peça</small></h3><div class="grid2">${trickHTML()}</div></div>
+  <div class="sec"><h3>Pares mínimos <small>a mesma frase em duas provas, com uma palavra diferente</small></h3>
+    <div class="box">${RX.pares.map(p=>`<div class="par"><div class="pb">${p.base}</div><div class="v">${p.v}</div><div class="x">${p.f}</div></div>`).join('')}</div></div>
+  <div class="sec"><h3>O que já caiu, por SP <small>bolinha = em quantas provas diferentes caiu · ★ = caiu na T10 ou T11</small></h3>
+    <div class="box">${SPS.map(n=>{const L=U.res.idx.filter(e=>e.sp===n).sort((a,b)=>b.n-a.n||b.star-a.star).slice(0,8);
+      return `<div class="spblock"><header><h4>SP${n} · ${SPN[n]}</h4><button class="lnk" data-train="${n}">Treinar as antigas desta SP →</button></header>
+      ${L.map(e=>`<div class="hit">${bub(e.n,e.peg)}<span>${e.star?'<b class="st">★</b> ':''}${esc(e.t)}<small class="pv">${esc(e.lb.join(' · '))}</small></span><button class="lnk" data-page="${e.p}">p.${e.p}</button></div>`).join('')}</div>`}).join('')}</div></div>
+  <div class="sec"><h3>Respostas que mudaram entre provas <small>quando duas turmas tiveram gabaritos diferentes</small></h3>
+    <div class="grid2">${RX.diverg.map(d=>`<div class="box trick"><h4>${d.onde}</h4><p>${d.prob}</p><p class="como"><b>Na prova:</b> ${d.como}</p></div>`).join('')}</div></div>
+  <div class="sec"><h3>Pegadinhas já usadas <small>${U.peg.length} frases falsas, com a versão certa e onde caíram</small></h3>
+    <div class="ctl"><div class="row"><input class="search" id="pegq" type="search" placeholder="Buscar fármaco ou palavra…" aria-label="Buscar pegadinha"></div><div class="row" id="pegsp"></div></div>
+    <div class="box" id="peglist"></div></div>
+  <div class="sec"><h3>Frases da aula <small>${U.aulas.length} frases da transcrição das aulas antigas que viram questão</small></h3>
+    <div class="ctl"><div class="row"><input class="search" id="flq" type="search" placeholder="Buscar nas frases…" aria-label="Buscar frase da aula"></div></div>
+    <div class="box" id="fllist"></div></div>
+  <div class="sec"><h3>Gabaritos em aberto <small>o que deduzi e vale confirmar com a turma ou com ela</small></h3>
+    <div class="box"><ul class="clean">${RX.confirmar.map(c=>`<li><b>${esc(c.q)}</b> — ${c.x}</li>`).join('')}</ul></div></div>`;
+  let psp='all';
+  const pegChips=()=>{$('#pegsp').innerHTML=[['all','Todas',U.peg.length],...SPS.map(n=>[String(n),'SP'+n,U.peg.filter(p=>p.sp==='SP'+n).length])].map(([v,l,c])=>`<button class="chip" aria-pressed="${psp===v}" data-v="${v}" ${c?'':'disabled'}>${l}<span class="c">${c}</span></button>`).join('')};
+  const pegRun=()=>{const q=$('#pegq').value;const L=U.peg.filter(p=>(psp==='all'||p.sp==='SP'+psp)&&matchQ(q,p.p+' '+p.v+' '+p.e));$('#peglist').innerHTML=L.length?pegHTML(L):'<div class="empty">Nenhuma pegadinha com esse termo.</div>'};
+  pegChips();pegRun();
+  $('#pegsp').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;psp=b.dataset.v;pegChips();pegRun()});
+  $('#pegq').addEventListener('input',pegRun);
+  const flRun=()=>{const q=$('#flq').value;const L=U.aulas.filter(a=>matchQ(q,a.x+' '+a.g));const show=q?L:L.slice(0,12);
+    $('#fllist').innerHTML=(show.map(a=>`<div class="fl"><small>${esc(a.g)}</small>${esc(a.x)}</div>`).join('')||'<div class="empty">Nada encontrado.</div>')+(!q&&L.length>12?`<p class="count" style="margin:10px 0 0">Mostrando 12 de ${L.length}. Use a busca para achar o resto.</p>`:'')};
+  flRun();$('#flq').addEventListener('input',flRun);
+  el.addEventListener('click',e=>{const b=e.target.closest('[data-train]');if(b){go('antigas',{sp:b.dataset.train});return}
+    const pg=e.target.closest('[data-page]');if(pg)go('resumo',{page:+pg.dataset.page})});
+};
+
+/* ---------- resumo ---------- */
+const SECS=[[U.res.sp.SP1,'ITU · sulfas · quinolonas'],[U.res.sp.SP3,'β-lactâmicos'],[U.res.sp.SP4,'Carbapenêmicos → aminoglicosídeos'],[U.res.sp.SP5,'Síntese proteica'],[U.res.sp.TB,'Tuberculose'],[U.res.first_idx,'Índice']];
+BUILD.resumo=()=>{
+  const el=$('#p-resumo');
+  const per={};U.res.idx.forEach(e=>{const p=per[e.p]=per[e.p]||{n:0};p.n++});
+  const lbl={1:'Capa · top 15'};SECS.forEach(([p,l])=>{lbl[p]=l});
+  const pages=Array.from({length:NP},(_,i)=>i+1);
+  const n4=U.res.idx.filter(e=>e.n>=4).length, nst=U.res.idx.filter(e=>e.star).length, npeg=U.res.idx.filter(e=>e.peg).length;
+  el.innerHTML=`<h2>Resumo</h2>
+  <p class="lede">É o resumo da veterana (41 páginas), com tudo o que já caiu grifado de roxo. A bolinha na margem diz em quantas provas o trecho caiu; ★ marca o que caiu na T10 ou T11; contorno vermelho, que ela já usou como pegadinha. O grifo original da veterana ficou cinza.</p>
+  <div class="box pdfcard"><img src="central/thumbs/p-01.jpg" alt="Capa do resumo grifado"><div>
+    <div class="eyebrow">PDF · ${NP} páginas</div><h3 style="font-size:1.35rem;margin:4px 0 8px">Farmaco UC15: o que a Vânia já cobrou</h3>
+    <p style="margin:0 0 12px;color:var(--muted)">${U.res.idx.length} trechos grifados · ${n4} caíram em 4 provas ou mais · ${nst} caíram na T10/T11 · ${npeg} já viraram pegadinha. No fim, o índice página por página e o que caiu fora do resumo.</p>
+    <div class="heat" style="margin-bottom:14px"><span><i class="hlsw"></i>caiu em prova</span><span>${bub(3)} nº de provas</span><span><b class="st">★</b> T10/T11</span><span>${bub(2,1)} pegadinha</span></div>
+    <div class="row"><button class="btn" data-read="2">Ler aqui</button><button class="btn ghost" id="dlpdf" hidden>Baixar PDF</button><a class="btn ghost" href="${PDF}" target="_blank" rel="noopener">Abrir em nova aba ↗</a></div>
+    <p class="toast" id="dlmsg" style="margin:8px 0 0"></p>
+  </div></div>
+  <div class="sec" id="leitor"><h3>Leitor <small>role dentro do quadro; as setas e o número da página navegam</small></h3>
+    <div class="viewer"><div class="vbar">
+      <div class="grp">${SECS.map(([p,l])=>`<button class="chip" data-read="${p}">${l}</button>`).join('')}</div>
+      <div class="grp"><button class="ib" data-nav="-1" aria-label="Página anterior">‹</button><input class="pgin num" id="pgin" type="number" min="1" max="${NP}" value="1" aria-label="Página"><span class="count">/ ${NP}</span><button class="ib" data-nav="1" aria-label="Próxima página">›</button>
+      <button class="ib" data-zoom="-1" aria-label="Diminuir">−</button><button class="ib" data-zoom="1" aria-label="Aumentar">+</button><button class="ib" data-zoom="0">Largura</button></div></div>
+      <div class="vscroll" id="vscroll"><div class="vmsg">Carregando o PDF…</div></div></div></div>
+  <div class="sec"><h3>Top 15: o que mais cai</h3><div class="box" style="padding:6px 12px;overflow-x:auto"><table class="top14"><tbody>${U.res.top.map(e=>`<tr><td>${bub(e.n)}</td><td>${e.star?'<b class="st">★</b> ':''}${esc(e.t)}<div class="pv">${esc(e.pv)}</div></td><td style="white-space:nowrap"><button class="lnk" data-read="${e.p}">p.${e.p}</button></td></tr>`).join('')}</tbody></table></div></div>
+  <div class="sec"><h3>Esquemas <small>o mecanismo em desenho, para ler junto com o resumo</small></h3>
+    <div class="figs">${U.expl.map(f=>`<figure class="fig"><div class="pl">${f.svg}</div><figcaption>${spTag(f.sp)} ${esc(f.cap)}</figcaption></figure>`).join('')}</div></div>
+  <div class="sec"><h3>Página por página <small>número em roxo = quantos trechos grifados</small></h3>
+    <div class="thumbs">${pages.map(p=>`<a class="th" href="#resumo" data-read="${p}"><img loading="lazy" src="central/thumbs/p-${String(p).padStart(2,'0')}.jpg" alt="Página ${p}"><span class="m"><span>p.${p}${lbl[p]?' · '+lbl[p]:''}</span>${per[p]?`<b>${per[p].n}</b>`:''}</span></a>`).join('')}</div></div>`;
+  el.addEventListener('click',e=>{
+    const r=e.target.closest('[data-read]');if(r){e.preventDefault();V.goto(+r.dataset.read,true);return}
+    const n=e.target.closest('[data-nav]');if(n){V.goto(V.cur+ +n.dataset.nav);return}
+    const z=e.target.closest('[data-zoom]');if(z){V.zoom(+z.dataset.zoom);return}
+  });
+  $('#pgin').addEventListener('change',e=>V.goto(+e.target.value));
+  V.init();
+  setupDownload();
+};
+HOOK.resumo=o=>{if(o.page)V.goto(o.page,true)};
+
+/* leitor: pdf.js, páginas desenhadas sob demanda */
+const V={doc:null,cur:1,scale:0,pages:[],pending:null,
+  async init(){
+    const box=$('#vscroll');
+    if(!window.pdfjsLib){box.innerHTML='<div class="vmsg">O leitor não carregou. Use "Abrir em nova aba".</div>';return}
+    pdfjsLib.GlobalWorkerOptions.workerSrc='central/pdf.worker.min.js';
+    try{this.doc=await pdfjsLib.getDocument(PDF).promise}catch(err){box.innerHTML='<div class="vmsg">Não consegui abrir o PDF aqui. Use "Abrir em nova aba".</div>';return}
+    const p1=await this.doc.getPage(1);this.ratio=p1.getViewport({scale:1}).height/p1.getViewport({scale:1}).width;this.baseW=p1.getViewport({scale:1}).width;
+    box.innerHTML='';
+    for(let i=1;i<=this.doc.numPages;i++){const d=document.createElement('div');d.className='vpage';d.dataset.p=i;d.innerHTML=`<canvas></canvas><span class="pn">p.${i}</span>`;box.appendChild(d);this.pages.push(d)}
+    this.io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)this.draw(+en.target.dataset.p)}),{root:box,rootMargin:'600px 0px'});
+    this.pages.forEach(d=>this.io.observe(d));
+    box.addEventListener('scroll',()=>{const top=box.scrollTop+box.clientHeight*.3;let c=1;for(const d of this.pages){if(d.offsetTop-box.offsetTop<=top)c=+d.dataset.p}this.cur=c;$('#pgin').value=c},{passive:true});
+    window.addEventListener('resize',()=>{if(!this.scale)this.layout()});
+    this.layout();
+    if(this.pending){const p=this.pending;this.pending=null;this.goto(p)}
+  },
+  width(){const box=$('#vscroll');const fit=box.clientWidth-28;return this.scale?this.baseW*this.scale*1.333:fit},
+  layout(){const w=Math.max(200,this.width());this.pages.forEach(d=>{d.style.width=w+'px';d.style.height=(w*this.ratio)+'px';d.dataset.drawn=''});
+    this.pages.forEach(d=>{const r=d.getBoundingClientRect(),b=$('#vscroll').getBoundingClientRect();if(r.bottom>b.top-600&&r.top<b.bottom+600)this.draw(+d.dataset.p)})},
+  async draw(i){const d=this.pages[i-1];const w=parseFloat(d.style.width);if(!w||d.dataset.drawn==String(w))return;d.dataset.drawn=String(w);
+    const page=await this.doc.getPage(i);const dpr=Math.min(window.devicePixelRatio||1,2);const vp=page.getViewport({scale:w/this.baseW*dpr});
+    const c=d.querySelector('canvas');c.width=vp.width;c.height=vp.height;await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise},
+  zoom(dir){const fitScale=(($('#vscroll').clientWidth-28)/this.baseW)/1.333;let s=this.scale||fitScale;if(dir===0)this.scale=0;else this.scale=Math.min(3,Math.max(.4,s*(dir>0?1.2:1/1.2)));const p=this.cur;this.layout();this.goto(p)},
+  goto(p,reveal){p=Math.min(NP,Math.max(1,p||1));
+    if(reveal){const L=$('#leitor');if(L)L.scrollIntoView({block:'start'})}
+    if(!this.pages.length){this.pending=p;return}
+    const box=$('#vscroll');box.scrollTop=this.pages[p-1].offsetTop-box.offsetTop-8;this.cur=p;$('#pgin').value=p}
+};
+
+async function setupDownload(){
+  const b=$('#dlpdf');const msg=$('#dlmsg');const NAME='Farmaco UC15 - Resumo grifado.pdf';
+  let dl=null;try{dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){dl=null}
+  if(!dl){ // GitHub Pages: download direto pelo navegador
+    if(window.claude){b.remove();return}
+    const a=document.createElement('a');a.className='btn ghost';a.href=PDF;a.download=NAME;a.textContent='Baixar PDF';b.replaceWith(a);return}
+  b.hidden=false;
+  b.addEventListener('click',async()=>{
+    msg.textContent='Preparando o arquivo…';
+    try{const blob=await (await fetch(PDF)).blob();await dl.save({filename:NAME,data:blob});msg.textContent='Pronto: o PDF foi para os seus downloads.'}
+    catch(err){const c=err&&err.code;msg.textContent=c==='declined'?'Download cancelado.':c==='rate_limited'?'Já há um download aberto; confirme ou feche ele primeiro.':'Não deu para baixar por aqui. Use "Abrir em nova aba" e salve de lá.'}
+  });
+}
+
+/* ---------- tabela ---------- */
+let TB={sp:'all',view:'full',q:''};
+const susB=s=>s==='sim'?'<span class="sus sim">SUS</span>':s==='não'?'<span class="sus nao">fora</span>':s==='hosp'?'<span class="sus hosp">hospital</span>':s==='prog'?'<span class="sus prog">programa MS</span>':'—';
+BUILD.tabela=()=>{
+  const el=$('#p-tabela');
+  el.innerHTML=`<h2>Tabela de fármacos</h2>
+  <p class="lede">Mecanismo, dose, quando usar e o cuidado que ela cobra. A última coluna conta as questões que tocam no fármaco: clique para treinar só elas. A versão compacta cabe numa tela, para consulta rápida.</p>
+  <div class="ctl"><div class="row"><input class="search" id="tbq" type="search" placeholder="Buscar fármaco, classe ou palavra…" aria-label="Buscar fármaco">
+    <div class="seg" id="tbview"><button data-v="full">Completa</button><button data-v="compact">Compacta</button></div></div>
+    <div class="row" id="tbsp"></div></div>
+  <div id="tbout"></div>`;
+  $('#tbq').addEventListener('input',e=>{TB.q=e.target.value;tbRun()});
+  $('#tbview').addEventListener('click',e=>{const b=e.target.closest('button');if(b){TB.view=b.dataset.v;tbRun()}});
+  $('#tbsp').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b){TB.sp=b.dataset.v;tbRun()}});
+  el.addEventListener('click',e=>{const b=e.target.closest('[data-dq]');if(b)go(b.dataset.where,{q:b.dataset.dq,view:'lista'})});
+  tbRun();
+};
+HOOK.tabela=o=>{TB.q=o.q||'';TB.sp='all';$('#tbq').value=TB.q;tbRun()};
+function tbRun(){
+  document.querySelectorAll('#tbview button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===TB.view));
+  $('#tbsp').innerHTML=[['all','Todas'],...SPS.map(n=>['SP'+n,'SP'+n])].map(([v,l])=>`<button class="chip" aria-pressed="${TB.sp===v}" data-v="${v}">${l}<span class="c">${U.drugs.filter(d=>v==='all'||d.sp===v).length}</span></button>`).join('');
+  const L=U.drugs.filter(d=>(TB.sp==='all'||d.sp===TB.sp)&&matchQ(TB.q,d.n+' '+d.g+' '+d.mec+' '+d.ind+' '+d.ea+' '+d.ds));
+  if(!L.length){$('#tbout').innerHTML='<div class="empty">Nenhum fármaco com esse termo.</div>';return}
+  let g='',rows='';
+  const links=d=>`<div class="qlinks">${d.nb?`<button class="lnk" data-dq="${esc(d.k)}" data-where="antigas">${d.nb} antigas</button>`:''}${d.na?`<button class="lnk" data-dq="${esc(d.k)}" data-where="treino">${d.na} no treino</button>`:''}${!d.nb&&!d.na?'<span class="count">—</span>':''}</div>`;
+  if(TB.view==='full'){
+    L.forEach(d=>{if(d.sp+d.g!==g){g=d.sp+d.g;rows+=`<tr class="g"><td colspan="7">${d.sp} · ${esc(d.g)}</td></tr>`}
+      rows+=`<tr><td class="nm">${esc(d.n)}</td><td>${esc(d.mec)}</td><td>${esc(d.ds)}</td><td>${esc(d.ind)}</td><td>${esc(d.ea)}</td><td>${susB(d.sus)}</td><td>${links(d)}</td></tr>`});
+    $('#tbout').innerHTML=`<div class="tblwrap"><table class="drugs"><thead><tr><th>Fármaco</th><th>Mecanismo</th><th>Dose</th><th>Quando usar</th><th>Cuidado · pegadinha</th><th>SUS</th><th>Questões</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }else{
+    L.forEach(d=>{if(d.sp+d.g!==g){g=d.sp+d.g;rows+=`<tr class="g"><td colspan="4">${d.sp} · ${esc(d.g)}</td></tr>`}
+      rows+=`<tr><td class="nm">${esc(d.s)}</td><td>${esc(firstClause(d.mec))}</td><td>${esc(firstClause(d.ds))}</td><td>${susB(d.sus)}</td></tr>`});
+    $('#tbout').innerHTML=`<div class="tblwrap"><table class="drugs compact"><thead><tr><th>Fármaco</th><th>Como age</th><th>Dose-chave</th><th>SUS</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+}
+function firstClause(h){const t=String(h||'');const cut=t.split(/ · |; |\. /)[0];return cut.length>140?cut.slice(0,138)+'…':cut}
+
+/* ---------- motor de questões (antigas + treino) ---------- */
+const LET='ABCDE';
+function shuffleArr(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const ORD={};
+function shuffled(id,n){if(!ORD[id])ORD[id]=shuffleArr([...Array(n).keys()]);return ORD[id]}
+function drugLinks(text){const t=norm(text);return U.drugs.filter(d=>d.k.split('|').some(k=>k.length>3&&t.includes(k))).slice(0,2)}
+function goLinks(pages,text){
+  const ps=(pages||[]).slice(0,2);const ds=drugLinks(text);
+  return `<div class="go">${ps.map(p=>`<button class="lnk" data-page="${p}">Ler no resumo, p.${p}</button>`).join('')}${ds.map(d=>`<button class="lnk" data-tab="${esc(d.s)}">Ver ${esc(d.s)} na tabela</button>`).join('')}</div>`;
+}
+function fromBanco(q){
+  const objective=q.alts&&q.alts.length&&q.gab&&q.gab.length<=3;
+  return {id:q.id,src:q.prova,sp:q.sp,selo:q.selo,tipo:q.tipo,enun:q.enun,itens:q.itens||[],tus:q.tus,
+    opts:objective?q.alts.map((t,i)=>({t,ok:q.gab.includes(LET[i]),c:(q.tr||{})[LET[i]]||''})):null,shuffle:false,
+    gab:objective?`Gabarito: ${q.gab}${q.selo==='IN'?' (provável)':''}`:q.gab,com:q.com,links:goLinks(q.pg,q.tema+' '+q.enun+' '+(q.alts||[]).join(' ')+' '+(q.gab||''))};
+}
+function fromAbcd(q){
+  return {id:'A-'+q.id,src:q.ref?('Frase de '+q.ref):'Dita em aula',sp:q.sp,selo:q.tag,tipo:'ABCD',enun:q.q,itens:[],
+    opts:q.o.map(o=>({t:o[0],ok:o[1]===1,c:o[2]||''})),shuffle:true,gab:'',com:'',links:goLinks(q.pg,q.q+' '+q.o.map(o=>o[0]).join(' '))};
+}
+const SELO={OF:'gabarito conferido',IN:'gabarito provável',AB:'gabarito em aberto',caiu:'já caiu',aula:'aula antiga'};
+function qCard(x,i,mode,sess){
+  const st=sess.ans[x.id];const done=mode==='estudo'?st!==undefined:sess.graded;
+  const prev0=PR[x.id];const prev=prev0&&prev0.t<(sess.t0||Infinity)?prev0:null;
+  let body='';
+  if(x.opts){
+    const ord=x.shuffle?shuffled(x.id,x.opts.length):[...x.opts.keys()];
+    body=`<div class="opts">${ord.map((oi,k)=>{const o=x.opts[oi];let cls='';
+      if(done){if(o.ok)cls='right';else if(st===oi)cls='wrong'}else if(st===oi)cls='sel';
+      return `<button class="opt ${cls}" data-q="${esc(x.id)}" data-o="${oi}" ${done?'disabled':''}><span class="L">${LET[k]}</span><span>${o.t}</span>${done&&o.c?`<span class="oc">${o.c}</span>`:''}</button>`}).join('')}</div>`;
+  }else{
+    body=st===undefined&&!sess.graded?`<div class="self" style="margin-top:12px"><button class="btn ghost" data-reveal="${esc(x.id)}">Mostrar resposta</button></div>`:'';
+  }
+  const showFb=x.opts?done:(st!==undefined||sess.graded);
+  const fb=showFb?`<div class="fb">${x.gab?`<div><span class="k">Resposta</span><div>${x.gab}</div></div>`:''}${x.com?`<div><span class="k">Comentário</span><div>${x.com}</div></div>`:''}
+    ${!x.opts&&st==='rev'?`<div class="self"><span class="count">Como você foi?</span><button class="btn ghost" data-self="${esc(x.id)}" data-ok="1">Acertei</button><button class="btn ghost" data-self="${esc(x.id)}" data-ok="0">Errei</button></div>`:''}${x.links}</div>`:'';
+  return `<article class="q" id="q-${esc(x.id)}"><div class="qh"><span class="num">${i+1}.</span><span class="src">${esc(x.src)}</span>${spTag(x.sp)}<span class="selo ${esc(x.selo)}">${SELO[x.selo]||esc(x.selo)}</span>${x.tipo!=='ABCD'?`<span>${esc(x.tipo)}</span>`:''}${prev&&!prev.ok?'<span class="selo err">errou antes</span>':''}${prev&&prev.ok?'<span class="selo OF">acertou antes</span>':''}</div>
+    <div class="qe">${x.enun}</div>${x.itens.length?`<ul class="itens">${x.itens.map(t=>t==='PORQUE'?`<li class="pq">PORQUE</li>`:`<li>${t}</li>`).join('')}</ul>`:''}${body}${fb}</article>`;
+}
+
+function makeQuiz(cfg){
+  const el=$('#'+cfg.pane);
+  const F={};cfg.filters.forEach(f=>F[f.key]='all');
+  let state={mode:'estudo',view:cfg.view||'lista',idx:0,q:'',sess:{ans:{},ok:{},graded:false,t0:Date.now()},t0:0,limit:0,list:[]};
+  el.innerHTML=`<h2>${cfg.title}</h2><p class="lede">${cfg.lede}</p>
+   <div class="ctl">${cfg.filters.map(f=>`<div class="row" data-f="${f.key}"><span class="eyebrow">${f.label}</span><span class="chips row"></span></div>`).join('')}
+    <div class="row"><span class="eyebrow">Rodada</span><div class="seg" data-role="round"><button data-v="0">Todas</button><button data-v="5">5</button><button data-v="10">10</button><button data-v="15">15</button></div><span class="count">sorteia da seleção e mostra uma por vez</span></div>
+    <div class="row"><input class="search" type="search" placeholder="Buscar fármaco ou palavra…" aria-label="Buscar questão" data-role="q"><div class="seg" data-role="view"><button data-v="uma">Uma por vez</button><button data-v="lista">Lista</button></div><div class="seg" data-role="mode"><button data-v="estudo">Modo estudo</button><button data-v="prova">Modo prova</button></div></div>
+    <div class="row"><span class="count" data-role="n"></span></div></div>
+   <div data-role="bar"></div><div class="qlist" data-role="list"></div>`;
+  const pass=(x,skip)=>cfg.filters.every(f=>f.key===skip||F[f.key]==='all'||f.opts.find(o=>o[0]===F[f.key])[2](x))&&matchQ(state.q,x.enun+' '+x.itens.join(' ')+' '+(x.opts||[]).map(o=>o.t).join(' ')+' '+x.src+' '+(x.gab||''));
+  function chips(){cfg.filters.forEach(f=>{el.querySelector(`[data-f="${f.key}"] .chips`).innerHTML=f.opts.map(([v,l,p])=>{const c=cfg.all.filter(x=>pass(x,f.key)&&(v==='all'||p(x))).length;return `<button class="chip" aria-pressed="${F[f.key]===v}" data-v="${v}" ${c||v==='all'?'':'disabled'}>${l}<span class="c">${c}</span></button>`}).join('')})}
+  function newSess(){state.sess={ans:{},ok:{},graded:false,t0:Date.now()};state.t0=Date.now();state.idx=0}
+  function run(reset=true){
+    chips();
+    if(reset){let L=cfg.all.filter(x=>pass(x));if(state.limit){L=shuffleArr(L).slice(0,state.limit)}state.list=L;newSess()}
+    el.querySelectorAll('[data-role="mode"] button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===state.mode));
+    el.querySelectorAll('[data-role="view"] button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===state.view));
+    el.querySelectorAll('[data-role="round"] button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.v===state.limit));
+    el.querySelector('[data-role="n"]').innerHTML=`<b>${state.list.length}</b> questões nesta seleção${state.limit?' · rodada de '+state.limit:''}`;
+    bar();
+    listHTML();
+  }
+  function roundResult(){
+    const L=state.list;const n=L.length;const ok=L.filter(x=>state.sess.ok[x.id]).length;const errs=L.filter(x=>state.sess.ok[x.id]===false).length;
+    return `<div class="rres"><div><b class="num">${ok}/${n}</b><span>${state.limit?'Rodada concluída':'Fim da lista'}${errs?` · ${errs} para rever`:''}</span></div><div class="row">${state.limit?`<button class="btn" data-act="again">Nova rodada de ${state.limit}</button>`:''}${errs?`<button class="btn ghost" data-act="redo">Refazer as erradas</button>`:''}</div></div>`;
+  }
+  function listHTML(){
+    const box=el.querySelector('[data-role="list"]');
+    if(!state.list.length){box.innerHTML='<div class="empty">Nenhuma questão com esses filtros.</div>';return}
+    if(state.view==='lista'){box.innerHTML=state.list.map((x,i)=>qCard(x,i,state.mode,state.sess)).join('');return}
+    const n=state.list.length,i=Math.min(state.idx,n-1);state.idx=i;const x=state.list[i];
+    const answered=state.sess.ans[x.id]!==undefined&&state.sess.ans[x.id]!=='rev';const last=i===n-1;
+    const nextLbl=last?(state.mode==='prova'&&!state.sess.graded?'Corrigir':'Fim'):'Próxima →';
+    const nextAct=last?(state.mode==='prova'&&!state.sess.graded?'data-act="grade"':'disabled'):'data-step="1"';
+    const done=last&&state.mode==='estudo'&&answered;
+    box.innerHTML=`<div class="prog"><i style="width:${(i+1)/n*100}%"></i></div>${qCard(x,i,state.mode,state.sess)}
+      <div class="qnav"><button class="btn ghost" data-step="-1" ${i?'':'disabled'}>← Anterior</button><span class="count num">${i+1} de ${n}</span><button class="btn ${answered||state.sess.graded?'':'ghost'}" ${nextAct}>${nextLbl}</button></div>
+      ${done?roundResult():''}<p class="kbd">Teclado: A–D escolhe · Enter ou → avança · ← volta</p>`;
+  }
+  function bar(){const b=el.querySelector('[data-role="bar"]');
+    if(state.mode!=='prova'||!state.list.length){b.innerHTML='';return}
+    if(state.sess.graded){const obj=state.list.filter(x=>x.opts);const ok=obj.filter(x=>x.opts[state.sess.ans[x.id]]?.ok).length;
+      b.innerHTML=`<div class="qbar"><div class="result"><b class="num">${ok}/${obj.length}</b><span>objetivas certas · as discursivas mostram a resposta para você conferir</span></div><button class="btn ghost" data-act="again">${state.limit?'Nova rodada':'Refazer'}</button></div>`;return}
+    const n=Object.keys(state.sess.ans).length;
+    b.innerHTML=`<div class="qbar"><span class="timer num" data-role="timer">00:00</span><span class="count">${n} de ${state.list.length} respondidas</span><button class="btn" data-act="grade">Corrigir prova</button></div>`;tick()}
+  let tmr;function tick(){clearInterval(tmr);tmr=setInterval(()=>{const t=el.querySelector('[data-role="timer"]');if(!t||el.hidden){return}const s=Math.floor((Date.now()-state.t0)/1000);t.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000)}
+  function rerender(id){if(state.view==='uma'){listHTML();return}const x=state.list.find(z=>z.id===id);const i=state.list.indexOf(x);const node=document.getElementById('q-'+id);if(node)node.outerHTML=qCard(x,i,state.mode,state.sess)}
+  el.addEventListener('click',e=>{
+    const c=e.target.closest('.chip');if(c&&c.closest('[data-f]')){F[c.closest('[data-f]').dataset.f]=c.dataset.v;run();return}
+    const rd=e.target.closest('[data-role="round"] button');if(rd){state.limit=+rd.dataset.v;if(state.limit)state.view='uma';run();return}
+    const v=e.target.closest('[data-role="view"] button');if(v){state.view=v.dataset.v;run(false);return}
+    const st=e.target.closest('[data-step]');if(st&&!st.disabled){state.idx=Math.max(0,Math.min(state.list.length-1,state.idx+ +st.dataset.step));listHTML();el.querySelector('[data-role="list"]').scrollIntoView({block:'nearest'});return}
+    const m=e.target.closest('[data-role="mode"] button');if(m){state.mode=m.dataset.v;newSess();run(false);return}
+    const o=e.target.closest('.opt');if(o&&!o.disabled){const id=o.dataset.q,oi=+o.dataset.o;state.sess.ans[id]=oi;const x=state.list.find(z=>z.id===id);
+      if(state.mode==='estudo'){const ok=!!x.opts[oi].ok;state.sess.ok[id]=ok;mark(id,ok)}rerender(id);if(state.mode==='prova')bar();return}
+    const r=e.target.closest('[data-reveal]');if(r){state.sess.ans[r.dataset.reveal]='rev';rerender(r.dataset.reveal);return}
+    const s=e.target.closest('[data-self]');if(s){const ok=s.dataset.ok==='1';mark(s.dataset.self,ok);state.sess.ok[s.dataset.self]=ok;state.sess.ans[s.dataset.self]='done';rerender(s.dataset.self);return}
+    const a=e.target.closest('[data-act]');if(a){const act=a.dataset.act;
+      if(act==='grade'){state.sess.graded=true;state.idx=0;state.list.forEach(x=>{if(x.opts){const ok=state.sess.ans[x.id]!==undefined&&!!x.opts[state.sess.ans[x.id]].ok;state.sess.ok[x.id]=ok;mark(x.id,ok)}});run(false);window.scrollTo({top:0})}
+      else if(act==='redo'){state.list=state.list.filter(x=>state.sess.ok[x.id]===false);newSess();run(false)}
+      else{run()}return}
+    const t=e.target.closest('[data-tab]');if(t){go('tabela',{q:t.dataset.tab});return}
+    const pg=e.target.closest('[data-page]');if(pg){go('resumo',{page:+pg.dataset.page});return}
+  });
+  el.querySelector('[data-role="q"]').addEventListener('input',e=>{state.q=e.target.value;run()});
+  document.addEventListener('keydown',e=>{
+    if(el.hidden||state.view!=='uma'||e.target.closest('input,textarea,select')||e.metaKey||e.ctrlKey||e.altKey)return;
+    const k=e.key.toLowerCase();const opts=[...el.querySelectorAll('[data-role="list"] .opt')];
+    const li='abcde'.indexOf(k);const ni='12345'.indexOf(k);const ix=li>=0?li:ni;
+    if(ix>=0&&opts[ix]&&!opts[ix].disabled){opts[ix].click();e.preventDefault();return}
+    if(k==='enter'||k==='arrowright'){const b=el.querySelector('.qnav [data-step="1"],.qnav [data-act="grade"]');if(b){b.click();e.preventDefault()}return}
+    if(k==='arrowleft'){const b=el.querySelector('.qnav [data-step="-1"]');if(b&&!b.disabled){b.click();e.preventDefault()}}
+  });
+  return {set(o){cfg.filters.forEach(f=>F[f.key]='all');state.limit=o.limit||0;if(o.view)state.view=o.view;else if(state.limit)state.view='uma';
+      if(o.sp&&F.sp!==undefined)F.sp=String(o.sp);if(o.tag)F.tag=o.tag;if(o.st)F.st=o.st;if(o.tu)F.tu=o.tu;if(o.mode)state.mode=o.mode;
+      state.q=o.q||'';el.querySelector('[data-role="q"]').value=state.q;run()},run};
+}
+const stOpts=()=>[['all','Todas',()=>true],['nao','Não fiz',x=>!PR[x.id]],['errei','Errei',x=>PR[x.id]&&!PR[x.id].ok]];
+
+/* ---------- questões antigas ---------- */
+let QA,QT;
+BUILD.antigas=()=>{
+  const all=U.banco.map(fromBanco);
+  const TU=['T1','T2','T3','T4','T5','T7','T8','T9','T10','T11','PM'];
+  QA=makeQuiz({pane:'p-antigas',title:'Questões antigas',
+    lede:'As provas dos veteranos, com gabarito e comentário. A sua prova segue o modelo da T10/T11. Filtre por turma e SP; no modo prova o gabarito só aparece quando você corrige.',
+    all,filters:[
+      {key:'tu',label:'Turma',opts:[['all','Todas',()=>true],['T10+T11','T10 + T11',x=>x.tus.includes('T10')||x.tus.includes('T11')],...TU.map(t=>[t,t==='PM'?'Plano de melhoria':t,x=>x.tus.includes(t)])]},
+      {key:'sp',label:'SP',opts:[['all','Todas',()=>true],...SPS.map(n=>[String(n),'SP'+n+' · '+SPN[n],x=>x.sp===n])]},
+      {key:'tp',label:'Tipo',opts:[['all','Todas',()=>true],['obj','Objetivas',x=>!!x.opts],['disc','Discursivas',x=>!x.opts]]},
+      {key:'st',label:'Status',opts:stOpts()}]});
+  QA.run();
+};
+HOOK.antigas=o=>QA.set(o);
+
+/* ---------- treino ABCD ---------- */
+BUILD.treino=()=>{
+  const all=U.abcd.map(fromAbcd);
+  QT=makeQuiz({pane:'p-treino',title:'Treino ABCD',view:'uma',
+    lede:'Questões novas no formato da T11: quatro alternativas, uma certa, a falsa difere por uma ou duas palavras. Depois de responder, cada alternativa mostra por que está certa ou errada.',
+    all,filters:[
+      {key:'sp',label:'SP',opts:[['all','Todas',()=>true],...SPS.map(n=>[String(n),'SP'+n+' · '+SPN[n],x=>x.sp===n])]},
+      {key:'tag',label:'Origem',opts:[['all','Todas',()=>true],['caiu','Já caiu',x=>x.selo==='caiu'],['aula','Aula antiga',x=>x.selo==='aula']]},
+      {key:'st',label:'Status',opts:stOpts()}]});
+  QT.run();
+};
+HOOK.treino=o=>QT.set(o);
+
+/* ---------- véspera ---------- */
+BUILD.vespera=()=>{
+  const el=$('#p-vespera');
+  const refs=p=>(p.e.match(/T\d+|PM/g)||[]).length;
+  const topPeg=U.peg.slice().sort((a,b)=>refs(b)-refs(a)).slice(0,10);
+  const errs=Object.entries(PR).filter(([k,v])=>!v.ok&&!k.startsWith('A-')).length;
+  el.innerHTML=`<h2>Véspera</h2>
+  <p class="lede">Para a manhã da prova: um simulado curto no formato da sua turma, o que mais cai, como ela engana, as doses que ela pede e a tabela numa tela.</p>
+  <div class="vhero"><div><h3>Simulado relâmpago</h3><p>15 questões sorteadas da T10 e da T11, no modo prova, com cronômetro.</p></div>
+    <div class="row"><button class="btn" data-v="sim">Começar</button><button class="btn ghost" data-v="abcd">Rodada ABCD de 10</button><button class="btn ghost" data-v="err">Refazer as que errei <span class="num">(${errs})</span></button></div></div>
+  <div class="sec"><h3>O que mais cai</h3><div class="box" style="padding:6px 12px;overflow-x:auto"><table class="top14"><tbody>${U.res.top.map(e=>`<tr><td>${bub(e.n)}</td><td>${e.star?'<b class="st">★</b> ':''}${esc(e.t)}</td><td><button class="lnk" data-page="${e.p}">p.${e.p}</button></td></tr>`).join('')}</tbody></table></div></div>
+  <div class="sec"><h3>Como ela engana</h3><div class="grid2">${trickHTML()}</div></div>
+  <div class="sec"><h3>As 10 pegadinhas mais repetidas</h3><div class="box">${pegHTML(topPeg)}</div></div>
+  <div class="sec"><h3>Doses que ela já pediu <small>discursiva = fármaco + dose + posologia (+ tempo)</small></h3><div class="box" style="padding:6px 12px;overflow-x:auto"><table class="top14 doses"><tbody>${U.rx.doses.map(([f,d,src])=>`<tr><td>${esc(f)}</td><td>${esc(d)}<div class="pv">${esc(src)}</div></td></tr>`).join('')}</tbody></table></div></div>
+  <div class="sec"><h3>Tabela compacta</h3><div class="cgrid">${U.drugs.map(d=>`<div class="cdrug"><b>${esc(d.s)}</b><span>${esc(firstClause(d.ds))}</span></div>`).join('')}</div></div>`;
+  el.addEventListener('click',e=>{const pg=e.target.closest('[data-page]');if(pg){go('resumo',{page:+pg.dataset.page});return}const b=e.target.closest('[data-v]');if(!b)return;
+    if(b.dataset.v==='sim')go('antigas',{tu:'T10+T11',mode:'prova',limit:15,view:'uma'});
+    else if(b.dataset.v==='abcd')go('treino',{mode:'estudo',limit:10,view:'uma'});
+    else go('antigas',{st:'errei',mode:'estudo',view:'uma'});});
+};
+
+go((location.hash||'#raiox').slice(1));
+
+</script>
+
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>
