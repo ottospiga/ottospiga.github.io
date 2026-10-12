@@ -268,7 +268,7 @@ table.compact{min-width:620px}
       <div class="crumb"><a href="../../../" style="color:inherit;text-decoration:none">Medicina</a> › 5ª fase › UC14 › <span>Fisiologia</span></div>
       <h1>Fisiologia <small>Maria Verônica · UC14</small></h1>
     </div>
-    <div class="topr"><span class="pill">T11 · 13 questões</span><span class="pill">64 no treino</span></div>
+    <div class="topr"><span class="pill">T5–T11 · 86 questões</span><span class="pill">64 no treino</span></div>
   </header>
 
   <div class="shell">
@@ -305,7 +305,7 @@ const mark=(id,ok)=>{PR[id]={ok,t:Date.now()};saveP()};
 const TABS=[
  {id:'raiox',t:'Raio-X da prova',s:'por ora na p.12 do resumo',off:1},
  {id:'resumo',t:'Resumo',s:'PDF · 12 págs · T5–T11'},
- {id:'antigas',t:'Questões antigas',s:U.banco.length+' · T11'},
+ {id:'antigas',t:'Questões antigas',s:U.banco.length+' · T5–T11'},
  {id:'treino',t:'Treino ABCD',s:U.abcd.length+' no estilo dela'},
  {id:'vespera',t:'Véspera',s:'revisão do dia da prova'}
 ];
@@ -527,8 +527,9 @@ let QA,QT;
 BUILD.antigas=()=>{
   const all=U.banco.map(fromBanco);
   QA=makeQuiz({pane:'p-antigas',title:'Questões antigas',
-    lede:'A prova da T11 (abril/2026) inteira: 12 objetivas e a discursiva, com o gabarito oficial e o comentário de cada pegadinha. Quando chegar outra prova, ela entra aqui com o filtro de turma.',
+    lede:'As 7 provas reais da professora (T5 a T11, de 2023 a 2026): '+U.banco.length+' questões, com o gabarito e o comentário de cada pegadinha. O selo "inferido" marca as 4 questões cuja letra foi deduzida, porque a correção não mostrava. Comece pela T11 e pela T10, que são as mais parecidas com a sua prova.',
     all,filters:[
+      {key:'tu',label:'Turma',opts:[['all','Todas',()=>true],...['T11','T10','T9','T8','T7','T6','T5'].map(t=>[t,t,x=>x.id.startsWith(t+'-')])]},
       {key:'sp',label:'SP',opts:[['all','Todas',()=>true],...[1,2,3,4].map(n=>[String(n),'SP'+n+' · '+SPN[n],x=>x.sp===n])]},
       {key:'tp',label:'Tipo',opts:[['all','Todas',()=>true],['obj','Objetivas',x=>!!x.opts],['disc','Discursiva',x=>!x.opts]]},
       {key:'st',label:'Status',opts:stOpts()}]});
@@ -543,6 +544,7 @@ BUILD.treino=()=>{
   QT=makeQuiz({pane:'p-treino',title:'Treino ABCD',view:'uma',
     lede:'Questões novas no formato dela: cinco alternativas, assertivas I a V, e o erro escondido em uma palavra ("exclusivamente", "aumento" × "redução", o receptor trocado). Depois de responder, cada alternativa mostra por que está certa ou errada.',
     all,filters:[
+      {key:'tu',label:'Turma',opts:[['all','Todas',()=>true],...['T11','T10','T9','T8','T7','T6','T5'].map(t=>[t,t,x=>x.id.startsWith(t+'-')])]},
       {key:'sp',label:'SP',opts:[['all','Todas',()=>true],...[1,2,3,4].map(n=>[String(n),'SP'+n+' · '+SPN[n],x=>x.sp===n])]},
       {key:'tag',label:'Origem',opts:[['all','Todas',()=>true],['caiu','Tema da T11',x=>byId[x.id].tag==='caiu'],['aula','Marcado na aula',x=>byId[x.id].tag==='aula'],['slide','Só nos slides',x=>byId[x.id].tag==='slide']]},
       {key:'st',label:'Status',opts:stOpts()}]});
