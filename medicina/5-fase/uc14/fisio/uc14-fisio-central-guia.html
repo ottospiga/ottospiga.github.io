@@ -223,7 +223,7 @@ table.compact{min-width:620px}
 .result b{font-family:var(--display);font-size:1.6rem}
 
 .tab.off{opacity:.45;cursor:not-allowed}.tab.off:hover{background:transparent}
-.dT{background:#c4b5fd}.dY{background:#fde68a}.dB{background:#93c5fd}
+.dT{background:#c4b5fd}.dG{background:#a7e3a0}.dY{background:#fde68a}.dB{background:#93c5fd}
 .th .m b.tq{color:var(--sp2)}
 /* leitor de PDF */
 .viewer{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -290,7 +290,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/<[^>]+>/g,'');
 const SPN={1:'Diarreia',2:'Bile & bilirrubina',3:'Fígado & cirrose',4:'Gastrite & úlcera'};
-const NPAG=10;
+const NPAG=12;
 const spTag=n=>`<span class="sp sp${n}">SP${n}</span>`;
 const PDF='central/resumo.pdf';
 const pdfAt=p=>`${PDF}#page=${p}`;
@@ -303,14 +303,14 @@ const mark=(id,ok)=>{PR[id]={ok,t:Date.now()};saveP()};
 
 /* ---------- abas ---------- */
 const TABS=[
- {id:'raiox',t:'Raio-X da prova',s:'entra com a 2ª prova',off:1},
- {id:'resumo',t:'Resumo',s:'PDF · 10 págs + esquemas'},
+ {id:'raiox',t:'Raio-X da prova',s:'por ora na p.12 do resumo',off:1},
+ {id:'resumo',t:'Resumo',s:'PDF · 12 págs · T5–T11'},
  {id:'antigas',t:'Questões antigas',s:U.banco.length+' · T11'},
  {id:'treino',t:'Treino ABCD',s:U.abcd.length+' no estilo dela'},
  {id:'vespera',t:'Véspera',s:'revisão do dia da prova'}
 ];
 $('#rail').innerHTML=TABS.map((t,i)=>`<button class="tab${t.off?' off':''}" role="tab" id="tab-${t.id}" aria-controls="p-${t.id}" aria-selected="false" data-t="${t.id}" ${t.off?'disabled title="Ainda não: só temos a T11"':''}><span class="ix">${i+1}</span><b>${t.t}</b><small>${t.s}</small></button>`).join('')+
- `<p class="railnote">O Raio-X entra quando chegar outra prova de Fisio. O progresso das questões fica salvo neste navegador.</p>`;
+ `<p class="railnote">O raio-X das provas T5–T11 está na última página do resumo (p.12). O progresso das questões fica salvo neste navegador.</p>`;
 const built={};
 function go(id,opts){
   if(!TABS.find(t=>t.id===id&&!t.off))id='resumo';
@@ -476,34 +476,34 @@ const T11MAP=[
  [1,'Q3','Osmótica melhora com jejum; secretora persiste; motilidade pesa na crônica'],
  [2,'Q5','Tabela da OMS: lágrimas e olhos encovados também no desidratado; letargia = grave'],
  [2,'Q7','HCO₃⁻ → acidose · K⁺ → arritmia · Na⁺ → consciência · 5–10% × > 10%'],
- [3,'Q6','Íleo terminal (ASBT), 90–95% reciclados, falta de ADEK'],
- [4,'Q2','↑ secreção de colesterol, hipomotilidade; marrom = infecção'],
- [4,'Q11','Obstrução → conjugada reflui, colúria e acolia'],
- [5,'Q10','Álcool absorvido no delgado; progressão não linear; ↓ VLDL'],
- [6,'Q4','↑ resistência + vasodilatação esplâncnica → ↑ fluxo portal'],
- [6,'Q8','Hepatorrenal = funcional, vasoconstrição renal'],
- [6,'Q12','Ascite: ↓ volume arterial efetivo → SRAA/ADH retêm'],
- [8,'Q1','Histamina em H2 (não CCK2); somatostatina; ácido não basta'],
- [9,'Q9','H. pylori começa no antro; helmintos protegem; 10–20% úlcera'],
- [10,'Q13','Discursiva: úlcera gástrica piora ao comer; estenose pilórica → vômito sem bile']
+ [4,'Q6','Íleo terminal (ASBT), 90–95% reciclados, falta de ADEK'],
+ [5,'Q2','↑ secreção de colesterol, hipomotilidade; marrom = infecção'],
+ [5,'Q11','Obstrução → conjugada reflui, colúria e acolia'],
+ [6,'Q10','Álcool absorvido no delgado; progressão não linear; ↓ VLDL'],
+ [7,'Q4','↑ resistência + vasodilatação esplâncnica → ↑ fluxo portal'],
+ [8,'Q8','Hepatorrenal = funcional, vasoconstrição renal'],
+ [8,'Q12','Ascite: ↓ volume arterial efetivo → SRAA/ADH retêm'],
+ [9,'Q1','Histamina em H2 (não CCK2); somatostatina; ácido não basta'],
+ [10,'Q9','H. pylori começa no antro; helmintos protegem; 10–20% úlcera'],
+ [11,'Q13','Discursiva: úlcera gástrica piora ao comer; estenose pilórica → vômito sem bile']
 ];
 BUILD.resumo=()=>{
   const el=$('#p-resumo');
-  const lbl={1:'SP1 Diarreia',3:'SP1 → SP2',5:'SP3 Fígado',8:'SP4 Estômago'};
+  const lbl={1:'SP1 Diarreia',4:'SP2 Bile',6:'SP3 Fígado',9:'SP4 Estômago',12:'Raio-X T5–T11'};
   const pages=Array.from({length:NPAG},(_,i)=>i+1);
   const per={};T11MAP.forEach(([p])=>per[p]=(per[p]||0)+1);
   el.innerHTML=`<h2>Resumo</h2>
-  <p class="lede">O resumo em PDF, no estilo do de Pato. O roxo marca o que caiu na T11, o amarelo é o que foi marcado na aula, e o ✎ azul traz a resposta da discursiva.</p>
+  <p class="lede">O resumo em PDF, no estilo do de Pato. O roxo marca o que caiu na T11 e o <b>verde</b> o que caiu nas provas antigas (T5–T10), com as turmas ao lado. O amarelo é o que foi marcado na aula, e o ✎ azul traz a resposta da discursiva. Na última página está o raio-X das 7 provas: o que mais cai, as pegadinhas e os gabaritos.</p>
   <div class="box pdfcard"><img src="central/thumbs/p-01.jpg" alt="Primeira página do resumo de Fisio"><div>
-    <div class="eyebrow">PDF · ${NPAG} páginas · 4 aulas</div><h3 style="font-size:1.35rem;margin:4px 0 8px">Fisiologia UC14: Resumo</h3>
-    <p style="margin:0 0 12px;color:var(--muted)">Diarreia · bile e bilirrubina · doença hepática alcoólica e cirrose · gastrites e úlceras. Todas as 13 questões da T11 aparecem grifadas.</p>
-    <div class="heat" style="margin-bottom:14px"><span><i class="dot dT"></i>caiu na T11</span><span><i class="dot dY"></i>marcado na aula</span><span><i class="dot dB"></i>✎ resposta da discursiva</span></div>
-    <div class="row"><button class="btn" data-read="1">Ler aqui</button><button class="btn ghost" id="dlpdf" hidden>Baixar PDF</button><a class="btn ghost" href="${PDF}" target="_blank" rel="noopener">Abrir em nova aba ↗</a></div>
+    <div class="eyebrow">PDF · ${NPAG} páginas · 4 aulas · provas T5–T11</div><h3 style="font-size:1.35rem;margin:4px 0 8px">Fisiologia UC14: Resumo</h3>
+    <p style="margin:0 0 12px;color:var(--muted)">Diarreia · bile e bilirrubina · doença hepática alcoólica e cirrose · gastrites e úlceras. Todas as 13 questões da T11 aparecem grifadas, e as provas T5–T10 estão marcadas em verde (106 trechos), com o raio-X na p.12.</p>
+    <div class="heat" style="margin-bottom:14px"><span><i class="dot dT"></i>caiu na T11</span><span><i class="dot dG"></i>caiu em T5–T10</span><span><i class="dot dY"></i>marcado na aula</span><span><i class="dot dB"></i>✎ resposta da discursiva</span></div>
+    <div class="row"><button class="btn" data-read="1">Ler aqui</button><button class="btn ghost" data-read="12">Raio-X das provas (p.12)</button><button class="btn ghost" id="dlpdf" hidden>Baixar PDF</button><a class="btn ghost" href="${PDF}" target="_blank" rel="noopener">Abrir em nova aba ↗</a></div>
     <p class="toast" id="dlmsg" style="margin:8px 0 0"></p>
   </div></div>
   <div class="sec" id="leitor"><h3>Leitor <small>role dentro do quadro; as setas e o número de página navegam</small></h3>
     <div class="viewer"><div class="vbar">
-      <div class="grp">${[[1,'SP1'],[3,'SP2'],[5,'SP3'],[8,'SP4']].map(([p,l])=>`<button class="chip" data-read="${p}">${l}</button>`).join('')}</div>
+      <div class="grp">${[[1,'SP1'],[4,'SP2'],[6,'SP3'],[9,'SP4'],[12,'Raio-X']].map(([p,l])=>`<button class="chip" data-read="${p}">${l}</button>`).join('')}</div>
       <div class="grp"><button class="ib" data-nav="-1" aria-label="Página anterior">‹</button><input class="pgin num" id="pgin" type="number" min="1" max="${NPAG}" value="1" aria-label="Página"><span class="count">/ ${NPAG}</span><button class="ib" data-nav="1" aria-label="Próxima página">›</button>
       <button class="ib" data-zoom="-1" aria-label="Diminuir">−</button><button class="ib" data-zoom="1" aria-label="Aumentar">+</button><button class="ib" data-zoom="0">Largura</button></div></div>
       <div class="vscroll" id="vscroll"><div class="vmsg">Carregando o PDF…</div></div></div></div>
