@@ -403,5 +403,14 @@
     "data": "2026-10-06",
     "arquivo": "5-fase/uc15/farmaco/uc15-farmaco-central-guia.html",
     "origem": ""
+  },
+  {
+    "uc": "UC14",
+    "materia": "Anatomia",
+    "titulo": "Lâminas UC14",
+    "tipo": "flashcards",
+    "data": "2026-10-14",
+    "arquivo": "5-fase/uc14/anato/uc14-anato-laminas.html",
+    "origem": "5_fase/UC14/Anato/Laminas_UC14.html"
   }
 ]
