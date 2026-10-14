@@ -412,5 +412,14 @@
     "data": "2026-10-14",
     "arquivo": "5-fase/uc14/anato/uc14-anato-laminas.html",
     "origem": "5_fase/UC14/Anato/Laminas_UC14.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Laboratório",
+    "titulo": "UC14 · Laboratório · Resumo, vídeo, questões e raio-X da prova",
+    "tipo": "guia-prova",
+    "data": "2026-10-14",
+    "arquivo": "5-fase/uc14/lab/uc14-lab-central-guia.html",
+    "origem": "5_fase/UC14/Lab/site/lab/uc14-lab-central-guia.html"
   }
 ]
