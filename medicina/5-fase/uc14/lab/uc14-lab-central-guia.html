@@ -229,7 +229,7 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
           <div class="seg" aria-label="Formato do resumo"><button type="button" id="rTxt" class="on">Explicado</button><button type="button" id="rCmp">Comprimido</button><button type="button" id="rPdf">PDF</button></div>
           <a class="btn sec dl" href="central/Lab_UC14_Resumo.pdf" download>Baixar PDF completo</a>
           <a class="btn sec dl" href="central/Lab_UC14_Resumo_Comprimido.pdf" download>Baixar comprimido (2 págs)</a>
-          <a class="btn sec dl" href="central/Lab_UC14_Resumo.pdf" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
+          <a class="btn sec dl" id="pdfOpen" href="central/Lab_UC14_Resumo.pdf" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
         </div>
         <div id="resTxt">
         <p class="legend"><mark class="t">texto em roxo</mark> = caiu na prova da T11 (29/04/2026). Clique numa figura para ampliar.</p>
@@ -630,7 +630,8 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
 </div>
 </div>
         <div id="resPdf" hidden>
-          <p class="legend">Mesmo conteúdo, em PDF (27 páginas, A4). No celular, use “Abrir PDF em nova aba”.</p>
+          <div class="seg" aria-label="Qual PDF"><button type="button" id="pdfFull" class="on">Completo · 27 págs</button><button type="button" id="pdfCmp">Comprimido · 2 págs</button></div>
+          <p class="legend" id="pdfLegend">Mesmo conteúdo, em PDF (27 páginas, A4). No celular, use “Abrir PDF em nova aba”.</p>
           <iframe id="pdfFrame" title="Resumo de Lab UC14 em PDF" loading="lazy"></iframe>
         </div>
       </div>
@@ -1036,9 +1037,13 @@ function disc(d){$("secObj").hidden=d;$("secDisc").hidden=!d;$("qObj").classList
 $("qObj").onclick=()=>disc(false);$("qDisc").onclick=()=>disc(true);
 
 let RM="txt";
+const PDFS={full:["central/Lab_UC14_Resumo.pdf","Mesmo conteúdo, em PDF (27 páginas, A4). No celular, use “Abrir PDF em nova aba”."],cmp:["central/Lab_UC14_Resumo_Comprimido.pdf","Resumo comprimido em PDF (2 páginas, A4): método, números de cabeça e SP1–SP4. No celular, use “Abrir PDF em nova aba”."]};
+function pdfSel(k){$("pdfFrame").src=PDFS[k][0];$("pdfOpen").href=PDFS[k][0];$("pdfLegend").textContent=PDFS[k][1];
+  $("pdfFull").classList.toggle("on",k==="full");$("pdfCmp").classList.toggle("on",k==="cmp");}
+$("pdfFull").onclick=()=>pdfSel("full");$("pdfCmp").onclick=()=>pdfSel("cmp");
 function resMode(m){RM=m;$("resTxt").hidden=m!=="txt";$("resCmp").hidden=m!=="cmp";$("resPdf").hidden=m!=="pdf";
   $("rTxt").classList.toggle("on",m==="txt");$("rCmp").classList.toggle("on",m==="cmp");$("rPdf").classList.toggle("on",m==="pdf");
-  if(m==="pdf"&&!$("pdfFrame").getAttribute("src"))$("pdfFrame").src="central/Lab_UC14_Resumo.pdf";
+  if(m==="pdf"&&!$("pdfFrame").getAttribute("src"))pdfSel("full");
   $("p-res").classList.toggle("wide",m==="cmp");
   $("side").hidden=(m!=="txt")&&TAB==="res";$("main").scrollTop=0;}
 $("rTxt").onclick=()=>resMode("txt");$("rCmp").onclick=()=>resMode("cmp");$("rPdf").onclick=()=>resMode("pdf");
