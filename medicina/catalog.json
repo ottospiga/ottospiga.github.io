@@ -421,5 +421,32 @@
     "data": "2026-10-14",
     "arquivo": "5-fase/uc14/lab/uc14-lab-central-guia.html",
     "origem": "5_fase/UC14/Lab/site/lab/uc14-lab-central-guia.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Fisiologia",
+    "titulo": "UC14 · Fisiologia · Videoaulas (SP2, SP3 e SP4)",
+    "tipo": "material",
+    "data": "2026-10-14",
+    "arquivo": "5-fase/uc14/fisio/uc14-fisio-videoaulas.html",
+    "origem": ""
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · Tutoria SP4 · Leitura: Dispepsia, DRGE e Úlcera",
+    "tipo": "material",
+    "data": "2026-10-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp4-tutoria-leitura.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP4_Tutoria_Leitura.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · Tutoria SP4 · Questões ABCD",
+    "tipo": "banco",
+    "data": "2026-10-14",
+    "arquivo": "5-fase/uc14/tutoria/uc14-sp4-tutoria-questoes-abcd.html",
+    "origem": "5_fase/UC14/Tutoria/UC14_SP4_Tutoria_Questoes_ABCD.html"
   }
 ]
