@@ -177,6 +177,23 @@ video{width:100%;border-radius:10px;background:#000;aspect-ratio:16/9;max-width:
 a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
 #pdfFrame{width:100%;height:calc(100vh - 230px);min-height:480px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .grid:has(.side[hidden]){grid-template-columns:minmax(0,1fr)}
+#p-res.wide{max-width:1180px}
+.cp{font-family:var(--sans);font-size:13.5px;line-height:1.42;color:var(--ink)}
+.cp-head{border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:12px}
+.cp-head h2{font-family:var(--cond);text-transform:uppercase;font-size:28px;margin:0;line-height:1}
+.cp-head p{margin:4px 0 0;font-size:12.5px;color:var(--ink2)}
+.cp-grid{columns:2 340px;column-gap:16px}
+.blk{break-inside:avoid;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--spx);border-radius:8px;padding:9px 11px;margin:0 0 12px;display:inline-block;width:100%}
+.blk.sp1{border-top-color:var(--sp1)}.blk.sp2{border-top-color:var(--sp2)}.blk.sp3{border-top-color:var(--sp3)}.blk.sp4{border-top-color:var(--sp4)}
+.blk h3{margin:0 0 5px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono);font-weight:600}
+.blk p{margin:0 0 6px}.blk ul{margin:0;padding-left:1.1em}.blk li{margin:1px 0}
+.blk table{border-collapse:collapse;width:100%;font-size:12.5px;margin:2px 0 6px;font-variant-numeric:tabular-nums}
+.blk td{border-top:1px solid var(--line2);padding:3px 5px;vertical-align:top;font-weight:400}
+.blk td:first-child{font-weight:600;white-space:nowrap}
+.blk tr:first-child td{border-top:0}
+.cp .t{background:var(--t11bg);color:var(--t11);border-radius:3px;padding:0 .2em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cp p.t{display:block;padding:4px 6px}
+
 .foot{font-size:12px;color:var(--ink3);max-width:760px;margin:24px auto 0}
 @media (max-width:640px){.top .who{display:none}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
@@ -209,8 +226,9 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
       <!-- RESUMO -->
       <div id="p-res" class="read res">
         <div class="resbar">
-          <div class="seg" aria-label="Formato do resumo"><button type="button" id="rTxt" class="on">Ler aqui</button><button type="button" id="rPdf">PDF</button></div>
-          <a class="btn sec dl" href="central/Lab_UC14_Resumo.pdf" download>Baixar PDF</a>
+          <div class="seg" aria-label="Formato do resumo"><button type="button" id="rTxt" class="on">Explicado</button><button type="button" id="rCmp">Comprimido</button><button type="button" id="rPdf">PDF</button></div>
+          <a class="btn sec dl" href="central/Lab_UC14_Resumo.pdf" download>Baixar PDF completo</a>
+          <a class="btn sec dl" href="central/Lab_UC14_Resumo_Comprimido.pdf" download>Baixar comprimido (2 págs)</a>
           <a class="btn sec dl" href="central/Lab_UC14_Resumo.pdf" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
         </div>
         <div id="resTxt">
@@ -497,6 +515,120 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
 </section>
 
         </div>
+        <div id="resCmp" hidden><div class="cp">
+<div class="cp-head">
+  <h2>Lab UC14 · comprimido</h2>
+  <p>Tabata · T11: 9 obj A–D + 1 disc, 10% cada · “paciente 1 e 2, respectivamente” · <b>sem referência</b> · <span class="t">roxo = caiu na T11</span></p>
+</div>
+
+<div class="cp-grid">
+
+<section class="blk"><h3>Método</h3>
+<ul>
+<li>N / ↑ / ↓ em <b>todo</b> número → sobra o padrão</li>
+<li>Resolve o paciente fácil → corta metade (alternativas em par)</li>
+<li>Errada típica = acerta 1 paciente, erra o outro</li>
+<li>Disc: incompleto ou múltiplo = 0 → <b>1 diagnóstico + 1 fase</b></li>
+</ul></section>
+
+<section class="blk"><h3>Números de cabeça</h3>
+<table>
+<tr><td>TTOL</td><td>subir <b>≥ 20</b> mg/dL = absorve</td></tr>
+<tr><td>pH fecal</td><td>&lt; 5,6 → fermentação (lactose)</td></tr>
+<tr><td>Calprotectina</td><td>&lt; 50 SII · 50–150 repetir · &gt; 150 orgânica</td></tr>
+<tr><td>Elastase fecal</td><td>&gt; 200 normal · &lt; 200 insuf. pancreática</td></tr>
+<tr><td>Amilase/lipase</td><td>&gt; 3× LSN = aguda (amil 30–118 · lip 13–60)</td></tr>
+<tr><td>GASA</td><td>≥ 1,1 portal · &lt; 1,1 exsudato</td></tr>
+<tr><td>Proteína ascite</td><td>2,5 (algoritmo) · 3,0 (tabela)</td></tr>
+<tr><td>Ascite células</td><td>PMN &gt; 250 peritonite · leuco &gt; 500 exsudato</td></tr>
+<tr><td>AST/ALT</td><td>≈ 1 normal · &gt; 2 álcool · &lt; 1 viral</td></tr>
+<tr><td>Leucograma</td><td>neut 1.500–7.000 · linf 1.000–4.500 · eos ≤ 500 · bast ≤ 8%</td></tr>
+<tr><td>Hepatite crônica</td><td>&gt; 6 meses</td></tr>
+</table></section>
+
+<section class="blk sp1"><h3>SP1 · Diarreia</h3>
+<p><b>Celíaca</b>: autoimune; gliadina desaminada pela tTG → imunogênica → atrofia vilositária. <b>Anti-tTG IgA</b> = mais eficiente/prático · EmA caro · anti-DPG · biópsia confirma. Caso: diarreia crônica, ↓peso, anemia (até macro), <b>D-xilose ↓</b>, ácidos graxos +. <span class="t">Q1: tTG 45 = celíaca · Q8: tTG 2 = não é</span></p>
+<p><b>Lactose</b>: 50 g (2 g/kg criança), glicemia 0-30-60-120. ↑ &lt; 20 = intolerante · pH &lt; 5,6 · subst. redutoras. 2ª (celíaca, DII) → ache a base. <span class="t">Q1 +8 int · Q8 +17 int · <b>Q3 +39 NORMAL (pegadinha)</b></span></p>
+<p><b>DII</b>: RCU = cólon/reto, sangue · Crohn = qualquer segmento, <b>delgado → ácidos graxos</b>. Calprotectina/lactoferrina = neutrófilo nas fezes. <b>ASCA+/pANCA− Crohn · ASCA−/pANCA+ RCU</b> (97% esp, ~50% sens). <span class="t">Q3: calpro 420 + AG+ = Crohn · calpro 22 = SII</span></p>
+<p><b>Agentes</b>: vírus → antígeno fezes (látex rota/adeno, PCR) · bactéria → coprocultura · parasita → parasitológico · fungo → pesquisa · toxina → presuntivo.</p>
+</section>
+
+<section class="blk sp4"><h3>SP4 · Sangue oculto / copro</h3>
+<p><b>Colorimétrico</b>: peroxidase → Hb humana <b>e animal</b>, alimentos (beterraba, brócolis…), vit C interfere → <b>dieta 72 h</b>. <b>Imunoquímico</b>: anti-Hb humana, <b>sem dieta</b>. Itajaí: 45 × 13 (+) = 32 falso-positivos. Rastreio CCR.</p>
+<p><b>Sangramento crônico</b> → ferropriva: VCM ↓, HCM ↓, RDW ↑. <span class="t">Q7 P2: VCM 72, HCM 23, SO+</span></p>
+<table class="mini">
+<tr><td>Gordura neutra</td><td>lipase ↓ ou bile ↓</td></tr>
+<tr><td>Ácidos graxos</td><td>causa intestinal (não absorveu)</td></tr>
+<tr><td>Amido</td><td>amilase ↓</td></tr>
+<tr><td>Fibras musculares</td><td>tripsina ↓</td></tr>
+<tr><td>pH ácido · alcalino</td><td>má abs. carboidrato · pouca fibra/ATB</td></tr>
+</table>
+<p><span class="t">Copro <b>fibras + gordura neutra + amido ++</b> = pâncreas (Q8, Q9)</span>. Dieta de prova 72 h (carne, batata, feijão, leite, manteiga).</p>
+<p><b>H. pylori</b>: antígeno → fezes · IgG → sangue (barato, sensível; não prova cura).</p>
+</section>
+
+<section class="blk sp2"><h3>SP2 · Pâncreas e fígado</h3>
+<p><b>PA aguda</b> = 2 de 3: dor em faixa→dorso · enzima &gt; 3× · imagem. Amilase ↑ 5–8 h, pico 12–72 h, <b>20% normal</b>. Lipase ↑ 4–8 h, pico 24 h. <b>Crônica</b>: fibrose → enzimas normais/↓, elastase &lt; 200, copro ++.</p>
+<p class="t"><b>Q8 × Q9</b>: mesmo etilista, elastase ↓, copro ++. Amil 13/lip 6 = crônica · amil 448/lip 213 = aguda.</p>
+<table class="mini">
+<tr><td>Lesão</td><td>AST/ALT ↑↑ · bili ambas</td></tr>
+<tr><td>Colestase</td><td>FAL/GGT ↑↑ · BD ↑ · AST/ALT pouco</td></tr>
+<tr><td>Disfunção</td><td>albumina ↓ · TAP ↑ · ureia ↓ · BI ↑</td></tr>
+</table>
+<p><span class="t">Q9 P2: FAL 1240, GGT 420, BD 7,2, TAP normal = colestase (não disfunção)</span></p>
+<p><b>Bilirrubina</b>: heme → BI (+albumina, não filtra) → fígado conjuga → BD → bile → urobilinogênio → estercobilina (fezes) / urobilina (urina). <b>Hemólise</b>: BI ↑, urobilinogênio ↑, bili urina −. <b>Colestase</b>: colúria, acolia, urobilinogênio ↓.</p>
+</section>
+
+<section class="blk sp2"><h3>SP2 · Ascite</h3>
+<table class="mini">
+<tr><td></td><td><b>Transudato</b></td><td><b>Exsudato</b></td></tr>
+<tr><td>Aspecto</td><td>límpido</td><td>turvo</td></tr>
+<tr><td>Proteína</td><td>&lt; 3</td><td>&gt; 3</td></tr>
+<tr><td>Albumina</td><td>&lt; 50% sérico</td><td>&gt; 50%</td></tr>
+<tr><td>LDH</td><td>&lt; 200</td><td>&gt; 200</td></tr>
+<tr><td>Razão prot · LDH</td><td>&lt; 0,5 · &lt; 0,6</td><td>&gt; 0,5 · &gt; 0,6</td></tr>
+<tr><td>GASA</td><td>&gt; 1,1</td><td>&lt; 1,1</td></tr>
+</table>
+<p>GASA ≥ 1,1: prot &lt; 2,5 <b>cirrose</b> · &gt; 2,5 <b>cardíaca</b>. GASA &lt; 1,1 + prot &gt; 2,5: <b>ADA/BAAR</b> TB · <b>citologia</b> carcinomatose · <b>amilase &gt; 100</b> pancreática. Nefrótica: prot &lt; 2,5. PBS: LDH &gt; 225, glicose &lt; 50, prot &gt; 1. Bilirrubina alta = perfuração biliar.</p>
+<p class="t">Q2: GASA 2,8 = portal · GASA 0,5 + 3.200 leuco PMN = exsudato infec/neo (ADA normal tira TB). <b>Q4: GASA 1,5 mas urina espumosa, prot +++, alb 2,1 = NEFRÓTICA</b> (clínica &gt; GASA).</p>
+</section>
+
+<section class="blk sp2"><h3>SP2 · Urina escura e anemias</h3>
+<p>Fita “sangue” detecta <b>Hb (íntegra ou livre) + mioglobina</b>; porfirina não.</p>
+<table class="mini">
+<tr><td>Fita + · muitas hemácias</td><td>sangramento: sem prot/cilindro + lombar→virilha = <b>litíase</b> · prot + dismórficas + cil. hemáticos = <b>glomérulo</b></td></tr>
+<tr><td>Fita + · hemácias raras</td><td>pigmento: Hb livre (<b>hemólise intravascular</b>, Hb ↓ BI ↑) · mioglobina (<b>rabdo</b>, CK ↑)</td></tr>
+<tr><td>Fita − · urina vinho</td><td><b>porfiria</b> (hemácias, Hb, BT normais)</td></tr>
+<tr><td>Bilirrubina +</td><td>colestase</td></tr>
+<tr><td>Cil. granulosos</td><td>tubular</td></tr>
+</table>
+<p class="t">Q5 litíase (105 mil hemácias) · <b>Q6 porfiria (fita −)</b> · Q7 P1 falciforme: VCM 88 + policromatofilia + BI ↑ + urobilinogênio, criança com dor recorrente.</p>
+<p><b>Hemograma</b>: bacteriana = neutrofilia + desvio (bastões ↑), granulações tóxicas, Döhle · viral = linfocitose, atípicos · parasita = eosinofilia (41%) + anemia (37%).</p>
+</section>
+
+<section class="blk sp2"><h3>“Outros” + “Pense rápido”</h3>
+<p>Porfiria → porfirinas, ALA, urina · Falciforme → eletroforese Hb · Chumbo → ALA, ZPP · Ectópica → β-hCG seriado · Pielo/cistite → PU + urocultura · Litíase → PU · CAD → gasometria, ânion gap · Celíaca → anti-gliadina, anti-tTG · DII → calpro, ASCA, pANCA.</p>
+<p>Fita + c/ micro normal → rabdo/hemólise · elastase ↓ → pancreatite · &gt; 250 céls ascite → exsudato · urina vinho → porfiria · acolia + colúria → colestase · acidose metabólica → DM1.</p>
+</section>
+
+<section class="blk sp3"><h3>SP3 · Hepatites</h3>
+<p><b>A, E</b> fecal-oral, não cronificam · <b>B, C, D</b> cronificam (&gt; 6 m) · <b>D</b> só com HBsAg.</p>
+<p><b>HAV</b>: IgM 1 sem → 4–6 m = agudo · IgG vida toda = passado/vacina. <b>HCV</b>: RNA 1–3 sem (1º) · anti-HCV 30–120 d · ALT 1–3 m, flutua · anti-HCV <b>não</b> é cura. ~70% das crônicas.</p>
+<table class="mini">
+<tr><td>HBsAg</td><td>tem vírus (1º, 30–40 d)</td></tr>
+<tr><td>HBeAg</td><td>replica · crônico = mau prognóstico</td></tr>
+<tr><td>Anti-HBc IgM</td><td>agudo (≤ 6 m)</td></tr>
+<tr><td>Anti-HBc IgG</td><td>contato (passado/presente)</td></tr>
+<tr><td>Anti-HBe</td><td>soroconversão = bom</td></tr>
+<tr><td>Anti-HBs</td><td>imune: + anti-HBc = cura · sozinho = vacina</td></tr>
+</table>
+<p>Aguda: HBsAg + IgM · Crônica: HBsAg &gt; 6 m + IgG · Curada: IgG + anti-HBs · Vacinado: só anti-HBs · Resolução: sintomas some, ALT normaliza, HBsAg −, anti-HBs +.</p>
+<p class="t"><b>Disc T11 = Hepatite C, crônica</b>: anti-HAV IgG (passado) · B curada (IgG + anti-HBe + anti-HBs) · anti-HDV sem HBsAg (cicatriz) · anti-HCV + ALT 224 + 9 meses.</p>
+</section>
+
+</div>
+</div>
+</div>
         <div id="resPdf" hidden>
           <p class="legend">Mesmo conteúdo, em PDF (27 páginas, A4). No celular, use “Abrir PDF em nova aba”.</p>
           <iframe id="pdfFrame" title="Resumo de Lab UC14 em PDF" loading="lazy"></iframe>
@@ -798,17 +930,17 @@ function setTab(t){TAB=t;try{localStorage.setItem("labuc14_tab",t);}catch(e){}
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
   ["res","vid","q","px"].forEach(k=>$("p-"+k).hidden=k!==t);
   if(t!=="vid")$("video").pause();
-  $("main").scrollTop=0;$("side").hidden=(t==="res"&&!$("resPdf").hidden);side();}
+  $("main").scrollTop=0;$("side").hidden=(t==="res"&&RM!=="txt");side();}
 function applySP(){
-  document.querySelectorAll("#p-res section").forEach(s=>{const sp=s.dataset.sp;s.hidden=!(SP==="all"||sp===SP||(sp==="all"&&false));});
-  if(SP==="all")document.querySelectorAll("#p-res section").forEach(s=>s.hidden=false);
+  document.querySelectorAll("#resTxt section").forEach(s=>{const sp=s.dataset.sp;s.hidden=!(SP==="all"||sp===SP||(sp==="all"&&false));});
+  if(SP==="all")document.querySelectorAll("#resTxt section").forEach(s=>s.hidden=false);
   qStart();side();$("main").scrollTop=0;}
 
 /* ---------- painel direito ---------- */
 function side(){
   const S=$("side");
   if(TAB==="res"){
-    const items=[];document.querySelectorAll("#p-res section").forEach(s=>{if(s.hidden)return;
+    const items=[];document.querySelectorAll("#resTxt section").forEach(s=>{if(s.hidden)return;
       const h=s.querySelector("h2");items.push(`<a href="#${s.id}" class="h2" data-go="${s.id}">${h.textContent}</a>`);
       s.querySelectorAll("h3").forEach((h3,i)=>{if(!h3.id)h3.id=s.id+"-"+i;items.push(`<a href="#${h3.id}" class="h3" data-go="${h3.id}">${h3.textContent}</a>`);});});
     S.innerHTML=`<h4>Neste resumo</h4><nav class="toc">${items.join("")}</nav>`;
@@ -829,7 +961,7 @@ function side(){
 }
 /* destaca seção atual no índice */
 $("main").addEventListener("scroll",()=>{if(TAB!=="res")return;let cur=null;
-  document.querySelectorAll("#p-res section:not([hidden]) h2, #p-res section:not([hidden]) h3").forEach(h=>{if(h.getBoundingClientRect().top<140)cur=h.closest("h3")?h.id:h.closest("section").id;});
+  document.querySelectorAll("#resTxt section:not([hidden]) h2, #resTxt section:not([hidden]) h3").forEach(h=>{if(h.getBoundingClientRect().top<140)cur=h.closest("h3")?h.id:h.closest("section").id;});
   document.querySelectorAll(".toc a").forEach(a=>a.classList.toggle("on",a.dataset.go===cur));},{passive:true});
 
 /* ---------- figuras ---------- */
@@ -903,10 +1035,13 @@ document.querySelectorAll("#secDisc .btn").forEach(b=>b.onclick=()=>{const r=$(b
 function disc(d){$("secObj").hidden=d;$("secDisc").hidden=!d;$("qObj").classList.toggle("on",!d);$("qDisc").classList.toggle("on",d);}
 $("qObj").onclick=()=>disc(false);$("qDisc").onclick=()=>disc(true);
 
-function resMode(pdf){$("resTxt").hidden=pdf;$("resPdf").hidden=!pdf;$("rTxt").classList.toggle("on",!pdf);$("rPdf").classList.toggle("on",pdf);
-  if(pdf&&!$("pdfFrame").src)$("pdfFrame").src="central/Lab_UC14_Resumo.pdf";
-  try{localStorage.setItem("labuc14_res",pdf?"pdf":"txt");}catch(e){} $("side").hidden=pdf&&TAB==="res";}
-$("rTxt").onclick=()=>resMode(false);$("rPdf").onclick=()=>resMode(true);
+let RM="txt";
+function resMode(m){RM=m;$("resTxt").hidden=m!=="txt";$("resCmp").hidden=m!=="cmp";$("resPdf").hidden=m!=="pdf";
+  $("rTxt").classList.toggle("on",m==="txt");$("rCmp").classList.toggle("on",m==="cmp");$("rPdf").classList.toggle("on",m==="pdf");
+  if(m==="pdf"&&!$("pdfFrame").getAttribute("src"))$("pdfFrame").src="central/Lab_UC14_Resumo.pdf";
+  $("p-res").classList.toggle("wide",m==="cmp");
+  $("side").hidden=(m!=="txt")&&TAB==="res";$("main").scrollTop=0;}
+$("rTxt").onclick=()=>resMode("txt");$("rCmp").onclick=()=>resMode("cmp");$("rPdf").onclick=()=>resMode("pdf");
 qStart();setTab(TAB);
 </script>
 <!-- medicina-nav --><script defer src="../../../nav.js"></script>
