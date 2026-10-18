@@ -146,6 +146,20 @@ video{width:100%;border-radius:10px;background:#000;aspect-ratio:16/9;max-width:
 .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--ink2)}
 .tag.prova{border-color:var(--t11);color:var(--t11);background:var(--t11bg)}
 #stem{white-space:pre-line;font-size:15.5px;line-height:1.55;margin:0 0 14px}
+.tag.antiga{border-color:var(--sp1);color:var(--sp1);background:var(--okbg)}
+.qtb{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.qtb table{border-collapse:collapse;font-size:13px;min-width:100%;font-variant-numeric:tabular-nums}
+.qtb th,.qtb td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+.qtb th{background:var(--panel2);color:var(--ink);font-weight:600;white-space:nowrap;text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:13px}
+.qtb td:first-child{font-weight:600;background:var(--panel2)}
+#stem2{white-space:pre-line;font-size:15px;line-height:1.55;margin:0 0 14px}
+#stem2:empty{display:none}
+.qex{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:4px 0 10px;font-size:13.5px}
+.qex h5{margin:0 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);font-family:var(--mono)}
+.qex div{display:grid;grid-template-columns:34px 22px 1fr;gap:6px;padding:3px 0;border-top:1px solid var(--line2)}
+.qex div:first-of-type{border-top:0}
+.qex .vv{color:var(--ok);font-weight:700}.qex .ff{color:var(--no);font-weight:700}
+
 .opt{display:grid;grid-template-columns:28px 1fr;gap:10px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font-size:14.5px}
 .opt:hover:not(:disabled){border-color:var(--acc)}
 .opt .L{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:12px}
@@ -657,7 +671,10 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
           <div id="qcard" class="card">
             <div class="badges"><span class="badge" id="bOb"></span><span class="tag" id="bTag"></span></div>
             <p id="stem"></p>
+            <div id="stemTb" class="qtb"></div>
+            <p id="stem2"></p>
             <div id="opts"></div>
+            <div id="qex" class="qex" hidden></div>
             <div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="btnNext" disabled>Próxima →</button></div>
           </div>
           <div id="fim" class="card" hidden>
@@ -670,7 +687,7 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
       </div>
       <!-- PROVA -->
       <div id="p-px" class="px" hidden><h2>Raio-X da prova de Lab</h2>
-<div class="verdict"><b>Veredito:</b> prova curta e previsível. Quem sabe ler os exames sem valor de referência e conhece os slides “Outros” e “Pense rápido” da SP2 faz quase tudo. As alternativas erradas costumam acertar um paciente e errar o outro.</div>
+<div class="verdict"><b>Veredito:</b> prova curta e previsível — e repetitiva: lactose, hepatites, painel hepático, coprológico e ascite caíram em todas as turmas de T6 a T11. Quem sabe ler os exames sem valor de referência e conhece os slides “Outros” e “Pense rápido” da SP2 faz quase tudo. As alternativas erradas costumam acertar um paciente e errar o outro.</div>
 
 <h3 id="px-formato">Formato (T11, 29/04/2026)</h3>
 <p>9 objetivas A–D + 1 discursiva, <b>cada uma vale 10%</b>. Seis das nove objetivas trazem <b>dois pacientes</b> e pedem “a interpretação mais provável para o paciente 1 e o paciente 2, respectivamente”; as outras três são caso único com “assinale a correta”. O enunciado <b>quase não traz valor de referência</b>. A discursiva avisa: diagnóstico incorreto, incompleto ou com múltiplas respostas zera a questão.</p>
@@ -711,12 +728,50 @@ a.btn{text-decoration:none;display:inline-block;font-size:13px;padding:7px 12px}
 <div class="trap"><b>Anemia macrocítica na celíaca.</b> Q1: VCM 108 aparece para tentar “ferropriva”; a má absorção de folato explica.</div>
 </div>
 
+<h3 id="px-antigas">Provas antigas: T6 a T10 (2023–2025)</h3>
+<p>Mesma professora, mesmo título (“Dor abdominal, diarreia, vômitos e icterícia”), mas <b>outro formato</b>: até a T10 ela usava afirmativas I–VI com “é correto apenas o que se afirma em”, asserção-razão (“I PORQUE II”) e <b>tabelas com valor de referência</b>; as discursivas eram metade da nota. Na T11 virou caso “Paciente 1 e 2” sem referência. O conteúdo é o mesmo, e as tabelas se repetem quase idênticas de uma turma para outra. As 33 objetivas estão no banco (filtro “Provas antigas”), com cada afirmativa corrigida.</p>
+<div class="tbl"><table><thead><tr><th>Turma</th><th>Data</th><th>Prova</th><th>Gabarito</th></tr></thead><tbody>
+<tr><td>T6</td><td>06/10/2023</td><td>8 objetivas A–E + 3 discursivas</td><td>1 B · 2 E · 3 E · 4 C · 5 D · 6 A · 7 C · 8 A</td></tr>
+<tr><td>T7</td><td>26/04/2024</td><td>7 objetivas + 3 discursivas</td><td>1 C · 2 E · 3 D · 4 E · 5 A · 6 B* · 7 E</td></tr>
+<tr><td>T8</td><td>04/10/2024</td><td>8 objetivas + 2 discursivas</td><td>1 E · 2 D · 3 B · 4 D · 5 C · 6 B · 7 A · 8 A</td></tr>
+<tr><td>T9</td><td>23/04/2025</td><td>8 objetivas + 2 discursivas</td><td>1 C · 2 A* · 3 D · 4 E · 5 C · 6 B · 7 A · 8 C</td></tr>
+<tr><td>T10</td><td>01/10/2025</td><td>3 objetivas + 5 discursivas</td><td>1 E · 2 B · 3 A</td></tr>
+<tr class="hl"><td>T11</td><td>29/04/2026</td><td>9 objetivas A–D + 1 discursiva</td><td>formato novo (ver acima)</td></tr>
+</tbody></table></div>
+<p style="font-size:13px;color:var(--ink2)">* Deduzidos: T7 Q6 a veterana errou e não há marca da certa (B é a única combinação coerente); T9 Q2 está rasurado no quadro (A bate com a T10, onde a mesma frase conta como verdadeira).</p>
+
+<h3 id="px-repete">O que caiu em quase toda prova</h3>
+<div class="tbl"><table><thead><tr><th>Tema</th><th>Turmas</th><th>Como ela cobra</th></tr></thead><tbody>
+<tr class="hl"><td>Curva de lactose</td><td>todas (T6–T11)</td><td>Tabela de 4–6 pacientes; normal = subir 20 ou mais em qualquer ponto. Discursiva “classifique” ou afirmativa.</td></tr>
+<tr class="hl"><td>Marcadores de hepatite</td><td>todas</td><td>Tabela de HBV com 3 pacientes (crônico 7 meses · agudo · vacinado) repetida na T6, T8 e T9; discursiva “diagnóstico + fase” ou “+ confirmatório”.</td></tr>
+<tr class="hl"><td>Painel hepático</td><td>todas</td><td>Lesão (AST/ALT) × colestase (FAL, GGT, BD) × disfunção (TAP, BI, albumina) × pancreatite (amilase). Mesma tabela de 4 pacientes na T9 e T10.</td></tr>
+<tr class="hl"><td>Coprológico funcional</td><td>todas</td><td>Pancreático (amido + gordura neutra + fibras) × intestinal (ácidos graxos, D-xilose ↓) × biliar (gordura neutra + fezes cinza).</td></tr>
+<tr class="hl"><td>Ascite: transudato × exsudato</td><td>todas</td><td>Tabela com o anexo de pontos de corte, asserção-razão ou GASA.</td></tr>
+<tr><td>Celíaca × DII (anti-tTG, calprotectina, ASCA/pANCA)</td><td>todas</td><td>Caso de 2 pacientes ou frases teóricas que se repetem palavra por palavra.</td></tr>
+<tr><td>Hemograma infeccioso</td><td>T6–T9 (questão própria); T10–T11 dentro dos casos</td><td>Bacteriana (neutrofilia ± desvio) × viral (linfocitose) × parasitária (eosinofilia + anemia).</td></tr>
+<tr><td>H. pylori e sangue oculto</td><td>T6, T7, T8</td><td>IgG = contato; antígeno nas fezes = ativa; imunoensaio dispensa dieta.</td></tr>
+<tr><td>Urina escura, porfiria, litíase, anemias</td><td>só T11</td><td>Tema novo da T11: não aparece nas antigas, então vem dos slides da SP2.</td></tr>
+</tbody></table></div>
+
+<h3 id="px-pegantigas">Pegadinhas das provas antigas</h3>
+<div class="traps">
+<div class="trap"><b>Uma palavra derruba a afirmativa.</b> “Leucocitose neutro<u>pênica</u>”, “desvio à esquerda” com bastonetes 6% (até 8% é normal), “insuficiência pancreática” com amilase 458, “globina” no lugar de heme.</div>
+<div class="trap"><b>Afirmativa em duas metades.</b> T10: “P3 colestase (certo). P4 insuficiência pancreática (errado)” = falsa inteira. Leia até o ponto final.</div>
+<div class="trap"><b>Valor no limite da referência.</b> TAP 16,2 com referência até 16,5 não é disfunção (T8). Proteína 3,0 no corte: decida pelas razões e pelo LDH (T6, atividade).</div>
+<div class="trap"><b>Frase que ela considera VERDADEIRA:</b> “as viroses geralmente são diagnosticadas apenas clinicamente ou descartando outras hipóteses”. Caiu na T9 e na T10.</div>
+<div class="trap"><b>Frases sempre FALSAS:</b> celíaca por “falta de enzima” (é autoimune); glicose “sobe mais de 20” no intolerante (sobe menos); AST/ALT “extracelulares” ou “de função” (são intracelulares, de lesão); toxina “detectada no coprológico ou na coprocultura”; antígeno de H. pylori “no sangue” (é nas fezes).</div>
+<div class="trap"><b>Bilirrubina:</b> colestase → direta (hidrossolúvel, sai na urina = colúria) e fezes acinzentadas; disfunção/hemólise → indireta. Ela troca as duas para ver se você percebe.</div>
+<div class="trap"><b>Hepatite C sem RNA:</b> anti-HCV reagente com HCV-RNA não reagente = contato, não infecção ativa (T7). E o confirmatório da C é RNA, não DNA (T10).</div>
+<div class="trap"><b>“8 meses” na hepatite A</b> (T10 C): o A não cronifica; IgM reagente = aguda, não importa o tempo do enunciado.</div>
+<div class="trap"><b>D-xilose:</b> normal no pancreático (a mucosa absorve), baixa no intestinal.</div>
+</div>
+
 <h3 id="px-slides">Os slides que viraram prova</h3>
 <p><b>“Outros” (SP2):</b> o exame de cada doença — porfiria (ALA, porfirinas, urina), falciforme (eletroforese de Hb), chumbo (ALA, ZPP), ectópica (β-hCG seriado), lactose (TTOL), celíaca (anti-gliadina, anti-tTG), DII (calprotectina, ASCA, pANCA), cetoacidose (gasometria, ânion gap).</p>
 <p><b>“Pense rápido” (SP2):</b> fita + com microscopia normal → rabdomiólise ou hemólise; elastase baixa → pancreatite; mais de 250 células na ascite → exsudato; urina cor de vinho → porfiria; acolia + colúria → colestase; acidose metabólica → DM1.</p>
 <p><b>Caso final da SP2:</b> criança de 4 anos com dor abdominal recorrente, mucosas hipocoradas e internações → virou a criança falciforme da Q7.</p>
 </div>
-      <p class="foot">Material de estudo pessoal montado a partir dos slides das SP1–SP4 (2026.2) e da prova de Lab da T11. Questões “Inéditas” foram escritas no molde da professora; não são oficiais.</p>
+      <p class="foot">Material de estudo pessoal montado a partir dos slides das SP1–SP4 (2026.2) e das provas de Lab das turmas T6 a T11. Questões “Inéditas” foram escritas no molde da professora; não são oficiais.</p>
     </main>
     <aside class="side" id="side"></aside>
   </div>
@@ -900,7 +955,263 @@ const QS=[
 ["Não há hepatite D ativa, pois o vírus D depende do B (HBsAg) para se replicar.",1,"Exatamente a armadilha da discursiva da T11."],
 ["Hepatite D aguda.",0,"Sem HBsAg o HDV não replica."],
 ["Hepatite D crônica.",0,"Idem."],
-["Coinfecção B/D ativa.",0,"HBsAg negativo afasta B ativa."]]}
+["Coinfecção B/D ativa.",0,"HBsAg negativo afasta B ativa."]]},
+// ================= PROVAS ANTIGAS (T6–T10) · reais, formato de afirmativas com valores de referência =================
+// tb: tabela ("|" separa colunas, 1ª linha = cabeçalho) · q2: texto depois da tabela · v: V/F de cada afirmativa (I, II, III…) · r: por quê de cada afirmativa · fix: mantém a ordem original das letras
+{id:"h6_1",ob:"o1",sp:"sp1",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q1",fix:1,
+q:"Paciente 1: sexo masculino, 4 anos, sem febre e choroso. Paciente 2: sexo masculino, 34 anos, nega febre. Analise os resultados dos exames:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Glicemia basal / 30 min / 60 min (TTOL)|89 / 115 / 98|78 / 96 / 109|Normal: elevação de pelo menos 20 mg/dL","Anti-tTG IgA|13,5 U/mL|4,8 U/mL|Não reagente < 7,0 · indeterminado 7–10 · reagente > 10,0","Parasitológico|Pastosa, castanho, muco ausente, sangue negativo; helmintos e protozoários negativos|Pastosa, castanho, muco ausente, sangue negativo; helmintos e protozoários negativos|Formada, castanho, ausente, negativo","Coprocultura|Ausência de bactérias patogênicas|não realizado|Ausência de bactérias patogênicas","Calprotectina fecal|41 µg/g|312 µg/g|Negativo < 50 · positivo baixo 50–150 · positivo > 150","pANCA|não realizado|Negativo|Negativo","ASCA|não realizado|Positivo|Negativo"],
+q2:"Com base no caso e nos resultados dos exames, assinale a opção correta:",o:[
+["Paciente 1: intolerância à lactose; paciente 2: retocolite ulcerativa.",0,"A curva do P1 sobe 26 (normal). E ASCA+/pANCA− é Crohn, não RCU."],
+["Paciente 1: doença celíaca; paciente 2: doença de Crohn.",1,"P1: anti-tTG 13,5 (reagente) com curva normal. P2: calprotectina 312 + ASCA positivo e pANCA negativo = Crohn."],
+["Paciente 1: intolerância à lactose; paciente 2: doença de Crohn.",0,"P2 certo, mas a curva do P1 (89 → 115) é normal."],
+["Paciente 1: doença celíaca; paciente 2: retocolite ulcerativa.",0,"P1 certo; RCU seria pANCA+ e ASCA−."],
+["Paciente 1: origem viral; paciente 2: doença celíaca.",0,"Anti-tTG reagente é do P1; o P2 tem 4,8 (não reagente)."]]},
+
+{id:"h6_2",ob:"o1",sp:"sp1",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q2",fix:1,
+q:"Os quadros de diarreia podem ser desencadeados por diversas causas, como infecções, doenças inflamatórias, entre outros. Sobre as possíveis causas de diarreia e os exames laboratoriais para seu diagnóstico, analise as asserções:",
+q2:"I. A intolerância à lactose pode ocorrer na forma primária, por redução de lactase com predisposição genética, ou na forma secundária, por consequência de um distúrbio de base que gera uma intolerância transitória.\nII. Na diarreia de origem bacteriana alguns achados comuns são calprotectina com resultado positivo alto (> 150 µg/g), presença de sangue nas fezes, pH fecal diminuído e hemograma apresentando leucocitose neutropênica.\nIII. Um resultado de ASCA negativo e pANCA positivo sugere um quadro de doença de Crohn. Além disso, devido ao intenso processo inflamatório, ocorre presença de leucócitos nas fezes.\nIV. Na doença celíaca ocorre uma redução na produção das enzimas responsáveis pela digestão do glúten, o que gera incapacidade de ingerir alimentos com glúten. Um dos exames para detectar este quadro é a pesquisa de substâncias redutoras, que se apresenta positiva pela presença do glúten não digerido.\nV. Nas diarreias causadas por toxinas de microrganismos, é possível realizar coprocultura ou pesquisa de fungos para detectar essas substâncias. As diarreias virais são causadas principalmente pelo rotavírus e carecem de evidências laboratoriais, mas febre e sangue nas fezes podem sugerir origem viral.\nÉ correto apenas o que se afirma em:",
+v:"VFFFF",r:["Definição dos slides: primária genética, secundária transitória.","Leucocitose NEUTROFÍLICA, não “neutropênica”: uma palavra derruba a frase.","ASCA−/pANCA+ é retocolite ulcerativa; Crohn é ASCA+.","Celíaca é autoimune (anti-tTG), não falta de enzima; substâncias redutoras pesquisam carboidrato (lactose), não glúten.","Toxinas não saem em coprocultura nem em pesquisa de fungos; febre e sangue sugerem bactéria, não vírus."],o:[
+["I e III",0,""],["II, IV e V",0,""],["I, II, III, IV e V",0,""],["III",0,""],["I",1,""]]},
+
+{id:"h6_3",ob:"o6",sp:"sp2",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q3",fix:1,
+q:"O hemograma é uma ferramenta importante no diagnóstico ou acompanhamento de várias patologias, como no caso de quadros infecciosos. Analise o laudo abaixo:",
+tb:["Parâmetro|Resultado|Referência","Eritrócitos · Hb · Ht|4,76 · 14,1 · 42,3|3,9–5,3 · 11,0–16,0 · 35–47","Leucócitos|15.600|3.600–11.000","Mielócitos|2% (312)|—","Metamielócitos|4% (624)|—","Bastonetes|5% (780)|até 8%","Segmentados|81% (12.636)|1.500–7.000","Eosinófilos · Basófilos|0 · 0|0–500 · 0–200","Linfócitos|6% (936)|1.000–4.500","Monócitos|2% (312)|100–1.000","Plaquetas|345.000|140.000–500.000"],
+q2:"Com base no caso e nos resultados dos exames, assinale a opção correta:",o:[
+["Leucocitose, neutropenia e linfocitose; causa provável parasitária, sem evidência de desvio à esquerda.",0,"Segmentados 12.636 = neutrofilia; linfócitos 936 = linfopenia."],
+["Leucocitose, neutrofilia e linfopenia; causa provável bacteriana, sem evidência de desvio à esquerda.",0,"Quase: mas há mielócitos e metamielócitos no sangue = desvio à esquerda."],
+["Leucopenia, neutrofilia e linfocitose; causa provável viral em fase neutrofílica, sem desvio à esquerda.",0,"15.600 é leucocitose."],
+["Leucopenia, neutropenia e linfocitose; causa provável fúngica, com desvio à esquerda.",0,"Tudo invertido."],
+["Leucocitose, neutrofilia e linfopenia; causa provável bacteriana, e o paciente apresenta desvio à esquerda.",1,"Bastonete 5% é normal, mas mielócito e metamielócito (formas jovens) circulando já é desvio à esquerda."]]},
+
+{id:"h6_4",ob:"o2",sp:"sp2",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q4",fix:1,
+q:"Na avaliação laboratorial da dor abdominal, a interpretação dos exames laboratoriais é de fundamental importância. Analise os resultados abaixo:",
+tb:["Exame|Pac 1 (fem.)|Pac 2 (masc.)|Pac 3 (masc.)|Referência","AST|26|29|422|até 40 U/L","ALT|27|37|581|mulheres até 31 · homens até 41 U/L","TAP (tempo · atividade · RNI)|16,8 s · 45% · 1,24|15,6 s · 79% · 1,14|14,3 s · 88% · 1,02|14,0–16,5 s · 100–70% · 1,0–1,22","Bilirrubina total · direta · indireta|1,6 · 0,2 · 1,4|1,3 · 0,7 · 0,6|1,7 · 0,5 · 1,2|até 1,2 · 0,4 · 0,8 mg/dL","Fosfatase alcalina|375|984|496|150–507 U/L","GGT|32|187|52|homens até 60 · mulheres até 43 U/L"],
+q2:"Com base no tema e nos resultados dos exames, assinale a alternativa correta:",o:[
+["P1 causa biliar (obstrução); P2 disfunção hepática; P3 lesão hepática.",0,"P1 e P2 trocados."],
+["P1 disfunção hepática; P2 lesão hepática; P3 origem biliar (obstrução).",0,"P2 e P3 trocados."],
+["P1 disfunção hepática; P2 causa biliar (obstrução); P3 lesão hepática.",1,"P1: TAP ↑, atividade ↓, RNI ↑ e BI ↑ = disfunção. P2: FAL, GGT e BD ↑ = colestase. P3: AST/ALT altíssimas = lesão."],
+["P1 lesão hepática; P2 causa biliar (obstrução); P3 disfunção hepática.",0,"P1 tem AST/ALT normais; P3 tem TAP normal."],
+["P1 origem biliar (obstrução); P2 disfunção hepática; P3 lesão hepática.",0,"FAL e GGT normais no P1 afastam colestase."]]},
+
+{id:"h8_5",ob:"o5",sp:"sp3",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q5 · repetida da T6 Q5",fix:1,
+q:"O diagnóstico e acompanhamento de Hepatite B conta com muitos marcadores laboratoriais. O paciente 1 foi diagnosticado há sete meses com hepatite B. Analise os resultados dos pacientes abaixo:",
+tb:["Marcador|Paciente 1|Paciente 2|Paciente 3","HBsAg|Reagente|Reagente|Não reagente","HBeAg|Reagente|—*|—*","Anti-HBc IgM|Não reagente|Reagente|Não reagente","Anti-HBc IgG|Reagente|Não reagente|Não reagente","Anti-HBe|Não reagente|—*|—*","Anti-HBs|Não reagente|—*|Reagente","*|exame não prescrito / não realizado||"],
+q2:"I. Os resultados do paciente 1 apontam para hepatite B em fase aguda e indicam prognóstico desfavorável pela presença de HBsAg, que indica o vírus na circulação.\nII. Os resultados do paciente 1 apontam para hepatite B em fase crônica e indicam prognóstico desfavorável pela presença de HBeAg, que indica replicação viral.\nIII. Os resultados do paciente 2 apontam para hepatite B em fase aguda, indicado pela presença de HBsAg e anti-HBc IgM, ainda com ausência de anti-HBc IgG.\nIV. Os resultados do paciente 2 apontam para hepatite B crônica e indicam prognóstico favorável pela presença de anti-HBc IgM.\nV. Os resultados do paciente 3 apontam para hepatite B curada.\nVI. Os resultados do paciente 3 apontam para um paciente vacinado que nunca teve hepatite B.\nÉ correto apenas o que se afirma em:",
+v:"FVVFFV",r:["7 meses com HBsAg = crônica (mais de 6 meses).","Crônica (7 meses, IgG sem IgM) e HBeAg = replicação, pior prognóstico.","HBsAg + IgM sem IgG = aguda inicial.","IgM é fase aguda; não é crônica nem “favorável”.","Curado teria anti-HBc IgG. Só anti-HBs = vacina.","Só anti-HBs reagente, anti-HBc negativo = vacinado."],o:[
+["III e VI",0,""],["II e III",0,""],["II, III e VI",1,""],["I e IV",0,""],["I, III e V",0,""]]},
+
+{id:"h6_6",ob:"o5",sp:"sp3",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q6",fix:1,
+q:"Paciente do sexo masculino, admitido com suspeita de hepatite, apresentando icterícia. Resultados:\nHBsAg não reagente · anti-HBc IgM não reagente · anti-HBc IgG reagente · anti-HBs reagente · anti-HDV não reagente · anti-HCV reagente · anti-HAV IgM não reagente · anti-HAV IgG reagente · anti-HEV IgM não reagente · anti-HEV IgG não reagente.",
+q2:"I. Os resultados indicam que ele não apresenta hepatite B e nunca se infectou com hepatite B, mas recebeu a vacina contra este vírus.\nII. Os resultados não mostram evidências de hepatite D e o marcador de hepatite C, apesar de reagente, não diferencia doença ativa de doença pregressa.\nIII. Os resultados para hepatite E se mostraram não reagentes, descartando este como agente causador do quadro.\nIV. Os resultados indicam hepatite A em sua forma crônica, tendo em vista o anti-HAV IgG reagente.\nV. Os resultados apontam como causa mais provável uma infecção pelo vírus da hepatite C, mas para confirmação laboratorial seria preciso realizar a pesquisa do vírus.\nÉ correto apenas o que se afirma em:",
+v:"FVVFV",r:["Anti-HBc IgG reagente = teve contato (B curada). Vacinado teria só anti-HBs.","Anti-HDV negativo; anti-HCV só mostra contato: ativo × passado se separa com HCV-RNA.","Anti-HEV IgM e IgG negativos descartam E.","Hepatite A não cronifica; IgG = contato antigo ou vacina.","Anti-HCV reagente é o que sobra; confirma com RNA."],o:[
+["II, III e V",1,""],["I, II, III e IV",0,""],["I, III e V",0,""],["II e III",0,""],["I, II e IV",0,""]]},
+
+{id:"h6_7",ob:"o6",sp:"sp4",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q7",fix:1,
+q:"Na avaliação de quadros patológicos que afetam o trato gastrintestinal é importante a associação de alguns exames laboratoriais. Analise as asserções:",
+q2:"I. Na suspeita de infecção por H. pylori, pode-se pesquisar anticorpos IgG no sangue, que detecta infecção presente ou passada, sem distingui-las.\nII. Na suspeita de infecção por H. pylori, pode-se pesquisar antígenos nas fezes, que identifica e diferencia infecção presente e passada.\nIII. Para o coprológico funcional é necessária uma dieta para que o paciente ingira quantidades adequadas de macronutrientes (carboidratos, proteínas e lipídeos), já que o exame avalia principalmente as funções digestivas.\nIV. Para a pesquisa de sangue oculto, a técnica de imunoensaio não necessita de dieta prévia, pois utiliza anticorpos para detectar o antígeno (hemoglobina humana) nas fezes.\nV. Sangramentos no TGI que evoluem de forma crônica podem desencadear anemia ferropriva pela perda constante de ferro, com redução de hemoglobina, VCM e HCM.\nÉ correto apenas o que se afirma em:",
+v:"VVVVV",r:["IgG = contato; não separa ativa de passada.","Para ela, verdadeira: antígeno nas fezes = infecção ativa (é o que “diferencia”). A veterana marcou B e errou.","Coprológico funcional exige dieta de prova.","Imunoensaio é específico para Hb humana: sem dieta.","Ferropriva = microcítica e hipocrômica."],o:[
+["II e V",0,""],["II, IV e V",0,""],["I, II, III, IV e V",1,""],["I, III e IV",0,""],["I e III",0,""]]},
+
+{id:"h6_8",ob:"o6",sp:"sp4",tag:"antiga",tu:"T6",dt:"out/2023",ref:"Q8",fix:1,
+q:"Na avaliação de distúrbios do trato gastrintestinal, dois pacientes com diarreia realizam coprológico funcional:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Consistência · cor|Pastosa · castanho-amarelada|Pastosa · amarelada|Formada · castanho","pH · leucócitos|7,1 · negativo|6,3 · negativo|6,0–8,0 · negativo","Amido amorfo|Ausente|Presente|Ausente","Gorduras neutras|Ausente|Presente|Ausente","Ácidos graxos|Presente|Ausente|Ausente","Fibras musculares|Ausente|Presente|Ausente","Flora iodófila · fungos · cistos · ovos|ausentes/negativos|ausentes/negativos|ausentes"],
+q2:"I. O paciente 1 aponta para causa intestinal, pela presença de ácidos graxos nas fezes, por comprometimento na absorção intestinal.\nII. O paciente 1 aponta para causa hepatobiliar, pela presença de ácidos graxos, por deficiência de bile.\nIII. O paciente 2 aponta para causa pancreática, pois carboidratos, triglicerídeos e proteínas nas fezes indicam comprometimento na produção ou liberação das enzimas pancreáticas.\nIV. O paciente 2 aponta para causa hepatobiliar, como obstrução biliar, que prejudica a digestão de carboidratos, proteínas e lipídeos.\nV. Fezes amareladas podem estar relacionadas à presença de gordura; coloração vermelha a sangue, sendo tonalidade mais viva das porções finais do TGI e mais escura das porções anteriores.\nÉ correto apenas o que se afirma em:",
+v:"VFVFV",r:["Ácidos graxos = gordura já digerida e não absorvida = intestino.","Biliar dá gordura NEUTRA e fezes acinzentadas.","Amido + gordura neutra + fibras = pâncreas não digeriu nada.","Bile não digere carboidrato nem proteína.","Cor das fezes como nos slides da SP4."],o:[
+["I, III e V",1,""],["II, IV e V",0,""],["II e III",0,""],["I e III",0,""],["I e V",0,""]]},
+
+// ---------- T7 · 26/04/2024 ----------
+{id:"h7_1",ob:"o1",sp:"sp1",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q1",fix:1,
+q:"Seis pacientes realizaram exame para determinar a presença de possível intolerância à lactose:",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4|Pac 5|Pac 6","Basal|91|88|101|93|79|84","30 min após carboidrato|152|95|107|135|94|117","60 min após carboidrato|125|98|98|108|90|95","Referência|diferença de 20 mg/dL||||| "],
+q2:"I. O paciente 1 é compatível com intolerância à lactose e o paciente 2 não é.\nII. O paciente 3 é compatível com intolerância à lactose e o paciente 4 não é.\nIII. O paciente 5 é compatível com intolerância à lactose e o paciente 6 não é.\nIV. Na intolerância de origem primária, ocorre redução ou ausência da enzima lactose, resultando em redução na capacidade de quebrar a lactase e, como consequência, esse dissacarídeo é absorvido em menor quantidade.\nV. Em crianças de 1 ou 2 anos, o teste de tolerância não é realizado, mas pode-se avaliar o pH, que tende a aumentar, e a coprocultura, onde se analisa a presença de carboidratos nas fezes.\nÉ correto apenas o que se afirma em:",
+v:"FVVFF",r:["Invertida: P1 sobe 61 (normal) e P2 sobe 10 (intolerante).","P3 +6 (IL); P4 +42 (normal).","P5 +15 (IL); P6 +33 (normal).","Lactose e lactase trocadas: a enzima é a lactase, o açúcar é a lactose. Ela considerou falsa.","pH fecal DIMINUI (fermentação); carboidrato se vê em substâncias redutoras, não em coprocultura."],o:[
+["I e III",0,""],["IV e V",0,""],["II e III",1,""],["II e IV",0,""],["II, III e V",0,""]]},
+
+{id:"h7_2",ob:"o6",sp:"sp4",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q2",fix:1,
+q:"Analise os resultados dos dois pacientes abaixo, que apresentam quadro de diarreia:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Anti-tTG IgA|2,5 U/mL|1,7 U/mL|não reagente < 7,0","Sangue oculto (imunoensaio)|Positivo|Negativo|Negativo","Coprocultura|não realizado|Ausência de patogênicos|Ausência","Pesquisa de fungos|Negativo|Negativo|Negativo","Calprotectina|321 µg/g|não realizado|< 50 negativo · > 150 positivo","Copro: consistência · cor · pH|Pastosas · amarelada · 6,6|Pastosas · amarelada · 6,2|Formadas · castanho · 6,0–8,0","Leucócitos|Positivo|Negativo|Negativo","Amido amorfo|Presente|Presente|Ausente","Gorduras neutras|Ausente|Presente|Ausente","Ácidos graxos|Presente|Ausente|Ausente","Fibras musculares|Presente|Presente|Ausente"],
+q2:"I. O paciente 1 indica causa hepatobiliar pela presença de ácidos graxos. O sangue oculto pode vir de diferentes porções do TGI, e para este exame o paciente precisou de dieta restritiva de 72 h para evitar falso-positivo.\nII. O paciente 1 indica causa pancreática, pela presença de carboidratos, lipídeos e proteínas. O sangue oculto não precisou de dieta prévia, pois o imunoensaio detecta antígeno (hemoglobina humana) com anticorpos.\nIII. O paciente 2 indica causa intestinal pela presença de carboidratos, lipídeos e proteínas; a provável causa é enterite infecciosa viral ou bacteriana.\nIV. O paciente 2 indica causa pancreática, com redução da capacidade de digestão enzimática, refletindo o comprometimento da produção ou liberação de amilases, lipases e proteases.\nV. A calprotectina do paciente 1 é característica de doença celíaca e enterites infecciosas, por ser produzida pelos enterócitos durante a agressão ao epitélio.\nÉ correto apenas o que se afirma em:",
+v:"FFFVF",r:["Ácidos graxos = intestinal; imunoensaio não pede dieta.","A segunda frase é certa, mas o P1 é intestinal/inflamatório (ácidos graxos, leucócitos, calprotectina 321, sangue): a primeira derruba.","Gordura neutra + amido + fibras é pâncreas, não intestino.","Padrão pancreático clássico.","Calprotectina vem dos neutrófilos e marca inflamação (DII); celíaca não é o exemplo."],o:[
+["I, III e V",0,""],["II e IV",0,""],["II e III",0,""],["I, IV e V",0,""],["IV",1,""]]},
+
+{id:"h7_3",ob:"o1",sp:"sp1",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q3",fix:1,
+q:"Os quadros de diarreia podem ser desencadeados por diversas causas. Sobre as causas e os exames laboratoriais, analise as asserções:",
+q2:"I. A doença de Crohn pode ser diagnosticada com exames altamente sensíveis, ASCA e pANCA, que neste caso apresentam resultado não reagente e reagente, respectivamente.\nII. Na doença celíaca ocorre redução na capacidade de digestão do glúten pela redução ou perda da amilase que o digere. O diagnóstico é pela avaliação da enzima tTG (transglutaminase).\nIII. Alguns quadros diarreicos infecciosos podem provocar sangramento intestinal, como bactérias e alguns parasitas. A perda crônica de sangue pode desencadear anemia ferropriva (microcítica/hipocrômica) quando a dieta não repõe o ferro.\nIV. As toxinas bacterianas podem ser detectadas no coprológico funcional, enquanto vírus e bactérias são rotineiramente identificados por culturas e parasitoses pelo parasitológico.\nÉ correto apenas o que se afirma em:",
+v:"FFVF",r:["Invertido (Crohn = ASCA+/pANCA−) e são específicos (97%), não sensíveis (~50%).","Celíaca é autoimune; o exame é o ANTICORPO anti-tTG, não a enzima.","Frase que ela repete em várias provas.","Toxina não aparece no coprológico; vírus não se cultiva na rotina (antígeno/PCR)."],o:[
+["I e III",0,""],["II e IV",0,""],["I, II, III e IV",0,""],["III",1,""],["I, II e III",0,""]]},
+
+{id:"h7_4",ob:"o6",sp:"sp2",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q4",fix:1,
+q:"Analise os resultados do hemograma de dois pacientes com suspeita de infecção:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Eritrócitos · Hb · Ht|4,2 · 13,6 · 40,8|3,7 · 10,8 · 32,4|3,9–5,3 · 11–16 · 35–47","Leucócitos|15.600|9.200|3.600–11.000","Bastonetes|4% (624)|1% (92)|até 8%","Segmentados|78% (12.168)|49% (4.508)|1.500–7.000","Eosinófilos|1% (156)|12% (1.104)|0–500","Basófilos|0|0|0–200","Linfócitos|15% (2.340)|31% (2.852)|1.000–4.500","Monócitos|3% (468)|7% (644)|100–1.000","Plaquetas|342.000|197.000|150.000–500.000"],
+q2:"Com base no tema e nos resultados dos exames, assinale a alternativa correta:",o:[
+["P1: leucocitose com neutrofilia; causa mais provável bacteriana, e o paciente apresenta desvio à esquerda.",0,"Bastonetes 4% (até 8%) e sem formas jovens: sem desvio."],
+["P1: leucocitose com neutropenia; causa bacteriana, sem desvio à esquerda.",0,"12.168 segmentados é neutrofilia."],
+["P2: neutrofilia; causa mais provável viral, sem desvio à esquerda.",0,"P2 não tem neutrofilia; tem eosinofilia."],
+["P2: eosinofilia; causa mais provável fúngica, sem desvio à esquerda nem anemia.",0,"Eosinofilia = parasita; e Hb 10,8 é anemia."],
+["P2: eosinofilia; causa mais provável parasitária, e o paciente apresenta anemia e não apresenta desvio à esquerda.",1,"Eosinófilos 1.104 + Hb 10,8: parasitose com anemia."]]},
+
+{id:"h7_5",ob:"o2",sp:"sp2",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q5",fix:1,
+q:"Analise os resultados dos pacientes abaixo, referindo dor abdominal:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","AST · ALT|32 · 37|39 · 47|até 42 · até 49 U/L","Amilase|56|73|30–118 U/L","Fosfatase alcalina|318|614|150–507 U/L","TAP|17,4 s|16,2 s|14,0–16,5 s","Bilirrubina total · direta · indireta|6,98 · 0,15 · 6,83|1,29 · 0,58 · 0,71|até 1,2 · 0,4 · 0,8","Líquido ascítico: proteína · albumina|1,9 · 1,1 g/dL|não realizado|transudato < 3,0 g/dL","LDH · razão proteína · razão LDH|107 · 0,37 · 0,48|—|< 200 · < 0,5 · < 0,6","Hemácias · leucócitos (PMN/MN)|(+) · 14 (36% / 64%)|—|"],
+q2:"I. O paciente 1 indica disfunção hepática, com base na elevação do TAP e da bilirrubina indireta.\nII. O líquido ascítico do paciente 1 indica transudato, que pode ter sido desencadeado pela redução da síntese hepática de proteínas plasmáticas.\nIII. O paciente 2 é compatível com quadro de origem biliar, com base na fosfatase alcalina e bilirrubina direta elevadas.\nIV. A bilirrubina direta elevada no paciente 2 pode ser consequência de obstrução de vias biliares, levando ao aumento da bilirrubina direta no sangue e sua consequente eliminação renal.\nÉ correto apenas o que se afirma em:",
+v:"VVVV",r:["TAP 17,4 + BI 6,83 com AST/ALT normais = falha de síntese/conjugação.","Todos os critérios de transudato; albumina baixa por falta de síntese.","FAL 614 e BD 0,58 = colestase.","BD é hidrossolúvel e sai na urina (colúria)."],o:[
+["I, II, III e IV",1,""],["I, II e III",0,""],["I e III",0,""],["II e IV",0,""],["IV",0,""]]},
+
+{id:"h7_6",ob:"o5",sp:"sp3",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q6",fix:1,
+q:"Hepatite é o termo genérico para inflamação hepática, aguda ou crônica. Paciente com suspeita de hepatite e clínica sugestiva há DOIS MESES:\nAnti-HDV reagente · anti-HCV reagente · HCV-RNA não reagente · HBsAg reagente · HBeAg reagente · anti-HBc IgM reagente · anti-HBc IgG reagente · anti-HBe não reagente · anti-HBs não reagente · ALT 395 U/L (referência até 49).",
+q2:"I. Os resultados indicam infecção crônica por hepatite B.\nII. Os resultados indicam coinfecção pelos vírus da hepatite B e D.\nIII. Os resultados indicam infecção pelo vírus da hepatite C.\nIV. Os resultados indicam que ele foi vacinado contra hepatite C.\nV. Os resultados indicam replicação do vírus B, o que deixa o prognóstico menos favorável.\nVI. A ALT/TGP é um marcador de função hepática e o resultado elevado indica disfunção hepática.\nÉ correto apenas o que se afirma em:",
+v:"FVFFVF",r:["2 meses com anti-HBc IgM = aguda.","HBsAg + anti-HDV: D junto com B.","HCV-RNA não reagente: anti-HCV é só contato.","Não existe vacina contra C.","HBeAg = replicação.","ALT é marcador de LESÃO; função é TAP, albumina, BI. (Gabarito deduzido: a veterana marcou D e errou.)"],o:[
+["I, II, IV, V e VI",0,""],["II e V",1,""],["III e VI",0,""],["I, II e V",0,""],["III, V e VI",0,""]]},
+
+{id:"h7_7",ob:"o6",sp:"sp4",tag:"antiga",tu:"T7",dt:"abr/2024",ref:"Q7",fix:1,
+q:"H. pylori é um patógeno cujo reservatório principal é o homem. Observe os resultados abaixo:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Antígeno H. pylori|Reagente|Não reagente|Não reagente","Anti-H. pylori IgG|Reagente|Reagente|Não reagente"],
+q2:"I. O paciente 1 apresenta infecção ativa por H. pylori.\nII. O paciente 1 já teve infecção por H. pylori e está curado.\nIII. O paciente 2 recebeu a vacina contra H. pylori.\nIV. O paciente 2 apresenta infecção ativa em fase crônica por H. pylori.\nV. A pesquisa de antígenos de H. pylori é realizada no sangue do paciente com suspeita de infecção.\nÉ correto apenas o que se afirma em:",
+v:"VFFFF",r:["Antígeno reagente = ativa.","Antígeno positivo: não está curado.","Não há vacina; IgG = contato prévio.","Antígeno negativo = sem infecção ativa.","Antígeno é nas FEZES; anticorpo no sangue."],o:[
+["II e III",0,""],["I e V",0,""],["II, IV e V",0,""],["I, III e V",0,""],["I",1,""]]},
+
+// ---------- T8 · 04/10/2024 ----------
+{id:"h8_1",ob:"o6",sp:"sp2",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q1",fix:1,
+q:"Analise os resultados do hemograma de três pacientes com suspeita de infecção:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Paciente 3|Referência","Eritrócitos · Hb · Ht|3,2 · 10,1 · 30,3|4,5 · 13,9 · 41,7|4,2 · 12,5 · 37,5|3,9–5,3 · 11–16 · 35–47","Leucócitos|10.500|13.700|10.300|3.600–11.000","Bastonetes|1% (105)|6% (822)|1% (103)|até 8%","Segmentados|48% (5.040)|75% (10.275)|23% (2.369)|1.500–7.000","Eosinófilos|15% (1.575)|1% (137)|1% (103)|0–500","Basófilos|0|0|0|0–200","Linfócitos|29% (3.045)|16% (2.192)|67% (6.901)|1.000–4.500","Monócitos|7% (735)|3% (411)|8% (824)|100–1.000","Plaquetas|318.000|296.000|243.000|150.000–500.000"],
+q2:"Com base no tema e nos resultados dos exames, assinale a alternativa correta:",o:[
+["P1 apresenta anemia e neutrofilia; a causa mais provável é bacteriana.",0,"P1 tem eosinofilia (1.575), não neutrofilia: parasitária."],
+["P2 apresenta leucocitose, neutrofilia e desvio à esquerda; a causa mais provável é bacteriana.",0,"Bastonetes 6% estão dentro de “até 8%”: não há desvio. Uma palavra errada."],
+["P3 apresenta leucocitose e linfopenia; a causa mais provável é viral.",0,"Linfócitos 6.901 = linfocitose (e 10.300 nem é leucocitose)."],
+["Nos pacientes 1 e 3 é possível excluir processo infeccioso, pois não há leucocitose.",0,"Eosinofilia e linfocitose já apontam infecção."],
+["Granulações tóxicas e corpúsculos de Döhle podem ser observados em infecções bacterianas graves, enquanto atipia linfocitária se relaciona especialmente a infecções virais.",1,"Frase teórica correta da SP2."]]},
+
+{id:"h8_2",ob:"o1",sp:"sp1",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q2",fix:1,
+q:"Analise os resultados dos dois pacientes abaixo, que apresentam quadro de diarreia:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Anti-tTG IgA|21,3 U/mL|3,1 U/mL|não reagente < 7 · reagente > 10","Sangue oculto (imunoensaio)|Negativo|Positivo|Negativo","Coprocultura|não realizado|Ausência de patogênicos|Ausência","Pesquisa de fungos|Negativo|Negativo|Negativo","Calprotectina|46 µg/g|532 µg/g|< 50 negativo · > 150 positivo"],
+q2:"I. O paciente 1 indica doença celíaca, onde ocorre formação de autoanticorpos desencadeada pela exposição ao glúten.\nII. O paciente 1 indica doença celíaca, onde ocorre deficiência genética da enzima responsável pela quebra do glúten, o que desencadeia o processo inflamatório.\nIII. O paciente 2 indica quadro inflamatório de grandes proporções, como doença de Crohn, mas a confirmação laboratorial pode ser feita pela pesquisa de ASCA e pANCA.\nIV. ASCA positivo e pANCA negativo indica doença de Crohn, enquanto pANCA positivo com ASCA negativo indica retocolite ulcerativa.\nV. A pesquisa de sangue oculto usou imunoensaio, com anticorpos para detectar o antígeno (hemoglobina humana) nas fezes, sem necessidade de dieta preparatória.\nÉ correto apenas o que se afirma em:",
+v:"VFVVV",r:["Celíaca = autoimune.","Não é deficiência de enzima: é autoimune (a veterana anotou “autoimune!”).","Calprotectina 532 + sangue oculto: DII; ASCA/pANCA diferenciam.","Regra dos slides.","Imunoensaio dispensa dieta."],o:[
+["I, III e V",0,""],["II e V",0,""],["I, III e IV",0,""],["I, III, IV e V",1,""],["II, III, IV e V",0,""]]},
+
+{id:"h8_3",ob:"o2",sp:"sp2",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q3",fix:1,
+q:"Analise os resultados dos pacientes abaixo, todos do sexo masculino (51, 59 e 43 anos):",
+tb:["Parâmetro|Paciente 1|Paciente 2|Paciente 3|Referência","AST|1.159|49|27|até 42 U/L","ALT|1.612|51|31|até 49 U/L","Amilase|71|48|557|30–118 U/L","Fosfatase alcalina|498|3.024|326|150–507 U/L","TAP|16,2 s|14,7 s|15,1 s|14,0–16,5 s","GGT|57|576|34|homens até 60 U/L","Bilirrubina total · direta · indireta|não realizado|1,33 · 0,69 · 0,64|0,86 · 0,24 · 0,62|até 1,2 · 0,4 · 0,8"],
+q2:"I. O paciente 1 indica lesão hepática como causa das alterações de AST e ALT.\nII. O paciente 1 indica disfunção hepática como causa das alterações de AST e ALT.\nIII. O paciente 2 indica lesão de parênquima hepático como causa das alterações de GGT, FAL e bilirrubina.\nIV. O paciente 2 indica colestase como causa das alterações de GGT, FAL e bilirrubina.\nV. O paciente 3 é compatível com pancreatite aguda como causa da elevação da amilase.\nVI. A bilirrubina na colestase eleva-se às custas da fração direta, enquanto na disfunção hepática se eleva às custas da fração indireta.\nÉ correto apenas o que se afirma em:",
+v:"VFFVVV",r:["AST/ALT > 1.000 = lesão.","TAP 16,2 está dentro da referência (até 16,5): não há disfunção. Pegadinha do limite.","FAL 3.024, GGT 576, BD ↑ = colestase, não lesão.","Idem.","Amilase 557 > 3× 118.","Regra da professora: colestase → BD; disfunção → BI."],o:[
+["II, III, V e VI",0,""],["I, IV, V e VI",1,""],["I, IV e V",0,""],["I, III e VI",0,""],["II, IV e V",0,""]]},
+
+{id:"h8_4",ob:"o5",sp:"sp3",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q4",fix:1,
+q:"Hepatite é o termo genérico para inflamação hepática, aguda ou crônica. Paciente com suspeita de hepatite:\nAnti-HDV não reagente · HBsAg não reagente · anti-HBc IgM não reagente · anti-HBc IgG reagente · anti-HBs reagente · anti-HCV reagente · anti-HAV IgM não reagente · anti-HAV IgG não reagente · anti-HEV IgM não reagente · anti-HEV IgG não reagente · ALT 421 U/L (referência até 49).",
+q2:"I. Os resultados indicam infecção crônica por hepatite B.\nII. Os resultados indicam hepatite B curada.\nIII. Os resultados indicam possível infecção pelo vírus da hepatite C.\nIV. Os resultados indicam que ele foi vacinado contra hepatite C.\nV. Para confirmação laboratorial é necessária a pesquisa do RNA viral.\nÉ correto apenas o que se afirma em:",
+v:"FVVFV",r:["Sem HBsAg não há B ativa.","Anti-HBc IgG + anti-HBs = curado.","Anti-HCV + ALT 421.","Vacina existe para A e B, não para C.","HCV é vírus de RNA: confirma com HCV-RNA."],o:[
+["I, III e V",0,""],["II e V",0,""],["II e III",0,""],["II, III e V",1,""],["I e IV",0,""]]},
+
+{id:"h9_6",ob:"o5",sp:"sp3",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q6 · variante da T6/T8 Q5",fix:1,
+q:"O diagnóstico e acompanhamento de Hepatite B conta com muitos marcadores. O paciente 1 foi diagnosticado há sete meses com hepatite B, enquanto os pacientes 2 e 3 realizam a primeira investigação:",
+tb:["Marcador|Paciente 1|Paciente 2|Paciente 3","HBsAg|Reagente|Reagente|Não reagente","HBeAg|Reagente|—*|—*","Anti-HBc IgM|Não reagente|Reagente|Não reagente","Anti-HBc IgG|Reagente|Não reagente|Não reagente","Anti-HBe|Não reagente|—*|—*","Anti-HBs|Não reagente|—*|Reagente","*|exame não prescrito / não realizado||"],
+q2:"I. O paciente 1 aponta para hepatite B em fase aguda e prognóstico desfavorável pela presença de HBsAg, que indica o vírus na circulação.\nII. O paciente 1 aponta para hepatite B curada, tendo em vista a memória imunológica indicada pelo anti-HBc IgG.\nIII. O paciente 2 aponta para hepatite B em fase aguda, pela presença de HBsAg e anti-HBc IgM, ainda sem anti-HBc IgG.\nIV. O paciente 2 aponta para hepatite B crônica e prognóstico favorável pela presença de anti-HBc IgM.\nV. O paciente 3 aponta para hepatite B curada.\nVI. O paciente 3 aponta para um paciente vacinado que nunca teve hepatite B.\nÉ correto apenas o que se afirma em:",
+v:"FFVFFV",r:["7 meses = crônica.","Com HBsAg e HBeAg reagentes não está curado: anti-HBc IgG aqui é infecção crônica.","Aguda inicial.","IgM = aguda.","Curado teria anti-HBc IgG.","Só anti-HBs = vacina."],o:[
+["I e III",0,""],["III e VI",1,""],["I, III e VI",0,""],["I e IV",0,""],["III e V",0,""]]},
+
+{id:"h8_6",ob:"o6",sp:"sp4",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q6",fix:1,
+q:"H. pylori é um patógeno cujo reservatório principal é o homem. Resultado do paciente: anti-Helicobacter pylori IgG reagente.\nAnalise as asserções e a relação proposta entre elas:",
+q2:"I. Os resultados do paciente não confirmam a presença de infecção, apenas o contato com a bactéria, sendo que para confirmação seria necessária a pesquisa de antígeno\nPORQUE\nII. A pesquisa de anticorpos é realizada em amostra de soro, enquanto a pesquisa de antígeno é realizada em amostra de fezes.",o:[
+["As asserções I e II são verdadeiras, e a II é uma justificativa da I.",0,"As duas são verdadeiras, mas a amostra (soro × fezes) não explica por que IgG só mostra contato."],
+["As asserções I e II são verdadeiras, mas a II não é uma justificativa da I.",1,"I: IgG = contato; antígeno confirma. II: soro × fezes, verdadeiro, mas não é o motivo."],
+["A asserção I é verdadeira, e a II é falsa.",0,"II é verdadeira."],
+["A asserção I é falsa, e a II é verdadeira.",0,"I é verdadeira."],
+["As asserções I e II são falsas.",0,"Ambas verdadeiras."]]},
+
+{id:"h8_7",ob:"o3",sp:"sp2",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q7",fix:1,
+q:"Analise os resultados do paciente abaixo com ascite, as asserções e a relação proposta entre elas:",
+tb:["Parâmetro|Paciente 1|Ponto de corte (anexo)","Proteínas totais|4,1 g/dL|transudato < 3,0 · exsudato > 3,0","Albumina · globulinas|3,4 · 0,5 g/dL|","LDH|307 UI/L|< 200 · > 200","Razão proteína (líquido/soro)|0,58|< 0,5 · > 0,5","Hemácias|(+)|","Leucócitos|465/mm³ (85% PMN, 15% MN)|"],
+q2:"I. Pela elevada concentração de proteínas e elevada contagem de leucócitos, sugere-se um processo de exsudato\nPORQUE\nII. O líquido de exsudato resulta de processo inflamatório com alteração de permeabilidade e elevação de proteínas e leucócitos no líquido ascítico.",o:[
+["As asserções I e II são verdadeiras, e a II é uma justificativa da I.",1,"Exsudato (proteína 4,1, LDH 307, razão 0,58) e a II explica o porquê: inflamação → permeabilidade."],
+["As asserções I e II são verdadeiras, mas a II não é uma justificativa da I.",0,"Aqui a II é exatamente a explicação."],
+["A asserção I é verdadeira, e a II é falsa.",0,"II é verdadeira para exsudato (na T9 ela troca para transudato e aí fica falsa)."],
+["A asserção I é falsa, e a II é verdadeira.",0,"I é verdadeira."],
+["As asserções I e II são falsas.",0,""]]},
+
+{id:"h8_8",ob:"o1",sp:"sp1",tag:"antiga",tu:"T8",dt:"out/2024",ref:"Q8 · mesma tabela da T7 Q1",fix:1,
+q:"Seis pacientes realizaram exame para determinar a presença de possível intolerância à lactose:",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4|Pac 5|Pac 6","Basal|91|88|101|93|79|84","30 min após carboidrato|152|95|107|135|94|117","60 min após carboidrato|125|98|98|108|90|95","Referência|diferença de 20 mg/dL||||| "],
+q2:"I. Os pacientes 1, 4 e 6 indicam quadro de intolerância à lactose.\nII. Os pacientes 2, 3 e 5 não indicam quadro de intolerância à lactose.\nIII. A intolerância à lactose pode ser de origem primária, relacionada à predisposição genética, com redução na produção de lactase.\nIV. A intolerância à lactose pode ser de origem secundária, quando ocorre perda temporária de lactases por inflamação intestinal desencadeada por outros processos patológicos.\nÉ correto apenas o que se afirma em:",
+v:"FFVV",r:["1, 4 e 6 sobem 61, 42 e 33: normais.","2, 3 e 5 sobem 10, 6 e 15: são os intolerantes.","Primária = genética.","Secundária = transitória."],o:[
+["III e IV",1,""],["I e II",0,""],["I, II, III e IV",0,""],["IV",0,""],["I, II, III e IV (repetida assim no original)",0,""]]},
+
+// ---------- T9 · 23/04/2025 ----------
+{id:"h9_1",ob:"o1",sp:"sp1",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q1",fix:1,
+q:"Paciente 1 — 39 anos, quadro crônico de diarreia. Paciente 2 — 22 anos, quadro agudo de diarreia.",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Anti-tTG IgA|2,3 U/mL|1,6 U/mL|não reagente < 7 · reagente > 10","Coprocultura|Ausência de patogênicos|Ausência de patogênicos|Ausência","Pesquisa de fungos|Negativo|Negativo|Negativo","Calprotectina|597 µg/g|30 µg/g|< 50 negativo · > 150 positivo","TTOL basal / 30 / 60 min|79 / 108 / 87|87 / 104 / 119|diferença de 20 mg/dL","Parasitológico|Pastosa, castanho, muco ausente, SANGUE POSITIVO; helmintos e protozoários negativos|Pastosa, castanho, muco ausente, sangue negativo; negativos|Formadas, castanho, ausente, negativo","Eritrócitos · Hb · Ht|3,86 · 10,6 · 31,8|4,5 · 12,9 · 39,1|3,9–5,3 · 11–16 · 35–47","Leucócitos|12.300|8.400|3.600–11.000","Bastonetes · segmentados|5% · 73% (8.979)|1% (84) · 43% (3.612)|até 8% · 1.500–7.000","Eosinófilos · basófilos|1% (123) · 0|1% (84) · 0|0–500 · 0–200","Linfócitos · monócitos|18% (2.214) · 3% (369)|48% (4.032) · 7% (588)|1.000–4.500 · 100–1.000","Plaquetas|344.000|237.000|150.000–500.000"],
+q2:"I. O paciente 1 é provavelmente de origem bacteriana, pela presença de sangue nas fezes e leucocitose neutrofílica.\nII. O paciente 1 é provavelmente de origem parasitária, pela anemia e presença de sangue nas fezes.\nIII. O paciente 2 é possivelmente de origem viral, visto que é um quadro agudo e foram descartadas outras hipóteses diagnósticas.\nIV. O paciente 2 é provavelmente uma intolerância à lactose secundária.\nÉ correto apenas o que se afirma em:",
+v:"FFVF",r:["Coprocultura negativa; crônico com calprotectina 597, sangue e anemia = DII.","Parasitológico negativo e sem eosinofilia.","Agudo, tudo negativo: viral por exclusão.","Curva 87 → 119 = +32: normal."],o:[
+["I e IV",0,""],["I e III",0,""],["III",1,""],["II e IV",0,""],["II e III",0,""]]},
+
+{id:"h9_2",ob:"o1",sp:"sp1",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q2",fix:1,
+q:"Diarreia é caracterizada por evacuações mais frequentes e alteração no aspecto das fezes, podendo ser causada por diferentes doenças. Analise as asserções:",
+q2:"I. A retocolite ulcerativa (RU) e a doença de Crohn (DC) são quadros inflamatórios intestinais que podem ser avaliados pela pesquisa de ASCA e pANCA, que apresentam resultados positivos para DC e RU, respectivamente.\nII. Na intolerância à lactose ocorre redução da capacidade de digestão da lactose por redução ou ausência de lactase, que pode ser transitória ou permanente, de acordo com a origem do distúrbio.\nIII. A perda na capacidade de digerir a lactose faz com que a glicose sérica aumente pela maior absorção de glicose em detrimento da lactose, o que é detectado no teste de tolerância por elevação superior a 20 mg/dL entre dois pontos no intolerante.\nIV. A doença celíaca é provocada por redução da capacidade de digestão do glúten pela perda da enzima transglutaminase e pode ser genética (primária) ou secundária a outro quadro de diarreia.\nV. Alguns quadros diarreicos infecciosos podem provocar sangramento intestinal, como bactérias e alguns parasitas. A perda crônica de sangue pode desencadear anemia ferropriva (microcítica/hipocrômica) quando a dieta não repõe o ferro.\nVI. A coprocultura investiga bactérias patogênicas, mas toxinas bacterianas não serão detectadas na coprocultura ou no coprológico funcional. Parasitoses são investigadas pelo parasitológico, mas as viroses geralmente são diagnosticadas apenas clinicamente ou por exclusão de outras hipóteses.\nÉ correto apenas o que se afirma em:",
+v:"VVFFVV",r:["ASCA → Crohn, pANCA → RCU, na ordem certa.","Transitória (secundária) ou permanente (primária).","No intolerante a glicose sobe MENOS de 20.","Celíaca é autoimune; a tTG é o alvo dos anticorpos, não uma enzima perdida.","Frase repetida da T7.","Ela considera verdadeira (a mesma frase aparece como certa na T10 Q2)."],o:[
+["I, II, V e VI",1,"Gabarito deduzido: o quadro da veterana está rasurado; é a única combinação coerente com a T10, onde a mesma frase VI conta como verdadeira."],
+["I, II, III, IV, V e VI",0,""],["III, IV e V",0,""],["I, II e V",0,""],["I, II, III e VI",0,""]]},
+
+{id:"h9_3",ob:"o6",sp:"sp2",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q3",fix:1,
+q:"Analise os resultados do hemograma dos pacientes abaixo, todos com suspeita de infecção:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Paciente 3|Referência","Eritrócitos · Hb · Ht|4,3 · 12,7 · 38,1|3,2 · 10,3 · 30,9|4,2 · 11,9 · 35,7|3,9–5,3 · 11–16 · 35–47","Leucócitos|11.500|10.600|14.100|3.600–11.000","Bastonetes|1%|1%|6% (846)|até 8%","Segmentados|26% (2.990)|50% (5.300)|72% (10.152)|1.500–7.000","Eosinófilos|1% (115)|18% (1.908)|1% (141)|0–500","Linfócitos|64% (7.360)|27% (2.862)|17% (2.397)|1.000–4.500","Monócitos|8% (920)|4% (735)|3% (423)|100–1.000","Metamielócitos|0|0|2% (282)|—","Plaquetas|297.000|186.000|296.000|150.000–500.000"],
+q2:"Com base no tema e nos resultados dos exames, assinale a alternativa correta:",o:[
+["P1 apresenta leucocitose com linfopenia e neutropenia; a causa mais provável é viral.",0,"Linfócitos 7.360 = linfocitose."],
+["P2 tem neutrófilos normais, mas predomínio de segmentados; a causa mais provável é fúngica.",0,"O achado do P2 é eosinofilia (1.908) com anemia: parasitária."],
+["No P2 é possível excluir processo infeccioso, pois não há leucocitose.",0,"Eosinofilia já aponta infecção (e 10.600 está no limite)."],
+["P3 apresenta leucocitose, neutrofilia e desvio à esquerda; a causa mais provável é bacteriana.",1,"14.100, segmentados 10.152 e metamielócitos 2%: desvio à esquerda."],
+["Pela perda de sangue, nos processos bacterianos e parasitários é comum ocorrer anemia e plaquetopenia.",0,"Plaquetopenia não é a regra."]]},
+
+{id:"h9_4",ob:"o2",sp:"sp2",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q4",fix:1,
+q:"Analise os resultados dos pacientes abaixo, todos do sexo masculino:",
+tb:["Parâmetro|Pac 1|Pac 2|Pac 3|Pac 4|Referência","AST|62|723|38|26|até 42 U/L","ALT|85|957|45|31|até 49 U/L","Amilase|39|42|68|9|30–118 U/L","Fosfatase alcalina|206|475|859|185|150–507 U/L","TAP|14,4 s|17,1 s|15,3 s|14,6 s|14,0–16,5 s","GGT|39|55|126|37|homens até 60 U/L","Bilirrubina total|1,26|2,96|1,67|0,95|até 1,2 mg/dL","Bilirrubina direta|0,46|1,73|1,11|0,29|até 0,4 mg/dL","Bilirrubina indireta|0,80|1,23|0,56|0,66|até 0,8 mg/dL"],
+q2:"I. O paciente 1 mostra lesão hepática, com elevação de AST e ALT.\nII. O paciente 1 mostra colestase, com elevação de bilirrubinas, AST e ALT.\nIII. O paciente 2 mostra lesão hepática, com elevação de AST, ALT e bilirrubinas.\nIV. O paciente 2 mostra disfunção hepática, com elevação do TAP e bilirrubina indireta.\nV. O paciente 3 mostra colestase, com elevação de FAL, GGT e bilirrubina direta.\nVI. O paciente 4 mostra pancreatite aguda, com alteração da amilase.\nÉ correto apenas o que se afirma em:",
+v:"VFVVVF",r:["AST 62 / ALT 85.","FAL e GGT normais: não é colestase.","AST/ALT muito altas.","Também tem TAP 17,1 e BI 1,23: lesão + disfunção ao mesmo tempo.","FAL 859, GGT 126, BD 1,11.","Amilase 9 está BAIXA; pancreatite aguda seria > 3× o limite."],o:[
+["II, III e VI",0,""],["I, IV e V",0,""],["II, IV e V",0,""],["I, III, V e VI",0,""],["I, III, IV e V",1,""]]},
+
+{id:"h9_5",ob:"o2",sp:"sp2",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q5",fix:1,
+q:"A dor abdominal é uma manifestação comum que pode ter várias causas. A intensidade e localização da dor, bem como os exames laboratoriais, podem indicar diferentes problemas. Analise as asserções:",
+q2:"I. AST e ALT são enzimas extracelulares que podem ser afetadas por quadros que provocam lesão hepática, pois ocorre aumento na produção destas enzimas com maior liberação para o sangue.\nII. Na pancreatite aguda (PA) e na insuficiência pancreática (IP) ocorre aumento sérico de amilase e lipase, mas nas fezes observa-se redução destas enzimas na IP e elevação na PA.\nIII. O TAP avalia a coagulação, mas como o fígado sintetiza os fatores de coagulação, no comprometimento hepático poderá haver redução na síntese destes fatores, com consequente elevação do TAP.\nIV. A bilirrubina é produto da degradação da protoporfirina proveniente da hemoglobina. A elevação de bilirrubina direta é causada principalmente por aumento da destruição de hemácias e disfunção hepática, enquanto a elevação de indireta é causada principalmente por colestases.\nÉ correto apenas o que se afirma em:",
+v:"FFVF",r:["São INTRAcelulares: sobem porque a célula rompe, não porque se produz mais.","Na IP a amilase/lipase séricas ficam normais ou baixas; o que cai nas fezes é a elastase.","Frase-padrão dela sobre TAP.","Direta e indireta trocadas: hemólise/disfunção → indireta; colestase → direta."],o:[
+["I e II",0,""],["III e IV",0,""],["III",1,""],["I e IV",0,""],["I, II, III e IV",0,""]]},
+
+{id:"h9_7",ob:"o6",sp:"sp4",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q7",fix:1,
+q:"Analise os resultados dos exames laboratoriais dos pacientes abaixo:",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Consistência · cor|Pastosa · castanho-amarelada|Pastosa · castanho-amarelada|Formadas · castanho","pH · leucócitos|6,2 · negativo|7,2 · negativo|6,0–8,0 · negativo","Amido amorfo|Presente|Ausente|Ausente","Gorduras neutras|Presente|Ausente|Ausente","Ácidos graxos|Ausente|Presente|Ausente","Fibras musculares|Presente|Ausente|Ausente","Flora iodófila · fungos · cistos · ovos|ausentes/negativos|ausentes/negativos|ausentes"],
+q2:"I. O paciente 1 sugere distúrbio de origem pancreática.\nII. O paciente 2 sugere distúrbio de origem intestinal.\nIII. Nos distúrbios pancreáticos observam-se triglicerídeos nas fezes em grande quantidade pela menor produção ou liberação de enzimas, como a lipase pancreática.\nIV. Nos distúrbios intestinais, o problema está na redução da capacidade de absorção, o que provoca perda de ácidos graxos nas fezes.\nV. Nos distúrbios hepatobiliares, o problema está na redução da produção e/ou liberação de bile, fundamental na emulsificação de lipídeos, o que resulta na perda de triglicerídeos.\nÉ correto apenas o que se afirma em:",
+v:"VVVVV",r:["Amido + gordura neutra + fibras.","Ácidos graxos isolados.","Gordura neutra = triglicerídeo não digerido.","Ácido graxo = digerido e não absorvido.","Sem bile, a gordura não emulsiona e sai como triglicerídeo (gordura neutra)."],o:[
+["I, II, III, IV e V",1,""],["III, IV e V",0,""],["I, III e V",0,""],["II e IV",0,""],["I, II e IV",0,""]]},
+
+{id:"h9_8",ob:"o3",sp:"sp2",tag:"antiga",tu:"T9",dt:"abr/2025",ref:"Q8",fix:1,
+q:"Analise os resultados do paciente abaixo com ascite, as asserções e a relação proposta entre elas:",
+tb:["Parâmetro|Paciente 1|Ponto de corte (anexo)","Proteínas totais|2,3 g/dL|transudato < 3,0 · exsudato > 3,0","Albumina · globulinas|0,9 · 1,3 g/dL|","LDH|110 UI/L|< 200 · > 200","Razão proteína (líquido/soro)|0,42|< 0,5 · > 0,5","Hemácias|(+)|","Leucócitos|15/mm³ (26% PMN, 74% MN)|"],
+q2:"I. Pela baixa concentração de proteínas e baixa contagem de leucócitos, sugere-se um processo proveniente de transudato\nPORQUE\nII. O líquido proveniente de transudato é resultante de processo inflamatório com consequente alteração de permeabilidade, que resulta em extravasamento de líquidos.",o:[
+["As asserções I e II são verdadeiras, e a II é uma justificativa da I.",0,"II descreve exsudato."],
+["As asserções I e II são verdadeiras, mas a II não é uma justificativa da I.",0,"II é falsa."],
+["A asserção I é verdadeira, e a II é falsa.",1,"Transudato (2,3 g/dL, LDH 110, razão 0,42); mas transudato é pressão/oncótica, não inflamação."],
+["A asserção I é falsa, e a II é verdadeira.",0,""],
+["As asserções I e II são falsas.",0,""]]},
+
+// ---------- T10 · 01/10/2025 ----------
+{id:"h10_1",ob:"o5",sp:"sp3",tag:"antiga",tu:"T10",dt:"out/2025",ref:"Q1",fix:1,
+q:"O diagnóstico e acompanhamento de Hepatite conta com muitos marcadores. Paciente 1: há duas semanas com clínica sugestiva de hepatite viral. Paciente 2: investigação. Paciente 3: investigação.",
+tb:["Marcador|Paciente 1|Paciente 2|Paciente 3","HBsAg|Reagente|Não reagente|Não reagente","HBeAg|Reagente|—*|—*","Anti-HBc IgM|Reagente|Não reagente|Não reagente","Anti-HBc IgG|Reagente|Não reagente|Reagente","Anti-HBe|Não reagente|—*|—*","Anti-HBs|Não reagente|Reagente|Reagente","Anti-HCV|Não reagente|Não reagente|Reagente","*|exame não prescrito / não realizado||"],
+q2:"I. O paciente 1 aponta para hepatite B em fase crônica, tendo em vista o anti-HBc IgG; com prognóstico desfavorável pela presença de HBsAg, que indica replicação viral.\nII. O paciente 1 aponta para hepatite B aguda com replicação viral, indicada pela presença de HBeAg.\nIII. O paciente 2 aponta para hepatite B curada e negativo para hepatite C.\nIV. O paciente 2 aponta para um paciente vacinado contra hepatite B, que nunca teve hepatite B nem hepatite C.\nV. O paciente 3 aponta para hepatite B curada, que possivelmente apresenta hepatite C.\nVI. O paciente 3 aponta para um paciente vacinado que nunca teve hepatite B, que possivelmente apresenta hepatite C.\nÉ correto apenas o que se afirma em:",
+v:"FVFVVF",r:["2 semanas + IgM = aguda (o IgG já subindo não faz crônica); e quem indica replicação é o HBeAg, não o HBsAg.","Aguda com HBeAg.","Sem anti-HBc IgG não é curado: é vacina.","Só anti-HBs.","Anti-HBc IgG + anti-HBs = curado; anti-HCV reagente.","Tem anti-HBc IgG: teve B."],o:[
+["III e VI",0,""],["II e IV",0,""],["II, III e VI",0,""],["I, IV e VI",0,""],["II, IV e V",1,""]]},
+
+{id:"h10_2",ob:"o1",sp:"sp1",tag:"antiga",tu:"T10",dt:"out/2025",ref:"Q2",fix:1,
+q:"Paciente 1 — 26 anos, diarreia aguda. Paciente 2 — 35 anos, quadro crônico de diarreia.",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Anti-tTG IgA|3,4 U/mL|1,2 U/mL|não reagente < 7 · reagente > 10","Coprocultura|Ausência de patogênicos|Ausência de patogênicos|Ausência","Pesquisa de fungos|Negativo|Negativo|Negativo","Calprotectina|48 µg/g|589 µg/g|< 50 negativo · > 150 positivo","TTOL basal / 30 / 60 min|88 / 102 / 95|77 / 104 / 109|diferença de 20 mg/dL","Parasitológico|Pastosa, castanho, sem muco, sangue negativo; negativos|Pastosa, castanho, sem muco, sangue negativo; negativos|Formadas, castanho","Eritrócitos · Hb · Ht|4,27 · 12,9 · 38,7|4,5 · 12,9 · 39,1|3,9–5,3 · 11–16 · 35–47","Leucócitos|11.900|8.400|3.600–11.000","Bastonetes · segmentados|1% (119) · 52% (6.188)|1% (84) · 43% (3.612)|até 8% · 1.500–7.000","Eosinófilos · basófilos|1% (119) · 0|1% (84) · 0|0–500 · 0–200","Linfócitos · monócitos|39% (4.641) · 7% (833)|48% (4.032) · 7% (588)|1.000–4.500 · 100–1.000","Plaquetas|289.000|237.000|150.000–500.000"],
+q2:"I. O paciente 1 é provavelmente de origem bacteriana. O paciente 2 é provavelmente de origem viral.\nII. O paciente 1 é de origem viral, com leucocitose causada por linfocitose. O paciente 2 pode indicar doença de Crohn, que pode ser confirmada com anti-tTG ou anti-gliadina, sendo que o primeiro se apresenta reagente e o segundo não reagente na DC.\nIII. O paciente 1 sugere intolerância à lactose e, considerando os demais resultados, poderia ser de origem secundária. Nestes casos, a intolerância é transitória, pela redução ou perda temporária de lactases secundária a outro quadro patológico.\nIV. A perda na capacidade de digerir a lactose faz com que a glicose sérica aumente pela maior absorção de glicose, o que é detectado no teste de tolerância por elevação superior a 20 mg/dL entre dois pontos no intolerante.\nV. A coprocultura investiga bactérias patogênicas, mas toxinas bacterianas não serão detectadas na coprocultura ou no coprológico funcional. Parasitoses pelo parasitológico, mas as viroses geralmente são diagnosticadas apenas clinicamente ou por exclusão.\nÉ correto apenas o que se afirma em:",
+v:"FFVFV",r:["P1 tem linfocitose e coprocultura negativa (viral); P2 crônico com calprotectina 589 (DII).","A primeira metade está certa, mas anti-tTG/anti-gliadina são de celíaca; Crohn é ASCA.","Curva 88 → 102 = +14 num agudo viral: intolerância secundária.","No intolerante a glicose sobe MENOS de 20.","Mesma frase VI da T9 Q2, aqui confirmada como certa."],o:[
+["I e IV",0,""],["III e V",1,""],["II e IV",0,""],["II, III e V",0,""],["III, IV e V",0,""]]},
+
+{id:"h10_3",ob:"o2",sp:"sp2",tag:"antiga",tu:"T10",dt:"out/2025",ref:"Q3",fix:1,
+q:"Analise os resultados dos pacientes abaixo, todos do sexo masculino:",
+tb:["Parâmetro|Pac 1|Pac 2|Pac 3|Pac 4|Referência","AST|62|723|38|26|até 42 U/L","ALT|85|957|45|31|até 49 U/L","Amilase|39|42|68|458|30–118 U/L","Fosfatase alcalina|206|475|859|185|150–507 U/L","TAP (tempo · atividade · RNI)|14,3 · 95% · 1,02|17,1 · 61% · 1,25|15,4 · 81% · 1,09|14,6 · 90% · 1,04|14,0–16,5 s · 100–70% · 1,0–1,22","GGT|39|55|126|37|homens até 60 U/L","Bilirrubina total · direta · indireta|1,26 · 0,46 · 0,80|2,96 · 1,73 · 1,23|1,67 · 1,11 · 0,56|0,95 · 0,29 · 0,66|até 1,2 · 0,4 · 0,8"],
+q2:"I. O paciente 1 mostra lesão hepática, com elevação de AST, ALT e bilirrubina. O paciente 2 mostra lesão hepática, com elevação de AST, ALT e bilirrubina.\nII. O paciente 1 mostra colestase, com elevação de bilirrubinas, AST e ALT. O paciente 2 mostra disfunção hepática, com elevação do TAP e bilirrubina indireta.\nIII. O paciente 3 mostra colestase, com elevação de FAL, GGT e bilirrubina direta. O paciente 4 mostra insuficiência pancreática, com alteração da amilase.\nIV. O paciente 3 mostra lesão hepática, com elevação de bilirrubina direta. O paciente 4 mostra pancreatite aguda, com alteração da amilase.\nV. A bilirrubina é produto da degradação da globina proveniente da hemoglobina. A elevação de indireta pode ser causada por destruição de hemácias e disfunção hepática; a de direta, por colestases. Quando há destruição de hemácias, as fezes ficam branco-acinzentadas.\nVI. O TAP avalia a coagulação; no comprometimento hepático há redução da síntese de fatores e elevação do TAP. O RNI tende a reduzir e a atividade tende a aumentar no distúrbio hepático que compromete a síntese.\nÉ correto apenas o que se afirma em:",
+v:"VFFFFF",r:["Os dois têm AST, ALT e bilirrubina ↑.","P1 não tem colestase (FAL/GGT normais).","P3 certo, mas amilase 458 é pancreatite AGUDA, não insuficiência. Uma metade derruba a frase.","P4 certo, mas P3 é colestase, não lesão.","Bilirrubina vem do HEME, não da globina; e fezes acinzentadas (acolia) são da colestase, não da hemólise.","Invertido: o RNI aumenta e a atividade cai."],o:[
+["I",1,"A veterana marcou C (I e III) e errou: a III chama de insuficiência uma amilase de 458."],
+["III e V",0,""],["I e III",0,""],["II e IV",0,""],["I, V e VI",0,""]]}
 ];
 const DISC=[
 {t:"Discursiva real da T11 · hepatites virais (10%)",caso:"Anti-HAV IgM não reagente; anti-HAV IgG reagente; anti-HDV reagente; HBsAg não reagente; HBeAg não reagente; anti-HBc IgM não reagente; anti-HBc IgG reagente; anti-HBe reagente; anti-HBs reagente; anti-HCV reagente; ALT 224 U/L (referência: até 49 U/L). Considerando que o paciente apresenta hepatite viral, com presença do vírus há 9 meses, responda (diagnóstico incorreto, incompleto ou com múltiplas respostas = resposta inteira incorreta):",
@@ -911,7 +1222,62 @@ itens:[["Provável diagnóstico:","Hepatite B (HBsAg reagente, com HBeAg: replic
 ["Fase da doença:","Crônica: HBsAg há mais de 6 meses, IgM já negativo e IgG reagente."]]},
 {t:"Inédita · no molde da T11",caso:"Icterícia há 10 dias. Anti-HAV IgM reagente; anti-HAV IgG reagente; HBsAg não reagente; anti-HBc IgG reagente; anti-HBs reagente; anti-HCV não reagente; ALT 1.450 U/L. Responda com um diagnóstico e uma fase:",
 itens:[["Provável diagnóstico:","Hepatite A (IgM reagente). O B está curado (anti-HBc IgG + anti-HBs) e não entra na resposta."],
-["Fase da doença:","Aguda. O vírus A não cronifica."]]}
+["Fase da doença:","Aguda. O vírus A não cronifica."]]},
+// ===== Discursivas das provas antigas (T6–T10) + atividade individual da T6 =====
+{t:"T10 · out/2025 · A) intolerância à lactose",tag:"antiga",caso:"Quatro pacientes realizaram exame para determinar possível intolerância à lactose. Considera-se normal a elevação da glicemia, em relação ao jejum, de pelo menos 20 mg/dL em qualquer das amostras (30 ou 60 min). Classifique cada um como normal ou intolerância à lactose (IL).",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4","Basal|76|81|94|88","30 min|91|109|133|119","60 min|87|95|125|103"],
+itens:[["Pacientes 1 a 4:","P1 IL (maior subida +15) · P2 normal (+28) · P3 normal (+39) · P4 normal (+31). Conta sempre do basal até o MAIOR valor."]]},
+{t:"T10 · out/2025 · B) hepatites",tag:"antiga",caso:"Anti-HDV não reagente; HBsAg não reagente; anti-HBc IgM não reagente; anti-HBc IgG reagente; anti-HBs reagente; anti-HCV reagente; anti-HAV IgM não reagente; anti-HAV IgG não reagente; anti-HEV IgM não reagente; anti-HEV IgG não reagente; ALT 789 U/L (referência até 49). O paciente tem hepatite viral, com o vírus presente há 8 meses (diagnóstico incorreto, incompleto ou com múltiplas respostas = resposta inteira incorreta).",
+itens:[["Diagnóstico mais provável:","Hepatite C. O B está curado (anti-HBc IgG + anti-HBs) e não entra."],["Exame laboratorial confirmatório:","Pesquisa do RNA viral (HCV-RNA / carga viral). A veterana escreveu “DNA viral” e a professora corrigiu para RNA."]]},
+{t:"T10 · out/2025 · C) hepatites",tag:"antiga",caso:"Anti-HCV não reagente; anti-HDV reagente; HBsAg não reagente; HBeAg não reagente; anti-HBc IgM não reagente; anti-HBc IgG reagente; anti-HBe reagente; anti-HBs reagente; anti-HAV IgM reagente; anti-HAV IgG não reagente; ALT 224 U/L (referência até 49). O paciente tem hepatite viral, com o vírus presente há 8 meses. Mesma regra: diagnóstico incorreto, incompleto ou múltiplo zera.",
+itens:[["Diagnóstico mais provável:","Hepatite A (anti-HAV IgM reagente). Anti-HDV sem HBsAg não replica; B curada é passado."],["Fase da doença:","Aguda. O “8 meses” é a isca para “crônica”, mas o vírus A não cronifica e o IgM é de fase aguda."]]},
+{t:"T10 · out/2025 · D) ascite",tag:"antiga",caso:"Na avaliação de pacientes com ascite, classifique cada um como transudato ou exsudato (anexo: transudato = proteína < 3,0 g/dL, LDH < 200, razão proteína < 0,5, razão LDH < 0,6, GASA ≥ 1,1).",
+tb:["Parâmetro|Pac 1|Pac 2|Pac 3|Pac 4","Proteínas totais|2,9 g/dL|5,3 g/dL|4,6 g/dL|5,6 g/dL","LDH|125|378|232|459","GASA|3,1|0,89|0,97|0,76","Hemácias|(+)|(++)|(+)|(+)","Leucócitos (PMN/MN)|3 (sem diferencial)|303 (54/46%)|95 (35/65%)|565 (87/13%)"],
+itens:[["Pacientes 1 a 4:","P1 transudato (proteína 2,9, LDH 125, GASA 3,1) · P2, P3 e P4 exsudato (proteína > 3, LDH > 200, GASA < 1,1)."]]},
+{t:"T10 · out/2025 · E) coprológico + D-xilose",tag:"antiga",caso:"Dois pacientes com diarreia realizam coprológico funcional. Cite a provável origem do distúrbio de cada um.",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Consistência · cor · pH|Pastosa · castanho-amarelada · 6,2|Pastosa · castanho-amarelada · 7,2|Formadas · castanho · 6,0–8,0","Amido amorfo|Presente (+++)|Ausente|Ausente","Gorduras neutras|Presente (+++)|Ausente|Ausente","Ácidos graxos|Ausente|Presente (++)|Ausente","Fibras musculares|Presente (+++)|Ausente|Ausente","D-xilose|39 mg/dL|8 mg/dL|superior a 25 mg/dL"],
+itens:[["Paciente 1:","Pancreática: amido + gordura neutra + fibras, com D-xilose NORMAL (a mucosa absorve)."],["Paciente 2:","Intestinal: ácidos graxos e D-xilose baixa (a mucosa não absorve)."]]},
+{t:"T9 · abr/2025 · A) hepatites (a veterana zerou)",tag:"antiga",caso:"Clínica sugestiva há três meses: anti-HDV reagente; anti-HCV reagente; HBsAg não reagente; HBeAg não reagente; anti-HBc IgM não reagente; anti-HBc IgG reagente; anti-HBe reagente; anti-HBs reagente; ALT 678 U/L (referência até 49). Cite o provável diagnóstico.",
+itens:[["Provável diagnóstico:","Hepatite C. A veterana escreveu “B curada; infecção atual por D e possível C” e levou zero (a professora anotou “Qual?”). Anti-HDV sem HBsAg não é infecção ativa por D: uma resposta só."]]},
+{t:"T9 · abr/2025 · B) intolerância à lactose",tag:"antiga",caso:"Quatro pacientes; normal = elevação de pelo menos 20 mg/dL em relação ao jejum, em qualquer amostra (30 ou 60 min). Classifique como normal ou IL.",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4","Basal|74|94|82|93","30 min|98|133|109|102","60 min|87|125|93|105"],
+itens:[["Pacientes 1 a 4:","P1 normal (+24) · P2 normal (+39) · P3 normal (+27) · P4 IL (+12)."]]},
+{t:"T8 · out/2024 · A) intolerância à lactose",tag:"antiga",caso:"Quatro pacientes; normal = elevação de pelo menos 20 mg/dL em qualquer amostra. Classifique como normal ou IL.",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4","Basal|92|81|94|77","30 min|101|112|133|85","60 min|103|93|125|90"],
+itens:[["Pacientes 1 a 4:","P1 IL (+11) · P2 normal (+31) · P3 normal (+39) · P4 IL (+13)."]]},
+{t:"T8 · out/2024 · B) coprológico",tag:"antiga",caso:"Dois pacientes com diarreia realizam coprológico funcional. Cite a provável origem de cada um.",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","Consistência · cor · pH|Pastosa · castanho-amarelada · 6,2|Pastosa · CINZA CLARO · 7,2|Formadas · castanho","Amido amorfo|Presente|Ausente|Ausente","Gorduras neutras|Ausente|Presente|Ausente","Ácidos graxos|Presente|Ausente|Ausente","Fibras musculares|Presente|Ausente|Ausente"],
+itens:[["Paciente 1:","Pancreática (amido + fibras, fezes amareladas): foi a resposta aceita."],["Paciente 2:","Biliar (hepatobiliar): fezes acinzentadas (acolia) com gordura neutra isolada."]]},
+{t:"T7 · abr/2024 · A) coprológico: marcadores e cor",tag:"antiga",caso:"No coprológico funcional, aponte quais marcadores — carboidratos, triglicerídeos, ácidos graxos e proteínas — estarão classicamente presentes nas fezes em cada situação e indique a provável coloração das fezes.",
+itens:[["Causa pancreática:","Carboidratos (amido), triglicerídeos (gordura neutra) e proteínas (fibras musculares); fezes amareladas."],["Obstrução biliar:","Triglicerídeos (gordura neutra); fezes acinzentadas / esbranquiçadas (acolia)."]]},
+{t:"T7 · abr/2024 · B) marcadores de vias biliares",tag:"antiga",caso:"Cite 2 marcadores séricos característicos de alterações nas vias biliares e o resultado (normal, aumentado, diminuído) num distúrbio de vias biliares, como obstrução.",
+itens:[["Resposta:","Bilirrubina direta aumentada e fosfatase alcalina aumentada (GGT aumentada também vale)."]]},
+{t:"T7 · abr/2024 · C) hepatite B curada",tag:"antiga",caso:"Na investigação da hepatite B, cite quais marcadores estão reagentes num paciente curado.",
+itens:[["Resposta:","Anti-HBs, anti-HBc IgG e anti-HBe (HBsAg não reagente)."]]},
+{t:"T6 · out/2023 · A) intolerância à lactose",tag:"antiga",caso:"Cinco pacientes; normal = elevação de pelo menos 20 mg/dL em qualquer amostra (30 ou 60 min). Indique quais são compatíveis com intolerância à lactose.",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4|Pac 5","Basal|85|79|77|94|89","30 min|137|83|110|102|95","60 min|121|91|94|104|90"],
+itens:[["Intolerantes:","Pacientes 2, 4 e 5 (sobem 12, 10 e 6). P1 +52 e P3 +33 são normais."]]},
+{t:"T6 · out/2023 · B) ascite (a veterana errou o P2)",tag:"antiga",caso:"Analise o líquido ascítico e indique transudato ou exsudato.",
+tb:["Parâmetro|Pac 1|Pac 2|Pac 3|Pac 4","Proteínas totais|2,2 g/dL|3,0 g/dL|4,5 g/dL|2,9 g/dL","Albumina · globulinas|0,9 · 1,3|2,3 · 0,77|3,8 · 0,7|1,3 · 1,6","LDH|102|167|294|146","Razão proteína (líq/soro)|0,35|0,44|0,58|0,40","Razão LDH (líq/soro)|0,50|0,46|0,66|0,51","Leucócitos (PMN/MN)|16 (22/78%)|39 (32/69%)|829 (83/17%)|12 (23/77%)"],
+itens:[["Pacientes 1 a 4:","P1 transudato · P2 TRANSUDATO · P3 exsudato · P4 transudato. O P2 tem proteína 3,0 bem no corte; quem decide são os outros critérios (razão 0,44, LDH 167, razão LDH 0,46, poucas células). A veterana marcou exsudato e errou."]]},
+{t:"T6 · out/2023 · C) função hepática",tag:"antiga",caso:"Dentre os marcadores abordados na UC14, cite 2 que indicam comprometimento da FUNÇÃO hepática e o resultado na vigência de disfunção (normal, ↑ ou ↓).",
+itens:[["Resposta:","TAP aumentado (atividade ↓, RNI ↑), bilirrubina indireta aumentada, albumina diminuída. AST/ALT NÃO servem: são de lesão."]]},
+{t:"Atividade individual T6 (2023) · 1) lactose",tag:"antiga",caso:"Cinco pacientes; normal = elevação de pelo menos 20 mg/dL em relação ao jejum. Aponte quem tem intolerância à lactose.",
+tb:["Glicemia (mg/dL)|Pac 1|Pac 2|Pac 3|Pac 4|Pac 5","Basal|77|94|89|85|79","30 min|110|102|95|137|83","60 min|94|104|90|121|91"],
+itens:[["Intolerantes:","Pacientes 2, 3 e 5 (+10, +6, +12)."]]},
+{t:"Atividade individual T6 (2023) · 2) dois casos de diarreia",tag:"antiga",caso:"Paciente 1: masculino, adulto, diarreia há 24 h e febre. Paciente 2: feminino, 5 anos, chorosa, sem febre; evacuações mais frequentes.",
+tb:["Parâmetro|Paciente 1|Paciente 2|Referência","pH fecal|7,0|6,7|> 4 anos: 6,5–7,5","Substâncias redutoras|Negativo|Negativo|Negativo","Anti-tTG IgA|3,6 U/mL|12,1 U/mL|reagente > 10","Parasitológico|Pastosa, castanho, muco ausente, SANGUE POSITIVO; negativos|Pastosa, castanho, sangue negativo; negativos|Formada","Coprocultura|não realizado|Ausência de patogênicos|Ausência","Calprotectina|30 µg/g|não realizado|< 50","Leucócitos|12.300 (bast 5%, seg 73% = 8.979, linf 18%)|não realizado|3.600–11.000"],
+itens:[["Provável causa e marcadores:","P1: infecção bacteriana (febre, sangue nas fezes, leucocitose com neutrofilia). P2: doença celíaca (anti-tTG 12,1 reagente)."]]},
+{t:"Atividade individual T6 (2023) · 3) hemograma",tag:"antiga",caso:"Interprete o hemograma, identificando todas as alterações com os termos técnicos, e indique o provável agente: eritrócitos 4,40; Hb 11,8; Ht 36,3; leucócitos 15.200; metamielócitos 4% (608); mielócitos 1% (152); bastonetes 4% (608); segmentados 74% (11.248); eosinófilos 0; basófilos 0; linfócitos 15% (2.280); monócitos 2% (304); plaquetas 312.000.",
+itens:[["Alterações e agente:","Leucocitose, neutrofilia e desvio à esquerda (mielócitos e metamielócitos circulando): infecção bacteriana grave. A professora descontou de quem não citou o desvio."]]},
+{t:"Atividade individual T6 (2023) · 4) dor abdominal",tag:"antiga",caso:"P1 masc. 42 anos: hemograma normal; AST 28; ALT 34; amilase 51; lipase 40; FAL 281; TAP 16,8 s (14–16,5); GGT 48; BT 1,39; BD 0,21; BI 1,18. P2 fem. 41 anos: hemograma normal; AST 38; ALT 40; amilase 375 (30–118); lipase 199 (> 18 anos: 13–60); FAL 215; TAP 14,9; GGT 29; BT 0,94.",
+itens:[["Paciente 1:","Disfunção hepática: TAP e bilirrubina indireta aumentados, com AST/ALT normais."],["Paciente 2:","Pancreatite aguda: amilase e lipase acima de 3× o limite."]]},
+{t:"Atividade individual T6 (2023) · 5) ascite",tag:"antiga",caso:"Cite quais resultados são exsudato e quais são transudato.",
+tb:["Parâmetro|Pac 1|Pac 2|Pac 3|Pac 4","Proteínas totais|4,8 g/dL|2,0 g/dL|2,7 g/dL|3,0 g/dL","LDH|289|77|89|158","Razão proteína · razão LDH|0,62 · 0,90|0,36 · 0,47|0,44 · 0,42|0,42 · 0,43","Leucócitos (PMN/MN)|1.359 (89/11%)|5 (18/82%)|12 (23/77%)|41 (30/70%)"],
+itens:[["Resposta:","Exsudato: paciente 1. Transudato: pacientes 2, 3 e 4 (o P4 com proteína 3,0 é transudato pelas razões e pelo LDH)."]]},
+{t:"Atividade individual T6 (2023) · 6) coprológico",tag:"antiga",caso:"Aponte a causa provável de cada paciente e os marcadores que levaram à conclusão.",
+tb:["Parâmetro|Paciente 1|Paciente 2","Consistência · cor · pH|Pastosa · castanho-amarelada · 6,2|Pastosa · cinza claro · 7,2","Amido amorfo|Presente|Ausente","Gorduras neutras|Presente|Presente","Ácidos graxos|Ausente|Ausente","Fibras musculares|Presente|Ausente"],
+itens:[["Paciente 1:","Pancreática: fezes amareladas com amido, gordura neutra e fibras."],["Paciente 2:","Biliar: fezes acinzentadas com gordura neutra isolada."]]}
 ];
 
 const CH=[{"p": 1, "t": 0, "title": "Como a prova de Lab funciona", "k": "A prova · formato"}, {"p": 1, "t": 57.0, "title": "Setinha em cada número", "k": "A prova · método"}, {"p": 1, "t": 109.2, "title": "De onde saem as questões", "k": "A prova · mapa"}, {"p": 1, "t": 166.4, "title": "Os números que ela não te dá", "k": "A prova · números"}, {"p": 1, "t": 220.8, "title": "Doença celíaca", "k": "Diarreia · SP1"}, {"p": 1, "t": 286.1, "title": "Intolerância à lactose", "k": "Diarreia · SP1"}, {"p": 1, "t": 352.7, "title": "Calprotectina e doença inflamatória", "k": "Diarreia · SP1"}, {"p": 1, "t": 422.1, "title": "Coprológico funcional", "k": "Diarreia · SP4"}, {"p": 1, "t": 482.9, "title": "Sangue oculto e anemia ferropriva", "k": "Diarreia · SP4"}, {"p": 2, "t": 0, "title": "Hemograma na infecção", "k": "Dor abdominal · SP2"}, {"p": 2, "t": 51.7, "title": "Pancreatite aguda ou crônica", "k": "Pâncreas · SP2"}, {"p": 2, "t": 122.0, "title": "Lesão, colestase ou disfunção", "k": "Fígado · SP2"}, {"p": 2, "t": 184.6, "title": "O caminho da bilirrubina", "k": "Fígado · SP2"}, {"p": 2, "t": 244.4, "title": "Transudato ou exsudato", "k": "Ascite · SP2"}, {"p": 2, "t": 311.1, "title": "A ascite que vem do rim", "k": "Ascite · SP2"}, {"p": 2, "t": 364.3, "title": "Urina escura: o que a fita diz", "k": "Urina · SP2"}, {"p": 2, "t": 427.3, "title": "Falciforme × ferropriva", "k": "Anemias · SP2 e SP4"}, {"p": 2, "t": 486.2, "title": "Os slides “Outros” e “Pense rápido”", "k": "Mais cobrado · SP2"}, {"p": 3, "t": 0, "title": "Quem cronifica e o que é crônico", "k": "Hepatites · SP3"}, {"p": 3, "t": 50.1, "title": "Hepatite C: anticorpo não é cura", "k": "Hepatites · SP3"}, {"p": 3, "t": 93.1, "title": "Hepatite B: um marcador, uma frase", "k": "Hepatites · SP3"}, {"p": 3, "t": 146.6, "title": "Lendo o painel do B", "k": "Hepatites · SP3"}, {"p": 3, "t": 207.6, "title": "A discursiva da turma onze", "k": "Hepatites · discursiva"}, {"p": 3, "t": 269.6, "title": "Checklist da véspera", "k": "Véspera"}];
@@ -954,7 +1320,7 @@ function side(){
     const by={};Object.keys(OBJ).forEach(k=>by[k]=[0,0]);
     Object.entries(HIST).forEach(([id,r])=>{const q=QS.find(x=>x.id===id);if(q){by[q.ob][1]++;if(r)by[q.ob][0]++;}});
     S.innerHTML=`<h4>Seu desempenho (neste navegador)</h4>`+Object.keys(OBJ).map(k=>`<div class="stat"><span>${OBJ[k].n}</span><b>${by[k][1]?by[k][0]+"/"+by[k][1]:"—"}</b></div>`).join("")+
-      `<p style="font-size:12.5px;color:var(--ink2);margin-top:12px">Conta a última resposta de cada questão. As 9 da T11 estão no filtro “Caiu na T11”.</p>`;
+      `<p style="font-size:12.5px;color:var(--ink2);margin-top:12px">Conta a última resposta de cada questão. As 9 da T11 estão em “Caiu na T11”; as 33 das turmas T6–T10, em “Provas antigas”.</p>`;
   }else{
     S.innerHTML=`<h4>Raio-X da prova</h4><nav class="toc">`+[...document.querySelectorAll("#p-px h3")].map(h=>`<a href="#${h.id}" class="h2" data-go="${h.id}">${h.textContent}</a>`).join("")+`</nav>`;
     S.querySelectorAll("a").forEach(a=>a.onclick=e=>{e.preventDefault();$(a.dataset.go).scrollIntoView({behavior:"smooth",block:"start"});});
@@ -989,30 +1355,45 @@ try{HIST=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){}
 function saveH(){try{localStorage.setItem(KEY,JSON.stringify(HIST));}catch(e){}}
 let modo="estudo",filtro="all",N=10,fila=[],idx=0,ok=0,err=0,erradas=[],resp=[],respondida=false,escolha=-1;
 $("nq").textContent=QS.length;
+const LET="ABCDE",ROM=["I","II","III","IV","V","VI","VII"];
+function tbl(rows){if(!rows||!rows.length)return"";const r=rows.map(x=>x.split("|"));
+  return "<table><thead><tr>"+r[0].map(c=>`<th>${esc(c)}</th>`).join("")+"</tr></thead><tbody>"+r.slice(1).map(x=>"<tr>"+x.map(c=>`<td>${esc(c)}</td>`).join("")+"</tr>").join("")+"</tbody></table>";}
+function romsOf(t){const m=String(t).match(/\b(VII|VI|IV|V|III|II|I)\b/g);return m?[...new Set(m)]:null;}
+function autoWhy(q,oi){if(!q.v)return"";const o=q.o[oi],rs=romsOf(o[0]);if(!rs)return"";
+  const tru=ROM.slice(0,q.v.length).filter((r,i)=>q.v[i]==="V");
+  if(o[1])return"Exatamente as verdadeiras: "+tru.join(", ")+".";
+  const fal=rs.filter(r=>q.v[ROM.indexOf(r)]==="F"),miss=tru.filter(r=>!rs.includes(r)),p=[];
+  if(fal.length)p.push((fal.length>1?"Inclui ":"Inclui a ")+fal.join(", ")+(fal.length>1?", que são falsas":", que é falsa"));
+  if(miss.length)p.push("deixa de fora "+miss.join(", ")+(miss.length>1?" (verdadeiras)":" (verdadeira)"));
+  return p.join("; ")+".";}
+function exHTML(q){if(!q.v||!q.r)return"";return"<h5>Afirmativa por afirmativa</h5>"+q.r.map((t,i)=>{const ok=q.v[i]==="V";
+  return`<div><b>${ROM[i]}</b><span class="${ok?"vv":"ff"}">${ok?"V":"F"}</span><span>${esc(t)}</span></div>`;}).join("");}
+function tagTxt(q){return q.tag==="prova"?"Caiu na T11 · "+q.ref:q.tag==="antiga"?"Prova "+q.tu+" · "+q.dt+" · "+q.ref:"Inédita · "+q.ref;}
 function pool(k){let b=QS.filter(q=>SP==="all"||q.sp===SP);
-  if(k==="caiu")return b.filter(q=>q.tag==="prova");if(k==="err")return b.filter(q=>HIST[q.id]===false);
+  if(k==="caiu")return b.filter(q=>q.tag==="prova");if(k==="antiga")return b.filter(q=>q.tag==="antiga");if(k==="reais")return b.filter(q=>q.tag!=="ined");if(k==="err")return b.filter(q=>HIST[q.id]===false);
   if(k==="all")return b;return b.filter(q=>q.ob===k);}
-function chips(){const L=[["all","Todas"]].concat(Object.keys(OBJ).map(k=>[k,OBJ[k].n]),[["caiu","Caiu na T11"],["err","Minhas erradas"]]);
+function chips(){const L=[["all","Todas"]].concat(Object.keys(OBJ).map(k=>[k,OBJ[k].n]),[["caiu","Caiu na T11"],["antiga","Provas antigas T6–T10"],["reais","Todas as provas reais"],["err","Minhas erradas"]]);
   $("chips").innerHTML=L.filter(([k])=>pool(k).length).map(([k,n])=>`<button type="button" class="chip${k===filtro?" on":""}" data-k="${k}">${n}<span class="n">${pool(k).length}</span></button>`).join("");
   document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{filtro=c.dataset.k;qStart();});
   document.querySelectorAll("#rodada button").forEach(b=>b.classList.toggle("on",+b.dataset.n===N));}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function qStart(lista){if(!pool(filtro).length)filtro="all";
   let qs=lista||shuffle(pool(filtro).slice());if(!lista&&N>0)qs=qs.slice(0,N);
-  fila=qs.map(q=>({q,ord:shuffle([0,1,2,3])}));idx=0;ok=0;err=0;erradas=[];resp=[];
+  fila=qs.map(q=>{const ix=q.o.map((_,i)=>i);return{q,ord:q.fix?ix:shuffle(ix)};});idx=0;ok=0;err=0;erradas=[];resp=[];
   $("fim").hidden=true;$("qcard").hidden=false;$("score").hidden=modo==="prova";chips();show();}
 function show(){respondida=false;escolha=-1;if(idx>=fila.length)return fim();
   const {q,ord}=fila[idx];$("bOb").textContent=OBJ[q.ob].n+" · "+SPNAME[q.sp];$("bOb").style.background=SPCOL[q.sp];
-  $("bTag").className="tag "+q.tag;$("bTag").textContent=(q.tag==="prova"?"Caiu na T11 · ":"Inédita · ")+q.ref;
-  $("stem").textContent=q.q;
-  $("opts").innerHTML=ord.map((oi,i)=>`<button type="button" class="opt" data-i="${i}"><span class="L">${"ABCD"[i]}</span><span><span class="tx"></span><span class="why" hidden></span></span></button>`).join("");
-  [...$("opts").children].forEach((b,i)=>{const o=q.o[ord[i]];b.querySelector(".tx").textContent=o[0];b.querySelector(".why").textContent=o[2];b.onclick=()=>pick(i);});
+  $("bTag").className="tag "+q.tag;$("bTag").textContent=tagTxt(q);
+  $("stem").textContent=q.q;$("stemTb").innerHTML=tbl(q.tb);$("stemTb").hidden=!q.tb;$("stem2").textContent=q.q2||"";$("qex").hidden=true;$("qex").innerHTML=exHTML(q);
+  $("opts").innerHTML=ord.map((oi,i)=>`<button type="button" class="opt" data-i="${i}"><span class="L">${LET[i]}</span><span><span class="tx"></span><span class="why" hidden></span></span></button>`).join("");
+  [...$("opts").children].forEach((b,i)=>{const o=q.o[ord[i]];b.querySelector(".tx").textContent=o[0];b.querySelector(".why").textContent=o[2]||autoWhy(q,ord[i]);b.onclick=()=>pick(i);});
   $("btnNext").disabled=true;$("btnNext").textContent=idx===fila.length-1?"Ver resultado":"Próxima →";
   $("pos").textContent=(idx+1)+" / "+fila.length;$("nOk").textContent=ok;$("nErr").textContent=err;$("progBar").style.width=(idx/fila.length*100)+"%";}
 function pick(i){if(respondida)return;const {q,ord}=fila[idx];
   if(modo==="prova"){escolha=i;[...$("opts").children].forEach((b,j)=>b.classList.toggle("sel",j===i));$("btnNext").disabled=false;return;}
   respondida=true;escolha=i;grade(q,ord,i);
   [...$("opts").children].forEach((b,j)=>{b.disabled=true;b.querySelector(".why").hidden=false;if(q.o[ord[j]][1])b.classList.add("ok");else if(j===i)b.classList.add("bad");});
+  if($("qex").innerHTML)$("qex").hidden=false;
   $("btnNext").disabled=false;}
 function grade(q,ord,i){const a=q.o[ord[i]][1]===1;if(a)ok++;else{err++;erradas.push(q);}HIST[q.id]=a;saveH();resp.push({q,ord,i,a});$("nOk").textContent=ok;$("nErr").textContent=err;}
 function next(){if(modo==="prova"){if(escolha<0)return;const {q,ord}=fila[idx];grade(q,ord,escolha);}else if(!respondida)return;idx++;show();}
@@ -1021,16 +1402,16 @@ function fim(){$("qcard").hidden=true;$("fim").hidden=false;$("progBar").style.w
   $("fimTitulo").textContent=`${ok}/${t} acertos`;$("fimTexto").textContent=err?`${err} para refazer.`:"Rodada sem erros.";
   $("btnErradas").hidden=!err;
   $("review").innerHTML=modo==="prova"?resp.map((r,n)=>{const c=r.ord.findIndex(oi=>r.q.o[oi][1]===1);const s=r.q.o[r.ord[r.i]],k=r.q.o[r.ord[c]];
-    return `<div class="rv"><div class="rq">${n+1}. ${esc(r.q.q)}</div><div>${r.a?"✓":"✗"} Sua: <b>${"ABCD"[r.i]})</b> ${esc(s[0])}</div>${r.a?"":`<div>Certa: <b>${"ABCD"[c]})</b> ${esc(k[0])}</div>`}<div style="color:var(--ink2)">${esc(k[2])}</div></div>`;}).join(""):"";
+    return `<div class="rv"><div class="rq">${n+1}. [${esc(tagTxt(r.q))}] ${esc(r.q.q)}</div><div>${r.a?"✓":"✗"} Sua: <b>${LET[r.i]})</b> ${esc(s[0])}</div>${r.a?"":`<div>Certa: <b>${LET[c]})</b> ${esc(k[0])}</div>`}<div style="color:var(--ink2)">${esc(k[2]||autoWhy(r.q,r.ord[c]))}</div>${r.q.v?`<div class="qex">${exHTML(r.q)}</div>`:""}</div>`;}).join(""):"";
   side();}
 $("btnNext").onclick=next;$("btnNova").onclick=()=>qStart();$("btnErradas").onclick=()=>qStart(erradas.slice());
 function setModo(m){modo=m;$("mTreino").classList.toggle("on",m==="estudo");$("mProva").classList.toggle("on",m==="prova");qStart();}
 $("mTreino").onclick=()=>setModo("estudo");$("mProva").onclick=()=>setModo("prova");
 document.querySelectorAll("#rodada button").forEach(b=>b.onclick=()=>{N=+b.dataset.n;qStart();});
 document.addEventListener("keydown",e=>{if(TAB!=="q"||$("qcard").hidden||(e.target&&e.target.tagName==="TEXTAREA"))return;
-  const m={"1":0,"2":1,"3":2,"4":3,"a":0,"b":1,"c":2,"d":3}[e.key.toLowerCase()];if(m!==undefined&&!e.metaKey&&!e.ctrlKey)pick(m);
+  const m={"1":0,"2":1,"3":2,"4":3,"5":4,"a":0,"b":1,"c":2,"d":3,"e":4}[e.key.toLowerCase()];if(m!==undefined&&m<fila[idx].q.o.length&&!e.metaKey&&!e.ctrlKey)pick(m);
   if((e.key==="Enter"||e.key==="ArrowRight")&&!$("btnNext").disabled&&!(e.target&&e.target.tagName==="BUTTON")){e.preventDefault();next();}});
-$("secDisc").innerHTML=DISC.map((d,i)=>`<div class="card" style="margin-bottom:12px"><h3 style="margin:0 0 6px;font-size:16px">${esc(d.t)}</h3><p style="margin:0 0 8px">${esc(d.caso)}</p>`+
+$("secDisc").innerHTML=DISC.map((d,i)=>`<div class="card" style="margin-bottom:12px"><h3 style="margin:0 0 6px;font-size:16px">${esc(d.t)}</h3><p style="margin:0 0 8px">${esc(d.caso)}</p>${d.tb?`<div class="qtb">${tbl(d.tb)}</div>`:""}`+
   d.itens.map((it,j)=>`<div><p style="margin:8px 0 0;font-weight:600">${esc(it[0])}</p><textarea aria-label="Sua resposta"></textarea><button type="button" class="btn sec" data-r="r${i}_${j}">Ver resposta</button><div class="rot" id="r${i}_${j}" hidden>${esc(it[1])}</div></div>`).join("")+`</div>`).join("");
 document.querySelectorAll("#secDisc .btn").forEach(b=>b.onclick=()=>{const r=$(b.dataset.r);r.hidden=!r.hidden;b.textContent=r.hidden?"Ver resposta":"Esconder";});
 function disc(d){$("secObj").hidden=d;$("secDisc").hidden=!d;$("qObj").classList.toggle("on",!d);$("qDisc").classList.toggle("on",d);}
