@@ -177,7 +177,7 @@
     "tipo": "material",
     "data": "2026-09-07",
     "arquivo": "5-fase/uc13/farmaco/uc13-farmaco-podcast.html",
-    "origem": ""
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   },
   {
     "uc": "UC13",
@@ -384,7 +384,7 @@
     "tipo": "guia-prova",
     "data": "2026-10-05",
     "arquivo": "5-fase/uc14/farmaco/uc14-farmaco-central-guia.html",
-    "origem": ""
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   },
   {
     "uc": "UC14",
@@ -393,7 +393,7 @@
     "tipo": "guia-prova",
     "data": "2026-10-14",
     "arquivo": "5-fase/uc14/fisio/uc14-fisio-central-guia.html",
-    "origem": ""
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   },
   {
     "uc": "UC15",
@@ -402,7 +402,7 @@
     "tipo": "guia-prova",
     "data": "2026-10-06",
     "arquivo": "5-fase/uc15/farmaco/uc15-farmaco-central-guia.html",
-    "origem": ""
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   },
   {
     "uc": "UC14",
@@ -429,7 +429,7 @@
     "tipo": "material",
     "data": "2026-10-14",
     "arquivo": "5-fase/uc14/fisio/uc14-fisio-videoaulas.html",
-    "origem": ""
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   },
   {
     "uc": "UC14",
@@ -448,5 +448,14 @@
     "data": "2026-10-14",
     "arquivo": "5-fase/uc14/tutoria/uc14-sp4-tutoria-questoes-abcd.html",
     "origem": "5_fase/UC14/Tutoria/UC14_SP4_Tutoria_Questoes_ABCD.html"
+  },
+  {
+    "uc": "HP Infecções",
+    "materia": "Infectologia",
+    "titulo": "HP Infecções · Resumo, questões e vídeo",
+    "tipo": "guia-prova",
+    "data": "2026-10-18",
+    "arquivo": "5-fase/hp-infeccoes/infectologia/hp-infeccoes-resumo-questoes-video.html",
+    "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
   }
 ]
