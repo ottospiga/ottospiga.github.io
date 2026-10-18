@@ -466,5 +466,14 @@
     "data": "2026-10-18",
     "arquivo": "5-fase/hp-otorrino/otorrino/hp-otorrino-central.html",
     "origem": "5_fase/HP/otorrino/Otorrino_HP_Central.html"
+  },
+  {
+    "uc": "UC14",
+    "materia": "Tutoria",
+    "titulo": "UC14 · Tutoria · Prova final (resumo, questões e vídeos)",
+    "tipo": "guia-prova",
+    "data": "2026-10-18",
+    "arquivo": "5-fase/uc14/tutoria/prova-final/uc14-tutoria-prova-final.html",
+    "origem": "5_fase/UC14/Tutoria/Tutoria UC14 - Prova Final/Tutoria UC14 - Prova Final.html"
   }
 ]

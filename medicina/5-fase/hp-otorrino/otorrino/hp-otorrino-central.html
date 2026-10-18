@@ -247,6 +247,10 @@ h3.cg{font-family:var(--cond);text-transform:uppercase;font-size:24px;margin:22p
   <div class="grid">
     <main class="main" id="main">
       <div id="p-res" class="read res">
+        <div class="resbar">
+          <div class="seg" aria-label="Formato do resumo"><button type="button" id="rTxt" class="on">Ler aqui</button><button type="button" id="rPdf">PDF</button></div>
+          <a class="btn sec" id="dlPdf" href="HP_Otorrino_Resumo.pdf" download>Baixar PDF</a>
+        </div>
         <div id="resTxt">
         <p class="legend"><mark class="t">texto em roxo</mark> = caiu na T10 (pelo relato) · <span class="nota">✎ T10</span> = cobrado com outras palavras · clique numa figura para ampliar.</p>
         <section id="prova" data-sp="all">
@@ -472,6 +476,7 @@ h3.cg{font-family:var(--cond);text-transform:uppercase;font-size:24px;margin:22p
 </section>
 
         </div>
+        <div id="resPdf" hidden><iframe id="pdfFrame" title="Resumo em PDF" data-src="HP_Otorrino_Resumo.pdf"></iframe></div>
       </div>
       <div id="p-cond" class="condw" hidden>
         <div class="row" style="margin-bottom:6px"><div class="chips" id="cchips"></div></div>
@@ -892,6 +897,11 @@ function applySP(){
   document.querySelectorAll("#resTxt section").forEach(s=>s.hidden=!(SP==="all"||s.dataset.sp===SP||s.dataset.sp==="all"));
   qStart();side();$("main").scrollTop=0;}
 
+/* ---------- resumo: ler aqui / PDF ---------- */
+$("rTxt").onclick=()=>{RM="txt";$("rTxt").classList.add("on");$("rPdf").classList.remove("on");$("resTxt").hidden=false;$("resPdf").hidden=true;$("p-res").classList.remove("wide");setTab("res");};
+$("rPdf").onclick=()=>{RM="pdf";$("rPdf").classList.add("on");$("rTxt").classList.remove("on");$("resTxt").hidden=true;$("resPdf").hidden=false;$("p-res").classList.add("wide");
+  const f=$("pdfFrame");if(!f.src)f.src=f.dataset.src;setTab("res");};
+
 /* ---------- painel direito ---------- */
 function side(){const S=$("side");
   if(TAB==="res"){const it=[];
@@ -973,6 +983,10 @@ $("secDisc").innerHTML=DISC.map((d,k)=>`<div class="card"><div class="badges"><s
 $("secDisc").querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const r=$("r"+b.dataset.r);r.hidden=!r.hidden;});
 
 qStart();setTab(TAB);applySP();
+
+/* ---------- baixar PDF (no artifact, via capability downloads) ---------- */
+if(window.claude&&typeof claude.use==="function"){claude.use("downloads").then(dl=>{if(!dl)return;const a=$("dlPdf");
+  a.onclick=async e=>{e.preventDefault();try{const r=await fetch(a.getAttribute("href"));const b=await r.blob();await dl.save({filename:"HP_Otorrino_Resumo.pdf",data:b});}catch(err){}};}).catch(()=>{});}
 
 </script>
 <!-- medicina-nav --><script defer src="../../../nav.js"></script>
