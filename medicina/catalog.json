@@ -457,5 +457,14 @@
     "data": "2026-10-18",
     "arquivo": "5-fase/hp-infeccoes/infectologia/hp-infeccoes-resumo-questoes-video.html",
     "origem": "5_fase/HP/Infecções/HP Infecções - Site/"
+  },
+  {
+    "uc": "HP Otorrinolaringologia",
+    "materia": "Otorrinolaringologia",
+    "titulo": "HP Otorrinolaringologia · Central (estudo, condutas, questões, prova e véspera)",
+    "tipo": "guia-prova",
+    "data": "2026-10-18",
+    "arquivo": "5-fase/hp-otorrino/otorrino/hp-otorrino-central.html",
+    "origem": "5_fase/HP/otorrino/Otorrino_HP_Central.html"
   }
 ]

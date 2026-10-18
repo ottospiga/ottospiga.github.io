@@ -30,10 +30,11 @@ NAV_MARK = "<!-- medicina-nav -->"
 # Pasta nova sem entrada aqui: "ucN" vira "UCN" sozinho; o resto vira
 # Title Case do slug ("nefro-uro" -> "Nefro Uro"). Edite à vontade.
 # ---------------------------------------------------------------------------
-UC_ORDER = ["UC13", "UC14", "UC15", "HP Manifestações Abdominais", "HP Infecções"]  # seções fixas, nesta ordem
+UC_ORDER = ["UC13", "UC14", "UC15", "HP Manifestações Abdominais", "HP Otorrinolaringologia", "HP Infecções"]  # seções fixas, nesta ordem
 UC_NAMES = {
     "uc13": "UC13",
     "hp-abdomen": "HP Manifestações Abdominais",
+    "hp-otorrino": "HP Otorrinolaringologia",
     "hp-infeccoes": "HP Infecções",
 }
 MATERIA_NAMES = {
@@ -43,6 +44,7 @@ MATERIA_NAMES = {
     "farmaco": "Farmacologia",
     "fisio": "Fisiologia",
     "anato": "Anatomia",
+    "otorrino": "Otorrinolaringologia",
     "lab": "Laboratório",
     "procedimentos": "Procedimentos",
     "clinica": "Clínica",
