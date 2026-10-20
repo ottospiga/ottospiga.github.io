@@ -12,7 +12,7 @@
 :root{
   --bg:#eef1f4; --panel:#ffffff; --panel2:#f7f9fb; --line:#dde4ea; --ink:#16202a; --ink2:#59666f; --ink3:#89939d;
   --rail:#1b232c; --railink:#aebac6; --railon:#27313c;
-  --acc:#0a5f8a; --accsoft:#e4eef5; --t11:#6d28d9; --t11bg:#ede4fd; --note:#1d3fb0;
+  --acc:#0a5f8a; --accsoft:#e4eef5; --t11:#6d28d9; --t11bg:#ede4fd; --p05:#b4530a; --p05bg:#fdeedd; --note:#1d3fb0;
   --ok:#0f6a46; --okbg:#ecf9f2; --no:#a02a22; --nobg:#fdf0ef; --fig:#ffffff;
   --f-ui:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --f-txt:'IBM Plex Serif',Georgia,'Times New Roman',serif;
@@ -22,12 +22,12 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f1418; --panel:#161d23; --panel2:#1b242b; --line:#2a3640; --ink:#e3e9ee; --ink2:#a3b0ba; --ink3:#748391;
   --rail:#0a0e11; --railink:#aebac6; --railon:#1f2830;
-  --acc:#5fb3e0; --accsoft:#14303f; --t11:#b9a0ff; --t11bg:#2b2346; --note:#8fb0ff;
+  --acc:#5fb3e0; --accsoft:#14303f; --t11:#b9a0ff; --t11bg:#2b2346; --p05:#f5a65b; --p05bg:#3a2715; --note:#8fb0ff;
   --ok:#5fd18a; --okbg:#163423; --no:#ff8a8f; --nobg:#3a1c1f; --fig:#f4f6f8; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f1418; --panel:#161d23; --panel2:#1b242b; --line:#2a3640; --ink:#e3e9ee; --ink2:#a3b0ba; --ink3:#748391;
   --rail:#0a0e11; --railink:#aebac6; --railon:#1f2830;
-  --acc:#5fb3e0; --accsoft:#14303f; --t11:#b9a0ff; --t11bg:#2b2346; --note:#8fb0ff;
+  --acc:#5fb3e0; --accsoft:#14303f; --t11:#b9a0ff; --t11bg:#2b2346; --p05:#f5a65b; --p05bg:#3a2715; --note:#8fb0ff;
   --ok:#5fd18a; --okbg:#163423; --no:#ff8a8f; --nobg:#3a1c1f; --fig:#f4f6f8; color-scheme:dark}
 [hidden]{display:none!important}
 *{box-sizing:border-box}
@@ -91,8 +91,15 @@ main{max-width:1180px;margin:0 auto;padding-block:20px 60px}
 .chip{font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:5px 11px;border-radius:999px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--panel)}
 .chip.t11[aria-pressed="true"]{background:var(--t11);border-color:var(--t11)}
+.chip.p05[aria-pressed="true"]{background:var(--p05);border-color:var(--p05)}
+.chip .num{color:inherit;opacity:.7;font-size:11.5px}
+.chip:disabled{opacity:.45;cursor:default}
 .cfg{display:flex;flex-direction:column;gap:10px}
 .cfg .row{display:flex;flex-direction:column;gap:5px}
+.cfg summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cfg summary::-webkit-details-marker{display:none}
+.cfg summary:after{content:'▾';color:var(--ink3)}.cfg[open] summary:after{content:'▴'}
+.cfg[open] summary{margin-bottom:4px}
 .btn{font:inherit;font-weight:600;font-size:15px;border:0;border-radius:9px;padding:9px 16px;cursor:pointer;background:var(--acc);color:var(--panel)}
 .btn.gh{background:transparent;color:var(--acc);border:1px solid var(--line)}
 .btn:disabled{opacity:.45;cursor:default}
@@ -101,7 +108,7 @@ main{max-width:1180px;margin:0 auto;padding-block:20px 60px}
 .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tg{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--accsoft);color:var(--acc)}
-.tg.t11{background:var(--t11bg);color:var(--t11)}.tg.ed{background:transparent;border:1px solid var(--line);color:var(--ink3)}
+.tg.t11{background:var(--t11bg);color:var(--t11)}.tg.p05{background:var(--p05bg);color:var(--p05)}.tg.ed{background:transparent;border:1px solid var(--line);color:var(--ink3)}
 .prog{height:4px;background:var(--line);border-radius:2px;overflow:hidden}.prog i{display:block;height:100%;background:var(--acc)}
 .qt{font-family:var(--f-txt);font-size:18.5px;line-height:1.45;margin:0}
 .opts{display:flex;flex-direction:column;gap:8px}
@@ -227,7 +234,7 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 <h2 class="t" id="sindromes-definem-a-conduta">SÍNDROMES (DEFINEM A CONDUTA)</h2>
 <div class="tw"><table><tr><th>Síndrome</th><th>Definição (slide)</th></tr><tr class=""><td>Trato baixo (cistite)</td><td>Disúria, polaciúria, urgência, dor suprapúbica, hematúria</td></tr><tr class="hl"><td>Trato alto (pielo)</td><td>Dor lombar, <b>Giordano +</b>, febre, náuseas e vômitos</td></tr><tr class=""><td>Recorrente</td><td>≥ 2 episódios em 6 meses ou ≥ 3 em 1 ano</td></tr><tr class="hl"><td>Associada a cateter</td><td>Sonda vesical presente ou usada nas últimas 48 h → <b>categoria à parte</b></td></tr><tr class="hl"><td>Complicada</td><td>Sintomas sistêmicos + alteração urológica estrutural/funcional ou comorbidade · T11: “hematúria e incontinência”</td></tr><tr class="hl"><td>Bacteriúria assintomática</td><td>Não rastrear nem tratar · <b>exceto gestante</b> e antes de procedimento urológico invasivo</td></tr></table></div>
 <ul>
-<li class="n">✎ T11 Q7: ITU complicada = <mark>“hematúria e incontinência urinária”</mark>; “presença de cateter” foi considerada errada (no slide, cateter é categoria própria).</li>
+<li class="n">✎ T11 Q7: ITU complicada = <mark>“hematúria e incontinência urinária”</mark>; “presença de cateter” foi considerada errada (no slide, cateter é categoria própria). <b>Prova 12/05:</b> a mesma questão deu <b>cateter</b> como certo — gabarito instável, leia as opções.</li>
 <li class="n">✎ T11 Q8: BAS → <mark>em gestantes deve sempre ser tratada</mark>; nos demais não rastrear/tratar.</li>
 <li>Recorrente: profilaxia não-ATB (água, micção pós-coito, estrogênio tópico, cranberry) · ATB contínua/pós-coito (nitrofurantoína ou SMX-TMP).</li>
 </ul>
@@ -368,15 +375,15 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 
 <section id="v-questoes" class="view" hidden>
   <div style="min-width:0"><div class="card" id="card" aria-live="polite"></div></div>
-  <aside class="side"><div class="box cfg">
-    <div class="row"><span class="lab">Questões</span><div class="chips" id="fSrc">
-      <button class="chip t11" data-v="T11">Prova T11</button><button class="chip" data-v="ED">Inéditas</button><button class="chip" data-v="ALL">Todas</button><button class="chip" data-v="ERR">Que errei</button></div></div>
+  <aside class="side"><details class="box cfg" id="cfgbox" open><summary><span class="lab">Filtros</span> <span class="count" id="sumtxt"></span></summary>
+    <div class="row"><span class="lab">Fonte</span><div class="chips" id="fSrc"></div></div>
     <div class="row"><span class="lab">Aulas</span><div class="chips" id="fAu"></div></div>
-    <div class="row"><span class="lab">Rodada</span><div class="chips" id="fN"><button class="chip" data-v="5">5</button><button class="chip" data-v="10">10</button><button class="chip" data-v="15">15</button><button class="chip" data-v="0">Todas</button></div></div>
-    <div class="row"><span class="lab">Modo</span><div class="chips" id="fM"><button class="chip" data-v="estudo">Estudo</button><button class="chip" data-v="prova">Prova</button></div></div>
-    <div class="acts" style="justify-content:space-between"><span class="count" id="avail"></span><button class="btn" id="go">Nova rodada</button></div>
-    <span class="note">T11 = texto e gabarito originais (29/03/2026). Inéditas = no estilo dela, tiradas dos slides. Erros ficam salvos só neste navegador.</span>
-  </div></aside>
+    <div class="row"><span class="lab">Tamanho da rodada</span><div class="chips" id="fN"><button class="chip" data-v="5">5</button><button class="chip" data-v="10">10</button><button class="chip" data-v="15">15</button><button class="chip" data-v="0">Todas</button></div></div>
+    <div class="row"><span class="lab">Modo</span><div class="chips" id="fM"><button class="chip" data-v="estudo">Estudo · resposta na hora</button><button class="chip" data-v="prova">Prova · corrige no fim</button></div></div>
+    <div class="row"><div class="chips"><button class="chip" id="fErr">Só as que errei</button></div></div>
+    <div class="acts" style="justify-content:space-between"><span class="count" id="avail"></span><button class="btn gh" id="go">Embaralhar</button></div>
+    <span class="note">Os filtros já valem na hora: mudou, começa uma rodada nova. Provas = texto e gabarito originais; com as duas marcadas, as questões repetidas aparecem uma vez só. Erros ficam salvos só neste navegador.</span>
+  </details></aside>
 </section>
 
 <section id="v-video" class="view" hidden>
@@ -389,7 +396,8 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 
 <section id="v-prova" class="view" hidden>
   <div class="pv"><div class="box"><span class="lab">Como é a prova</span>
-<p style="margin-top:6px">Prova de assinalar com uma discursiva no fim, valendo o mesmo por questão. As objetivas são diretas: <b>uma questão por tema, com a frase quase literal do slide</b>, e as alternativas erradas trocam um item da lista (ex.: “encefalite” no lugar de “insuficiência renal” na tríade de Weil). A discursiva da T11 foi um caso clínico de dengue grave. Todas as aulas caíram; nada fora dos slides.</p></div>
+<p style="margin-top:6px">Prova de assinalar com uma discursiva no fim, valendo o mesmo por questão. As objetivas são diretas: <b>uma questão por tema, com a frase quase literal do slide</b>, e as alternativas erradas trocam um item da lista (ex.: “encefalite” no lugar de “insuficiência renal” na tríade de Weil). A discursiva da T11 foi um caso clínico de dengue grave. Todas as aulas caíram; nada fora dos slides. Na prova de 12/05 ela <b>repetiu 10 questões da T11 palavra por palavra</b> (Q6, 9–12, 14, 16–19) e transformou as outras em <b>casos clínicos curtos</b> com a mesma resposta; a discursiva mudou de dengue para sepse por pneumonia.</p></div>
+<div class="box" style="border-color:var(--p05)"><span class="lab" style="color:var(--p05)">Divergência de gabarito · ITU complicada</span><p style="margin-top:6px">A mesma pergunta (“qual critério sugere ITU complicada?”) teve resposta diferente: na <b>T11</b> o gabarito foi <b>hematúria e incontinência</b>; na prova de <b>12/05</b> a aluna marcou <b>presença de cateter urinário</b> e fechou as objetivas (nota 9,75). Se cair de novo, cateter é a resposta mais defensável quando aparecer nas opções.</p></div>
 
 <div class="box"><span class="lab">Mapa da T11 (29/03/2026)</span>
 <div class="tw"><table class="tmap"><tr><th>Q</th><th>Aula</th><th>O que cobrou</th><th>Resposta</th></tr>
@@ -399,7 +407,7 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 <tr><td>4</td><td>Pneumonia</td><td>Jovem, tosse seca, intersticial</td><td><i>Mycoplasma</i></td></tr>
 <tr><td>5</td><td>ITU</td><td>Agente na mulher</td><td><i>E. coli</i></td></tr>
 <tr><td>6</td><td>ITU</td><td>Achado da pielonefrite</td><td>Dor lombar + Giordano</td></tr>
-<tr class="hl"><td>7</td><td>ITU</td><td>Critério de ITU complicada</td><td>Hematúria e incontinência (não “cateter”)</td></tr>
+<tr class="hl"><td>7</td><td>ITU</td><td>Critério de ITU complicada</td><td>Hematúria e incontinência (na 12/05: cateter)</td></tr>
 <tr><td>8</td><td>ITU</td><td>Bacteriúria assintomática</td><td>Gestante: sempre tratar</td></tr>
 <tr><td>9</td><td>Pele</td><td>Lesão da celulite</td><td>Eritema difuso, bordas mal delimitadas</td></tr>
 <tr><td>10</td><td>Pele</td><td>Pé diabético</td><td>Neuropatia + trauma + DAP</td></tr>
@@ -415,9 +423,28 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 <tr><td>20</td><td>Arboviroses</td><td>Discursiva: caso no 5º dia</td><td>Dengue grave, fase crítica, choque</td></tr>
 </table></div><span class="note">Linhas em roxo = onde a turma mais errou ou onde o gabarito pega.</span></div>
 
+<div class="box"><span class="lab">Mapa da prova de 12/05/2026</span>
+<div class="tw"><table class="tmap"><tr><th>Q</th><th>Aula</th><th>O que cobrou</th><th>Resposta</th></tr>
+<tr><td>1</td><td>Pneumonia</td><td>Caso: 67 a, consolidação lobar</td><td><i>S. pneumoniae</i></td></tr>
+<tr><td>2</td><td>Pneumonia</td><td>Caso: 24 a, surto na faculdade, intersticial</td><td>Atípica / <i>Mycoplasma</i></td></tr>
+<tr><td>3</td><td>Pneumonia</td><td>Quais critérios SÃO do CURB-65</td><td>Confusão, FR, PA, ureia, idade</td></tr>
+<tr><td>4</td><td>Pneumonia</td><td>Caso: 76 a, FR 32, ureia ↑, confusão</td><td>Internação (CURB-65 = 4)</td></tr>
+<tr><td>5</td><td>ITU</td><td>Caso: disúria sem febre/dor lombar</td><td>Cistite não complicada</td></tr>
+<tr><td>6</td><td>ITU</td><td>= T11 Q6</td><td>Dor lombar + Giordano</td></tr>
+<tr class="hl"><td>7</td><td>ITU</td><td>= T11 Q7 (gabarito diferente)</td><td>Presença de cateter</td></tr>
+<tr><td>8</td><td>ITU</td><td>Caso: gestante com urocultura +</td><td>Tratar a BAS</td></tr>
+<tr><td>9–12</td><td>Pele</td><td>= T11 Q9–12</td><td>Celulite, pé diabético, fasciíte, zóster</td></tr>
+<tr><td>13</td><td>Arboviroses</td><td>Fase crítica (reescrita)</td><td>3º–7º dia, na defervescência</td></tr>
+<tr><td>14</td><td>Arboviroses</td><td>= T11 Q14</td><td>Extravasamento plasmático</td></tr>
+<tr><td>15</td><td>Leptospirose</td><td>Caso: icterícia + oligúria + dispneia</td><td>Síndrome de Weil</td></tr>
+<tr><td>16</td><td>Leptospirose</td><td>= T11 Q16 (+ “mialgia generalizada”)</td><td>Panturrilhas</td></tr>
+<tr><td>17–19</td><td>Sepse</td><td>= T11 Q18, Q17, Q19</td><td>qSOFA, Sepsis-3, choque</td></tr>
+<tr class="hl"><td>20</td><td>Sepse</td><td>Discursiva: 68 a, PAC + hipotensão, lactato 4,8</td><td>Sepse pulmonar → choque séptico; qSOFA; pacote da 1ª hora</td></tr>
+</table></div></div>
+
 <div class="box"><span class="lab">Pegadinhas para não cair</span>
 <ul style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:5px">
-<li><b>Cateter</b> é categoria própria de ITU; não é o critério de “complicada” no gabarito dela.</li>
+<li><b>ITU complicada</b>: o gabarito mudou entre as provas (T11 = hematúria e incontinência; 12/05 = presença de cateter). Leia todas as opções antes de marcar.</li>
 <li><b>Saturação</b> não entra no CURB-65; <b>febre, leucocitose, SatO₂ e oligúria</b> não entram no qSOFA.</li>
 <li><b>Erisipela</b> = borda elevada e bem delimitada; <b>celulite</b> = borda mal delimitada; <b>vesículas agrupadas</b> = herpes.</li>
 <li><b>Zóster</b> é vesícula num dermátomo, não pápula nem mácula bilateral.</li>
@@ -426,16 +453,18 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 <li>Sepsis-3 ≠ “infecção + SIRS” (definição antiga). Choque ≠ “hipotensão postural” nem “queda de saturação”.</li>
 <li>PAC leve sem comorbidade = <b>amoxicilina</b> (ou macrolídeo); ceftriaxona + azitro é de enfermaria.</li>
 <li>Bacteriúria assintomática: só trata <b>gestante</b> (e antes de procedimento urológico).</li>
-<li>Discursiva: escreva <b>diagnóstico + fase + sinais de alarme/choque + evolução + conduta</b>. Chamar de “benigna, resolve em 10 dias” custou ponto.</li>
+<li>Na discursiva de sepse, dê o <b>nome da síndrome</b> (sepse/choque séptico de foco pulmonar), use <b>qSOFA</b> como critério de gravidade (idade e tabagismo não contam) e escreva o <b>pacote da 1ª hora</b>: lactato, 2 hemoculturas, ATB ≤ 1 h, cristaloide 30 mL/kg, noradrenalina se PAM &lt; 65.</li>
+<li>Discursiva de dengue: escreva <b>diagnóstico + fase + sinais de alarme/choque + evolução + conduta</b>. Chamar de “benigna, resolve em 10 dias” custou ponto.</li>
 </ul></div>
 </div>
-  <aside class="side"><div class="box"><span class="lab">Peso por aula na T11</span><div class="bars" style="margin-top:8px" id="peso"></div></div></aside>
+  <aside class="side"><div class="box"><span class="lab">Questões por aula (T11 + 12/05)</span><div class="bars" style="margin-top:8px" id="peso"></div></div></aside>
 </section>
 </main>
 
 <script>
 const AULAS = {pn:"Pneumonia", itu:"ITU", pele:"Pele", lep:"Leptospirose", arb:"Arboviroses", sep:"Sepse"};
-// a = índice da correta. src: "T11" (prova real, texto original) ou "ED" (inédita no estilo da T11, tirada dos slides)
+// a = índice da correta. src: "T11" / "P0512" (provas reais, texto original) ou "ED" (inédita no estilo da prova, tirada dos slides)
+const SRCS = {T11:{l:"Prova T11", d:"29/03/2026", cls:"t11"}, P0512:{l:"Prova 12/05", d:"12/05/2026", cls:"p05"}, ED:{l:"Inéditas", d:"no estilo dela", cls:"ed"}};
 const Q = [
 // ===== PROVA T11 (29/03/2026) — texto original =====
 {src:"T11",n:1,au:"pn",q:"A pneumonia adquirida na comunidade é uma infecção pulmonar desenvolvida fora do ambiente hospitalar, comumente causada por bactérias. Qual o agente etiológico bacteriano mais comum da PAC em adultos?",o:["Mycoplasma pneumoniae.","Streptococcus pneumoniae.","Haemophilus influenzae.","Staphylococcus aureus."],a:1,e:"Slide: o pneumococo é historicamente o patógeno mais comum da PAC em todo o mundo. Mycoplasma é o atípico (jovem, tosse seca)."},
@@ -444,7 +473,7 @@ const Q = [
 {src:"T11",n:4,au:"pn",q:"Paciente jovem com quadro arrastado de tosse seca prolongada, febre baixa e RX com infiltrado intersticial difuso. Qual o agente etiológico mais provável para pneumonia atípica?",o:["Streptococcus pneumoniae.","Staphylococcus aureus.","Mycoplasma pneumoniae.","Klebsiella pneumoniae."],a:2,e:"Mycoplasma: adultos jovens, tosse seca persistente, febre baixa a moderada, acometimento intersticial com dissociação clínico-radiológica."},
 {src:"T11",n:5,au:"itu",q:"A incidência de infecções urinárias é mais frequente em mulheres. Qual o agente etiológico mais comum neste grupo?",o:["Klebsiella pneumoniae.","Proteus mirabilis.","Escherichia coli.","Enterococcus faecalis."],a:2,e:"E. coli: 75–95% das cistites não complicadas (fímbrias/adesinas)."},
 {src:"T11",n:6,au:"itu",q:"A pielonefrite é uma infecção bacteriana grave do trato urinário superior, levando a sinais clínicos e sintomas gerais. Qual dos seguintes achados é mais sugestivo?",o:["Disúria e hematúria microscópica isolada.","Dor lombar com sinal de Giordano positivo.","Incontinência urinária e corrimento vaginal fétido.","Febre e sinal de Murphy positivo."],a:1,e:"Pielonefrite = sintomas de cistite + febre, calafrios, dor no flanco, náuseas/vômitos e Giordano (punho-percussão do ângulo costovertebral). Murphy é vesícula biliar."},
-{src:"T11",n:7,au:"itu",q:"Em relação à complexidade das infecções do trato urinário, qual dos seguintes critérios sugere ITU complicada?",o:["Disúria e urgência miccional.","Hematúria e incontinência urinária.","Presença de cateter urinário.","História de ITU prévia."],a:1,e:"Pegadinha: no slide, “associada a cateter” é uma categoria à parte, e o gabarito deu “hematúria e incontinência”. Complicada = sintomas sistêmicos + condições preexistentes (anormalidades urológicas, comorbidades)."},
+{src:"T11",n:7,au:"itu",q:"Em relação à complexidade das infecções do trato urinário, qual dos seguintes critérios sugere ITU complicada?",o:["Disúria e urgência miccional.","Hematúria e incontinência urinária.","Presença de cateter urinário.","História de ITU prévia."],a:1,e:"Gabarito da T11: “hematúria e incontinência” (no slide, “associada a cateter” é categoria à parte). ATENÇÃO: na prova de 12/05 a mesma questão foi corrigida com “presença de cateter” como certa. Complicada = sintomas sistêmicos + condições preexistentes (anormalidades urológicas, comorbidades)."},
 {src:"T11",n:8,au:"itu",q:"Bacteriúria assintomática é definida como a presença significativa de bactérias na urina, sem sintomas de infecção. Sobre bacteriúria assintomática, é correto afirmar:",o:["Tem indicação de tratamento obrigatório.","Não necessita de investigação adicional.","Em pacientes gestantes deve sempre ser tratada.","É sempre indicativa de infecção grave e de comprometimento do estado geral."],a:2,e:"Quem tratar? Apenas gestantes (e antes de procedimento urológico invasivo com sangramento de mucosa). Nos demais, não rastrear nem tratar."},
 {src:"T11",n:9,au:"pele",q:"A celulite é um processo inflamatório-infeccioso da derme profunda e do tecido subcutâneo. Quais as características típicas da lesão?",o:["Eritema difuso com bordas bem delimitadas e descamativa.","Eritema difuso, bordas mal delimitadas, calor e dor local.","Presença de vesículas agrupadas e eritema.","Úlcera com bordas elevadas."],a:1,e:"Celulite: eritema difuso, bordas MAL delimitadas, dor e calor. Bordas elevadas e BEM delimitadas = erisipela. Vesículas agrupadas = herpes."},
 {src:"T11",n:10,au:"pele",q:"A úlcera do pé diabético é uma lesão cutânea que pode ocorrer nos pacientes diabéticos resultante da combinação de quais fatores a seguir?",o:["Hipertensão arterial, obesidade e trauma.","Retinopatia diabética, doença arterial periférica e trauma.","Obesidade, trauma e neuropatia periférica.","Neuropatia periférica, trauma e doença arterial periférica."],a:3,e:"Três pilares: neuropatia periférica + doença arterial periférica + trauma (geralmente distal ao maléolo)."},
@@ -460,6 +489,30 @@ const Q = [
 {src:"T11",n:20,au:"arb",disc:true,q:"Adolescente de 16 anos, previamente hígido, apresenta quadro de febre alta há 4 dias, cefaleia, dor retro-orbitária e mialgia. No 5º dia, evolui com dor abdominal intensa, vômitos persistentes e letargia. Ao exame: PA 90×60 mmHg, FC 120 bpm, extremidades frias, enchimento capilar lento. Ht aumentado em relação ao basal e plaquetas 45.000/mm³. Qual o diagnóstico inicial provável e qual a evolução do quadro?",
  r:"Dengue na FASE CRÍTICA (3º–7º dia, que começa na defervescência), com SINAIS DE ALARME (dor abdominal intensa, vômitos persistentes, letargia, Ht ↑ com plaquetas ↓) e SINAIS DE CHOQUE (PA convergente 90×60, taquicardia, extremidades frias, TEC lento) → dengue grave por extravasamento plasmático. Evolução: risco de choque e sangramentos; superada a fase crítica, fase de recuperação com reabsorção do plasma. Tratamento de suporte com hidratação, evitando AINE e AAS.",
  e:"Na T11 perdeu ponto quem chamou de “evolução benigna com resolução em 10 dias” sem reconhecer o choque."},
+
+// ===== PROVA 12/05/2026 — texto original; gabarito = marcações da aluna (nota 9,75: objetivas todas certas, discursiva parcial) =====
+{src:"P0512",n:1,au:"pn",q:"Homem de 67 anos, tabagista, procura atendimento com febre há 3 dias, tosse produtiva com expectoração amarelada e dispneia progressiva. Ao exame: FR 32 irpm, PA 88x56 mmHg, FC 118 bpm, SatO₂ 88% em ar ambiente. Ausculta com crepitações em base direita. Raio X de tórax com consolidação lobar inferior direita. Qual o principal agente etiológico provável?",o:["Mycoplasma pneumoniae.","Streptococcus pneumoniae.","Legionella pneumophila.","Chlamydia pneumoniae."],a:1,e:"Tosse produtiva purulenta + consolidação lobar = pneumonia típica → pneumococo, principal agente da PAC. Mesma ideia da T11 Q1, agora em caso clínico."},
+{src:"P0512",n:2,au:"pn",q:"Mulher de 24 anos apresenta tosse seca, febre baixa, cefaleia e mialgia há 7 dias. Refere que vários colegas da faculdade apresentaram sintomas semelhantes. Ao exame, ausculta pulmonar pouco exuberante em comparação à intensidade dos sintomas. Radiografia com infiltrado intersticial difuso. O diagnóstico e agente mais provável é:",o:["Pneumonia complicada / Klebsiella pneumoniae.","Pneumonia nosocomial / Staphylococcus aureus.","Pneumonia atípica / Mycoplasma pneumoniae.","Sepses de origem pulmonar / Streptococcus pneumoniae."],a:2,e:"Jovem, surto em coletividade (faculdade), tosse seca, febre baixa, dissociação clínico-radiológica e intersticial difuso → atípica por Mycoplasma (T11 Q4 em versão caso)."},
+{src:"P0512",n:3,au:"pn",q:"Sobre o escore CURB-65 utilizado para nível de gravidade em PAC, quais critérios fazem parte?",o:["Confusão mental / FR / PA / Ureia / Idade ≥ 65.","Confusão mental / FC / Saturação O2 / Ureia / Idade ≥ 65.","FC / FR / Sat O2 / Ureia / Idade ≥ 65.","Confusão mental / Saturação de O2 / Ureia / Creatinina / Idade ≥ 65 anos."],a:0,e:"C confusão · U ureia > 50 · R FR ≥ 30 · B PAS < 90 ou PAD ≤ 60 · 65 idade. FC, saturação e creatinina não entram (na T11 ela perguntou o inverso: o que NÃO faz parte)."},
+{src:"P0512",n:4,au:"pn",q:"Em atendimento a um paciente de 76 anos com diagnóstico de PAC apresenta: FR 32 irpm, ureia elevada e confusão mental. Qual a melhor conduta inicial?",o:["Alta domiciliar com antibiótico via oral e acompanhamento ambulatorial.","Realizar raio X de tórax e liberar para casa com antibiótico via oral.","Complementar avaliação para internação hospitalar.","Tratamento ambulatorial com broncodilatador e soro fisiológico nasal."],a:2,e:"CURB-65 = 4 (confusão + ureia + FR ≥ 30 + idade ≥ 65): 2 = internar, ≥ 3 = considerar UTI. Não é caso ambulatorial."},
+{src:"P0512",n:5,au:"itu",q:"Mulher, 24 anos, previamente hígida, procura atendimento com disúria, polaciúria e urgência urinária há 2 dias. Nega febre, dor lombar ou corrimento vaginal. Exame físico sem alterações. Qual o diagnóstico mais provável?",o:["Pielonefrite aguda.","Cistite aguda não complicada.","Uretrite gonocócica.","Vaginite por candidíase."],a:1,e:"Sintomas de trato baixo sem febre, dor lombar ou sinais sistêmicos, mulher jovem hígida → cistite não complicada (diagnóstico clínico)."},
+{src:"P0512",n:6,au:"itu",q:"A pielonefrite é uma infecção bacteriana grave do trato urinário superior, levando a sinais clínicos e sintomas gerais. Qual dos seguintes achados é mais sugestivo?",o:["Disúria e Hematúria macroscópica.","Incontinência urinária e corrimento vaginal fétido.","Febre e sinal de Murphy positivo.","Dor lombar com sinal de Giordano positivo."],a:3,e:"Repetiu a T11 Q6 com as alternativas em outra ordem: Giordano positivo."},
+{src:"P0512",n:7,au:"itu",q:"Em relação a complexidade das infecções do trato urinário, qual dos seguintes critérios sugere ITU complicada?",o:["Presença de cateter urinário.","Hematúria e incontinência urinária.","Disúria e urgência miccional.","História de ITU prévia."],a:0,e:"DIVERGÊNCIA: mesma questão da T11 Q7. Na T11 o gabarito foi “hematúria e incontinência”; nesta prova a aluna marcou “presença de cateter” e fechou as objetivas (nota 9,75). Pelos livros, cateter de demora é fator de ITU complicada; no slide ele aparece como categoria própria. Se cair: cateter é a resposta mais defensável quando estiver entre as opções; se ela mantiver o gabarito da T11, será hematúria e incontinência."},
+{src:"P0512",n:8,au:"itu",q:"Mulher, 29 anos, gestante de 16 semanas, realiza urocultura de rotina que evidencia >100.000 UFC/mL de E. coli. Nega sintomas urinários. A conduta correta é:",o:["Não tratar, pois está assintomática.","Sem indicação de tratamento pois a Escherichia coli faz parte da microbiota intestinal normal.","Tratar bacteriúria assintomática em gestante.","Indicação para tratamento somente se paciente sintomática."],a:2,e:"Bacteriúria assintomática só se trata em gestante (e antes de procedimento urológico). T11 Q8 em versão caso."},
+{src:"P0512",n:9,au:"pele",q:"A celulite é um processo inflamatório-infeccioso da derme profunda e do tecido subcutâneo. Quais as características típicas da lesão?",o:["Eritema difuso com bordas bem delimitadas e descamativa.","Presença de vesículas agrupadas e eritema.","Eritema difuso, bordas mal delimitadas, calor e dor local.","Úlcera com bordas elevadas."],a:2,e:"Repetiu a T11 Q9: celulite = bordas MAL delimitadas."},
+{src:"P0512",n:10,au:"pele",q:"A úlcera do pé diabético é uma lesão cutânea que pode ocorrer nos pacientes diabéticos resultante da combinação de quais fatores a seguir?",o:["Hipertensão arterial, obesidade e trauma.","Retinopatia diabética, doença arterial periférica e trauma.","Obesidade, trauma e neuropatia periférica.","Neuropatia periférica, trauma e doença arterial periférica."],a:3,e:"Repetiu a T11 Q10 igualzinha."},
+{src:"P0512",n:11,au:"pele",q:"Em relação ao diagnóstico diferencial entre celulite e fasceíte necrotizante, é correto afirmar:",o:["Ambas têm evolução semelhante.","Fasceíte necrotizante apresenta maior toxicidade sistêmica.","Celulite é um processo inflamatório e fasceite é uma infecção bacteriana.","Celulite exige cirurgia imediata."],a:1,e:"Repetiu a T11 Q11 igualzinha."},
+{src:"P0512",n:12,au:"pele",q:"Em relação ao herpes zoster, é correto afirmar:",o:["Lesões cutâneas com máculas difusas bilaterais.","Vesículas agrupadas em dermátomo ou seja unilateral.","Lesões em pápulas em um seguimento unilateral.","Úlceras agrupadas e unilateral."],a:1,e:"Repetiu a T11 Q12 igualzinha: vesículas em dermátomo."},
+{src:"P0512",n:13,au:"arb",q:"Os sinais da fase crítica da dengue incluem, dor abdominal, vômitos e sangramento de mucosas. Em relação a essa fase é correto afirmar:",o:["Geralmente ocorre nos dois primeiros dias da doença com febre alta.","Esses achados são tardios e ocorrem após 2 semanas da doença.","Ocorre entre 3º e o 7º dia após o início dos sintomas, na defervescência da febre.","Sintomas ocorrem devido uso de antibiótico em presença de doença de origem viral."],a:2,e:"Fase crítica: 3º–7º dia, começa na defervescência (T11 Q13 reescrita)."},
+{src:"P0512",n:14,au:"arb",q:"Qual achado sugere dengue grave?",o:["Febre alta.","Cefaleia.","Extravasamento plasmático.","Mialgia leve."],a:2,e:"Repetiu a T11 Q14 igualzinha."},
+{src:"P0512",n:15,au:"lep",q:"Paciente masculino, 35 anos, apresenta febre, mialgia e icterícia há 6 dias. Evolui com oligúria e dispneia. Ao exame: PA 90x60 mmHg, FR 30 irpm, saturação 89%. Qual complicação da leptospirose provavelmente está presente?",o:["Síndrome hemolítico-urêmica.","Síndrome de Weil.","Glomerulonefrite pós-estreptocócica.","Hepatite fulminante viral."],a:1,e:"Icterícia + insuficiência renal (oligúria) + comprometimento hemorrágico/pulmonar = síndrome de Weil (T11 Q15 em versão caso)."},
+{src:"P0512",n:16,au:"lep",q:"Na leptospirose uma das principais queixas é de mialgia, descrita principalmente em que local?",o:["Membros superiores.","Em todo o abdome.","Mialgia generalizada.","Panturrilhas."],a:3,e:"Repetiu a T11 Q16, agora com “mialgia generalizada” de distrator: a resposta continua panturrilhas."},
+{src:"P0512",n:17,au:"sep",q:"Critérios de qSOFA incluem:",o:["Febre, leucocitose, taquicardia.","FR ≥ 22, alteração do nível de consciência, PAS ≤ 100 mmHg.","Saturação < 90%, febre, oligúria.","Hipotensão, hipoglicemia, acidose"],a:1,e:"Repetiu a T11 Q18 igualzinha."},
+{src:"P0512",n:18,au:"sep",q:"Definição atual de sepse (Sepsis-3) - A sepse é definida como:",o:["Infecção inicial com febre recorrente em uso de antibiótico.","Infecção com resposta inflamatória sistêmica (SIRS).","Disfunção orgânica potencialmente fatal causada por resposta desregulada do hospedeiro à infecção.","Infecção com alteração em sinais vitais mantida após expansão de de volume."],a:2,e:"Repetiu a T11 Q17 igualzinha."},
+{src:"P0512",n:19,au:"sep",q:"Na sepse o paciente pode evoluir com complicações, como o choque septico, que é definido por:",o:["Infecção acompanhada por hipotensão postural mantida após reposição de volume.","Sepse com foco desconhecido associada a hipotensão e queda na saturação de O2.","Sepses grave com alteração do nível de consciência e dos sinais vitais.","Sepse com necessidade de vasopressor para manter PAM ≥ 65 mmHg e lactato > 2 mmol/L após reposição volêmica."],a:3,e:"Repetiu a T11 Q19 (a correta mudou de letra: agora D)."},
+{src:"P0512",n:20,au:"sep",disc:true,q:"Homem, 68 anos, hipertenso e diabético, trazido ao pronto socorro com história de febre há 3 dias, tosse produtiva e dispneia progressiva. Ao exame físico: sonolento, PA 82x48 mmHg, FC 124 bpm, FR 32 irpm, SpO₂ 88% em ar ambiente, T 39,2°C. Ausculta pulmonar com crepitações em base direita. Extremidades frias e enchimento capilar lentificado. Diurese reduzida nas últimas 12 horas. Exames: leucócitos 19.800/mm³; lactato 4,8 mmol/L; creatinina 2,1 mg/dL (basal 1,0); gasometria pH 7,29 / HCO₃⁻ 18 mEq/L. A) Qual o diagnóstico sindrômico mais provável? (foco inicial e evolução). B) Cite 3 critérios clínicos que indicam gravidade. C) Quais as medidas terapêuticas iniciais na primeira hora?",
+ r:"A) SEPSE de foco pulmonar (PAC → pneumonia bacteriana típica, base direita) com disfunção orgânica (neurológica, renal, perfusão, acidose lática), evoluindo para CHOQUE SÉPTICO (hipotensão + lactato 4,8; confirmar se persistir com necessidade de vasopressor após volume). B) qSOFA 3/3: FR ≥ 22 (32), alteração da consciência (sonolento), PAS ≤ 100 (82). Também: hipoperfusão (extremidades frias, TEC lento), oligúria/creatinina dobrando, lactato > 2 (4,8), SpO₂ 88%. C) Hora 1: ABCDE, O₂, 2 acessos; lactato e 2 hemoculturas sem atrasar o ATB; antibiótico de amplo espectro em até 1 h; cristaloide 30 mL/kg (iniciar, completar em 3 h) com reavaliação; noradrenalina se PAM < 65 após volume; controle do foco, monitorizar diurese, internação/UTI.",
+ e:"A resposta da aluna levou nota parcial: escreveu “pneumonia típica com provável evolução para sepse”, citou idade e tabagismo como gravidade e não montou o pacote da 1ª hora (lactato, hemoculturas, ATB ≤ 1 h, 30 mL/kg, noradrenalina). Use os nomes do slide: sepse/choque séptico, qSOFA, Sepsis-3."},
 
 // ===== INÉDITAS no estilo da prova (tiradas dos slides) =====
 {src:"ED",au:"pn",q:"A pneumonia adquirida na comunidade é aquela que se inicia fora do hospital ou dentro de quanto tempo após a internação?",o:["24 horas.","48 horas.","72 horas.","7 dias."],a:1,e:"PAC: fora do hospital ou nas primeiras 48 h. Hospitalar: após 48 h. PAV: após 48 h de ventilação mecânica."},
@@ -526,23 +579,48 @@ $$('#rmode button').forEach(b=>b.onclick=()=>{$$('#rmode button').forEach(x=>x.s
  const on=()=>{let k=0;heads.forEach((h,i)=>{if(h&&h.getBoundingClientRect().top<160)k=i});links.forEach((a,i)=>a.classList.toggle('on',i===k))};
  addEventListener('scroll',on,{passive:true});on();}
 // ===== QUESTÕES =====
-Q.forEach((q,i)=>{q.id=q.src==='T11'?'t'+q.n:'e'+i});
-let errs=new Set(store.get('hpinf_errs',[]));
-let cfg=Object.assign({src:'T11',aus:Object.keys(AULAS),n:0,m:'estudo'},store.get('hpinf_cfg',{}));
-$('#fAu').innerHTML=Object.entries(AULAS).map(([k,v])=>`<button class="chip" data-v="${k}">${v}</button>`).join('');
-function single(id,key,num){$$(id+' .chip').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.v===String(cfg[key])));b.onclick=()=>{cfg[key]=num?+b.dataset.v:b.dataset.v;single(id,key,num);upd()}})}
-single('#fSrc','src');single('#fN','n',true);single('#fM','m');
-$$('#fAu .chip').forEach(b=>{b.setAttribute('aria-pressed',String(cfg.aus.includes(b.dataset.v)));b.onclick=()=>{const k=b.dataset.v;cfg.aus=cfg.aus.includes(k)?cfg.aus.filter(x=>x!==k):[...cfg.aus,k];b.setAttribute('aria-pressed',String(cfg.aus.includes(k)));upd()}});
-function pool(){return Q.filter(q=>cfg.aus.includes(q.au)&&(cfg.src==='ALL'||(cfg.src==='ERR'?errs.has(q.id):q.src===cfg.src)))}
-function upd(){const p=pool().length;$('#avail').textContent=p+(p===1?' questão':' questões');$('#go').disabled=!p;store.set('hpinf_cfg',cfg)}
-upd();
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+{let k=0;Q.forEach(q=>{q.id=q.src==='ED'?'ed'+(k++):q.src.toLowerCase()+'_'+q.n})}
+// repetidas: mesma pergunta e mesma resposta certa em outra prova
+Q.filter(q=>q.src==='P0512').forEach(q=>{const t=Q.find(x=>x.src==='T11'&&norm(x.q)===norm(q.q)&&!x.disc&&!q.disc&&norm(x.o[x.a])===norm(q.o[q.a]));if(t){q.dupOf=t.id;t.also=(t.also||[]).concat('12/05 Q'+q.n)}});
+let errs=new Set(store.get('hpinf_errs2',[]));
+const ALLAU=Object.keys(AULAS);
+let cfg=Object.assign({srcs:['T11','P0512'],aus:ALLAU.slice(),n:10,m:'estudo',err:false},store.get('hpinf_cfg2',{}));
+const cnt=s=>Q.filter(q=>q.src===s).length;
+$('#fSrc').innerHTML=Object.entries(SRCS).map(([k,v])=>`<button class="chip ${v.cls}" data-v="${k}">${v.l} <span class="num">${cnt(k)}</span></button>`).join('');
+$('#fAu').innerHTML='<button class="chip" data-v="*">Todas</button>'+Object.entries(AULAS).map(([k,v])=>`<button class="chip" data-v="${k}">${v}</button>`).join('');
+function paint(){
+  $$('#fSrc .chip').forEach(b=>b.setAttribute('aria-pressed',String(cfg.srcs.includes(b.dataset.v))));
+  $$('#fAu .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v==='*'?cfg.aus.length===ALLAU.length:cfg.aus.includes(b.dataset.v)&&cfg.aus.length<ALLAU.length)));
+  $$('#fN .chip').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===cfg.n)));
+  $$('#fM .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===cfg.m)));
+  const ne=Q.filter(q=>errs.has(q.id)).length;const fe=$('#fErr');fe.innerHTML=`Só as que errei <span class="num">${ne}</span>`;fe.setAttribute('aria-pressed',String(cfg.err));fe.disabled=!ne&&!cfg.err;
+}
+if(innerWidth<900)$('#cfgbox').open=false;
+function changed(){store.set('hpinf_cfg2',cfg);paint();start()}
+$$('#fSrc .chip').forEach(b=>b.onclick=()=>{const k=b.dataset.v;cfg.srcs=cfg.srcs.includes(k)?cfg.srcs.filter(x=>x!==k):[...cfg.srcs,k];changed()});
+$$('#fAu .chip').forEach(b=>b.onclick=()=>{const k=b.dataset.v;
+  if(k==='*')cfg.aus=ALLAU.slice();
+  else if(cfg.aus.length===ALLAU.length)cfg.aus=[k];               // com "Todas" ligado, clicar numa aula isola só ela
+  else{cfg.aus=cfg.aus.includes(k)?cfg.aus.filter(x=>x!==k):[...cfg.aus,k];if(!cfg.aus.length)cfg.aus=ALLAU.slice()}
+  changed()});
+$$('#fN .chip').forEach(b=>b.onclick=()=>{cfg.n=+b.dataset.v;changed()});
+$$('#fM .chip').forEach(b=>b.onclick=()=>{cfg.m=b.dataset.v;changed()});
+$('#fErr').onclick=()=>{cfg.err=!cfg.err;changed()};
+function pool(){const both=cfg.srcs.includes('T11');
+  return Q.filter(q=>cfg.srcs.includes(q.src)&&cfg.aus.includes(q.au)&&!(both&&q.dupOf)&&(!cfg.err||errs.has(q.id)))}
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const saveE=()=>store.set('hpinf_errs',[...errs]);
+const saveE=()=>{store.set('hpinf_errs2',[...errs]);paint()};
 let R=null;const L='ABCD';
-function start(){let p=pool();if(!p.length)return;p=cfg.src==='T11'&&cfg.n===0?p:shuf(p);if(cfg.n)p=p.slice(0,cfg.n);
- R={qs:p.map(q=>({q,ord:q.disc?[]:(q.src==='T11'?q.o.map((_,i)=>i):shuf(q.o.map((_,i)=>i))),pick:null})),i:0,m:cfg.m};show()}
+function start(){let p=pool();
+  const one=cfg.srcs.length===1&&cfg.srcs[0]!=='ED'&&!cfg.n; // uma prova inteira = na ordem original
+  if(!one)p=shuf(p); if(cfg.n)p=p.slice(0,cfg.n);
+  $('#avail').textContent=pool().length+' no filtro'+(p.length?` · rodada de ${p.length}`:'');
+  $('#sumtxt').textContent=cfg.srcs.map(s=>SRCS[s].l.replace('Prova ','')).join(' + ')+(cfg.aus.length<ALLAU.length?' · '+cfg.aus.map(a=>AULAS[a]).join(', '):'')+(cfg.err?' · erradas':'')+' · '+(p.length||0)+' q';
+  if(!p.length){R=null;$('#card').innerHTML=`<span class="lab">Nenhuma questão</span><p style="margin:0">${cfg.err?'Você ainda não errou nenhuma questão com esses filtros. Desligue “Só as que errei”.':'Marque pelo menos uma fonte (Prova T11, Prova 12/05 ou Inéditas).'}</p>`;return}
+  R={qs:p.map(q=>({q,ord:q.disc?[]:(q.src==='ED'?shuf(q.o.map((_,i)=>i)):q.o.map((_,i)=>i)),pick:null})),i:0,m:cfg.m};show()}
 $('#go').onclick=start;
-const tags=q=>`<div class="tags">${q.src==='T11'?`<span class="tg t11">Prova T11 · Q${q.n}</span>`:'<span class="tg ed">Inédita</span>'}<span class="tg">${AULAS[q.au]}</span></div>`;
+const tags=q=>`<div class="tags">${q.src==='ED'?'<span class="tg ed">Inédita</span>':`<span class="tg ${SRCS[q.src].cls}">${SRCS[q.src].l} · Q${q.n}</span>`}${q.also?`<span class="tg ${SRCS.P0512.cls}">repetiu em ${q.also.join(', ')}</span>`:''}<span class="tg">${AULAS[q.au]}</span></div>`;
 function show(){const it=R.qs[R.i],q=it.q,tot=R.qs.length;
  let h=`<div class="meta">${tags(q)}<span class="num">${R.i+1}/${tot}</span></div><div class="prog"><i style="width:${R.i/tot*100}%"></i></div><p class="qt">${q.q}</p>`;
  if(q.disc){h+=`<label class="lab" for="resp">Sua resposta</label><textarea id="resp" placeholder="Diagnóstico + fase + evolução + conduta"></textarea><div class="acts"><button class="btn gh" id="see">Ver resposta esperada</button></div>`;
@@ -565,7 +643,7 @@ function result(){if(R.m==='prova')R.qs.forEach(it=>{if(!it.q.disc)(it.pick===it
  h+=wr.length?`<div class="rev"><span class="lab">Para revisar (${wr.length})</span>${wr.map(it=>{const q=it.q;return `<div class="it">${tags(q)}<div class="q">${q.q}</div><div>${it.pick===null?'<span class="y">Sem resposta</span>':`<span class="y">Você: ${q.o[it.pick]}</span>`}<br><span class="c">Correta: ${q.o[q.a]}</span></div><div class="exp">${q.e}</div></div>`}).join('')}</div>`:'<p>Nenhum erro nesta rodada.</p>';
  h+=`<div class="acts">${wr.length?'<button class="btn gh" id="redo">Refazer as erradas</button>':''}<button class="btn" id="again">Nova rodada</button></div>`;
  $('#card').innerHTML=h;$('#again').onclick=start;const rd=$('#redo');if(rd)rd.onclick=()=>{R={qs:wr.map(it=>({q:it.q,ord:it.ord,pick:null})),i:0,m:R.m};show()}}
-start();
+paint();start();
 // ===== VÍDEO (partes tocadas em sequência) =====
 const vd=$('#vd');let part=0;const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
 const offs=[];{let o=0;VPARTS.forEach(p=>{offs.push(o);o+=p.dur})}
@@ -577,7 +655,7 @@ $$('.ch').forEach(b=>b.onclick=()=>{const c=CHAP[+b.dataset.i];let p=0;while(p+1
 vd.addEventListener('timeupdate',()=>{const g=offs[part]+vd.currentTime;$('#vpos').textContent=`Parte ${part+1}/${VPARTS.length} · ${fmt(g)} de ${fmt(offs.at(-1)+VPARTS.at(-1).dur)}`;let k=0;CHAP.forEach((c,i)=>{if(g>=c.t-.5)k=i});$$('.ch').forEach((b,i)=>b.classList.toggle('on',i===k))});
 load(0,0,false);
 // ===== PROVA: peso =====
-{const by={};Q.filter(q=>q.src==='T11').forEach(q=>by[q.au]=(by[q.au]||0)+1);const mx=Math.max(...Object.values(by));
+{const by={};Q.filter(q=>q.src!=='ED').forEach(q=>by[q.au]=(by[q.au]||0)+1);const mx=Math.max(...Object.values(by));
  $('#peso').innerHTML=Object.entries(AULAS).map(([k,v])=>`<span>${v}</span><span class="bar"><i style="width:${(by[k]||0)/mx*100}%"></i></span><span class="num">${by[k]||0}</span>`).join('')}
 </script>
 <!-- medicina-nav --><script defer src="../../../nav.js"></script>
