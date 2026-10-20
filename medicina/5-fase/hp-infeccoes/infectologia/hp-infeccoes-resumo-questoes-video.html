@@ -396,7 +396,7 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 
 <section id="v-prova" class="view" hidden>
   <div class="pv"><div class="box"><span class="lab">Como é a prova</span>
-<p style="margin-top:6px">Prova de assinalar com uma discursiva no fim, valendo o mesmo por questão. As objetivas são diretas: <b>uma questão por tema, com a frase quase literal do slide</b>, e as alternativas erradas trocam um item da lista (ex.: “encefalite” no lugar de “insuficiência renal” na tríade de Weil). A discursiva da T11 foi um caso clínico de dengue grave. Todas as aulas caíram; nada fora dos slides. Na prova de 12/05 ela <b>repetiu 10 questões da T11 palavra por palavra</b> (Q6, 9–12, 14, 16–19) e transformou as outras em <b>casos clínicos curtos</b> com a mesma resposta; a discursiva mudou de dengue para sepse por pneumonia.</p></div>
+<p style="margin-top:6px">Prova de assinalar com uma discursiva no fim, valendo o mesmo por questão. As objetivas são diretas: <b>uma questão por tema, com a frase quase literal do slide</b>, e as alternativas erradas trocam um item da lista (ex.: “encefalite” no lugar de “insuficiência renal” na tríade de Weil). A discursiva da T11 foi um caso clínico de dengue grave. Todas as aulas caíram; nada fora dos slides. Na prova de 12/05 ela <b>repetiu 10 questões da T11 palavra por palavra</b> (Q6, 9–12, 14, 16–19) e transformou as outras em <b>casos clínicos curtos</b> com a mesma resposta; a discursiva mudou de dengue para sepse por pneumonia. Numa terceira prova (só a discursiva conhecida) voltou o caso de dengue no 5º dia, agora pedindo <b>classificação</b> e os <b>5 sinais de alarme</b>.</p></div>
 <div class="box" style="border-color:var(--p05)"><span class="lab" style="color:var(--p05)">Divergência de gabarito · ITU complicada</span><p style="margin-top:6px">A mesma pergunta (“qual critério sugere ITU complicada?”) teve resposta diferente: na <b>T11</b> o gabarito foi <b>hematúria e incontinência</b>; na prova de <b>12/05</b> a aluna marcou <b>presença de cateter urinário</b> e fechou as objetivas (nota 9,75). Se cair de novo, cateter é a resposta mais defensável quando aparecer nas opções.</p></div>
 
 <div class="box"><span class="lab">Mapa da T11 (29/03/2026)</span>
@@ -464,7 +464,7 @@ textarea{font:inherit;font-family:var(--f-txt);font-size:16px;width:100%;min-hei
 <script>
 const AULAS = {pn:"Pneumonia", itu:"ITU", pele:"Pele", lep:"Leptospirose", arb:"Arboviroses", sep:"Sepse"};
 // a = índice da correta. src: "T11" / "P0512" (provas reais, texto original) ou "ED" (inédita no estilo da prova, tirada dos slides)
-const SRCS = {T11:{l:"Prova T11", d:"29/03/2026", cls:"t11"}, P0512:{l:"Prova 12/05", d:"12/05/2026", cls:"p05"}, ED:{l:"Inéditas", d:"no estilo dela", cls:"ed"}};
+const SRCS = {T11:{l:"Prova T11", d:"29/03/2026", cls:"t11"}, P0512:{l:"Prova 12/05", d:"12/05/2026", cls:"p05"}, OUT:{l:"Outra prova", d:"enviada em 20/10", cls:"p05"}, ED:{l:"Inéditas", d:"no estilo dela", cls:"ed"}};
 const Q = [
 // ===== PROVA T11 (29/03/2026) — texto original =====
 {src:"T11",n:1,au:"pn",q:"A pneumonia adquirida na comunidade é uma infecção pulmonar desenvolvida fora do ambiente hospitalar, comumente causada por bactérias. Qual o agente etiológico bacteriano mais comum da PAC em adultos?",o:["Mycoplasma pneumoniae.","Streptococcus pneumoniae.","Haemophilus influenzae.","Staphylococcus aureus."],a:1,e:"Slide: o pneumococo é historicamente o patógeno mais comum da PAC em todo o mundo. Mycoplasma é o atípico (jovem, tosse seca)."},
@@ -513,6 +513,11 @@ const Q = [
 {src:"P0512",n:20,au:"sep",disc:true,q:"Homem, 68 anos, hipertenso e diabético, trazido ao pronto socorro com história de febre há 3 dias, tosse produtiva e dispneia progressiva. Ao exame físico: sonolento, PA 82x48 mmHg, FC 124 bpm, FR 32 irpm, SpO₂ 88% em ar ambiente, T 39,2°C. Ausculta pulmonar com crepitações em base direita. Extremidades frias e enchimento capilar lentificado. Diurese reduzida nas últimas 12 horas. Exames: leucócitos 19.800/mm³; lactato 4,8 mmol/L; creatinina 2,1 mg/dL (basal 1,0); gasometria pH 7,29 / HCO₃⁻ 18 mEq/L. A) Qual o diagnóstico sindrômico mais provável? (foco inicial e evolução). B) Cite 3 critérios clínicos que indicam gravidade. C) Quais as medidas terapêuticas iniciais na primeira hora?",
  r:"A) SEPSE de foco pulmonar (PAC → pneumonia bacteriana típica, base direita) com disfunção orgânica (neurológica, renal, perfusão, acidose lática), evoluindo para CHOQUE SÉPTICO (hipotensão + lactato 4,8; confirmar se persistir com necessidade de vasopressor após volume). B) qSOFA 3/3: FR ≥ 22 (32), alteração da consciência (sonolento), PAS ≤ 100 (82). Também: hipoperfusão (extremidades frias, TEC lento), oligúria/creatinina dobrando, lactato > 2 (4,8), SpO₂ 88%. C) Hora 1: ABCDE, O₂, 2 acessos; lactato e 2 hemoculturas sem atrasar o ATB; antibiótico de amplo espectro em até 1 h; cristaloide 30 mL/kg (iniciar, completar em 3 h) com reavaliação; noradrenalina se PAM < 65 após volume; controle do foco, monitorizar diurese, internação/UTI.",
  e:"A resposta da aluna levou nota parcial: escreveu “pneumonia típica com provável evolução para sepse”, citou idade e tabagismo como gravidade e não montou o pacote da 1ª hora (lactato, hemoculturas, ATB ≤ 1 h, 30 mL/kg, noradrenalina). Use os nomes do slide: sepse/choque séptico, qSOFA, Sepsis-3."},
+
+// ===== OUTRA PROVA (só a discursiva, enviada pelo Otto em 20/10) =====
+{src:"OUT",n:20,au:"arb",disc:true,q:"Uma mulher de 32 anos procura o pronto-socorro no 5º dia de doença, relatando febre alta há quatro dias, cefaleia, mialgia intensa e dor retro-orbitária. Nas últimas 12 horas, passou a apresentar dor abdominal intensa e contínua, vômitos frequentes e tontura ao levantar-se. Ao exame físico: PA 95 x 60 mmHg, FC 112 bpm, enchimento capilar de 3 segundos, extremidades frias e dor abdominal difusa à palpação. Hematócrito: 48% (valor basal conhecido: 38%), plaquetas: 68.000/mm³. a) Qual o diagnóstico e classificação clínica mais adequada para este caso? b) Quais sinais de alarme estão presentes (05)?",
+ r:"a) DENGUE na FASE CRÍTICA (5º dia, após a febre ceder), com SINAIS DE ALARME e já com SINAIS DE CHOQUE COMPENSADO (taquicardia 112, enchimento capilar 3 s, extremidades frias) por extravasamento plasmático (Ht 38 → 48%) → DENGUE GRAVE (no manejo do MS, grupo D: internação, expansão volêmica com cristaloide e reavaliação; sem AINE/AAS). Se considerar só alarme sem choque, seria grupo C — mas extremidades frias + TEC > 2 s já são hipoperfusão. b) 1. Dor abdominal intensa e contínua; 2. Vômitos persistentes; 3. Hipotensão postural/lipotimia (tontura ao levantar); 4. Aumento do hematócrito (38 → 48%); 5. Queda das plaquetas (68.000).",
+ e:"No slide dela os sinais de alarme são: dor abdominal intensa, vômitos persistentes, letargia, hepatomegalia e aumento do Ht + queda das plaquetas. Neste caso não há letargia nem hepatomegalia: a 5ª é a hipotensão postural (lista do MS). Mesmo raciocínio da discursiva da T11: fase crítica começa na defervescência e o grave é o extravasamento plasmático."},
 
 // ===== INÉDITAS no estilo da prova (tiradas dos slides) =====
 {src:"ED",au:"pn",q:"A pneumonia adquirida na comunidade é aquela que se inicia fora do hospital ou dentro de quanto tempo após a internação?",o:["24 horas.","48 horas.","72 horas.","7 dias."],a:1,e:"PAC: fora do hospital ou nas primeiras 48 h. Hospitalar: após 48 h. PAV: após 48 h de ventilação mecânica."},
@@ -585,7 +590,7 @@ const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().re
 Q.filter(q=>q.src==='P0512').forEach(q=>{const t=Q.find(x=>x.src==='T11'&&norm(x.q)===norm(q.q)&&!x.disc&&!q.disc&&norm(x.o[x.a])===norm(q.o[q.a]));if(t){q.dupOf=t.id;t.also=(t.also||[]).concat('12/05 Q'+q.n)}});
 let errs=new Set(store.get('hpinf_errs2',[]));
 const ALLAU=Object.keys(AULAS);
-let cfg=Object.assign({srcs:['T11','P0512'],aus:ALLAU.slice(),n:10,m:'estudo',err:false},store.get('hpinf_cfg2',{}));
+let cfg=Object.assign({srcs:['T11','P0512','OUT'],aus:ALLAU.slice(),n:10,m:'estudo',err:false},store.get('hpinf_cfg3',{}));
 const cnt=s=>Q.filter(q=>q.src===s).length;
 $('#fSrc').innerHTML=Object.entries(SRCS).map(([k,v])=>`<button class="chip ${v.cls}" data-v="${k}">${v.l} <span class="num">${cnt(k)}</span></button>`).join('');
 $('#fAu').innerHTML='<button class="chip" data-v="*">Todas</button>'+Object.entries(AULAS).map(([k,v])=>`<button class="chip" data-v="${k}">${v}</button>`).join('');
@@ -597,7 +602,7 @@ function paint(){
   const ne=Q.filter(q=>errs.has(q.id)).length;const fe=$('#fErr');fe.innerHTML=`Só as que errei <span class="num">${ne}</span>`;fe.setAttribute('aria-pressed',String(cfg.err));fe.disabled=!ne&&!cfg.err;
 }
 if(innerWidth<900)$('#cfgbox').open=false;
-function changed(){store.set('hpinf_cfg2',cfg);paint();start()}
+function changed(){store.set('hpinf_cfg3',cfg);paint();start()}
 $$('#fSrc .chip').forEach(b=>b.onclick=()=>{const k=b.dataset.v;cfg.srcs=cfg.srcs.includes(k)?cfg.srcs.filter(x=>x!==k):[...cfg.srcs,k];changed()});
 $$('#fAu .chip').forEach(b=>b.onclick=()=>{const k=b.dataset.v;
   if(k==='*')cfg.aus=ALLAU.slice();
@@ -617,7 +622,7 @@ function start(){let p=pool();
   if(!one)p=shuf(p); if(cfg.n)p=p.slice(0,cfg.n);
   $('#avail').textContent=pool().length+' no filtro'+(p.length?` · rodada de ${p.length}`:'');
   $('#sumtxt').textContent=cfg.srcs.map(s=>SRCS[s].l.replace('Prova ','')).join(' + ')+(cfg.aus.length<ALLAU.length?' · '+cfg.aus.map(a=>AULAS[a]).join(', '):'')+(cfg.err?' · erradas':'')+' · '+(p.length||0)+' q';
-  if(!p.length){R=null;$('#card').innerHTML=`<span class="lab">Nenhuma questão</span><p style="margin:0">${cfg.err?'Você ainda não errou nenhuma questão com esses filtros. Desligue “Só as que errei”.':'Marque pelo menos uma fonte (Prova T11, Prova 12/05 ou Inéditas).'}</p>`;return}
+  if(!p.length){R=null;$('#card').innerHTML=`<span class="lab">Nenhuma questão</span><p style="margin:0">${cfg.err?'Você ainda não errou nenhuma questão com esses filtros. Desligue “Só as que errei”.':'Marque pelo menos uma fonte.'}</p>`;return}
   R={qs:p.map(q=>({q,ord:q.disc?[]:(q.src==='ED'?shuf(q.o.map((_,i)=>i)):q.o.map((_,i)=>i)),pick:null})),i:0,m:cfg.m};show()}
 $('#go').onclick=start;
 const tags=q=>`<div class="tags">${q.src==='ED'?'<span class="tg ed">Inédita</span>':`<span class="tg ${SRCS[q.src].cls}">${SRCS[q.src].l} · Q${q.n}</span>`}${q.also?`<span class="tg ${SRCS.P0512.cls}">repetiu em ${q.also.join(', ')}</span>`:''}<span class="tg">${AULAS[q.au]}</span></div>`;
