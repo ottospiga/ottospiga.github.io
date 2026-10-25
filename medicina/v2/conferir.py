@@ -14,8 +14,11 @@ FORA = {}  # "uc13/....html": "motivo"
 txt = open(os.path.join(AQUI, "site-data.js"), encoding="utf-8").read()
 base = re.search(r'base:\s*"([^"]+)"', txt).group(1)
 srcs = re.findall(r'src:\s*"([^"]+)"', txt)
+outros = re.findall(r'(?:pdf|data):\s*"([^"]+)"', txt) + [d + "data.js" for d in re.findall(r'dir:\s*"([^"]+)"', txt)]
 raiz = os.path.normpath(os.path.join(AQUI, base))
-faltando = [s for s in srcs if not os.path.isfile(os.path.join(raiz, s))]
+def caminho(s):
+    return os.path.join(AQUI, s) if s.startswith(("conteudo/", "lib/")) else os.path.join(raiz, s)
+faltando = [s for s in srcs + outros if not os.path.isfile(caminho(s))]
 usados = {N(s) for s in srcs}
 sobra = []
 PASTAS = PASTAS or sorted(os.listdir(raiz))

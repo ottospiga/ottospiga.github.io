@@ -222,6 +222,7 @@ a{color:var(--acc)}
 .nv-ix:hover{background:var(--bg)}
 .nv-ix .p{font-family:var(--f-mono);font-size:12px;color:var(--acc);width:34px;flex:0 0 auto;padding-top:2px}
 .nv-ix small{display:block;color:var(--muted);font-size:12px}.nv-ix small.peg{color:#a32a2a}
+.nv-idx[hidden]{display:none}
 .nv-pdf{flex:1;min-width:0;display:flex;flex-direction:column}
 .nv-ptools{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surface);font-size:14px}
 .nv-pscroll{flex:1;overflow-y:auto;padding:12px;background:var(--sunk)}
@@ -237,6 +238,16 @@ a{color:var(--acc)}
   .nv-pegs{grid-template-columns:minmax(0,1fr)}
   .nv-seg{margin-left:0}
 }
+
+.nv-vid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.nv-player video{width:100%;border-radius:12px;background:#000;display:block;aspect-ratio:16/9}
+.nv-vtitle{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:8px}
+.nv-vlist{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px;max-height:70vh;overflow-y:auto}
+.nv-vlist h4{margin:6px 0 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nv-vtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.nv-chap{display:flex;gap:10px;align-items:center;border:0;background:none;text-align:left;padding:7px 4px;border-top:1px solid var(--line);font-size:14px}
+.nv-chap:hover{background:var(--bg)}.nv-chap .tag{margin-left:auto}
+@media (max-width:900px){.nv-vid{grid-template-columns:minmax(0,1fr)}}
 /* esquemas (mesmas cores das Centrais) */
 figure.fig{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow-x:auto}
 figure.fig figcaption{font-size:13px;color:#59666f}
@@ -297,7 +308,7 @@ const ucOf = id => S.ucs.find(u => u.id === id);
 const ucName = u => [u.nome, u.tema].filter(Boolean).join(" · ");
 const ORD = (a, b) => (b.ordem ?? b.num) - (a.ordem ?? a.num);
 const matOf = (u, id) => (u.materias || []).find(m => m.id === id);
-const href = src => encodeURI(S.base + src).replace(/#/g, "%23");
+const href = src => src == null ? src : encodeURI((/^(conteudo|lib)\//.test(src) ? "" : S.base) + src).replace(/#/g, "%23");
 const isPdf = src => /\.pdf$/i.test(src);
 const key = (u,m,a,i) => [u,m,a,i].join("/");
 
@@ -418,12 +429,12 @@ function renderMateria(){
   $("#view").querySelectorAll("[data-item]").forEach(b => b.onclick = () => go(u.id, m.id, st.aba, +b.dataset.item));
   if (it.nativo && window.NATIVO){
     const page = pendingPage; pendingPage = 0;
-    NATIVO.render($("#nat"), { view: it.nativo, dir: href(it.dir) }, {
+    NATIVO.render($("#nat"), { view: it.nativo, dir: href(it.dir), data: href(it.data), pdf: href(it.pdf), lib: href(it.lib || "lib/"), ns: it.ns || (u.id + "/" + m.id), videos: (it.videos || []).map(v => Object.assign({}, v, { src: href(v.src) })) }, {
       store, save, page,
       openResumo(p){
-        const ai = m.abas.findIndex(ab => ab.itens.some(x => x.nativo === "resumo"));
+        const ai = m.abas.findIndex(ab => ab.itens.some(x => x.nativo === "resumo" && !x.pdf));
         if (ai < 0) return;
-        pendingPage = p; go(u.id, m.id, ai, m.abas[ai].itens.findIndex(x => x.nativo === "resumo"));
+        pendingPage = p; go(u.id, m.id, ai, m.abas[ai].itens.findIndex(x => x.nativo === "resumo" && !x.pdf));
       }
     });
   }

@@ -9,13 +9,32 @@ window.SITE = {
   base: "../5-fase/",
   ucs: [
     {
-      id: "uc15", num: 15, nome: "UC15", tema: "", cor: "uc15", status: "",
+      id: "uc15", num: 15, nome: "UC15", tema: "Infecção", cor: "uc15", status: "",
+      /* UC15 no formato novo (em avaliação, só na v2). Arquivos novos ficam em v2/conteudo/uc15/.
+         Abas "nativas" são desenhadas pelo site a partir dos dados já existentes; nada foi reescrito. */
       materias: [
-        /* formato novo (nativo): as abas são desenhadas pelo site a partir do data.js da Central.
-           Mesmo conteúdo da Central, só a apresentação muda. Em avaliação. */
+        { id: "lab", nome: "Laboratório", prof: "Tabata", abas: [
+          { id: "resumo", titulo: "Resumo", itens: [ { label: "Resumo (roxo = caiu na T11)", nativo: "pdf", pdf: "conteudo/uc15/lab/Lab_UC15_Resumo.pdf", ns: "uc15/lab/resumo" } ] },
+          { id: "videos", titulo: "Vídeos", itens: [ { label: "Vídeos por SP", nativo: "videos", data: "conteudo/uc15/lab/data.js", ns: "uc15/lab", videos: [
+            { t: "SP1 · Bactérias", short: "SP1", d: "5:07", src: "conteudo/uc15/lab/videos/lab15_sp1.mp4", chap: "1" },
+            { t: "SP2 · Antibiograma", short: "SP2", d: "4:55", src: "conteudo/uc15/lab/videos/lab15_sp2.mp4", chap: "2" },
+            { t: "SP3 · Resistências", short: "SP3", d: "4:44", src: "conteudo/uc15/lab/videos/lab15_sp3.mp4", chap: "3" },
+            { t: "SP4 · Sepse e gasometria", short: "SP4", d: "4:19", src: "conteudo/uc15/lab/videos/lab15_sp4.mp4", chap: "4" },
+            { t: "SP5 · Hemocultura", short: "SP5", d: "4:20", src: "conteudo/uc15/lab/videos/lab15_sp5.mp4", chap: "5" } ] } ] },
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Questões (T11 + treino)", nativo: "labq", data: "conteudo/uc15/lab/data.js", ns: "uc15/lab" } ] },
+          { id: "original", titulo: "Discursivas · página completa", itens: [ { label: "Página do Lab UC15 (com as discursivas interativas)", src: "conteudo/uc15/lab/Lab_UC15.html" } ] },
+          { id: "veterana", titulo: "Resumo da veterana", itens: [ { label: "Laboratório UC15", nativo: "pdf", pdf: "conteudo/uc15/lab/resumo-veterana.pdf", ns: "uc15/lab/vet" } ] } ] },
+        { id: "tutoria", nome: "Tutoria", abas: [
+          { id: "sp1", titulo: "SP1 · Resumo", itens: [ { label: "SP1 · Todo cuidado é pouco", nativo: "pdf", pdf: "conteudo/uc15/tutoria/sp1-resumo.pdf", ns: "uc15/tut/sp1" } ] },
+          { id: "sp1-video", titulo: "SP1 · Videoaula", itens: [ { label: "Videoaula SP1", nativo: "videos", ns: "uc15/tut", videos: [
+            { t: "SP1 · Microbiota, antibioticoterapia e ITU", short: "SP1", d: "19:53", src: "conteudo/uc15/tutoria/videos/sp1.mp4" } ] } ] },
+          { id: "veterana", titulo: "Resumo da veterana (T11)", itens: [ { label: "Tutoria · resumo T11", nativo: "pdf", pdf: "conteudo/uc15/tutoria/resumo-veterana-t11.pdf", ns: "uc15/tut/vet" } ] } ] },
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
           { id: "raiox", titulo: "Raio-X", itens: [ { label: "Raio-X", nativo: "raiox", dir: "uc15/farmaco/central/" } ] },
           { id: "resumo", titulo: "Resumo", itens: [ { label: "Resumo grifado", nativo: "resumo", dir: "uc15/farmaco/central/" } ] },
+          { id: "videos", titulo: "Videoaulas", itens: [ { label: "Videoaulas", nativo: "videos", ns: "uc15/farmaco", videos: [
+            { t: "SP2–3 · Betalactâmicos", short: "SP2–3", d: "11:02", src: "conteudo/uc15/farmaco/videos/sp2-3-betalactamicos.mp4" },
+            { t: "SP1 · Sulfas e quinolonas", short: "SP1", d: "14:24", src: "conteudo/uc15/farmaco/videos/sp1-sulfas-quinolonas.mp4" } ] } ] },
           { id: "tabela", titulo: "Tabela", itens: [ { label: "Tabela de fármacos", nativo: "tabela", dir: "uc15/farmaco/central/" } ] },
           { id: "provas", titulo: "Provas antigas", itens: [ { label: "Questões das provas", nativo: "provas", dir: "uc15/farmaco/central/" } ] },
           { id: "abcd", titulo: "Treino ABCD", itens: [ { label: "Treino ABCD", nativo: "abcd", dir: "uc15/farmaco/central/" } ] },
@@ -23,7 +42,15 @@ window.SITE = {
           { id: "esquemas", titulo: "Esquemas", itens: [ { label: "Esquemas", nativo: "esquemas", dir: "uc15/farmaco/central/" } ] },
           { id: "aulas", titulo: "Frases da aula", itens: [ { label: "Frases da aula", nativo: "aulas", dir: "uc15/farmaco/central/" } ] },
           { id: "central", titulo: "Central (original)", itens: [
-            { label: "Central da matéria", src: "uc15/farmaco/uc15-farmaco-central-guia.html" } ] } ] }
+            { label: "Central da matéria", src: "uc15/farmaco/uc15-farmaco-central-guia.html" } ] } ] },
+        { id: "pato", nome: "Patologia", prof: "Maria Verônica", abas: [
+          { id: "resumo", titulo: "Resumo", itens: [ { label: "Resumo das aulas 1–3", nativo: "pdf", pdf: "conteudo/uc15/pato/resumo-aulas-1-3.pdf", ns: "uc15/pato/resumo" } ] },
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Questões", nativo: "patoq", data: "conteudo/uc15/pato/data.js", ns: "uc15/pato" } ] },
+          { id: "veterana", titulo: "Resumo da veterana", itens: [ { label: "Patologia UC15", nativo: "pdf", pdf: "conteudo/uc15/pato/resumo-veterana.pdf", ns: "uc15/pato/vet" } ] } ] },
+        { id: "fisio", nome: "Fisiologia", abas: [
+          { id: "videos", titulo: "Videoaula", itens: [ { label: "Videoaula SP1", nativo: "videos", ns: "uc15/fisio", videos: [
+            { t: "SP1 · Fisiologia renal e ITU", short: "SP1", d: "11:13", src: "conteudo/uc15/fisio/videos/sp1-renal-itu.mp4" } ] } ] },
+          { id: "veterana", titulo: "Resumo da veterana", itens: [ { label: "Fisiologia UC15", nativo: "pdf", pdf: "conteudo/uc15/fisio/resumo-veterana.pdf", ns: "uc15/fisio/vet" } ] } ] }
       ]
     },
     {

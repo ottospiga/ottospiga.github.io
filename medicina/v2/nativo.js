@@ -65,12 +65,12 @@
           <div><b>${Object.keys(P.mark).length}</b><span>marcadas</span></div>
         </div>
         <section class="nv-card nv-filters">
-          ${chipRow("SP", spOpts(cfg.items, q => q.sp), F.sp, "sp", true)}
-          ${cfg.turmas ? chipRow("Turma", cfg.turmas.map(t => ({ v: t, l: t, n: cfg.items.filter(q => (q.tus || []).includes(t)).length })), F.tu, "tu", true) : ""}
+          ${chipRow(cfg.spLabel || "SP", spOpts(cfg.items, q => q.sp), F.sp, "sp", true)}
+          ${cfg.turmas ? chipRow(cfg.tuLabel || "Turma", cfg.turmas.map(t => ({ v: t, l: t, n: cfg.items.filter(q => (q.tus || []).includes(t)).length })), F.tu, "tu", true) : ""}
           ${cfg.temas ? `<div class="nv-frow"><span class="nv-flabel">Tema</span><select id="nvTema"><option value="">Todos os temas</option>${cfg.temas.map(t => `<option ${F.tema === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>
             ${cfg.grupos ? `<select id="nvTipo"><option value="">Objetivas e discursivas</option>${cfg.grupos.map(t => `<option ${F.tipo === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>` : ""}</div>` : ""}
           ${chipRow("Situação", [{ v: "todas", l: "Todas" }, { v: "nao", l: "Não feitas" }, { v: "errei", l: "Errei" }, { v: "marcadas", l: "Marcadas" }], F.sit, "sit", false)}
-          ${cfg.turmas ? `<label class="nv-toggle"><input type="checkbox" id="nvRep" ${F.rep ? "checked" : ""}> Só as que caíram em mais de uma turma</label>` : ""}
+          ${cfg.turmas && !cfg.noRep ? `<label class="nv-toggle"><input type="checkbox" id="nvRep" ${F.rep ? "checked" : ""}> Só as que caíram em mais de uma turma</label>` : ""}
         </section>
         <section class="nv-card nv-start">
           <div class="nv-frow">
@@ -269,6 +269,8 @@
     draw();
   };
 
+  V.pdf = (el, U, ctx, item) => V.resumo(el, null, ctx, item);
+
   V.esquemas = (el, U) => {
     el.innerHTML = `<div class="nv-wrap wide"><div class="nv-figs">${U.expl.map(f => `<figure class="fig"><div class="pl">${f.svg}</div><figcaption><span class="tag">${/^\d+$/.test(String(f.sp)) ? "SP" + f.sp : esc(f.sp)}</span> ${esc(f.cap || "")}</figcaption></figure>`).join("")}</div></div>`;
   };
@@ -305,11 +307,12 @@
 
   /* ---------- resumo: leitor pdf.js + índice dos grifos ---------- */
   V.resumo = async (el, U, ctx, item) => {
-    const base = item.dir, pdf = base + "resumo.pdf";
-    const res = U.res || { idx: [] };
+    const base = item.dir || "", pdf = item.pdf || base + "resumo.pdf", lib = item.lib || base;
+    const res = (U && U.res) || { idx: [] };
     let spF = "";
+    const hasIdx = res.idx && res.idx.length;
     el.innerHTML = `<div class="nv-reader">
-      <aside class="nv-idx">
+      <aside class="nv-idx" ${hasIdx ? "" : "hidden"}>
         <div class="nv-frow"><button class="chip sm" data-s="" aria-pressed="true">Tudo</button>${Object.keys(res.sp || {}).filter(k => /^SP/.test(k)).map(k => `<button class="chip sm" data-s="${k}">${k}</button>`).join("")}</div>
         <div class="nv-idxlist" id="ri"></div>
       </aside>
@@ -335,8 +338,8 @@
         await page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise; }
     };
     try {
-      if (!window.pdfjsLib) await loadScript(base + "pdf.min.js");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js";
+      if (!window.pdfjsLib) await loadScript(lib + "pdf.min.js");
+      pdfjsLib.GlobalWorkerOptions.workerSrc = lib + "pdf.worker.min.js";
       R.doc = await pdfjsLib.getDocument(pdf).promise;
     } catch (e) { ps.innerHTML = `<div class="nv-msg">O leitor não carregou aqui. Use "Abrir PDF".</div>`; return; }
     const p1 = await R.doc.getPage(1), v = p1.getViewport({ scale: 1 }), ratio = v.height / v.width;
@@ -350,15 +353,75 @@
     if (R.pending) R.go(R.pending);
   };
 
+
+  /* ---------- Lab UC15 (dados extraídos do Lab_UC15.html) ---------- */
+  function prepLab(q) {
+    return {
+      id: q.id, sp: q.sp,
+      tags: [{ l: "SP" + q.sp }, q.src === "T11" ? { l: "caiu na T11" + (q.n ? " · Q" + q.n : ""), c: "hot" } : { l: "treino" }],
+      enun: q.enun, itens: [],
+      opts: q.alts.map((h, i) => ({ html: h, ok: i === q.gab, why: "" })),
+      gabLabel: LET[q.gab], com: (q.com || "") + (q.pega ? `<p><span class="tag warn">pegadinha</span> ${q.pega}</p>` : ""), pg: []
+    };
+  }
+  V.labq = (el, U, ctx) => {
+    const items = U.qobj.map(q => Object.assign({}, q, { tus: [q.src === "T11" ? "T11" : "treino"] }));
+    quiz(el, ctx, { ns: ctx.ns + ":labq", items, turmas: ["T11", "treino"], tuLabel: "Origem", noRep: true, prep: prepLab });
+  };
+
+  /* ---------- Pato UC15 (dados extraídos do Pato_UC15_Questoes.html) ---------- */
+  const AULA = a => a ? "Aula " + a : "Prova T11";
+  function prepPato(q) {
+    return {
+      id: q.id, sp: q.sp,
+      tags: [{ l: AULA(q.a) }].concat(q.r ? [{ l: q.r }] : []).concat(q.p ? [{ l: "caiu em prova", c: "hot" }] : []).concat(q.d ? [{ l: "discursiva" }] : []),
+      enun: esc(q.e).replace(/\n/g, "<br>"), itens: (q.it || []).map((x, i) => ["I", "II", "III", "IV", "V", "VI"][i] + ". " + x),
+      opts: q.d ? [] : (q.o || []).map((h, i) => ({ html: h, ok: i === q.c, why: "" })),
+      gab: esc(q.ans || "").replace(/\n/g, "<br>"), gabLabel: LET[q.c], com: q.d ? "" : (q.x || ""), pg: []
+    };
+  }
+  V.patoq = (el, U, ctx) => {
+    const items = U.q.map((q, i) => Object.assign({}, q, { id: "p" + i, sp: AULA(q.a), tus: q.p ? ["caiu em prova"] : [], grupo: q.d ? "Só discursivas" : "Só objetivas" }));
+    quiz(el, ctx, { ns: ctx.ns + ":patoq", items, spLabel: "Aula", turmas: ["caiu em prova"], tuLabel: "Origem", noRep: true, temas: null, prep: prepPato });
+  };
+
+  /* ---------- vídeos (com capítulos quando existem) ---------- */
+  V.videos = (el, U, ctx, item) => {
+    const P = prog(ctx.ns + ":videos");
+    P.pos = P.pos || {};
+    let cur = Math.min(P.cur || 0, item.videos.length - 1);
+    function fmt(t) { t = Math.floor(t); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
+    function draw() {
+      const v = item.videos[cur];
+      const chap = v.chap && U && U.chap ? U.chap[v.chap] || [] : [];
+      el.innerHTML = `<div class="nv-wrap wide"><div class="nv-vid">
+        <div class="nv-player"><video id="vv" controls preload="metadata" playsinline src="${v.src}"></video>
+          <div class="nv-vtitle"><b>${esc(v.t)}</b>${v.d ? `<span class="mono">${esc(v.d)}</span>` : ""}</div></div>
+        <aside class="nv-vlist">
+          ${item.videos.length > 1 ? `<div class="nv-vtabs">${item.videos.map((x, i) => `<button class="chip sm" data-v="${i}" aria-pressed="${i === cur}">${esc(x.short || x.t)}</button>`).join("")}</div>` : ""}
+          ${chap.length ? `<h4>Capítulos</h4>${chap.map(c => `<button class="nv-chap" data-t="${c.t}"><span class="mono">${fmt(c.t)}</span><span>${esc(c.title)}</span>${c.t11 ? `<span class="tag hot">caiu</span>` : ""}</button>`).join("")}` : `<p class="nv-hint">Continua de onde você parou, neste navegador.</p>`}
+        </aside></div></div>`;
+      const vv = el.querySelector("#vv");
+      const key = v.src;
+      vv.addEventListener("loadedmetadata", () => { if (P.pos[key] && P.pos[key] < vv.duration - 5) vv.currentTime = P.pos[key]; }, { once: true });
+      let last = 0;
+      vv.addEventListener("timeupdate", () => { if (Math.abs(vv.currentTime - last) > 5) { last = vv.currentTime; P.pos[key] = Math.floor(vv.currentTime); SAVE(); } });
+      el.querySelectorAll("[data-v]").forEach(b => b.onclick = () => { cur = +b.dataset.v; P.cur = cur; SAVE(); draw(); });
+      el.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { vv.currentTime = +b.dataset.t; vv.play().catch(() => {}); });
+    }
+    draw();
+  };
+
   /* ---------- API para o shell ---------- */
   window.NATIVO = {
     render(el, item, ctx) {
       ST = ctx.store; SAVE = ctx.save;
       el.innerHTML = `<div class="nv-msg">Carregando…</div>`;
-      loadData(item.dir + "data.js").then(U => {
+      const dataSrc = item.data || (item.dir ? item.dir + "data.js" : null);
+      (dataSrc ? loadData(dataSrc) : Promise.resolve(null)).then(U => {
         const fn = V[item.view];
         if (!fn) { el.innerHTML = `<div class="nv-msg">Vista "${esc(item.view)}" não existe.</div>`; return; }
-        fn(el, U, Object.assign({ ns: item.dir }, ctx), item);
+        fn(el, U, Object.assign({ ns: item.ns || item.dir || item.data || item.pdf || "x" }, ctx), item);
       }).catch(e => { el.innerHTML = `<div class="nv-msg">Não consegui carregar os dados (${esc(e.message)}).</div>`; });
     }
   };
