@@ -11,8 +11,18 @@ window.SITE = {
     {
       id: "uc15", num: 15, nome: "UC15", tema: "", cor: "uc15", status: "",
       materias: [
+        /* formato novo (nativo): as abas são desenhadas pelo site a partir do data.js da Central.
+           Mesmo conteúdo da Central, só a apresentação muda. Em avaliação. */
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
-          { id: "central", titulo: "Central", itens: [
+          { id: "raiox", titulo: "Raio-X", itens: [ { label: "Raio-X", nativo: "raiox", dir: "uc15/farmaco/central/" } ] },
+          { id: "resumo", titulo: "Resumo", itens: [ { label: "Resumo grifado", nativo: "resumo", dir: "uc15/farmaco/central/" } ] },
+          { id: "tabela", titulo: "Tabela", itens: [ { label: "Tabela de fármacos", nativo: "tabela", dir: "uc15/farmaco/central/" } ] },
+          { id: "provas", titulo: "Provas antigas", itens: [ { label: "Questões das provas", nativo: "provas", dir: "uc15/farmaco/central/" } ] },
+          { id: "abcd", titulo: "Treino ABCD", itens: [ { label: "Treino ABCD", nativo: "abcd", dir: "uc15/farmaco/central/" } ] },
+          { id: "pegadinhas", titulo: "Pegadinhas", itens: [ { label: "Pegadinhas", nativo: "pegadinhas", dir: "uc15/farmaco/central/" } ] },
+          { id: "esquemas", titulo: "Esquemas", itens: [ { label: "Esquemas", nativo: "esquemas", dir: "uc15/farmaco/central/" } ] },
+          { id: "aulas", titulo: "Frases da aula", itens: [ { label: "Frases da aula", nativo: "aulas", dir: "uc15/farmaco/central/" } ] },
+          { id: "central", titulo: "Central (original)", itens: [
             { label: "Central da matéria", src: "uc15/farmaco/uc15-farmaco-central-guia.html" } ] } ] }
       ]
     },
