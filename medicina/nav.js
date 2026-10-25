@@ -1,4 +1,5 @@
 (function () {
+  if (window.self !== window.top) return; // dentro do site v2 (iframe): sem menu flutuante duplicado
   var script = document.currentScript;
   if (!script || !script.src) return;
   var base;

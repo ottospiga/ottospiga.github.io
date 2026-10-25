@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicina · 5ª fase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#f5f7f8; --surface:#ffffff; --sunk:#eaeef0; --fg:#18242b; --muted:#5d6d76; --line:#d5dde1;
+  --nav:#18242b; --nav-2:#223038; --nav-3:#1e2c33; --nav-line:#2f3f47; --nav-fg:#e4ecef; --nav-muted:#93a5ae; --nav-dim:#c7d3d8;
+  --uc13:#d4573b; --uc13-bg:#3a2a27; --uc13-fg:#f07a5f;
+  --uc14:#138a7e; --uc14-bg:#23443f; --uc14-fg:#7fd6cc;
+  --uc15:#4f55c9; --uc15-bg:#2a2b4a; --uc15-fg:#8e93ff;
+  --acc:#d4573b;
+  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#10171b; --surface:#172126; --sunk:#0c1215; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3940;
+  --nav:#0b1114; --nav-2:#172126; --nav-3:#121b20; --nav-line:#22313a;
+  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.app{display:flex;height:100%}
+
+/* ---------- barra lateral ---------- */
+.nav{flex:0 0 264px;background:var(--nav);color:var(--nav-fg);display:flex;flex-direction:column;gap:14px;padding:14px 12px;overflow-y:auto;transition:flex-basis .15s}
+.nav-top{display:flex;align-items:center;gap:8px}
+.icon-btn{width:40px;height:40px;border:0;border-radius:10px;background:var(--nav-2);display:grid;place-items:center;flex:0 0 auto}
+.brand{font-family:var(--f-display);font-weight:800;font-size:18px;color:#fff}
+.brand-sub{font-size:12px;color:var(--nav-muted)}
+.home-link{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;color:var(--nav-dim);text-decoration:none;font-weight:700;border:0;background:none;text-align:left}
+.home-link[aria-current="true"]{background:#fff;color:#18242b}
+.home-link[aria-current="true"] path{stroke:#18242b}
+.uc-btn{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;border-radius:10px;padding:8px;text-align:left}
+.uc-btn[disabled]{cursor:default;opacity:.55}
+.uc-badge{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:14px;flex:0 0 auto}
+.uc-label{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.uc-label b{color:var(--nav-fg)}
+.uc-label span{font-size:12px;color:var(--nav-muted)}
+.chev{margin-left:auto;transition:transform .15s}
+.uc-group.open{background:var(--nav-3);border-radius:12px;padding:4px 4px 8px}
+.uc-group.open .chev{transform:rotate(90deg)}
+.mats{display:none;flex-direction:column;gap:2px;margin:2px 0 0 21px;padding-left:12px;border-left:1px solid var(--nav-line)}
+.uc-group.open .mats{display:flex}
+.mat-link{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;color:var(--nav-dim);font-size:14px;text-decoration:none;border:0;background:none;text-align:left;width:100%}
+.mat-link:hover{background:var(--nav-2)}
+.mat-link[aria-current="true"]{background:var(--uc-bg,var(--nav-2));color:#fff;font-weight:700}
+.mat-link small{font-size:11px;color:var(--nav-muted);font-family:var(--f-mono)}
+.nav-foot{margin-top:auto;border-top:1px solid var(--nav-line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.nav-foot button{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--nav-dim);padding:6px 8px;font-size:13px;text-align:left}
+/* recolhida */
+.app.collapsed .nav{flex-basis:64px;align-items:center;padding:14px 0}
+.app.collapsed .brand,.app.collapsed .brand-sub,.app.collapsed .uc-label,.app.collapsed .chev,.app.collapsed .mats,.app.collapsed .home-link span,.app.collapsed .nav-foot span{display:none}
+.app.collapsed .uc-group.open{background:none;padding:0}
+.app.collapsed .uc-btn{padding:4px;justify-content:center}
+.app.collapsed .uc-badge{width:44px;height:44px;border-radius:11px;font-size:15px}
+.app.collapsed .home-link{justify-content:center;padding:10px}
+.app.collapsed .nav-top{flex-direction:column}
+.flyout{position:fixed;z-index:30;width:260px;background:var(--nav);color:var(--nav-fg);border:1px solid var(--nav-line);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.flyout h4{margin:0;padding:6px 8px 8px;font-family:var(--f-display);color:#fff}
+
+/* ---------- área principal ---------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;height:100%}
+.head{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 32px 0}
+.head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.head h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.1}
+.crumb{font-size:13px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-weight:700;font-size:12px;background:var(--sunk);color:var(--muted)}
+.tabs{display:flex;gap:2px;margin-top:8px;overflow-x:auto;scrollbar-width:thin}
+.tab{padding:10px 14px;border:0;border-bottom:3px solid transparent;background:none;color:var(--muted);font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--acc)}
+.tab .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);opacity:.0}
+.tab.seen .dot{opacity:.55}
+.sub{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 32px;border-bottom:1px solid var(--line);background:var(--bg)}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.chip .kind{font-family:var(--f-mono);font-size:10px;opacity:.7}
+.sub .tools{margin-left:auto;display:flex;gap:6px}
+.tool{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px;color:var(--fg);text-decoration:none}
+.viewer{flex:1;min-height:0;background:var(--sunk)}
+.viewer iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.missing{padding:40px;color:var(--muted)}
+
+/* ---------- início ---------- */
+.home{flex:1;overflow-y:auto;padding:32px 40px 48px}
+.home-in{max-width:1100px;display:flex;flex-direction:column;gap:28px}
+.home h1{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.1}
+.home h2{margin:0 0 12px;font-family:var(--f-display);font-weight:700;font-size:20px}
+.cont{background:var(--nav);color:var(--nav-fg);border-radius:14px;padding:16px 20px}
+.cont h3{margin:0 0 6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--uc14-fg)}
+.cont button{width:100%;display:flex;align-items:center;gap:14px;padding:10px 0;border:0;border-bottom:1px solid var(--nav-line);background:none;color:#fff;text-align:left}
+.cont button:last-child{border-bottom:0}
+.cont small{color:var(--nav-muted);font-size:13px;display:block}
+.uc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
+.uc-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.uc-card header{display:flex;align-items:center;gap:10px}
+.uc-card header b{font-size:17px}
+.uc-card header .st{margin-left:auto;font-size:12px;color:var(--muted)}
+.uc-card .mlist{display:flex;flex-wrap:wrap;gap:6px}
+.uc-card .mlist button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px}
+.prog{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.prog i{flex:1;height:5px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.prog i b{display:block;height:100%;background:var(--acc)}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--muted)}
+.empty{color:var(--muted);font-size:14px}
+
+/* ---------- celular ---------- */
+.mob-top{display:none}
+@media (max-width:760px){
+  .nav{position:fixed;inset:0 auto 0 0;width:300px;z-index:40;transform:translateX(-105%);transition:transform .2s}
+  .app.drawer .nav{transform:none}
+  .app.collapsed .nav{flex-basis:auto;align-items:stretch;padding:14px 12px}
+  .scrim{position:fixed;inset:0;background:rgba(24,36,43,.5);z-index:35;display:none}
+  .app.drawer .scrim{display:block}
+  .mob-top{display:flex;align-items:center;gap:12px;background:var(--nav);color:#fff;padding:10px 16px}
+  .mob-top b{font-family:var(--f-display);font-size:18px}
+  .head{padding:12px 16px 0}
+  .head h1{font-size:22px}
+  .sub{padding:10px 16px}
+  .sub .tools{margin-left:0}
+  .home{padding:20px 16px 40px}
+  .collapse-btn{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="scrim" id="scrim"></div>
+  <nav class="nav" id="nav" aria-label="UCs e matérias"></nav>
+  <div class="main">
+    <div class="mob-top">
+      <button class="icon-btn" id="openDrawer" aria-label="Abrir menu"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <b id="mobTitle">Medicina</b>
+    </div>
+    <div id="view" style="flex:1;min-height:0;display:flex;flex-direction:column"></div>
+  </div>
+</div>
+<script src="site-data.js"></script>
+<script>
+(function(){
+const S = window.SITE;
+const $ = (s, el=document) => el.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ICON = {
+  home:'<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 7.5L8 3l5.5 4.5V13h-4v-3h-3v3h-4z" fill="none" stroke="#c7d3d8" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  chev:'<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 3l3 3-3 3" fill="none" stroke="#93a5ae" stroke-width="1.6"/></svg>',
+  left:'<svg width="16" height="16" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3L4.5 7l4 4" fill="none" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  menu:'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  moon:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2.5A6 6 0 1013.5 11 4.5 4.5 0 0111 2.5z" fill="none" stroke="#93a5ae" stroke-width="1.5"/></svg>'
+};
+
+/* ---------- dados no navegador (localStorage) ---------- */
+const KEY = "med-site-v2";
+const store = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } })();
+store.seen = store.seen || {};       // "uc/mat/aba/item" -> timestamp
+store.recent = store.recent || [];   // últimos lugares abertos
+store.open = store.open || {uc13:true};
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+
+/* ---------- estado ---------- */
+let st = { uc:null, mat:null, aba:0, item:0 };
+const ucOf = id => S.ucs.find(u => u.id === id);
+const matOf = (u, id) => (u.materias || []).find(m => m.id === id);
+const href = src => encodeURI(S.base + src).replace(/#/g, "%23");
+const isPdf = src => /\.pdf$/i.test(src);
+const key = (u,m,a,i) => [u,m,a,i].join("/");
+
+function setAcc(uc){
+  const c = uc ? `var(--${uc.cor})` : "var(--uc14)";
+  document.documentElement.style.setProperty("--acc", c);
+}
+
+function parseHash(){
+  const h = decodeURIComponent(location.hash.slice(1)).split("/");
+  const u = ucOf(h[0]);
+  if (!u || !u.materias.length) return { uc:null };
+  const m = matOf(u, h[1]);
+  if (!m) return { uc:u.id, mat:u.materias[0].id, aba:0, item:0 };
+  let ai = m.abas.findIndex(a => a.id === h[2]); if (ai < 0) ai = 0;
+  let ii = Math.max(0, Math.min(+h[3] || 0, m.abas[ai].itens.length - 1));
+  return { uc:u.id, mat:m.id, aba:ai, item:ii };
+}
+function go(uc, mat, aba=0, item=0){
+  if (!uc){ location.hash = "inicio"; return; }
+  const m = matOf(ucOf(uc), mat);
+  location.hash = [uc, mat, m.abas[aba].id, item].join("/");
+}
+window.addEventListener("hashchange", route);
+
+function route(){
+  st = parseHash();
+  $("#app").classList.remove("drawer");
+  closeFly();
+  renderNav();
+  if (!st.uc) renderHome(); else renderMateria();
+}
+
+/* ---------- barra lateral ---------- */
+function renderNav(){
+  const nav = $("#nav");
+  nav.innerHTML = `
+    <div class="nav-top">
+      <button class="icon-btn collapse-btn" id="collapse" aria-label="Recolher ou abrir menu">${$("#app").classList.contains("collapsed") ? ICON.menu : ICON.left}</button>
+      <span class="brand">Medicina</span><span class="brand-sub">${esc(S.fase)}</span>
+    </div>
+    <button class="home-link" id="goHome" aria-current="${!st.uc}">${ICON.home}<span>Início</span></button>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      ${S.ucs.slice().sort((a,b)=>b.num-a.num).map(u => {
+        const open = !!store.open[u.id] && u.materias.length;
+        const has = u.materias.length > 0;
+        return `<div class="uc-group ${open ? "open" : ""}" style="--uc-bg:var(--${u.cor}-bg)">
+          <button class="uc-btn" data-uc="${u.id}" ${has ? "" : "disabled"} aria-expanded="${open}" title="${esc(u.nome)} ${esc(u.tema)}">
+            <span class="uc-badge" style="background:${st.uc===u.id ? `var(--${u.cor})` : `var(--${u.cor}-bg)`};color:${st.uc===u.id ? "#fff" : `var(--${u.cor}-fg)`}">${u.num}</span>
+            <span class="uc-label"><b>${esc(u.tema || u.nome)}</b><span>${has ? u.materias.length + " matérias · " : ""}${esc(u.status)}</span></span>
+            ${has ? ICON.chev : ""}
+          </button>
+          <div class="mats">${u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("")}</div>
+        </div>`;
+      }).join("")}
+    </div>
+    <div class="nav-foot"><button id="theme">${ICON.moon}<span>Tema escuro</span></button></div>`;
+  $("#collapse").onclick = () => {
+    $("#app").classList.toggle("collapsed");
+    store.collapsed = $("#app").classList.contains("collapsed"); save(); renderNav();
+  };
+  $("#goHome").onclick = () => go(null);
+  $("#theme").onclick = () => {
+    store.dark = !store.dark; save(); applyTheme();
+  };
+  nav.querySelectorAll("[data-uc]").forEach(b => b.onclick = (e) => {
+    const id = b.dataset.uc;
+    if ($("#app").classList.contains("collapsed") && innerWidth > 760){ openFly(id, b); return; }
+    store.open[id] = !store.open[id]; save(); renderNav();
+  });
+  nav.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [u,m] = b.dataset.go.split("|"); go(u, m); });
+}
+function openFly(id, btn){
+  closeFly();
+  const u = ucOf(id), r = btn.getBoundingClientRect();
+  const f = document.createElement("div");
+  f.className = "flyout"; f.id = "fly"; f.setAttribute("role","menu");
+  f.style.left = (r.right + 8) + "px"; f.style.top = Math.max(8, r.top - 8) + "px";
+  f.innerHTML = `<h4>${esc(u.nome)} · ${esc(u.tema)}</h4>` + u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("");
+  document.body.appendChild(f);
+  f.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [uu,m] = b.dataset.go.split("|"); closeFly(); go(uu, m); });
+  setTimeout(() => document.addEventListener("click", outside), 0);
+}
+function outside(e){ const f = $("#fly"); if (f && !f.contains(e.target)) closeFly(); }
+function closeFly(){ const f = $("#fly"); if (f) f.remove(); document.removeEventListener("click", outside); }
+
+/* ---------- página da matéria ---------- */
+function renderMateria(){
+  const u = ucOf(st.uc), m = matOf(u, st.mat), a = m.abas[st.aba], it = a.itens[st.item];
+  setAcc(u);
+  document.title = `${m.nome} · ${u.nome}`;
+  $("#mobTitle").textContent = `${m.nome} · ${u.nome}`;
+  const k = key(u.id, m.id, a.id, st.item);
+  store.seen[k] = Date.now();
+  store.recent = [{ uc:u.id, mat:m.id, aba:st.aba, item:st.item, t:Date.now() }].concat(store.recent.filter(r => !(r.uc===u.id && r.mat===m.id && r.aba===st.aba && r.item===st.item))).slice(0, 6);
+  save();
+  const seenAba = (ab) => ab.itens.some((_, i) => store.seen[key(u.id, m.id, ab.id, i)]);
+  $("#view").innerHTML = `
+    <header class="head">
+      <div class="head-row">
+        <h1>${esc(m.nome)}</h1>
+        <span class="crumb">${esc(u.nome)} · ${esc(u.tema)}${m.prof ? " · Prof. " + esc(m.prof) : ""}</span>
+        <span class="pill" style="margin-left:auto">${esc(u.status)}</span>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Abas da matéria">
+        ${m.abas.map((ab, i) => `<button class="tab ${seenAba(ab) ? "seen" : ""}" role="tab" data-aba="${i}" aria-selected="${i===st.aba}">${esc(ab.titulo)}<span class="dot" aria-hidden="true"></span></button>`).join("")}
+      </nav>
+    </header>
+    <div class="sub">
+      ${a.itens.length > 1 ? a.itens.map((x, i) => `<button class="chip" data-item="${i}" aria-pressed="${i===st.item}">${esc(x.label)}<span class="kind">${isPdf(x.src) ? "PDF" : "HTML"}</span></button>`).join("") : `<span style="font-weight:700">${esc(it.label)}</span>`}
+      <span class="tools">
+        <a class="tool" href="${href(it.src)}" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+        ${isPdf(it.src) ? `<a class="tool" href="${href(it.src)}" download>Baixar PDF</a>` : ""}
+      </span>
+    </div>
+    <div class="viewer"><iframe title="${esc(it.label)}" src="${href(it.src)}"></iframe></div>`;
+  $("#view").querySelectorAll("[data-aba]").forEach(b => b.onclick = () => go(u.id, m.id, +b.dataset.aba, 0));
+  $("#view").querySelectorAll("[data-item]").forEach(b => b.onclick = () => go(u.id, m.id, st.aba, +b.dataset.item));
+}
+
+/* ---------- início ---------- */
+function progress(u, m){
+  let tot = 0, seen = 0;
+  m.abas.forEach(a => a.itens.forEach((_, i) => { tot++; if (store.seen[key(u.id, m.id, a.id, i)]) seen++; }));
+  return tot ? Math.round(seen / tot * 100) : 0;
+}
+function ago(t){
+  const d = Math.floor((Date.now() - t) / 60000);
+  if (d < 1) return "agora"; if (d < 60) return d + " min";
+  if (d < 1440) return Math.floor(d/60) + " h"; return Math.floor(d/1440) + " d";
+}
+function renderHome(){
+  setAcc(null);
+  document.title = "Medicina · 5ª fase";
+  $("#mobTitle").textContent = "Medicina";
+  const recent = store.recent.filter(r => { const u = ucOf(r.uc), m = u && matOf(u, r.mat); return m && m.abas[r.aba] && m.abas[r.aba].itens[r.item]; }).slice(0, 4);
+  const hoje = new Date().toLocaleDateString("pt-BR", { weekday:"long", day:"numeric", month:"long" });
+  $("#view").innerHTML = `<div class="home"><div class="home-in">
+    <header>
+      <div class="crumb">${esc(hoje.charAt(0).toUpperCase() + hoje.slice(1))}</div>
+      <h1>Medicina · ${esc(S.fase)}</h1>
+    </header>
+    <section class="cont" aria-label="Continuar de onde parou">
+      <h3>Continuar de onde parou</h3>
+      ${recent.length ? recent.map((r, i) => { const u = ucOf(r.uc), m = matOf(u, r.mat), a = m.abas[r.aba], it = a.itens[r.item];
+        return `<button data-rec="${i}"><span style="font-size:12px;font-weight:700;color:var(--${u.cor}-fg);width:44px">${esc(u.nome)}</span><span style="flex:1"><b>${esc(m.nome)} › ${esc(a.titulo)}</b><small>${esc(it.label)}</small></span><small>${ago(r.t)}</small></button>`; }).join("")
+        : `<p class="empty" style="color:var(--nav-muted);margin:4px 0">Nada aberto ainda. O que você abrir aparece aqui.</p>`}
+    </section>
+    <section>
+      <h2>Unidades</h2>
+      <div class="uc-cards">
+        ${S.ucs.slice().sort((a,b)=>b.num-a.num).map(u => `
+          <article class="uc-card" style="--acc:var(--${u.cor})">
+            <header><span class="uc-badge" style="background:var(--${u.cor});color:#fff">${u.num}</span><b>${esc(u.tema || u.nome)}</b><span class="st">${esc(u.status)}</span></header>
+            ${u.materias.length ? `
+              <div class="mlist">${u.materias.map(m => `<button data-go="${u.id}|${m.id}">${esc(m.nome)}</button>`).join("")}</div>
+              <div class="prog"><span>visto</span><i><b style="width:${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%"></b></i><span style="font-family:var(--f-mono)">${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%</span></div>
+              ${u.plano ? `<a class="tool" style="align-self:flex-start" href="${href(u.plano.src)}" target="_blank" rel="noopener">${esc(u.plano.label)} ↗</a>` : ""}`
+            : `<p class="empty" style="margin:0">Material ainda não organizado aqui.</p>`}
+          </article>`).join("")}
+      </div>
+    </section>
+    <footer class="foot">
+      <span>O que você abriu fica salvo neste navegador.</span>
+      <button class="tool" id="exp">Exportar progresso</button>
+      <label class="tool" style="cursor:pointer">Importar<input type="file" id="imp" accept="application/json" hidden></label>
+      <button class="tool" id="clr">Limpar</button>
+    </footer>
+  </div></div>`;
+  $("#view").querySelectorAll("[data-rec]").forEach(b => b.onclick = () => { const r = recent[+b.dataset.rec]; go(r.uc, r.mat, r.aba, r.item); });
+  $("#view").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [u,m] = b.dataset.go.split("|"); go(u, m); });
+  $("#exp").onclick = () => {
+    const blob = new Blob([JSON.stringify(store, null, 2)], { type:"application/json" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+    a.download = "progresso-medicina-" + new Date().toISOString().slice(0,10) + ".json"; a.click();
+  };
+  $("#imp").onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then(t => { try { Object.assign(store, JSON.parse(t)); save(); route(); } catch(err){ alert("Arquivo inválido: escolha um .json exportado por este site."); } });
+  };
+  let armed = false;
+  $("#clr").onclick = e => {
+    if (!armed){ armed = true; e.target.textContent = "Clique de novo para apagar"; return; }
+    store.seen = {}; store.recent = []; save(); route();
+  };
+}
+
+function applyTheme(){ document.documentElement.dataset.theme = store.dark ? "dark" : "light"; }
+
+$("#openDrawer").onclick = () => $("#app").classList.add("drawer");
+$("#scrim").onclick = () => $("#app").classList.remove("drawer");
+if (store.collapsed) $("#app").classList.add("collapsed");
+applyTheme();
+route();
+})();
+</script>
+</body>
+</html>
