@@ -43,6 +43,7 @@
     const P = prog(cfg.ns);
     const F = P.f = Object.assign({ sp: [], tu: [], tema: "", tipo: "", sit: "todas", rep: false, mode: "estudo", n: 10, q: "" }, P.f);
     const pre = ctx.preset || null;
+    let idsF = pre && pre.ids ? pre.ids : null;
     if (pre) Object.assign(F, { sp: [], tu: [], tema: "", tipo: "", sit: "todas", rep: false, q: "" }, pre.f || {});
     const qMatch = (q) => { if (!F.q) return true; const t = norm(q.enun + " " + (q.itens || []).join(" ") + " " + (q.alts || []).join(" ") + " " + (q.q || "") + " " + (q.o || []).map(x => x[0]).join(" ") + " " + (q.tema || "")); return F.q.split("|").some(k => k && t.includes(norm(k))); };
     let round = null; // {list, i, ans:{id:{pick, ok}}, revealed}
@@ -54,6 +55,7 @@
         (!F.tema || q.tema === F.tema) &&
         (!F.tipo || q.grupo === F.tipo) &&
         (!F.rep || (q.tus || []).length > 1) && qMatch(q) &&
+        (!idsF || idsF.includes(q.id)) &&
         (F.sit === "todas" || (F.sit === "nao" && !P.r[q.id]) || (F.sit === "errei" && P.r[q.id] === "err") || (F.sit === "marcadas" && P.mark[q.id])));
     }
 
@@ -103,7 +105,7 @@
       const r = el.querySelector("#nvRep"); if (r) r.onchange = () => { F.rep = r.checked; SAVE(); drawSetup(); };
       const qi = el.querySelector("#nvQ"); if (qi) qi.onchange = () => { F.q = qi.value.trim(); SAVE(); drawSetup(); };
       el.querySelector("#nvGo").onclick = () => {
-        const list = shuffle(pl).slice(0, F.n || pl.length).map(q => cfg.prep ? cfg.prep(q) : q);
+        const list = (cfg.keepOrder && (idsF || F.mode === "prova") ? pl : shuffle(pl)).slice(0, F.n || pl.length).map(q => cfg.prep ? cfg.prep(q) : q);
         round = { list, i: 0, ans: {}, mode: F.mode };
         drawQ();
       };
@@ -137,7 +139,7 @@
             ${round.reveal === q.id && !a ? `<div class="nv-expl"><b>Gabarito:</b> ${q.gab}${q.com ? `<p>${q.com}</p>` : ""}</div>
               <div class="nv-frow"><span>Como foi?</span><button class="btn ok" data-self="1">Acertei</button><button class="btn err" data-self="0">Errei</button></div>` : ""}`}
           ${show ? `<div class="nv-expl ${a.ok ? "ok" : "err"}"><b>${a.ok ? "Certo." : "Errado."}</b> ${q.opts.length ? "Gabarito: " + q.gabLabel + "." : ""} ${q.opts.length && q.com ? `<p>${q.com}</p>` : !q.opts.length ? `<p>Gabarito: ${q.gab}</p>${q.com ? `<p>${q.com}</p>` : ""}` : ""}
-            ${(q.pg && q.pg.length && cfg.resumoTab) || (q.drugs && q.drugs.length) ? `<div class="nv-links">${cfg.resumoTab ? (q.pg || []).slice(0, 2).map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("") : ""}${(q.drugs || []).map(d => `<button class="link" data-tb="${esc(d.s)}">${esc(d.s)} na tabela →</button>`).join("")}</div>` : ""}</div>` : ""}
+            ${(q.pg && q.pg.length && cfg.resumoTab) || (q.drugs && q.drugs.length) ? `<div class="nv-links">${cfg.resumoTab ? (q.pg || []).slice(0, 2).map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("") : ""}${(q.drugs || []).map(d => `<button class="link" data-tb="${esc(d.s)}">${esc(d.s)} na tabela →</button>`).join("")}</div>` : ""}${q.tabLinks && q.tabLinks.length ? `<div class="nv-links">${q.tabLinks.map(l => `<button class="link" data-tab="${l.tab}" data-page="${l.page}">${esc(l.label)} →</button>`).join("")}</div>` : ""}</div>` : ""}
           <div class="nv-frow nv-actions">
             <button class="btn" id="nvMark" aria-pressed="${!!P.mark[q.id]}">${P.mark[q.id] ? "Marcada para revisar" : "Marcar para revisar"}</button>
             ${a || (!q.opts.length && round.reveal === q.id && a) ? "" : ""}
@@ -145,7 +147,7 @@
           </div>
         </article>
       </div>`;
-      el.querySelector("#nvBack").onclick = () => { round = null; drawSetup(); };
+      el.querySelector("#nvBack").onclick = () => { round = null; idsF = null; drawSetup(); };
       el.querySelector("#nvMark").onclick = () => { if (P.mark[q.id]) delete P.mark[q.id]; else P.mark[q.id] = 1; SAVE(); drawQ(); };
       el.querySelectorAll("[data-o]").forEach(b => b.onclick = () => {
         if (a && study) return;
@@ -160,6 +162,7 @@
       });
       el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
       el.querySelectorAll("[data-tb]").forEach(b => b.onclick = () => ctx.openView("tabela", { q: b.dataset.tb }));
+      el.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => ctx.openTab(b.dataset.tab, { page: +b.dataset.page }));
       const n = el.querySelector("#nvNext"); if (n) n.onclick = next;
       el.scrollTop = 0; el.closest(".viewer")?.scrollTo?.(0, 0);
     }
@@ -315,7 +318,7 @@
     });
   };
 
-  V.pdf = (el, U, ctx, item) => V.resumo(el, null, ctx, item);
+  V.pdf = (el, U, ctx, item) => V.resumo(el, U, ctx, item);
 
   V.esquemas = (el, U) => {
     el.innerHTML = `<div class="nv-wrap wide"><div class="nv-figs">${U.expl.map(f => `<figure class="fig"><div class="pl">${f.svg}</div><figcaption><span class="tag">${/^\d+$/.test(String(f.sp)) ? "SP" + f.sp : esc(f.sp)}</span> ${esc(f.cap || "")}</figcaption></figure>`).join("")}</div></div>`;
@@ -355,50 +358,126 @@
   V.resumo = async (el, U, ctx, item) => {
     const base = item.dir || "", pdf = item.pdf || base + "resumo.pdf", lib = item.lib || base;
     const res = (U && U.res) || { idx: [] };
-    let spF = "";
-    const hasIdx = res.idx && res.idx.length;
+    const thumbs = item.thumbs || (item.dir ? base + "thumbs/p-" : null);
+    const toc = item.toc || [];
+    const P = prog(ctx.ns + ":leitor");
+    // página → questões da APF que caíram ali
+    const apfAt = {};
+    if (U && U.apf && item.apfKey) U.apf.forEach(q => (q.link || []).forEach(l => { if (l.t === item.apfKey) (apfAt[l.p] = apfAt[l.p] || []).push(q); }));
+    const idxAt = {}; (res.idx || []).forEach(x => (idxAt[x.p] = idxAt[x.p] || []).push(x));
+    let spF = "", side = (res.idx && res.idx.length) || toc.length ? "indice" : "paginas";
     el.innerHTML = `<div class="nv-reader">
-      <aside class="nv-idx" ${hasIdx ? "" : "hidden"}>
-        <div class="nv-frow"><button class="chip sm" data-s="" aria-pressed="true">Tudo</button>${Object.keys(res.sp || {}).filter(k => /^SP/.test(k)).map(k => `<button class="chip sm" data-s="${k}">${k}</button>`).join("")}</div>
+      <aside class="nv-idx">
+        <div class="nv-frow nv-sidetabs">${(res.idx && res.idx.length) || toc.length ? `<button class="chip sm" data-side="indice">Índice</button>` : ""}${thumbs ? `<button class="chip sm" data-side="paginas">Página por página</button>` : ""}</div>
         <div class="nv-idxlist" id="ri"></div>
       </aside>
       <div class="nv-pdf">
+        ${toc.length ? `<div class="nv-toc">${toc.map(t => `<button class="chip sm" data-p="${t.p}">${esc(t.t)}</button>`).join("")}</div>` : ""}
         <div class="nv-ptools"><button class="btn" data-nav="-1" aria-label="Página anterior">‹</button><label>p. <input id="pgin" type="number" min="1" value="1" style="width:56px"></label><span id="pgt"></span><button class="btn" data-nav="1" aria-label="Próxima página">›</button>
+          <span class="nv-zoom"><button class="btn" data-z="-1" aria-label="Diminuir">−</button><button class="btn" data-z="1" aria-label="Aumentar">+</button><button class="btn" data-z="0">Largura</button></span>
           <a class="btn" href="${pdf}" target="_blank" rel="noopener" style="margin-left:auto">Abrir PDF ↗</a><a class="btn" href="${pdf}" download>Baixar</a></div>
         <div class="nv-pscroll" id="ps"><div class="nv-msg">Carregando o resumo…</div></div>
       </div></div>`;
     const ri = el.querySelector("#ri");
-    function drawIdx() {
-      const list = res.idx.filter(x => !spF || ("SP" + x.sp) === spF);
-      ri.innerHTML = list.map(x => `<button class="nv-ix" data-p="${x.p}"><span class="p">p.${x.p}</span><span><b>${esc(x.t)}${x.star ? " ★" : ""}</b><small>${esc(x.lb ? x.lb.join(" · ") : x.pv)}</small>${x.peg ? `<small class="peg">${esc(x.peg)}</small>` : ""}</span></button>`).join("");
+    function apfBadges(p) { return (apfAt[p] || []).map(q => `<button class="tag hot" data-q="${q.id}" title="Abrir a questão">APF SP${q.sp} Q${q.n}</button>`).join(" "); }
+    function drawSide() {
+      el.querySelectorAll("[data-side]").forEach(b => b.setAttribute("aria-pressed", b.dataset.side === side));
+      if (side === "paginas" && thumbs) {
+        const n = R.doc ? R.doc.numPages : 0;
+        ri.innerHTML = n ? `<div class="nv-thumbs">${Array.from({ length: n }, (_, i) => i + 1).map(p => `<button class="nv-th ${p === R.cur ? "cur" : ""}" data-p="${p}"><img loading="lazy" src="${thumbs}${String(p).padStart(2, "0")}.jpg" alt="Página ${p}"><span>p.${p}${idxAt[p] ? ` <b>${idxAt[p].length}</b>` : ""}${apfAt[p] ? ` <b class="apf">APF</b>` : ""}</span></button>`).join("")}</div>` : `<div class="nv-msg">Carregando…</div>`;
+      } else if (res.idx && res.idx.length) {
+        const sps = Object.keys(res.sp || {}).filter(k => /^SP/.test(k));
+        const list = res.idx.filter(x => !spF || ("SP" + x.sp) === spF);
+        ri.innerHTML = `<div class="nv-frow" style="margin-bottom:6px"><button class="chip sm" data-s="" aria-pressed="${!spF}">Tudo</button>${sps.map(k => `<button class="chip sm" data-s="${k}" aria-pressed="${spF === k}">${k}</button>`).join("")}</div>` +
+          list.map(x => `<button class="nv-ix" data-p="${x.p}"><span class="p">p.${x.p}</span><span><b>${esc(x.t)}${x.star ? " ★" : ""}</b><small>${esc(x.lb ? x.lb.join(" · ") : x.pv)}</small>${x.peg ? `<small class="peg">${esc(x.peg)}</small>` : ""}</span></button>`).join("");
+      } else {
+        ri.innerHTML = toc.map(t => `<div class="nv-ix"><span class="p">p.${t.p}</span><span><button class="link" data-p="${t.p}">${esc(t.t)}</button>${t.d ? `<small>${esc(t.d)}</small>` : ""}${apfBadges(t.p) ? `<small>${apfBadges(t.p)}</small>` : ""}</span></div>`).join("") +
+          (Object.keys(apfAt).length ? `<p class="nv-hint" style="margin-top:10px">As etiquetas roxas são as questões da APF T11 que caíram naquela página.</p>` : "");
+      }
       ri.querySelectorAll("[data-p]").forEach(b => b.onclick = () => R.go(+b.dataset.p));
+      ri.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { spF = b.dataset.s; drawSide(); });
+      ri.querySelectorAll("[data-q]").forEach(b => b.onclick = e => { e.stopPropagation(); ctx.openView(item.apfView || "apf", { f: { mode: "estudo", n: 0 }, ids: [b.dataset.q], start: true }); });
+      if (side === "paginas") { const c = ri.querySelector(".nv-th.cur"); if (c) c.scrollIntoView({ block: "nearest" }); }
     }
-    el.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { spF = b.dataset.s; el.querySelectorAll("[data-s]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawIdx(); });
-    drawIdx();
+    el.querySelectorAll("[data-side]").forEach(b => b.onclick = () => { side = b.dataset.side; drawSide(); });
+    el.querySelectorAll(".nv-toc [data-p]").forEach(b => b.onclick = () => R.go(+b.dataset.p));
     const ps = el.querySelector("#ps");
-    const R = { doc: null, pages: [], cur: 1, pending: ctx.page || 0,
-      go(p) { if (!this.doc) { this.pending = p; return; } p = Math.max(1, Math.min(this.doc.numPages, p)); const d = this.pages[p - 1]; ps.scrollTop = d.offsetTop - ps.offsetTop - 8; this.draw(p); } ,
-      async draw(i) { const d = this.pages[i - 1]; if (!d) return; const w = ps.clientWidth - 24; if (d.dataset.w == w) return; d.dataset.w = w;
+    const R = { doc: null, pages: [], cur: 1, z: P.z || 0, pending: ctx.page || P.page || 0,
+      width() { return this.z ? this.baseW * this.z : ps.clientWidth - 24; },
+      layout() { const w = this.width(); this.pages.forEach(d => { d.style.width = w + "px"; d.style.height = (w * this.ratio) + "px"; d.dataset.w = ""; }); this.go(this.cur, true); },
+      go(p, quiet) { if (!this.doc) { this.pending = p; return; } p = Math.max(1, Math.min(this.doc.numPages, p)); const d = this.pages[p - 1]; ps.scrollTop = d.offsetTop - ps.offsetTop - 8; this.draw(p); },
+      async draw(i) { const d = this.pages[i - 1]; if (!d) return; const w = parseFloat(d.style.width) || this.width(); if (d.dataset.w == w) return; d.dataset.w = w;
         const page = await this.doc.getPage(i); const v1 = page.getViewport({ scale: 1 }); const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const vp = page.getViewport({ scale: w / v1.width * dpr }); const c = d.querySelector("canvas"); c.width = vp.width; c.height = vp.height; c.style.width = w + "px"; c.style.height = (vp.height / dpr) + "px";
         await page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise; }
     };
+    drawSide();
     try {
       if (!window.pdfjsLib) await loadScript(lib + "pdf.min.js");
       pdfjsLib.GlobalWorkerOptions.workerSrc = lib + "pdf.worker.min.js";
       R.doc = await pdfjsLib.getDocument(pdf).promise;
     } catch (e) { ps.innerHTML = `<div class="nv-msg">O leitor não carregou aqui. Use "Abrir PDF".</div>`; return; }
-    const p1 = await R.doc.getPage(1), v = p1.getViewport({ scale: 1 }), ratio = v.height / v.width;
+    const p1 = await R.doc.getPage(1), v = p1.getViewport({ scale: 1 }); R.ratio = v.height / v.width; R.baseW = v.width;
     ps.innerHTML = ""; el.querySelector("#pgt").textContent = "de " + R.doc.numPages;
-    for (let i = 1; i <= R.doc.numPages; i++) { const d = document.createElement("div"); d.className = "nv-page"; d.dataset.p = i; d.innerHTML = `<canvas></canvas><span>p.${i}</span>`; d.style.height = ((ps.clientWidth - 24) * ratio) + "px"; ps.appendChild(d); R.pages.push(d); }
+    for (let i = 1; i <= R.doc.numPages; i++) { const d = document.createElement("div"); d.className = "nv-page"; d.dataset.p = i; d.innerHTML = `<canvas></canvas><span>p.${i}</span>`; ps.appendChild(d); R.pages.push(d); }
+    R.pages.forEach(d => { const w = R.width(); d.style.width = w + "px"; d.style.height = (w * R.ratio) + "px"; });
     const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) R.draw(+en.target.dataset.p); }), { root: ps, rootMargin: "800px 0px" });
     R.pages.forEach(d => io.observe(d));
-    ps.addEventListener("scroll", () => { const top = ps.scrollTop + ps.clientHeight * .3; let c = 1; for (const d of R.pages) if (d.offsetTop - ps.offsetTop <= top) c = +d.dataset.p; R.cur = c; el.querySelector("#pgin").value = c; }, { passive: true });
+    let last = 0;
+    ps.addEventListener("scroll", () => { const top = ps.scrollTop + ps.clientHeight * .3; let c = 1; for (const d of R.pages) if (d.offsetTop - ps.offsetTop <= top) c = +d.dataset.p; if (c !== R.cur) { R.cur = c; el.querySelector("#pgin").value = c; if (side === "paginas") { ri.querySelectorAll(".nv-th").forEach(t => t.classList.toggle("cur", +t.dataset.p === c)); } } if (Date.now() - last > 1500) { last = Date.now(); P.page = c; SAVE(); } }, { passive: true });
     el.querySelector("#pgin").onchange = e => R.go(+e.target.value);
     el.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => R.go(R.cur + +b.dataset.nav));
+    el.querySelectorAll("[data-z]").forEach(b => b.onclick = () => { const k = +b.dataset.z; if (!k) R.z = 0; else { const cur = R.z || (ps.clientWidth - 24) / R.baseW; R.z = Math.max(.5, Math.min(3, cur * (k > 0 ? 1.2 : 1 / 1.2))); } P.z = R.z; SAVE(); R.layout(); });
+    window.addEventListener("resize", () => { if (!R.z) R.layout(); });
+    if (side === "paginas") drawSide();
     if (R.pending) R.go(R.pending);
   };
 
+  /* ---------- APFs (Tutoria UC15) ---------- */
+  function prepApf(q) {
+    return {
+      id: q.id, sp: q.sp,
+      tags: [{ l: "APF SP" + q.sp + " · Q" + q.n }, { l: "T11" }].concat(q.disc ? [{ l: "discursiva" }] : []),
+      enun: q.enun, itens: [],
+      opts: q.disc ? [] : q.alts.map((h, i) => ({ html: h, ok: i === q.gab, why: "" })),
+      gab: q.disc ? `<span class="tag">resposta de uma aluna da T11</span><br>${q.resp}` : "", gabLabel: q.disc ? "" : LET[q.gab],
+      com: (q.nota ? q.nota : "") + (q.marcas ? `<span class="tag warn">marcas da tutora</span> ${q.marcas}` : ""),
+      pg: [], tabLinks: (q.link || []).map(l => ({ tab: l.t, page: l.p, label: (l.t === "veterana" ? "Resumo da veterana p." : "Resumo SP1 p.") + l.p }))
+    };
+  }
+  V.apf = (el, U, ctx) => {
+    const items = U.apf.map(q => Object.assign({}, q, { tus: [], grupo: q.disc ? "Só discursivas" : "Só objetivas" }));
+    quiz(el, ctx, { ns: ctx.ns + ":apf", items, grupos: ["Só objetivas", "Só discursivas"], temas: null, prep: prepApf, keepOrder: true });
+  };
+  V.apfraiox = (el, U, ctx) => {
+    const P = prog(ctx.ns + ":apf");
+    const bySp = {}; U.apf.forEach(q => (bySp[q.sp] = bySp[q.sp] || []).push(q));
+    const first = h => { const t = strip(h).replace(/\s+/g, " "); return t.length > 120 ? t.slice(0, 118) + "…" : t; };
+    el.innerHTML = `<div class="nv-wrap wide">
+      <section class="nv-card nv-lead"><h3>Como a Ana Elisa cobra na APF</h3>
+        <p>As 5 APFs da T11, uma por SP: ${U.apf.filter(q => !q.disc).length} objetivas de 4–5 alternativas e ${U.apf.filter(q => q.disc).length} discursivas de caso clínico. Abaixo, o que caiu em cada uma. Clique numa questão para abri-la, ou faça a APF inteira da SP.</p></section>
+      <div class="nv-apfgrid">${Object.keys(bySp).map(sp => { const qs = bySp[sp], m = U.sps[sp] || {}; const done = qs.filter(q => P.r && P.r[q.id]).length;
+        return `<section class="nv-card nv-apfsp"><header><span class="tag hot">SP${sp}</span><b>${esc(m.tema || "")}</b><span class="mono">${done}/${qs.length}</span></header>
+          <p class="nv-hint">${esc(m.formato || "")}${m.data ? " · " + esc(m.data) : ""}</p>
+          <ol class="nv-apfq">${qs.map(q => `<li><span class="mono">Q${q.n}</span><button class="link" data-q="${q.id}">${q.disc ? `<span class="tag">discursiva</span> ` : ""}${esc(first(q.enun))}</button>${P.r && P.r[q.id] ? ` <span class="dot ${P.r[q.id] === "ok" ? "ok" : "err"}"></span>` : ""}</li>`).join("")}</ol>
+          <button class="btn-pri" data-sp="${sp}">Fazer a APF da SP${sp}</button></section>`; }).join("")}</div></div>`;
+    el.querySelectorAll("[data-q]").forEach(b => b.onclick = () => ctx.openView("apf", { f: { mode: "estudo", n: 0 }, ids: [b.dataset.q], start: true }));
+    el.querySelectorAll("[data-sp]").forEach(b => b.onclick = () => ctx.openView("apf", { f: { sp: [b.dataset.sp], mode: "prova", n: 0 }, start: true }));
+  };
+
+  /* ---------- resumo denso (HTML) ---------- */
+  V.denso = (el, U, ctx, item) => {
+    const D = window[item.global || "UC_DENSO"];
+    if (!D) { el.innerHTML = `<div class="nv-msg">Resumo denso não encontrado.</div>`; return; }
+    el.innerHTML = `<div class="nv-wrap nv-denso">
+      <nav class="nv-toc sticky">${D.secoes.map(s => `<a class="chip sm" href="#" data-s="${s.id}">${esc(s.t)}</a>`).join("")}</nav>
+      ${D.apf ? `<section class="nv-card nv-hero"><h3>${esc(D.titulo)}</h3><p>${esc(D.apf)}</p>
+        <div class="legend"><span class="lg apf">caiu na APF</span><span class="lg pega">pegadinha</span><span class="lg fix">erro da veterana</span></div></section>` : ""}
+      ${D.secoes.map(s => `<section class="nv-card" id="dn-${s.id}"><div class="nv-dh"><h3>${esc(s.t)}</h3>${s.p ? `<button class="link" data-p="${s.p}">resumo completo p.${s.p} →</button>` : ""}</div>${s.html}</section>`).join("")}
+    </div>`;
+    el.querySelectorAll("[data-s]").forEach(a => a.onclick = e => { e.preventDefault(); const t = el.querySelector("#dn-" + a.dataset.s); const sc = el.closest(".viewer") || el; sc.scrollTo({ top: t.offsetTop - 60, behavior: "smooth" }); });
+    el.querySelectorAll("[data-p]").forEach(b => b.onclick = () => ctx.openTab(item.fullTab || "resumo", { page: +b.dataset.p }));
+  };
 
   /* ---------- Lab UC15 (dados extraídos do Lab_UC15.html) ---------- */
   function prepLab(q) {
@@ -439,13 +518,13 @@
     function fmt(t) { t = Math.floor(t); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
     function draw() {
       const v = item.videos[cur];
-      const chap = v.chap && U && U.chap ? U.chap[v.chap] || [] : [];
+      const chap = v.chapters || (v.chap && U && U.chap ? U.chap[v.chap] || [] : []);
       el.innerHTML = `<div class="nv-wrap wide"><div class="nv-vid">
         <div class="nv-player"><video id="vv" controls preload="metadata" playsinline src="${v.src}"></video>
           <div class="nv-vtitle"><b>${esc(v.t)}</b>${v.d ? `<span class="mono">${esc(v.d)}</span>` : ""}</div></div>
         <aside class="nv-vlist">
           ${item.videos.length > 1 ? `<div class="nv-vtabs">${item.videos.map((x, i) => `<button class="chip sm" data-v="${i}" aria-pressed="${i === cur}">${esc(x.short || x.t)}</button>`).join("")}</div>` : ""}
-          ${chap.length ? `<h4>Capítulos</h4>${chap.map(c => `<button class="nv-chap" data-t="${c.t}"><span class="mono">${fmt(c.t)}</span><span>${esc(c.title)}</span>${c.t11 ? `<span class="tag hot">caiu</span>` : ""}</button>`).join("")}` : `<p class="nv-hint">Continua de onde você parou, neste navegador.</p>`}
+          ${chap.length ? `<h4>Capítulos</h4>${chap.map((c, i) => `${c.k && (!i || chap[i - 1].k !== c.k) ? `<div class="nv-chapk">${esc(c.k)}</div>` : ""}<button class="nv-chap" data-t="${c.t}"><span class="mono">${fmt(c.t)}</span><span>${esc(c.title)}</span>${c.t11 ? `<span class="tag hot">caiu</span>` : ""}${c.star ? `<span class="tag hot">★ APF</span>` : ""}${c.pega ? `<span class="tag warn">pegadinha</span>` : ""}</button>`).join("")}` : `<p class="nv-hint">Continua de onde você parou, neste navegador.</p>`}
         </aside></div></div>`;
       const vv = el.querySelector("#vv");
       const key = v.src;
