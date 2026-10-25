@@ -40,6 +40,7 @@ window.SITE = {
           { id: "abcd", titulo: "Treino ABCD", itens: [ { label: "Treino ABCD", nativo: "abcd", dir: "uc15/farmaco/central/" } ] },
           { id: "pegadinhas", titulo: "Pegadinhas", itens: [ { label: "Pegadinhas", nativo: "pegadinhas", dir: "uc15/farmaco/central/" } ] },
           { id: "esquemas", titulo: "Esquemas", itens: [ { label: "Esquemas", nativo: "esquemas", dir: "uc15/farmaco/central/" } ] },
+          { id: "vespera", titulo: "Véspera", itens: [ { label: "Véspera", nativo: "vespera", dir: "uc15/farmaco/central/", extra: "conteudo/uc15/farmaco/truques.js" } ] },
           { id: "aulas", titulo: "Frases da aula", itens: [ { label: "Frases da aula", nativo: "aulas", dir: "uc15/farmaco/central/" } ] },
           { id: "central", titulo: "Central (original)", itens: [
             { label: "Central da matéria", src: "uc15/farmaco/uc15-farmaco-central-guia.html" } ] } ] },

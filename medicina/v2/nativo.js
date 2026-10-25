@@ -41,7 +41,10 @@
      ===================================================================== */
   function quiz(el, ctx, cfg) {
     const P = prog(cfg.ns);
-    const F = P.f = Object.assign({ sp: [], tu: [], tema: "", tipo: "", sit: "todas", rep: false, mode: "estudo", n: 10 }, P.f);
+    const F = P.f = Object.assign({ sp: [], tu: [], tema: "", tipo: "", sit: "todas", rep: false, mode: "estudo", n: 10, q: "" }, P.f);
+    const pre = ctx.preset || null;
+    if (pre) Object.assign(F, { sp: [], tu: [], tema: "", tipo: "", sit: "todas", rep: false, q: "" }, pre.f || {});
+    const qMatch = (q) => { if (!F.q) return true; const t = norm(q.enun + " " + (q.itens || []).join(" ") + " " + (q.alts || []).join(" ") + " " + (q.q || "") + " " + (q.o || []).map(x => x[0]).join(" ") + " " + (q.tema || "")); return F.q.split("|").some(k => k && t.includes(norm(k))); };
     let round = null; // {list, i, ans:{id:{pick, ok}}, revealed}
 
     function pool() {
@@ -50,7 +53,7 @@
         (!F.tu.length || (q.tus || []).some(t => F.tu.includes(t))) &&
         (!F.tema || q.tema === F.tema) &&
         (!F.tipo || q.grupo === F.tipo) &&
-        (!F.rep || (q.tus || []).length > 1) &&
+        (!F.rep || (q.tus || []).length > 1) && qMatch(q) &&
         (F.sit === "todas" || (F.sit === "nao" && !P.r[q.id]) || (F.sit === "errei" && P.r[q.id] === "err") || (F.sit === "marcadas" && P.mark[q.id])));
     }
 
@@ -65,6 +68,7 @@
           <div><b>${Object.keys(P.mark).length}</b><span>marcadas</span></div>
         </div>
         <section class="nv-card nv-filters">
+          ${cfg.busca ? `<div class="nv-frow"><input type="search" id="nvQ" placeholder="Buscar nas questões (ex.: nitrofurantoína)" value="${esc(F.q.includes("|") ? F.q.split("|")[0] : F.q)}" aria-label="Buscar"></div>` : ""}
           ${chipRow(cfg.spLabel || "SP", spOpts(cfg.items, q => q.sp), F.sp, "sp", true)}
           ${cfg.turmas ? chipRow(cfg.tuLabel || "Turma", cfg.turmas.map(t => ({ v: t, l: t, n: cfg.items.filter(q => (q.tus || []).includes(t)).length })), F.tu, "tu", true) : ""}
           ${cfg.temas ? `<div class="nv-frow"><span class="nv-flabel">Tema</span><select id="nvTema"><option value="">Todos os temas</option>${cfg.temas.map(t => `<option ${F.tema === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>
@@ -97,12 +101,14 @@
       const t = el.querySelector("#nvTema"); if (t) t.onchange = () => { F.tema = t.value; SAVE(); drawSetup(); };
       const g = el.querySelector("#nvTipo"); if (g) g.onchange = () => { F.tipo = g.value; SAVE(); drawSetup(); };
       const r = el.querySelector("#nvRep"); if (r) r.onchange = () => { F.rep = r.checked; SAVE(); drawSetup(); };
+      const qi = el.querySelector("#nvQ"); if (qi) qi.onchange = () => { F.q = qi.value.trim(); SAVE(); drawSetup(); };
       el.querySelector("#nvGo").onclick = () => {
         const list = shuffle(pl).slice(0, F.n || pl.length).map(q => cfg.prep ? cfg.prep(q) : q);
         round = { list, i: 0, ans: {}, mode: F.mode };
         drawQ();
       };
     }
+    function startNow() { el.querySelector("#nvGo")?.click(); }
 
     function record(q, ok) {
       P.r[q.id] = ok ? "ok" : "err"; SAVE();
@@ -131,7 +137,7 @@
             ${round.reveal === q.id && !a ? `<div class="nv-expl"><b>Gabarito:</b> ${q.gab}${q.com ? `<p>${q.com}</p>` : ""}</div>
               <div class="nv-frow"><span>Como foi?</span><button class="btn ok" data-self="1">Acertei</button><button class="btn err" data-self="0">Errei</button></div>` : ""}`}
           ${show ? `<div class="nv-expl ${a.ok ? "ok" : "err"}"><b>${a.ok ? "Certo." : "Errado."}</b> ${q.opts.length ? "Gabarito: " + q.gabLabel + "." : ""} ${q.opts.length && q.com ? `<p>${q.com}</p>` : !q.opts.length ? `<p>Gabarito: ${q.gab}</p>${q.com ? `<p>${q.com}</p>` : ""}` : ""}
-            ${q.pg && q.pg.length && cfg.resumoTab ? `<div class="nv-links">${q.pg.map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("")}</div>` : ""}</div>` : ""}
+            ${(q.pg && q.pg.length && cfg.resumoTab) || (q.drugs && q.drugs.length) ? `<div class="nv-links">${cfg.resumoTab ? (q.pg || []).slice(0, 2).map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("") : ""}${(q.drugs || []).map(d => `<button class="link" data-tb="${esc(d.s)}">${esc(d.s)} na tabela →</button>`).join("")}</div>` : ""}</div>` : ""}
           <div class="nv-frow nv-actions">
             <button class="btn" id="nvMark" aria-pressed="${!!P.mark[q.id]}">${P.mark[q.id] ? "Marcada para revisar" : "Marcar para revisar"}</button>
             ${a || (!q.opts.length && round.reveal === q.id && a) ? "" : ""}
@@ -153,6 +159,7 @@
         const ok = b.dataset.self === "1"; round.ans[q.id] = { ok, txt: round.txt }; record(q, ok); drawQ();
       });
       el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
+      el.querySelectorAll("[data-tb]").forEach(b => b.onclick = () => ctx.openView("tabela", { q: b.dataset.tb }));
       const n = el.querySelector("#nvNext"); if (n) n.onclick = next;
       el.scrollTop = 0; el.closest(".viewer")?.scrollTo?.(0, 0);
     }
@@ -171,6 +178,14 @@
       el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { round.mode = "estudo"; round.i = +b.dataset.i; drawQ(); });
     }
     drawSetup();
+    if (pre && pre.start) startNow();
+  }
+
+  /* ---------- links questão → tabela ---------- */
+  function drugLinks(drugs, text) {
+    if (!drugs) return [];
+    const t = norm(text);
+    return drugs.filter(d => String(d.k || "").split("|").some(k => k.length > 3 && t.includes(k))).slice(0, 2);
   }
 
   /* ---------- montar questões no formato do quiz ---------- */
@@ -206,17 +221,20 @@
     const order = t => t === "PM" ? 99 : +t.replace(/\D/g, "");
     const turmas = [...new Set(U.banco.flatMap(q => q.tus || []))].sort((a, b) => order(a) - order(b));
     const items = U.banco.map(q => Object.assign({}, q, { grupo: q.alts && q.alts.length ? "Só objetivas" : "Só discursivas" }));
-    quiz(el, ctx, { ns: ctx.ns + ":provas", items, turmas, temas: [...new Set(U.banco.map(q => q.tema))], grupos: ["Só objetivas", "Só discursivas"], prep: prepBanco, resumoTab: true });
+    quiz(el, ctx, { ns: ctx.ns + ":provas", items, turmas, temas: [...new Set(U.banco.map(q => q.tema))], grupos: ["Só objetivas", "Só discursivas"], busca: true, resumoTab: true,
+      prep: q => Object.assign(prepBanco(q), { drugs: drugLinks(U.drugs, q.enun + " " + (q.itens || []).join(" ") + " " + (q.alts || []).join(" ") + " " + (q.gab || "")) }) });
   };
 
   V.abcd = (el, U, ctx) => {
     const items = U.abcd.map(q => Object.assign({}, q));
-    quiz(el, ctx, { ns: ctx.ns + ":abcd", items, prep: prepAbcd, resumoTab: true });
+    quiz(el, ctx, { ns: ctx.ns + ":abcd", items, busca: true, resumoTab: true,
+      prep: q => Object.assign(prepAbcd(q), { drugs: drugLinks(U.drugs, q.q + " " + q.o.map(x => x[0]).join(" ")) }) });
   };
 
   V.tabela = (el, U, ctx) => {
     const P = prog(ctx.ns + ":tabela");
     const F = P.f = Object.assign({ sp: "", g: "", q: "", hot: false, compact: false }, P.f);
+    if (ctx.preset && ctx.preset.q != null) Object.assign(F, { sp: "", g: "", hot: false, q: ctx.preset.q });
     const grupos = [...new Set(U.drugs.map(d => d.g))];
     function draw() {
       const list = U.drugs.filter(d => (!F.sp || d.sp === F.sp) && (!F.g || d.g === F.g) && (!F.hot || d.nb > 0) && (!F.q || norm(d.n + " " + d.g + " " + d.mec + " " + d.ind).includes(norm(F.q))));
@@ -234,7 +252,7 @@
         ${F.compact ? `<div class="nv-compact">${list.map(d => `<div class="nv-cd"><b>${esc(d.n)}</b><span class="g">${esc(d.g)} · ${esc(d.sp)}</span><span>${d.ds}</span>${d.nb ? `<span class="tag hot">caiu ${d.nb}×</span>` : ""}</div>`).join("")}</div>` : `
         <div class="nv-tablebox"><table class="nv-table">
           <thead><tr><th>Fármaco</th><th>Mecanismo</th><th>Dose</th><th>Indicação</th><th>Atenção</th><th>SUS</th></tr></thead>
-          <tbody>${list.map(d => `<tr><td><b>${esc(d.n)}</b><div class="g">${esc(d.g)} · ${esc(d.sp)}</div>${d.nb ? `<span class="tag hot">caiu ${d.nb}×</span>` : ""}</td><td>${d.mec}</td><td>${d.ds}</td><td>${d.ind}</td><td>${d.ea}</td><td>${esc(d.sus || "")}</td></tr>`).join("")}</tbody>
+          <tbody>${list.map(d => `<tr><td><b>${esc(d.n)}</b><div class="g">${esc(d.g)} · ${esc(d.sp)}</div>${d.nb ? `<span class="tag hot">caiu ${d.nb}×</span>` : ""}<div class="nv-qlinks">${d.nb ? `<button class="link" data-dq="${esc(d.k)}" data-w="provas">${d.nb} nas provas →</button>` : ""}${d.na ? `<button class="link" data-dq="${esc(d.k)}" data-w="abcd">${d.na} no treino →</button>` : ""}</div></td><td>${d.mec}</td><td>${d.ds}</td><td>${d.ind}</td><td>${d.ea}</td><td>${esc(d.sus || "")}</td></tr>`).join("")}</tbody>
         </table></div>`}
       </div>`;
       const tq = el.querySelector("#tq"); tq.oninput = () => { F.q = tq.value; SAVE(); const pos = tq.selectionStart; draw(); const n = el.querySelector("#tq"); n.focus(); n.setSelectionRange(pos, pos); };
@@ -242,6 +260,7 @@
       el.querySelector("#th").onclick = () => { F.hot = !F.hot; SAVE(); draw(); };
       el.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { F.compact = b.dataset.c === "1"; SAVE(); draw(); });
       el.querySelectorAll("[data-f=sp]").forEach(b => b.onclick = () => { F.sp = b.dataset.v; SAVE(); draw(); });
+      el.querySelectorAll("[data-dq]").forEach(b => b.onclick = () => ctx.openView(b.dataset.w, { f: { q: b.dataset.dq }, start: false }));
     }
     draw();
   };
@@ -267,6 +286,33 @@
       el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { open[b.dataset.i] = 1; draw(); });
     }
     draw();
+  };
+
+  V.vespera = (el, U, ctx, item) => {
+    const T = window.UC_TRUQUES || [];
+    const refs = p => (String(p.e).match(/T\d+|PM/g) || []).length;
+    const topPeg = U.peg.slice().sort((a, b) => refs(b) - refs(a)).slice(0, 10);
+    const P = prog(ctx.ns + ":provas");
+    const errs = Object.values(P.r || {}).filter(v => v === "err").length;
+    const first = h => { const c = String(h || "").replace(/<[^>]+>/g, "").split(/ · |; |\. /)[0]; return c.length > 140 ? c.slice(0, 138) + "…" : c; };
+    el.innerHTML = `<div class="nv-wrap wide">
+      <section class="nv-card nv-hero"><div><h3>Véspera</h3><p>Para a manhã da prova: um simulado curto no formato da sua turma, o que mais cai, como ela engana, as doses que ela pede e a tabela numa tela.</p></div>
+        <div class="nv-frow"><button class="btn-pri" data-go="sim">Simulado relâmpago · 15 da T10 e T11</button><button class="btn" data-go="abcd">Rodada ABCD de 10</button><button class="btn" data-go="err">Refazer as que errei (${errs})</button></div></section>
+      <div class="nv-2col">
+        <section class="nv-card"><h3>O que mais cai</h3><div class="nv-top">${(U.res.top || []).map(t => `<button class="nv-toprow" data-pg="${t.p}"><span class="n">${t.n}×</span><span class="t">${esc(t.t)}${t.star ? " ★" : ""}</span><span class="p">p.${t.p} →</span></button>`).join("")}</div></section>
+        <section class="nv-card"><h3>Doses que ela já pediu</h3><p class="nv-hint">Discursiva = fármaco + dose + posologia (+ tempo).</p><div class="nv-tablebox"><table class="nv-table" style="min-width:0"><tbody>${U.rx.doses.map(d => `<tr><td><b>${esc(d[0])}</b></td><td>${esc(d[1])}<div class="g">${esc(d[2])}</div></td></tr>`).join("")}</tbody></table></div></section>
+      </div>
+      ${T.length ? `<section class="nv-card"><h3>Como ela engana</h3><div class="nv-tricks">${T.map(t => `<div class="nv-trick"><b>${t.h}</b><p>${t.p}</p><div class="sw">${t.x.map(([a, b]) => `<span><s>${esc(a)}</s>${b ? " → " + esc(b) : ""}</span>`).join("")}</div></div>`).join("")}</div></section>` : ""}
+      <section class="nv-card"><h3>As 10 pegadinhas mais repetidas</h3><div class="nv-pegs">${topPeg.map(p => `<article class="nv-peg"><div class="f"><span class="tag err">falsa</span> ${esc(p.p)}</div><div class="v"><span class="tag ok">o certo</span> ${esc(p.v)}</div><div class="e">${esc(p.sp)} · ${esc(p.e)}</div></article>`).join("")}</div></section>
+      <section class="nv-card"><h3>Tabela compacta</h3><div class="nv-compact">${U.drugs.map(d => `<div class="nv-cd"><b>${esc(d.s)}</b><span>${esc(first(d.ds))}</span></div>`).join("")}</div></section>
+    </div>`;
+    el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
+    el.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+      const g = b.dataset.go;
+      if (g === "sim") ctx.openView("provas", { f: { tu: ["T10", "T11"], mode: "prova", n: 15 }, start: true });
+      else if (g === "abcd") ctx.openView("abcd", { f: { mode: "estudo", n: 10 }, start: true });
+      else ctx.openView("provas", { f: { sit: "errei", mode: "estudo", n: 0 }, start: true });
+    });
   };
 
   V.pdf = (el, U, ctx, item) => V.resumo(el, null, ctx, item);
@@ -418,7 +464,7 @@
       ST = ctx.store; SAVE = ctx.save;
       el.innerHTML = `<div class="nv-msg">Carregando…</div>`;
       const dataSrc = item.data || (item.dir ? item.dir + "data.js" : null);
-      (dataSrc ? loadData(dataSrc) : Promise.resolve(null)).then(U => {
+      (dataSrc ? loadData(dataSrc) : Promise.resolve(null)).then(U => item.extra ? (loading[item.extra] = loading[item.extra] || loadScript(item.extra)).then(() => U) : U).then(U => {
         const fn = V[item.view];
         if (!fn) { el.innerHTML = `<div class="nv-msg">Vista "${esc(item.view)}" não existe.</div>`; return; }
         fn(el, U, Object.assign({ ns: item.ns || item.dir || item.data || item.pdf || "x" }, ctx), item);
