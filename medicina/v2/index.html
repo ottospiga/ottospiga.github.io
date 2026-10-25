@@ -13,6 +13,7 @@
   --uc13:#d4573b; --uc13-bg:#3a2a27; --uc13-fg:#f07a5f;
   --uc14:#138a7e; --uc14-bg:#23443f; --uc14-fg:#7fd6cc;
   --uc15:#4f55c9; --uc15-bg:#2a2b4a; --uc15-fg:#8e93ff;
+  --hp:#a86b12; --hp-bg:#3a3020; --hp-fg:#f0b429;
   --acc:#d4573b;
   --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
@@ -21,7 +22,7 @@
 :root[data-theme="dark"]{
   --bg:#10171b; --surface:#172126; --sunk:#0c1215; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3940;
   --nav:#0b1114; --nav-2:#172126; --nav-3:#121b20; --nav-line:#22313a;
-  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; color-scheme:dark;
+  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; --hp:#f0b429; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -164,12 +165,14 @@ const KEY = "med-site-v2";
 const store = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } })();
 store.seen = store.seen || {};       // "uc/mat/aba/item" -> timestamp
 store.recent = store.recent || [];   // últimos lugares abertos
-store.open = store.open || {uc13:true};
+store.open = store.open || {uc14:true};
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
 
 /* ---------- estado ---------- */
 let st = { uc:null, mat:null, aba:0, item:0 };
 const ucOf = id => S.ucs.find(u => u.id === id);
+const ucName = u => [u.nome, u.tema].filter(Boolean).join(" · ");
+const ORD = (a, b) => (b.ordem ?? b.num) - (a.ordem ?? a.num);
 const matOf = (u, id) => (u.materias || []).find(m => m.id === id);
 const href = src => encodeURI(S.base + src).replace(/#/g, "%23");
 const isPdf = src => /\.pdf$/i.test(src);
@@ -215,13 +218,13 @@ function renderNav(){
     </div>
     <button class="home-link" id="goHome" aria-current="${!st.uc}">${ICON.home}<span>Início</span></button>
     <div style="display:flex;flex-direction:column;gap:4px">
-      ${S.ucs.slice().sort((a,b)=>b.num-a.num).map(u => {
-        const open = !!store.open[u.id] && u.materias.length;
+      ${S.ucs.slice().sort(ORD).map(u => {
+        const open = (!!store.open[u.id] || st.uc === u.id) && u.materias.length > 0;
         const has = u.materias.length > 0;
         return `<div class="uc-group ${open ? "open" : ""}" style="--uc-bg:var(--${u.cor}-bg)">
           <button class="uc-btn" data-uc="${u.id}" ${has ? "" : "disabled"} aria-expanded="${open}" title="${esc(u.nome)} ${esc(u.tema)}">
-            <span class="uc-badge" style="background:${st.uc===u.id ? `var(--${u.cor})` : `var(--${u.cor}-bg)`};color:${st.uc===u.id ? "#fff" : `var(--${u.cor}-fg)`}">${u.num}</span>
-            <span class="uc-label"><b>${esc(u.tema || u.nome)}</b><span>${has ? u.materias.length + " matérias · " : ""}${esc(u.status)}</span></span>
+            <span class="uc-badge" style="background:${st.uc===u.id ? `var(--${u.cor})` : `var(--${u.cor}-bg)`};color:${st.uc===u.id ? "#fff" : `var(--${u.cor}-fg)`}">${esc(u.sigla || u.num)}</span>
+            <span class="uc-label"><b>${esc(u.tema || u.nome)}</b><span>${has ? u.materias.length + (u.materias.length > 1 ? " matérias" : " matéria") : ""}${has && u.status ? " · " : ""}${esc(u.status || "")}</span></span>
             ${has ? ICON.chev : ""}
           </button>
           <div class="mats">${u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("")}</div>
@@ -250,7 +253,7 @@ function openFly(id, btn){
   const f = document.createElement("div");
   f.className = "flyout"; f.id = "fly"; f.setAttribute("role","menu");
   f.style.left = (r.right + 8) + "px"; f.style.top = Math.max(8, r.top - 8) + "px";
-  f.innerHTML = `<h4>${esc(u.nome)} · ${esc(u.tema)}</h4>` + u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("");
+  f.innerHTML = `<h4>${esc(ucName(u))}</h4>` + u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("");
   document.body.appendChild(f);
   f.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [uu,m] = b.dataset.go.split("|"); closeFly(); go(uu, m); });
   setTimeout(() => document.addEventListener("click", outside), 0);
@@ -273,8 +276,8 @@ function renderMateria(){
     <header class="head">
       <div class="head-row">
         <h1>${esc(m.nome)}</h1>
-        <span class="crumb">${esc(u.nome)} · ${esc(u.tema)}${m.prof ? " · Prof. " + esc(m.prof) : ""}</span>
-        <span class="pill" style="margin-left:auto">${esc(u.status)}</span>
+        <span class="crumb">${esc(ucName(u))}${m.prof ? " · Prof. " + esc(m.prof) : ""}</span>
+        ${u.status ? `<span class="pill" style="margin-left:auto">${esc(u.status)}</span>` : ""}
       </div>
       <nav class="tabs" role="tablist" aria-label="Abas da matéria">
         ${m.abas.map((ab, i) => `<button class="tab ${seenAba(ab) ? "seen" : ""}" role="tab" data-aba="${i}" aria-selected="${i===st.aba}">${esc(ab.titulo)}<span class="dot" aria-hidden="true"></span></button>`).join("")}
@@ -323,9 +326,9 @@ function renderHome(){
     <section>
       <h2>Unidades</h2>
       <div class="uc-cards">
-        ${S.ucs.slice().sort((a,b)=>b.num-a.num).map(u => `
+        ${S.ucs.slice().sort(ORD).map(u => `
           <article class="uc-card" style="--acc:var(--${u.cor})">
-            <header><span class="uc-badge" style="background:var(--${u.cor});color:#fff">${u.num}</span><b>${esc(u.tema || u.nome)}</b><span class="st">${esc(u.status)}</span></header>
+            <header><span class="uc-badge" style="background:var(--${u.cor});color:#fff">${esc(u.sigla || u.num)}</span><b>${esc(u.tema || u.nome)}</b><span class="st">${esc(u.status || "")}</span></header>
             ${u.materias.length ? `
               <div class="mlist">${u.materias.map(m => `<button data-go="${u.id}|${m.id}">${esc(m.nome)}</button>`).join("")}</div>
               <div class="prog"><span>visto</span><i><b style="width:${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%"></b></i><span style="font-family:var(--f-mono)">${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%</span></div>
