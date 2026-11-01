@@ -2,7 +2,7 @@
    Enunciados e alternativas copiados como estão na prova. gab = alternativa marcada pela aluna e aceita
    (nas SP2 e SP5 conferida pelo quadro de gabarito; na SP3 Q4 a tutora circulou a C como certa).
    Discursivas: resposta escrita por uma aluna da T11, com as marcas da tutora. Não é gabarito oficial.
-   link: aba "sp1" = resumo de SP1 (nosso), aba "veterana" = resumo T11 da veterana. */
+   link: aba "sp1"/"sp2" = resumos de SP1/SP2 (nossos), aba "veterana" = resumo T11 da veterana. */
 window.UC = { sps: {
   1: { tema: "ITU, microbiota e antibioticoterapia", data: "", formato: "5 objetivas + 1 discursiva (receita de alta)" },
   2: { tema: "IVAS: sinusite, otite e pneumonia", data: "13/05/2026", formato: "3 objetivas + 1 discursiva (caso de pneumonia)" },
@@ -53,26 +53,26 @@ window.UC = { sps: {
       "Rinofaringite aguda, resfriado comum, são causados na sua grande maioria por bactérias gram positivas.",
       "A faringoamigdalite aguda estreptocócica (FAE) é uma infecção aguda da orofaringe, na maioria das vezes, produzida por um estreptococo beta-hemolítico do grupo A. Ela não pode desencadear reações supurativas tardias, como febre reumática (FR) e glomerulonefrite difusa aguda (GNDA).",
       "A maioria dos episódios de faringoamigdalites agudas é causada por vírus e é autolimitada (5–7 dias). Para estes casos não há tratamento específico, além de medidas de suporte (hidratação e uso de analgésicos e antipiréticos)."], gab: 3,
-    link: [{ t: "veterana", p: 9 }] },
+    link: [{ t: "sp2", p: 3 }, { t: "veterana", p: 9 }] },
   { id: "sp2-2", sp: 2, n: 2,
     enun: "Larissa, 24 anos, estudante, previamente hígida refere há 1 semana coriza, espirros e tosse seca e há 2 dias refere piora importante dos sintomas com quadro de cefaleia, congestão nasal, febre (39 ºC) e otalgia intensa à esquerda. Ao exame físico nota-se dor à palpação de seios frontais e a otoscopia mostra abaulamento da membrana timpânica esquerda com perda da transparência (opacidade). A paciente foi diagnosticada com Sinusite Aguda e Otite Média Aguda (OMA). Sobre o caso assinale a alternativa correta:",
     alts: ["A paciente deve realizar exame de imagem com Tomografia Computadorizada de seios da face para confirmar o diagnóstico de Sinusite e a otoscopia com os achados descritos confirmam o diagnóstico de OMA.",
       "Um dos fatores mais predisponentes para as sinusites e OMAs são as IVAS (resfriado, gripe).",
       "Provavelmente a paciente está com uma Sinusite Viral Aguda e não deve-se instituir tratamento por se tratar de patologia com resolução espontânea. Em relação à Otite deve ser iniciado antibioticoterapia e analgésicos.",
       "O tratamento adequado para ambos os diagnósticos deve ser feito com amoxicilina por 3 dias associado ao uso de solução salina nasal, mucocinéticos e sintomáticos (analgésicos e antitérmicos)."], gab: 1,
-    link: [{ t: "veterana", p: 9 }] },
+    link: [{ t: "sp2", p: 9 }, { t: "veterana", p: 9 }] },
   { id: "sp2-3", sp: 2, n: 3,
     enun: "Na UBS você atende Gisele, de 4 anos de idade, que segundo a mãe iniciou quadro de coriza, febre (37,9 °C), congestão nasal e tosse seca há 3 dias. Ao exame físico bom estado geral, demais aparelhos sem alterações:",
     alts: ["Solicitar hemograma, PCR, radiografia de tórax e de seios da face.",
       "Alta com prescrição de medicações sintomáticas.",
       "Etapa de hidratação venosa e solicitar radiografia de tórax e de seios da face.",
       "Alta com prescrição de medicações sintomáticas e antibioticoterapia."], gab: 1,
-    link: [{ t: "veterana", p: 9 }] },
+    link: [{ t: "sp2", p: 3 }, { t: "veterana", p: 9 }] },
   { id: "sp2-4", sp: 2, n: 4, disc: true,
     enun: "Paciente de 70 anos vem apresentando há 6 dias tosse produtiva, secreção amarelada e febre de 38,8 °C. Em isolamento domiciliar e em uso de sintomáticos, pois pensou que poderia ser gripe ou Covid-19. É hipertenso e diabético com controle adequado. Nega alergias, cirurgias, bem como doenças em familiares próximos. Exame físico: consciente e desorientado no tempo e no espaço, agitado, FC 118 bpm, FR 25 irpm, PA 80×50 mmHg, sons respiratórios aumentados em base D com crepitações na mesma área. Abdome com RHA presentes, sem visceromegalias palpáveis, indolor à palpação superficial e profunda. De acordo com a análise do caso, qual a melhor conduta a ser indicada no momento?<br>a) Cite os exames complementares a serem solicitados, se julgar necessário.<br>b) Cite o tratamento medicamentoso e o regime optado por você – ambulatorial, hospitalar ou UTI?",
     resp: "<b>a)</b> Hemograma, ureia, PCR/VHS, cultura de escarro, antibiograma.<br><b>b)</b> Tratamento com antibioticoterapia (amoxicilina + clavulanato). Regime hospitalar por conta da idade, PA e confusão mental.",
     marcas: "A tutora acrescentou \"+ RX de tórax\" nos exames e \"pensar em ATB EV\" no tratamento.",
-    link: [{ t: "veterana", p: 9 }] },
+    link: [{ t: "sp2", p: 18 }, { t: "veterana", p: 9 }] },
 
   { id: "sp3-1", sp: 3, n: 1, enun: "A osteomielite é uma infecção que acomete o tecido ósseo e medular. Sobre sua classificação e agentes etiológicos, assinale a alternativa CORRETA:",
     alts: ["A osteomielite hematogênica ocorre principalmente em adultos e é causada, na maioria dos casos, por bactérias anaeróbias da flora oral.",
