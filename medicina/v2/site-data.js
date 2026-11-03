@@ -39,6 +39,8 @@ window.SITE = {
           { id: "veterana", titulo: "Resumo da veterana", itens: [ { label: "Tutoria · resumo T11", nativo: "pdf", pdf: "conteudo/uc15/tutoria/resumo-veterana-t11.pdf", thumbs: "conteudo/uc15/tutoria/thumbs-vet/p-", data: "conteudo/uc15/tutoria/apf.js", apfKey: "veterana", ns: "uc15/tut/vet",
             toc: [{"p": 1, "t": "SP1 · ITU"}, {"p": 9, "t": "SP2 · IVAS"}, {"p": 17, "t": "SP3 · Osteomielite"}, {"p": 23, "t": "SP4 · Infecções cutâneas"}, {"p": 29, "t": "SP5 · Sepse"}] } ] } ] },
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
+          { id: "diario", titulo: "Resumo diário", itens: [ { label: "Resumo diário SP1–3", nativo: "pdf", pdf: "conteudo/uc15/farmaco/resumo-diario-sp1-3.pdf", thumbs: "conteudo/uc15/farmaco/thumbs-diario/p-", ns: "uc15/farmaco/diario",
+            toc: [{"p": 1, "t": "Como ela pensa"}, {"p": 2, "t": "SP1 · ITU e antissépticos"}, {"p": 3, "t": "SP2 · Sulfas e quinolonas"}, {"p": 4, "t": "SP3 · Mecanismo e penicilinas"}, {"p": 5, "t": "SP3 · Alergia e cefalosporinas"}, {"p": 7, "t": "Resistência (quadro da aula)"}, {"p": 8, "t": "Divergências · doses · 10 frases"}, {"p": 9, "t": "Fluxograma do quadro"}] } ] },
           { id: "raiox", titulo: "Raio-X", itens: [ { label: "Raio-X", nativo: "raiox", dir: "uc15/farmaco/central/" } ] },
           { id: "resumo", titulo: "Resumo", itens: [ { label: "Resumo grifado", nativo: "resumo", dir: "uc15/farmaco/central/" } ] },
           { id: "videos", titulo: "Videoaulas", itens: [ { label: "Videoaulas", nativo: "videos", ns: "uc15/farmaco", videos: [
