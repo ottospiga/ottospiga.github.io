@@ -1,309 +1,152 @@
 #!/usr/bin/env python3
-"""Gera medicina/index.html a partir do catalog.json.
+"""Confere o site de Medicina e regera o menu dos guias.
 
-Uso:
-  python3 medicina/build.py           # regenera o index a partir do catálogo
-  python3 medicina/build.py --scan    # + varre 5-fase/**/*.html: adiciona guias
-                                      #   novos ao catálogo, remove entradas cujo
-                                      #   arquivo sumiu e regenera o index
+A fonte única é medicina/site-data.js (UC → matéria → abas → itens), editado à mão.
+Este script NÃO mexe nele; só:
+  1. confere se todo caminho citado no site-data.js existe (src, pdf, data, dir, extra, vídeos, miniaturas);
+  2. lista os .html de 5-fase/ que ainda não estão em nenhuma aba (guia novo esperando lugar);
+  3. regera medicina/nav.js (menu 📚 que aparece quando um guia é aberto sozinho, fora do site);
+  4. injeta em cada guia de 5-fase/ a linha que carrega esse menu (idempotente).
 
-Sem dependências fora da stdlib. Pode ser rodado de qualquer diretório.
+Uso:  python3 medicina/build.py        (de qualquer diretório; só stdlib)
+Sai com código 1 se houver caminho inexistente ou guia sem aba.
 """
 
-import argparse
-import html
 import json
 import re
+import sys
 import unicodedata
-from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-CATALOG_PATH = ROOT / "catalog.json"
+SITE_DATA = ROOT / "site-data.js"
 GUIDES_DIR = ROOT / "5-fase"
-INDEX_PATH = ROOT / "index.html"
 NAV_PATH = ROOT / "nav.js"
 NAV_MARK = "<!-- medicina-nav -->"
 
+# HTMLs de 5-fase/ que ficam de propósito fora das abas: {"uc14/x/arquivo.html": "motivo"}
+FORA = {}
+
+NFC = lambda s: unicodedata.normalize("NFC", s)
+
+
 # ---------------------------------------------------------------------------
-# Tabelas editáveis — nomes de exibição para os slugs das pastas.
-# Pasta nova sem entrada aqui: "ucN" vira "UCN" sozinho; o resto vira
-# Title Case do slug ("nefro-uro" -> "Nefro Uro"). Edite à vontade.
+# site-data.js → dict (objeto JS simples: chaves sem aspas, comentários, vírgula final)
 # ---------------------------------------------------------------------------
-UC_ORDER = ["UC13", "UC14", "UC15", "HP Manifestações Abdominais", "HP Otorrinolaringologia", "HP Infecções"]  # seções fixas, nesta ordem
-UC_NAMES = {
-    "uc13": "UC13",
-    "hp-abdomen": "HP Manifestações Abdominais",
-    "hp-otorrino": "HP Otorrinolaringologia",
-    "hp-infeccoes": "HP Infecções",
-}
-MATERIA_NAMES = {
-    "tutoria": "Tutoria",
-    "anato-fisio": "Anatomia + Fisiologia",
-    "pato": "Patologia",
-    "farmaco": "Farmacologia",
-    "fisio": "Fisiologia",
-    "anato": "Anatomia",
-    "otorrino": "Otorrinolaringologia",
-    "lab": "Laboratório",
-    "procedimentos": "Procedimentos",
-    "clinica": "Clínica",
-    "infectologia": "Infectologia",
-}
-TIPO_LABELS = {
-    "guia-sp": "guia de SP",
-    "guia-prova": "guia de prova",
-    "flashcards": "flashcards",
-    "banco": "banco de questões",
-    "simulado": "simulado",
-    "material": "material de apoio",
-}
-
-
-def display_name(slug, table):
-    if slug in table:
-        return table[slug]
-    m = re.fullmatch(r"uc(\d+)", slug)
-    if m:
-        return "UC" + m.group(1)
-    return slug.replace("-", " ").title()
-
-
-def infer_tipo(filename):
-    """Tipo a partir dos tokens do nome do arquivo; None se nada casar."""
-    stem = filename.lower()
-    if stem.endswith(".html"):
-        stem = stem[: -len(".html")]
-    tokens = stem.split("-")
-    if "flashcards" in tokens or "flashcard" in tokens:
-        return "flashcards"
-    if "banco" in tokens:
-        return "banco"
-    if any(t.startswith("simulad") for t in tokens):
-        return "simulado"
-    if any(t in ("podcast", "roteiro", "roteiros", "transcricao", "transcricoes", "leitura", "material") for t in tokens):
-        return "material"
-    if any(re.fullmatch(r"sp\d+", t) for t in tokens) or "inicial" in tokens or "aprofundamento" in tokens:
-        return "guia-sp"
-    if any(re.fullmatch(r"[ab]\d", t) for t in tokens) or "revisao" in tokens or "guia" in tokens:
-        return "guia-prova"
-    return None
-
-
-def extract_title(path):
-    text = Path(path).read_text(encoding="utf-8", errors="replace")
-    m = re.search(r"<title>(.*?)</title>", text, re.I | re.S)
-    if not m:
-        return Path(path).stem
-    return re.sub(r"\s+", " ", html.unescape(m.group(1))).strip()
-
-
-def load_catalog():
-    if not CATALOG_PATH.exists():
-        return []
-    return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
-
-
-def save_catalog(entries):
-    CATALOG_PATH.write_text(
-        json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
-
-
-def scan(entries):
-    """Remove entradas sem arquivo e adiciona arquivos sem entrada."""
-    changed = False
-    kept = []
-    for e in entries:
-        if (ROOT / e["arquivo"]).is_file():
-            kept.append(e)
+def js_object_to_json(src):
+    out, i, n = [], 0, len(src)
+    while i < n:
+        c = src[i]
+        if c in "\"'":                                   # string
+            j, buf = i + 1, []
+            while src[j] != c:
+                if src[j] == "\\":
+                    buf.append(src[j:j + 2]); j += 2; continue
+                buf.append(src[j]); j += 1
+            s = "".join(buf)
+            if c == "'":
+                s = s.replace("\\'", "'").replace('"', '\\"')
+            out.append('"' + s + '"'); i = j + 1
+        elif src.startswith("/*", i):
+            i = src.index("*/", i) + 2
+        elif src.startswith("//", i):
+            i = src.find("\n", i); i = n if i < 0 else i
+        elif c.isalpha() or c in "_$":                    # identificador
+            j = i
+            while j < n and (src[j].isalnum() or src[j] in "_$"):
+                j += 1
+            word = src[i:j]
+            k = j
+            while k < n and src[k] in " \t\r\n":
+                k += 1
+            out.append('"%s"' % word if k < n and src[k] == ":" and word not in ("true", "false", "null") else word)
+            i = j
         else:
-            print("- removido do catálogo (arquivo sumiu): " + e["arquivo"])
-            changed = True
-    entries = kept
+            out.append(c); i += 1
+    txt = "".join(out)
+    return re.sub(r",(\s*[}\]])", r"\1", txt)
 
-    known = {e["arquivo"] for e in entries}
+
+def load_site():
+    src = SITE_DATA.read_text(encoding="utf-8")
+    body = src[src.index("{", src.index("window.SITE")):src.rindex("}") + 1]
+    return json.loads(js_object_to_json(body))
+
+
+def ucs_em_ordem(site):
+    # mesma ordem da barra lateral: maior número primeiro (UC15, UC14, UC13), HP (ordem 0) por último
+    return sorted(site["ucs"], key=lambda u: -(u.get("ordem", u.get("num", 0))))
+
+
+# ---------------------------------------------------------------------------
+# conferência
+# ---------------------------------------------------------------------------
+def caminho(site, rel):
+    return ROOT / rel if rel.startswith(("conteudo/", "lib/")) else ROOT / site["base"] / rel
+
+
+def conferir(site):
+    faltando, usados = [], set()
+    for u in site["ucs"]:
+        for m in u["materias"]:
+            for a in m["abas"]:
+                for it in a["itens"]:
+                    onde = "{}/{}/{}".format(u["id"], m["id"], a["id"])
+                    refs = [it.get(k) for k in ("src", "pdf", "data", "extra")]
+                    if it.get("dir"):
+                        refs.append(it["dir"] + "data.js")
+                    refs += [v.get("src") for v in it.get("videos", [])]
+                    if it.get("thumbs"):
+                        refs.append(it["thumbs"] + "01.jpg")
+                    for r in filter(None, refs):
+                        if not caminho(site, r).is_file():
+                            faltando.append((onde, r))
+                    if it.get("src") and not it["src"].startswith("conteudo/"):
+                        usados.add(NFC(it["src"]))
+    sem_aba = sorted(
+        rel for rel in (NFC(p.relative_to(GUIDES_DIR).as_posix()) for p in GUIDES_DIR.rglob("*.html"))
+        if rel not in usados and rel not in FORA)
+    return faltando, sem_aba, usados
+
+
+# ---------------------------------------------------------------------------
+# menu 📚 dos guias abertos sozinhos (nav.js)
+# ---------------------------------------------------------------------------
+def render_nav(site):
+    data = []
+    for u in ucs_em_ordem(site):
+        nome = " · ".join(x for x in (u.get("nome"), u.get("tema")) if x)
+        ms = []
+        for m in u["materias"]:
+            fs = []
+            for a in m["abas"]:
+                for i, it in enumerate(a["itens"]):
+                    t = a["titulo"] if len(a["itens"]) == 1 else "{} · {}".format(a["titulo"], it["label"])
+                    fs.append({"t": t, "h": "{}/{}/{}/{}".format(u["id"], m["id"], a["id"], i),
+                               "f": (site["base"] + it["src"]) if it.get("src") and not it["src"].startswith("conteudo/") else ""})
+            ms.append({"m": m["nome"], "fs": fs})
+        data.append({"u": nome, "ms": ms})
+    return NAV_TEMPLATE.replace("__DATA__", json.dumps(data, ensure_ascii=False))
+
+
+def inject_nav():
+    feitos = []
     for p in sorted(GUIDES_DIR.rglob("*.html")):
-        rel = p.relative_to(ROOT).as_posix()
-        if rel in known:
+        text = p.read_text(encoding="utf-8", errors="replace")
+        if NAV_MARK in text:
             continue
-        parts = p.relative_to(GUIDES_DIR).parts
-        if len(parts) < 2:
-            print("! ignorado (esperado 5-fase/<uc>/<materia>/arquivo.html): " + rel)
-            continue
-        uc = display_name(parts[0], UC_NAMES)
-        materia = display_name(parts[1], MATERIA_NAMES) if len(parts) >= 3 else "Geral"
-        tipo = infer_tipo(p.name)
-        aviso = ""
-        if tipo is None:
-            tipo = "guia-prova"
-            aviso = "  (tipo por fallback — confira no catalog.json)"
-        entry = {
-            "uc": uc,
-            "materia": materia,
-            "titulo": extract_title(p),
-            "tipo": tipo,
-            "data": datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d"),
-            "arquivo": rel,
-            "origem": "",
-        }
-        entries.append(entry)
-        known.add(rel)
-        changed = True
-        print("+ adicionado: {} [{}] {}{}".format(rel, tipo, entry["titulo"], aviso))
-    return entries, changed
+        depth = len(p.relative_to(ROOT).parts) - 1
+        tag = '{}<script defer src="{}nav.js"></script>'.format(NAV_MARK, "../" * depth)
+        head, sep, tail = text.rpartition("</body>")
+        text = head + tag + "\n" + sep + tail if sep else text + "\n" + tag + "\n"
+        p.write_text(text, encoding="utf-8")
+        feitos.append(p.relative_to(ROOT).as_posix())
+    return feitos
 
 
-def fmt_date(iso):
-    return "{}/{}/{}".format(iso[8:10], iso[5:7], iso[:4])
-
-
-def strip_accents(s):
-    return "".join(c for c in unicodedata.normalize("NFD", s) if not unicodedata.combining(c))
-
-
-def slugify(s):
-    s = re.sub(r"[^a-z0-9]+", "-", strip_accents(s).lower()).strip("-")
-    return s or "x"
-
-
-def esc(s):
-    return html.escape(str(s), quote=True)
-
-
-PAGE_TOP = """<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicina · UNIFEBE · 5º período</title>
-  <style>
-    :root{
-      --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
-      --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --blue:#4c8dff;
-      --amber:#ffb454; --green:#38d39f; --purple:#c6b3ff;
-      --shadow:0 6px 24px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    [hidden]{display:none!important}
-    body{
-      background:var(--bg); color:var(--ink);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      padding:24px 16px 40px; display:flex; justify-content:center;
-    }
-    main{width:100%; max-width:860px}
-    .topnav{display:flex; gap:18px; margin-bottom:20px; font-size:14px}
-    .topnav a{color:var(--blue); text-decoration:none}
-    .topnav a:hover{text-decoration:underline}
-    .kicker{color:var(--tealo); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase}
-    h1{font-size:clamp(26px,6vw,36px); margin:6px 0 2px}
-    .sub{color:var(--mut); font-size:15px; margin-bottom:18px}
-    #busca{
-      width:100%; padding:12px 14px; margin-bottom:8px;
-      background:var(--card); color:var(--ink);
-      border:1px solid var(--line); border-radius:12px; font-size:15px; outline:none;
-    }
-    #busca:focus{border-color:var(--tealo)}
-    #busca::placeholder{color:var(--mut)}
-    #vazio{color:var(--mut); margin:18px 2px}
-    section.uc{margin-top:26px}
-    section.uc>h2{
-      font-size:20px; color:var(--tealo); padding-bottom:8px;
-      border-bottom:1px solid var(--line); margin-bottom:6px;
-    }
-    .materia{margin-top:14px}
-    .materia>h3{font-size:14px; color:var(--mut); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px}
-    .cards{display:grid; gap:12px}
-    @media(min-width:700px){.cards{grid-template-columns:1fr 1fr}}
-    .card{
-      display:flex; flex-direction:column; gap:10px;
-      background:var(--card); border:1px solid var(--line); border-radius:14px;
-      padding:16px 18px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow);
-      transition:transform .12s ease, border-color .12s ease;
-    }
-    .card:hover{transform:translateY(-2px); border-color:var(--mut)}
-    .titulo{font-weight:600; font-size:15px; line-height:1.45}
-    .meta{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:auto}
-    .badge{font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap}
-    .b-guia-sp{color:var(--tealo); background:rgba(18,211,176,.12); border:1px solid rgba(18,211,176,.35)}
-    .b-guia-prova{color:var(--blue); background:rgba(76,141,255,.12); border:1px solid rgba(76,141,255,.35)}
-    .b-flashcards{color:var(--purple); background:rgba(198,179,255,.12); border:1px solid rgba(198,179,255,.35)}
-    .b-banco{color:var(--amber); background:rgba(255,180,84,.12); border:1px solid rgba(255,180,84,.35)}
-    .b-simulado{color:var(--green); background:rgba(56,211,159,.12); border:1px solid rgba(56,211,159,.35)}
-    .b-material{color:var(--mut); background:rgba(159,178,198,.12); border:1px solid rgba(159,178,198,.35)}
-    .data{color:var(--mut); font-size:13px}
-    .abrir{color:var(--tealo); font-weight:600; font-size:13px; margin-left:auto; white-space:nowrap}
-    footer{margin-top:34px; color:var(--mut); font-size:13px}
-    html{scroll-behavior:smooth}
-    section.uc, .materia{scroll-margin-top:12px}
-    .sidenav .tree{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:18px}
-    .sidenav summary{cursor:pointer; color:var(--tealo); font-weight:600; font-size:14px}
-    .sidenav ul{list-style:none; margin-top:6px}
-    .sidenav li{margin:2px 0}
-    .sidenav a{display:block; text-decoration:none; color:var(--ink); font-size:14px; font-weight:600; padding:4px 8px; border-radius:8px}
-    .sidenav ul ul a{color:var(--mut); font-weight:400; font-size:13px; padding-left:20px}
-    .sidenav a:hover{color:var(--tealo); background:rgba(18,211,176,.08)}
-    @media(min-width:980px){
-      main{max-width:1120px}
-      .layout{display:grid; grid-template-columns:220px minmax(0,1fr); gap:28px; align-items:start}
-      .sidenav{position:sticky; top:16px; max-height:calc(100vh - 32px); overflow:auto}
-      .sidenav .tree{margin-bottom:0}
-      .sidenav summary{display:none}
-    }
-  </style>
-</head>
-<body>
-<main>
-  <nav class="topnav"><a href="../index.html">← Início</a><a href="../coisas/index.html">Coisas</a></nav>
-  <p class="kicker">Medicina · UNIFEBE · 5º período</p>
-  <h1>Medicina</h1>
-  <p class="sub">Guias de estudo por UC e matéria. Clique num card para abrir.</p>
-  <input id="busca" type="search" placeholder="buscar guia… (título, matéria, tipo)" autocomplete="off">
-  <p id="vazio" hidden>Nenhum guia encontrado.</p>
-"""
-
-PAGE_BOTTOM = """  <footer>atualizado em {updated} · {n} guias</footer>
-</main>
-<script>
-  var busca = document.getElementById('busca');
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
-  function norm(s){{
-    return s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
-  }}
-  busca.addEventListener('input', function(){{
-    var q = norm(busca.value.trim());
-    cards.forEach(function(c){{ c.hidden = q !== '' && c.getAttribute('data-q').indexOf(q) === -1; }});
-    document.querySelectorAll('.materia').forEach(function(m){{
-      m.hidden = !m.querySelector('.card:not([hidden])');
-    }});
-    document.querySelectorAll('section.uc').forEach(function(s){{
-      s.hidden = !s.querySelector('.materia:not([hidden])');
-    }});
-    document.getElementById('vazio').hidden = cards.some(function(c){{ return !c.hidden; }});
-  }});
-  var tree = document.querySelector('.tree');
-  if (tree && window.innerWidth < 980) tree.removeAttribute('open');
-  window.addEventListener('resize', function(){{
-    if (tree && window.innerWidth >= 980) tree.setAttribute('open', '');
-  }});
-  document.querySelectorAll('.sidenav a').forEach(function(a){{
-    a.addEventListener('click', function(){{
-      if (busca.value) {{ busca.value = ''; busca.dispatchEvent(new Event('input')); }}
-      if (tree && window.innerWidth < 980) tree.removeAttribute('open');
-      var alvo = document.querySelector(a.getAttribute('href'));
-      if (alvo) alvo.scrollIntoView({{behavior: 'smooth', block: 'start'}});
-    }});
-  }});
-</script>
-</body>
-</html>
-"""
-
-
-# Menu lateral flutuante injetado nos guias: nav.js é gerado do catálogo e
-# cada guia recebe UMA linha <script> antes do </body> (ver inject_nav).
-NAV_TEMPLATE = """(function () {
-  if (window.self !== window.top) return; // dentro do site v2 (iframe): sem menu flutuante duplicado
+NAV_TEMPLATE = """/* Gerado por medicina/build.py a partir do site-data.js — não editar à mão. */
+(function () {
+  if (window.self !== window.top) return; // dentro do site (iframe): sem menu flutuante duplicado
   var script = document.currentScript;
   if (!script || !script.src) return;
   var base;
@@ -349,17 +192,15 @@ NAV_TEMPLATE = """(function () {
   ].join('\\n');
   root.appendChild(style);
   var tab = document.createElement('button');
-  tab.className = 'tab'; tab.title = 'Guias de medicina'; tab.setAttribute('aria-label', 'Abrir menu de guias');
+  tab.className = 'tab'; tab.title = 'Medicina'; tab.setAttribute('aria-label', 'Abrir menu de Medicina');
   tab.textContent = '\\uD83D\\uDCDA';
   var backdrop = document.createElement('div'); backdrop.className = 'backdrop';
   var drawer = document.createElement('nav'); drawer.className = 'drawer';
   var hd = document.createElement('div'); hd.className = 'hd';
-  var titulo = document.createElement('span'); titulo.textContent = 'Medicina \\u00B7 guias';
+  var titulo = document.createElement('span'); titulo.textContent = 'Medicina';
   var x = document.createElement('button'); x.className = 'x'; x.textContent = '\\u00D7'; x.setAttribute('aria-label', 'Fechar');
   hd.appendChild(titulo); hd.appendChild(x); drawer.appendChild(hd);
-  var idx = document.createElement('a'); idx.className = 'idx';
-  idx.href = new URL('index.html', base).href; idx.textContent = '\\u2302  P\\u00E1gina Medicina';
-  drawer.appendChild(idx);
+  var atual = null;
   var tree = document.createElement('div'); tree.className = 'tree';
   DATA.forEach(function (uc) {
     var d1 = document.createElement('details');
@@ -369,14 +210,18 @@ NAV_TEMPLATE = """(function () {
       var s2 = document.createElement('summary'); s2.textContent = m.m; d2.appendChild(s2);
       m.fs.forEach(function (f) {
         var a = document.createElement('a');
-        a.href = new URL(f.f, base).href; a.textContent = f.t; a.className = 'doc';
-        if (a.href === here) { a.className = 'doc atual'; d1.open = true; d2.open = true; }
+        a.href = new URL('index.html#' + f.h, base).href; a.textContent = f.t; a.className = 'doc';
+        if (f.f && new URL(f.f, base).href === here) { a.className = 'doc atual'; d1.open = true; d2.open = true; atual = atual || f.h; }
         d2.appendChild(a);
       });
       d1.appendChild(d2);
     });
     tree.appendChild(d1);
   });
+  var idx = document.createElement('a'); idx.className = 'idx';
+  idx.href = new URL('index.html' + (atual ? '#' + atual : ''), base).href;
+  idx.textContent = atual ? '\\u2302  Abrir no site de Medicina' : '\\u2302  P\\u00E1gina Medicina';
+  drawer.appendChild(idx);
   drawer.appendChild(tree);
   root.appendChild(tab); root.appendChild(backdrop); root.appendChild(drawer);
   function abre() { backdrop.classList.add('on'); drawer.classList.add('on'); }
@@ -390,118 +235,27 @@ NAV_TEMPLATE = """(function () {
 """
 
 
-def render_nav(entries):
-    ucs = {}
-    for e in entries:
-        ucs.setdefault(e["uc"], {}).setdefault(e["materia"], []).append(e)
-    uc_order = [u for u in UC_ORDER if u in ucs] + [u for u in ucs if u not in UC_ORDER]
-    data = [{"u": uc,
-             "ms": [{"m": m, "fs": [{"t": x["titulo"], "f": x["arquivo"]} for x in items]}
-                    for m, items in ucs[uc].items()]}
-            for uc in uc_order]
-    return NAV_TEMPLATE.replace("__DATA__", json.dumps(data, ensure_ascii=False))
-
-
-def inject_nav(entries):
-    """Garante em cada guia do catálogo a linha que carrega o menu (idempotente)."""
-    feitos = []
-    for e in entries:
-        p = ROOT / e["arquivo"]
-        if not p.is_file():
-            continue
-        text = p.read_text(encoding="utf-8", errors="replace")
-        if NAV_MARK in text:
-            continue
-        depth = len(Path(e["arquivo"]).parts) - 1
-        tag = '{}<script defer src="{}nav.js"></script>'.format(NAV_MARK, "../" * depth)
-        head, sep, tail = text.rpartition("</body>")
-        if sep:
-            text = head + tag + "\n" + sep + tail
-        else:
-            text = text + "\n" + tag + "\n"
-        p.write_text(text, encoding="utf-8")
-        feitos.append(e["arquivo"])
-    return feitos
-
-
-def render_index(entries):
-    ucs = {}
-    for e in entries:
-        ucs.setdefault(e["uc"], {}).setdefault(e["materia"], []).append(e)
-    uc_order = [u for u in UC_ORDER if u in ucs] + [u for u in ucs if u not in UC_ORDER]
-
-    out = [PAGE_TOP]
-    out.append('  <div class="layout">\n    <aside class="sidenav">\n      <details class="tree" open>\n'
-               '        <summary>Navegar por UC e matéria</summary>\n        <ul>\n')
-    for uc in uc_order:
-        us = slugify(uc)
-        out.append('          <li><a href="#uc-{}">{}</a>\n            <ul>\n'.format(us, esc(uc)))
-        for materia in ucs[uc]:
-            out.append('              <li><a href="#m-{}-{}">{}</a></li>\n'.format(us, slugify(materia), esc(materia)))
-        out.append('            </ul>\n          </li>\n')
-    out.append('        </ul>\n      </details>\n    </aside>\n    <div class="conteudo">\n')
-    for uc in uc_order:
-        us = slugify(uc)
-        out.append('  <section class="uc" id="uc-{}">\n    <h2>{}</h2>\n'.format(us, esc(uc)))
-        for materia, items in ucs[uc].items():
-            out.append('    <div class="materia" id="m-{}-{}">\n      <h3>{}</h3>\n      <div class="cards">\n'.format(us, slugify(materia), esc(materia)))
-            for e in items:
-                tipo = e["tipo"]
-                label = TIPO_LABELS.get(tipo, tipo)
-                busca = strip_accents(" ".join(
-                    [e["titulo"], e["materia"], e["uc"], tipo, label, fmt_date(e["data"])]
-                )).lower()
-                out.append(
-                    '        <a class="card" href="{href}" data-q="{q}">\n'
-                    '          <span class="titulo">{titulo}</span>\n'
-                    '          <span class="meta">\n'
-                    '            <span class="badge b-{tipo}">{label}</span>\n'
-                    '            <span class="data">{data}</span>\n'
-                    '            <span class="abrir">abrir →</span>\n'
-                    '          </span>\n'
-                    '        </a>\n'.format(
-                        href=esc(e["arquivo"]), q=esc(busca), titulo=esc(e["titulo"]),
-                        tipo=esc(tipo), label=esc(label), data=esc(fmt_date(e["data"])),
-                    )
-                )
-            out.append('      </div>\n    </div>\n')
-        out.append('  </section>\n')
-    out.append('    </div>\n  </div>\n')
-    out.append(PAGE_BOTTOM.format(updated=date.today().strftime("%d/%m/%Y"), n=len(entries)))
-    return "".join(out)
-
-
 def main():
-    ap = argparse.ArgumentParser(description="Gera medicina/index.html a partir do catalog.json")
-    ap.add_argument("--scan", action="store_true",
-                    help="varre 5-fase/**/*.html e atualiza o catálogo antes de gerar")
-    args = ap.parse_args()
+    site = load_site()
+    faltando, sem_aba, usados = conferir(site)
+    print("{} guias de 5-fase/ nas abas".format(len(usados)))
+    print("Caminhos inexistentes: {}".format(len(faltando)))
+    for onde, r in faltando:
+        print("  ✗ {}  →  {}".format(onde, r))
+    print("Guias de 5-fase/ sem aba no site-data.js: {}".format(len(sem_aba)))
+    for r in sem_aba:
+        print("  ? " + r)
 
-    entries = load_catalog()
-    if args.scan:
-        entries, changed = scan(entries)
-        if changed:
-            save_catalog(entries)
-            print("catalog.json atualizado ({} guias)".format(len(entries)))
-        else:
-            print("catalog.json inalterado ({} guias)".format(len(entries)))
-
-    out = render_index(entries)
-    if INDEX_PATH.exists() and INDEX_PATH.read_text(encoding="utf-8") == out:
-        print("index.html inalterado")
-    else:
-        INDEX_PATH.write_text(out, encoding="utf-8")
-        print("index.html gerado ({} guias)".format(len(entries)))
-
-    nav = render_nav(entries)
+    nav = render_nav(site)
     if NAV_PATH.exists() and NAV_PATH.read_text(encoding="utf-8") == nav:
         print("nav.js inalterado")
     else:
         NAV_PATH.write_text(nav, encoding="utf-8")
-        print("nav.js gerado ({} guias)".format(len(entries)))
-    feitos = inject_nav(entries)
+        print("nav.js gerado")
+    feitos = inject_nav()
     if feitos:
-        print("menu lateral injetado em {} guia(s)".format(len(feitos)))
+        print("menu injetado em {} guia(s): {}".format(len(feitos), ", ".join(feitos)))
+    sys.exit(1 if faltando or sem_aba else 0)
 
 
 if __name__ == "__main__":

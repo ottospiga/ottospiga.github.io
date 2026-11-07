@@ -3,16 +3,13 @@ Resume
 
 ## Guias de medicina
 
-- `index.html` — página inicial com duas portas: **Coisas** e **Medicina**.
-- `coisas/` — página "Coisas"; por enquanto só o currículo, em `coisas/cv/` (página original, sem alterações).
-- `medicina/` — guias de estudo do 5º período de Medicina (UNIFEBE, 2026.2), páginas HTML autocontidas em `medicina/5-fase/<uc>/<materia>/`. Cada guia recebe uma única linha injetada antes do `</body>` (marcador `<!-- medicina-nav -->`) que carrega o menu lateral `medicina/nav.js` — fora isso, o arquivo é o original.
-- `medicina/catalog.json` — catálogo dos guias (UC, matéria, título, tipo, data, arquivo).
-- `medicina/build.py` — gera `medicina/index.html` a partir do catálogo (Python 3, sem dependências).
-- `medicina/5-fase/uc13/farmaco/podcast/` — episódios do podcast em MP3 (player em `uc13-farmaco-podcast.html`; áudio é a única exceção à regra "só HTML").
-- `.nojekyll` — Pages serve os arquivos como estão, sem Jekyll.
+- `index.html`: página inicial com duas portas, **Coisas** e **Medicina**.
+- `coisas/`: página "Coisas"; por enquanto só o currículo, em `coisas/cv/` (página original, sem alterações).
+- `medicina/index.html`: site de Medicina (barra lateral UC15 → UC14 → UC13 → HP, abas por matéria). Lê `medicina/site-data.js`, a fonte única do conteúdo; `nativo.js` desenha as abas "nativas" (PDF, vídeos, questões).
+- `medicina/5-fase/<uc>/<materia>/`: guias HTML autocontidos, embutidos nas abas como estão. Cada guia recebe uma linha (`<!-- medicina-nav -->`) que carrega `medicina/nav.js`, o menu 📚 que só aparece quando o guia é aberto sozinho.
+- `medicina/conteudo/`: arquivos que só existem no formato novo (PDFs, vídeos, dados da UC15).
+- `medicina/build.py`: confere o `site-data.js`, regera o `nav.js` e injeta o menu (Python 3, só stdlib).
+- `medicina/v2/index.html`: só redireciona para `/medicina/` (mantém o `#endereço`).
+- `.nojekyll`: Pages serve os arquivos como estão, sem Jekyll.
 
-### Como adicionar um guia novo
-
-1. Copie o HTML autocontido para `medicina/5-fase/<uc>/<materia>/nome-minusculo-com-hifens.html` (pasta nova de UC/matéria é reconhecida automaticamente; `ucN` vira "UCN" no site — outros nomes de exibição são editáveis no topo do `build.py`).
-2. Rode `python3 medicina/build.py --scan` — adiciona o guia ao catálogo (título pelo `<title>`, tipo pelo nome do arquivo, data pela data do arquivo), regenera `medicina/index.html` + `medicina/nav.js` e injeta no guia novo a linha do menu lateral. Se algum campo sair errado, corrija no `catalog.json` e rode `python3 medicina/build.py` de novo.
-3. `git add medicina && git commit -m "novo guia" && git push` — usar `git add medicina` (e não `git add .`) evita commitar `.DS_Store` e afins no repo público.
+Como adicionar um guia novo: ver [`medicina/LEIA.md`](medicina/LEIA.md).
