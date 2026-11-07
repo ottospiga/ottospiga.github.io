@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Medicina · 5ª fase</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
@@ -57,7 +58,8 @@ a{color:var(--acc)}
 .mat-link[aria-current="true"]{background:var(--uc-bg,var(--nav-2));color:#fff;font-weight:700}
 .mat-link small{font-size:11px;color:var(--nav-muted);font-family:var(--f-mono)}
 .nav-foot{margin-top:auto;border-top:1px solid var(--nav-line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
-.nav-foot button{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--nav-dim);padding:6px 8px;font-size:13px;text-align:left}
+.nav-foot button,.nav-foot .foot-link{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--nav-dim);padding:6px 8px;font-size:13px;text-align:left;text-decoration:none;border-radius:8px}
+.nav-foot .foot-link:hover,.nav-foot button:hover{background:var(--nav-2)}
 /* recolhida */
 .app.collapsed .nav{flex-basis:64px;align-items:center;padding:14px 0}
 .app.collapsed .brand,.app.collapsed .brand-sub,.app.collapsed .uc-label,.app.collapsed .chev,.app.collapsed .mats,.app.collapsed .home-link span,.app.collapsed .nav-foot span{display:none}
@@ -332,7 +334,9 @@ const ICON = {
   chev:'<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 3l3 3-3 3" fill="none" stroke="#93a5ae" stroke-width="1.6"/></svg>',
   left:'<svg width="16" height="16" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3L4.5 7l4 4" fill="none" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
   menu:'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
-  moon:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2.5A6 6 0 1013.5 11 4.5 4.5 0 0111 2.5z" fill="none" stroke="#93a5ae" stroke-width="1.5"/></svg>'
+  moon:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2.5A6 6 0 1013.5 11 4.5 4.5 0 0111 2.5z" fill="none" stroke="#93a5ae" stroke-width="1.5"/></svg>',
+  site:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 3.5L5 8l4.5 4.5" fill="none" stroke="#93a5ae" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  coisas:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2.5" fill="none" stroke="#93a5ae" stroke-width="1.5"/></svg>'
 };
 
 /* ---------- dados no navegador (localStorage) ---------- */
@@ -364,7 +368,21 @@ function setAcc(uc){
   document.documentElement.style.setProperty("--acc", c);
 }
 
+/* âncoras do índice antigo (v1) que já foram compartilhadas → endereço novo */
+const LEGADO = {
+  "uc-uc13":"uc13", "uc-uc14":"uc14", "uc-uc15":"uc15",
+  "uc-hp-manifestacoes-abdominais":"hp/abdome-clinica", "uc-hp-otorrinolaringologia":"hp/otorrino", "uc-hp-infeccoes":"hp/infeccoes",
+  "m-uc13-tutoria":"uc13/tutoria", "m-uc13-farmacologia":"uc13/farmaco", "m-uc13-patologia":"uc13/pato",
+  "m-uc13-anatomia-fisiologia":"uc13/anato-fisio", "m-uc13-laboratorio":"uc13/lab",
+  "m-uc14-tutoria":"uc14/tutoria", "m-uc14-farmacologia":"uc14/farmaco", "m-uc14-laboratorio":"uc14/lab",
+  "m-uc14-fisiologia":"uc14/fisio", "m-uc14-anatomia":"uc14/anato", "m-uc14-patologia":"uc14/pato",
+  "m-uc15-farmacologia":"uc15/farmaco",
+  "m-hp-manifestacoes-abdominais-clinica":"hp/abdome-clinica", "m-hp-manifestacoes-abdominais-procedimentos":"hp/abdome-procedimentos",
+  "m-hp-otorrinolaringologia-otorrinolaringologia":"hp/otorrino", "m-hp-infeccoes-infectologia":"hp/infeccoes"
+};
 function parseHash(){
+  const novo = LEGADO[location.hash.slice(1)];
+  if (novo) history.replaceState(null, "", "#" + novo);
   const h = decodeURIComponent(location.hash.slice(1)).split("/");
   const u = ucOf(h[0]);
   if (!u || !u.materias.length) return { uc:null };
@@ -412,7 +430,11 @@ function renderNav(){
         </div>`;
       }).join("")}
     </div>
-    <div class="nav-foot"><button id="theme">${ICON.moon}<span>Tema escuro</span></button></div>`;
+    <div class="nav-foot">
+      <a class="foot-link" href="../index.html">${ICON.site}<span>Página inicial do site</span></a>
+      <a class="foot-link" href="../coisas/index.html">${ICON.coisas}<span>Coisas</span></a>
+      <button id="theme">${ICON.moon}<span>Tema escuro</span></button>
+    </div>`;
   $("#collapse").onclick = () => {
     $("#app").classList.toggle("collapsed");
     store.collapsed = $("#app").classList.contains("collapsed"); save(); renderNav();
