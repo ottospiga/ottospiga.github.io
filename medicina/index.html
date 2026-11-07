@@ -104,12 +104,20 @@ a{color:var(--acc)}
 .cont button:last-child{border-bottom:0}
 .cont small{color:var(--nav-muted);font-size:13px;display:block}
 .uc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
-.uc-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.uc-card{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--acc);border-radius:14px;padding:16px 18px 10px;display:flex;flex-direction:column;gap:8px}
 .uc-card header{display:flex;align-items:center;gap:10px}
 .uc-card header b{font-size:17px}
+.uc-go{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;text-align:left;color:inherit}
+.uc-go:hover b{color:var(--acc)}
 .uc-card header .st{margin-left:auto;font-size:12px;color:var(--muted)}
-.uc-card .mlist{display:flex;flex-wrap:wrap;gap:6px}
-.uc-card .mlist button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px}
+.uc-card .mlist{display:flex;flex-direction:column;margin:0 -6px}
+.uc-card .mlist button{display:flex;align-items:center;gap:10px;border:0;border-top:1px solid var(--line);background:none;padding:9px 6px;font-weight:700;font-size:14.5px;text-align:left;border-radius:0}
+.uc-card .mlist button:first-child{border-top:0}
+.uc-card .mlist button span{flex:1}
+.uc-card .mlist button small{font-weight:400;font-size:12px;color:var(--muted)}
+.uc-card .mlist button i{font-style:normal;color:var(--muted);font-size:18px;line-height:1}
+.uc-card .mlist button:hover{background:var(--bg);border-radius:8px}
+.uc-card .mlist button:hover i,.uc-card .mlist button:hover span{color:var(--acc)}
 .prog{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 .prog i{flex:1;height:5px;border-radius:3px;background:var(--sunk);overflow:hidden}
 .prog i b{display:block;height:100%;background:var(--acc)}
@@ -540,30 +548,22 @@ function ago(t){
 }
 function renderHome(){
   setAcc(null);
-  document.title = "Medicina · 5ª fase";
+  document.title = "Medicina";
   $("#mobTitle").textContent = "Medicina";
-  const recent = store.recent.filter(r => { const u = ucOf(r.uc), m = u && matOf(u, r.mat); return m && m.abas[r.aba] && m.abas[r.aba].itens[r.item]; }).slice(0, 4);
   const hoje = new Date().toLocaleDateString("pt-BR", { weekday:"long", day:"numeric", month:"long" });
   $("#view").innerHTML = `<div class="home"><div class="home-in">
     <header>
       <div class="crumb">${esc(hoje.charAt(0).toUpperCase() + hoje.slice(1))}</div>
-      <h1>Medicina · ${esc(S.fase)}</h1>
+      <h1>Medicina</h1>
     </header>
-    <section class="cont" aria-label="Continuar de onde parou">
-      <h3>Continuar de onde parou</h3>
-      ${recent.length ? recent.map((r, i) => { const u = ucOf(r.uc), m = matOf(u, r.mat), a = m.abas[r.aba], it = a.itens[r.item];
-        return `<button data-rec="${i}"><span style="font-size:12px;font-weight:700;color:var(--${u.cor}-fg);width:44px">${esc(u.nome)}</span><span style="flex:1"><b>${esc(m.nome)} › ${esc(a.titulo)}</b><small>${esc(it.label)}</small></span><small>${ago(r.t)}</small></button>`; }).join("")
-        : `<p class="empty" style="color:var(--nav-muted);margin:4px 0">Nada aberto ainda. O que você abrir aparece aqui.</p>`}
-    </section>
     <section>
-      <h2>Unidades</h2>
+      <h2>${esc(S.fase)}</h2>
       <div class="uc-cards">
-        ${S.ucs.slice().sort(ORD).map(u => `
+        ${S.ucs.filter(u => u.materias.length).sort(ORD).map(u => `
           <article class="uc-card" style="--acc:var(--${u.cor})">
-            <header><span class="uc-badge" style="background:var(--${u.cor});color:#fff">${esc(u.sigla || u.num)}</span><b>${esc(u.tema || u.nome)}</b><span class="st">${esc(u.status || "")}</span></header>
+            <header>${u.materias.length ? `<button class="uc-go" data-go="${u.id}|${u.materias[0].id}">` : "<span class=\"uc-go\">"}<span class="uc-badge" style="background:var(--${u.cor});color:#fff">${esc(u.sigla || u.num)}</span><b>${esc(u.nome)} · ${esc(u.tema || "")}</b>${u.materias.length ? "</button>" : "</span>"}<span class="st">${esc(u.status || "")}</span></header>
             ${u.materias.length ? `
-              <div class="mlist">${u.materias.map(m => `<button data-go="${u.id}|${m.id}">${esc(m.nome)}</button>`).join("")}</div>
-              <div class="prog"><span>visto</span><i><b style="width:${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%"></b></i><span style="font-family:var(--f-mono)">${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%</span></div>
+              <div class="mlist">${u.materias.map(m => `<button data-go="${u.id}|${m.id}"><span>${esc(m.nome)}</span><small>${m.abas.length} ${m.abas.length > 1 ? "abas" : "aba"}</small><i aria-hidden="true">›</i></button>`).join("")}</div>
               ${u.plano ? `<a class="tool" style="align-self:flex-start" href="${href(u.plano.src)}" target="_blank" rel="noopener">${esc(u.plano.label)} ↗</a>` : ""}`
             : `<p class="empty" style="margin:0">Material ainda não organizado aqui.</p>`}
           </article>`).join("")}
@@ -576,7 +576,6 @@ function renderHome(){
       <button class="tool" id="clr">Limpar</button>
     </footer>
   </div></div>`;
-  $("#view").querySelectorAll("[data-rec]").forEach(b => b.onclick = () => { const r = recent[+b.dataset.rec]; go(r.uc, r.mat, r.aba, r.item); });
   $("#view").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [u,m] = b.dataset.go.split("|"); go(u, m); });
   $("#exp").onclick = () => {
     const blob = new Blob([JSON.stringify(store, null, 2)], { type:"application/json" });
