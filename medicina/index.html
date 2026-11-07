@@ -1,697 +1,585 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicina · UNIFEBE · 5º período</title>
-  <style>
-    :root{
-      --bg:#0f1720; --card:#161f2b; --card2:#1c2836; --line:#2a3a4d;
-      --ink:#e8eef5; --mut:#9fb2c6; --tealo:#12d3b0; --blue:#4c8dff;
-      --amber:#ffb454; --green:#38d39f; --purple:#c6b3ff;
-      --shadow:0 6px 24px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    [hidden]{display:none!important}
-    body{
-      background:var(--bg); color:var(--ink);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      padding:24px 16px 40px; display:flex; justify-content:center;
-    }
-    main{width:100%; max-width:860px}
-    .topnav{display:flex; gap:18px; margin-bottom:20px; font-size:14px}
-    .topnav a{color:var(--blue); text-decoration:none}
-    .topnav a:hover{text-decoration:underline}
-    .kicker{color:var(--tealo); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase}
-    h1{font-size:clamp(26px,6vw,36px); margin:6px 0 2px}
-    .sub{color:var(--mut); font-size:15px; margin-bottom:18px}
-    #busca{
-      width:100%; padding:12px 14px; margin-bottom:8px;
-      background:var(--card); color:var(--ink);
-      border:1px solid var(--line); border-radius:12px; font-size:15px; outline:none;
-    }
-    #busca:focus{border-color:var(--tealo)}
-    #busca::placeholder{color:var(--mut)}
-    #vazio{color:var(--mut); margin:18px 2px}
-    section.uc{margin-top:26px}
-    section.uc>h2{
-      font-size:20px; color:var(--tealo); padding-bottom:8px;
-      border-bottom:1px solid var(--line); margin-bottom:6px;
-    }
-    .materia{margin-top:14px}
-    .materia>h3{font-size:14px; color:var(--mut); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px}
-    .cards{display:grid; gap:12px}
-    @media(min-width:700px){.cards{grid-template-columns:1fr 1fr}}
-    .card{
-      display:flex; flex-direction:column; gap:10px;
-      background:var(--card); border:1px solid var(--line); border-radius:14px;
-      padding:16px 18px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow);
-      transition:transform .12s ease, border-color .12s ease;
-    }
-    .card:hover{transform:translateY(-2px); border-color:var(--mut)}
-    .titulo{font-weight:600; font-size:15px; line-height:1.45}
-    .meta{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:auto}
-    .badge{font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap}
-    .b-guia-sp{color:var(--tealo); background:rgba(18,211,176,.12); border:1px solid rgba(18,211,176,.35)}
-    .b-guia-prova{color:var(--blue); background:rgba(76,141,255,.12); border:1px solid rgba(76,141,255,.35)}
-    .b-flashcards{color:var(--purple); background:rgba(198,179,255,.12); border:1px solid rgba(198,179,255,.35)}
-    .b-banco{color:var(--amber); background:rgba(255,180,84,.12); border:1px solid rgba(255,180,84,.35)}
-    .b-simulado{color:var(--green); background:rgba(56,211,159,.12); border:1px solid rgba(56,211,159,.35)}
-    .b-material{color:var(--mut); background:rgba(159,178,198,.12); border:1px solid rgba(159,178,198,.35)}
-    .data{color:var(--mut); font-size:13px}
-    .abrir{color:var(--tealo); font-weight:600; font-size:13px; margin-left:auto; white-space:nowrap}
-    footer{margin-top:34px; color:var(--mut); font-size:13px}
-    html{scroll-behavior:smooth}
-    section.uc, .materia{scroll-margin-top:12px}
-    .sidenav .tree{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:18px}
-    .sidenav summary{cursor:pointer; color:var(--tealo); font-weight:600; font-size:14px}
-    .sidenav ul{list-style:none; margin-top:6px}
-    .sidenav li{margin:2px 0}
-    .sidenav a{display:block; text-decoration:none; color:var(--ink); font-size:14px; font-weight:600; padding:4px 8px; border-radius:8px}
-    .sidenav ul ul a{color:var(--mut); font-weight:400; font-size:13px; padding-left:20px}
-    .sidenav a:hover{color:var(--tealo); background:rgba(18,211,176,.08)}
-    @media(min-width:980px){
-      main{max-width:1120px}
-      .layout{display:grid; grid-template-columns:220px minmax(0,1fr); gap:28px; align-items:start}
-      .sidenav{position:sticky; top:16px; max-height:calc(100vh - 32px); overflow:auto}
-      .sidenav .tree{margin-bottom:0}
-      .sidenav summary{display:none}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicina · 5ª fase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#f5f7f8; --surface:#ffffff; --sunk:#eaeef0; --fg:#18242b; --muted:#5d6d76; --line:#d5dde1;
+  --nav:#18242b; --nav-2:#223038; --nav-3:#1e2c33; --nav-line:#2f3f47; --nav-fg:#e4ecef; --nav-muted:#93a5ae; --nav-dim:#c7d3d8;
+  --uc13:#d4573b; --uc13-bg:#3a2a27; --uc13-fg:#f07a5f;
+  --uc14:#138a7e; --uc14-bg:#23443f; --uc14-fg:#7fd6cc;
+  --uc15:#4f55c9; --uc15-bg:#2a2b4a; --uc15-fg:#8e93ff;
+  --hp:#a86b12; --hp-bg:#3a3020; --hp-fg:#f0b429;
+  --acc:#d4573b;
+  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#10171b; --surface:#172126; --sunk:#0c1215; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3940;
+  --nav:#0b1114; --nav-2:#172126; --nav-3:#121b20; --nav-line:#22313a;
+  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; --hp:#f0b429; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.app{display:flex;height:100%}
+
+/* ---------- barra lateral ---------- */
+.nav{flex:0 0 264px;background:var(--nav);color:var(--nav-fg);display:flex;flex-direction:column;gap:14px;padding:14px 12px;overflow-y:auto;transition:flex-basis .15s}
+.nav-top{display:flex;align-items:center;gap:8px}
+.icon-btn{width:40px;height:40px;border:0;border-radius:10px;background:var(--nav-2);display:grid;place-items:center;flex:0 0 auto}
+.brand{font-family:var(--f-display);font-weight:800;font-size:18px;color:#fff}
+.brand-sub{font-size:12px;color:var(--nav-muted)}
+.home-link{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;color:var(--nav-dim);text-decoration:none;font-weight:700;border:0;background:none;text-align:left}
+.home-link[aria-current="true"]{background:#fff;color:#18242b}
+.home-link[aria-current="true"] path{stroke:#18242b}
+.uc-btn{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;border-radius:10px;padding:8px;text-align:left}
+.uc-btn[disabled]{cursor:default;opacity:.55}
+.uc-badge{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:14px;flex:0 0 auto}
+.uc-label{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.uc-label b{color:var(--nav-fg)}
+.uc-label span{font-size:12px;color:var(--nav-muted)}
+.chev{margin-left:auto;transition:transform .15s}
+.uc-group.open{background:var(--nav-3);border-radius:12px;padding:4px 4px 8px}
+.uc-group.open .chev{transform:rotate(90deg)}
+.mats{display:none;flex-direction:column;gap:2px;margin:2px 0 0 21px;padding-left:12px;border-left:1px solid var(--nav-line)}
+.uc-group.open .mats{display:flex}
+.mat-link{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;color:var(--nav-dim);font-size:14px;text-decoration:none;border:0;background:none;text-align:left;width:100%}
+.mat-link:hover{background:var(--nav-2)}
+.mat-link[aria-current="true"]{background:var(--uc-bg,var(--nav-2));color:#fff;font-weight:700}
+.mat-link small{font-size:11px;color:var(--nav-muted);font-family:var(--f-mono)}
+.nav-foot{margin-top:auto;border-top:1px solid var(--nav-line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.nav-foot button{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--nav-dim);padding:6px 8px;font-size:13px;text-align:left}
+/* recolhida */
+.app.collapsed .nav{flex-basis:64px;align-items:center;padding:14px 0}
+.app.collapsed .brand,.app.collapsed .brand-sub,.app.collapsed .uc-label,.app.collapsed .chev,.app.collapsed .mats,.app.collapsed .home-link span,.app.collapsed .nav-foot span{display:none}
+.app.collapsed .uc-group.open{background:none;padding:0}
+.app.collapsed .uc-btn{padding:4px;justify-content:center}
+.app.collapsed .uc-badge{width:44px;height:44px;border-radius:11px;font-size:15px}
+.app.collapsed .home-link{justify-content:center;padding:10px}
+.app.collapsed .nav-top{flex-direction:column}
+.flyout{position:fixed;z-index:30;width:260px;background:var(--nav);color:var(--nav-fg);border:1px solid var(--nav-line);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.flyout h4{margin:0;padding:6px 8px 8px;font-family:var(--f-display);color:#fff}
+
+/* ---------- área principal ---------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;height:100%}
+.head{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 32px 0}
+.head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.head h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.1}
+.crumb{font-size:13px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-weight:700;font-size:12px;background:var(--sunk);color:var(--muted)}
+.tabs{display:flex;gap:2px;margin-top:8px;overflow-x:auto;scrollbar-width:thin}
+.tab{padding:10px 14px;border:0;border-bottom:3px solid transparent;background:none;color:var(--muted);font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--acc)}
+.tab .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);opacity:.0}
+.tab.seen .dot{opacity:.55}
+.sub{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 32px;border-bottom:1px solid var(--line);background:var(--bg)}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.chip .kind{font-family:var(--f-mono);font-size:10px;opacity:.7}
+.sub .tools{margin-left:auto;display:flex;gap:6px}
+.tool{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px;color:var(--fg);text-decoration:none}
+.viewer{flex:1;min-height:0;background:var(--sunk)}
+.viewer iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.missing{padding:40px;color:var(--muted)}
+
+/* ---------- início ---------- */
+.home{flex:1;overflow-y:auto;padding:32px 40px 48px}
+.home-in{max-width:1100px;display:flex;flex-direction:column;gap:28px}
+.home h1{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.1}
+.home h2{margin:0 0 12px;font-family:var(--f-display);font-weight:700;font-size:20px}
+.cont{background:var(--nav);color:var(--nav-fg);border-radius:14px;padding:16px 20px}
+.cont h3{margin:0 0 6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--uc14-fg)}
+.cont button{width:100%;display:flex;align-items:center;gap:14px;padding:10px 0;border:0;border-bottom:1px solid var(--nav-line);background:none;color:#fff;text-align:left}
+.cont button:last-child{border-bottom:0}
+.cont small{color:var(--nav-muted);font-size:13px;display:block}
+.uc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
+.uc-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.uc-card header{display:flex;align-items:center;gap:10px}
+.uc-card header b{font-size:17px}
+.uc-card header .st{margin-left:auto;font-size:12px;color:var(--muted)}
+.uc-card .mlist{display:flex;flex-wrap:wrap;gap:6px}
+.uc-card .mlist button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px}
+.prog{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.prog i{flex:1;height:5px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.prog i b{display:block;height:100%;background:var(--acc)}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--muted)}
+.empty{color:var(--muted);font-size:14px}
+
+/* ---------- celular ---------- */
+.mob-top{display:none}
+@media (max-width:760px){
+  .nav{position:fixed;inset:0 auto 0 0;width:300px;z-index:40;transform:translateX(-105%);transition:transform .2s}
+  .app.drawer .nav{transform:none}
+  .app.collapsed .nav{flex-basis:auto;align-items:stretch;padding:14px 12px}
+  .scrim{position:fixed;inset:0;background:rgba(24,36,43,.5);z-index:35;display:none}
+  .app.drawer .scrim{display:block}
+  .mob-top{display:flex;align-items:center;gap:12px;background:var(--nav);color:#fff;padding:10px 16px}
+  .mob-top b{font-family:var(--f-display);font-size:18px}
+  .head{padding:12px 16px 0}
+  .head h1{font-size:22px}
+  .sub{padding:10px 16px}
+  .sub .tools{margin-left:0}
+  .home{padding:20px 16px 40px}
+  .collapse-btn{display:none!important}
+}
+
+/* ---------- vistas nativas (formato novo) ---------- */
+.viewer.native{overflow-y:auto;background:var(--bg)}
+.nv-wrap{max-width:860px;margin:0 auto;padding:24px 32px 64px;display:flex;flex-direction:column;gap:14px}
+.nv-wrap.wide{max-width:1240px}
+.nv-msg{padding:40px;color:var(--muted)}
+.nv-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.nv-card h3{margin:0 0 10px;font-family:var(--f-display);font-size:18px}
+.nv-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.nv-stats div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;flex-direction:column}
+.nv-stats b{font-family:var(--f-display);font-size:24px;color:var(--acc);line-height:1.1}
+.nv-stats span{font-size:12px;color:var(--muted)}
+.nv-filters{display:flex;flex-direction:column;gap:10px}
+.nv-frow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.nv-flabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;min-width:64px}
+.chip.sm{padding:4px 10px;font-size:12.5px}
+.nv-toggle{display:flex;align-items:center;gap:8px;font-size:14px}
+.nv-toggle input{accent-color:var(--acc);width:16px;height:16px}
+.nv-wrap select,.nv-wrap input[type=search],.nv-ptools input{font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.nv-wrap input[type=search]{flex:1;min-width:180px}
+.btn,.btn-pri{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:7px 14px;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn-pri[disabled]{opacity:.45;cursor:default}
+.btn[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
+.btn.ok{border-color:#1f8a4c;color:#1f8a4c}.btn.err{border-color:#c33a3a;color:#c33a3a}
+.link{border:0;background:none;color:var(--acc);font-weight:700;padding:0}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.tag.hot{background:#e4d4fb;color:#5b2d9e}.tag.ok{background:#e3f2e9;color:#1f6b40}.tag.err{background:#f8e4e4;color:#a32a2a}.tag.warn{background:#fdf3d6;color:#7a5300}
+.nv-qtop{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+.nv-bar{display:flex;gap:3px}.nv-bar i{flex:1;height:5px;border-radius:3px;background:var(--sunk)}
+.nv-bar i.cur{background:var(--fg)}.nv-bar i.ok{background:#1f8a4c}.nv-bar i.err{background:#c33a3a}.nv-bar i.done{background:var(--acc)}
+.nv-tags{display:flex;flex-wrap:wrap;gap:5px}
+.nv-enun{font-size:17px;margin:10px 0 8px;max-width:68ch}
+.nv-itens{margin:0 0 10px;padding-left:4px;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.nv-opts{display:flex;flex-direction:column;gap:8px}
+.nv-opt{display:flex;gap:12px;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 14px;font-size:15px;color:var(--fg)}
+.nv-opt b{font-family:var(--f-mono);color:var(--muted)}
+.nv-opt:hover:not([disabled]){border-color:var(--acc)}
+.nv-opt.ok{border-color:#1f8a4c;background:color-mix(in srgb,#1f8a4c 10%,var(--surface))}
+.nv-opt.err{border-color:#c33a3a;background:color-mix(in srgb,#c33a3a 9%,var(--surface))}
+.nv-opt.picked{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,var(--surface))}
+.nv-opt[disabled]{cursor:default}
+.nv-opt .why{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.nv-disc{width:100%;min-height:90px;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);margin-bottom:8px}
+.nv-expl{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--sunk);border-left:3px solid var(--acc)}
+.nv-expl.ok{border-left-color:#1f8a4c}.nv-expl.err{border-left-color:#c33a3a}
+.nv-expl p{margin:6px 0 0}
+.nv-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.nv-actions{margin-top:14px;justify-content:space-between}
+.nv-end{text-align:center}.nv-end .nv-frow{justify-content:center}
+.nv-big{font-family:var(--f-display);font-size:56px;font-weight:800;color:var(--acc)}.nv-big small{font-size:24px;color:var(--muted)}
+.nv-revrow{width:100%;display:flex;gap:10px;align-items:center;border:0;border-top:1px solid var(--line);background:none;padding:9px 0;text-align:left;font-size:14px}
+.nv-revrow .txt{color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}.dot.ok{background:#1f8a4c}.dot.err{background:#c33a3a}
+.nv-count{font-size:13px;color:var(--muted);margin:-4px 0 0 4px}
+.nv-tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.nv-table{border-collapse:collapse;width:100%;font-size:14px;min-width:760px}
+.nv-table th{position:sticky;top:0;background:var(--sunk);text-align:left;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:9px 12px}
+.nv-table td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+.nv-table .g{font-size:12px;color:var(--muted)}
+.nv-table td.okc{background:color-mix(in srgb,#1f8a4c 7%,transparent)}.nv-table td.errc{background:color-mix(in srgb,#c33a3a 7%,transparent)}
+.nv-compact{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.nv-cd{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;font-size:13.5px}
+.nv-cd b{font-size:15px}.nv-cd .g{font-size:12px;color:var(--muted)}.nv-cd .tag{align-self:flex-start}
+.nv-seg{display:inline-flex;gap:4px;margin-left:auto}
+.nv-hint{font-size:13px;color:var(--muted);margin:2px 0}
+.nv-pegs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.nv-peg{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.nv-peg .e{font-size:12px;color:var(--muted)}
+.nv-figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(460px,1fr));gap:14px}
+.nv-aulas{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.nv-lead p{margin:0 0 10px;max-width:70ch}
+.nv-top{display:flex;flex-direction:column}
+.nv-toprow{display:flex;gap:12px;align-items:flex-start;border:0;border-top:1px solid var(--line);background:none;padding:9px 0;text-align:left}
+.nv-toprow .n{font-family:var(--f-display);font-weight:800;font-size:18px;color:var(--acc);width:40px}
+.nv-toprow .t{flex:1;font-weight:700}.nv-toprow small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.nv-toprow .p{color:var(--acc);font-weight:700;font-size:13px;white-space:nowrap}
+.nv-pesos .row{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;font-size:14px;margin:6px 0}
+.nv-pesos i{position:relative;height:10px;border-radius:5px;background:var(--sunk)}
+.nv-pesos i b{position:absolute;inset:0 auto 0 0;border-radius:5px;background:color-mix(in srgb,var(--acc) 35%,transparent)}
+.nv-pesos i em{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--acc)}
+.mono{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.nv-steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}.nv-steps p{margin:2px 0 0}
+.nv-div{border-top:1px solid var(--line);padding:10px 0}.nv-div p{margin:4px 0}.nv-div .como{color:var(--acc)}
+.nv-reader{display:flex;height:100%;min-height:0}
+.nv-idx{flex:0 0 320px;border-right:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;min-height:0;padding:12px}
+.nv-idxlist{overflow-y:auto;margin-top:10px;flex:1}
+.nv-ix{width:100%;display:flex;gap:10px;text-align:left;border:0;border-top:1px solid var(--line);background:none;padding:8px 2px;font-size:13.5px}
+.nv-ix:hover{background:var(--bg)}
+.nv-ix .p{font-family:var(--f-mono);font-size:12px;color:var(--acc);width:34px;flex:0 0 auto;padding-top:2px}
+.nv-ix small{display:block;color:var(--muted);font-size:12px}.nv-ix small.peg{color:#a32a2a}
+.nv-idx[hidden]{display:none}
+.nv-pdf{flex:1;min-width:0;display:flex;flex-direction:column}
+.nv-ptools{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surface);font-size:14px}
+.nv-pscroll{flex:1;overflow-y:auto;padding:12px;background:var(--sunk)}
+.nv-page{position:relative;margin:0 auto 12px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.nv-page canvas{display:block}
+.nv-page span{position:absolute;right:8px;bottom:6px;font-size:11px;color:#5d6d76}
+@media (max-width:760px){
+  .nv-wrap{padding:16px 14px 48px}
+  .nv-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nv-reader{flex-direction:column}
+  .nv-idx{flex:0 0 auto;max-height:34vh;border-right:0;border-bottom:1px solid var(--line)}
+  .nv-figs{grid-template-columns:minmax(0,1fr)}
+  .nv-pegs{grid-template-columns:minmax(0,1fr)}
+  .nv-seg{margin-left:0}
+}
+
+.nv-vid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.nv-player video{width:100%;border-radius:12px;background:#000;display:block;aspect-ratio:16/9}
+.nv-vtitle{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:8px}
+.nv-vlist{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px;max-height:70vh;overflow-y:auto}
+.nv-vlist h4{margin:6px 0 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nv-vtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.nv-chap{display:flex;gap:10px;align-items:center;border:0;background:none;text-align:left;padding:7px 4px;border-top:1px solid var(--line);font-size:14px}
+.nv-chap:hover{background:var(--bg)}
+.nv-chapk{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);font-weight:700;margin:10px 0 2px}
+.nv-sidetabs{margin-bottom:8px}
+.nv-toc{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.nv-toc a.chip{text-decoration:none;color:var(--fg)}
+.nv-toc.sticky{position:sticky;top:0;z-index:2;border:1px solid var(--line);border-radius:12px;padding:8px}
+.nv-zoom{display:inline-flex;gap:4px;margin-left:8px}
+.nv-thumbs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.nv-th{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:#5d6d76}
+.nv-th img{width:100%;display:block;border-radius:4px}
+.nv-th.cur{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+.nv-th b{background:#e4d4fb;color:#5b2d9e;border-radius:999px;padding:0 6px;font-size:11px}
+.nv-th b.apf{background:#5b2d9e;color:#fff}
+.tag[data-q]{border:0;cursor:pointer}
+.nv-apfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}
+.nv-apfsp header{display:flex;align-items:center;gap:8px;margin-bottom:4px}.nv-apfsp header .mono{margin-left:auto}
+.nv-apfq{margin:8px 0 12px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.nv-apfq li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:4px;align-items:start}.nv-apfq .mono{padding-top:2px}
+.nv-apfq .link{font-weight:400;color:var(--fg);text-align:left;display:inline;font-size:14px;line-height:1.45}
+.nv-apfq li{padding-left:2px}.nv-apfq .link:hover{color:var(--acc)}
+.nv-denso{max-width:900px}
+.nv-denso ul{margin:6px 0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
+.nv-denso p{margin:8px 0}
+.nv-dh{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.nv-denso mark.apf{background:#e4d4fb;color:inherit;padding:0 2px;border-radius:2px}
+.nv-denso .pega{background:#fdf3d6;color:#7a5300;font-weight:700;padding:0 4px;border-radius:3px}
+.nv-denso .fix{background:#f8e4e4;color:#a32a2a;font-weight:700;padding:0 4px;border-radius:3px}
+.dt{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}.dt th,.dt td{border-top:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}.dt th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin:6px 0 10px}
+.tl div{background:var(--sunk);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;font-size:13.5px}.tl b{color:var(--acc)}
+.rx{font-family:var(--f-mono);font-size:13px;background:var(--sunk);border-radius:8px;padding:10px 12px;line-height:1.6}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;font-size:13px}
+.lg::before{content:"";display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.lg.apf::before{background:#e4d4fb}.lg.pega::before{background:#fdf3d6}.lg.fix::before{background:#f8e4e4}
+.nv-qlinks{display:flex;flex-direction:column;gap:2px;margin-top:6px;font-size:12.5px}
+.nv-hero{display:flex;flex-direction:column;gap:10px;background:var(--nav);color:#e4ecef;border-color:var(--nav)}
+.nv-hero h3{color:#fff}.nv-hero p{margin:0;color:#c7d3d8;max-width:70ch}.nv-hero .btn{background:transparent;color:#fff;border-color:#3a4b54}
+.nv-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.nv-tricks{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.nv-trick{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
+.nv-trick p{margin:4px 0 8px;font-size:14px}.nv-trick .sw{display:flex;flex-direction:column;gap:4px;font-size:13px}.nv-trick s{color:#a32a2a}
+@media (max-width:900px){.nv-2col{grid-template-columns:minmax(0,1fr)}}.nv-chap .tag{margin-left:auto}
+@media (max-width:900px){.nv-vid{grid-template-columns:minmax(0,1fr)}}
+/* esquemas (mesmas cores das Centrais) */
+figure.fig{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow-x:auto}
+figure.fig figcaption{font-size:13px;color:#59666f}
+figure.fig svg{width:100%;height:auto;display:block;min-width:420px}
+figure.fig .pl{--x-ink:#16202a;--x-ink2:#59666f;--x-ink3:#6f7d8a;--x-ok:#0f6a46;--x-okbg:#ecf9f2;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#0a5f8a;--x-accsoft:#e4eef5;--x-accink:#fff;--x-trap:#6f5511;--x-line2:#eaeff3;--x-panel:#fff;--x-trapbg:#fdf8ea}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg text{font-family:var(--f-body)}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-<main>
-  <nav class="topnav"><a href="../index.html">← Início</a><a href="../coisas/index.html">Coisas</a></nav>
-  <p class="kicker">Medicina · UNIFEBE · 5º período</p>
-  <h1>Medicina</h1>
-  <p class="sub">Guias de estudo por UC e matéria. Clique num card para abrir.</p>
-  <input id="busca" type="search" placeholder="buscar guia… (título, matéria, tipo)" autocomplete="off">
-  <p id="vazio" hidden>Nenhum guia encontrado.</p>
-  <div class="layout">
-    <aside class="sidenav">
-      <details class="tree" open>
-        <summary>Navegar por UC e matéria</summary>
-        <ul>
-          <li><a href="#uc-uc13">UC13</a>
-            <ul>
-              <li><a href="#m-uc13-tutoria">Tutoria</a></li>
-              <li><a href="#m-uc13-anatomia-fisiologia">Anatomia + Fisiologia</a></li>
-              <li><a href="#m-uc13-patologia">Patologia</a></li>
-              <li><a href="#m-uc13-farmacologia">Farmacologia</a></li>
-              <li><a href="#m-uc13-laboratorio">Laboratório</a></li>
-            </ul>
-          </li>
-          <li><a href="#uc-uc14">UC14</a>
-            <ul>
-              <li><a href="#m-uc14-farmacologia">Farmacologia</a></li>
-              <li><a href="#m-uc14-tutoria">Tutoria</a></li>
-              <li><a href="#m-uc14-patologia">Patologia</a></li>
-              <li><a href="#m-uc14-fisiologia">Fisiologia</a></li>
-              <li><a href="#m-uc14-anatomia">Anatomia</a></li>
-              <li><a href="#m-uc14-laboratorio">Laboratório</a></li>
-            </ul>
-          </li>
-          <li><a href="#uc-uc15">UC15</a>
-            <ul>
-              <li><a href="#m-uc15-farmacologia">Farmacologia</a></li>
-            </ul>
-          </li>
-          <li><a href="#uc-hp-manifestacoes-abdominais">HP Manifestações Abdominais</a>
-            <ul>
-              <li><a href="#m-hp-manifestacoes-abdominais-procedimentos">Procedimentos</a></li>
-              <li><a href="#m-hp-manifestacoes-abdominais-clinica">Clínica</a></li>
-            </ul>
-          </li>
-          <li><a href="#uc-hp-otorrinolaringologia">HP Otorrinolaringologia</a>
-            <ul>
-              <li><a href="#m-hp-otorrinolaringologia-otorrinolaringologia">Otorrinolaringologia</a></li>
-            </ul>
-          </li>
-          <li><a href="#uc-hp-infeccoes">HP Infecções</a>
-            <ul>
-              <li><a href="#m-hp-infeccoes-infectologia">Infectologia</a></li>
-            </ul>
-          </li>
-        </ul>
-      </details>
-    </aside>
-    <div class="conteudo">
-  <section class="uc" id="uc-uc13">
-    <h2>UC13</h2>
-    <div class="materia" id="m-uc13-tutoria">
-      <h3>Tutoria</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp1-dor-modo-inicial-v2.html" data-q="uc xiii · sp1 — dor · modo inicial v2 tutoria uc13 guia-sp guia de sp 28/07/2026">
-          <span class="titulo">UC XIII · SP1 — Dor · Modo Inicial v2</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">28/07/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp1-dor-aprofundamento.html" data-q="uc xiii · sp1 dor · aprofundamento tutoria uc13 guia-sp guia de sp 28/07/2026">
-          <span class="titulo">UC XIII · SP1 Dor · Aprofundamento</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">28/07/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-modo-inicial.html" data-q="uc13 · sp2 — dor neuropatica · modo inicial tutoria uc13 guia-sp guia de sp 04/08/2026">
-          <span class="titulo">UC13 · SP2 — Dor Neuropática · Modo Inicial</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">04/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp2-dor-neuropatica-aprofundamento.html" data-q="uc13 · sp2 — dor neuropatica · aprofundamento tutoria uc13 guia-sp guia de sp 04/08/2026">
-          <span class="titulo">UC13 · SP2 — Dor Neuropática · Aprofundamento</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">04/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp3-dor-cronica-modo-inicial.html" data-q="uc13 · sp3 — dor cronica: fibromialgia &amp; miofascial · modo inicial tutoria uc13 guia-sp guia de sp 10/08/2026">
-          <span class="titulo">UC13 · SP3 — Dor Crônica: Fibromialgia &amp; Miofascial · Modo Inicial</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">10/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp3-dor-cronica-aprofundamento.html" data-q="uc13 · sp3 — dor cronica: fm &amp; miofascial · aprofundamento tutoria uc13 guia-sp guia de sp 10/08/2026">
-          <span class="titulo">UC13 · SP3 — Dor Crônica: FM &amp; Miofascial · Aprofundamento</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">10/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp4-dor-visceral.html" data-q="uc13 · sp4 — dor visceral &amp; nefrolitiase · guia de estudo tutoria uc13 guia-sp guia de sp 16/08/2026">
-          <span class="titulo">UC13 · SP4 — Dor Visceral &amp; Nefrolitíase · Guia de Estudo</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">16/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-sp5-dor-neoplasica.html" data-q="uc13 · sp5 — dor neoplasica, opioides &amp; cefaleias · guia de estudo tutoria uc13 guia-sp guia de sp 24/08/2026">
-          <span class="titulo">UC13 · SP5 — Dor Neoplásica, Opioides &amp; Cefaleias · Guia de Estudo</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">24/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/tutoria/uc13-prova-final-tutoria-guia.html" data-q="uc13 · prova final de tutoria · guia + simulado tutoria uc13 guia-prova guia de prova 07/09/2026">
-          <span class="titulo">UC13 · Prova Final de Tutoria · Guia + Simulado</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">07/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
+<div class="app" id="app">
+  <div class="scrim" id="scrim"></div>
+  <nav class="nav" id="nav" aria-label="UCs e matérias"></nav>
+  <div class="main">
+    <div class="mob-top">
+      <button class="icon-btn" id="openDrawer" aria-label="Abrir menu"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <b id="mobTitle">Medicina</b>
     </div>
-    <div class="materia" id="m-uc13-anatomia-fisiologia">
-      <h3>Anatomia + Fisiologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc13/anato-fisio/revisao-relampago-a1-anato-fisio.html" data-q="revisao-relampago · a1 anato seccional + fisio · 27/08 anatomia + fisiologia uc13 guia-prova guia de prova 26/08/2026">
-          <span class="titulo">Revisão-Relâmpago · A1 Anato Seccional + Fisio · 27/08</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">26/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc13-patologia">
-      <h3>Patologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc13/pato/uc13-pato-a1-revisao.html" data-q="pato a1 · revisao pre-prova · 28/08 13h patologia uc13 guia-prova guia de prova 28/08/2026">
-          <span class="titulo">Pato A1 · Revisão Pré-Prova · 28/08 13h</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">28/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc13-farmacologia">
-      <h3>Farmacologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-a1-estrategia.html" data-q="farmaco a1 · estrategia de guerra · 04/09 farmacologia uc13 guia-prova guia de prova 07/09/2026">
-          <span class="titulo">Farmaco A1 · Estratégia de Guerra · 04/09</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">07/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-banco-vania.html" data-q="banco vania · farmaco uc13 · questoes reais t5–t12 farmacologia uc13 banco banco de questoes 11/09/2026">
-          <span class="titulo">Banco Vânia · Farmaco UC13 · questões reais T5–T12</span>
-          <span class="meta">
-            <span class="badge b-banco">banco de questões</span>
-            <span class="data">11/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-flashcards-posologia.html" data-q="flashcards farmaco a1 · v3 atomico farmacologia uc13 flashcards flashcards 04/09/2026">
-          <span class="titulo">Flashcards Farmaco A1 · v3 atômico</span>
-          <span class="meta">
-            <span class="badge b-flashcards">flashcards</span>
-            <span class="data">04/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-simuladao-vania.html" data-q="simuladao vania · farmaco uc13 · a1 04/09 farmacologia uc13 simulado simulado 29/08/2026">
-          <span class="titulo">Simuladão Vânia · Farmaco UC13 · A1 04/09</span>
-          <span class="meta">
-            <span class="badge b-simulado">simulado</span>
-            <span class="data">29/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-leitura-dirigida-artigos.html" data-q="leitura dirigida · artigos da vania · uc13 farmacologia uc13 material material de apoio 07/09/2026">
-          <span class="titulo">Leitura Dirigida · Artigos da Vânia · UC13</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">07/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-podcast-roteiros.html" data-q="farmaco uc13 · roteiros do podcast (ep. 1–4) farmacologia uc13 material material de apoio 01/09/2026">
-          <span class="titulo">Farmaco UC13 · Roteiros do podcast (Ep. 1–4)</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">01/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-podcast.html" data-q="podcast farmaco uc13 · 5 episodios farmacologia uc13 material material de apoio 07/09/2026">
-          <span class="titulo">Podcast Farmaco UC13 · 5 episódios</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">07/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-simuladao-pm.html" data-q="simuladao pm · farmaco uc13 farmacologia uc13 simulado simulado 07/09/2026">
-          <span class="titulo">Simuladão PM · Farmaco UC13</span>
-          <span class="meta">
-            <span class="badge b-simulado">simulado</span>
-            <span class="data">07/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc13/farmaco/uc13-farmaco-vias-metabolicas.html" data-q="vias metabolicas · farmaco uc13 farmacologia uc13 material material de apoio 19/09/2026">
-          <span class="titulo">Vias Metabólicas · Farmaco UC13</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">19/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc13-laboratorio">
-      <h3>Laboratório</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc13/lab/uc13-lab-a1-guia.html" data-q="uc13 · laboratorio (praticas funcionais) — guia de estudo a1 laboratorio uc13 guia-prova guia de prova 29/08/2026">
-          <span class="titulo">UC13 · Laboratório (Práticas Funcionais) — Guia de estudo A1</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">29/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="uc" id="uc-uc14">
-    <h2>UC14</h2>
-    <div class="materia" id="m-uc14-farmacologia">
-      <h3>Farmacologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-banco-vania.html" data-q="uc14 · farmaco · banco de questoes da vania farmacologia uc14 banco banco de questoes 19/09/2026">
-          <span class="titulo">UC14 · Farmaco · Banco de questões da Vânia</span>
-          <span class="meta">
-            <span class="badge b-banco">banco de questões</span>
-            <span class="data">19/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-raio-x-vania-estrategia.html" data-q="uc14 · farmaco · raio-x da vania + estrategia farmacologia uc14 guia-prova guia de prova 20/09/2026">
-          <span class="titulo">UC14 · Farmaco · Raio-X da Vânia + Estratégia</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">20/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-transcricao-aula-04-09.html" data-q="🎧 transcricao · farmaco uc14 · aula 04/09/2026 farmacologia uc14 material material de apoio 17/09/2026">
-          <span class="titulo">🎧 Transcrição · Farmaco UC14 · aula 04/09/2026</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">17/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-vias-metabolicas.html" data-q="uc14 · farmaco · vias metabolicas farmacologia uc14 material material de apoio 17/09/2026">
-          <span class="titulo">UC14 · Farmaco · Vias metabólicas</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">17/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-sp1-diarreia-dii.html" data-q="uc14 · farmaco · sp1 diarreia + dii — guia v2 farmacologia uc14 guia-sp guia de sp 17/09/2026">
-          <span class="titulo">UC14 · Farmaco · SP1 Diarreia + DII — Guia v2</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">17/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-sp2-constipacao.html" data-q="uc14 · farmaco · sp2 constipacao — guia v2 farmacologia uc14 guia-sp guia de sp 19/09/2026">
-          <span class="titulo">UC14 · Farmaco · SP2 Constipação — Guia v2</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">19/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-sp3-antiemeticos-hepato.html" data-q="uc14 · farmaco · sp3 antiemeticos + hepato — guia v2 farmacologia uc14 guia-sp guia de sp 19/09/2026">
-          <span class="titulo">UC14 · Farmaco · SP3 Antieméticos + Hepato — Guia v2</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">19/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-sp4-dispepsia.html" data-q="uc14 · farmaco · sp4 dispepsia — pre-resumo farmacologia uc14 guia-sp guia de sp 20/09/2026">
-          <span class="titulo">UC14 · Farmaco · SP4 Dispepsia — pré-resumo</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">20/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-guia-completo.html" data-q="uc14 · farmaco · guia completo (sps + banco + vias + raio-x) farmacologia uc14 guia-prova guia de prova 25/09/2026">
-          <span class="titulo">UC14 · Farmaco · Guia Completo (SPs + Banco + Vias + Raio-X)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">25/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-tabelao-farmacos.html" data-q="uc14 · farmaco · tabelao de farmacos farmacologia uc14 material material de apoio 22/09/2026">
-          <span class="titulo">UC14 · Farmaco · Tabelão de fármacos</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">22/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-transcricao-aula-19-09.html" data-q="🎧 transcricao · farmaco uc14 · aula 19/09/2026 farmacologia uc14 material material de apoio 19/09/2026">
-          <span class="titulo">🎧 Transcrição · Farmaco UC14 · aula 19/09/2026</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">19/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-flashcards-mecanismo.html" data-q="mecanismos farmaco uc14 farmacologia uc14 flashcards flashcards 30/09/2026">
-          <span class="titulo">Mecanismos Farmaco UC14</span>
-          <span class="meta">
-            <span class="badge b-flashcards">flashcards</span>
-            <span class="data">30/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-questoes-abcd.html" data-q="questoes abcd farmaco uc14 farmacologia uc14 banco banco de questoes 30/09/2026">
-          <span class="titulo">Questões ABCD Farmaco UC14</span>
-          <span class="meta">
-            <span class="badge b-banco">banco de questões</span>
-            <span class="data">30/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/farmaco/uc14-farmaco-central-guia.html" data-q="uc14 · farmaco · central da materia (raio-x, resumo, tabela, questoes) farmacologia uc14 guia-prova guia de prova 05/10/2026">
-          <span class="titulo">UC14 · Farmaco · Central da matéria (Raio-X, Resumo, Tabela, Questões)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">05/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc14-tutoria">
-      <h3>Tutoria</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/tutoria/uc14-prova-final-tutoria-guia-simulado.html" data-q="uc14 · prova final de tutoria · guia + simuladao tutoria uc14 simulado simulado 14/09/2026">
-          <span class="titulo">UC14 · Prova Final de Tutoria · Guia + Simuladão</span>
-          <span class="meta">
-            <span class="badge b-simulado">simulado</span>
-            <span class="data">14/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp1-abdome-agudo.html" data-q="uc14 · sp1 — abdome agudo · guia + simulado apf tutoria uc14 guia-sp guia de sp 14/09/2026">
-          <span class="titulo">UC14 · SP1 — Abdome Agudo · Guia + Simulado APF</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">14/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp2-diarreia-parasitoses.html" data-q="uc14 · sp2 — diarreia e parasitoses · guia + simulado apf tutoria uc14 guia-sp guia de sp 14/09/2026">
-          <span class="titulo">UC14 · SP2 — Diarreia e Parasitoses · Guia + Simulado APF</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">14/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp3-ictericia-biliar-pancreatite.html" data-q="uc14 · sp3 — ictericia, vias biliares e pancreatite · guia + simulado apf tutoria uc14 guia-sp guia de sp 14/09/2026">
-          <span class="titulo">UC14 · SP3 — Icterícia, Vias Biliares e Pancreatite · Guia + Simulado APF</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">14/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp4-dispepsia-drge-ulcera-hda.html" data-q="uc14 · sp4 — dispepsia, drge, ulcera e hda · guia + simulado apf tutoria uc14 guia-sp guia de sp 14/09/2026">
-          <span class="titulo">UC14 · SP4 — Dispepsia, DRGE, Úlcera e HDA · Guia + Simulado APF</span>
-          <span class="meta">
-            <span class="badge b-guia-sp">guia de SP</span>
-            <span class="data">14/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp4-tutoria-leitura.html" data-q="uc14 · tutoria sp4 · leitura: dispepsia, drge e ulcera tutoria uc14 material material de apoio 14/10/2026">
-          <span class="titulo">UC14 · Tutoria SP4 · Leitura: Dispepsia, DRGE e Úlcera</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">14/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/uc14-sp4-tutoria-questoes-abcd.html" data-q="uc14 · tutoria sp4 · questoes abcd tutoria uc14 banco banco de questoes 14/10/2026">
-          <span class="titulo">UC14 · Tutoria SP4 · Questões ABCD</span>
-          <span class="meta">
-            <span class="badge b-banco">banco de questões</span>
-            <span class="data">14/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/tutoria/prova-final/uc14-tutoria-prova-final.html" data-q="uc14 · tutoria · prova final (resumo, questoes e videos) tutoria uc14 guia-prova guia de prova 18/10/2026">
-          <span class="titulo">UC14 · Tutoria · Prova final (resumo, questões e vídeos)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">18/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc14-patologia">
-      <h3>Patologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/pato/uc14-pato-guia.html" data-q="patologia uc14 patologia uc14 guia-prova guia de prova 27/09/2026">
-          <span class="titulo">Patologia UC14</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">27/09/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc14-fisiologia">
-      <h3>Fisiologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/fisio/uc14-fisio-central-guia.html" data-q="uc14 · fisio · central da materia (resumo, esquemas, t11, treino abcd) fisiologia uc14 guia-prova guia de prova 14/10/2026">
-          <span class="titulo">UC14 · Fisio · Central da matéria (Resumo, Esquemas, T11, Treino ABCD)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">14/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-        <a class="card" href="5-fase/uc14/fisio/uc14-fisio-videoaulas.html" data-q="uc14 · fisiologia · videoaulas (sp2, sp3 e sp4) fisiologia uc14 material material de apoio 14/10/2026">
-          <span class="titulo">UC14 · Fisiologia · Videoaulas (SP2, SP3 e SP4)</span>
-          <span class="meta">
-            <span class="badge b-material">material de apoio</span>
-            <span class="data">14/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc14-anatomia">
-      <h3>Anatomia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/anato/uc14-anato-laminas.html" data-q="laminas uc14 anatomia uc14 flashcards flashcards 14/10/2026">
-          <span class="titulo">Lâminas UC14</span>
-          <span class="meta">
-            <span class="badge b-flashcards">flashcards</span>
-            <span class="data">14/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-uc14-laboratorio">
-      <h3>Laboratório</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc14/lab/uc14-lab-central-guia.html" data-q="uc14 · laboratorio · resumo, video, questoes (t6–t11) e raio-x da prova laboratorio uc14 guia-prova guia de prova 18/10/2026">
-          <span class="titulo">UC14 · Laboratório · Resumo, vídeo, questões (T6–T11) e raio-X da prova</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">18/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="uc" id="uc-uc15">
-    <h2>UC15</h2>
-    <div class="materia" id="m-uc15-farmacologia">
-      <h3>Farmacologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/uc15/farmaco/uc15-farmaco-central-guia.html" data-q="uc15 · farmaco · central da materia (raio-x, resumo, tabela, questoes) farmacologia uc15 guia-prova guia de prova 06/10/2026">
-          <span class="titulo">UC15 · Farmaco · Central da matéria (Raio-X, Resumo, Tabela, Questões)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">06/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="uc" id="uc-hp-manifestacoes-abdominais">
-    <h2>HP Manifestações Abdominais</h2>
-    <div class="materia" id="m-hp-manifestacoes-abdominais-procedimentos">
-      <h3>Procedimentos</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/hp-abdomen/procedimentos/hp-joao-hpp-guia.html" data-q="hp · prova do joao (hpp) — exame fisico abdominal, abdome agudo, ascite, via biliar e endoscopia · guia de estudo procedimentos hp manifestacoes abdominais guia-prova guia de prova 29/08/2026">
-          <span class="titulo">HP · Prova do João (HPp) — Exame físico abdominal, abdome agudo, ascite, via biliar e endoscopia · Guia de estudo</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">29/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="materia" id="m-hp-manifestacoes-abdominais-clinica">
-      <h3>Clínica</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/hp-abdomen/clinica/hp-andrea-hpc-guia.html" data-q="hpc · andrea — hepatites, dhgna, cirrose e ascite · guia de estudo clinica hp manifestacoes abdominais guia-prova guia de prova 29/08/2026">
-          <span class="titulo">HPc · Andrea — Hepatites, DHGNA, Cirrose e Ascite · Guia de estudo</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">29/08/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="uc" id="uc-hp-otorrinolaringologia">
-    <h2>HP Otorrinolaringologia</h2>
-    <div class="materia" id="m-hp-otorrinolaringologia-otorrinolaringologia">
-      <h3>Otorrinolaringologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/hp-otorrino/otorrino/hp-otorrino-central.html" data-q="hp otorrinolaringologia · central (estudo, condutas, questoes, prova e vespera) otorrinolaringologia hp otorrinolaringologia guia-prova guia de prova 18/10/2026">
-          <span class="titulo">HP Otorrinolaringologia · Central (estudo, condutas, questões, prova e véspera)</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">18/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="uc" id="uc-hp-infeccoes">
-    <h2>HP Infecções</h2>
-    <div class="materia" id="m-hp-infeccoes-infectologia">
-      <h3>Infectologia</h3>
-      <div class="cards">
-        <a class="card" href="5-fase/hp-infeccoes/infectologia/hp-infeccoes-resumo-questoes-video.html" data-q="hp infeccoes · resumo, questoes e video infectologia hp infeccoes guia-prova guia de prova 18/10/2026">
-          <span class="titulo">HP Infecções · Resumo, questões e vídeo</span>
-          <span class="meta">
-            <span class="badge b-guia-prova">guia de prova</span>
-            <span class="data">18/10/2026</span>
-            <span class="abrir">abrir →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-    </div>
+    <div id="view" style="flex:1;min-height:0;display:flex;flex-direction:column"></div>
   </div>
-  <footer>atualizado em 20/10/2026 · 53 guias</footer>
-</main>
+</div>
+<script src="site-data.js"></script>
+<script src="nativo.js"></script>
 <script>
-  var busca = document.getElementById('busca');
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
-  function norm(s){
-    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+(function(){
+const S = window.SITE;
+const $ = (s, el=document) => el.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ICON = {
+  home:'<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 7.5L8 3l5.5 4.5V13h-4v-3h-3v3h-4z" fill="none" stroke="#c7d3d8" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  chev:'<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 3l3 3-3 3" fill="none" stroke="#93a5ae" stroke-width="1.6"/></svg>',
+  left:'<svg width="16" height="16" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3L4.5 7l4 4" fill="none" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  menu:'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="#e4ecef" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  moon:'<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2.5A6 6 0 1013.5 11 4.5 4.5 0 0111 2.5z" fill="none" stroke="#93a5ae" stroke-width="1.5"/></svg>'
+};
+
+/* ---------- dados no navegador (localStorage) ---------- */
+const KEY = "med-site-v2";
+const store = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } })();
+store.seen = store.seen || {};       // "uc/mat/aba/item" -> timestamp
+store.recent = store.recent || [];   // últimos lugares abertos
+store.open = store.open || {uc14:true};
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+
+/* ---------- estado ---------- */
+let st = { uc:null, mat:null, aba:0, item:0 };
+const ucOf = id => S.ucs.find(u => u.id === id);
+const ucName = u => [u.nome, u.tema].filter(Boolean).join(" · ");
+const ORD = (a, b) => (b.ordem ?? b.num) - (a.ordem ?? a.num);
+const matOf = (u, id) => (u.materias || []).find(m => m.id === id);
+const PREV_REMOTE = window.PREVIEW_REMOTE || null, PREV_LOCAL = window.PREVIEW_LOCAL || [];
+const href = src => {
+  if (src == null) return src;
+  let path = (/^(conteudo|lib)\//.test(src) ? "" : S.base) + src;
+  if (PREV_REMOTE && !PREV_LOCAL.some(p => path.startsWith(p))) path = PREV_REMOTE + path; // só na prévia local
+  return encodeURI(path).replace(/#/g, "%23");
+};
+const isPdf = src => /\.pdf$/i.test(src);
+const key = (u,m,a,i) => [u,m,a,i].join("/");
+
+function setAcc(uc){
+  const c = uc ? `var(--${uc.cor})` : "var(--uc14)";
+  document.documentElement.style.setProperty("--acc", c);
+}
+
+function parseHash(){
+  const h = decodeURIComponent(location.hash.slice(1)).split("/");
+  const u = ucOf(h[0]);
+  if (!u || !u.materias.length) return { uc:null };
+  const m = matOf(u, h[1]);
+  if (!m) return { uc:u.id, mat:u.materias[0].id, aba:0, item:0 };
+  let ai = m.abas.findIndex(a => a.id === h[2]); if (ai < 0) ai = 0;
+  let ii = Math.max(0, Math.min(+h[3] || 0, m.abas[ai].itens.length - 1));
+  return { uc:u.id, mat:m.id, aba:ai, item:ii };
+}
+function go(uc, mat, aba=0, item=0){
+  if (!uc){ location.hash = "inicio"; return; }
+  const m = matOf(ucOf(uc), mat);
+  location.hash = [uc, mat, m.abas[aba].id, item].join("/");
+}
+window.addEventListener("hashchange", route);
+
+function route(){
+  st = parseHash();
+  $("#app").classList.remove("drawer");
+  closeFly();
+  renderNav();
+  if (!st.uc) renderHome(); else renderMateria();
+}
+
+/* ---------- barra lateral ---------- */
+function renderNav(){
+  const nav = $("#nav");
+  nav.innerHTML = `
+    <div class="nav-top">
+      <button class="icon-btn collapse-btn" id="collapse" aria-label="Recolher ou abrir menu">${$("#app").classList.contains("collapsed") ? ICON.menu : ICON.left}</button>
+      <span class="brand">Medicina</span><span class="brand-sub">${esc(S.fase)}</span>
+    </div>
+    <button class="home-link" id="goHome" aria-current="${!st.uc}">${ICON.home}<span>Início</span></button>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      ${S.ucs.slice().sort(ORD).map(u => {
+        const open = (!!store.open[u.id] || st.uc === u.id) && u.materias.length > 0;
+        const has = u.materias.length > 0;
+        return `<div class="uc-group ${open ? "open" : ""}" style="--uc-bg:var(--${u.cor}-bg)">
+          <button class="uc-btn" data-uc="${u.id}" ${has ? "" : "disabled"} aria-expanded="${open}" title="${esc(u.nome)} ${esc(u.tema)}">
+            <span class="uc-badge" style="background:${st.uc===u.id ? `var(--${u.cor})` : `var(--${u.cor}-bg)`};color:${st.uc===u.id ? "#fff" : `var(--${u.cor}-fg)`}">${esc(u.sigla || u.num)}</span>
+            <span class="uc-label"><b>${esc(u.tema || u.nome)}</b><span>${has ? u.materias.length + (u.materias.length > 1 ? " matérias" : " matéria") : ""}${has && u.status ? " · " : ""}${esc(u.status || "")}</span></span>
+            ${has ? ICON.chev : ""}
+          </button>
+          <div class="mats">${u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("")}</div>
+        </div>`;
+      }).join("")}
+    </div>
+    <div class="nav-foot"><button id="theme">${ICON.moon}<span>Tema escuro</span></button></div>`;
+  $("#collapse").onclick = () => {
+    $("#app").classList.toggle("collapsed");
+    store.collapsed = $("#app").classList.contains("collapsed"); save(); renderNav();
+  };
+  $("#goHome").onclick = () => go(null);
+  $("#theme").onclick = () => {
+    store.dark = !store.dark; save(); applyTheme();
+  };
+  nav.querySelectorAll("[data-uc]").forEach(b => b.onclick = (e) => {
+    const id = b.dataset.uc;
+    if ($("#app").classList.contains("collapsed") && innerWidth > 760){ openFly(id, b); return; }
+    store.open[id] = !store.open[id]; save(); renderNav();
+  });
+  nav.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [u,m] = b.dataset.go.split("|"); go(u, m); });
+}
+function openFly(id, btn){
+  closeFly();
+  const u = ucOf(id), r = btn.getBoundingClientRect();
+  const f = document.createElement("div");
+  f.className = "flyout"; f.id = "fly"; f.setAttribute("role","menu");
+  f.style.left = (r.right + 8) + "px"; f.style.top = Math.max(8, r.top - 8) + "px";
+  f.innerHTML = `<h4>${esc(ucName(u))}</h4>` + u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("");
+  document.body.appendChild(f);
+  f.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [uu,m] = b.dataset.go.split("|"); closeFly(); go(uu, m); });
+  setTimeout(() => document.addEventListener("click", outside), 0);
+}
+function outside(e){ const f = $("#fly"); if (f && !f.contains(e.target)) closeFly(); }
+function closeFly(){ const f = $("#fly"); if (f) f.remove(); document.removeEventListener("click", outside); }
+
+/* ---------- página da matéria ---------- */
+function renderMateria(){
+  const u = ucOf(st.uc), m = matOf(u, st.mat), a = m.abas[st.aba], it = a.itens[st.item];
+  setAcc(u);
+  document.title = `${m.nome} · ${u.nome}`;
+  $("#mobTitle").textContent = `${m.nome} · ${u.nome}`;
+  const k = key(u.id, m.id, a.id, st.item);
+  store.seen[k] = Date.now();
+  store.recent = [{ uc:u.id, mat:m.id, aba:st.aba, item:st.item, t:Date.now() }].concat(store.recent.filter(r => !(r.uc===u.id && r.mat===m.id && r.aba===st.aba && r.item===st.item))).slice(0, 6);
+  save();
+  const seenAba = (ab) => ab.itens.some((_, i) => store.seen[key(u.id, m.id, ab.id, i)]);
+  $("#view").innerHTML = `
+    <header class="head">
+      <div class="head-row">
+        <h1>${esc(m.nome)}</h1>
+        <span class="crumb">${esc(ucName(u))}${m.prof ? " · Prof. " + esc(m.prof) : ""}</span>
+        ${u.status ? `<span class="pill" style="margin-left:auto">${esc(u.status)}</span>` : ""}
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Abas da matéria">
+        ${m.abas.map((ab, i) => `<button class="tab ${seenAba(ab) ? "seen" : ""}" role="tab" data-aba="${i}" aria-selected="${i===st.aba}">${esc(ab.titulo)}<span class="dot" aria-hidden="true"></span></button>`).join("")}
+      </nav>
+    </header>
+    ${it.nativo && a.itens.length < 2 ? "" : `<div class="sub">
+      ${a.itens.length > 1 ? a.itens.map((x, i) => `<button class="chip" data-item="${i}" aria-pressed="${i===st.item}">${esc(x.label)}${x.nativo ? "" : `<span class="kind">${isPdf(x.src) ? "PDF" : "HTML"}</span>`}</button>`).join("") : `<span style="font-weight:700">${esc(it.label)}</span>`}
+      ${it.src ? `<span class="tools">
+        <a class="tool" href="${href(it.src)}" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+        ${isPdf(it.src) ? `<a class="tool" href="${href(it.src)}" download>Baixar PDF</a>` : ""}
+      </span>` : ""}
+    </div>`}
+    ${it.nativo ? `<div class="viewer native" id="nat"></div>` : `<div class="viewer"><iframe title="${esc(it.label)}" src="${href(it.src)}"></iframe></div>`}`;
+  $("#view").querySelectorAll("[data-aba]").forEach(b => b.onclick = () => go(u.id, m.id, +b.dataset.aba, 0));
+  $("#view").querySelectorAll("[data-item]").forEach(b => b.onclick = () => go(u.id, m.id, st.aba, +b.dataset.item));
+  if (it.nativo && window.NATIVO){
+    const page = pendingPage; pendingPage = 0;
+    const preset = pendingPreset; pendingPreset = null;
+    NATIVO.render($("#nat"), Object.assign({}, it, { view: it.nativo, dir: href(it.dir), data: href(it.data), pdf: href(it.pdf), lib: href(it.lib || "lib/"), extra: href(it.extra), thumbs: it.thumbs ? href(it.thumbs) : (it.dir ? href(it.dir) + "thumbs/p-" : null), ns: it.ns || (u.id + "/" + m.id), videos: (it.videos || []).map(v => Object.assign({}, v, { src: href(v.src) })) }), {
+      store, save, page, preset,
+      openTab(abaId, opts){
+        const ai = m.abas.findIndex(ab => ab.id === abaId);
+        if (ai < 0) return;
+        opts = opts || {};
+        pendingPage = opts.page || 0; pendingPreset = opts.preset || null;
+        if (ai === st.aba && st.item === 0) { renderMateria(); return; }
+        go(u.id, m.id, ai, 0);
+      },
+      openView(view, pre){
+        const ai = m.abas.findIndex(ab => ab.itens.some(x => x.nativo === view));
+        if (ai < 0) return;
+        pendingPreset = pre || null;
+        const ii = m.abas[ai].itens.findIndex(x => x.nativo === view);
+        if (ai === st.aba && ii === st.item) { renderMateria(); return; }
+        go(u.id, m.id, ai, ii);
+      },
+      openResumo(p){
+        const ai = m.abas.findIndex(ab => ab.itens.some(x => x.nativo === "resumo" && !x.pdf));
+        if (ai < 0) return;
+        pendingPage = p; go(u.id, m.id, ai, m.abas[ai].itens.findIndex(x => x.nativo === "resumo" && !x.pdf));
+      }
+    });
   }
-  busca.addEventListener('input', function(){
-    var q = norm(busca.value.trim());
-    cards.forEach(function(c){ c.hidden = q !== '' && c.getAttribute('data-q').indexOf(q) === -1; });
-    document.querySelectorAll('.materia').forEach(function(m){
-      m.hidden = !m.querySelector('.card:not([hidden])');
-    });
-    document.querySelectorAll('section.uc').forEach(function(s){
-      s.hidden = !s.querySelector('.materia:not([hidden])');
-    });
-    document.getElementById('vazio').hidden = cards.some(function(c){ return !c.hidden; });
-  });
-  var tree = document.querySelector('.tree');
-  if (tree && window.innerWidth < 980) tree.removeAttribute('open');
-  window.addEventListener('resize', function(){
-    if (tree && window.innerWidth >= 980) tree.setAttribute('open', '');
-  });
-  document.querySelectorAll('.sidenav a').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (busca.value) { busca.value = ''; busca.dispatchEvent(new Event('input')); }
-      if (tree && window.innerWidth < 980) tree.removeAttribute('open');
-      var alvo = document.querySelector(a.getAttribute('href'));
-      if (alvo) alvo.scrollIntoView({behavior: 'smooth', block: 'start'});
-    });
-  });
+}
+let pendingPage = 0, pendingPreset = null;
+
+/* ---------- início ---------- */
+function progress(u, m){
+  let tot = 0, seen = 0;
+  m.abas.forEach(a => a.itens.forEach((_, i) => { tot++; if (store.seen[key(u.id, m.id, a.id, i)]) seen++; }));
+  return tot ? Math.round(seen / tot * 100) : 0;
+}
+function ago(t){
+  const d = Math.floor((Date.now() - t) / 60000);
+  if (d < 1) return "agora"; if (d < 60) return d + " min";
+  if (d < 1440) return Math.floor(d/60) + " h"; return Math.floor(d/1440) + " d";
+}
+function renderHome(){
+  setAcc(null);
+  document.title = "Medicina · 5ª fase";
+  $("#mobTitle").textContent = "Medicina";
+  const recent = store.recent.filter(r => { const u = ucOf(r.uc), m = u && matOf(u, r.mat); return m && m.abas[r.aba] && m.abas[r.aba].itens[r.item]; }).slice(0, 4);
+  const hoje = new Date().toLocaleDateString("pt-BR", { weekday:"long", day:"numeric", month:"long" });
+  $("#view").innerHTML = `<div class="home"><div class="home-in">
+    <header>
+      <div class="crumb">${esc(hoje.charAt(0).toUpperCase() + hoje.slice(1))}</div>
+      <h1>Medicina · ${esc(S.fase)}</h1>
+    </header>
+    <section class="cont" aria-label="Continuar de onde parou">
+      <h3>Continuar de onde parou</h3>
+      ${recent.length ? recent.map((r, i) => { const u = ucOf(r.uc), m = matOf(u, r.mat), a = m.abas[r.aba], it = a.itens[r.item];
+        return `<button data-rec="${i}"><span style="font-size:12px;font-weight:700;color:var(--${u.cor}-fg);width:44px">${esc(u.nome)}</span><span style="flex:1"><b>${esc(m.nome)} › ${esc(a.titulo)}</b><small>${esc(it.label)}</small></span><small>${ago(r.t)}</small></button>`; }).join("")
+        : `<p class="empty" style="color:var(--nav-muted);margin:4px 0">Nada aberto ainda. O que você abrir aparece aqui.</p>`}
+    </section>
+    <section>
+      <h2>Unidades</h2>
+      <div class="uc-cards">
+        ${S.ucs.slice().sort(ORD).map(u => `
+          <article class="uc-card" style="--acc:var(--${u.cor})">
+            <header><span class="uc-badge" style="background:var(--${u.cor});color:#fff">${esc(u.sigla || u.num)}</span><b>${esc(u.tema || u.nome)}</b><span class="st">${esc(u.status || "")}</span></header>
+            ${u.materias.length ? `
+              <div class="mlist">${u.materias.map(m => `<button data-go="${u.id}|${m.id}">${esc(m.nome)}</button>`).join("")}</div>
+              <div class="prog"><span>visto</span><i><b style="width:${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%"></b></i><span style="font-family:var(--f-mono)">${Math.round(u.materias.reduce((s,m)=>s+progress(u,m),0)/u.materias.length)}%</span></div>
+              ${u.plano ? `<a class="tool" style="align-self:flex-start" href="${href(u.plano.src)}" target="_blank" rel="noopener">${esc(u.plano.label)} ↗</a>` : ""}`
+            : `<p class="empty" style="margin:0">Material ainda não organizado aqui.</p>`}
+          </article>`).join("")}
+      </div>
+    </section>
+    <footer class="foot">
+      <span>O que você abriu fica salvo neste navegador.</span>
+      <button class="tool" id="exp">Exportar progresso</button>
+      <label class="tool" style="cursor:pointer">Importar<input type="file" id="imp" accept="application/json" hidden></label>
+      <button class="tool" id="clr">Limpar</button>
+    </footer>
+  </div></div>`;
+  $("#view").querySelectorAll("[data-rec]").forEach(b => b.onclick = () => { const r = recent[+b.dataset.rec]; go(r.uc, r.mat, r.aba, r.item); });
+  $("#view").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { const [u,m] = b.dataset.go.split("|"); go(u, m); });
+  $("#exp").onclick = () => {
+    const blob = new Blob([JSON.stringify(store, null, 2)], { type:"application/json" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+    a.download = "progresso-medicina-" + new Date().toISOString().slice(0,10) + ".json"; a.click();
+  };
+  $("#imp").onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then(t => { try { Object.assign(store, JSON.parse(t)); save(); route(); } catch(err){ alert("Arquivo inválido: escolha um .json exportado por este site."); } });
+  };
+  let armed = false;
+  $("#clr").onclick = e => {
+    if (!armed){ armed = true; e.target.textContent = "Clique de novo para apagar"; return; }
+    store.seen = {}; store.recent = []; save(); route();
+  };
+}
+
+function applyTheme(){ document.documentElement.dataset.theme = store.dark ? "dark" : "light"; }
+
+$("#openDrawer").onclick = () => $("#app").classList.add("drawer");
+$("#scrim").onclick = () => $("#app").classList.remove("drawer");
+if (store.collapsed) $("#app").classList.add("collapsed");
+applyTheme();
+route();
+})();
 </script>
 </body>
 </html>

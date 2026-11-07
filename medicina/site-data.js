@@ -6,11 +6,11 @@
    ===================================================================== */
 window.SITE = {
   fase: "5ª fase · 2026.2",
-  base: "../5-fase/",
+  base: "5-fase/",
   ucs: [
     {
       id: "uc15", num: 15, nome: "UC15", tema: "Infecção", cor: "uc15", status: "",
-      /* UC15 no formato novo (em avaliação, só na v2). Arquivos novos ficam em v2/conteudo/uc15/.
+      /* UC15 no formato novo. Arquivos próprios ficam em conteudo/uc15/.
          Abas "nativas" são desenhadas pelo site a partir dos dados já existentes; nada foi reescrito. */
       materias: [
         { id: "lab", nome: "Laboratório", prof: "Tabata", abas: [
