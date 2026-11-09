@@ -495,7 +495,7 @@
   };
 
   /* ---------- Pato UC15 (dados extraídos do Pato_UC15_Questoes.html) ---------- */
-  const AULA = a => a ? "Aula " + a : "Prova T11";
+  const AULA = a => a ? "Aula " + a : "Fisio T11";
   function prepPato(q) {
     return {
       id: q.id, sp: q.sp,
