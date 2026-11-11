@@ -10,6 +10,7 @@ Resume
 - `medicina/conteudo/`: arquivos que só existem no formato novo (PDFs, vídeos, dados da UC15).
 - `medicina/build.py`: confere o `site-data.js`, regera o `nav.js` e injeta o menu (Python 3, só stdlib).
 - `medicina/v2/index.html`: só redireciona para `/medicina/` (mantém o `#endereço`).
+- `ferramentas/roi-microbiologia/`: calculadora de retorno da automação em microbiologia (AutoBac). Página solta, sem link no site e com `noindex`.
 - `.nojekyll`: Pages serve os arquivos como estão, sem Jekyll.
 
 Como adicionar um guia novo: ver [`medicina/LEIA.md`](medicina/LEIA.md).

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de retorno — automação em microbiologia</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#18212b; --muted:#5b6673; --line:#dfe3e8;
+    --accent:#0f6e66; --accent-soft:#e3f1ef; --neg:#b42318; --neg-soft:#fdecea; --pos:#13703a;
+    --radius:10px; --font: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{font-size:16px}
+  @media (min-width:1400px){html{font-size:17px}}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.4}
+  header{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;padding:.8rem 1.4rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+  header h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px}
+  header .sub{font-size:.8rem;color:#b8c2cc}
+  .bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+  .seg{display:inline-flex;border:1px solid #4a5663;border-radius:8px;overflow:hidden}
+  .seg button{background:transparent;color:#d6dde4;border:0;padding:.5rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
+  .seg button.on{background:#fff;color:var(--ink);font-weight:600}
+  .btn{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:.5rem .85rem;font:inherit;font-size:.88rem;cursor:pointer;min-height:38px}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.ghost{background:transparent;color:#e7ecf0;border-color:#4a5663}
+  .btn.small{padding:.3rem .6rem;font-size:.8rem;min-height:30px}
+  .btn.danger{color:var(--neg)}
+  main{max-width:1500px;margin:0 auto;padding:1.2rem 1.4rem 3rem}
+  section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem;margin-bottom:1.1rem}
+  h2{font-size:1.05rem;margin:0 0 .8rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap}
+  h2 small{font-weight:400;color:var(--muted);font-size:.82rem}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin-bottom:1.1rem}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.9rem 1rem}
+  .kpi .l{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+  .kpi .v{font-size:1.65rem;font-weight:650;margin-top:.15rem;font-variant-numeric:tabular-nums}
+  .kpi .d{font-size:.8rem;color:var(--muted)}
+  .kpi.hl{background:var(--accent-soft);border-color:#b9dcd7}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media (max-width:900px){.grid2{grid-template-columns:1fr}}
+  label{display:block;font-size:.76rem;color:var(--muted);margin-bottom:.15rem}
+  input[type=text],select{width:100%;font:inherit;font-size:.95rem;padding:.42rem .5rem;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font-variant-numeric:tabular-nums}
+  input[type=text]:focus,select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+  .fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.55rem .7rem;align-items:end}
+  .ctrl-row{display:grid;grid-template-columns:minmax(260px,320px) minmax(180px,220px);gap:.7rem 1rem;align-items:end;margin-bottom:1rem}
+  .ctrl-row label{white-space:nowrap}
+  @media (max-width:560px){.ctrl-row{grid-template-columns:1fr}}
+  select{height:2.3rem}
+  input[type=text]{height:2.3rem}
+  .role{border:1px solid var(--line);border-radius:8px;padding:.8rem}
+  .role h3{margin:0 0 .6rem;font-size:.95rem;display:flex;justify-content:space-between}
+  .role h3 span{font-variant-numeric:tabular-nums;color:var(--accent)}
+  .mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:.9rem}
+  @media (max-width:420px){.mods{grid-template-columns:1fr}}
+  .mod{border:1px solid var(--line);border-radius:var(--radius);padding:.85rem;display:flex;flex-direction:column;gap:.6rem;background:#fff}
+  .mod.off{opacity:.55;background:#fafbfc}
+  .mod-head{display:flex;gap:.5rem;align-items:center}
+  .mod-head input[type=text]{font-weight:600}
+  .switch{position:relative;width:44px;height:24px;flex:none}
+  .switch input{opacity:0;width:0;height:0}
+  .switch span{position:absolute;inset:0;background:#c7ced6;border-radius:24px;cursor:pointer;transition:.15s}
+  .switch span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.15s}
+  .switch input:checked+span{background:var(--accent)}
+  .switch input:checked+span:before{transform:translateX(20px)}
+  .mod-out{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;border-top:1px solid var(--line);padding-top:.55rem}
+  .mod-out div{font-size:.72rem;color:var(--muted)}
+  .mod-out b{display:block;font-size:.98rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .note{font-size:.75rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{padding:.5rem .55rem;border-bottom:1px solid var(--line);text-align:right;font-size:.9rem;vertical-align:middle}
+  th{font-size:.74rem;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:600;background:#fafbfc}
+  th:first-child,td:first-child{text-align:left}
+  tfoot td{font-weight:650;border-top:2px solid var(--ink)}
+  .tbl{overflow-x:auto}
+  .neg{color:var(--neg)} .pos{color:var(--pos)}
+  .tag{display:inline-block;font-size:.7rem;padding:.1rem .45rem;border-radius:20px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:.3rem}
+  .tag.gray{background:#eef0f3;color:var(--muted)}
+  svg text{font-family:var(--font)}
+  .modal{position:fixed;inset:0;background:rgba(15,20,25,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:1rem}
+  .modal.on{display:flex}
+  .modal .box{background:#fff;border-radius:12px;max-width:820px;width:100%;padding:1.2rem;max-height:90vh;display:flex;flex-direction:column;gap:.7rem}
+  .modal textarea{width:100%;flex:1;min-height:380px;font:inherit;font-size:.92rem;padding:.7rem;border:1px solid var(--line);border-radius:8px;resize:vertical}
+  .toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;opacity:0;transition:.2s;pointer-events:none;z-index:60}
+  .toast.on{opacity:1}
+  .comp-inp input[type=text],.comp-inp select{font-size:.88rem;padding:.3rem .4rem}
+  .aviso{background:#fff8e6;border:1px solid #f1d58a;border-radius:var(--radius);padding:.75rem 1rem;margin-bottom:1.1rem;font-size:.92rem}
+  .scen-badge{font-size:.78rem;padding:.2rem .55rem;border-radius:20px;background:#2b3742;color:#cfe8e4}
+  footer{font-size:.75rem;color:var(--muted);max-width:1500px;margin:0 auto;padding:0 1.4rem 2rem}
+  @media print{header .bar,.btn,.modal{display:none!important} header{position:static} body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Retorno da automação modular — microbiologia</h1>
+    <div class="sub">Calculadora de economia e payback · valores em R$ por mês</div>
+  </div>
+  <div class="bar">
+    <span class="scen-badge" id="scenBadge">Cenário: Mercado</span>
+    <div class="seg" role="tablist" aria-label="Cenário">
+      <button id="scMercado" class="on">Mercado</button>
+      <button id="scLab">Laboratório</button>
+    </div>
+    <button class="btn ghost" id="btnCopy" title="Copia todos os valores do cenário ativo para o outro">Copiar para Laboratório</button>
+    <button class="btn primary" id="btnResumo">Gerar resumo</button>
+    <button class="btn ghost" id="btnExport">Exportar JSON</button>
+    <button class="btn ghost" id="btnImport">Importar JSON</button>
+    <button class="btn ghost" id="btnColar" title="Cola o código que vem no fim de um resumo">Colar código</button>
+    <button class="btn ghost" id="btnReset" title="Volta o cenário ativo aos valores do levantamento">Restaurar padrão</button>
+    <input type="file" id="fileImport" accept="application/json,.json" hidden>
+  </div>
+</header>
+
+<main>
+  <div class="aviso" id="aviso">
+    <b>Como usar:</b> ajuste o volume, os minutos e as taxas de repetição de cada módulo conforme a rotina do laboratório. Os preços dos módulos são provisórios (começam no ponto de empate). No fim, clique em <b>Gerar resumo</b>, copie o texto e envie ao Otto.
+  </div>
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>Custo da equipe <small>usado para converter minutos em reais</small></h2>
+    <div class="ctrl-row">
+      <div>
+        <label for="modoHora">Como informar o custo</label>
+        <select id="modoHora">
+          <option value="mensal">Custo mensal por profissional</option>
+          <option value="salario">Calcular pelo salário + encargos</option>
+          <option value="direto">Custo por hora</option>
+        </select>
+      </div>
+      <div>
+        <label for="horasMes">Horas produtivas por mês</label>
+        <input type="text" id="horasMes" inputmode="decimal">
+      </div>
+    </div>
+    <div class="grid2" id="roles"></div>
+  </section>
+
+  <section>
+    <h2>Módulos <span><button class="btn small" id="btnAddMod">+ Adicionar módulo</button></span></h2>
+    <div class="mods" id="mods"></div>
+    <p class="note">Economia de tempo = volume × (minutos hoje − minutos com o módulo). Repetições evitadas = volume × (taxa hoje × minutos hoje − taxa com módulo × minutos com módulo) + material poupado. Saldo = economia − mensalidade − insumos e manutenção. Payback de compra = preço ÷ (economia − insumos e manutenção).</p>
+  </section>
+
+  <section>
+    <h2>Resultado por módulo <small>somente módulos ativados</small></h2>
+    <div class="tbl"><table id="tblRes"></table></div>
+  </section>
+
+  <section>
+    <h2>Economia mensal por módulo <small>saldo depois de mensalidade, insumos e manutenção</small></h2>
+    <div id="chart"></div>
+  </section>
+
+  <section>
+    <h2>Comparação com concorrentes <span><button class="btn small" id="btnAddComp">+ Adicionar concorrente</button></span></h2>
+    <p class="note" style="margin-top:-.4rem">Premissa: o concorrente poupa o mesmo tempo que o módulo comparável. O que muda é o preço e o custo mensal.</p>
+    <div class="tbl"><table id="tblComp"></table></div>
+  </section>
+</main>
+
+<footer>
+  Valores padrão do cenário "Mercado": levantamento de 11/11/2026 (salários SC no Novo CAGED e CCTs do Sindilab; tempos da literatura; volumes de um lab de médio porte). Os minutos "com o módulo", os preços dos módulos e os volumes de imuno-hematologia são estimativas, para ajustar com o laboratório.
+</footer>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2 style="margin:0">Resumo para a proposta <small id="resumoScen"></small></h2>
+    <textarea id="resumoTxt"></textarea>
+    <div class="bar" style="justify-content:flex-end">
+      <button class="btn" id="btnClose">Fechar</button>
+      <button class="btn primary" id="btnCopyTxt">Copiar texto</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ---------- Dados iniciais (JSON do levantamento de 11/11/2026) ---------- */
+const DADOS_INICIAIS = {
+  "custo_hora": {"tecnico": 30.6, "analista": 40.1},
+  "procedimentos": [
+    {"nome": "Semeadura", "minutos_por_amostra": 0.8, "executor": "tecnico", "volume_mensal": 775, "taxa_repeticao": 0.08},
+    {"nome": "Leitura e interpretação de placas", "minutos_por_amostra": 0.6, "executor": "analista", "volume_mensal": 775, "taxa_repeticao": 0.0},
+    {"nome": "Gram - preparo e coloração", "minutos_por_amostra": 2.0, "executor": "tecnico", "volume_mensal": 77, "taxa_repeticao": 0.03},
+    {"nome": "Gram - leitura", "minutos_por_amostra": 3.1, "executor": "analista", "volume_mensal": 77, "taxa_repeticao": 0.03},
+    {"nome": "Antibiograma disco-difusão - montagem", "minutos_por_amostra": 5.5, "executor": "tecnico", "volume_mensal": 83, "taxa_repeticao": 0.04},
+    {"nome": "Antibiograma disco-difusão - leitura e laudo", "minutos_por_amostra": 4.2, "executor": "analista", "volume_mensal": 83, "taxa_repeticao": 0.04},
+    {"nome": "Tipagem ABO/Rh", "minutos_por_amostra": 4, "executor": "tecnico", "volume_mensal": 600, "taxa_repeticao": 0.01},
+    {"nome": "Coombs direto", "minutos_por_amostra": 5, "executor": "tecnico", "volume_mensal": 30, "taxa_repeticao": 0.02},
+    {"nome": "Coombs indireto", "minutos_por_amostra": 8, "executor": "tecnico", "volume_mensal": 150, "taxa_repeticao": 0.02}
+  ],
+  "concorrentes": [
+    {"modulo": "Semeadura", "equipamento": "Copan WASP (est.)", "preco_brl": 2000000, "custo_mensal_brl": 15000},
+    {"modulo": "Semeadura antibiograma", "equipamento": "bioMérieux PREVI Isola (est.)", "preco_brl": 300000, "custo_mensal_brl": 2500},
+    {"modulo": "Gram", "equipamento": "bioMérieux PREVI Color Gram (est.)", "preco_brl": 150000, "custo_mensal_brl": 1300},
+    {"modulo": "Leitura de halo", "equipamento": "i2a SIRscan", "preco_brl": 521000, "custo_mensal_brl": 2550},
+    {"modulo": "Leitura de halo", "equipamento": "Interscience Scan 1200", "preco_brl": 86000, "custo_mensal_brl": 400},
+    {"modulo": "Imagem de placas (TLA)", "equipamento": "Copan WASPLab / BD Kiestra", "preco_brl": 6600000, "custo_mensal_brl": 50000},
+    {"modulo": "Antibiograma automatizado", "equipamento": "Vitek 2 / Phoenix em comodato (est.)", "preco_brl": 0, "custo_mensal_brl": 11000},
+    {"modulo": "Imuno-hematologia", "equipamento": "Gel card manual em comodato (est.)", "preco_brl": 0, "custo_mensal_brl": 8000}
+  ]
+};
+
+/* Módulos comparáveis para cada categoria de concorrente */
+const MAPA_CONCORRENTE = {
+  "Semeadura": "Semeadura",
+  "Semeadura antibiograma": "Antibiograma (montagem e leitura)",
+  "Gram": "Coloração de Gram",
+  "Leitura de halo": "Antibiograma (montagem e leitura)",
+  "Imagem de placas (TLA)": "Caixa leitora de placas",
+  "Antibiograma automatizado": "Antibiograma (montagem e leitura)",
+  "Imuno-hematologia": "Tipagem sanguínea"
+};
+
+let seq = 1;
+const uid = () => "m" + (Date.now().toString(36)) + (seq++);
+
+function proc(nome){ return DADOS_INICIAIS.procedimentos.find(p => p.nome === nome) || {}; }
+
+function cenarioPadrao(){
+  const P = proc;
+  const sem = P("Semeadura"), lei = P("Leitura e interpretação de placas");
+  const gc = P("Gram - preparo e coloração"), gl = P("Gram - leitura");
+  const am = P("Antibiograma disco-difusão - montagem"), al = P("Antibiograma disco-difusão - leitura e laudo");
+  const tip = P("Tipagem ABO/Rh"), cd = P("Coombs direto"), ci = P("Coombs indireto");
+  const coombsVol = (cd.volume_mensal||0) + (ci.volume_mensal||0);
+  const coombsMin = coombsVol ? ((cd.volume_mensal*cd.minutos_por_amostra)+(ci.volume_mensal*ci.minutos_por_amostra))/coombsVol : 0;
+  const gramMin = gc.minutos_por_amostra + gl.minutos_por_amostra;
+  const atbMin = am.minutos_por_amostra + al.minutos_por_amostra;
+  const r = x => Math.round(x*100)/100;
+  return {
+    equipe: {
+      modo: "mensal", horasMes: 165,
+      tecnico:  {mensal: 5045, hora: DADOS_INICIAIS.custo_hora.tecnico,  salario: 2350, adicionais: 324, encargos: 66.2, beneficios: 600},
+      analista: {mensal: 6608, hora: DADOS_INICIAIS.custo_hora.analista, salario: 3291, adicionais: 324, encargos: 66.2, beneficios: 600}
+    },
+    modulos: [
+      {id:uid(), nome:"Caixa leitora de placas", ativo:true, executor:"analista", pctTecnico:50,
+       volume:lei.volume_mensal, minHoje:lei.minutos_por_amostra, minModulo:r(lei.minutos_por_amostra*0.54),
+       repHoje:2, repModulo:0.5, materialRep:3, tipoPreco:"mensal", preco:30, custoMensal:150},
+      {id:uid(), nome:"Semeadura", ativo:true, executor:"tecnico", pctTecnico:100,
+       volume:sem.volume_mensal, minHoje:sem.minutos_por_amostra, minModulo:r(sem.minutos_por_amostra*0.22),
+       repHoje:r(sem.taxa_repeticao*100), repModulo:5.5, materialRep:4, tipoPreco:"mensal", preco:0, custoMensal:500},
+      {id:uid(), nome:"Coloração de Gram", ativo:true, executor:"misto", pctTecnico:r(gc.minutos_por_amostra/gramMin*100),
+       volume:gc.volume_mensal, minHoje:r(gramMin), minModulo:r(gramMin-gc.minutos_por_amostra*0.74),
+       repHoje:r(gc.taxa_repeticao*100), repModulo:1, materialRep:2, tipoPreco:"mensal", preco:0, custoMensal:300},
+      {id:uid(), nome:"Antibiograma (montagem e leitura)", ativo:true, executor:"misto", pctTecnico:r(am.minutos_por_amostra/atbMin*100),
+       volume:am.volume_mensal, minHoje:r(atbMin), minModulo:3.15,
+       repHoje:r(am.taxa_repeticao*100), repModulo:2, materialRep:25, tipoPreco:"mensal", preco:70, custoMensal:300},
+      {id:uid(), nome:"Tipagem sanguínea", ativo:false, executor:"tecnico", pctTecnico:100,
+       volume:tip.volume_mensal, minHoje:tip.minutos_por_amostra, minModulo:1.5,
+       repHoje:r(tip.taxa_repeticao*100), repModulo:0.5, materialRep:10, tipoPreco:"mensal", preco:800, custoMensal:0},
+      {id:uid(), nome:"Teste de Coombs", ativo:false, executor:"tecnico", pctTecnico:100,
+       volume:coombsVol, minHoje:r(coombsMin), minModulo:3,
+       repHoje:r(ci.taxa_repeticao*100), repModulo:1, materialRep:12, tipoPreco:"mensal", preco:440, custoMensal:0},
+      {id:uid(), nome:"Integração e relatórios de dados", ativo:true, executor:"analista", pctTecnico:50,
+       volume:sem.volume_mensal, minHoje:1.0, minModulo:0.4,
+       repHoje:2, repModulo:0.5, materialRep:0, tipoPreco:"mensal", preco:310, custoMensal:0}
+    ],
+    concorrentes: DADOS_INICIAIS.concorrentes.map(c => ({
+      id:uid(), nome:c.equipamento, modulo: MAPA_CONCORRENTE[c.modulo] || c.modulo, preco:c.preco_brl, custoMensal:c.custo_mensal_brl
+    }))
+  };
+}
+
+/* ---------- Estado e armazenamento ---------- */
+const CHAVE = "roi_microbiologia_v1";
+let estado = carregar() || {ativo:"mercado", cenarios:{mercado:cenarioPadrao(), laboratorio:cenarioPadrao()}};
+
+function migrar(o){
+  for(const c of Object.values(o.cenarios||{})){
+    const e = c && c.equipe; if(!e) continue;
+    const h = parseNum(e.horasMes)||165;
+    for(const k of ["tecnico","analista"]) if(e[k] && e[k].mensal == null) e[k].mensal = Math.round(parseNum(e[k].hora)*h);
+  }
+  return o;
+}
+function carregar(){
+  try { const s = localStorage.getItem(CHAVE); if(!s) return null; const o = JSON.parse(s);
+        if(!(o && o.cenarios && o.cenarios.mercado && o.cenarios.laboratorio)) return null;
+        migrar(o); return o; }
+  catch(e){ return null; }
+}
+let tSalvar;
+function salvar(){ clearTimeout(tSalvar); tSalvar = setTimeout(() => { try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){} }, 250); }
+const C = () => estado.cenarios[estado.ativo];
+
+/* ---------- Formatação pt-BR ---------- */
+const fBRL = new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:2,maximumFractionDigits:2});
+const fBRL0 = new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+const fN = (x,d=1) => new Intl.NumberFormat("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d}).format(x);
+const fNum = x => new Intl.NumberFormat("pt-BR",{maximumFractionDigits:2}).format(x);
+const brl = x => fBRL.format(isFinite(x)?x:0);
+function parseNum(s){
+  if(typeof s === "number") return s;
+  s = String(s||"").trim().replace(/R\$|\s|%/g,"");
+  if(!s) return 0;
+  if(s.includes(",")) s = s.replace(/\./g,"").replace(",",".");
+  else if((s.match(/\./g)||[]).length > 1) s = s.replace(/\./g,"");
+  const n = parseFloat(s); return isFinite(n) ? n : 0;
+}
+function fPayback(m){
+  if(m === 0) return "imediato";
+  if(!isFinite(m) || m < 0) return "não se paga";
+  if(m > 240) return "> 20 anos";
+  return fN(m,1) + " meses";
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- Cálculo ---------- */
+function horas(){
+  const e = C().equipe, h = Math.max(parseNum(e.horasMes),1);
+  const calc = r => e.modo === "direto" ? parseNum(r.hora)
+    : e.modo === "mensal" ? parseNum(r.mensal)/h
+    : ((parseNum(r.salario)+parseNum(r.adicionais))*(1+parseNum(r.encargos)/100)+parseNum(r.beneficios))/h;
+  const t = calc(e.tecnico), a = calc(e.analista);
+  return {tecnico: t, analista: a, tecnicoMes: t*h, analistaMes: a*h, horasMes: h};
+}
+function calcModulo(m, H){
+  const p = Math.min(Math.max(parseNum(m.pctTecnico),0),100)/100;
+  const custoHora = m.executor === "tecnico" ? H.tecnico : m.executor === "analista" ? H.analista : p*H.tecnico + (1-p)*H.analista;
+  const vol = parseNum(m.volume), mh = parseNum(m.minHoje), mm = parseNum(m.minModulo);
+  const rh = parseNum(m.repHoje)/100, rm = parseNum(m.repModulo)/100;
+  const hBase = vol*(mh-mm)/60;
+  const hRep = vol*(rh*mh - rm*mm)/60;
+  const econTempo = hBase*custoHora;
+  const econRep = hRep*custoHora + vol*(rh-rm)*parseNum(m.materialRep);
+  const bruta = econTempo + econRep;
+  const preco = parseNum(m.preco), custo = parseNum(m.custoMensal);
+  const mensalidade = m.tipoPreco === "mensal" ? preco : 0;
+  const investimento = m.tipoPreco === "compra" ? preco : 0;
+  const liquida = bruta - custo - mensalidade;
+  let payback;
+  if(m.tipoPreco === "compra"){ const base = bruta - custo; payback = base > 0 ? (preco > 0 ? preco/base : 0) : Infinity; }
+  else payback = liquida > 0 ? 0 : Infinity;
+  return {horas: hBase + hRep, econTempo, econRep, bruta, mensalidade, investimento, custo, liquida, payback, custoHora};
+}
+function calcTudo(){
+  const H = horas(), c = C();
+  const res = c.modulos.map(m => ({m, r: calcModulo(m,H)}));
+  const at = res.filter(x => x.m.ativo);
+  const T = at.reduce((a,{r}) => { for(const k of ["horas","econTempo","econRep","bruta","mensalidade","investimento","custo","liquida"]) a[k]+=r[k]; return a; },
+    {horas:0,econTempo:0,econRep:0,bruta:0,mensalidade:0,investimento:0,custo:0,liquida:0});
+  T.payback = T.investimento > 0 ? (T.liquida > 0 ? T.investimento/T.liquida : Infinity) : (T.liquida > 0 ? 0 : Infinity);
+  T.fte = T.horas / H.horasMes;
+  return {H, res, at, T};
+}
+
+/* ---------- Renderização das entradas ---------- */
+const $ = id => document.getElementById(id);
+function campo(lbl, key, val, extra=""){
+  return `<div><label>${lbl}</label><input type="text" inputmode="decimal" data-k="${key}" value="${esc(fNum(parseNum(val)))}" ${extra}></div>`;
+}
+function renderEquipe(){
+  const e = C().equipe;
+  $("modoHora").value = e.modo;
+  $("horasMes").value = fNum(e.horasMes);
+  const papel = (k, titulo) => {
+    const r = e[k];
+    const corpo = e.modo === "direto"
+      ? campo("Custo por hora (R$)", k+".hora", r.hora)
+      : e.modo === "mensal"
+      ? campo("Custo total por mês (R$)", k+".mensal", r.mensal) + `<div class="note" style="grid-column:span 2;align-self:center">salário + encargos + benefícios, por profissional</div>`
+      : campo("Salário bruto (R$)", k+".salario", r.salario) + campo("Insalubridade (R$)", k+".adicionais", r.adicionais)
+        + campo("Encargos (%)", k+".encargos", r.encargos) + campo("Benefícios por mês (R$)", k+".beneficios", r.beneficios);
+    return `<div class="role"><h3>${titulo} <span id="hora_${k}"></span></h3><div class="fields">${corpo}</div></div>`;
+  };
+  $("roles").innerHTML = papel("tecnico","Técnico") + papel("analista","Analista");
+  $("roles").querySelectorAll("input").forEach(inp => inp.addEventListener("input", ev => {
+    const [k, f] = ev.target.dataset.k.split("."); C().equipe[k][f] = parseNum(ev.target.value); atualizar();
+  }));
+}
+function renderModulos(){
+  const box = $("mods");
+  box.innerHTML = C().modulos.map(m => `
+  <div class="mod ${m.ativo?"":"off"}" data-id="${m.id}">
+    <div class="mod-head">
+      <label class="switch" title="Ativar ou desativar"><input type="checkbox" data-f="ativo" ${m.ativo?"checked":""}><span></span></label>
+      <input type="text" data-f="nome" value="${esc(m.nome)}" aria-label="Nome do módulo">
+      <button class="btn small danger" data-acao="remover" title="Remover módulo">Remover</button>
+    </div>
+    <div class="fields">
+      <div><label>Executor</label><select data-f="executor">
+        <option value="tecnico" ${m.executor==="tecnico"?"selected":""}>Técnico</option>
+        <option value="analista" ${m.executor==="analista"?"selected":""}>Analista</option>
+        <option value="misto" ${m.executor==="misto"?"selected":""}>Misto</option></select></div>
+      ${m.executor==="misto" ? fm("% do tempo do técnico","pctTecnico",m.pctTecnico) : ""}
+      ${fm("Volume por mês","volume",m.volume)}
+      ${fm("Min/amostra hoje","minHoje",m.minHoje)}
+      ${fm("Min/amostra com módulo","minModulo",m.minModulo)}
+      ${fm("Repetição hoje (%)","repHoje",m.repHoje)}
+      ${fm("Repetição com módulo (%)","repModulo",m.repModulo)}
+      ${fm("Material por repetição (R$)","materialRep",m.materialRep)}
+      <div><label>Forma de preço</label><select data-f="tipoPreco">
+        <option value="mensal" ${m.tipoPreco==="mensal"?"selected":""}>Mensalidade</option>
+        <option value="compra" ${m.tipoPreco==="compra"?"selected":""}>Compra</option></select></div>
+      ${fm(m.tipoPreco==="compra"?"Preço de compra (R$)":"Mensalidade (R$)","preco",m.preco)}
+      ${fm("Insumos e manutenção/mês (R$)","custoMensal",m.custoMensal)}
+    </div>
+    <div class="mod-out">
+      <div>Horas/mês<b data-o="horas">–</b></div>
+      <div>Economia/mês<b data-o="bruta">–</b></div>
+      <div>Repetições<b data-o="rep">–</b></div>
+      <div>Payback<b data-o="payback">–</b></div>
+    </div>
+  </div>`).join("");
+  function fm(l,f,v){ return `<div><label>${l}</label><input type="text" inputmode="decimal" data-f="${f}" value="${esc(fNum(parseNum(v)))}"></div>`; }
+
+  box.querySelectorAll(".mod").forEach(card => {
+    const m = C().modulos.find(x => x.id === card.dataset.id);
+    card.querySelectorAll("[data-f]").forEach(el => {
+      const f = el.dataset.f;
+      const ev = (el.tagName === "SELECT" || el.type === "checkbox") ? "change" : "input";
+      el.addEventListener(ev, () => {
+        if(f === "ativo"){ m.ativo = el.checked; card.classList.toggle("off", !m.ativo); }
+        else if(f === "nome"){ m.nome = el.value; }
+        else if(f === "executor" || f === "tipoPreco"){ m[f] = el.value; renderModulos(); renderComp(); }
+        else m[f] = parseNum(el.value);
+        if(f === "nome") renderCompSelects();
+        atualizar();
+      });
+    });
+    card.querySelector("[data-acao=remover]").addEventListener("click", () => {
+      if(!confirm(`Remover o módulo "${m.nome}"?`)) return;
+      C().modulos = C().modulos.filter(x => x.id !== m.id); renderModulos(); renderComp(); atualizar();
+    });
+  });
+}
+function renderComp(){
+  const c = C(); const nomes = c.modulos.map(m => m.nome);
+  const linhas = c.concorrentes.map(k => `
+    <tr data-id="${k.id}" class="comp-inp">
+      <td><input type="text" data-f="nome" value="${esc(k.nome)}"></td>
+      <td><select data-f="modulo">${opts(nomes, k.modulo)}</select></td>
+      <td><input type="text" inputmode="decimal" data-f="preco" value="${esc(fNum(k.preco))}"></td>
+      <td><input type="text" inputmode="decimal" data-f="custoMensal" value="${esc(fNum(k.custoMensal))}"></td>
+      <td data-o="econ">–</td><td data-o="saldo">–</td><td data-o="payback">–</td><td data-o="nosso">–</td>
+      <td><button class="btn small danger" data-acao="rm">×</button></td>
+    </tr>`).join("");
+  $("tblComp").innerHTML = `<thead><tr><th>Solução</th><th>Módulo comparável</th><th>Preço (R$)</th><th>Custo mensal (R$)</th>
+    <th>Economia/mês</th><th>Saldo/mês</th><th>Payback</th><th>Nosso módulo: saldo · payback</th><th></th></tr></thead><tbody>${linhas}</tbody>`;
+  $("tblComp").querySelectorAll("tbody tr").forEach(tr => {
+    const k = c.concorrentes.find(x => x.id === tr.dataset.id);
+    tr.querySelectorAll("[data-f]").forEach(el => el.addEventListener(el.tagName==="SELECT"?"change":"input", () => {
+      const f = el.dataset.f; k[f] = (f==="preco"||f==="custoMensal") ? parseNum(el.value) : el.value; atualizar();
+    }));
+    tr.querySelector("[data-acao=rm]").addEventListener("click", () => { c.concorrentes = c.concorrentes.filter(x => x.id !== k.id); renderComp(); atualizar(); });
+  });
+}
+function opts(nomes, sel){
+  const lista = nomes.includes(sel) || !sel ? nomes : [sel, ...nomes];
+  return lista.map(n => `<option ${n===sel?"selected":""}>${esc(n)}</option>`).join("");
+}
+function renderCompSelects(){
+  const nomes = C().modulos.map(m => m.nome);
+  $("tblComp").querySelectorAll("select[data-f=modulo]").forEach(s => {
+    const k = C().concorrentes.find(x => x.id === s.closest("tr").dataset.id);
+    s.innerHTML = opts(nomes, k.modulo);
+  });
+}
+
+/* ---------- Atualização das saídas ---------- */
+function atualizar(){
+  const {H, res, at, T} = calcTudo();
+  $("hora_tecnico") && ($("hora_tecnico").textContent = fBRL0.format(H.tecnicoMes) + "/mês · " + brl(H.tecnico) + "/h");
+  $("hora_analista") && ($("hora_analista").textContent = fBRL0.format(H.analistaMes) + "/mês · " + brl(H.analista) + "/h");
+
+  const cls = v => v < 0 ? "neg" : "";
+  $("kpis").innerHTML = `
+    <div class="kpi hl"><div class="l">Saldo mensal</div><div class="v ${cls(T.liquida)}">${fBRL0.format(T.liquida)}</div><div class="d">economia ${fBRL0.format(T.bruta)} − custos ${fBRL0.format(T.mensalidade+T.custo)}</div></div>
+    <div class="kpi"><div class="l">Saldo anual</div><div class="v ${cls(T.liquida)}">${fBRL0.format(T.liquida*12)}</div><div class="d">${at.length} módulo(s) ativo(s)</div></div>
+    <div class="kpi"><div class="l">Horas liberadas/mês</div><div class="v">${fN(T.horas,0)} h</div><div class="d">= ${fN(T.fte,2)} profissional(is) em tempo integral</div></div>
+    <div class="kpi"><div class="l">Payback do pacote</div><div class="v">${fPayback(T.payback)}</div><div class="d">investimento ${fBRL0.format(T.investimento)} · mensalidades ${fBRL0.format(T.mensalidade)}</div></div>`;
+
+  res.forEach(({m,r}) => {
+    const card = document.querySelector(`.mod[data-id="${m.id}"]`); if(!card) return;
+    card.querySelector("[data-o=horas]").textContent = fN(r.horas,1) + " h";
+    const b = card.querySelector("[data-o=bruta]"); b.textContent = fBRL0.format(r.econTempo); b.className = r.econTempo<0?"neg":"";
+    card.querySelector("[data-o=rep]").textContent = fBRL0.format(r.econRep);
+    card.querySelector("[data-o=payback]").textContent = fPayback(r.payback);
+  });
+
+  const linhas = at.map(({m,r}) => `<tr><td>${esc(m.nome)}<span class="tag gray">${m.tipoPreco==="compra"?"compra":"mensal"}</span></td>
+    <td>${fN(r.horas,1)}</td><td>${brl(r.econTempo)}</td><td>${brl(r.econRep)}</td><td>${brl(r.mensalidade+r.custo)}</td>
+    <td class="${r.liquida<0?"neg":"pos"}">${brl(r.liquida)}</td><td>${r.investimento?brl(r.investimento):"—"}</td><td>${fPayback(r.payback)}</td></tr>`).join("");
+  $("tblRes").innerHTML = `<thead><tr><th>Módulo</th><th>Horas/mês</th><th>Economia de tempo</th><th>Repetições evitadas</th>
+    <th>Custo mensal</th><th>Saldo/mês</th><th>Investimento</th><th>Payback</th></tr></thead>
+    <tbody>${linhas || `<tr><td colspan="8">Nenhum módulo ativado.</td></tr>`}</tbody>
+    <tfoot><tr><td>Total</td><td>${fN(T.horas,1)}</td><td>${brl(T.econTempo)}</td><td>${brl(T.econRep)}</td><td>${brl(T.mensalidade+T.custo)}</td>
+    <td class="${T.liquida<0?"neg":"pos"}">${brl(T.liquida)}</td><td>${T.investimento?brl(T.investimento):"—"}</td><td>${fPayback(T.payback)}</td></tr></tfoot>`;
+
+  desenharGrafico(at);
+
+  const porNome = {}; res.forEach(x => porNome[x.m.nome] = x.r);
+  document.querySelectorAll("#tblComp tbody tr").forEach(tr => {
+    const k = C().concorrentes.find(x => x.id === tr.dataset.id); if(!k) return;
+    const r = porNome[k.modulo];
+    const econ = r ? r.bruta : 0, saldo = econ - parseNum(k.custoMensal);
+    const pb = parseNum(k.preco) > 0 ? (saldo > 0 ? parseNum(k.preco)/saldo : Infinity) : (saldo > 0 ? 0 : Infinity);
+    tr.querySelector("[data-o=econ]").textContent = r ? brl(econ) : "módulo não encontrado";
+    const s = tr.querySelector("[data-o=saldo]"); s.textContent = brl(saldo); s.className = saldo<0?"neg":"pos";
+    tr.querySelector("[data-o=payback]").textContent = fPayback(pb);
+    tr.querySelector("[data-o=nosso]").innerHTML = r ? `<span class="${r.liquida<0?"neg":"pos"}">${brl(r.liquida)}</span> · ${fPayback(r.payback)}` : "—";
+  });
+
+  $("scenBadge").textContent = "Cenário: " + (estado.ativo === "mercado" ? "Mercado" : "Laboratório");
+  $("scMercado").classList.toggle("on", estado.ativo === "mercado");
+  $("scLab").classList.toggle("on", estado.ativo === "laboratorio");
+  $("btnCopy").textContent = estado.ativo === "mercado" ? "Copiar para Laboratório" : "Copiar para Mercado";
+  salvar();
+}
+
+function desenharGrafico(at){
+  const W = 900, rowH = 38, padL = 250, padR = 120, top = 10;
+  if(!at.length){ $("chart").innerHTML = `<p class="note">Ative ao menos um módulo.</p>`; return; }
+  const vals = at.map(x => x.r.liquida);
+  const max = Math.max(0, ...vals), min = Math.min(0, ...vals);
+  const span = (max - min) || 1, plotW = W - padL - padR;
+  const x0 = padL + (-min/span)*plotW;
+  const H = top*2 + rowH*at.length + 22;
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Saldo mensal por módulo">`;
+  s += `<line x1="${x0}" y1="${top-4}" x2="${x0}" y2="${H-22}" stroke="#8a95a1" stroke-width="1"/>`;
+  at.forEach(({m,r}, i) => {
+    const v = r.liquida, y = top + i*rowH, w = Math.abs(v)/span*plotW;
+    const x = v >= 0 ? x0 : x0 - w, cor = v >= 0 ? "#0f6e66" : "#b42318";
+    const nome = m.nome.length > 32 ? m.nome.slice(0,31)+"…" : m.nome;
+    s += `<text x="${padL-12}" y="${y+rowH/2+5}" text-anchor="end" font-size="15" fill="#18212b">${esc(nome)}</text>`;
+    s += `<rect x="${x}" y="${y+7}" width="${Math.max(w,1.5)}" height="${rowH-14}" rx="4" fill="${cor}"/>`;
+    const tx = v >= 0 ? x0 + w + 8 : x0 - w - 8;
+    s += `<text x="${tx}" y="${y+rowH/2+5}" text-anchor="${v>=0?"start":"end"}" font-size="14" font-weight="600" fill="${cor}">${fBRL0.format(v)}</text>`;
+  });
+  s += `<text x="${x0}" y="${H-5}" text-anchor="middle" font-size="12" fill="#5b6673">R$ 0</text></svg>`;
+  $("chart").innerHTML = s;
+}
+
+/* ---------- Resumo ---------- */
+function gerarResumo(){
+  const {H, at, T} = calcTudo();
+  const nomeC = estado.ativo === "mercado" ? "valores de mercado (levantamento)" : "valores informados pelo laboratório";
+  const L = [];
+  L.push("PROPOSTA — AUTOMAÇÃO MODULAR DA MICROBIOLOGIA");
+  L.push(`Base de cálculo: ${nomeC}.`);
+  L.push(`Custo da equipe para o laboratório (salário, encargos e benefícios): técnico ${brl(H.tecnicoMes)} por mês, analista ${brl(H.analistaMes)} por mês (${fNum(H.horasMes)} h produtivas por mês; ${brl(H.tecnico)} e ${brl(H.analista)} por hora).`);
+  L.push("");
+  L.push("Resultado do pacote proposto:");
+  L.push(`• Economia mensal bruta: ${brl(T.bruta)} (tempo ${brl(T.econTempo)} + repetições evitadas ${brl(T.econRep)}).`);
+  L.push(`• Custos mensais do pacote: ${brl(T.mensalidade + T.custo)} (mensalidades ${brl(T.mensalidade)}; insumos e manutenção ${brl(T.custo)}).`);
+  L.push(`• Saldo para o laboratório: ${brl(T.liquida)} por mês, ${brl(T.liquida*12)} por ano.`);
+  L.push(`• Tempo da equipe liberado: ${fN(T.horas,0)} horas por mês, equivalente a ${fN(T.fte,2)} profissional(is) em tempo integral.`);
+  if(T.investimento > 0) L.push(`• Investimento em compra: ${brl(T.investimento)}; retorno em ${fPayback(T.payback)}.`);
+  else L.push(`• Sem investimento inicial (modelo por mensalidade); retorno: ${fPayback(T.payback)}.`);
+  L.push("");
+  L.push("Por módulo:");
+  at.forEach(({m,r}) => {
+    L.push(`• ${m.nome}: ${fN(r.horas,1)} h/mês liberadas; economia ${brl(r.bruta)}; custo ${brl(r.mensalidade+r.custo)}; saldo ${brl(r.liquida)}/mês; retorno ${fPayback(r.payback)}.`);
+  });
+  const comps = C().concorrentes.filter(k => at.some(x => x.m.nome === k.modulo));
+  if(comps.length){
+    L.push("");
+    L.push("Comparação com alternativas de mercado (mesma economia de tempo):");
+    comps.forEach(k => {
+      const r = at.find(x => x.m.nome === k.modulo).r;
+      const saldo = r.bruta - parseNum(k.custoMensal);
+      const pb = parseNum(k.preco) > 0 ? (saldo > 0 ? parseNum(k.preco)/saldo : Infinity) : (saldo > 0 ? 0 : Infinity);
+      L.push(`• ${k.nome}: preço ${brl(parseNum(k.preco))}, custo ${brl(parseNum(k.custoMensal))}/mês, saldo ${brl(saldo)}/mês, retorno ${fPayback(pb)}.`);
+    });
+  }
+  L.push("");
+  L.push("Premissas: tempos de mão de obra da literatura e do levantamento de mercado (nov/2026); valores a confirmar com a rotina do laboratório. O técnico sempre confirma o resultado sugerido.");
+  L.push("");
+  L.push("—");
+  L.push("Código para replicar (na calculadora, use \"Colar código\"):");
+  L.push(codigoCenario());
+  return L.join("\n");
+}
+function codigoCenario(){
+  const json = JSON.stringify(C());
+  return "CALC1:" + btoa(unescape(encodeURIComponent(json)));
+}
+function colarCodigo(texto){
+  const m = String(texto||"").match(/CALC1:([A-Za-z0-9+\/=\s]+)/);
+  if(!m){ toast("Código não encontrado. Cole o resumo inteiro ou a linha que começa com CALC1:"); return; }
+  let o; try{ o = JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/\s/g,""))))); }catch(e){ toast("Código inválido ou incompleto."); return; }
+  if(!(o && o.equipe && o.modulos)){ toast("Código não reconhecido."); return; }
+  migrar({cenarios:{x:o}});
+  if(!confirm("Substituir os valores do cenário " + (estado.ativo==="mercado"?"Mercado":"Laboratório") + " pelos do código?")) return;
+  estado.cenarios[estado.ativo] = o; renderTudo(); toast("Cenário carregado do código.");
+}
+
+/* ---------- Importar e exportar ---------- */
+function deJsonLevantamento(o){
+  // Aceita o formato {custo_hora, procedimentos, concorrentes} e aplica no cenário ativo
+  const c = C();
+  if(o.custo_hora){ const h = parseNum(c.equipe.horasMes)||165; for(const k of ["tecnico","analista"]){ const v = +o.custo_hora[k]; if(v){ c.equipe[k].hora = v; c.equipe[k].mensal = Math.round(v*h); } } }
+  if(Array.isArray(o.procedimentos)){
+    o.procedimentos.forEach(p => {
+      const alvo = c.modulos.find(m => m.nome.toLowerCase() === String(p.nome).toLowerCase());
+      const dados = {volume:+p.volume_mensal||0, minHoje:+p.minutos_por_amostra||0, executor: p.executor==="analista"?"analista":"tecnico", repHoje: Math.round((+p.taxa_repeticao||0)*1000)/10};
+      if(alvo) Object.assign(alvo, dados);
+      else c.modulos.push(Object.assign({id:uid(), nome:p.nome, ativo:false, pctTecnico:100, minModulo:dados.minHoje, repModulo:dados.repHoje, materialRep:0, tipoPreco:"mensal", preco:0, custoMensal:0}, dados));
+    });
+  }
+  if(Array.isArray(o.concorrentes)){
+    c.concorrentes = o.concorrentes.map(k => ({id:uid(), nome:k.equipamento||k.nome||"Concorrente", modulo: MAPA_CONCORRENTE[k.modulo] || k.modulo || "", preco:+k.preco_brl||0, custoMensal:+k.custo_mensal_brl||0}));
+  }
+}
+function importar(texto){
+  let o; try{ o = JSON.parse(texto); }catch(e){ toast("Arquivo inválido: não é um JSON."); return; }
+  if(o && o.cenarios && o.cenarios.mercado && o.cenarios.laboratorio){ estado = migrar(o); if(!estado.ativo) estado.ativo = "mercado"; }
+  else if(o && (o.procedimentos || o.custo_hora || o.concorrentes)){ deJsonLevantamento(o); }
+  else if(o && o.equipe && o.modulos){ estado.cenarios[estado.ativo] = o; }
+  else { toast("Formato de JSON não reconhecido."); return; }
+  renderTudo(); toast("Dados importados.");
+}
+function baixar(nome, texto){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([texto], {type:"application/json"}));
+  a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* ---------- Utilidades ---------- */
+let tToast;
+function toast(msg){ const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(tToast); tToast = setTimeout(() => t.classList.remove("on"), 2200); }
+async function copiar(texto){
+  try{ await navigator.clipboard.writeText(texto); return true; }
+  catch(e){ const ta = $("resumoTxt"); ta.focus(); ta.select(); try{ return document.execCommand("copy"); }catch(_){ return false; } }
+}
+function renderTudo(){ renderEquipe(); renderModulos(); renderComp(); atualizar(); }
+
+/* ---------- Eventos ---------- */
+$("scMercado").onclick = () => { estado.ativo = "mercado"; renderTudo(); };
+$("scLab").onclick = () => { estado.ativo = "laboratorio"; renderTudo(); };
+$("btnCopy").onclick = () => {
+  const de = estado.ativo, para = de === "mercado" ? "laboratorio" : "mercado";
+  const nomePara = para === "mercado" ? "Mercado" : "Laboratório";
+  if(!confirm(`Substituir todos os valores do cenário ${nomePara} pelos do cenário atual?`)) return;
+  estado.cenarios[para] = JSON.parse(JSON.stringify(estado.cenarios[de]));
+  salvar(); toast(`Valores copiados para o cenário ${nomePara}.`);
+};
+$("btnReset").onclick = () => {
+  if(!confirm("Voltar o cenário ativo aos valores padrão do levantamento?")) return;
+  estado.cenarios[estado.ativo] = cenarioPadrao(); renderTudo(); toast("Valores padrão restaurados.");
+};
+$("modoHora").onchange = e => { C().equipe.modo = e.target.value; renderEquipe(); atualizar(); };
+$("horasMes").oninput = e => { C().equipe.horasMes = parseNum(e.target.value); atualizar(); };
+$("btnAddMod").onclick = () => {
+  C().modulos.push({id:uid(), nome:"Novo módulo", ativo:true, executor:"tecnico", pctTecnico:100, volume:100, minHoje:2, minModulo:1,
+    repHoje:2, repModulo:1, materialRep:0, tipoPreco:"mensal", preco:0, custoMensal:0});
+  renderModulos(); renderCompSelects(); atualizar();
+  const ult = $("mods").lastElementChild; ult && ult.scrollIntoView({behavior:"smooth", block:"center"});
+};
+$("btnAddComp").onclick = () => {
+  const m = C().modulos[0];
+  C().concorrentes.push({id:uid(), nome:"Novo concorrente", modulo: m ? m.nome : "", preco:0, custoMensal:0});
+  renderComp(); atualizar();
+};
+$("btnExport").onclick = () => {
+  const d = new Date().toISOString().slice(0,10);
+  baixar(`calculadora_roi_${d}.json`, JSON.stringify(estado, null, 2)); toast("JSON exportado.");
+};
+$("btnImport").onclick = () => $("fileImport").click();
+$("btnColar").onclick = () => { const t = prompt("Cole aqui o resumo recebido (ou só a linha que começa com CALC1:)"); if(t) colarCodigo(t); };
+$("fileImport").onchange = e => {
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader(); r.onload = () => importar(r.result); r.readAsText(f); e.target.value = "";
+};
+$("btnResumo").onclick = () => {
+  $("resumoTxt").value = gerarResumo();
+  $("resumoScen").textContent = "cenário " + (estado.ativo === "mercado" ? "Mercado" : "Laboratório");
+  $("modal").classList.add("on");
+};
+$("btnClose").onclick = () => $("modal").classList.remove("on");
+$("modal").onclick = e => { if(e.target.id === "modal") $("modal").classList.remove("on"); };
+document.addEventListener("keydown", e => { if(e.key === "Escape") $("modal").classList.remove("on"); });
+$("btnCopyTxt").onclick = async () => { toast(await copiar($("resumoTxt").value) ? "Resumo copiado." : "Não foi possível copiar; selecione e copie manualmente."); };
+document.addEventListener("focusout", e => {
+  const el = e.target;
+  if(el.matches && el.matches('input[inputmode="decimal"]')) el.value = fNum(parseNum(el.value));
+});
+
+renderTudo();
+</script>
+</body>
+</html>
