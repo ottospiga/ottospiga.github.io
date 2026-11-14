@@ -139,7 +139,7 @@
             ${round.reveal === q.id && !a ? `<div class="nv-expl"><b>Gabarito:</b> ${q.gab}${q.com ? `<p>${q.com}</p>` : ""}</div>
               <div class="nv-frow"><span>Como foi?</span><button class="btn ok" data-self="1">Acertei</button><button class="btn err" data-self="0">Errei</button></div>` : ""}`}
           ${show ? `<div class="nv-expl ${a.ok ? "ok" : "err"}"><b>${a.ok ? "Certo." : "Errado."}</b> ${q.opts.length ? "Gabarito: " + q.gabLabel + "." : ""} ${q.opts.length && q.com ? `<p>${q.com}</p>` : !q.opts.length ? `<p>Gabarito: ${q.gab}</p>${q.com ? `<p>${q.com}</p>` : ""}` : ""}
-            ${(q.pg && q.pg.length && cfg.resumoTab) || (q.drugs && q.drugs.length) ? `<div class="nv-links">${cfg.resumoTab ? (q.pg || []).slice(0, 2).map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("") : ""}${(q.drugs || []).map(d => `<button class="link" data-tb="${esc(d.s)}">${esc(d.s)} na tabela →</button>`).join("")}</div>` : ""}${q.tabLinks && q.tabLinks.length ? `<div class="nv-links">${q.tabLinks.map(l => `<button class="link" data-tab="${l.tab}" data-page="${l.page}">${esc(l.label)} →</button>`).join("")}</div>` : ""}</div>` : ""}
+            ${(q.pg && q.pg.length && cfg.resumoTab) || (q.drugs && q.drugs.length) ? `<div class="nv-links">${cfg.resumoTab ? (q.pg || []).slice(0, 2).map(p => `<button class="link" data-pg="${p}">Resumo p.${p} →</button>`).join("") : ""}${(q.drugs || []).map(d => `<button class="link" data-tb="${esc(d.s)}">${esc(d.s)} na tabela →</button>`).join("")}</div>` : ""}${q.tabLinks && q.tabLinks.length ? `<div class="nv-links">${q.tabLinks.map(l => `<button class="link" data-tab="${l.tab}" data-page="${l.page}" data-item="${l.item || 0}">${esc(l.label)} →</button>`).join("")}</div>` : ""}</div>` : ""}
           <div class="nv-frow nv-actions">
             <button class="btn" id="nvMark" aria-pressed="${!!P.mark[q.id]}">${P.mark[q.id] ? "Marcada para revisar" : "Marcar para revisar"}</button>
             ${a || (!q.opts.length && round.reveal === q.id && a) ? "" : ""}
@@ -160,9 +160,9 @@
       el.querySelectorAll("[data-self]").forEach(b => b.onclick = () => {
         const ok = b.dataset.self === "1"; round.ans[q.id] = { ok, txt: round.txt }; record(q, ok); drawQ();
       });
-      el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
+      bindPg(el, ctx);
       el.querySelectorAll("[data-tb]").forEach(b => b.onclick = () => ctx.openView("tabela", { q: b.dataset.tb }));
-      el.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => ctx.openTab(b.dataset.tab, { page: +b.dataset.page }));
+      el.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => ctx.openTab(b.dataset.tab, { page: +b.dataset.page, item: +b.dataset.item || 0 }));
       const n = el.querySelector("#nvNext"); if (n) n.onclick = next;
       el.scrollTop = 0; el.closest(".viewer")?.scrollTo?.(0, 0);
     }
@@ -200,7 +200,7 @@
       tags: [{ l: q.prova }, { l: q.tema }, { l: q.tipo }].concat(q.selo === "OF" ? [{ l: "gabarito oficial", c: "ok" }] : q.selo === "IN" ? [{ l: "gabarito inferido", c: "warn" }] : q.selo === "AB" ? [{ l: "anulada/aberta", c: "warn" }] : []).concat((q.tus || []).length > 1 ? [{ l: "caiu " + q.tus.length + "×", c: "hot" }] : []),
       enun: q.enun, itens: q.itens,
       opts: objective ? q.alts.map((h, i) => ({ html: h, ok: set.includes(LET[i]), why: (q.tr || {})[LET[i]] || "" })) : [],
-      gab: q.gab, gabLabel: set.join(" ou "), com: q.com, pg: q.pg
+      gab: q.gab, gabLabel: set.join(" ou "), com: q.com, pg: q.pg, tabLinks: q.tabLinks
     };
   }
   function prepAbcd(q) {
@@ -211,7 +211,7 @@
       tags: [{ l: "SP" + q.sp }, q.tag === "caiu" ? { l: "já caiu", c: "hot" } : { l: "da aula" }].concat(q.ref ? [{ l: q.ref }] : []),
       enun: q.q, itens: [],
       opts: o.map(x => ({ html: x[0], ok: !!x[1], why: x[2] })),
-      gabLabel: LET[ci], com: "", pg: q.pg
+      gabLabel: LET[ci], com: "", pg: q.pg, tabLinks: q.tabLinks
     };
   }
 
@@ -219,9 +219,10 @@
      VISTAS
      ===================================================================== */
   const V = {};
+  const bindPg = (el, ctx) => el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => (b.dataset.it ? ctx.openTab("resumo", { page: +b.dataset.pg, item: +b.dataset.it }) : ctx.openResumo(+b.dataset.pg)));
 
   V.provas = (el, U, ctx) => {
-    const order = t => t === "PM" ? 99 : +t.replace(/\D/g, "");
+    const order = t => /^PM/.test(t) ? 100 + (+t.replace(/\D/g, "") || 99) : (+t.replace(/\D/g, "") || 200);
     const turmas = [...new Set(U.banco.flatMap(q => q.tus || []))].sort((a, b) => order(a) - order(b));
     const items = U.banco.map(q => Object.assign({}, q, { grupo: q.alts && q.alts.length ? "Só objetivas" : "Só discursivas" }));
     quiz(el, ctx, { ns: ctx.ns + ":provas", items, turmas, temas: [...new Set(U.banco.map(q => q.tema))], grupos: ["Só objetivas", "Só discursivas"], busca: true, resumoTab: true,
@@ -297,25 +298,24 @@
     const topPeg = U.peg.slice().sort((a, b) => refs(b) - refs(a)).slice(0, 10);
     const P = prog(ctx.ns + ":provas");
     const errs = Object.values(P.r || {}).filter(v => v === "err").length;
+    const sims = item.sims || [{ l: "Simulado relâmpago · 15 da T10 e T11", view: "provas", f: { tu: ["T10", "T11"], mode: "prova", n: 15 } }, { l: "Rodada ABCD de 10", view: "abcd", f: { mode: "estudo", n: 10 } }];
     const first = h => { const c = String(h || "").replace(/<[^>]+>/g, "").split(/ · |; |\. /)[0]; return c.length > 140 ? c.slice(0, 138) + "…" : c; };
     el.innerHTML = `<div class="nv-wrap wide">
-      <section class="nv-card nv-hero"><div><h3>Véspera</h3><p>Para a manhã da prova: um simulado curto no formato da sua turma, o que mais cai, como ela engana, as doses que ela pede e a tabela numa tela.</p></div>
-        <div class="nv-frow"><button class="btn-pri" data-go="sim">Simulado relâmpago · 15 da T10 e T11</button><button class="btn" data-go="abcd">Rodada ABCD de 10</button><button class="btn" data-go="err">Refazer as que errei (${errs})</button></div></section>
+      <section class="nv-card nv-hero"><div><h3>Véspera</h3><p>${esc(item.hero || "Para a manhã da prova: um simulado curto no formato da sua turma, o que mais cai, como ela engana, as doses que ela pede e a tabela numa tela.")}</p></div>
+        <div class="nv-frow">${sims.map((s, i) => `<button class="${i ? "btn" : "btn-pri"}" data-sim="${i}">${esc(s.l)}</button>`).join("")}<button class="btn" data-go="err">Refazer as que errei (${errs})</button></div></section>
       <div class="nv-2col">
-        <section class="nv-card"><h3>O que mais cai</h3><div class="nv-top">${(U.res.top || []).map(t => `<button class="nv-toprow" data-pg="${t.p}"><span class="n">${t.n}×</span><span class="t">${esc(t.t)}${t.star ? " ★" : ""}</span><span class="p">p.${t.p} →</span></button>`).join("")}</div></section>
+        <section class="nv-card"><h3>O que mais cai</h3><div class="nv-top">${(U.res.top || []).map(t => `<button class="nv-toprow" data-pg="${t.p}" data-it="${t.it == null ? "" : t.it}"><span class="n">${t.n}×</span><span class="t">${esc(t.t)}${t.star ? " ★" : ""}</span><span class="p">p.${t.p} →</span></button>`).join("")}</div></section>
         <section class="nv-card"><h3>Doses que ela já pediu</h3><p class="nv-hint">Discursiva = fármaco + dose + posologia (+ tempo).</p><div class="nv-tablebox"><table class="nv-table" style="min-width:0"><tbody>${U.rx.doses.map(d => `<tr><td><b>${esc(d[0])}</b></td><td>${esc(d[1])}<div class="g">${esc(d[2])}</div></td></tr>`).join("")}</tbody></table></div></section>
       </div>
       ${T.length ? `<section class="nv-card"><h3>Como ela engana</h3><div class="nv-tricks">${T.map(t => `<div class="nv-trick"><b>${t.h}</b><p>${t.p}</p><div class="sw">${t.x.map(([a, b]) => `<span><s>${esc(a)}</s>${b ? " → " + esc(b) : ""}</span>`).join("")}</div></div>`).join("")}</div></section>` : ""}
       <section class="nv-card"><h3>As 10 pegadinhas mais repetidas</h3><div class="nv-pegs">${topPeg.map(p => `<article class="nv-peg"><div class="f"><span class="tag err">falsa</span> ${esc(p.p)}</div><div class="v"><span class="tag ok">o certo</span> ${esc(p.v)}</div><div class="e">${esc(p.sp)} · ${esc(p.e)}</div></article>`).join("")}</div></section>
       <section class="nv-card"><h3>Tabela compacta</h3><div class="nv-compact">${U.drugs.map(d => `<div class="nv-cd"><b>${esc(d.s)}</b><span>${esc(first(d.ds))}</span></div>`).join("")}</div></section>
     </div>`;
-    el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
+    bindPg(el, ctx);
     el.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
-      const g = b.dataset.go;
-      if (g === "sim") ctx.openView("provas", { f: { tu: ["T10", "T11"], mode: "prova", n: 15 }, start: true });
-      else if (g === "abcd") ctx.openView("abcd", { f: { mode: "estudo", n: 10 }, start: true });
-      else ctx.openView("provas", { f: { sit: "errei", mode: "estudo", n: 0 }, start: true });
+      ctx.openView("provas", { f: { sit: "errei", mode: "estudo", n: 0 }, start: true });
     });
+    el.querySelectorAll("[data-sim]").forEach(b => b.onclick = () => { const s = sims[+b.dataset.sim]; ctx.openView(s.view || "provas", { f: s.f, start: true }); });
   };
 
   V.pdf = (el, U, ctx, item) => V.resumo(el, U, ctx, item);
@@ -343,15 +343,16 @@
     const maxP = Math.max(1, ...(R.pesos || []).map(p => p.all));
     el.innerHTML = `<div class="nv-wrap">
       ${R.veredito ? `<section class="nv-card nv-lead"><h3>Como ela cobra</h3>${R.veredito.map(p => `<p>${p}</p>`).join("")}</section>` : ""}
-      ${top.length ? `<section class="nv-card"><h3>O que mais cai</h3><div class="nv-top">${top.map(t => `<button class="nv-toprow" data-pg="${t.p}"><span class="n">${t.n}×</span><span class="t">${esc(t.t)}${t.star ? " ★" : ""}<small>${esc(t.pv)}</small></span><span class="p">p.${t.p} →</span></button>`).join("")}</div></section>` : ""}
-      ${R.pesos ? `<section class="nv-card"><h3>Peso de cada SP nas provas</h3><div class="nv-pesos">${R.pesos.map(p => `<div class="row"><span>SP${p.sp}</span><i><b style="width:${p.all / maxP * 100}%"></b><em style="width:${p.novo / maxP * 100}%"></em></i><span class="mono">${p.all} · ${p.novo} recentes</span></div>`).join("")}</div><p class="nv-hint">Barra clara: total de questões já cobradas. Barra escura: das provas mais recentes.</p></section>` : ""}
+      ${R.erros ? `<section class="nv-card"><h3>${esc(R.errosTitulo || "Seus erros na prova")}</h3>${R.errosNota ? `<p class="nv-hint">${R.errosNota}</p>` : ""}<div class="nv-tablebox"><table class="nv-table"><thead><tr><th>Questão</th><th>Tipo de erro</th><th>O que era</th></tr></thead><tbody>${R.erros.map(e => `<tr><td><b>${e[0]}</b></td><td>${e[1]}</td><td>${e[2]}</td></tr>`).join("")}</tbody></table></div></section>` : ""}
+      ${top.length ? `<section class="nv-card"><h3>O que mais cai</h3><div class="nv-top">${top.map(t => `<button class="nv-toprow" data-pg="${t.p}" data-it="${t.it == null ? "" : t.it}"><span class="n">${t.n}×</span><span class="t">${esc(t.t)}${t.star ? " ★" : ""}<small>${esc(t.pv)}</small></span><span class="p">p.${t.p} →</span></button>`).join("")}</div></section>` : ""}
+      ${R.pesos ? `<section class="nv-card"><h3>Peso de cada SP nas provas</h3><div class="nv-pesos">${R.pesos.map(p => `<div class="row"><span>SP${p.sp}</span><i><b style="width:${p.all / maxP * 100}%"></b><em style="width:${p.novo / maxP * 100}%"></em></i><span class="mono">${p.all} · ${p.novo} ${esc(R.pesosNovo || "recentes")}</span></div>`).join("")}</div><p class="nv-hint">${esc(R.pesosHint || "Barra clara: total de questões já cobradas. Barra escura: das provas mais recentes.")}</p></section>` : ""}
       ${R.algoritmo ? `<section class="nv-card"><h3>Raciocínio para escolher o antibiótico</h3><ol class="nv-steps">${R.algoritmo.map(a => `<li><b>${esc(a.t.replace(/^\d+\.\s*/, ""))}</b><p>${a.x}</p></li>`).join("")}</ol></section>` : ""}
       ${R.pares ? `<section class="nv-card"><h3>Mesma frase, uma palavra trocada</h3><div class="nv-tablebox"><table class="nv-table"><thead><tr><th>Tema</th><th>Verdadeira</th><th>Falsa</th></tr></thead><tbody>${R.pares.map(p => `<tr><td>${p.base}</td><td class="okc">${p.v}</td><td class="errc">${p.f}</td></tr>`).join("")}</tbody></table></div></section>` : ""}
       ${R.diverg ? `<section class="nv-card"><h3>Onde as provas se contradizem</h3>${R.diverg.map(d => `<div class="nv-div"><b>${d.onde}</b><p>${d.prob}</p><p class="como">${d.como}</p></div>`).join("")}</section>` : ""}
       ${R.confirmar ? `<section class="nv-card"><h3>Gabaritos a confirmar</h3><ul class="nv-aulas">${R.confirmar.map(c => `<li><b>${esc(c.q)}</b> · ${c.x}</li>`).join("")}</ul></section>` : ""}
       ${R.doses ? `<section class="nv-card"><h3>Doses que ela cobra</h3><div class="nv-tablebox"><table class="nv-table"><thead><tr><th>Fármaco</th><th>Dose</th><th>Fonte</th></tr></thead><tbody>${R.doses.map(d => `<tr><td><b>${d[0]}</b></td><td>${d[1]}</td><td class="g">${d[2]}</td></tr>`).join("")}</tbody></table></div></section>` : ""}
     </div>`;
-    el.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => ctx.openResumo(+b.dataset.pg));
+    bindPg(el, ctx);
   };
 
   /* ---------- resumo: leitor pdf.js + índice dos grifos ---------- */

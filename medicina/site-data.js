@@ -102,7 +102,8 @@ window.SITE = {
             { label: "Questões ABCD", src: "uc14/tutoria/uc14-sp4-tutoria-questoes-abcd.html" },
             { label: "Guia + simulado APF", src: "uc14/tutoria/uc14-sp4-dispepsia-drge-ulcera-hda.html" } ] } ] },
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
-          /* Página da PM (nov/2026): resumos novos por SP, no formato dos resumos da Tutoria UC15. */
+          /* Página única da PM (nov/2026): uma aba por função. O material antigo (Central, Guia completo, banco,
+             tabelão, raio-X, guias por SP, vias) continua no ar pelos endereços de sempre, fora do menu. */
           { id: "resumo", titulo: "Resumo", itens: [
             /*RESUMOS-UC14-FARMACO*/{ label: "SP1 · Diarreia e DII", nativo: "pdf", rk: "sp1", pdf: "conteudo/uc14/farmaco/resumo-sp1.pdf", thumbs: "conteudo/uc14/farmaco/thumbs-sp1/p-", ns: "uc14/farmaco/sp1",
               toc: [{"p": 1, "t": "A balança que decide se existe diarreia"}, {"p": 1, "t": "Os quatro jeitos de quebrar a balança"}, {"p": 2, "t": "Onde cada fármaco entra na balança"}, {"p": 5, "t": "A microbiota como alvo"}, {"p": 5, "t": "Doença inflamatória intestinal"}, {"p": 7, "t": "Discursivas de diarreia e DII que já caíram"}, {"p": 8, "t": "Mapa mental"}] },
@@ -112,29 +113,24 @@ window.SITE = {
               toc: [{"p": 1, "t": "O vômito é um reflexo com dois comandos"}, {"p": 2, "t": "Serotonina acelera, dopamina freia"}, {"p": 3, "t": "Ondansetrona"}, {"p": 4, "t": "Metoclopramida e bromoprida"}, {"p": 5, "t": "Síndrome extrapiramidal"}, {"p": 5, "t": "Domperidona"}, {"p": 6, "t": "Anti-H1 e antimuscarínicos"}, {"p": 7, "t": "Quimioterapia"}, {"p": 7, "t": "Fígado e pâncreas"}, {"p": 8, "t": "Discursivas de antieméticos e hepato que já caíram"}, {"p": 9, "t": "Mapa mental"}] },
             { label: "SP4 · Dispepsia", nativo: "pdf", rk: "sp4", pdf: "conteudo/uc14/farmaco/resumo-sp4.pdf", thumbs: "conteudo/uc14/farmaco/thumbs-sp4/p-", ns: "uc14/farmaco/sp4",
               toc: [{"p": 1, "t": "Três estímulos, uma bomba"}, {"p": 3, "t": "A mucosa que resiste ao próprio ácido"}, {"p": 4, "t": "Anti-H2"}, {"p": 5, "t": "IBP"}, {"p": 7, "t": "O que o IBP crônico cobra"}, {"p": 8, "t": "As interações"}, {"p": 9, "t": "Vonoprazana"}, {"p": 10, "t": "Antiácidos"}, {"p": 11, "t": "Reforçar a defesa"}, {"p": 12, "t": "Fitoterapia e o que os artigos dela deixam cair"}, {"p": 13, "t": "Discursivas de dispepsia que já caíram"}, {"p": 14, "t": "Mapa mental"}] }/*FIM-RESUMOS*/ ] },
-          { id: "central", titulo: "Central", itens: [
-            { label: "Central da matéria", src: "uc14/farmaco/uc14-farmaco-central-guia.html" } ] },
-          { id: "questoes", titulo: "Questões", itens: [
-            { label: "Questões ABCD", src: "uc14/farmaco/uc14-farmaco-questoes-abcd.html" },
-            { label: "Banco Vânia (anterior)", src: "uc14/farmaco/uc14-farmaco-banco-vania.html" } ] },
-          { id: "flashcards", titulo: "Flashcards", itens: [
-            { label: "Mecanismos", src: "uc14/farmaco/uc14-farmaco-flashcards-mecanismo.html" } ] },
-          { id: "guia-completo", titulo: "Guia completo", itens: [
-            { label: "Guia completo", src: "uc14/farmaco/uc14-farmaco-guia-completo.html" } ] },
-          { id: "tabela", titulo: "Tabelão", itens: [
-            { label: "Tabelão de fármacos", src: "uc14/farmaco/uc14-farmaco-tabelao-farmacos.html" } ] },
+          /*DENSO-UC14*//*FIM-DENSO*/
+          { id: "tabela", titulo: "Fármacos", itens: [ { label: "Tabela de fármacos", nativo: "tabela", dir: "uc14/farmaco/pm/" } ] },
+          { id: "provas", titulo: "Questões", itens: [ { label: "Provas antigas, T12 e PMs", nativo: "provas", dir: "uc14/farmaco/pm/" } ] },
+          { id: "abcd", titulo: "Treino ABCD", itens: [ { label: "Treino ABCD", nativo: "abcd", dir: "uc14/farmaco/pm/" } ] },
+          { id: "flashcards", titulo: "Flashcards", itens: [ { label: "Mecanismos", src: "uc14/farmaco/uc14-farmaco-flashcards-mecanismo.html" } ] },
+          { id: "vespera", titulo: "Véspera", itens: [ { label: "Véspera", nativo: "vespera", dir: "uc14/farmaco/pm/", extra: "conteudo/uc14/farmaco/truques.js",
+              hero: "Para a quarta de manhã: um simulado curto, o que mais cai com o link para a página do resumo, como ela engana, as doses que ela pede e a tabela numa tela.",
+              sims: [ { l: "Simulado relâmpago · 15 que já caíram", view: "provas", f: { mode: "prova", n: 15 } },
+                      { l: "Só as PMs", view: "provas", f: { tu: ["PM T4", "PM T7", "PM conc."], mode: "prova", n: 0 } },
+                      { l: "Rodada ABCD de 10", view: "abcd", f: { mode: "estudo", n: 10 } } ] } ] },
           { id: "raiox", titulo: "Raio-X", itens: [
-            { label: "Raio-X da Vânia + estratégia", src: "uc14/farmaco/uc14-farmaco-raio-x-vania-estrategia.html" } ] },
-          { id: "sps", titulo: "SPs", itens: [
-            { label: "SP1 · Diarreia + DII", src: "uc14/farmaco/uc14-sp1-diarreia-dii.html" },
-            { label: "SP2 · Constipação", src: "uc14/farmaco/uc14-sp2-constipacao.html" },
-            { label: "SP3 · Antieméticos + hepato", src: "uc14/farmaco/uc14-sp3-antiemeticos-hepato.html" },
-            { label: "SP4 · Dispepsia", src: "uc14/farmaco/uc14-sp4-dispepsia.html" } ] },
-          { id: "vias", titulo: "Vias metabólicas", itens: [
-            { label: "Vias metabólicas", src: "uc14/farmaco/uc14-farmaco-vias-metabolicas.html" } ] },
-          { id: "transcricoes", titulo: "Transcrições", itens: [
-            { label: "Aula 19/09", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-19-09.html" },
-            { label: "Aula 04/09", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-04-09.html" } ] } ] },
+            { label: "Raio-X da PM", nativo: "raiox", dir: "uc14/farmaco/pm/" },
+            { label: "Frases das aulas", nativo: "aulas", dir: "uc14/farmaco/pm/" },
+            { label: "Aula 04/09 (transcrição)", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-04-09.html" },
+            { label: "Aula 19/09 (transcrição)", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-19-09.html" } ] },
+          /*VIDEOS-UC14*//*FIM-VIDEOS*/
+          /*PODCAST-UC14*//*FIM-PODCAST*/
+        ] },
         { id: "lab", nome: "Laboratório", abas: [
           { id: "central", titulo: "Central", itens: [
             { label: "Resumo, vídeo, questões e raio-X", src: "uc14/lab/uc14-lab-central-guia.html" } ] } ] },

@@ -514,8 +514,9 @@ function renderMateria(){
         if (ai < 0) return;
         opts = opts || {};
         pendingPage = opts.page || 0; pendingPreset = opts.preset || null;
-        if (ai === st.aba && st.item === 0) { renderMateria(); return; }
-        go(u.id, m.id, ai, 0);
+        const ti = Math.min(opts.item || 0, m.abas[ai].itens.length - 1);
+        if (ai === st.aba && st.item === ti) { renderMateria(); return; }
+        go(u.id, m.id, ai, ti);
       },
       openView(view, pre){
         const ai = m.abas.findIndex(ab => ab.itens.some(x => x.nativo === view));

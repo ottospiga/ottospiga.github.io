@@ -25,7 +25,19 @@ NAV_PATH = ROOT / "nav.js"
 NAV_MARK = "<!-- medicina-nav -->"
 
 # HTMLs de 5-fase/ que ficam de propósito fora das abas: {"uc14/x/arquivo.html": "motivo"}
-FORA = {}
+FORA = {
+    "uc14/farmaco/uc14-farmaco-central-guia.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-guia-completo.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-questoes-abcd.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-banco-vania.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-tabelao-farmacos.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-raio-x-vania-estrategia.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-sp1-diarreia-dii.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-sp2-constipacao.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-sp3-antiemeticos-hepato.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-sp4-dispepsia.html": "fora do menu desde a página única da PM (nov/2026)",
+    "uc14/farmaco/uc14-farmaco-vias-metabolicas.html": "fora do menu desde a página única da PM (nov/2026)",
+}
 
 NFC = lambda s: unicodedata.normalize("NFC", s)
 
