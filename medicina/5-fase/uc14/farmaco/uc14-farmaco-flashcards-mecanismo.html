@@ -138,6 +138,7 @@
 
 <script>
 const CATS={
+  pm:{n:"PM · seus erros e o que repete",cor:"var(--c-dis)"},
   dia:{n:"Diarreia & DII",cor:"var(--c-dia)"},
   con:{n:"Constipação",cor:"var(--c-con)"},
   eme:{n:"Êmese",cor:"var(--c-eme)"},
@@ -146,6 +147,43 @@ const CATS={
 };
 // q = pergunta · a = resposta curta · w = 1 linha · f = o que o CADERNO diz · t = o que a TABELA da veterana diz · n = nota própria da divergência · r = reverso
 const CARDS=[
+// ===== PM: erros da prova de 02/10 e o que se repete nas PMs =====
+{c:"pm",q:"Diarreia: fármaco imunomodulador + antissecretor?",a:"Zinco",w:"20 mg/dia (10 mg em <6 meses), 10–14 dias. Na prova você respondeu bismuto (QD1)."},
+{c:"pm",q:"Zinco na diarreia: dose acima de 6 meses?",a:"20 mg/dia por 10–14 dias"},
+{c:"pm",q:"Fármaco contraindicado na diarreia secretora/infecciosa?",a:"Loperamida",w:"Retém toxina e bactéria → megacólon tóxico. Foi a sua Q6."},
+{c:"pm",q:"\"Ativa receptor no plexo e inibe a liberação de ACh\": quem?",a:"Loperamida (agonista μ)",w:"A escopolamina BLOQUEIA o receptor muscarínico. Foi a sua Q9."},
+{c:"pm",q:"Enterotoxina estafilocócica: tipo de diarreia e fármaco?",a:"Secretora → racecadotrila"},
+{c:"pm",q:"Racecadotrila: dose no adulto?",a:"100 mg de 8/8 h",w:"10 mg é dose de criança (troca da PM T4)."},
+{c:"pm",q:"Diarreia da síndrome do intestino irritável: 1ª escolha?",a:"Alosetrona (antagonista 5-HT3)"},
+{c:"pm",q:"Sulfassalazina: qual parte é antimicrobiana?",a:"Sulfapiridina",w:"O 5-ASA é o anti-inflamatório. \"Ambas anti-inflamatórias\" = falsa."},
+{c:"pm",q:"Olsalazina: o que é?",a:"Pró-fármaco: 2 mesalazinas unidas por ponte azo",w:"Quem inibe COX é a mesalazina."},
+{c:"pm",q:"Como a mesalazina chega ao cólon?",a:"Cápsula de liberação entérica pH-dependente",w:"Frase verdadeira que você recusou na Q1."},
+{c:"pm",q:"Constipação depois de uso de sene: primária ou secundária?",a:"Secundária → osmótico (macrogol)",w:"Foi a sua Q13."},
+{c:"pm",q:"Sene: classe e mecanismo?",a:"Estimulante antracênico: irrita mucosa e plexo",w:"Não é antagonista H2 nem 5-HT3."},
+{c:"pm",q:"Lubiprostona: mecanismo?",a:"Ativa o canal de cloreto ClC-2 → Cl⁻ e água na luz",w:"E melhora a motilidade: frase verdadeira que você recusou na Q12."},
+{c:"pm",q:"Polissacarídeos NATURAIS formadores de massa (lacuna da T12)?",a:"Psyllium e estercúlia"},
+{c:"pm",q:"Formador de massa no paciente imobilizado: qual o risco?",a:"Obstrução intestinal → preferir osmótico"},
+{c:"pm",q:"Dois laxantes do cólon preguiçoso?",a:"Bisacodil e sene"},
+{c:"pm",q:"Prebióticos: constipação primária ou secundária?",a:"Primária, com água",w:"\"Secundária\" e \"monoterapia\" = falsas em 2 PMs."},
+{c:"pm",q:"Síndrome extrapiramidal: em que via o D2 é bloqueado?",a:"Nigroestriatal",w:"Desinibe fibras colinérgicas. Bromoprida ou metoclopramida; nunca domperidona."},
+{c:"pm",q:"Galactorreia: onde o D2 é bloqueado?",a:"Adeno-hipófise (fora da barreira)",w:"\"Hipotálamo\" e \"estimulação\" = falsas."},
+{c:"pm",q:"Por que a domperidona não dá extrapiramidal?",a:"Quase não atravessa a barreira hematoencefálica"},
+{c:"pm",q:"Boca seca e retenção urinária do dimenidrinato: qual receptor?",a:"Muscarínico",w:"A sonolência é H1 (\"respectivamente\")."},
+{c:"pm",q:"Antiemético que bloqueia a substância P: fármaco e receptor?",a:"Aprepitanto — NK1"},
+{c:"pm",q:"Ondansetrona serve para vômito vestibular?",a:"Não: vestibular é dimenidrinato"},
+{c:"pm",q:"Complexo B12–fator intrínseco: onde é absorvido?",a:"Íleo",w:"\"Duodeno\" foi a troca da sua Q3."},
+{c:"pm",q:"IBP crônico → dor muscular: qual íon?",a:"Magnésio"},
+{c:"pm",q:"IBP crônico → osteoporose: qual a cadeia?",a:"↓Ca → ↑PTH → reabsorção óssea"},
+{c:"pm",q:"IBP crônico → infecções: por quê?",a:"Perde a barreira ácida (imunidade inata)"},
+{c:"pm",q:"Supressor ácido do uso crônico: fármaco, dose, horário?",a:"Famotidina 20–40 mg à noite",w:"Reduz 50–70% e não inibe CYP."},
+{c:"pm",q:"Úlcera: fármaco que independe de bioativação?",a:"Vonoprazana",w:"Todo IBP é pró-fármaco. Foi a sua QD4."},
+{c:"pm",q:"Antiespasmódico que piora a gastroparesia?",a:"Escopolamina (antimuscarínico)",w:"Foi a sua QD3b."},
+{c:"pm",q:"IBP com menor interação por CYP?",a:"Pantoprazol"},
+{c:"pm",q:"Sucralfato: qual hidróxido?",a:"Alumínio",w:"\"Magnésio\" foi a troca da T12 Q11."},
+{c:"pm",q:"Bicarbonato de sódio + HCl forma qual sal?",a:"Cloreto de sódio (+ CO₂ e água)",w:"\"Cloreto de cálcio\" = falsa (T12 Q10)."},
+{c:"pm",q:"Diarreia dos sais de magnésio: tipo?",a:"Osmótica"},
+{c:"pm",q:"Pancreatite por colestase sem cirurgia: dois fármacos?",a:"Ácido ursodesoxicólico + pancreatina"},
+{c:"pm",q:"DRGE no lactente: qual associação?",a:"Omeprazol + domperidona"},
 // ===== DIARREIA & DII =====
 {c:"dia",q:"SRO (TRO) — mecanismo?",a:"Cotransporte Na⁺ + glicose arrasta água para dentro",w:"Osmolaridade reduzida: Na 75 · glicose 75 · Cl 65 · K 20 · citrato 10.",s:"sro"},
 {c:"dia",q:"Zinco na diarreia — mecanismo?",a:"Imunomodulador + antissecretor",w:"<6 m: 10 mg/dia · >6 m: 20 mg/dia, 10–14 dias.",s:"zinco"},

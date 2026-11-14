@@ -121,7 +121,8 @@ window.SITE = {
           { id: "vespera", titulo: "Véspera", itens: [ { label: "Véspera", nativo: "vespera", dir: "uc14/farmaco/pm/", extra: "conteudo/uc14/farmaco/truques.js",
               hero: "Para a quarta de manhã: um simulado curto, o que mais cai com o link para a página do resumo, como ela engana, as doses que ela pede e a tabela numa tela.",
               sims: [ { l: "Simulado relâmpago · 15 que já caíram", view: "provas", f: { mode: "prova", n: 15 } },
-                      { l: "Só as PMs", view: "provas", f: { tu: ["PM T4", "PM T7", "PM conc."], mode: "prova", n: 0 } },
+                      { l: "Simulado PM inédito · 8 + 6", view: "provas", f: { tu: ["Simulado PM"], mode: "prova", n: 0 } },
+                      { l: "Só as PMs antigas", view: "provas", f: { tu: ["PM T4", "PM T7", "PM conc."], mode: "prova", n: 0 } },
                       { l: "Rodada ABCD de 10", view: "abcd", f: { mode: "estudo", n: 10 } } ] } ] },
           { id: "raiox", titulo: "Raio-X", itens: [
             { label: "Raio-X da PM", nativo: "raiox", dir: "uc14/farmaco/pm/" },
