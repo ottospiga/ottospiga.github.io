@@ -113,7 +113,8 @@ window.SITE = {
               toc: [{"p": 1, "t": "O vômito é um reflexo com dois comandos"}, {"p": 2, "t": "Serotonina acelera, dopamina freia"}, {"p": 3, "t": "Ondansetrona"}, {"p": 4, "t": "Metoclopramida e bromoprida"}, {"p": 5, "t": "Síndrome extrapiramidal"}, {"p": 5, "t": "Domperidona"}, {"p": 6, "t": "Anti-H1 e antimuscarínicos"}, {"p": 7, "t": "Quimioterapia"}, {"p": 7, "t": "Fígado e pâncreas"}, {"p": 8, "t": "Discursivas de antieméticos e hepato que já caíram"}, {"p": 9, "t": "Mapa mental"}] },
             { label: "SP4 · Dispepsia", nativo: "pdf", rk: "sp4", pdf: "conteudo/uc14/farmaco/resumo-sp4.pdf", thumbs: "conteudo/uc14/farmaco/thumbs-sp4/p-", ns: "uc14/farmaco/sp4",
               toc: [{"p": 1, "t": "Três estímulos, uma bomba"}, {"p": 3, "t": "A mucosa que resiste ao próprio ácido"}, {"p": 4, "t": "Anti-H2"}, {"p": 5, "t": "IBP"}, {"p": 7, "t": "O que o IBP crônico cobra"}, {"p": 8, "t": "As interações"}, {"p": 9, "t": "Vonoprazana"}, {"p": 10, "t": "Antiácidos"}, {"p": 11, "t": "Reforçar a defesa"}, {"p": 12, "t": "Fitoterapia e o que os artigos dela deixam cair"}, {"p": 13, "t": "Discursivas de dispepsia que já caíram"}, {"p": 14, "t": "Mapa mental"}] }/*FIM-RESUMOS*/ ] },
-          /*DENSO-UC14*//*FIM-DENSO*/
+          /*DENSO-UC14*/{ id: "denso", titulo: "Resumo denso", itens: [ { label: "Resumo denso · SP1 a SP4", nativo: "pdf", pdf: "conteudo/uc14/farmaco/resumo-denso.pdf", thumbs: "conteudo/uc14/farmaco/thumbs-denso/p-", ns: "uc14/farmaco/denso",
+              toc: [{"p": 1, "t": "Como é a PM"}, {"p": 1, "t": "SP4 · Dispepsia"}, {"p": 2, "t": "SP1 · Diarreia e DII"}, {"p": 3, "t": "SP2 · Constipação"}, {"p": 5, "t": "SP3 · Antieméticos e hepato"}, {"p": 6, "t": "Na hora da prova"}] } ] },/*FIM-DENSO*/
           { id: "tabela", titulo: "Fármacos", itens: [ { label: "Tabela de fármacos", nativo: "tabela", dir: "uc14/farmaco/pm/" } ] },
           { id: "provas", titulo: "Questões", itens: [ { label: "Provas antigas, T12 e PMs", nativo: "provas", dir: "uc14/farmaco/pm/" } ] },
           { id: "abcd", titulo: "Treino ABCD", itens: [ { label: "Treino ABCD", nativo: "abcd", dir: "uc14/farmaco/pm/" } ] },
@@ -130,7 +131,7 @@ window.SITE = {
             { label: "Aula 04/09 (transcrição)", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-04-09.html" },
             { label: "Aula 19/09 (transcrição)", src: "uc14/farmaco/uc14-farmaco-transcricao-aula-19-09.html" } ] },
           /*VIDEOS-UC14*//*FIM-VIDEOS*/
-          /*PODCAST-UC14*//*FIM-PODCAST*/
+          /*PODCAST-UC14*/{ id: "podcast", titulo: "Podcast", itens: [ { label: "Podcast da PM · 32 min", src: "uc14/farmaco/uc14-farmaco-podcast.html" } ] },/*FIM-PODCAST*/
         ] },
         { id: "lab", nome: "Laboratório", abas: [
           { id: "central", titulo: "Central", itens: [
