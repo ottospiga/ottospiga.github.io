@@ -60,6 +60,11 @@ window.SITE = {
           { id: "esquemas", titulo: "Esquemas", itens: [ { label: "Esquemas", nativo: "esquemas", dir: "uc15/farmaco/central/" } ] },
           { id: "vespera", titulo: "Véspera", itens: [ { label: "Véspera", nativo: "vespera", dir: "uc15/farmaco/central/", extra: "conteudo/uc15/farmaco/truques.js" } ] },
           { id: "aulas", titulo: "Frases da aula", itens: [ { label: "Frases da aula", nativo: "aulas", dir: "uc15/farmaco/central/" } ] },
+          { id: "transcricoes", titulo: "Transcrições", itens: [
+            { label: "Aula 13/11 · SP5", src: "uc15/farmaco/uc15-farmaco-transcricao-sp5.html" },
+            { label: "Aula 06/11 · SP4", src: "uc15/farmaco/uc15-farmaco-transcricao-sp4.html" },
+            { label: "Aula 30/10 · SP2–SP3", src: "uc15/farmaco/uc15-farmaco-transcricao-sp2-sp3.html" },
+            { label: "Aula 22/10 · SP1", src: "uc15/farmaco/uc15-farmaco-transcricao-sp1.html" } ] },
           { id: "central", titulo: "Central (original)", itens: [
             { label: "Central da matéria", src: "uc15/farmaco/uc15-farmaco-central-guia.html" } ] } ] },
         { id: "pato", nome: "Patologia", prof: "Maria Verônica", abas: [
