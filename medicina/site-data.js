@@ -102,6 +102,10 @@ window.SITE = {
             { label: "Questões ABCD", src: "uc14/tutoria/uc14-sp4-tutoria-questoes-abcd.html" },
             { label: "Guia + simulado APF", src: "uc14/tutoria/uc14-sp4-dispepsia-drge-ulcera-hda.html" } ] } ] },
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
+          /* Página da PM (nov/2026): resumos novos por SP, no formato dos resumos da Tutoria UC15. */
+          { id: "resumo", titulo: "Resumo", itens: [
+            /*RESUMOS-UC14-FARMACO*/{ label: "SP4 · Dispepsia", nativo: "pdf", rk: "sp4", pdf: "conteudo/uc14/farmaco/resumo-sp4.pdf", thumbs: "conteudo/uc14/farmaco/thumbs-sp4/p-", ns: "uc14/farmaco/sp4",
+              toc: [{"p": 1, "t": "Três estímulos, uma bomba"}, {"p": 3, "t": "A mucosa que resiste ao próprio ácido"}, {"p": 4, "t": "Anti-H2"}, {"p": 5, "t": "IBP"}, {"p": 7, "t": "O que o IBP crônico cobra"}, {"p": 8, "t": "As interações"}, {"p": 9, "t": "Vonoprazana"}, {"p": 10, "t": "Antiácidos"}, {"p": 11, "t": "Reforçar a defesa"}, {"p": 12, "t": "Fitoterapia e o que os artigos dela deixam cair"}, {"p": 13, "t": "Discursivas de dispepsia que já caíram"}, {"p": 14, "t": "Mapa mental"}] }/*FIM-RESUMOS*/ ] },
           { id: "central", titulo: "Central", itens: [
             { label: "Central da matéria", src: "uc14/farmaco/uc14-farmaco-central-guia.html" } ] },
           { id: "questoes", titulo: "Questões", itens: [
