@@ -54,7 +54,7 @@
         (!F.tu.length || (q.tus || []).some(t => F.tu.includes(t))) &&
         (!F.tema || q.tema === F.tema) &&
         (!F.tipo || q.grupo === F.tipo) &&
-        (!F.rep || (q.tus || []).length > 1) && qMatch(q) &&
+        (!F.rep || (q.rep || (q.tus || []).length) > 1) && qMatch(q) &&
         (!idsF || idsF.includes(q.id)) &&
         (F.sit === "todas" || (F.sit === "nao" && !P.r[q.id]) || (F.sit === "errei" && P.r[q.id] === "err") || (F.sit === "marcadas" && P.mark[q.id])));
     }
@@ -71,7 +71,7 @@
         </div>
         <section class="nv-card nv-filters">
           ${cfg.busca ? `<div class="nv-frow"><input type="search" id="nvQ" placeholder="Buscar nas questões (ex.: nitrofurantoína)" value="${esc(F.q.includes("|") ? F.q.split("|")[0] : F.q)}" aria-label="Buscar"></div>` : ""}
-          ${chipRow(cfg.spLabel || "SP", spOpts(cfg.items, q => q.sp), F.sp, "sp", true)}
+          ${(o => o.length ? chipRow(cfg.spLabel || "SP", o, F.sp, "sp", true) : "")(spOpts(cfg.items, q => q.sp))}
           ${cfg.turmas ? chipRow(cfg.tuLabel || "Turma", cfg.turmas.map(t => ({ v: t, l: t, n: cfg.items.filter(q => (q.tus || []).includes(t)).length })), F.tu, "tu", true) : ""}
           ${cfg.temas ? `<div class="nv-frow"><span class="nv-flabel">Tema</span><select id="nvTema"><option value="">Todos os temas</option>${cfg.temas.map(t => `<option ${F.tema === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>
             ${cfg.grupos ? `<select id="nvTipo"><option value="">Objetivas e discursivas</option>${cfg.grupos.map(t => `<option ${F.tipo === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>` : ""}</div>` : ""}
@@ -192,12 +192,15 @@
   }
 
   /* ---------- montar questões no formato do quiz ---------- */
-  function prepBanco(q) {
+  /* selo = de onde veio a resposta. Um banco pode trazer os próprios rótulos em UC.selos (ex.: 6º período). */
+  const SELOS = { OF: { l: "gabarito oficial", c: "ok" }, IN: { l: "gabarito inferido", c: "warn" }, AB: { l: "anulada/aberta", c: "warn" } };
+  function prepBanco(q, selos) {
     const set = String(q.gab || "").replace(/[^A-H]/g, "").split("");
     const objective = q.alts && q.alts.length;
+    const selo = (selos || SELOS)[q.selo || ""], reps = q.rep || (q.tus || []).length;
     return {
       id: q.id, sp: q.sp, tus: q.tus, tema: q.tema,
-      tags: [{ l: q.prova }, { l: q.tema }, { l: q.tipo }].concat(q.selo === "OF" ? [{ l: "gabarito oficial", c: "ok" }] : q.selo === "IN" ? [{ l: "gabarito inferido", c: "warn" }] : q.selo === "AB" ? [{ l: "anulada/aberta", c: "warn" }] : []).concat((q.tus || []).length > 1 ? [{ l: "caiu " + q.tus.length + "×", c: "hot" }] : []),
+      tags: [{ l: q.prova }, { l: q.tema }, { l: q.tipo }].concat(selo ? [selo] : []).concat(q.incerta ? [{ l: "resposta incerta", c: "warn" }] : []).concat(reps > 1 ? [{ l: "caiu " + reps + "×", c: "hot" }] : []),
       enun: q.enun, itens: q.itens,
       opts: objective ? q.alts.map((h, i) => ({ html: h, ok: set.includes(LET[i]), why: (q.tr || {})[LET[i]] || "" })) : [],
       gab: q.gab, gabLabel: set.join(" ou "), com: q.com, pg: q.pg, tabLinks: q.tabLinks
@@ -223,10 +226,10 @@
 
   V.provas = (el, U, ctx) => {
     const order = t => /^PM/.test(t) ? 100 + (+t.replace(/\D/g, "") || 99) : (+t.replace(/\D/g, "") || 200);
-    const turmas = [...new Set(U.banco.flatMap(q => q.tus || []))].sort((a, b) => order(a) - order(b));
+    const turmas = U.turmas || [...new Set(U.banco.flatMap(q => q.tus || []))].sort((a, b) => order(a) - order(b));
     const items = U.banco.map(q => Object.assign({}, q, { grupo: q.alts && q.alts.length ? "Só objetivas" : "Só discursivas" }));
-    quiz(el, ctx, { ns: ctx.ns + ":provas", items, turmas, temas: [...new Set(U.banco.map(q => q.tema))], grupos: ["Só objetivas", "Só discursivas"], busca: true, resumoTab: true,
-      prep: q => Object.assign(prepBanco(q), { drugs: drugLinks(U.drugs, q.enun + " " + (q.itens || []).join(" ") + " " + (q.alts || []).join(" ") + " " + (q.gab || "")) }) });
+    quiz(el, ctx, { ns: ctx.ns + ":provas", items, turmas, tuLabel: U.tuLabel, temas: U.temas || [...new Set(U.banco.map(q => q.tema))], grupos: ["Só objetivas", "Só discursivas"], busca: true, resumoTab: true,
+      prep: q => Object.assign(prepBanco(q, U.selos), { drugs: drugLinks(U.drugs, q.enun + " " + (q.itens || []).join(" ") + " " + (q.alts || []).join(" ") + " " + (q.gab || "")) }) });
   };
 
   V.abcd = (el, U, ctx) => {
@@ -368,8 +371,8 @@
     const idxAt = {}; (res.idx || []).forEach(x => (idxAt[x.p] = idxAt[x.p] || []).push(x));
     let spF = "", side = (res.idx && res.idx.length) || toc.length ? "indice" : "paginas";
     el.innerHTML = `<div class="nv-reader">
-      <aside class="nv-idx">
-        <div class="nv-frow nv-sidetabs">${(res.idx && res.idx.length) || toc.length ? `<button class="chip sm" data-side="indice">Índice</button>` : ""}${thumbs ? `<button class="chip sm" data-side="paginas">Página por página</button>` : ""}</div>
+      <aside class="nv-idx"${(res.idx && res.idx.length) || toc.length || thumbs ? "" : " hidden"}>
+        <div class="nv-frow nv-sidetabs">${(res.idx && res.idx.length) || toc.length ? `<button class="chip sm" data-side="indice">Índice</button>` : ""}${thumbs ? `<button class="chip sm" data-side="paginas">Páginas</button>` : ""}</div>
         <div class="nv-idxlist" id="ri"></div>
       </aside>
       <div class="nv-pdf">

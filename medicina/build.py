@@ -86,8 +86,11 @@ def load_site():
 
 
 def ucs_em_ordem(site):
-    # mesma ordem da barra lateral: maior número primeiro (UC15, UC14, UC13), HP (ordem 0) por último
-    return sorted(site["ucs"], key=lambda u: -(u.get("ordem", u.get("num", 0))))
+    # mesma ordem da barra lateral: períodos na ordem de site["fases"]; dentro de cada um,
+    # maior número primeiro (UC15, UC14, UC13) e HP (ordem 0) por último
+    fases = [f["id"] for f in site.get("fases", [])]
+    pos = lambda u: fases.index(u["fase"]) if u.get("fase") in fases else 0
+    return sorted(site["ucs"], key=lambda u: (pos(u), -(u.get("ordem", u.get("num", 0)))))
 
 
 # ---------------------------------------------------------------------------
@@ -126,8 +129,11 @@ def conferir(site):
 # ---------------------------------------------------------------------------
 def render_nav(site):
     data = []
+    fases = {f["id"]: f["nome"] for f in site.get("fases", [])}
     for u in ucs_em_ordem(site):
         nome = " · ".join(x for x in (u.get("nome"), u.get("tema")) if x)
+        if len(fases) > 1 and u.get("sigla"):          # há um "HP" em cada período: o menu diz qual é
+            nome = " · ".join(x for x in (u.get("nome"), fases.get(u.get("fase"))) if x)
         ms = []
         for m in u["materias"]:
             fs = []

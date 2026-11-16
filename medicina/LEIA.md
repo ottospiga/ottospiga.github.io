@@ -16,6 +16,20 @@ O site é `medicina/index.html`, que lê o `site-data.js` (UC → matéria → a
    - `python3 -m http.server 8000` na raiz e abra `http://localhost:8000/medicina/#<uc>/<materia>`.
    - Depois `git add medicina && git commit && git push`. **Nunca `git add .`**, para não subir `.DS_Store`.
 
+## Períodos
+
+O `site-data.js` tem a lista `fases` (5º e 6º período). Cada UC diz o seu em `fase: "5"` ou `fase: "6"`. A barra lateral e o início mostram os períodos na ordem dessa lista; quando o semestre virar, troque a ordem ali. HP tem uma UC por período (`hp` e `hp6`).
+
+## Banco de questões do 6º período
+
+As questões das provas antigas ficam em `medicina/conteudo/<uc>/<materia>/data.js` e abrem na vista `provas` (a mesma da Farmaco UC14): filtros por SP, turma e tema, modo estudo ou prova, rodadas de 5, 10 ou 15.
+
+- Os `data.js` são gerados: `python3 medicina/bancos.py ~/Documents/MED/6_fase/_questoes`, e depois `python3 medicina/build.py`. Não edite à mão; corrija o JSON de origem e gere de novo.
+- Banco de matéria nova: acrescente o arquivo em `BANCOS`, no topo do `bancos.py`, e uma aba `{ nativo: "provas", data: "conteudo/<uc>/<materia>/data.js" }` no `site-data.js`.
+- Cada questão mostra de onde veio a resposta: gabarito do professor, resolução de veterano, resposta inferida ou sem gabarito.
+- Questão idêntica em várias turmas vira uma entrada só; variação da mesma questão conta para a etiqueta "caiu N×".
+- O progresso fica no navegador, pelo `id` da questão. Não troque os ids no JSON de origem.
+
 **Endereços:** `#uc14/farmaco/central/0` = UC → matéria → id da aba → posição do item. Links antigos (`/medicina/v2/…` e as âncoras `#m-uc14-farmacologia` do índice antigo) redirecionam sozinhos. Os guias nunca mudam de lugar, então link de guia mandado para alguém não quebra.
 
 **Repo público:** nada de cronograma, prova com nome ou PDF com nome/metadado de pessoa. Antes de subir um PDF, confira com `pdfinfo` e `pdftotext | grep`.
