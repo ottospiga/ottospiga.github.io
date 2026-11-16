@@ -376,7 +376,6 @@
         <div class="nv-idxlist" id="ri"></div>
       </aside>
       <div class="nv-pdf">
-        ${toc.length ? `<div class="nv-toc">${toc.map(t => `<button class="chip sm" data-p="${t.p}">${esc(t.t)}</button>`).join("")}</div>` : ""}
         <div class="nv-ptools"><button class="btn" data-nav="-1" aria-label="Página anterior">‹</button><label>p. <input id="pgin" type="number" min="1" value="1" style="width:56px"></label><span id="pgt"></span><button class="btn" data-nav="1" aria-label="Próxima página">›</button>
           <span class="nv-zoom"><button class="btn" data-z="-1" aria-label="Diminuir">−</button><button class="btn" data-z="1" aria-label="Aumentar">+</button><button class="btn" data-z="0">Largura</button></span>
           <a class="btn" href="${pdf}" target="_blank" rel="noopener" style="margin-left:auto">Abrir PDF ↗</a><a class="btn" href="${pdf}" download>Baixar</a></div>
