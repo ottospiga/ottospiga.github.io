@@ -1,15 +1,21 @@
 /* =====================================================================
    CATÁLOGO DO SITE — UC → matéria → abas → itens
-   Regra: só entra o que JÁ ESTÁ no GitHub. Dentro de cada aba, o mais novo primeiro (medicina/5-fase/...). Nada novo é gerado.
+   Regra (5º período): só entra o que JÁ ESTÁ no GitHub. Dentro de cada aba, o mais novo primeiro (medicina/5-fase/...). Nada novo é gerado.
    Cada item aponta para um HTML existente, que abre embutido na aba como está.
    src é relativo a `base`.
    ===================================================================== */
 window.SITE = {
   fase: "5º período · 2026.2",
+  /* Períodos, na ordem em que aparecem na barra lateral e no início (quando o semestre virar, é só trocar a ordem).
+     Cada UC diz o seu em `fase`. */
+  fases: [
+    { id: "5", nome: "5º período", sub: "2026.2" },
+    { id: "6", nome: "6º período", sub: "2027.1" }
+  ],
   base: "5-fase/",
   ucs: [
     {
-      id: "uc15", num: 15, nome: "UC15", tema: "Infecção", cor: "uc15", status: "",
+      id: "uc15", num: 15, nome: "UC15", tema: "Infecção", cor: "uc15", status: "", fase: "5",
       /* UC15 no formato novo. Arquivos próprios ficam em conteudo/uc15/.
          Abas "nativas" são desenhadas pelo site a partir dos dados já existentes; nada foi reescrito. */
       materias: [
@@ -85,7 +91,7 @@ window.SITE = {
       ]
     },
     {
-      id: "uc14", num: 14, nome: "UC14", tema: "Abdome", cor: "uc14", status: "em curso",
+      id: "uc14", num: 14, nome: "UC14", tema: "Abdome", cor: "uc14", status: "em curso", fase: "5",
       materias: [
         { id: "tutoria", nome: "Tutoria", abas: [
           { id: "prova-final", titulo: "Prova final", itens: [
@@ -158,7 +164,7 @@ window.SITE = {
       ]
     },
     {
-      id: "uc13", num: 13, nome: "UC13", tema: "Dor", cor: "uc13", status: "concluída",
+      id: "uc13", num: 13, nome: "UC13", tema: "Dor", cor: "uc13", status: "concluída", fase: "5",
       materias: [
         {
           id: "tutoria", nome: "Tutoria",
@@ -225,7 +231,7 @@ window.SITE = {
       ]
     },
     {
-      id: "hp", sigla: "HP", ordem: 0, nome: "HP", tema: "Habilidades", cor: "hp", status: "",
+      id: "hp", sigla: "HP", ordem: 0, nome: "HP", tema: "Habilidades", cor: "hp", status: "", fase: "5",
       materias: [
         { id: "infeccoes", nome: "Infecções", abas: [
           { id: "central", titulo: "Resumo, questões e vídeo", itens: [
@@ -239,6 +245,53 @@ window.SITE = {
         { id: "abdome-procedimentos", nome: "Abdome · Procedimentos (João)", abas: [
           { id: "guia", titulo: "Guia de estudo", itens: [
             { label: "Exame físico abdominal e abdome agudo", src: "hp-abdomen/procedimentos/hp-joao-hpp-guia.html" } ] } ] }
+      ]
+    },
+    /* ===================== 6º período (2027.1) =====================
+       Por enquanto só as provas antigas dos veteranos, digitalizadas. Cada banco é gerado por
+       medicina/bancos.py a partir de MED/6_fase/_questoes e abre na vista "provas" (a mesma da Farmaco UC14). */
+    {
+      id: "uc18", num: 18, nome: "UC18", tema: "Fadiga e anemias", cor: "uc18", status: "", fase: "6",
+      materias: [
+        { id: "farmaco", nome: "Farmacologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · T1 a T10", nativo: "provas", data: "conteudo/uc18/farmaco/data.js", ns: "uc18/farmaco" } ] } ] },
+        { id: "fisiopato", nome: "Fisiopatologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · sem turma", nativo: "provas", data: "conteudo/uc18/fisiopato/data.js", ns: "uc18/fisiopato" } ] } ] },
+        { id: "tutoria", nome: "Tutoria", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "APFs antigas", nativo: "provas", data: "conteudo/uc18/tutoria/data.js", ns: "uc18/tutoria" } ] } ] }
+      ]
+    },
+    {
+      id: "uc17", num: 17, nome: "UC17", tema: "Perda de sangue", cor: "uc17", status: "", fase: "6",
+      materias: [
+        { id: "farmaco", nome: "Farmacologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · T1 a T10 e PMs", nativo: "provas", data: "conteudo/uc17/farmaco/data.js", ns: "uc17/farmaco" } ] } ] },
+        { id: "fisiopato", nome: "Fisiopatologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · T4 a T11", nativo: "provas", data: "conteudo/uc17/fisiopato/data.js", ns: "uc17/fisiopato" } ] } ] },
+        { id: "tutoria", nome: "Tutoria", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas finais e APFs · T5 a T11", nativo: "provas", data: "conteudo/uc17/tutoria/data.js", ns: "uc17/tutoria" } ] } ] },
+        { id: "radio", nome: "Radiologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Prova antiga · sem turma", nativo: "provas", data: "conteudo/uc17/radio/data.js", ns: "uc17/radio" } ] } ] }
+      ]
+    },
+    {
+      id: "uc16", num: 16, nome: "UC16", tema: "Saúde mental", cor: "uc16", status: "", fase: "6",
+      materias: [
+        { id: "farmaco", nome: "Farmacologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · T2 a T11 e PMs", nativo: "provas", data: "conteudo/uc16/farmaco/data.js", ns: "uc16/farmaco" } ] } ] },
+        { id: "fisiopato", nome: "Fisiopatologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas antigas · T3 a T11", nativo: "provas", data: "conteudo/uc16/fisiopato/data.js", ns: "uc16/fisiopato" } ] } ] },
+        { id: "tutoria", nome: "Tutoria", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Provas finais e APFs · T2 a T10", nativo: "provas", data: "conteudo/uc16/tutoria/data.js", ns: "uc16/tutoria" } ] } ] }
+      ]
+    },
+    {
+      id: "hp6", sigla: "HP", ordem: 0, nome: "HP", tema: "Habilidades", cor: "hp", status: "", fase: "6",
+      materias: [
+        { id: "hemato", nome: "Hematologia", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Atividades, prática e quizzes", nativo: "provas", data: "conteudo/hp6/hemato/data.js", ns: "hp6/hemato" } ] } ] },
+        { id: "endo-rodrigo", nome: "Endócrino (Rodrigo)", abas: [
+          { id: "questoes", titulo: "Questões", itens: [ { label: "Prova T10 (relato de memória)", nativo: "provas", data: "conteudo/hp6/endo-rodrigo/data.js", ns: "hp6/endo-rodrigo" } ] } ] }
       ]
     },
   ]

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Medicina · 5ª fase</title>
+<title>Medicina</title>
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -15,6 +15,9 @@
   --uc14:#138a7e; --uc14-bg:#23443f; --uc14-fg:#7fd6cc;
   --uc15:#4f55c9; --uc15-bg:#2a2b4a; --uc15-fg:#8e93ff;
   --hp:#a86b12; --hp-bg:#3a3020; --hp-fg:#f0b429;
+  --uc16:#9a3fb5; --uc16-bg:#38273f; --uc16-fg:#d9a3ec;
+  --uc17:#c2334f; --uc17-bg:#42262c; --uc17-fg:#f790a5;
+  --uc18:#1b74ad; --uc18-bg:#1f3545; --uc18-fg:#7cc6f5;
   --acc:#d4573b;
   --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
@@ -23,7 +26,8 @@
 :root[data-theme="dark"]{
   --bg:#10171b; --surface:#172126; --sunk:#0c1215; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3940;
   --nav:#0b1114; --nav-2:#172126; --nav-3:#121b20; --nav-line:#22313a;
-  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; --hp:#f0b429; color-scheme:dark;
+  --uc13:#f07a5f; --uc14:#3cc0b1; --uc15:#8e93ff; --hp:#f0b429;
+  --uc16:#cf8ee6; --uc17:#f58aa0; --uc18:#6fbcf0; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -57,6 +61,11 @@ a{color:var(--acc)}
 .mat-link:hover{background:var(--nav-2)}
 .mat-link[aria-current="true"]{background:var(--uc-bg,var(--nav-2));color:#fff;font-weight:700}
 .mat-link small{font-size:11px;color:var(--nav-muted);font-family:var(--f-mono)}
+.fase-h{display:flex;align-items:baseline;gap:8px;padding:12px 8px 2px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--nav-muted)}
+.fase-h:first-child{padding-top:0}
+.fase-h b{color:var(--nav-dim)}
+.fase-h span{text-transform:none;letter-spacing:0}
+.fase-h .curto{display:none}
 .nav-foot{margin-top:auto;border-top:1px solid var(--nav-line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
 .nav-foot button,.nav-foot .foot-link{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--nav-dim);padding:6px 8px;font-size:13px;text-align:left;text-decoration:none;border-radius:8px}
 .nav-foot .foot-link:hover,.nav-foot button:hover{background:var(--nav-2)}
@@ -68,6 +77,9 @@ a{color:var(--acc)}
 .app.collapsed .uc-badge{width:44px;height:44px;border-radius:11px;font-size:15px}
 .app.collapsed .home-link{justify-content:center;padding:10px}
 .app.collapsed .nav-top{flex-direction:column}
+.app.collapsed .fase-h{justify-content:center;padding:10px 0 0}
+.app.collapsed .fase-h .longo,.app.collapsed .fase-h span{display:none}
+.app.collapsed .fase-h .curto{display:inline}
 .flyout{position:fixed;z-index:30;width:260px;background:var(--nav);color:var(--nav-fg);border:1px solid var(--nav-line);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
 .flyout h4{margin:0;padding:6px 8px 8px;font-family:var(--f-display);color:#fff}
 
@@ -130,6 +142,7 @@ a{color:var(--acc)}
   .nav{position:fixed;inset:0 auto 0 0;width:300px;z-index:40;transform:translateX(-105%);transition:transform .2s}
   .app.drawer .nav{transform:none}
   .app.collapsed .nav{flex-basis:auto;align-items:stretch;padding:14px 12px}
+  .app.collapsed .fase-h{justify-content:flex-start;padding:12px 8px 2px}
   .scrim{position:fixed;inset:0;background:rgba(24,36,43,.5);z-index:35;display:none}
   .app.drawer .scrim{display:block}
   .mob-top{display:flex;align-items:center;gap:12px;background:var(--nav);color:#fff;padding:10px 16px}
@@ -360,6 +373,10 @@ let st = { uc:null, mat:null, aba:0, item:0 };
 const ucOf = id => S.ucs.find(u => u.id === id);
 const ucName = u => [u.nome, u.tema].filter(Boolean).join(" · ");
 const ORD = (a, b) => (b.ordem ?? b.num) - (a.ordem ?? a.num);
+/* períodos: S.fases dá a ordem na barra lateral e no início; cada UC diz o seu em `fase` */
+const FASES = S.fases && S.fases.length ? S.fases : [{ id: "", nome: S.fase || "", sub: "" }];
+const ucsDa = f => S.ucs.filter(u => (u.fase || FASES[0].id) === f.id).sort(ORD);
+const faseNome = f => [f.nome, f.sub].filter(Boolean).join(" · ");
 const matOf = (u, id) => (u.materias || []).find(m => m.id === id);
 const PREV_REMOTE = window.PREVIEW_REMOTE || null, PREV_LOCAL = window.PREVIEW_LOCAL || [];
 const href = src => {
@@ -421,11 +438,11 @@ function renderNav(){
   nav.innerHTML = `
     <div class="nav-top">
       <button class="icon-btn collapse-btn" id="collapse" aria-label="Recolher ou abrir menu">${$("#app").classList.contains("collapsed") ? ICON.menu : ICON.left}</button>
-      <span class="brand">Medicina</span><span class="brand-sub">${esc(S.fase)}</span>
+      <span class="brand">Medicina</span><span class="brand-sub">${esc(FASES.length > 1 ? "" : S.fase)}</span>
     </div>
     <button class="home-link" id="goHome" aria-current="${!st.uc}">${ICON.home}<span>Início</span></button>
     <div style="display:flex;flex-direction:column;gap:4px">
-      ${S.ucs.slice().sort(ORD).map(u => {
+      ${FASES.map(f => (FASES.length > 1 && ucsDa(f).length ? `<div class="fase-h" title="${esc(faseNome(f))}"><b><span class="longo">${esc(f.nome)}</span><span class="curto">${esc(f.id)}º</span></b><span>${esc(f.sub || "")}</span></div>` : "") + ucsDa(f).map(u => {
         const open = (!!store.open[u.id] || st.uc === u.id) && u.materias.length > 0;
         const has = u.materias.length > 0;
         return `<div class="uc-group ${open ? "open" : ""}" style="--uc-bg:var(--${u.cor}-bg)">
@@ -436,7 +453,7 @@ function renderNav(){
           </button>
           <div class="mats">${u.materias.map(m => `<button class="mat-link" data-go="${u.id}|${m.id}" aria-current="${st.uc===u.id && st.mat===m.id}">${esc(m.nome)}<small>${m.abas.length}</small></button>`).join("")}</div>
         </div>`;
-      }).join("")}
+      }).join("")).join("")}
     </div>
     <div class="nav-foot">
       <a class="foot-link" href="../index.html">${ICON.site}<span>Página inicial do site</span></a>
@@ -557,10 +574,10 @@ function renderHome(){
       <div class="crumb">${esc(hoje.charAt(0).toUpperCase() + hoje.slice(1))}</div>
       <h1>Medicina</h1>
     </header>
-    <section>
-      <h2>${esc(S.fase)}</h2>
+    ${FASES.map(f => ucsDa(f).some(u => u.materias.length) ? `<section>
+      <h2>${esc(faseNome(f))}</h2>
       <div class="uc-cards">
-        ${S.ucs.filter(u => u.materias.length).sort(ORD).map(u => `
+        ${ucsDa(f).filter(u => u.materias.length).map(u => `
           <article class="uc-card" style="--acc:var(--${u.cor})">
             <header>${u.materias.length ? `<button class="uc-go" data-go="${u.id}|${u.materias[0].id}">` : "<span class=\"uc-go\">"}<span class="uc-badge" style="background:var(--${u.cor});color:#fff">${esc(u.sigla || u.num)}</span><b>${esc(u.nome)} · ${esc(u.tema || "")}</b>${u.materias.length ? "</button>" : "</span>"}<span class="st">${esc(u.status || "")}</span></header>
             ${u.materias.length ? `
@@ -569,7 +586,7 @@ function renderHome(){
             : `<p class="empty" style="margin:0">Material ainda não organizado aqui.</p>`}
           </article>`).join("")}
       </div>
-    </section>
+    </section>` : "").join("")}
     <footer class="foot">
       <span>O que você abriu fica salvo neste navegador.</span>
       <button class="tool" id="exp">Exportar progresso</button>
