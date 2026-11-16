@@ -371,8 +371,8 @@
     const idxAt = {}; (res.idx || []).forEach(x => (idxAt[x.p] = idxAt[x.p] || []).push(x));
     let spF = "", side = (res.idx && res.idx.length) || toc.length ? "indice" : "paginas";
     el.innerHTML = `<div class="nv-reader">
-      <aside class="nv-idx">
-        <div class="nv-frow nv-sidetabs">${(res.idx && res.idx.length) || toc.length ? `<button class="chip sm" data-side="indice">Índice</button>` : ""}${thumbs ? `<button class="chip sm" data-side="paginas">Página por página</button>` : ""}</div>
+      <aside class="nv-idx"${(res.idx && res.idx.length) || toc.length || thumbs ? "" : " hidden"}>
+        <div class="nv-frow nv-sidetabs">${(res.idx && res.idx.length) || toc.length ? `<button class="chip sm" data-side="indice">Índice</button>` : ""}${thumbs ? `<button class="chip sm" data-side="paginas">Páginas</button>` : ""}</div>
         <div class="nv-idxlist" id="ri"></div>
       </aside>
       <div class="nv-pdf">
