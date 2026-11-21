@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jogo dos alvos — Farmaco UC15</title>
+<style>
+/* Jogo dos alvos (Farmaco UC15) — mesma mecânica do jogo do "Antibióticos em 14 dias", com os fármacos da UC15.
+   Layout: coluna única; fármaco da vez numa barra fixa em cima, bactéria com os alvos clicáveis embaixo. Autocontido, sem CDN. */
+:root{--ink:#1d1a26;--ink2:#4b4560;--mut:#6b6480;--h:#1f1640;--pur:#6b2fb3;--pur-soft:#f1eafd;--pur-line:#e3dbf0;--bg:#fbfaff;--card:#fff;--line:#ebe6f2;
+--ok:#17663c;--ok-soft:#e4f5ea;--no:#a02a22;--no-soft:#fde7e7;--amb:#7a5600;--amb-soft:#fff3c9;
+--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:18px 18px 60px}
+.crumb{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pur)}
+h1{font-size:28px;line-height:1.15;margin:4px 0 4px;color:var(--h);letter-spacing:-.3px}
+.sub{font-size:14px;color:var(--mut);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--pur-line);border-radius:14px;padding:14px 16px}
+.card .eb{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pur)}
+.card b.big{display:block;font-size:20px;color:var(--h);margin:2px 0}
+.card p{margin:2px 0 10px;color:var(--mut);font-size:14px}
+.btn{font:700 14px var(--sans);padding:9px 15px;border-radius:10px;border:1.5px solid var(--pur);background:#fff;color:var(--pur);cursor:pointer}
+.btn.pri{background:var(--pur);color:#fff}
+.btn:focus-visible,.zone:focus-visible{outline:2px solid var(--pur);outline-offset:2px}
+label.tg{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--ink2);margin:0 0 14px;cursor:pointer}
+label.tg input{width:17px;height:17px;accent-color:var(--pur)}
+.gbar{position:sticky;top:0;z-index:3;display:flex;gap:12px;align-items:stretch;background:var(--bg);padding:8px 0 10px}
+.drug{flex:1;min-width:0;background:var(--pur);color:#fff;border-radius:14px;padding:10px 16px}
+.drug small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;min-height:16px}
+.drug b{display:block;font-size:25px;line-height:1.15;letter-spacing:-.2px}
+.gstat{background:var(--card);border:1px solid var(--pur-line);border-radius:14px;padding:8px 14px;min-width:86px;text-align:center}
+.gstat small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.gstat b{font-size:22px;color:var(--h);font-variant-numeric:tabular-nums}
+.board{background:var(--card);border:1px solid var(--pur-line);border-radius:14px;padding:8px;overflow-x:auto}
+.board svg{display:block;width:100%;height:auto;min-width:560px}
+.board svg text{font-family:var(--sans);fill:var(--ink)}
+.board svg .lbl{fill:var(--mut)}
+.zone{cursor:pointer;outline:none}
+.zone .pill{fill:#fff;stroke:var(--pur);stroke-width:2;transition:fill .12s}
+.zone:hover .pill{fill:var(--pur-soft)}
+.zone.ok .pill{fill:var(--ok-soft);stroke:var(--ok);stroke-width:3}
+.zone.bad .pill{fill:var(--no-soft);stroke:var(--no);stroke-width:3}
+.zone.hint .pill{fill:var(--amb-soft);stroke:var(--amb);stroke-width:3;stroke-dasharray:6 4}
+.zone .cnt{font-size:11px;font-weight:800;fill:var(--ok)}
+.board.idle .zone{cursor:default}
+.fb{margin:10px 0;border-radius:12px;padding:11px 14px;font-size:15px;background:var(--pur-soft);border-left:4px solid var(--pur);min-height:48px}
+.fb.ok{background:var(--ok-soft);border-color:var(--ok)}.fb.bad{background:var(--no-soft);border-color:var(--no)}
+.kb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;padding:11px 14px;border-radius:12px;background:var(--amb-soft);border-left:4px solid #e0a800;font-size:15px}
+.kb .btn{border-color:#b98600;color:#7a5600}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+ul.miss{margin:6px 0 0;padding-left:20px;font-size:14.5px}
+ul.miss li{margin:3px 0}
+.muted{color:var(--mut)}
+.chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--ok-soft);color:var(--ok)}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.drug b{font-size:21px}.gstat{min-width:68px;padding:8px 8px}h1{font-size:24px}}
+</style></head><body>
+<div class="wrap">
+<div class="crumb">Farmaco UC15 · Jogo dos alvos</div>
+<div id="app"></div>
+</div>
+<script>
+(function(){
+"use strict";
+var ZONES={
+ pbp:{name:"PBP (transpeptidação)",short:"PBP"},
+ dala:{name:"D-Ala-D-Ala (transglicosilase)",short:"D-Ala-D-Ala"},
+ mura:{name:"1º passo da parede (enolpiruvato transferase)",short:"1º passo da parede"},
+ memb:{name:"membrana",short:"membrana"},
+ r30:{name:"ribossomo 30S",short:"30S"},
+ r50:{name:"ribossomo 50S",short:"50S"},
+ gir:{name:"DNA-girase e topoisomerase IV",short:"DNA-girase"},
+ dano:{name:"dano ao DNA por radicais",short:"dano ao DNA"},
+ rnap:{name:"RNA-polimerase",short:"RNA-polimerase"},
+ fol:{name:"via do folato",short:"folato"},
+ mic:{name:"micobactéria (parede e membrana)",short:"micobactéria"}
+};
+/* [fármaco, classe, alvo, por quê, c = mata | s = freia | "" = não pergunta] */
+var DRUGS=[
+["Amoxicilina","aminopenicilina","pbp","β-lactâmico: liga-se à PBP e inibe a transpeptidação.","c"],
+["Penicilina G benzatina","penicilina de depósito","pbp","β-lactâmico: PBP. A benzatina só muda o tempo de ação.","c"],
+["Oxacilina","penicilina resistente à penicilinase","pbp","Resiste à penicilinase, mas o alvo continua sendo a PBP. Se a PBP muda (MRSA), ela falha.","c"],
+["Piperacilina + tazobactam","penicilina antipseudomonas + inibidor","pbp","A piperacilina age na PBP; o tazobactam só a protege da β-lactamase.","c"],
+["Cefalexina","cefalosporina de 1ª geração","pbp","Cefalosporina é β-lactâmico: PBP.","c"],
+["Ceftriaxona","cefalosporina de 3ª geração","pbp","Cefalosporina é β-lactâmico: PBP.","c"],
+["Cefepima","cefalosporina de 4ª geração","pbp","Cefalosporina é β-lactâmico: PBP.","c"],
+["Imipenem + cilastatina","carbapenêmico","pbp","Carbapenêmico é β-lactâmico: PBP. A cilastatina não é antibiótico.","c"],
+["Aztreonam","monobactâmico","pbp","Monobactâmico é β-lactâmico: PBP.","c"],
+["Vancomicina","glicopeptídeo","dala","Liga-se ao D-Ala-D-Ala e inibe a transglicosilase. Não depende da PBP, por isso funciona no MRSA.","c"],
+["Teicoplanina","glicopeptídeo","dala","Igual à vancomicina; só muda a posologia (1 vez ao dia).","c"],
+["Fosfomicina","dose única para cistite","mura","Inibe a enolpiruvato transferase, o primeiro passo da síntese da parede.","c"],
+["Polimixina B","polipeptídeo catiônico","memb","Liga-se ao LPS e desorganiza a membrana das Gram-negativas.","c"],
+["Daptomicina","lipopeptídeo","memb","Forma poro na membrana das Gram-positivas: sai potássio e a célula despolariza.","c"],
+["Gentamicina","aminoglicosídeo","r30","30S: leitura errada do RNA mensageiro. É a única classe da síntese proteica que mata.","c"],
+["Amicacina","aminoglicosídeo","r30","30S: leitura errada do RNA mensageiro. É a única classe da síntese proteica que mata.","c"],
+["Doxiciclina","tetraciclina","r30","30S: barra a entrada do RNA transportador.","s"],
+["Limeciclina","tetraciclina","r30","30S: barra a entrada do RNA transportador.","s"],
+["Tigeciclina","derivada das tetraciclinas","r30","30S, como as tetraciclinas.","s"],
+["Azitromicina","macrolídeo","r50","Macrolídeo: 50S.","s"],
+["Claritromicina","macrolídeo","r50","Macrolídeo: 50S.","s"],
+["Espiramicina","macrolídeo","r50","Macrolídeo: 50S. Única indicação: toxoplasmose na gestante até 12 semanas.","s"],
+["Clindamicina","lincosamida","r50","50S, o mesmo sítio dos macrolídeos: resistência cruzada.","s"],
+["Linezolida","oxazolidinona","r50","50S, só a porção 23S: sem resistência cruzada com macrolídeo e clindamicina.","s"],
+["Cloranfenicol","hoje só em colírio","r50","50S.","s"],
+["Ciprofloxacino","quinolona","gir","Quinolona: inibe a DNA-girase (topoisomerase II) e a topoisomerase IV.","c"],
+["Levofloxacino","quinolona","gir","Quinolona: inibe a DNA-girase (topoisomerase II) e a topoisomerase IV.","c"],
+["Norfloxacino","quinolona","gir","Quinolona: inibe a DNA-girase (topoisomerase II) e a topoisomerase IV.","c"],
+["Metronidazol","nitroimidazol","dano","É reduzido pelo anaeróbio a um radical que lesa o DNA.","c"],
+["Nitrofurantoína","só para cistite","dano","É reduzida pela bactéria a um radical que lesa DNA, RNA e proteínas. Não age na parede.","c"],
+["Rifampicina","tuberculose","rnap","Inibe a RNA-polimerase.",""],
+["Sulfametoxazol","sulfa","fol","Compete com o PABA na folato sintase, o primeiro passo.","s"],
+["Trimetoprima","par do sulfametoxazol","fol","Inibe a folato redutase, o segundo passo.","s"],
+["Sulfadiazina","sulfa da toxoplasmose","fol","Compete com o PABA na folato sintase.","s"],
+["Pirimetamina","par da sulfadiazina","fol","Inibe a folato redutase.","s"],
+["Isoniazida","tuberculose","mic","Inibe a síntese do ácido micólico da parede da micobactéria.",""],
+["Etambutol","tuberculose","mic","Inibe a síntese do arabinogalactano da parede da micobactéria.",""],
+["Pirazinamida","tuberculose","mic","Altera a membrana e o metabolismo da micobactéria.",""]
+];
+var KEY="uc15:farmaco:jogo:v1", S={best:0,plays:0,kill:false};
+try{var o=JSON.parse(localStorage.getItem(KEY)||"null");if(o)S=Object.assign(S,o)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var app=document.getElementById("app"),G=null,timer=null;
+
+function pill(id,x,y,w,h,label,sub){
+ return '<g class="zone" data-z="'+id+'" tabindex="0" role="button" aria-label="'+esc(ZONES[id].name)+'">'+
+  '<rect class="pill" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+Math.min(h/2,14)+'"/>'+
+  '<text x="'+(x+w/2)+'" y="'+(y+(sub?h/2-2:h/2+5))+'" text-anchor="middle" style="font-weight:700;font-size:14px">'+label+'</text>'+
+  (sub?'<text class="lbl" x="'+(x+w/2)+'" y="'+(y+h/2+14)+'" text-anchor="middle" style="font-size:11.5px">'+sub+'</text>':'')+
+  '<text class="cnt" x="'+(x+w-9)+'" y="'+(y+14)+'" text-anchor="end" data-c="'+id+'"></text></g>';
+}
+function board(){
+ return '<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Bactéria com os alvos dos antibióticos">'+
+ '<rect x="40" y="72" width="740" height="356" rx="178" fill="#f1eafd" stroke="#6b2fb3" stroke-width="5"/>'+
+ '<rect x="54" y="86" width="712" height="328" rx="164" fill="none" stroke="#6b2fb3" stroke-opacity=".45" stroke-width="7" stroke-dasharray="3 5"/>'+
+ '<rect x="68" y="100" width="684" height="300" rx="150" fill="#fff" fill-opacity=".75" stroke="#6b6480" stroke-opacity=".6" stroke-width="3"/>'+
+ '<circle cx="405" cy="246" r="118" fill="none" stroke="#6b2fb3" stroke-opacity=".5" stroke-width="3" stroke-dasharray="10 4 2 4"/>'+
+ '<ellipse cx="182" cy="206" rx="70" ry="34" fill="#6b2fb3" fill-opacity=".10" stroke="#6b2fb3" stroke-opacity=".6" stroke-width="2"/>'+
+ '<ellipse cx="182" cy="286" rx="90" ry="44" fill="#6b2fb3" fill-opacity=".16" stroke="#6b2fb3" stroke-opacity=".6" stroke-width="2"/>'+
+ '<text class="lbl" x="182" y="352" text-anchor="middle" style="font-size:11.5px">ribossomo 70S</text>'+
+ '<text class="lbl" x="405" y="146" text-anchor="middle" style="font-size:11.5px">cromossomo</text>'+
+ '<text class="lbl" x="40" y="62" style="font-size:11.5px">parede ↓</text>'+
+ pill("pbp",110,14,196,46,"PBP","transpeptidação")+
+ pill("dala",316,14,196,46,"D-Ala-D-Ala","transglicosilase")+
+ pill("mura",522,14,196,46,"1º passo da parede","enolpiruvato transferase")+
+ pill("r30",122,186,120,40,"30S","")+
+ pill("r50",112,264,140,44,"50S","")+
+ pill("gir",330,160,150,46,"DNA-girase","topoisomerase IV")+
+ pill("dano",330,222,150,46,"Dano ao DNA","radicais")+
+ pill("rnap",330,284,150,42,"RNA-polimerase","")+
+ pill("fol",556,166,170,52,"Via do folato","PABA → folato")+
+ pill("mic",556,262,170,52,"Micobactéria","parede e membrana")+
+ pill("memb",290,440,240,46,"Membrana","poros, saída de íons")+
+ '</svg>';
+}
+
+function home(){
+ clearInterval(timer);timer=null;
+ var last=G&&G.over?G:null,h='<h1>Onde cada fármaco ataca?</h1><p class="sub">Aparece o fármaco, você toca no alvo. Cada erro mostra o alvo certo e o porquê.</p>';
+ if(last){
+  var tot=last.right+last.wrong,pc=tot?Math.round(last.right/tot*100):0;
+  h+='<div class="card" style="margin-bottom:14px"><span class="eb">'+(last.mode==="rush"?"Relâmpago":"Treino")+' · fim</span>'+
+   '<b class="big">'+(last.mode==="rush"?last.score+" pontos":last.right+" de "+tot)+' <span class="muted" style="font-size:15px;font-weight:600">· '+pc+'% de acerto</span></b>'+
+   (last.mode==="rush"&&last.record?'<span class="chip">novo recorde</span>':'')+
+   (last.misses.length?'<div style="margin-top:6px"><b>Para revisar</b><ul class="miss">'+last.misses.map(function(m){return'<li><b>'+esc(m[0])+'</b> → '+esc(ZONES[m[2]].name)+'. <span class="muted">'+esc(m[3])+'</span></li>'}).join("")+'</ul></div>':'<p style="margin:6px 0 0">Sem erros.</p>')+
+   '</div>';
+ }
+ h+='<div class="grid">'+
+  '<div class="card"><span class="eb">Treino</span><b class="big">'+DRUGS.length+' fármacos, sem relógio</b><p>Passa por todos uma vez. Bom para aprender.</p><button class="btn pri" data-m="train">Jogar treino</button></div>'+
+  '<div class="card"><span class="eb">Relâmpago · 60 s</span><b class="big">Recorde: '+(S.best||0)+' pts</b><p>10 pontos por acerto, multiplicador a cada 3 seguidos, −2 s por erro.</p><button class="btn pri" data-m="rush">Jogar relâmpago</button></div>'+
+  '</div>'+
+  '<label class="tg"><input type="checkbox" id="kill"'+(S.kill?" checked":"")+'><span>No treino, perguntar também se o fármaco <b>mata</b> ou só <b>freia</b></span></label>'+
+  '<div class="board idle">'+board()+'</div>';
+ app.innerHTML=h;
+ [].forEach.call(app.querySelectorAll("[data-m]"),function(b){b.onclick=function(){start(b.getAttribute("data-m"))}});
+ document.getElementById("kill").onchange=function(){S.kill=this.checked;save()};
+}
+function start(mode){
+ G={mode:mode,deck:shuffle(DRUGS),i:0,score:0,streak:0,right:0,wrong:0,misses:[],cnt:{},lock:false,over:false,kill:mode==="train"&&S.kill};
+ var h='<div class="gbar"><div class="drug" aria-live="polite"><small id="gcls"></small><b id="gdrug"></b></div>'+
+  (mode==="rush"?'<div class="gstat"><small>tempo</small><b id="gtime">60</b></div><div class="gstat"><small>pontos</small><b id="gscore">0</b></div><div class="gstat"><small>seguidos</small><b id="gstreak">0</b></div>'
+   :'<div class="gstat"><small>fármaco</small><b id="gprog"></b></div><div class="gstat"><small>acertos</small><b id="gright">0</b></div>')+
+  '</div><div class="board">'+board()+'</div><div id="extra"></div><div class="fb" id="gfb">Toque no alvo do fármaco acima. No teclado: Tab e Enter.</div>'+
+  '<div class="row"><button class="btn" id="gquit">Encerrar</button></div>';
+ app.innerHTML=h;
+ [].forEach.call(app.querySelectorAll(".zone"),function(z){
+  z.onclick=function(){answer(z.getAttribute("data-z"))};
+  z.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();answer(z.getAttribute("data-z"))}};
+ });
+ document.getElementById("gquit").onclick=end;
+ show();
+ if(mode==="rush"){G.end=Date.now()+60000;timer=setInterval(tick,200)}
+}
+function cur(){if(G.mode==="rush"&&G.i>=G.deck.length){G.deck=shuffle(DRUGS);G.i=0}return G.deck[G.i]}
+function show(){
+ var d=cur();if(!d)return end();
+ document.getElementById("gdrug").textContent=d[0];
+ document.getElementById("gcls").textContent=d[1];
+ var p=document.getElementById("gprog");if(p)p.textContent=(G.i+1)+"/"+G.deck.length;
+}
+function tick(){
+ var left=Math.max(0,Math.ceil((G.end-Date.now())/1000)),el=document.getElementById("gtime");
+ if(el)el.textContent=left; if(left<=0)end();
+}
+function clearMarks(){[].forEach.call(app.querySelectorAll(".zone"),function(x){x.classList.remove("ok","bad","hint")})}
+function next(delay){
+ G.i++;G.lock=true;
+ setTimeout(function(){
+  if(!G||G.over)return; G.lock=false; clearMarks();
+  if(G.mode==="train"&&G.i>=G.deck.length)return end();
+  show();
+ },delay);
+}
+function answer(z){
+ if(!G||G.over||G.lock)return;
+ var d=cur(),ok=z===d[2],zel=app.querySelector('.zone[data-z="'+z+'"]'),fb=document.getElementById("gfb");
+ clearMarks();
+ if(ok){
+  G.right++;G.streak++;var mult=1+Math.floor(G.streak/3);G.score+=10*mult;
+  G.cnt[z]=(G.cnt[z]||0)+1;var c=app.querySelector('[data-c="'+z+'"]');if(c)c.textContent="×"+G.cnt[z];
+  zel.classList.add("ok");fb.className="fb ok";
+  fb.innerHTML="<b>"+esc(d[0])+"</b> → "+esc(ZONES[z].name)+". "+esc(d[3])+(G.mode==="rush"&&mult>1?" <b>×"+mult+"</b>":"");
+  if(G.kill&&d[4]){askKill(d);}
+  else next(G.mode==="rush"?350:1100);
+ }else{
+  G.wrong++;G.streak=0;if(!G.misses.some(function(m){return m[0]===d[0]}))G.misses.push(d);
+  zel.classList.add("bad");app.querySelector('.zone[data-z="'+d[2]+'"]').classList.add("hint");
+  fb.className="fb bad";
+  fb.innerHTML="<b>"+esc(d[0])+"</b> não age em "+esc(ZONES[z].short)+". O alvo é <b>"+esc(ZONES[d[2]].name)+"</b>: "+esc(d[3]);
+  if(G.mode==="rush"){G.end-=2000;next(1200)} else next(2400);
+ }
+ var s=document.getElementById("gscore");if(s)s.textContent=G.score;
+ var st=document.getElementById("gstreak");if(st)st.textContent=G.streak;
+ var r=document.getElementById("gright");if(r)r.textContent=G.right;
+}
+function askKill(d){
+ G.lock=true;
+ var ex=document.getElementById("extra");
+ ex.innerHTML='<div class="kb"><b>'+esc(d[0])+'</b> mata ou só freia? <button class="btn" data-k="c">Mata (bactericida)</button><button class="btn" data-k="s">Freia (bacteriostático)</button></div>';
+ [].forEach.call(ex.querySelectorAll("[data-k]"),function(b){b.onclick=function(){
+  var good=b.getAttribute("data-k")===d[4],fb=document.getElementById("gfb");
+  if(!good){G.wrong++;if(!G.misses.some(function(m){return m[0]===d[0]}))G.misses.push([d[0],d[1],d[2],d[3]+" "+(d[4]==="c"?"É bactericida.":"É bacteriostático.")])}
+  fb.className="fb "+(good?"ok":"bad");
+  fb.innerHTML="<b>"+esc(d[0])+"</b> "+(d[4]==="c"?"<b>mata</b> (bactericida).":"<b>só freia</b> (bacteriostático): depende da imunidade do paciente.");
+  ex.innerHTML="";G.lock=false;next(good?900:2000);
+ }});
+}
+function end(){
+ if(!G||G.over)return;
+ clearInterval(timer);timer=null;G.over=true;S.plays=(S.plays||0)+1;
+ if(G.mode==="rush"&&G.score>(S.best||0)){S.best=G.score;G.record=true}
+ save();home();
+}
+home();
+})();
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>

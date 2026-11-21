@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do alvo ao caso · 2 · Antibióticos da parede e da membrana — Farmaco UC15</title>
+<style>
+/* Do alvo ao caso — estilo dos resumos de Tutoria (serifa no texto, Inter/sans nos títulos, roxo = caiu em prova),
+   adaptado para tela. Layout: índice estreito à esquerda + coluna de leitura. Página autocontida, sem CDN. */
+:root{
+  --ink:#1d1a26; --ink2:#4b4560; --mut:#6b6480; --h:#1f1640; --h3:#2b1f4a;
+  --pur:#6b2fb3; --pur-soft:#f1eafd; --pur-mark:#e6d8fb; --pur-line:#e3dbf0;
+  --bg:#fbfaff; --card:#ffffff; --line:#ebe6f2;
+  --ok:#23804e; --ok-soft:#eef8f1; --no:#c02d2d; --no-soft:#fde7e7;
+  --warn:#9a6c00; --warn-soft:#fff6da; --blue:#2c5fb8; --blue-soft:#e9f3fb; --teal:#0b7285; --teal-soft:#e3f6f8;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Liberation Serif",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:14px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17.5px;line-height:1.62;-webkit-text-size-adjust:100%}
+.shell{display:grid;grid-template-columns:168px minmax(0,1fr);gap:0;max-width:1080px;margin:0 auto}
+/* índice */
+.idx{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:16px 10px 24px 14px;font-family:var(--sans);font-size:12.5px;line-height:1.3;border-right:1px solid var(--line)}
+.idx .ttl{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pur);margin:0 0 8px}
+.idx a{display:block;color:var(--ink2);text-decoration:none;padding:5px 7px;border-radius:6px;border-left:2px solid transparent;margin:1px 0}
+.idx a:hover{background:var(--pur-soft)}
+.idx a.on{color:var(--h);font-weight:700;border-left-color:var(--pur);background:var(--pur-soft)}
+.idx a.q{color:var(--pur);font-weight:600;padding-left:16px;font-size:12px}
+.idx a.q .c{float:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--mut)}
+.idx a.q.done .c{color:var(--ok)}
+.idx .sep{height:1px;background:var(--line);margin:12px 4px}
+.idx .parts a{font-size:12px}
+.idx .parts a.cur{font-weight:800;color:var(--pur)}
+.idx .prog{margin:10px 6px 0;font-size:11.5px;color:var(--mut)}
+.idx .bar{height:6px;border-radius:99px;background:var(--pur-line);overflow:hidden;margin-top:5px}
+.idx .bar i{display:block;height:100%;background:var(--pur);width:0}
+/* coluna de leitura */
+.doc{padding:22px 30px 90px 34px;min-width:0;max-width:820px}
+.crumb{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pur);margin-bottom:6px}
+h1,h2,h3,h4,.sans,figcaption,.box .lb,.obj,.legend,table.t,.ficha,.qs,.pager,.chip{font-family:var(--sans)}
+h1{font-size:30px;line-height:1.15;margin:0 0 6px;color:var(--h);letter-spacing:-.3px;text-wrap:balance}
+.sub{font-family:var(--sans);font-size:13.5px;color:#7a6a9c;margin:0 0 16px}
+h2{font-size:21px;color:var(--h);margin:40px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--pur);display:flex;align-items:center;gap:10px;line-height:1.2;text-wrap:balance}
+h2 .n{background:var(--pur);color:#fff;font-size:13.5px;min-width:27px;height:27px;padding:0 6px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-size:16.5px;color:var(--h3);margin:24px 0 6px;line-height:1.25}
+h4{font-size:14px;color:var(--h3);margin:16px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+p{margin:0 0 11px}
+ul,ol{margin:4px 0 12px;padding-left:22px}
+li{margin:3px 0 5px}
+b,strong{font-weight:700}
+a{color:var(--pur)}
+mark.apf{background:var(--pur-mark);color:inherit;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pega{background:#fdf0c4;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:99px;background:#fff3c9;color:#7a5600;vertical-align:1.5px;white-space:nowrap}
+.chip.lab{background:var(--teal-soft);color:var(--teal)}
+.obj{background:#f6f3fb;border:1px solid var(--pur-line);border-radius:10px;padding:12px 16px 10px;font-size:14px;margin:8px 0 14px;line-height:1.45}
+.obj b.h{display:block;color:var(--h3);font-size:14px;margin-bottom:4px}
+.obj ol,.obj ul{margin:0;padding-left:20px}
+.legend{display:flex;gap:6px 16px;font-size:12px;color:#555;margin:6px 0 16px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i.sw{width:24px;height:10px;border-radius:2px;display:inline-block}
+.box{border-radius:10px;padding:11px 15px 9px;margin:14px 0 16px;font-size:16px;border-left:4px solid;line-height:1.55}
+.box .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:3px}
+.box.apf{background:var(--pur-soft);border-color:var(--pur)} .box.apf .lb{color:var(--pur)}
+.box.fix{background:var(--no-soft);border-color:#d23b3b} .box.fix .lb{color:var(--no)}
+.box.pg{background:var(--warn-soft);border-color:#e0a800} .box.pg .lb{color:var(--warn)}
+.box.div{background:var(--blue-soft);border-color:#3a72d6} .box.div .lb{color:var(--blue)}
+.box.case{background:var(--ok-soft);border-color:#2f9e63} .box.case .lb{color:var(--ok)}
+.box.lab{background:var(--teal-soft);border-color:#1098ad} .box.lab .lb{color:var(--teal)}
+.box s{color:var(--no)}
+table.t{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 16px;line-height:1.4}
+table.t th{background:#efe8fa;color:var(--h3);font-size:12.5px;text-align:left;padding:7px 9px;border-bottom:1.5px solid var(--pur);vertical-align:bottom}
+table.t td{padding:6px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t tr:nth-child(even) td{background:#fbfafe}
+table.t td:first-child{font-weight:600;color:var(--h3)}
+table.t .ok{color:var(--ok);font-weight:700} table.t .no{color:var(--no);font-weight:700}
+.tw{overflow-x:auto;margin:0 -4px;padding:0 4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.small{font-size:15px}
+/* ficha de fármaco */
+.ficha{border:1px solid var(--pur-line);border-radius:12px;background:var(--card);margin:12px 0 16px;overflow:hidden;font-size:14.5px;line-height:1.45}
+.ficha>.fh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:9px 14px;background:#f6f3fb;border-bottom:1px solid var(--pur-line)}
+.ficha>.fh b{font-size:16px;color:var(--h)}
+.ficha>.fh span{font-size:12.5px;color:var(--mut)}
+.ficha>.fh .tag{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px}
+.tag.cida{background:#dff3e8;color:#17663c}.tag.stat{background:#fff0c9;color:#7a5600}
+.ficha dl{margin:0;display:grid;grid-template-columns:104px minmax(0,1fr)}
+.ficha dt{padding:7px 0 7px 14px;font-weight:700;color:var(--pur);font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-top:1px solid var(--line)}
+.ficha dd{margin:0;padding:7px 14px 7px 8px;border-top:1px solid var(--line)}
+.ficha dt:first-of-type,.ficha dd:first-of-type{border-top:0}
+/* figuras (mesmas classes dos esquemas da Central, recoloridas para o roxo da Tutoria) */
+figure.fig{margin:14px 0 18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 10px 8px;overflow-x:auto}
+figure.fig figcaption{font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4;text-align:center;text-wrap:balance}
+figure.fig svg{width:100%;height:auto;display:block;min-width:440px}
+figure.fig .pl{--x-ink:#1d1a26;--x-ink2:#4b4560;--x-ink3:#6b6480;--x-ok:#17663c;--x-okbg:#eaf7ef;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#6b2fb3;--x-accsoft:#f1eafd;--x-accink:#fff;--x-trap:#7a5600;--x-line2:#ece7f5;--x-panel:#fff;--x-trapbg:#fff6da}
+.fig svg text{font-family:var(--sans)}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+.fig svg .w6{font-weight:600}.fig svg .w7{font-weight:700}.fig svg .w8{font-weight:800}
+/* bloco de questões: uma por vez */
+.qs{margin:26px 0 30px;border:1.5px solid var(--pur);border-radius:14px;background:var(--card);overflow:hidden;font-size:15px;line-height:1.5}
+.qs .qh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--pur);color:#fff;padding:9px 14px}
+.qs .qh b{font-size:14px;letter-spacing:.02em}
+.qs .qh .cnt{margin-left:auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;opacity:.95}
+.qs .dots{display:flex;gap:5px;flex-wrap:wrap;padding:9px 14px 0}
+.qs .dots button{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--pur-line);background:#fff;font:700 10.5px var(--sans);color:var(--mut);cursor:pointer;padding:0}
+.qs .dots button.cur{border-color:var(--pur);color:var(--pur);box-shadow:0 0 0 2px var(--pur-soft)}
+.qs .dots button.ok{background:#dff3e8;border-color:#7cc79d;color:#17663c}
+.qs .dots button.no{background:#fde7e7;border-color:#e59a9a;color:#a02a22}
+.qs .qb{padding:10px 16px 14px}
+.qs .tags{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+.qs .tags span{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:#f1eefb;color:var(--ink2)}
+.qs .tags span.pv{background:var(--pur-soft);color:var(--pur)}
+.qs .tags span.warn{background:#fff0c9;color:#7a5600}
+.qs .enun{font-family:var(--serif);font-size:17px;line-height:1.5;margin:0 0 10px}
+.qs ol.itens{list-style:none;margin:0 0 12px;padding:0;font-family:var(--serif);font-size:16px}
+.qs ol.itens li{margin:0 0 7px;padding:7px 10px;background:#faf8fe;border-radius:8px;border-left:3px solid var(--pur-line);display:flex;gap:10px;align-items:flex-start}
+.qs ol.itens li.pq{background:none;border:0;font-family:var(--sans);font-weight:800;font-size:12px;letter-spacing:.1em;color:var(--pur);justify-content:center;padding:0}
+.qs ol.itens li .tx{flex:1;min-width:0}
+.qs ol.itens li.r-ok{border-left-color:#2f9e63;background:var(--ok-soft)}
+.qs ol.itens li.r-no{border-left-color:#d23b3b;background:var(--no-soft)}
+.qs .vf{display:inline-flex;gap:4px;flex:none}
+.qs .vf button{font:800 12px var(--sans);width:30px;height:28px;border-radius:7px;border:1.5px solid var(--pur-line);background:#fff;color:var(--ink2);cursor:pointer}
+.qs .vf button.sel{background:var(--pur);border-color:var(--pur);color:#fff}
+.qs .vf .truth{font:800 11px var(--sans);align-self:center;margin-left:4px}
+.qs .opts{display:grid;gap:7px;margin:0 0 10px}
+.qs .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;font:inherit;font-family:var(--serif);font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--pur-line);border-radius:10px;padding:9px 12px;cursor:pointer;line-height:1.45}
+.qs .opt:hover:not(:disabled){border-color:var(--pur);background:#faf7ff}
+.qs .opt:disabled{cursor:default;color:var(--ink)}
+.qs .opt>b{font-family:var(--sans);font-size:12.5px;width:22px;height:22px;border-radius:50%;background:#f1eefb;color:var(--pur);display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.qs .opt .w{display:block;font-family:var(--sans);font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.4}
+.qs .opt.ok{border-color:#2f9e63;background:var(--ok-soft)} .qs .opt.ok>b{background:#2f9e63;color:#fff}
+.qs .opt.no{border-color:#d23b3b;background:var(--no-soft)} .qs .opt.no>b{background:#d23b3b;color:#fff}
+.qs .fb{border-radius:10px;padding:10px 13px;margin:4px 0 10px;font-size:14.5px;line-height:1.5;background:var(--pur-soft);border-left:4px solid var(--pur)}
+.qs .fb.ok{background:var(--ok-soft);border-color:#2f9e63} .qs .fb.no{background:var(--no-soft);border-color:#d23b3b}
+.qs .fb .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px;color:var(--pur)}
+.qs .fb.ok .lb{color:var(--ok)} .qs .fb.no .lb{color:var(--no)}
+.qs .fb .gab{font-family:var(--serif);font-size:16.5px}
+.qs .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qs .btn{font:700 13.5px var(--sans);padding:8px 14px;border-radius:9px;border:1.5px solid var(--pur);background:#fff;color:var(--pur);cursor:pointer}
+.qs .btn.pri{background:var(--pur);color:#fff}
+.qs .btn.g{border-color:#2f9e63;color:#17663c}.qs .btn.r{border-color:#d23b3b;color:#a02a22}
+.qs .btn:disabled{opacity:.45;cursor:default}
+.qs .hint{font-size:12.5px;color:var(--mut)}
+.qs .more{font-size:12.5px;color:var(--mut);padding:0 16px 12px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:14px}
+.pager a{text-decoration:none;font-weight:700;padding:10px 14px;border:1.5px solid var(--pur-line);border-radius:10px;background:#fff;max-width:48%}
+.pager a small{display:block;font-weight:600;color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.pager a.nx{margin-left:auto;text-align:right}
+button:focus-visible,a:focus-visible{outline:2px solid var(--pur);outline-offset:2px}
+@media (max-width:860px){
+  body{font-size:16.5px}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .idx{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px 14px}
+  .idx .links{display:none}.idx.open .links{display:block}
+  .idx .ttl{cursor:pointer;margin:0}.idx .ttl::after{content:" ▾"}
+  .doc{padding:16px 16px 70px}
+  h1{font-size:25px}h2{font-size:19px}
+  .two{grid-template-columns:1fr}
+  .ficha dl{grid-template-columns:86px minmax(0,1fr)}
+}
+@media print{.idx,.pager,.qs .dots{display:none}.shell{display:block}.doc{max-width:none;padding:0}.qs{break-inside:avoid}}
+</style></head><body>
+<div class="shell">
+<nav class="idx" id="idx" aria-label="Índice"></nav>
+<main class="doc" id="doc">
+<div class="crumb">Farmaco UC15 · Do alvo ao caso · Parte 2 de 5</div>
+<h1>Antibióticos da parede e da membrana</h1>
+<div class="sub">β-lactâmicos (penicilinas, cefalosporinas, carbapenêmicos, aztreonam) · vancomicina e fosfomicina · polimixina e daptomicina. Todos matam.</div>
+
+<div class="obj"><b class="h">Você sai desta parte sabendo</b>
+<ol>
+<li>explicar o mecanismo dos β-lactâmicos em dois passos e o que a β-lactamase e o clavulanato fazem;</li>
+<li>dizer para que serve cada penicilina e cada geração de cefalosporina;</li>
+<li>por que o imipenem vem com cilastatina e quando entra o carbapenêmico;</li>
+<li>o que a vancomicina, a fosfomicina, a polimixina e a daptomicina têm de particular (espectro, dose e efeito adverso que ela cobra).</li>
+</ol>
+<div style="margin-top:6px;color:#6b6480">É a parte mais longa porque é a que mais cai: β-lactâmicos e as resistências a eles são mais de um terço das questões antigas.</div>
+</div>
+
+<h2><span class="n">1</span>β-lactâmicos: um mecanismo para quatro famílias</h2>
+<p>Penicilinas, cefalosporinas, carbapenêmicos e monobactâmicos são mais de quinze fármacos com <b>exatamente o mesmo mecanismo</b>, porque todos têm a mesma peça na molécula: o <b>anel β-lactâmico</b>. O que muda de um para o outro é quais bactérias ele alcança e quais enzimas conseguem destruí-lo.</p>
+<p>A parede da bactéria é feita de fios de peptidoglicano. Para ficar rígida, esses fios precisam ser amarrados uns aos outros por ligações cruzadas, como os cabos que ligam um poste ao outro. Quem faz essa amarração (a <b>transpeptidação</b>) é uma enzima chamada <b>PBP</b>, a proteína de ligação à penicilina. O β-lactâmico age em dois passos, e ela cobra os dois juntos:</p>
+<ol>
+<li><mark class="apf">liga-se à PBP e inibe a transpeptidação do peptidoglicano</mark>;</li>
+<li><mark class="apf">inativa a proteína inibidora das enzimas autolíticas</mark>. As autolisinas, que normalmente só abrem pequenas brechas para a parede crescer, ficam sem freio e digerem a própria parede.</li>
+</ol>
+<p>Sem amarração e com as autolisinas soltas, a bactéria incha e estoura. Por isso <mark class="apf">todos os β-lactâmicos são bactericidas</mark>. E como só agem em parede sendo construída, funcionam melhor em bactéria que está se multiplicando.</p>
+
+<figure class="fig"><div class="pl">
+<svg viewBox="0 0 680 186" role="img" aria-label="Quatro quadros: a PBP faz as pontes da parede; o beta-lactâmico ocupa a PBP; a beta-lactamase abre o anel; o clavulanato se oferece à beta-lactamase e o antibiótico volta a agir." xmlns="http://www.w3.org/2000/svg">
+<g class="l ld" opacity=".45"><line x1="170" y1="8" x2="170" y2="178"/><line x1="340" y1="8" x2="340" y2="178"/><line x1="510" y1="8" x2="510" y2="178"/></g>
+<!-- 1 -->
+<text x="85" y="18" text-anchor="middle" font-size="11.5" class="t w7">1 · A PBP amarra os fios</text>
+<g class="lacc lthick"><line x1="20" y1="40" x2="150" y2="40"/><line x1="20" y1="70" x2="150" y2="70"/></g>
+<g class="lok lt"><line x1="40" y1="40" x2="40" y2="70"/><line x1="70" y1="40" x2="70" y2="70"/><line x1="100" y1="40" x2="100" y2="70"/><line x1="130" y1="40" x2="130" y2="70"/></g>
+<circle cx="85" cy="104" r="15" class="bcell"/><text x="85" y="107.5" text-anchor="middle" font-size="9" class="tacc w7">PBP</text>
+<line x1="85" y1="88" x2="85" y2="76" class="lacc"/>
+<text x="85" y="142" text-anchor="middle" font-size="10" class="t2">pontes entre os fios</text>
+<text x="85" y="156" text-anchor="middle" font-size="10" class="t2">(transpeptidação)</text>
+<text x="85" y="172" text-anchor="middle" font-size="10" class="tok w6">parede rígida</text>
+<!-- 2 -->
+<text x="255" y="18" text-anchor="middle" font-size="11.5" class="t w7">2 · O anel ocupa a PBP</text>
+<g class="lacc lthick"><line x1="190" y1="40" x2="320" y2="40"/><line x1="190" y1="70" x2="320" y2="70"/></g>
+<g class="lno ld lt"><line x1="210" y1="40" x2="210" y2="70"/><line x1="240" y1="40" x2="240" y2="70"/><line x1="270" y1="40" x2="270" y2="70"/><line x1="300" y1="40" x2="300" y2="70"/></g>
+<circle cx="255" cy="104" r="15" class="bcell"/><text x="255" y="100" text-anchor="middle" font-size="8" class="tacc w7">PBP</text>
+<rect x="249" y="103" width="12" height="12" rx="2" class="bacc"/>
+<text x="255" y="142" text-anchor="middle" font-size="10" class="t2">o β-lactâmico (■) trava</text>
+<text x="255" y="156" text-anchor="middle" font-size="10" class="t2">a PBP: sem pontes</text>
+<text x="255" y="172" text-anchor="middle" font-size="10" class="tok w6">a bactéria estoura</text>
+<!-- 3 -->
+<text x="425" y="18" text-anchor="middle" font-size="11.5" class="t w7">3 · A β-lactamase reage</text>
+<g class="lacc lthick"><line x1="360" y1="40" x2="490" y2="40"/><line x1="360" y1="70" x2="490" y2="70"/></g>
+<g class="lok lt"><line x1="380" y1="40" x2="380" y2="70"/><line x1="410" y1="40" x2="410" y2="70"/><line x1="440" y1="40" x2="440" y2="70"/><line x1="470" y1="40" x2="470" y2="70"/></g>
+<circle cx="381" cy="104" r="15" class="bcell"/><text x="381" y="107.5" text-anchor="middle" font-size="9" class="tacc w7">PBP</text>
+<ellipse cx="459" cy="104" rx="30" ry="14" class="btrap"/><text x="459" y="107.5" text-anchor="middle" font-size="9" class="ttrap w7">β-lactamase</text>
+<rect x="405" y="95" width="5" height="12" rx="1" class="bnof"/><rect x="413" y="101" width="5" height="12" rx="1" class="bnof"/>
+<text x="425" y="142" text-anchor="middle" font-size="10" class="t2">a enzima abre o anel</text>
+<text x="425" y="156" text-anchor="middle" font-size="10" class="t2">antes de ele chegar à PBP</text>
+<text x="425" y="172" text-anchor="middle" font-size="10" class="tno w6">o antibiótico não age</text>
+<!-- 4 -->
+<text x="595" y="18" text-anchor="middle" font-size="11.5" class="t w7">4 · O inibidor se entrega</text>
+<g class="lacc lthick"><line x1="530" y1="40" x2="660" y2="40"/><line x1="530" y1="70" x2="660" y2="70"/></g>
+<g class="lno ld lt"><line x1="550" y1="40" x2="550" y2="70"/><line x1="580" y1="40" x2="580" y2="70"/><line x1="610" y1="40" x2="610" y2="70"/><line x1="640" y1="40" x2="640" y2="70"/></g>
+<circle cx="556" cy="104" r="15" class="bcell"/><text x="556" y="100" text-anchor="middle" font-size="8" class="tacc w7">PBP</text>
+<rect x="550" y="103" width="12" height="12" rx="2" class="bacc"/>
+<ellipse cx="624" cy="104" rx="32" ry="14" class="btrap"/><path d="M616 110 l8 -14 l8 14z" class="btrapf"/>
+<text x="624" y="130" text-anchor="middle" font-size="8.5" class="ttrap w7">clavulanato (▲)</text>
+<text x="595" y="146" text-anchor="middle" font-size="10" class="t2">o inibidor é destruído no lugar</text>
+<text x="595" y="160" text-anchor="middle" font-size="10" class="t2">do antibiótico</text>
+<text x="595" y="174" text-anchor="middle" font-size="10" class="tok w6">o β-lactâmico volta a agir</text>
+</svg></div><figcaption>O mesmo filme vale para todos os β-lactâmicos. O que muda é qual β-lactamase a bactéria tem e se o inibidor dá conta dela (Parte 4).</figcaption></figure>
+
+<h3>A enzima que estraga tudo e o inibidor “suicida”</h3>
+<p>A defesa mais comum da bactéria é fabricar uma <b>β-lactamase</b>, uma enzima que abre o anel antes que ele chegue à PBP. A mais simples se chama <b>penicilinase</b>. Para contornar, o antibiótico vem acompanhado de um <b>inibidor de β-lactamase</b>: clavulanato, sulbactam ou tazobactam. Eles <b>não são antibióticos</b>; são “inibidores suicidas”, que se oferecem para ser destruídos no lugar do antibiótico. E só dão conta da penicilinase, a β-lactamase simples.</p>
+<p>As associações já vêm prontas, e são só estas três:</p>
+<ul>
+<li><b>amoxicilina + clavulanato</b> (via oral, ambulatório);</li>
+<li><b>ampicilina + sulbactam</b> (IV, hospital);</li>
+<li><b>piperacilina + tazobactam</b> (IV, hospital).</li>
+</ul>
+<div class="box pg"><span class="lb">Pegadinha: associação que não existe</span>
+<p>“Oxacilina + tazobactam” e “cefalexina + sulbactam” já apareceram em sentença. <span class="pega">Não existem.</span> A oxacilina já resiste sozinha à penicilinase, e nenhuma cefalosporina desta lista vem com esses três inibidores.</p>
+</div>
+
+<h3>O que vale para a família inteira</h3>
+<ul>
+<li><b>Seguros na gestação.</b> Como o alvo é a parede, são a primeira escolha na gestante.</li>
+<li><b>Efeitos adversos</b>: náusea e diarreia, que é <mark class="apf">mais acentuada quando há clavulanato</mark> (a microbiota perde a própria defesa); candidíase depois de amplo espectro.</li>
+<li><b>Alergia</b>, que é o que mais muda a prescrição. A pergunta dela é “teve falta de ar?”. <b>Imediata</b> (anafilaxia, falta de ar): nenhum β-lactâmico. <b>Tardia</b> (só pele vermelha e coceira): ainda pode cefalosporina por via oral. Esse par “imediata × tardia” decide várias questões e volta inteiro na Parte 5.</li>
+<li><b>MRSA</b>: o <i>S. aureus</i> que <b>mudou a PBP</b>. Como todo β-lactâmico precisa se ligar à PBP, <mark class="apf">nenhum β-lactâmico funciona contra MRSA</mark>. É por isso que ela insiste tanto no “tem que se ligar à PBP”.</li>
+</ul>
+
+<h2><span class="n">2</span>Penicilinas</h2>
+<p>Pense nas penicilinas como uma escada em que cada degrau resolve um problema do anterior: a penicilina G só pega Gram-positivas sensíveis; as aminopenicilinas alcançam também algumas Gram-negativas e podem ser tomadas por boca; o clavulanato protege da penicilinase; a oxacilina resiste sozinha a ela; e a piperacilina é a única que entra na <i>Pseudomonas</i>.</p>
+
+<h3>Penicilina G: três sais, mesmo espectro, tempos diferentes</h3>
+<div class="tw"><table class="t">
+<tr><th>Sal</th><th>Como é</th><th>Para quê</th><th>O que ela cobra</th></tr>
+<tr><td>Cristalina</td><td>IV, hospital, de 4/4 h</td><td><mark class="apf">neurossífilis</mark> (sífilis terciária); meningite só depois que o antibiograma mostra germe sensível</td><td>o <b>empírico da meningite é ceftriaxona</b>, não penicilina G · <mark class="apf">é eliminada inalterada por filtração e secreção tubular</mark>: acumula se outro fármaco inibir a secreção tubular</td></tr>
+<tr><td>Procaína</td><td>IM, de 12/12 h (vem com o anestésico procaína)</td><td>infecção respiratória alta não complicada em quem <b>não consegue engolir</b>; dose de ataque IM</td><td><span class="pega">não é indicada para pneumonia</span></td></tr>
+<tr><td>Benzatina</td><td>IM, de depósito: nível baixo e constante por cerca de 3 semanas</td><td><mark class="apf">sífilis primária e secundária</mark>; <mark class="apf">profilaxia da febre reumática e da endocardite</mark> na faringite estreptocócica de repetição</td><td><mark class="apf">1.200.000 UI em cada nádega</mark> (2,4 milhões), dose única · <span class="pega">“trata a sífilis independente do estágio”</span> é falsa · segura na gestante</td></tr>
+</table></div>
+<p>A penicilina G não resiste à penicilinase, e quase todo estafilococo tem penicilinase. A frase dela: “<i>S. aureus</i>: esqueçam, penicilina jamais vai funcionar”.</p>
+
+<h3>Aminopenicilinas: amoxicilina e ampicilina</h3>
+<p>São as penicilinas do dia a dia, por via oral. <b>Amoxicilina 500 mg de 8/8 h</b>; <b>ampicilina 500 mg de 6/6 h</b>. A amoxicilina é a 1ª escolha das infecções respiratórias não complicadas da comunidade: <mark class="apf">faringite, otite média aguda por germe sensível e pneumonia comunitária simples</mark>. Duração: faringite cerca de 7 dias; otite, sinusite e pneumonia, 10 dias. Na gestante, amoxicilina ou ampicilina são a 1ª linha para infecção urinária e bacteriúria assintomática.</p>
+<p>Para ela, a <b>ampicilina é um pouco mais ativa em Gram-negativas</b> e a amoxicilina em Gram-positivas <span class="chip">aula 2026</span>. No hospital a ampicilina é usada por via IV, com sulbactam se houver penicilinase.</p>
+<p>Dois limites: são <b>destruídas pela penicilinase</b> (por isso sozinhas não servem para estafilococo, pele nem sinusite) e <b>não entram na <i>Pseudomonas</i></b>. Qualquer <i>Staphylococcus</i>, inclusive o <i>saprophyticus</i> da infecção urinária, deve ser tratado como produtor de penicilinase.</p>
+
+<h3>Amoxicilina + clavulanato</h3>
+<p><b>500/125 mg de 8/8 h</b> (ou 875/125 mg de 12/12 h), por 7 a 10 dias. Entra sempre que a bactéria provável produz penicilinase:</p>
+<ul>
+<li><mark class="apf">rinossinusite</mark> (ela diz “sempre”) e <mark class="apf">otite</mark>;</li>
+<li><mark class="apf">faringite recidivante</mark>;</li>
+<li><mark class="apf">pele: impetigo por <i>S. aureus</i> e <i>S. pyogenes</i></mark>;</li>
+<li>pneumonia comunitária em criança, com muita secreção ou com comprometimento respiratório;</li>
+<li><mark class="apf">infecção urinária por <i>S. saprophyticus</i></mark>;</li>
+<li><mark class="apf"><i>S. aureus</i> sensível à meticilina (MSSA) que não respondeu à amoxicilina</mark>.</li>
+</ul>
+<div class="box case"><span class="lb">O raciocínio dela para o estafilococo, em três degraus</span>
+<p>Não melhorou com amoxicilina → tem <b>penicilinase</b> → associar <b>clavulanato</b>. Piorou mesmo com clavulanato → a bactéria <b>mudou a PBP</b> → é <b>MRSA</b> → nenhum β-lactâmico serve. Uma questão recente era exatamente o primeiro degrau: MSSA resistente à amoxicilina, e a resposta era “associar amoxicilina + ácido clavulânico”.</p>
+</div>
+
+<h3>Oxacilina e piperacilina + tazobactam (hospital)</h3>
+<p>A <b>oxacilina</b> tem radicais que protegem o anel: <b>resiste à penicilinase sem precisar de inibidor</b>. É a equivalente brasileira da meticilina, e por isso é o disco que o laboratório usa para dizer se o <i>S. aureus</i> é MSSA ou MRSA. Se a oxacilina falha, é MRSA.</p>
+<p>A <b>piperacilina + tazobactam</b> é sempre associada e só hospitalar. <mark class="apf">É a única penicilina que penetra na <i>Pseudomonas</i>.</mark> Uso típico: pneumonia comunitária em paciente tão comprometido que precisa internar, pneumonia hospitalar, bacteremia, infecção em queimados. <mark class="apf">É efetiva contra MSSA</mark> e inútil contra MRSA.</p>
+<div class="box pg"><span class="lb">Pegadinha: MSSA lido como MRSA</span>
+<p>Numa prova, a sentença dizia que piperacilina + tazobactam trata <i>S. aureus</i> <b>sensível</b> à meticilina. O aluno leu “MRSA”, marcou falsa e errou. Leia a sigla letra por letra: <b>S</b> = sensível, serve β-lactâmico; <b>R</b> = resistente, nenhum serve.</p>
+</div>
+
+<div class="qs" data-t="Questões dela · mecanismo e penicilinas" data-ids="T3-Q6,T11-Q6,T11-Q2,T4-Q10,T10-Q9,b19"></div>
+
+<h2><span class="n">3</span>Cefalosporinas: a régua das gerações</h2>
+<p>As cefalosporinas têm o mesmo mecanismo das penicilinas. O que organiza a classe é a <b>geração</b>: a cada geração aumenta a ação em Gram-negativas e a resistência às β-lactamases. Na prova, saber a geração resolve a questão.</p>
+
+<figure class="fig"><div class="pl"><svg viewBox="0 0 680 300" role="img" aria-label="Cefalosporinas por geração: da 1ª para a 3ª ganham Gram-negativos e perdem um pouco de Gram-positivos; a 2ª resiste à penicilinase; a 4ª resiste à AmpC e pega Pseudomonas; a 5ª pega MRSA." xmlns="http://www.w3.org/2000/svg"><rect x="10" y="46" width="126" height="40" rx="8" class="bcell"/><text x="73" y="64" font-size="12" text-anchor="middle" class="tacc" font-weight="700">1ª geração</text><text x="73" y="79" font-size="10.5" text-anchor="middle" class="t2">Gram+</text><rect x="10" y="94" width="126" height="82" rx="8" class="b"/><text x="73" y="112" font-size="10.5" text-anchor="middle" class="t">cefalexina VO</text><text x="73" y="129" font-size="10.5" text-anchor="middle" class="t">500 mg 6/6 h</text><text x="73" y="146" font-size="10.5" text-anchor="middle" class="t">cefazolina IV</text><text x="73" y="163" font-size="10.5" text-anchor="middle" class="t">(profilaxia cirúrgica)</text><line x1="136" y1="66" x2="137.0" y2="66.0" class="l"/><polygon points="143.0,66.0 137.0,63.0 137.0,69.0" class="h"/><rect x="143" y="46" width="126" height="40" rx="8" class="bcell"/><text x="206" y="64" font-size="12" text-anchor="middle" class="tacc" font-weight="700">2ª geração</text><text x="206" y="79" font-size="10.5" text-anchor="middle" class="t2">+ penicilinase</text><rect x="143" y="94" width="126" height="82" rx="8" class="b"/><text x="206" y="112" font-size="10.5" text-anchor="middle" class="t">axetilcefuroxima</text><text x="206" y="129" font-size="10.5" text-anchor="middle" class="t">250 mg 12/12 h</text><text x="206" y="146" font-size="10.5" text-anchor="middle" class="t">cefaclor</text><text x="206" y="163" font-size="10.5" text-anchor="middle" class="t">cefoxitina: anaeróbio</text><line x1="269" y1="66" x2="270.0" y2="66.0" class="l"/><polygon points="276.0,66.0 270.0,63.0 270.0,69.0" class="h"/><rect x="276" y="46" width="126" height="40" rx="8" class="bcell"/><text x="339" y="64" font-size="12" text-anchor="middle" class="tacc" font-weight="700">3ª geração</text><text x="339" y="79" font-size="10.5" text-anchor="middle" class="t2">+ Gram−, SNC</text><rect x="276" y="94" width="126" height="82" rx="8" class="b"/><text x="339" y="112" font-size="10.5" text-anchor="middle" class="t">ceftriaxona: empírico</text><text x="339" y="129" font-size="10.5" text-anchor="middle" class="t">ceftazidima: Pseudom.</text><text x="339" y="146" font-size="10.5" text-anchor="middle" class="t">cefdinir VO</text><text x="339" y="163" font-size="10.5" text-anchor="middle" class="tno">NÃO vale p/ ESBL</text><line x1="402" y1="66" x2="403.0" y2="66.0" class="l"/><polygon points="409.0,66.0 403.0,63.0 403.0,69.0" class="h"/><rect x="409" y="46" width="126" height="40" rx="8" class="bcell"/><text x="472" y="64" font-size="12" text-anchor="middle" class="tacc" font-weight="700">4ª geração</text><text x="472" y="79" font-size="10.5" text-anchor="middle" class="t2">+ AmpC</text><rect x="409" y="94" width="126" height="82" rx="8" class="b"/><text x="472" y="112" font-size="10.5" text-anchor="middle" class="t">cefepima</text><text x="472" y="129" font-size="10.5" text-anchor="middle" class="t">Pseudomonas</text><text x="472" y="146" font-size="10.5" text-anchor="middle" class="t">neutropenia febril</text><text x="472" y="163" font-size="10.5" text-anchor="middle" class="tno">NÃO vale p/ ESBL</text><line x1="535" y1="66" x2="536.0" y2="66.0" class="l"/><polygon points="542.0,66.0 536.0,63.0 536.0,69.0" class="h"/><rect x="542" y="46" width="126" height="40" rx="8" class="bcell"/><text x="605" y="64" font-size="12" text-anchor="middle" class="tacc" font-weight="700">5ª geração</text><text x="605" y="79" font-size="10.5" text-anchor="middle" class="t2">+ MRSA</text><rect x="542" y="94" width="126" height="82" rx="8" class="b"/><text x="605" y="112" font-size="10.5" text-anchor="middle" class="t">ceftarolina</text><text x="605" y="129" font-size="10.5" text-anchor="middle" class="t">(PBP2a)</text><text x="605" y="146" font-size="10.5" text-anchor="middle" class="t">hospitalar</text><text x="605" y="163" font-size="10.5" text-anchor="middle" class="t"></text><text x="10" y="30" font-size="9.5" text-anchor="start" class="t3" letter-spacing="0.08em">GANHA ESPECTRO →</text><rect x="10" y="196" width="659" height="34" rx="8" class="bsoft"/><text x="340" y="217" font-size="11" text-anchor="middle" class="tacc" font-weight="600">Alergia tardia: 1ª no agudo (faringite) · 2ª na sinusite/recorrente · alergia imediata: nenhuma</text><rect x="10" y="240" width="659" height="50" rx="8" class="btrap"/><text x="340" y="260" font-size="10.5" text-anchor="middle" class="ttrap">Todas: dissulfiram com álcool · pseudolitíase biliar (ceftriaxona) · alergia cruzada 5–20%</text><text x="340" y="277" font-size="10.5" text-anchor="middle" class="t2">Uso maciço de 3ª geração no hospital → seleciona ESBL (T1 Q3)</text></svg></div><figcaption>A régua das gerações. Sinusite com alergia tardia pede 2ª (resiste à penicilinase); empírico hospitalar é 3ª (ceftriaxona); AmpC pede 4ª; para ESBL nenhuma serve.</figcaption></figure>
+
+<h3>1ª geração: “raciocine igual à amoxicilina”</h3>
+<p>Espectro um pouco menor que o das aminopenicilinas: Gram-positivas (o estreptococo da faringite) e um pouco de <i>E. coli</i>. É <b>degradada pela penicilinase</b>. Seu grande papel é ser a <mark class="apf">1ª alternativa quando o paciente tem alergia <b>tardia</b> à penicilina</mark>.</p>
+<ul>
+<li><b>Cefalexina</b>, via oral, atenção básica: <mark class="apf">500 mg de 6/6 h</mark> (4 vezes ao dia), cerca de 7 dias. Na <mark class="apf">bacteriúria assintomática da gestante, 10 dias</mark> (ela fala em 10 a 14).</li>
+<li><b>Cefazolina</b>, IV, hospital: profilaxia cirúrgica. <span class="pega">É de 1ª geração (não de 2ª) e pode ser usada na gestante.</span></li>
+</ul>
+<div class="box div"><span class="lb">Divergência: 1ª geração e <i>S. aureus</i></span>
+<p>Na aula de 2026 ela disse que a 1ª geração “é degradada pela penicilinase, <i>S. aureus</i> já não vai dar”. O slide dela diz que é ativa contra estafilococos que não sejam MRSA, e que a cefazolina trata MSSA grave. <b>Na prova:</b> se a questão escrever <b>MSSA</b>, cefazolina e cefalexina servem; se disser só “<i>S. aureus</i>” ou “produtor de penicilinase”, prefira a opção que resiste à penicilinase (amoxicilina + clavulanato ou 2ª geração).</p>
+</div>
+
+<h3>2ª geração: resistem à penicilinase</h3>
+<p>Funcionam sozinhas contra produtores de penicilinase e cobrem Gram-positivas e Gram-negativas. O tratamento é de <b>10 dias</b>. A atenção básica não tem nenhuma. <b>Não pegam <i>Pseudomonas</i>, ESBL nem MRSA.</b></p>
+<div class="tw"><table class="t">
+<tr><th>Fármaco</th><th>Via e dose</th><th>Para quê</th></tr>
+<tr><td>Axetilcefuroxima</td><td>VO · <mark class="apf">250 mg de 12/12 h por 10 dias</mark> (faixa de 125 a 500 mg)</td><td><mark class="apf">rinossinusite, otite e pneumonia em quem tem alergia <b>tardia</b></mark> (não pode amoxicilina + clavulanato)</td></tr>
+<tr><td>Cefaclor</td><td>VO · <mark class="apf">250 mg 3 vezes ao dia</mark></td><td>as mesmas da axetilcefuroxima</td></tr>
+<tr><td>Cefuroxima</td><td>IV/IM, hospital</td><td>pneumonia que precisa internar em paciente alérgico à penicilina</td></tr>
+<tr><td>Cefoxitina</td><td>IV, hospital · 1 a 2 g de 6/6 ou 8/8 h</td><td><mark class="apf">anaeróbios no hospital</mark>: infecção intra-abdominal por <i>Bacteroides fragilis</i>, apendicite rota; <mark class="apf">profilaxia de cirurgia colorretal</mark></td></tr>
+</table></div>
+<p>A lógica da 2ª geração por via oral: a 1ª linha das infecções respiratórias mais complicadas é amoxicilina + clavulanato; quando o paciente não pode usá-la por <b>alergia tardia</b>, entra a axetilcefuroxima, que também resiste à penicilinase. A cefoxitina é um caso à parte: ela a chama de “reserva de mercado” dos anaeróbios no hospital.</p>
+
+<h3>3ª geração: amplo espectro, muito boas em Gram-negativas</h3>
+<div class="tw"><table class="t">
+<tr><th>Fármaco</th><th>Para quê</th><th>O que ela cobra</th></tr>
+<tr><td>Ceftriaxona</td><td><mark class="apf">o empírico do hospital</mark>: pneumonia que interna, pielonefrite, sepse, meningite; infecção urinária complicada na gestante; gonorreia</td><td>1 g IM 1 vez ao dia no ambulatório; IV no hospital · <b>não pega <i>Pseudomonas</i></b> · <mark class="apf">não age em ESBL nem em MRSA</mark> · boa parte sai pela <b>bile</b>: não precisa de ajuste renal, mas causa <mark class="apf">pseudolitíase biliar</mark> (suspende e troca por cefotaxima)</td></tr>
+<tr><td>Ceftazidima</td><td><mark class="apf"><i>Pseudomonas</i> no hospital</mark></td><td>fica reservada para ela; o tratamento começa com ceftriaxona e troca se a cultura mostrar <i>Pseudomonas</i></td></tr>
+<tr><td>Cefotaxima</td><td>mesmo perfil da ceftriaxona</td><td>entra quando é preciso suspender a ceftriaxona</td></tr>
+<tr><td>Cefdinir</td><td>infecções ambulatoriais mais difíceis, respiratórias e de pele</td><td><mark class="apf">3ª geração por via oral</mark> (600 mg/dia), só na rede privada; caiu pela primeira vez na última prova</td></tr>
+</table></div>
+<p>O uso maciço da ceftriaxona criou uma pressão seletiva que fez surgir a <b>ESBL</b>, a β-lactamase de espectro estendido. A pergunta “qual antibiótico se relaciona ao <b>aparecimento</b> da <i>Klebsiella</i> ESBL?” já caiu, e a resposta é <mark class="apf">ceftriaxona</mark> (não confundir com “qual trata”).</p>
+
+<h3>4ª geração e a associação nova</h3>
+<p><b>Cefepima</b>: só hospitalar. Entra na <i>Pseudomonas</i> e seu diferencial é ser <mark class="apf">ativa contra a β-lactamase AmpC</mark>. Mas é <b>sensível à ESBL</b>: nunca se usa em ESBL. A sentença <span class="pega">“a cefepima é usada só em Gram-positivas e não é hidrolisada pelas metalo-β-lactamases”</span> é falsa nas duas metades.</p>
+<p><b>Ceftazidima + avibactam</b> (Torgena): o avibactam é o primeiro inibidor que alcança a <b>carbapenemase</b>. Ela avisou que <b>cai</b> <span class="chip">aula 2026</span>. Pelo protocolo de Santa Catarina, é usada na infecção por bactéria produtora de carbapenemase (KPC) <mark class="apf">quando a polimixina é contraindicada</mark>, por exemplo na disfunção renal. Não serve para MRSA. A <b>ceftarolina</b> (5ª geração) ela disse que não cobra.</p>
+
+<h3>Efeitos adversos da classe</h3>
+<ul>
+<li>náusea, vômito, <b>diarreia</b>, dor no local da injeção, <b>candidíase</b>;</li>
+<li><b>neurotoxicidade</b> no idoso: agitação, irritabilidade, confusão;</li>
+<li><mark class="apf">reação tipo dissulfiram</mark> com álcool: rubor, cefaleia e vômitos pelo acúmulo de <b>acetaldeído</b>, porque a <b>aldeído desidrogenase</b> fica inibida. Na aula ela disse que vale para todas as cefalosporinas; na prova, o par de fármacos da resposta era cefazolina e cefaclor.</li>
+</ul>
+<div class="box pg"><span class="lb">Pegadinhas de cefalosporina que já caíram</span>
+<ul>
+<li>“Cefoxitina trata <i>Enterobacter</i> ou <i>P. aeruginosa</i>.” <span class="pega">Não: 2ª geração não pega <i>Pseudomonas</i>; cefoxitina é para anaeróbios.</span></li>
+<li>“Cefuroxima é efetiva contra ESBL.” <span class="pega">Nenhuma cefalosporina até a 4ª geração é.</span></li>
+<li>“Ceftriaxona é resistente à ESBL.” <span class="pega">É sensível.</span></li>
+<li>“Ceftazidima + avibactam trata MRSA.” <span class="pega">Nenhum β-lactâmico trata MRSA.</span> E a frase “não é efetiva em infecção urinária” também é falsa: é usada justamente em infecção urinária complicada por carbapenemase.</li>
+</ul>
+</div>
+<div class="box div"><span class="lb">Divergência: posologia da ceftriaxona</span>
+<p>Na aula de 2026 ela disse que o mais frequente é 1 g de 12/12 h. O slide diz que 1 g uma vez ao dia basta, e o gabarito antigo do tratamento ambulatorial é <b>1 g IM 1 vez ao dia</b>. <b>Na prova:</b> ambulatório, 1 g IM 1 vez ao dia; hospital, IV, 1 g de 12/12 h.</p>
+</div>
+
+<div class="qs" data-t="Questões dela · cefalosporinas" data-ids="T8-Q2,T2-Q7,T4-Q7,T10-Q14,T11-Q16,T9-Q8,T5-Q7,T3-Q3,b17"></div>
+
+<h2><span class="n">4</span>Carbapenêmicos e aztreonam</h2>
+<p>Os <b>carbapenêmicos</b> são os β-lactâmicos de maior espectro: Gram-positivas, Gram-negativas, anaeróbios e até <i>Pseudomonas</i> (o ertapenem é a exceção, não cobre <i>Pseudomonas</i>). Justamente por isso não se usam em infecção simples. A indicação principal é uma só: <mark class="apf">Gram-negativa produtora de ESBL. O carbapenêmico é a 1ª linha contra ESBL.</mark></p>
+<p>Continuam sendo β-lactâmicos, então têm os mesmos dois limites: não funcionam contra <b>MRSA</b> (PBP alterada) nem contra bactérias que produzem <b>carbapenemase</b>.</p>
+
+<div class="ficha"><div class="fh"><b>Imipenem + cilastatina</b><span>carbapenêmico padrão do hospital · IV</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Por que a cilastatina</dt><dd>O imipenem é degradado no rim pela <b>desidropeptidase</b>, o que encurta a ação e gera um produto <b>nefrotóxico</b>. A cilastatina inibe essa enzima: <mark class="apf">aumenta o tempo de ação e diminui a nefrotoxicidade</mark>. <span class="pega">Não é sinergismo</span>: a cilastatina não é antibiótico e não aumenta o espectro.</dd>
+<dt>Para quê</dt><dd><mark class="apf">1ª escolha na ESBL</mark> (<i>Klebsiella</i>, <i>E. coli</i>, <i>Pseudomonas</i>); AmpC; infecção por <i>Klebsiella</i> que não respondeu à ceftriaxona.</dd>
+<dt>Dose</dt><dd>500 mg de 6/6 h (1 a 2 g/dia; <b>máximo 2 g/dia</b>). <span class="pega">“1 g a cada 12 horas”</span> já apareceu numa sentença falsa.</dd>
+<dt>Cuidado</dt><dd><mark class="apf">Convulsão é efeito do imipenem</mark>. Se o paciente convulsiona, troca-se por <b>meropenem</b>. Também: náusea, diarreia, candidíase e flebite no acesso.</dd>
+</dl></div>
+<p><b>Meropenem</b> (0,5 a 1 g de 8/8 h) tem espectro parecido, um pouco mais forte em Gram-negativas, e é a 2ª opção do hospital para quem convulsiona com imipenem. <b>Ertapenem</b> é da mesma família, sem ação em <i>Pseudomonas</i>.</p>
+<div class="box div"><span class="lb">Divergência: metabolismo dos carbapenêmicos</span>
+<p>Ela disse em aula que o imipenem é o único com metabolismo renal e que os outros têm metabolismo hepático. O slide diz que todos têm depuração renal e pedem ajuste na insuficiência renal. <b>Na prova</b>, a frase segura é: “só o imipenem é degradado pela desidropeptidase renal, por isso só ele precisa de cilastatina”.</p>
+</div>
+<p>Um detalhe de aula <span class="chip">aula 2026</span>: na <b>alergia imediata</b> à penicilina a cefalosporina não pode, mas parte dos pacientes tolera o carbapenêmico. Só se descobre testando no hospital. Se o paciente reagir também ao carbapenêmico e tiver uma infecção grave por Gram-negativa, a saída é o <b>aztreonam</b>.</p>
+<div class="ficha"><div class="fh"><b>Aztreonam</b><span>monobactâmico · só hospitalar</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Pega</dt><dd>Gram-negativas aeróbias.</dd>
+<dt>Não pega</dt><dd>Gram-positivas e anaeróbios.</dd>
+<dt>Para quê</dt><dd>Infecção <b>grave por Gram-negativa</b> em quem tem <b>alergia imediata</b> à penicilina e <b>também reagiu ao carbapenêmico</b>. Tem baixo risco de reação cruzada.</dd>
+</dl></div>
+<p>Para reconhecer se aparecerem: <b>relebactam</b> e <b>vaborbactam</b> são inibidores novos, sem anel β-lactâmico, que alcançam carbapenemases (mas não as metalo-β-lactamases). Vêm junto de um carbapenêmico e ainda não existem nos hospitais daqui.</p>
+
+<div class="qs" data-t="Questões dela · carbapenêmicos" data-ids="b14,T10-QD1,b15"></div>
+
+<h2><span class="n">5</span>Parede sem anel: vancomicina e fosfomicina</h2>
+<p>Estes dois também impedem a montagem da parede, mas <b>sem usar a PBP</b>. Isso tem uma consequência enorme: a resistência que derruba os β-lactâmicos não derruba estes.</p>
+
+<div class="ficha"><div class="fh"><b>Vancomicina</b><span>glicopeptídeo · hospitalar · IV</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd><mark class="apf">Inibe a transglicosilase</mark>, a enzima que alonga a cadeia de açúcares do peptidoglicano (a PBP faz as pontes; a transglicosilase faz o fio). Liga-se ao final <b>D-Ala-D-Ala</b> do precursor da parede. <b>Não depende da PBP</b>.</dd>
+<dt>Pega</dt><dd><mark class="apf">Somente Gram-positivas</mark>, aeróbias e anaeróbias, inclusive o estafilococo resistente à meticilina.</dd>
+<dt>Não pega</dt><dd>Gram-negativas: a molécula não passa pela membrana externa. <span class="pega">“Atua na membrana e pega Gram-negativas”</span> é falsa.</dd>
+<dt>Para quê</dt><dd><mark class="apf">MRSA no hospital (1ª linha)</mark>; infecções graves por Gram-positivas (pele, cateter, tubo orotraqueal), endocardite, sepse; <mark class="apf">profilaxia cirúrgica em quem tem alergia grave à penicilina</mark>; e <mark class="apf">por via oral na colite por <i>Clostridioides difficile</i></mark> (não é absorvida, age só no intestino; 125 a 500 mg de 6/6 h).</dd>
+<dt>Dose</dt><dd><mark class="apf">30 a 60 mg/kg/dia IV, dividida em 2 doses</mark>, em infusão lenta. É eliminada inalterada pelo rim: a dose é ajustada pela creatinina.</dd>
+<dt>Cuidado</dt><dd><b>Nefrotoxicidade e ototoxicidade</b>, piores quando associada a aminoglicosídeo; a perda auditiva é irreversível. Flebite, febre, calafrios. <mark class="apf">Infusão rápida demais causa a reação do “homem vermelho”</mark>.</dd>
+</dl></div>
+<p>A <b>teicoplanina</b> é igual em tudo (mecanismo, espectro, resistência, indicação). Só a farmacocinética muda: uma dose por dia. É mais cara, por isso o hospital usa vancomicina. Ela avisou em aula para “estudar vancomicina para a prova”.</p>
+<p>Com o uso maciço de vancomicina surgiu o <i>S. aureus</i> resistente também a ela. O nome que ela usa é <b>GRSA</b> (resistente a glicopeptídeos), não VRSA, porque a cepa resiste também à teicoplanina. O que usar aí está na Parte 4.</p>
+
+<div class="ficha"><div class="fh"><b>Fosfomicina</b><span>via oral · sachê em dose única</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd><mark class="apf">Inibe a enolpiruvato transferase</mark>, o primeiro passo da síntese da parede. A parede sai “cheia de buracos”.</dd>
+<dt>Pega</dt><dd>Gram-positivas e Gram-negativas da infecção urinária.</dd>
+<dt>Para quê</dt><dd><mark class="apf">Apenas cistite</mark> não complicada do adulto. Pode na gestante.</dd>
+<dt>Dose</dt><dd><b>3 g em dose única</b>, à noite, depois de esvaziar a bexiga, para o fármaco ficar concentrado na bexiga durante o sono.</dd>
+<dt>Cuidado</dt><dd><span class="pega">Não tem dose pediátrica</span>: não se usa em criança. Não serve para trato urinário alto. Não existe no SUS.</dd>
+</dl></div>
+
+<h2><span class="n">6</span>Membrana: polimixina B e daptomicina</h2>
+<p>Os dois abrem poros na membrana e a célula perde íons. Cada um age num tipo de bactéria, e a razão está no envelope que você viu na Parte 1.</p>
+
+<div class="ficha"><div class="fh"><b>Polimixina B</b><span>polipeptídeo catiônico · hospitalar · IV</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd>Liga-se ao LPS da membrana externa e <mark class="apf">desorganiza a membrana das Gram-negativas</mark>, como um detergente. A célula perde íons e morre.</dd>
+<dt>Pega</dt><dd>Gram-negativas multirresistentes: <i>Klebsiella</i>, <i>Pseudomonas</i>, <i>Acinetobacter</i>.</dd>
+<dt>Não pega</dt><dd>Gram-positivas (não têm LPS). <i>Proteus</i> e <i>Serratia</i> são resistentes.</dd>
+<dt>Para quê</dt><dd><mark class="apf">1ª linha, empírica, nas infecções por produtoras de carbapenemase</mark> (a <i>Klebsiella</i> KPC, o <i>Acinetobacter</i> com carbapenemase tipo OXA). <span class="pega">“1ª linha em ESBL”</span> é falsa: ESBL é carbapenêmico.</dd>
+<dt>Dose</dt><dd><b>1,5 a 2,5 mg/kg/dia, de 12/12 h</b>. A resistência está ligada à dose baixa: por medo do rim, o médico usa 1,5 e seleciona resistência.</dd>
+<dt>Cuidado</dt><dd><mark class="apf">Nefrotoxicidade e neurotoxicidade</mark> (fraqueza muscular, parestesia, perda de movimentos). <span class="pega">Não é ototoxicidade</span>: essa é do aminoglicosídeo e da vancomicina. Zera a microbiota.</dd>
+</dl></div>
+<p>A polimixina E (colistina) ela disse que não cobra: na prova, polimixina é a B.</p>
+
+<div class="ficha"><div class="fh"><b>Daptomicina</b><span>lipopeptídeo · hospitalar · IV</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd>Liga-se à membrana da Gram-positiva e forma poro: <mark class="apf">saída de potássio</mark>, despolarização e morte. <span class="pega">“Perda de cálcio” e “inibe a síntese proteica”</span> já apareceram como falsas.</dd>
+<dt>Pega</dt><dd>Gram-positivas aeróbias, inclusive MRSA e GRSA.</dd>
+<dt>Para quê</dt><dd><mark class="apf">GRSA</mark> em pele e partes moles, bacteremia e endocardite; alternativa à vancomicina.</dd>
+<dt>Cuidado</dt><dd><b>Nunca em pneumonia</b>: é inativada pelo surfactante pulmonar. Efeito limitante: <b>miopatia e rabdomiólise</b>; monitorar a <b>CPK</b> e suspender se subir.</dd>
+</dl></div>
+
+<div class="qs" data-t="Questões dela · vancomicina, polimixina e daptomicina" data-ids="T11-Q4,T10-Q4,T9-Q6,T10-Q12,p03,T7-QD5,T3-Q16,p07,p04,T8-Q4" data-more="As últimas misturam fármacos da Parte 3 (aminoglicosídeo, tigeciclina, linezolida). Se travar nelas, volte depois."></div>
+
+<div class="box apf"><span class="lb">O que levar desta parte</span>
+<ul>
+<li>β-lactâmico: liga à PBP, inibe a transpeptidação e solta as autolisinas. Bactericida. Não age em MRSA.</li>
+<li>Penicilinase → clavulanato, sulbactam ou tazobactam; oxacilina e cefalosporinas de 2ª geração resistem sozinhas.</li>
+<li>Gerações: 1ª = alergia tardia (cefalexina); 2ª = respiratório com alergia tardia (axetilcefuroxima) e anaeróbio no hospital (cefoxitina); 3ª = empírico hospitalar (ceftriaxona) e <i>Pseudomonas</i> (ceftazidima); 4ª = AmpC (cefepima).</li>
+<li>Carbapenêmico = ESBL. Imipenem sempre com cilastatina (não é sinergismo) e convulsão é dele.</li>
+<li>Vancomicina: transglicosilase, só Gram+, MRSA no hospital, via oral para <i>C. difficile</i>, homem vermelho.</li>
+<li>Polimixina: membrana de Gram−, carbapenemase, nefro e neurotoxicidade. Daptomicina: membrana de Gram+, potássio, CPK, nunca em pneumonia.</li>
+</ul>
+</div>
+
+<div class="pager"><a class="pv" href="uc15-farmaco-alvo-1-bacteria-e-alvos.html" data-part="0"><small>← Parte 1</small>A bactéria e os alvos</a><a class="nx" href="uc15-farmaco-alvo-3-ribossomo-dna-folato.html" data-part="2"><small>Parte 3 →</small>Antibióticos do ribossomo, do DNA e do folato</a></div>
+</main>
+</div>
+<script>window.PART=1;window.PARTS=[{"file": "uc15-farmaco-alvo-1-bacteria-e-alvos.html", "short": "Bactéria e alvos"}, {"file": "uc15-farmaco-alvo-2-parede-e-membrana.html", "short": "Parede e membrana"}, {"file": "uc15-farmaco-alvo-3-ribossomo-dna-folato.html", "short": "Ribossomo, DNA e folato"}, {"file": "uc15-farmaco-alvo-4-resistencia.html", "short": "Resistência"}, {"file": "uc15-farmaco-alvo-5-casos.html", "short": "Casos de uso"}];window.QS={"T3-Q6": {"prova": "T3 Q6", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre a penicilina G, avalie as sentenças abaixo e assinale o que for correto.", "itens": ["I. A penicilina G cristalina e benzatina são utilizados na terapia empírica da meningite até resultados da cultura, que podem indicar manutenção do tratamento ou substituição.", "II. A penicilina G cristalina deve ser administrada IV a cada 4-6horas. É eliminada inalterada por filtração glomerular e secreção tubular, e há risco de bioacumulação se paciente apresentar IR.", "III. A penicilina G procaína é administrada via IM, e sua associação com a procaína reduz a dor no momento da aplicação e mantém níveis séricos por 12 horas, indicada para pneumonias.", "IV. A penicilina G benzatina é o fármaco de escolha para o tratamento da sífilis independente do estágio da doença, e também é o fármaco de escolha para a profilaxia da endocardite."], "opts": [{"h": "I, II e IV", "ok": false, "why": ""}, {"h": "II e IV", "ok": false, "why": ""}, {"h": "I, II, III e IV", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}, {"h": "II apenas", "ok": true, "why": ""}], "gab": "E", "com": "Sentenças: I F · II V · III F · IV F<br><b>I<\/b> — empírico da meningite é <b>ceftriaxona<\/b><br><b>III<\/b> — procaína não é indicada para pneumonia (TRI precisa resistir à β-lactamase)<br><b>IV<\/b> — \"independente do estágio\": neurossífilis é penicilina G <b>cristalina<\/b>"}, "T11-Q6": {"prova": "T11 (jun/2026) Q6", "tipo": "direta", "selo": "OF", "enun": "Qual dos seguintes antimicrobianos pode sofrer bioacumulação por interação medicamentosa que promova a inibição da secreção tubular?", "itens": [], "opts": [{"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Amicacina", "ok": false, "why": ""}, {"h": "Penicilina G", "ok": true, "why": ""}, {"h": "Vancomicina", "ok": false, "why": ""}], "gab": "C", "com": "<b>Penicilina G<\/b> sai por secreção tubular (base da probenecida); amicacina e vanco saem por filtração."}, "T11-Q2": {"prova": "T11 (jun/2026) Q2", "tipo": "caso", "selo": "OF", "enun": "Em uma infecção do trato respiratório inferior causada por <i>Staphylococcus aureus<\/i> sensível à meticilina (MSSA) e resistente a amoxicilina, segundo os princípios de racionalidade terapêutica, qual a conduta de primeira escolha?", "itens": [], "opts": [{"h": "Associar amoxicilina + ácido clavulônico.", "ok": true, "why": ""}, {"h": "Substituir por ceftriaxona.", "ok": false, "why": ""}, {"h": "Administrar imipenem + cilastatina.", "ok": false, "why": ""}, {"h": "Substituir por vancomicina.", "ok": false, "why": ""}], "gab": "A", "com": "MSSA resistente à amoxicilina = penicilinase → basta <b>associar clavulanato<\/b>. Ceftriaxona, imipenem e vanco são escalada desnecessária."}, "T4-Q10": {"prova": "T4 Q10", "tipo": "direta", "selo": "OF", "enun": "Microrganismos como <i>Klebsiella sp., Enterobacter sp.<\/i>, produzem intrinsecamente betalactamases, assim, qual antibiótico NÃO seria efetivo para tais infecções?", "itens": [], "opts": [{"h": "acetilcefuroxima", "ok": false, "why": ""}, {"h": "ceftriaxona", "ok": false, "why": ""}, {"h": "amoxicilina", "ok": true, "why": ""}, {"h": "amicacina", "ok": false, "why": ""}], "gab": "C", "com": "β-lactamase intrínseca destrói penicilina sem inibidor e cefalosporina de 1ª → <b>amoxicilina<\/b> não funciona. Pergunta no negativo (\"NÃO seria efetivo\")."}, "T10-Q9": {"prova": "T10 (nov/2025) Q9", "tipo": "sentenças I–V", "selo": "IN", "enun": "Sobre as penicilinas, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. As penicilinas interferem na última etapa da síntese da parede celular bacteriana, que é a reticulação das cadeias de peptidoglicano por um processo conhecido como transpeptidação, que resulta na formação de uma parede celular frágil que causa a morte celular, e por isso as penicilinas são bactericidas e atuam de forma dependente do tempo.", "II. Ampicilina e amoxicilina são agentes de espectro estendido comumente usadas no tratamento de infecções respiratórias e cutâneas causadas principalmente por agentes Gram-positivos. Podem ser associadas com ácido clavulânico ou sulbactamo, para combater infecções causadas por organismos produtores de β-lactamases (penicilinases).", "III. As penicilinas e aminopenicilinas distribuem-se amplamente nos tecidos e nas secreções, como os líquidos articular, pleural e pericárdico. São eliminadas em sua maioria por filtração glomerular e secreção tubular renal de forma inalterada, de modo que as concentrações na urina são elevadas.", "IV. A piperacilina + tazobactamo é empregada no tratamento de bacteremias, pneumonias, infecções depois de queimaduras, infecções graves geralmente adquiridas no hospital. A piperacilina + tazobactamo é efetiva contra infecções causadas por <i>Staphylococcus aureus<\/i> sensível à meticilina.", "V. As reações de hipersensibilidade são comuns com o uso de penicilinas, cujas manifestações incluem erupção maculopapulosa, erupção urticariforme, broncospasmo, vasculite, dermatite esfoliativa e anafilaxia. A hipersensibilidade às penicilinas geralmente também inclui outros antibióticos β-lactâmicos (p. ex., cefalosporinas)."], "opts": [{"h": "I, II e V", "ok": false, "why": ""}, {"h": "III e IV", "ok": false, "why": ""}, {"h": "I, II, III, IV e V", "ok": true, "why": ""}, {"h": "II, III e V", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}], "gab": "C", "com": "A IV fala de <i>S. aureus<\/i> <b>sensível<\/b> à meticilina — pipe-tazo funciona. O aluno leu \"MRSA\" e errou.<br>Sentenças: I V · II V · III V · IV V · V V"}, "b19": {"prova": "Treino · já caiu · T10 Q9", "tipo": "", "selo": "", "enun": "Sobre as penicilinas, assinale a correta.", "itens": [], "opts": [{"h": "Piperacilina + tazobactam é efetiva contra infecções por S. aureus sensível à meticilina.", "ok": true, "why": "O aluno leu \"MRSA\" e errou."}, {"h": "Piperacilina + tazobactam é efetiva contra infecções por S. aureus resistente à meticilina.", "ok": false, "why": "MRSA: nenhum β-lactâmico."}, {"h": "Ampicilina e amoxicilina resistem às penicilinases e dispensam inibidor de β-lactamase.", "ok": false, "why": "São destruídas; por isso clavulanato/sulbactam."}, {"h": "As penicilinas são bacteriostáticas e atuam de forma dependente da concentração.", "ok": false, "why": "Bactericidas, dependentes do tempo."}], "gab": "", "com": "", "shuffle": true}, "T8-Q2": {"prova": "T8 (nov/2024) Q2", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os mecanismos farmacológicos e de resistência das penicilinas e cefalosporinas avalie as sentenças abaixo e assinale o que for correto.", "itens": ["I. A cefalexina na dose de 500 mg 6/6h é recomendada para tratar infecções orofaríngeas em pacientes com alergia tardia a penicilina. Várias bactérias apresentam resistência a esse fármaco porque expressam enzimas penicilinases.", "II. Em cepas bacterianas que expressam enzimas penicilinases, a opção terapêutica ambulatorial é a associação de amoxicilina + clavulanato via oral, e no ambiente hospitalar para administração via parenteral há a opção da associação de piperacilina + tazobactamo.", "III. As penicilinas e cefalosporinas compartilham o mesmo mecanismo de ação farmacológico ao inibirem a transpeptidação do peptidioglicano e inativarem a proteína inibidora das enzimas autolíticas, porém, tem espectro de ação distintos e diferentes empregos terapêuticos.", "IV. As aminopenicilinas são bem toleradas, mas quando associadas com ácido clavulônico, os distúrbios gastrintestinais, como diarreia, são mais acentuados em decorrência da sensibilidade das bactérias da microbiota do trato digestivo a esta associação.", "V. Amoxicilina + clavulanato ou axetilcefuroxima são opções terapêuticas para tratar quadros de pneumonia comunitária e infecções crônicas ou recorrentes do TR superior, pois são resistentes a beta-lactamases."], "opts": [{"h": "I, II, III, IV e V", "ok": true, "why": ""}, {"h": "II, III e IV", "ok": false, "why": ""}, {"h": "III, IV e V", "ok": false, "why": ""}, {"h": "III e IV", "ok": false, "why": ""}, {"h": "I, II e V", "ok": false, "why": ""}], "gab": "A", "com": "Sentenças: I V · II V · III V · IV V · V V"}, "T2-Q7": {"prova": "T2 Q7 · também T5 Q9", "tipo": "lacunas", "selo": "OF", "enun": "A reação denominada \"dissulfiram\" refere-se a associação de alguns antibióticos com ______ cujas principais manifestações clínicas são: rubor, cefaleia, vômitos, entre outros, explicados pelo acúmulo de ______ porque ocorre inibição da enzima ______ por fármacos como ______ e ______. Escolha a alternativa que preenche corretamente as lacunas:", "itens": [], "opts": [{"h": "álcool; acetaldeído; aldeído desidrogenase; cefazolina e cefaclor.", "ok": true, "why": ""}, {"h": "álcool; acetaldeído; aldeído desidrogenase; ampicilina e cefaclor.", "ok": false, "why": ""}, {"h": "álcool; acetato; álcool desidrogenase; cefalexina e cefaclor.", "ok": false, "why": ""}, {"h": "álcool; acetaldeído; aldeído desidrogenase; ciprofloxacino e amoxicilina.", "ok": false, "why": ""}, {"h": "álcool; acetaldeído; aldeído desidrogenase; ampicilina e tetraciclina.", "ok": false, "why": ""}], "gab": "A", "com": "Álcool → acúmulo de <b>acetaldeído<\/b> por inibição da <b>aldeído desidrogenase<\/b>. Os dois fármacos têm de ser cefalosporinas (cefazolina e cefaclor) — as outras alternativas trazem penicilina, quinolona ou tetraciclina. Na T5 a versão pedia <b>metronidazol e ceftriaxona<\/b>."}, "T4-Q7": {"prova": "T4 Q7", "tipo": "asserção-razão", "selo": "OF", "enun": "Sobre a ceftriaxona avalie as asserções e a relação proposta entre elas.", "itens": ["I- A ceftriaxona é uma cefalosporina de terceira geração efetiva contra uma ampla variedade de infecções graves, exceto cepas ESBL e MRSA, por isso empregada na terapia empírica da sepse em pacientes imunocompetentes e imunocomprometidos devido sua ação bactericida.", "PORQUE", "II- A ceftriaxona inibe a síntese da parede celular ao ligar-se a PBP com consequente inibição da transpeptidação do peptidioglicano e inativação da proteína inibidora das enzimas autolíticas, causando lesões na parede celular que provocam a morte bacteriana."], "opts": [{"h": "I e II verdadeiras, e a II é justificativa da I.", "ok": true, "why": ""}, {"h": "… não justifica", "ok": false, "why": ""}, {"h": "I V, II F", "ok": false, "why": ""}, {"h": "I F, II V", "ok": false, "why": ""}, {"h": "ambas F", "ok": false, "why": ""}], "gab": "A", "com": "A I diz que se usa na sepse <b>por ser bactericida<\/b>; a II explica como ela mata → justifica. Contraste com T2 Q17."}, "T10-Q14": {"prova": "T10 (nov/2025) Q14", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre as cefalosporinas, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. A cefalexina usada em doses de 500 mg 4 x ao dia, é empregada para tratar infecções por patógenos gram-positivos e gram-negativos, principalmente infecções respiratórias não complicadas em pacientes com alergia tardia a penicilina. Não apresenta efetividade contra estafilococos produtores de penicilinase.", "II. As cefalosporinas orais de segunda geração como axetilcefuroxima (250 mg 2 x ao dia) e cefaclor (250 mg 3 x ao dia) são ativas contra várias bactérias Gram-positivas e Gram-negativas produtoras de β-lactamases (penicilinases) e têm sido utilizadas principalmente para tratar sinusite, otite e infecções do trato respiratório inferior.", "III. A ceftazidima é o único fármaco com atividade útil contra <i>P. aeruginosa<\/i> ESBL. A associação ceftazidima + avibactam é indicada como primeira escolha para pacientes com infecção por <i>K. pneumoniae<\/i> carbapenemase em que está contraindicado a utilização da Polimixina B, porém, não é efetiva para tratar quadros de infecção urinária.", "IV. A ceftriaxona e a cefotaxima constituem as cefalosporinas de terceira geração mais ativas contra cepas de pneumococos não sensíveis à penicilina, e seu uso é recomendado para a terapia empírica de infecções graves do trato respiratório, urinário, SNC e sepse.", "V. Os principais efeitos adversos das cefalosporinas são: náuseas, vômitos, diarreia, dor abdominal, dor no local da aplicação, infecções secundárias (candidíase), e especificamente para a ceftriaxona pode ocorrer quadros de pseudolitíase biliar. A ingestão de álcool pode desencadear a reação do tipo dissulfiram."], "opts": [{"h": "I, II, IV e V", "ok": true, "why": ""}, {"h": "I, II, III, IV e V", "ok": false, "why": ""}, {"h": "III e IV", "ok": false, "why": ""}, {"h": "I, II e V", "ok": false, "why": ""}, {"h": "I, III e V", "ok": false, "why": ""}], "gab": "A", "com": "Doses cobradas: cefalexina 500 mg 4×/dia · axetilcefuroxima 250 mg 2×/dia · cefaclor 250 mg 3×/dia.<br>Sentenças: I V · II V · III F · IV V · V V<br><b>III<\/b> — \"o <b>único<\/b>\" (ESBL → carbapenêmico) e \"não é efetiva em ITU\" (é)"}, "T11-Q16": {"prova": "T11 (jun/2026) Q16", "tipo": "uma certa (A–D)", "selo": "OF", "enun": "Sobre características específicas de algumas cefalosporinas, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": [], "opts": [{"h": "A cefoxitina é indicada para o tratamento de infecções anaeróbias mistas em ambiente hospitalar como alternativa a ampicilina + sulbactamo em pacientes com alergia imediata a penicilina.", "ok": false, "why": "alergia <b>imediata<\/b> proíbe cefalosporina"}, {"h": "A cefuroxima é efetiva no tratamento da pneumonia nosocomial por sua efetividade contra cepas produtoras de β-lactamases de espectro estendido. As doses variam entre 250 a 500 mg.", "ok": false, "why": "2ª geração não pega ESBL"}, {"h": "Cefdinir é uma cefalosporina de terceira geração indicada via oral para o tratamento de pacientes com infecções por bactérias aeróbias Gram-positivas e Gram-negativas que acometem o trato respiratório superior, pele e tecidos moles.", "ok": true, "why": ""}, {"h": "A ceftazidima + avibactam é de uso hospitalar indicada para infecções graves do trato urinário e respiratório causadas por cepas MRSA e KPC, em pacientes que tem contraindicação de uso de polimixina e vancomicina.", "ok": false, "why": "nenhum β-lactâmico serve para MRSA"}], "gab": "C", "com": "Fármaco novo: <b>cefdinir<\/b> (3ª geração oral)."}, "T9-Q8": {"prova": "T9 (jun/2025) Q8", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os usos terapêuticos das cefalosporinas avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. Cefoxitina é uma cefalosporina de segunda geração, de escolha no ambiente hospitalar para tratar infecções anaeróbias e causadas por <i>Enterobacter<\/i> ou <i>P. aeruginosa<\/i>.", "II. A axetilcefuroxima na dose de 250 mg de 12/12h é empregada para tratar infecções crônicas ou agudas do TR, como pneumonia e sinusite, por ser resistente a ação das penicilinases.", "III. A ceftriaxona é uma cefalosporina de 3ª geração de amplo espectro resistente a ESBL, de primeira escolha no ambiente hospitalar para tratar infecções complicadas do TR e do TGU.", "IV. A cefepima é usada apenas em infecções graves causadas por cepas resistentes de algumas espécies de bactérias Gram-positivas e não é hidrolisada pelas enzimas metaloβ-lactamases."], "opts": [{"h": "I, II e IV", "ok": false, "why": ""}, {"h": "III", "ok": false, "why": ""}, {"h": "I e III", "ok": false, "why": ""}, {"h": "II", "ok": true, "why": ""}, {"h": "II, III e IV", "ok": false, "why": ""}], "gab": "D", "com": "Sentenças: I F · II V · III F · IV F<br><b>I<\/b> — 2ª geração não pega <i>P. aeruginosa<\/i><br><b>III<\/b> — ceftriaxona é sensível à ESBL<br><b>IV<\/b> — cefepima é para Gram− e é hidrolisada por metalo-β-lactamases"}, "T5-Q7": {"prova": "T5 Q7", "tipo": "asserção-razão", "selo": "OF", "enun": "Sobre as cefalosporinas de segunda geração avalie as asserções e a relação proposta entre elas.", "itens": ["I- A cefoxitina é empregada principalmente para tratar infecções agudas do trato respiratório inferior ou trato urinário alto por cepas resistentes como <i>P. aeruginosa, H. influenzae<\/i> ou <i>K. pneumoniae<\/i> produtoras de β-lactamases", "PORQUE", "II- A cefoxitina tem amplo espectro e atua inibindo a síntese da parede celular ao ligar-se a PBP com consequente inibição da transpeptidação do peptidioglicano, e é resistente as beta-lactamases, mas é inefetiva em casos de cepas ESBLs e MRSA."], "opts": [{"h": "…", "ok": false, "why": ""}, {"h": "…", "ok": false, "why": ""}, {"h": "I V, II F", "ok": false, "why": ""}, {"h": "A asserção I é falsa, e a II é verdadeira.", "ok": true, "why": ""}, {"h": "ambas F", "ok": false, "why": ""}], "gab": "D", "com": "Cefoxitina é reservada para anaeróbios no hospital (I falsa); o mecanismo e a resistência da II estão certos."}, "T3-Q3": {"prova": "T3 Q3", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os usos terapêuticos das cefalosporinas avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. Cefoxitina é uma cefalosporina de segunda geração, de escolha no ambiente hospitalar para tratar infecções anaeróbias e causadas por <i>Enterobacter<\/i> ou <i>P. aeruginosa<\/i>.", "II. A axetilcefuroxima pode ser empregada por via oral de 12/12h para tratar uma variedade de infecções crônicas ou agudas do TR, ITU, pele e outras, por ser resistente a beta-lactamases.", "III. A ceftriaxona é uma cefalosporina de 3ª geração de amplo espectro resistente a ESBL, de primeira escolha no ambiente hospitalar para tratar infecções complicadas do TR e ITU.", "IV. Os mecanismos bacterianos de resistências desenvolvidos durante o tratamento com ceftriaxona podem ser mediados por alteração na PLP, bombas de efluxo, metaloβ-lactamases.", "V. A cefepima é usada apenas em infecções graves causadas por cepas resistentes de algumas espécies de bactérias Gram-positivas. Não é hidrolisada pelas enzimas metaloβ-lactamases."], "opts": [{"h": "I, II e IV", "ok": false, "why": ""}, {"h": "II, III e V", "ok": false, "why": ""}, {"h": "III, IV e V", "ok": false, "why": ""}, {"h": "I, II, III e IV", "ok": false, "why": ""}, {"h": "II e IV", "ok": true, "why": ""}], "gab": "E", "com": "Sentenças: I F · II V · III F · IV V · V F<br><b>I<\/b> — 2ª geração não pega <i>Enterobacter<\/i> nem <i>P. aeruginosa<\/i><br><b>III<\/b> — ceftriaxona é <b>sensível<\/b> à ESBL<br><b>V<\/b> — cefepima é para Gram−, e <b>é<\/b> hidrolisada por metalo-β-lactamases"}, "b17": {"prova": "Treino · da aula · aula · T7 Q14 · T8 Q4", "tipo": "", "selo": "", "enun": "Sobre a ceftriaxona, assinale a correta.", "itens": [], "opts": [{"h": "Tem excreção predominantemente biliar: não precisa de ajuste renal, mas pode causar pseudolitíase biliar.", "ok": true, "why": "🎧 Na pseudolitíase: suspender e trocar por cefotaxima."}, {"h": "Tem excreção renal inalterada: a dose deve ser ajustada pela creatinina.", "ok": false, "why": "Isso é aminoglicosídeo/vanco."}, {"h": "Penetra bem em Pseudomonas, por isso é o empírico hospitalar das pneumonias.", "ok": false, "why": "Não pega Pseudomonas — para ela é ceftazidima."}, {"h": "Na pseudolitíase biliar, deve ser trocada por ceftazidima.", "ok": false, "why": "Troca-se por cefotaxima."}], "gab": "", "com": "", "shuffle": true}, "b14": {"prova": "Treino · já caiu · T7 Q3 · aula", "tipo": "", "selo": "", "enun": "Sobre o imipenem + cilastatina, assinale a correta.", "itens": [], "opts": [{"h": "A cilastatina inibe a desidropeptidase renal, prolonga a ação do imipenem e reduz a nefrotoxicidade.", "ok": true, "why": "🎧 Imipenem é o único carbapenêmico metabolizado no rim."}, {"h": "A cilastatina tem efeito sinérgico com o imipenem sobre a parede bacteriana.", "ok": false, "why": "\"Sinérgica\" foi a pegadinha da T7 Q3-I."}, {"h": "A cilastatina inibe as carbapenemases e amplia o espectro para KPC.", "ok": false, "why": "KPC = polimixina."}, {"h": "A cilastatina reduz o risco de convulsão próprio do imipenem.", "ok": false, "why": "Convulsão → trocar por meropenem/ertapenem."}], "gab": "", "com": "", "shuffle": true}, "T10-QD1": {"prova": "T10 (nov/2025) QD1", "tipo": "discursiva", "selo": "OF", "enun": "Paciente em tratamento de uma infecção ESBL apresentou convulsões após administração intravenosa do antibacteriano. Qual antibiótico está envolvido nessa reação adversa apresentada pelo paciente?", "itens": [], "opts": [], "gab": "<b>Imipenem + cilastatina<\/b>", "com": "ESBL → carbapenêmico; convulsão é efeito próprio do imipenem (por isso o hospital precisa ter meropenem ou ertapenem)."}, "b15": {"prova": "Treino · já caiu · T10 QD1 · aula", "tipo": "", "selo": "", "enun": "Paciente com infecção ESBL convulsiona após o antibiótico IV. Qual o fármaco e a conduta?", "itens": [], "opts": [{"h": "Imipenem — trocar por meropenem ou ertapenem", "ok": true, "why": "🎧 Convulsão é exclusiva do imipenem; por isso todo hospital tem um 2º carbapenêmico."}, {"h": "Gentamicina — trocar por polimixina", "ok": false, "why": "Gentamicina não convulsiona; e ESBL não é polimixina."}, {"h": "Ceftriaxona — trocar por cefotaxima", "ok": false, "why": "ESBL não se trata com ceftriaxona."}, {"h": "Cefepima — trocar por ceftazidima", "ok": false, "why": "Nem uma nem outra servem na ESBL."}], "gab": "", "com": "", "shuffle": true}, "T11-Q4": {"prova": "T11 (jun/2026) Q4", "tipo": "caso", "selo": "OF", "enun": "C. X., 67 anos, vem tratando um quadro de pneumonia nosocomial com ceftriaxona e evoluiu para um quadro de colite pseudomembranosa por <i>Clostridioides difficile<\/i>. Qual o antibiótico de escolha e a via de administração para tratar a infecção secundária?", "itens": [], "opts": [{"h": "Clindamicina via IV", "ok": false, "why": ""}, {"h": "Ciprofloxacino via oral", "ok": false, "why": ""}, {"h": "Vancomicina via oral", "ok": true, "why": ""}, {"h": "Imipenem + cilastatina via IV", "ok": false, "why": ""}], "gab": "C", "com": "Colite pseudomembranosa → <b>vancomicina via oral<\/b> (não absorve, age na luz)."}, "T10-Q4": {"prova": "T10 (nov/2025) Q4", "tipo": "caso", "selo": "OF", "enun": "Um paciente de 39 anos, com história de alergia grave a penicilina, será submetido a uma artroplastia total do joelho. Qual destes agentes antimicrobianos é mais apropriado para profilaxia cirúrgica conhecendo a microbiota da pele?", "itens": [], "opts": [{"h": "Levofloxacino", "ok": false, "why": ""}, {"h": "Piperacilina + tazobactamo", "ok": false, "why": ""}, {"h": "Vancomicina", "ok": true, "why": ""}, {"h": "Metronidazol", "ok": false, "why": ""}], "gab": "C", "com": "Microbiota da pele (estafilococo) + alergia grave → <b>vancomicina<\/b>."}, "T9-Q6": {"prova": "T9 (jun/2025) Q6 · também T11 Q11", "tipo": "caso", "selo": "OF", "enun": "Durante um histórico de medicação, um paciente menciona que teve uma reação a um medicamento anos atrás, quando estava sendo tratado para uma infecção por <i>Staphylococcus aureus<\/i> resistente à meticilina (MRSA). Ele lembra que a reação ocorreu porque o medicamento foi infundido muito rapidamente. Qual dos seguintes medicamentos provavelmente causou essa reação?", "itens": [], "opts": [{"h": "Polimixina", "ok": false, "why": ""}, {"h": "Cefepima", "ok": false, "why": ""}, {"h": "Vancomicina", "ok": true, "why": ""}, {"h": "Imipenem + cilastatina", "ok": false, "why": ""}], "gab": "C", "com": "Infusão rápida → síndrome do homem vermelho → <b>vancomicina<\/b>."}, "T10-Q12": {"prova": "T10 (nov/2025) Q12", "tipo": "direta", "selo": "OF", "enun": "Qual o antibiótico que é ativo somente contra bactérias gram-positivas aeróbias e anaeróbias, incluindo <i>Staphylococcus epidermidis<\/i> resistente à meticilina, <i>Enterococcus<\/i> spp. e <i>C. difficile<\/i>, e que se liga aos precursores do peptideoglicano, interrompendo a polimerização e a reticulação necessárias para a manutenção da integridade da parede celular.", "itens": [], "opts": [{"h": "Ceftazidima + avibactamo", "ok": false, "why": ""}, {"h": "Daptomicina", "ok": false, "why": ""}, {"h": "Vancomicina", "ok": true, "why": ""}, {"h": "Linezolida", "ok": false, "why": ""}, {"h": "Cefoxitina", "ok": false, "why": ""}], "gab": "C", "com": "Só Gram+, liga-se aos precursores do peptidoglicano → <b>vancomicina<\/b>."}, "p03": {"prova": "Treino · da aula · aula · T7 Q13 · T10 Q12", "tipo": "", "selo": "", "enun": "Sobre a vancomicina, assinale a correta.", "itens": [], "opts": [{"h": "Inibe a transglicosilase sem depender da PBP, age só em Gram-positivas e tem a dose ajustada pela creatinina.", "ok": true, "why": "🎧 \"Estudar vancomicina para a prova.\""}, {"h": "Atua sobre a membrana celular e é efetiva contra Gram-positivas e Gram-negativas.", "ok": false, "why": "T7 Q13-II: parede, só Gram+."}, {"h": "Liga-se à PBP alterada do MRSA, por isso funciona nessas cepas.", "ok": false, "why": "Funciona justamente por não depender da PBP."}, {"h": "Tem excreção biliar e dispensa ajuste na insuficiência renal.", "ok": false, "why": "Renal inalterada."}], "gab": "", "com": "", "shuffle": true}, "T7-QD5": {"prova": "T7 QD5", "tipo": "discursiva", "selo": "OF", "enun": "O tratamento empírico de infecções por <i>K. pneumoniae<\/i> carbapenemase é realizado com qual antibiótico? Qual o alvo biológico?", "itens": [], "opts": [], "gab": "<b>Polimixina<\/b>; alvo = <b>membrana celular<\/b>", "com": ""}, "T3-Q16": {"prova": "T3 Q16 · também T9 QD5", "tipo": "discursiva", "selo": "OF", "enun": "Qual o tratamento de escolha para infecções por <i>Klebsiella spp<\/i> carbapenemase? Cite dois efeitos adversos graves específicos do uso desse antibiótico.", "itens": [], "opts": [], "gab": "<b>Polimixina B<\/b>; <b>nefrotoxicidade<\/b> e <b>neurotoxicidade<\/b>", "com": ""}, "p07": {"prova": "Treino · já caiu · T5 Q14 · T8 Q4 · T3 Q16", "tipo": "", "selo": "", "enun": "Sobre a polimixina, assinale a correta.", "itens": [], "opts": [{"h": "Desorganiza a membrana de Gram-negativas, é a 1ª linha nas carbapenemases e é nefrotóxica e neurotóxica.", "ok": true, "why": "🎧 Paciente volta \"sem os movimentos\": B12, fisioterapia, probióticos."}, {"h": "Desorganiza a membrana de Gram-positivas e é nefrotóxica e ototóxica.", "ok": false, "why": "T5 Q14-IV: Gram− e NEURO."}, {"h": "É a 1ª linha nas infecções por cepas ESBL no hospital.", "ok": false, "why": "ESBL = carbapenêmico (T8 Q13-III)."}, {"h": "Inibe a síntese proteica no 30S com ação bacteriostática.", "ok": false, "why": "Membrana, bactericida."}], "gab": "", "com": "", "shuffle": true}, "p04": {"prova": "Treino · já caiu · T7 Q13 · T4 Q9", "tipo": "", "selo": "", "enun": "Sobre a daptomicina, assinale a correta.", "itens": [], "opts": [{"h": "Liga-se à membrana e provoca efluxo de potássio; é bactericida e indicada para GRSA.", "ok": true, "why": "Miotoxicidade: monitorar CPK."}, {"h": "Liga-se à membrana e provoca perda de cálcio; é bactericida e indicada para MRSA.", "ok": false, "why": "T7 Q13-IV: cálcio e MRSA trocados."}, {"h": "Inibe a síntese proteica no 50S, por isso é bacteriostática.", "ok": false, "why": "Isso é a linezolida (\"respectivamente\" invertido)."}, {"h": "É a escolha para pneumonia por GRSA por penetrar bem no pulmão.", "ok": false, "why": "O surfactante inativa a daptomicina."}], "gab": "", "com": "", "shuffle": true}, "T8-Q4": {"prova": "T8 (nov/2024) Q4", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os antibióticos de uso hospitalar avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. Os aminoglicosídeos são empregados para tratar infecções graves do trato respiratório causadas por bactérias Gram-positivas, infecções intra-abdominais, sepse, entre outras, cujas doses devem ser ajustadas de acordo com a taxa de filtração glomerular.", "II. Imipenem + cilastatina administrado via IV tem ação bactericida, atua inibindo a síntese da parede celular e ao ligar-se as PBPs inibe a transpeptidação do peptidioglicano. É de amplo espectro, efetivo contra bactérias ESBL e anaeróbios, tem boa penetração em <i>P. aeruginosa<\/i>.", "III. A ceftriaxona é uma cefalosporina de amplo espectro e de primeira escolha no ambiente hospitalar para tratar infecções complicadas do TR e TGU. Os principais efeitos adversos são alterações TGI, dor no local da aplicação e risco de pseudolitíase biliar.", "IV. A polimixina exerce ação bactericida ao interagir e desorganizar as estruturas da membrana celular de bactérias gram-negativas. É indicada para infecções do tipo carbapenemases. Os principais efeitos adversos consistem em nefrotoxicidade e neurotoxicidade.", "V. A vancomicina inibe a transglicosilase, impedindo o alongamento do peptidoglicano e a formação da parede celular e tem ação bactericida. É administrada via intravenosa e a nefrotoxicidade é o efeito adverso mais grave deste fármaco."], "opts": [{"h": "II e V", "ok": false, "why": ""}, {"h": "II e V", "ok": false, "why": ""}, {"h": "II, III, IV e V", "ok": true, "why": ""}, {"h": "I, II, III, IV e V", "ok": false, "why": ""}, {"h": "I, II e IV", "ok": false, "why": ""}], "gab": "C", "com": "A frase I é perfeita exceto por uma palavra.<br>Sentenças: I F · II V · III V · IV V · V V<br><b>I<\/b> — aminoglicosídeo é para <b>Gram-negativas<\/b>"}};</script>
+<script>
+/* Do alvo ao caso — índice lateral, questões uma por vez e progresso (localStorage, com try/catch). */
+(function () {
+  "use strict";
+  var QS = window.QS || {}, PARTS = window.PARTS || [], PART = window.PART || 0;
+  var LET = "ABCDEFGH", KEY = "uc15:farmaco:alvo:v1";
+  var P = {};
+  try { P = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { P = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (e) { /* sem armazenamento: segue em memória */ } }
+  function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- navegação entre partes: dentro do site troca o item da aba; sozinho, abre o arquivo ---------- */
+  var framed = false; try { framed = window.top !== window && !!window.top.location.hash; } catch (e) { framed = false; }
+  function goPart(i, ev) {
+    if (!framed) return true;
+    try { window.top.location.hash = "#uc15/farmaco/alvo/" + i; if (ev) ev.preventDefault(); return false; } catch (e) { return true; }
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest ? ev.target.closest("a[data-part]") : null;
+    if (a) { goPart(+a.getAttribute("data-part"), ev); return; }
+    var h = ev.target.closest ? ev.target.closest("a[data-hash]") : null; // link para outra aba do site
+    if (h && framed) { try { window.top.location.hash = h.getAttribute("data-hash"); ev.preventDefault(); } catch (e) { /* abre o arquivo */ } }
+  });
+
+  /* ---------- índice ---------- */
+  var idx = document.getElementById("idx"), doc = document.getElementById("doc");
+  var heads = [].slice.call(doc.querySelectorAll("h2, .qs"));
+  var links = el("div", "links");
+  idx.appendChild(el("div", "ttl", "Nesta parte"));
+  idx.appendChild(links);
+  idx.querySelector(".ttl").onclick = function () { idx.classList.toggle("open"); };
+  var linkOf = {};
+  heads.forEach(function (h, i) {
+    if (!h.id) h.id = "s" + i;
+    var a = el("a");
+    a.href = "#" + h.id;
+    if (h.classList.contains("qs")) { a.className = "q"; a.innerHTML = "Questões <span class='c'></span>"; }
+    else { var c = h.cloneNode(true), nn = c.querySelector(".n"); if (nn) nn.remove(); a.textContent = c.textContent.trim(); }
+    a.onclick = function () { idx.classList.remove("open"); };
+    links.appendChild(a); linkOf[h.id] = a;
+  });
+  links.appendChild(el("div", "sep"));
+  var pr = el("div", "prog", "<span id='pgt'></span><div class='bar'><i id='pgb'></i></div>");
+  links.appendChild(pr);
+  if (!framed) { // dentro do site a barra de abas já lista as partes: não repetir
+    links.appendChild(el("div", "sep"));
+    var parts = el("div", "parts"); parts.appendChild(el("div", "ttl", "Do alvo ao caso"));
+    PARTS.forEach(function (p, i) {
+      var a = el("a", i === PART ? "cur" : "");
+      a.href = p.file; a.setAttribute("data-part", i); a.textContent = (i + 1) + " · " + p.short;
+      parts.appendChild(a);
+    });
+    links.appendChild(parts);
+  }
+
+  if ("IntersectionObserver" in window) {
+    var cur = null;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (cur) cur.classList.remove("on");
+          cur = linkOf[e.target.id]; if (cur) cur.classList.add("on");
+        }
+      });
+    }, { rootMargin: "0px 0px -72% 0px", threshold: 0 });
+    heads.forEach(function (h) { io.observe(h); });
+  }
+
+  /* ---------- questões ---------- */
+  var blocks = [];
+  function status(id) { return P[id] === 1 ? "ok" : P[id] === 0 ? "no" : ""; }
+  function refreshProgress() {
+    var tot = 0, done = 0, ok = 0;
+    blocks.forEach(function (b) {
+      var d = 0;
+      b.ids.forEach(function (id) { tot++; if (P[id] != null) { d++; done++; if (P[id] === 1) ok++; } });
+      var a = linkOf[b.root.id];
+      if (a) { a.querySelector(".c").textContent = d + "/" + b.ids.length; a.classList.toggle("done", d === b.ids.length); }
+    });
+    var t = document.getElementById("pgt"), bar = document.getElementById("pgb");
+    if (t) t.textContent = tot ? ("Questões: " + done + " de " + tot + (done ? " · " + ok + " certas" : "")) : "";
+    if (bar) bar.style.width = (tot ? Math.round(done / tot * 100) : 0) + "%";
+  }
+  function setResult(id, ok) { P[id] = ok ? 1 : 0; save(); refreshProgress(); }
+
+  function vfKey(q) { // "I V · II F · III V" → {I:"V",...}; null se não for esse formato
+    if ((q.opts && q.opts.length) || !q.itens || !q.itens.length || !q.gab) return null;
+    var m = String(q.gab).replace(/<[^>]+>/g, "").match(/\b([IVX]+)\s+([VF])\b/g);
+    if (!m || m.length < 2) return null;
+    var k = {}; m.forEach(function (s) { var p = s.split(/\s+/); k[p[0]] = p[1]; });
+    return k;
+  }
+  function roman(item) { var m = String(item).replace(/<[^>]+>/g, "").match(/^\s*([IVX]+)\s*[.)–-]/); return m ? m[1] : null; }
+
+  function Block(root) {
+    var ids = (root.getAttribute("data-ids") || "").split(",").map(function (s) { return s.trim(); }).filter(function (s) { return QS[s]; });
+    var self = { root: root, ids: ids, i: 0 };
+    // começa na primeira ainda não respondida
+    for (var k = 0; k < ids.length; k++) { if (P[ids[k]] == null) { self.i = k; break; } }
+    var title = root.getAttribute("data-t") || "Questões dela";
+    root.innerHTML = "";
+    var head = el("div", "qh", "<b>" + title + "</b><span class='cnt'></span>");
+    var dots = el("div", "dots"), body = el("div", "qb");
+    root.appendChild(head); root.appendChild(dots); root.appendChild(body);
+    if (root.getAttribute("data-more")) root.appendChild(el("div", "more", root.getAttribute("data-more")));
+
+    function drawDots() {
+      dots.innerHTML = "";
+      ids.forEach(function (id, n) {
+        var b = el("button", (n === self.i ? "cur " : "") + status(id), String(n + 1));
+        b.type = "button"; b.title = QS[id].prova || "";
+        b.onclick = function () { self.i = n; draw(); };
+        dots.appendChild(b);
+      });
+      head.querySelector(".cnt").textContent = (self.i + 1) + " de " + ids.length;
+    }
+    function nav(row) {
+      var prev = el("button", "btn", "← Anterior"); prev.type = "button"; prev.disabled = self.i === 0;
+      prev.onclick = function () { self.i--; draw(); };
+      var next = el("button", "btn pri", self.i === ids.length - 1 ? "Fim do bloco ✓" : "Próxima →"); next.type = "button";
+      next.disabled = self.i === ids.length - 1;
+      next.onclick = function () { self.i++; draw(); root.scrollIntoView({ block: "nearest" }); };
+      row.appendChild(prev); row.appendChild(next);
+    }
+    function feedback(q, ok, extra) {
+      var f = el("div", "fb " + (ok === true ? "ok" : ok === false ? "no" : ""));
+      f.innerHTML = "<span class='lb'>" + (ok === true ? "Certo" : ok === false ? "Não foi dessa vez" : "Resposta dela") + "</span>" +
+        (extra || "") + (q.com ? "<div>" + q.com + "</div>" : "");
+      return f;
+    }
+    function draw() {
+      drawDots();
+      var id = ids[self.i], q = QS[id];
+      body.innerHTML = "";
+      var tags = el("div", "tags");
+      tags.appendChild(el("span", "pv", q.prova));
+      if (q.tipo) tags.appendChild(el("span", "", q.tipo));
+      if (q.selo === "IN") tags.appendChild(el("span", "warn", "gabarito inferido"));
+      if (q.selo === "AB") tags.appendChild(el("span", "warn", "gabarito em aberto"));
+      body.appendChild(tags);
+      if (q.enun) body.appendChild(el("div", "enun", q.enun));
+      var key = vfKey(q), answered = P[id] != null;
+
+      /* itens (sentenças I–V, asserção-razão) */
+      var itemEls = [];
+      if (q.itens && q.itens.length) {
+        var ol = el("ol", "itens");
+        q.itens.forEach(function (it) {
+          var li = el("li");
+          if (/^\s*PORQUE\s*$/i.test(String(it).replace(/<[^>]+>/g, ""))) { li.className = "pq"; li.textContent = "PORQUE"; }
+          else {
+            li.appendChild(el("span", "tx", it));
+            var r = roman(it);
+            if (key && r && key[r]) {
+              var vf = el("span", "vf");
+              ["V", "F"].forEach(function (c) {
+                var b = el("button", "", c); b.type = "button";
+                b.onclick = function () { [].forEach.call(vf.querySelectorAll("button"), function (x) { x.classList.remove("sel"); }); b.classList.add("sel"); li.setAttribute("data-a", c); };
+                vf.appendChild(b);
+              });
+              li.appendChild(vf); li.setAttribute("data-r", r); itemEls.push(li);
+            }
+          }
+          ol.appendChild(li);
+        });
+        body.appendChild(ol);
+      }
+
+      var row = el("div", "row");
+      if (q.opts && q.opts.length) {
+        /* objetiva */
+        var opts = q.shuffle ? shuffle(q.opts) : q.opts;
+        var box = el("div", "opts"), btns = [];
+        opts.forEach(function (o, n) {
+          var b = el("button", "opt", "<b>" + LET[n] + "</b><span>" + o.h + "</span>"); b.type = "button";
+          b.onclick = function () { reveal(o); };
+          btns.push({ b: b, o: o }); box.appendChild(b);
+        });
+        body.appendChild(box);
+        var reveal = function (chosen) {
+          btns.forEach(function (x) {
+            x.b.disabled = true;
+            if (x.o.ok) x.b.classList.add("ok");
+            if (chosen && x.o === chosen && !x.o.ok) x.b.classList.add("no");
+            if (x.o.why && !x.b.querySelector(".w")) x.b.querySelector("span").appendChild(el("span", "w", x.o.why));
+          });
+          var ok = chosen ? !!chosen.ok : null;
+          if (chosen) setResult(id, ok);
+          var open = q.selo === "AB" ? "<div><b>Gabarito em aberto:</b> as alternativas em verde são as que sobraram como possíveis.</div>" : "";
+          body.insertBefore(feedback(q, ok, open), row);
+          drawDots();
+        };
+        if (answered) reveal(null);
+      } else if (key && itemEls.length) {
+        /* sentenças com gabarito V/F por item */
+        var chk = el("button", "btn pri", "Conferir"); chk.type = "button";
+        var showVF = function (mine) {
+          var all = true;
+          itemEls.forEach(function (li) {
+            var r = li.getAttribute("data-r"), a = li.getAttribute("data-a"), t = key[r];
+            var vf = li.querySelector(".vf");
+            [].forEach.call(vf.querySelectorAll("button"), function (x) { x.disabled = true; });
+            if (mine) { var good = a === t; if (!good) all = false; li.classList.add(good ? "r-ok" : "r-no"); }
+            if (!vf.querySelector(".truth")) vf.appendChild(el("span", "truth", t === "V" ? "<span style='color:#17663c'>é V</span>" : "<span style='color:#a02a22'>é F</span>"));
+          });
+          return all;
+        };
+        chk.onclick = function () {
+          var miss = itemEls.some(function (li) { return !li.getAttribute("data-a"); });
+          if (miss) { hint.textContent = "Marque V ou F em todas as sentenças."; return; }
+          var ok = showVF(true); setResult(id, ok); chk.remove(); hint.textContent = "";
+          body.insertBefore(feedback(q, ok, "<div class='gab'>" + q.gab + "</div>"), row); drawDots();
+        };
+        var hint = el("span", "hint", "Julgue cada sentença e confira.");
+        if (answered) { showVF(false); body.appendChild(feedback(q, null, "<div class='gab'>" + q.gab + "</div>")); }
+        else { row.appendChild(chk); row.appendChild(hint); }
+      } else {
+        /* discursiva: responder de cabeça, revelar, autoavaliar */
+        var show = el("button", "btn pri", "Ver a resposta dela"); show.type = "button";
+        var hint2 = el("span", "hint", "Responda de cabeça (ou no papel) antes de abrir.");
+        var open2 = function (fresh) {
+          show.remove(); hint2.remove();
+          var f = feedback(q, null, "<div class='gab'>" + (q.gab || "") + "</div>");
+          body.insertBefore(f, row);
+          if (fresh) {
+            var g = el("button", "btn g", "Acertei"), r = el("button", "btn r", "Errei"); g.type = r.type = "button";
+            var mk = function (ok) { return function () { setResult(id, ok); g.remove(); r.remove(); drawDots(); }; };
+            g.onclick = mk(true); r.onclick = mk(false);
+            row.insertBefore(r, row.firstChild); row.insertBefore(g, row.firstChild);
+          }
+        };
+        show.onclick = function () { open2(true); };
+        if (answered) { body.appendChild(row); open2(false); }
+        else { row.appendChild(show); row.appendChild(hint2); }
+      }
+      body.appendChild(row);
+      var sp = el("span"); sp.style.flex = "1"; row.appendChild(sp);
+      nav(row);
+      if (answered) {
+        var redo = el("button", "btn", "Refazer"); redo.type = "button";
+        redo.onclick = function () { delete P[id]; save(); refreshProgress(); draw(); };
+        row.insertBefore(redo, sp);
+      }
+    }
+    self.draw = draw;
+    if (ids.length) draw(); else root.style.display = "none";
+    return self;
+  }
+  [].forEach.call(doc.querySelectorAll(".qs"), function (r) { blocks.push(Block(r)); });
+  refreshProgress();
+})();
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>

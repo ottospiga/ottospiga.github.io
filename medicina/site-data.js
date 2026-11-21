@@ -52,6 +52,13 @@ window.SITE = {
           { id: "veterana", titulo: "Resumo da veterana", itens: [ { label: "Tutoria · resumo T11", nativo: "pdf", pdf: "conteudo/uc15/tutoria/resumo-veterana-t11.pdf", thumbs: "conteudo/uc15/tutoria/thumbs-vet/p-", data: "conteudo/uc15/tutoria/apf.js", apfKey: "veterana", ns: "uc15/tut/vet",
             toc: [{"p": 1, "t": "SP1 · ITU"}, {"p": 9, "t": "SP2 · IVAS"}, {"p": 17, "t": "SP3 · Osteomielite"}, {"p": 23, "t": "SP4 · Infecções cutâneas"}, {"p": 29, "t": "SP5 · Sepse"}] } ] } ] },
         { id: "farmaco", nome: "Farmacologia", prof: "Vânia", abas: [
+          { id: "alvo", titulo: "Do alvo ao caso", itens: [
+            { label: "1 · A bactéria e os alvos", src: "uc15/farmaco/uc15-farmaco-alvo-1-bacteria-e-alvos.html" },
+            { label: "2 · Parede e membrana", src: "uc15/farmaco/uc15-farmaco-alvo-2-parede-e-membrana.html" },
+            { label: "3 · Ribossomo, DNA e folato", src: "uc15/farmaco/uc15-farmaco-alvo-3-ribossomo-dna-folato.html" },
+            { label: "4 · Resistência", src: "uc15/farmaco/uc15-farmaco-alvo-4-resistencia.html" },
+            { label: "5 · Casos de uso", src: "uc15/farmaco/uc15-farmaco-alvo-5-casos.html" } ] },
+          { id: "jogo", titulo: "Jogo dos alvos", itens: [ { label: "Jogo dos alvos", src: "uc15/farmaco/uc15-farmaco-jogo-dos-alvos.html" } ] },
           { id: "diario", titulo: "Resumo diário", itens: [ { label: "Resumo diário SP1–3", nativo: "pdf", pdf: "conteudo/uc15/farmaco/resumo-diario-sp1-3.pdf", thumbs: "conteudo/uc15/farmaco/thumbs-diario/p-", ns: "uc15/farmaco/diario",
             toc: [{"p": 1, "t": "Como ela pensa"}, {"p": 2, "t": "SP1 · ITU e antissépticos"}, {"p": 3, "t": "SP2 · Sulfas e quinolonas"}, {"p": 4, "t": "SP3 · Mecanismo e penicilinas"}, {"p": 5, "t": "SP3 · Alergia e cefalosporinas"}, {"p": 7, "t": "Resistência (quadro da aula)"}, {"p": 8, "t": "Divergências · doses · 10 frases"}, {"p": 9, "t": "Fluxograma do quadro"}] } ] },
           { id: "raiox", titulo: "Raio-X", itens: [ { label: "Raio-X", nativo: "raiox", dir: "uc15/farmaco/central/" } ] },

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do alvo ao caso · 3 · Antibióticos do ribossomo, do DNA e do folato — Farmaco UC15</title>
+<style>
+/* Do alvo ao caso — estilo dos resumos de Tutoria (serifa no texto, Inter/sans nos títulos, roxo = caiu em prova),
+   adaptado para tela. Layout: índice estreito à esquerda + coluna de leitura. Página autocontida, sem CDN. */
+:root{
+  --ink:#1d1a26; --ink2:#4b4560; --mut:#6b6480; --h:#1f1640; --h3:#2b1f4a;
+  --pur:#6b2fb3; --pur-soft:#f1eafd; --pur-mark:#e6d8fb; --pur-line:#e3dbf0;
+  --bg:#fbfaff; --card:#ffffff; --line:#ebe6f2;
+  --ok:#23804e; --ok-soft:#eef8f1; --no:#c02d2d; --no-soft:#fde7e7;
+  --warn:#9a6c00; --warn-soft:#fff6da; --blue:#2c5fb8; --blue-soft:#e9f3fb; --teal:#0b7285; --teal-soft:#e3f6f8;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Liberation Serif",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:14px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17.5px;line-height:1.62;-webkit-text-size-adjust:100%}
+.shell{display:grid;grid-template-columns:168px minmax(0,1fr);gap:0;max-width:1080px;margin:0 auto}
+/* índice */
+.idx{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:16px 10px 24px 14px;font-family:var(--sans);font-size:12.5px;line-height:1.3;border-right:1px solid var(--line)}
+.idx .ttl{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pur);margin:0 0 8px}
+.idx a{display:block;color:var(--ink2);text-decoration:none;padding:5px 7px;border-radius:6px;border-left:2px solid transparent;margin:1px 0}
+.idx a:hover{background:var(--pur-soft)}
+.idx a.on{color:var(--h);font-weight:700;border-left-color:var(--pur);background:var(--pur-soft)}
+.idx a.q{color:var(--pur);font-weight:600;padding-left:16px;font-size:12px}
+.idx a.q .c{float:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--mut)}
+.idx a.q.done .c{color:var(--ok)}
+.idx .sep{height:1px;background:var(--line);margin:12px 4px}
+.idx .parts a{font-size:12px}
+.idx .parts a.cur{font-weight:800;color:var(--pur)}
+.idx .prog{margin:10px 6px 0;font-size:11.5px;color:var(--mut)}
+.idx .bar{height:6px;border-radius:99px;background:var(--pur-line);overflow:hidden;margin-top:5px}
+.idx .bar i{display:block;height:100%;background:var(--pur);width:0}
+/* coluna de leitura */
+.doc{padding:22px 30px 90px 34px;min-width:0;max-width:820px}
+.crumb{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pur);margin-bottom:6px}
+h1,h2,h3,h4,.sans,figcaption,.box .lb,.obj,.legend,table.t,.ficha,.qs,.pager,.chip{font-family:var(--sans)}
+h1{font-size:30px;line-height:1.15;margin:0 0 6px;color:var(--h);letter-spacing:-.3px;text-wrap:balance}
+.sub{font-family:var(--sans);font-size:13.5px;color:#7a6a9c;margin:0 0 16px}
+h2{font-size:21px;color:var(--h);margin:40px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--pur);display:flex;align-items:center;gap:10px;line-height:1.2;text-wrap:balance}
+h2 .n{background:var(--pur);color:#fff;font-size:13.5px;min-width:27px;height:27px;padding:0 6px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-size:16.5px;color:var(--h3);margin:24px 0 6px;line-height:1.25}
+h4{font-size:14px;color:var(--h3);margin:16px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+p{margin:0 0 11px}
+ul,ol{margin:4px 0 12px;padding-left:22px}
+li{margin:3px 0 5px}
+b,strong{font-weight:700}
+a{color:var(--pur)}
+mark.apf{background:var(--pur-mark);color:inherit;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pega{background:#fdf0c4;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:99px;background:#fff3c9;color:#7a5600;vertical-align:1.5px;white-space:nowrap}
+.chip.lab{background:var(--teal-soft);color:var(--teal)}
+.obj{background:#f6f3fb;border:1px solid var(--pur-line);border-radius:10px;padding:12px 16px 10px;font-size:14px;margin:8px 0 14px;line-height:1.45}
+.obj b.h{display:block;color:var(--h3);font-size:14px;margin-bottom:4px}
+.obj ol,.obj ul{margin:0;padding-left:20px}
+.legend{display:flex;gap:6px 16px;font-size:12px;color:#555;margin:6px 0 16px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i.sw{width:24px;height:10px;border-radius:2px;display:inline-block}
+.box{border-radius:10px;padding:11px 15px 9px;margin:14px 0 16px;font-size:16px;border-left:4px solid;line-height:1.55}
+.box .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:3px}
+.box.apf{background:var(--pur-soft);border-color:var(--pur)} .box.apf .lb{color:var(--pur)}
+.box.fix{background:var(--no-soft);border-color:#d23b3b} .box.fix .lb{color:var(--no)}
+.box.pg{background:var(--warn-soft);border-color:#e0a800} .box.pg .lb{color:var(--warn)}
+.box.div{background:var(--blue-soft);border-color:#3a72d6} .box.div .lb{color:var(--blue)}
+.box.case{background:var(--ok-soft);border-color:#2f9e63} .box.case .lb{color:var(--ok)}
+.box.lab{background:var(--teal-soft);border-color:#1098ad} .box.lab .lb{color:var(--teal)}
+.box s{color:var(--no)}
+table.t{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 16px;line-height:1.4}
+table.t th{background:#efe8fa;color:var(--h3);font-size:12.5px;text-align:left;padding:7px 9px;border-bottom:1.5px solid var(--pur);vertical-align:bottom}
+table.t td{padding:6px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t tr:nth-child(even) td{background:#fbfafe}
+table.t td:first-child{font-weight:600;color:var(--h3)}
+table.t .ok{color:var(--ok);font-weight:700} table.t .no{color:var(--no);font-weight:700}
+.tw{overflow-x:auto;margin:0 -4px;padding:0 4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.small{font-size:15px}
+/* ficha de fármaco */
+.ficha{border:1px solid var(--pur-line);border-radius:12px;background:var(--card);margin:12px 0 16px;overflow:hidden;font-size:14.5px;line-height:1.45}
+.ficha>.fh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:9px 14px;background:#f6f3fb;border-bottom:1px solid var(--pur-line)}
+.ficha>.fh b{font-size:16px;color:var(--h)}
+.ficha>.fh span{font-size:12.5px;color:var(--mut)}
+.ficha>.fh .tag{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px}
+.tag.cida{background:#dff3e8;color:#17663c}.tag.stat{background:#fff0c9;color:#7a5600}
+.ficha dl{margin:0;display:grid;grid-template-columns:104px minmax(0,1fr)}
+.ficha dt{padding:7px 0 7px 14px;font-weight:700;color:var(--pur);font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-top:1px solid var(--line)}
+.ficha dd{margin:0;padding:7px 14px 7px 8px;border-top:1px solid var(--line)}
+.ficha dt:first-of-type,.ficha dd:first-of-type{border-top:0}
+/* figuras (mesmas classes dos esquemas da Central, recoloridas para o roxo da Tutoria) */
+figure.fig{margin:14px 0 18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 10px 8px;overflow-x:auto}
+figure.fig figcaption{font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4;text-align:center;text-wrap:balance}
+figure.fig svg{width:100%;height:auto;display:block;min-width:440px}
+figure.fig .pl{--x-ink:#1d1a26;--x-ink2:#4b4560;--x-ink3:#6b6480;--x-ok:#17663c;--x-okbg:#eaf7ef;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#6b2fb3;--x-accsoft:#f1eafd;--x-accink:#fff;--x-trap:#7a5600;--x-line2:#ece7f5;--x-panel:#fff;--x-trapbg:#fff6da}
+.fig svg text{font-family:var(--sans)}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+.fig svg .w6{font-weight:600}.fig svg .w7{font-weight:700}.fig svg .w8{font-weight:800}
+/* bloco de questões: uma por vez */
+.qs{margin:26px 0 30px;border:1.5px solid var(--pur);border-radius:14px;background:var(--card);overflow:hidden;font-size:15px;line-height:1.5}
+.qs .qh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--pur);color:#fff;padding:9px 14px}
+.qs .qh b{font-size:14px;letter-spacing:.02em}
+.qs .qh .cnt{margin-left:auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;opacity:.95}
+.qs .dots{display:flex;gap:5px;flex-wrap:wrap;padding:9px 14px 0}
+.qs .dots button{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--pur-line);background:#fff;font:700 10.5px var(--sans);color:var(--mut);cursor:pointer;padding:0}
+.qs .dots button.cur{border-color:var(--pur);color:var(--pur);box-shadow:0 0 0 2px var(--pur-soft)}
+.qs .dots button.ok{background:#dff3e8;border-color:#7cc79d;color:#17663c}
+.qs .dots button.no{background:#fde7e7;border-color:#e59a9a;color:#a02a22}
+.qs .qb{padding:10px 16px 14px}
+.qs .tags{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+.qs .tags span{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:#f1eefb;color:var(--ink2)}
+.qs .tags span.pv{background:var(--pur-soft);color:var(--pur)}
+.qs .tags span.warn{background:#fff0c9;color:#7a5600}
+.qs .enun{font-family:var(--serif);font-size:17px;line-height:1.5;margin:0 0 10px}
+.qs ol.itens{list-style:none;margin:0 0 12px;padding:0;font-family:var(--serif);font-size:16px}
+.qs ol.itens li{margin:0 0 7px;padding:7px 10px;background:#faf8fe;border-radius:8px;border-left:3px solid var(--pur-line);display:flex;gap:10px;align-items:flex-start}
+.qs ol.itens li.pq{background:none;border:0;font-family:var(--sans);font-weight:800;font-size:12px;letter-spacing:.1em;color:var(--pur);justify-content:center;padding:0}
+.qs ol.itens li .tx{flex:1;min-width:0}
+.qs ol.itens li.r-ok{border-left-color:#2f9e63;background:var(--ok-soft)}
+.qs ol.itens li.r-no{border-left-color:#d23b3b;background:var(--no-soft)}
+.qs .vf{display:inline-flex;gap:4px;flex:none}
+.qs .vf button{font:800 12px var(--sans);width:30px;height:28px;border-radius:7px;border:1.5px solid var(--pur-line);background:#fff;color:var(--ink2);cursor:pointer}
+.qs .vf button.sel{background:var(--pur);border-color:var(--pur);color:#fff}
+.qs .vf .truth{font:800 11px var(--sans);align-self:center;margin-left:4px}
+.qs .opts{display:grid;gap:7px;margin:0 0 10px}
+.qs .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;font:inherit;font-family:var(--serif);font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--pur-line);border-radius:10px;padding:9px 12px;cursor:pointer;line-height:1.45}
+.qs .opt:hover:not(:disabled){border-color:var(--pur);background:#faf7ff}
+.qs .opt:disabled{cursor:default;color:var(--ink)}
+.qs .opt>b{font-family:var(--sans);font-size:12.5px;width:22px;height:22px;border-radius:50%;background:#f1eefb;color:var(--pur);display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.qs .opt .w{display:block;font-family:var(--sans);font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.4}
+.qs .opt.ok{border-color:#2f9e63;background:var(--ok-soft)} .qs .opt.ok>b{background:#2f9e63;color:#fff}
+.qs .opt.no{border-color:#d23b3b;background:var(--no-soft)} .qs .opt.no>b{background:#d23b3b;color:#fff}
+.qs .fb{border-radius:10px;padding:10px 13px;margin:4px 0 10px;font-size:14.5px;line-height:1.5;background:var(--pur-soft);border-left:4px solid var(--pur)}
+.qs .fb.ok{background:var(--ok-soft);border-color:#2f9e63} .qs .fb.no{background:var(--no-soft);border-color:#d23b3b}
+.qs .fb .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px;color:var(--pur)}
+.qs .fb.ok .lb{color:var(--ok)} .qs .fb.no .lb{color:var(--no)}
+.qs .fb .gab{font-family:var(--serif);font-size:16.5px}
+.qs .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qs .btn{font:700 13.5px var(--sans);padding:8px 14px;border-radius:9px;border:1.5px solid var(--pur);background:#fff;color:var(--pur);cursor:pointer}
+.qs .btn.pri{background:var(--pur);color:#fff}
+.qs .btn.g{border-color:#2f9e63;color:#17663c}.qs .btn.r{border-color:#d23b3b;color:#a02a22}
+.qs .btn:disabled{opacity:.45;cursor:default}
+.qs .hint{font-size:12.5px;color:var(--mut)}
+.qs .more{font-size:12.5px;color:var(--mut);padding:0 16px 12px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:14px}
+.pager a{text-decoration:none;font-weight:700;padding:10px 14px;border:1.5px solid var(--pur-line);border-radius:10px;background:#fff;max-width:48%}
+.pager a small{display:block;font-weight:600;color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.pager a.nx{margin-left:auto;text-align:right}
+button:focus-visible,a:focus-visible{outline:2px solid var(--pur);outline-offset:2px}
+@media (max-width:860px){
+  body{font-size:16.5px}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .idx{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px 14px}
+  .idx .links{display:none}.idx.open .links{display:block}
+  .idx .ttl{cursor:pointer;margin:0}.idx .ttl::after{content:" ▾"}
+  .doc{padding:16px 16px 70px}
+  h1{font-size:25px}h2{font-size:19px}
+  .two{grid-template-columns:1fr}
+  .ficha dl{grid-template-columns:86px minmax(0,1fr)}
+}
+@media print{.idx,.pager,.qs .dots{display:none}.shell{display:block}.doc{max-width:none;padding:0}.qs{break-inside:avoid}}
+</style></head><body>
+<div class="shell">
+<nav class="idx" id="idx" aria-label="Índice"></nav>
+<main class="doc" id="doc">
+<div class="crumb">Farmaco UC15 · Do alvo ao caso · Parte 3 de 5</div>
+<h1>Antibióticos do ribossomo, do DNA e do folato</h1>
+<div class="sub">Aminoglicosídeos · tetraciclinas e tigeciclina · macrolídeos, clindamicina e linezolida · quinolonas · metronidazol e nitrofurantoína · sulfas · o esquema da tuberculose</div>
+
+<div class="obj"><b class="h">Você sai desta parte sabendo</b>
+<ol>
+<li>quem se liga ao 30S e quem se liga ao 50S, e por que isso decide a resistência cruzada;</li>
+<li>o que cada quinolona trata e o que nenhuma pode (gestante, criança);</li>
+<li>como agem metronidazol e nitrofurantoína e onde cada um serve;</li>
+<li>a via do folato e por que o sinergismo da sulfa com a trimetoprima é farmacodinâmico;</li>
+<li>o esquema da tuberculose: mecanismo e efeito adverso que se destaca de cada fármaco;</li>
+<li>os efeitos adversos e as interações que ela cobra “em bloco”.</li>
+</ol></div>
+
+<h2><span class="n">1</span>O ribossomo: duas subunidades, duas turmas</h2>
+<p>O ribossomo da bactéria tem duas metades. A menor, <b>30S</b>, lê o RNA mensageiro. A maior, <b>50S</b>, monta a proteína, ligando um aminoácido ao outro. Os antibióticos desta seção travam uma ou outra, a bactéria deixa de fabricar proteínas e para de se multiplicar. Por isso quase todos são <b>bacteriostáticos</b> e dependem de o paciente ter imunidade para terminar o serviço.</p>
+<p>Saber a subunidade tem um uso prático que ela cobra: fármacos que se ligam ao <b>mesmo lugar</b> costumam falhar juntos. Na frase dela, “se um inibidor do 30S falhou, outro inibidor do 30S provavelmente também falha”. O mesmo vale para o 50S, onde macrolídeo e clindamicina dividem o sítio.</p>
+
+<figure class="fig"><div class="pl">
+<svg viewBox="0 0 680 240" role="img" aria-label="Ribossomo bacteriano: na subunidade 30S ligam-se aminoglicosídeos, tetraciclinas e tigeciclina; na 50S, macrolídeos, clindamicina, cloranfenicol e linezolida." xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="340" cy="92" rx="100" ry="52" class="bcell"/>
+<text x="340" y="88" text-anchor="middle" font-size="17" class="tacc w8">50S</text>
+<text x="340" y="106" text-anchor="middle" font-size="10.5" class="tacc">monta a proteína</text>
+<ellipse cx="340" cy="174" rx="86" ry="30" class="btrap"/>
+<text x="340" y="173" text-anchor="middle" font-size="15" class="ttrap w8">30S</text>
+<text x="340" y="188" text-anchor="middle" font-size="10" class="ttrap">lê o RNA mensageiro</text>
+<path d="M216 146 q9 -7 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0" class="lacc lthick"/>
+<text x="222" y="134" font-size="10" class="tacc">RNAm</text>
+<g class="bokf"><circle cx="340" cy="34" r="5"/><circle cx="353" cy="27" r="5"/><circle cx="367" cy="22" r="5"/><circle cx="382" cy="20" r="5"/></g>
+<text x="394" y="24" font-size="10" class="tok">proteína nascendo</text>
+<rect x="8" y="150" width="206" height="84" rx="8" class="b"/>
+<text x="20" y="166" font-size="10" class="t3" letter-spacing="0.06em">LIGAM-SE AO 30S</text>
+<text x="20" y="183" font-size="11" class="tok w6">aminoglicosídeos: leitura errada</text>
+<text x="20" y="197" font-size="11" class="tok w7">→ proteína defeituosa → matam</text>
+<text x="20" y="213" font-size="11" class="ttrap w6">tetraciclinas · tigeciclina:</text>
+<text x="20" y="227" font-size="11" class="ttrap">barram a entrada do RNAt → freiam</text>
+<line x1="214" y1="188" x2="254" y2="178" class="l"/>
+<rect x="466" y="48" width="206" height="102" rx="8" class="b"/>
+<text x="478" y="64" font-size="10" class="t3" letter-spacing="0.06em">LIGAM-SE AO 50S</text>
+<text x="478" y="81" font-size="11" class="ttrap w6">macrolídeos · clindamicina</text>
+<text x="478" y="95" font-size="11" class="ttrap">cloranfenicol → freiam</text>
+<text x="478" y="111" font-size="10" class="tno w6">mesmo sítio: resistência cruzada</text>
+<text x="478" y="128" font-size="11" class="ttrap w6">linezolida: só a porção 23S</text>
+<text x="478" y="142" font-size="10" class="tok w6">sem resistência cruzada</text>
+<line x1="466" y1="96" x2="440" y2="94" class="l"/>
+<text x="569" y="188" text-anchor="middle" font-size="11.5" class="t w7">Todos freiam,</text>
+<text x="569" y="204" text-anchor="middle" font-size="11.5" class="t w7">menos o aminoglicosídeo.</text>
+</svg></div><figcaption>Quem se liga onde. A subunidade explica quem falha junto: macrolídeo e clindamicina (50S); aminoglicosídeo e tetraciclina (30S).</figcaption></figure>
+
+<h2><span class="n">2</span>30S: aminoglicosídeos</h2>
+<p>São a exceção da síntese proteica. Em vez de só travar o ribossomo, fazem com que ele <b>leia errado</b> o RNA mensageiro. A bactéria fabrica proteínas defeituosas, que se acumulam e a matam. <mark class="apf">São os únicos inibidores da síntese proteica bactericidas.</mark></p>
+
+<div class="ficha"><div class="fh"><b>Gentamicina · amicacina</b><span>aminoglicosídeos · IM ou IV · hospital</span><span class="tag cida">matam</span></div>
+<dl>
+<dt>Pega</dt><dd><mark class="apf">Gram-negativas aeróbias</mark>, em infecções graves. <span class="pega">“Tratam infecções graves por Gram-positivas”</span> é a troca de uma palavra que já caiu.</dd>
+<dt>Não pega</dt><dd>Anaeróbios (quase nada) e, no uso sistêmico, Gram-positivas.</dd>
+<dt>Para quê</dt><dd>Infecções graves do trato geniturinário, intra-abdominais e sepse, <b>quando nada melhor serve</b>. <mark class="apf">Nunca são a 1ª escolha.</mark> Costumam ser combinados: com β-lactâmico na sepse; com clindamicina na infecção intra-abdominal (ela cobre os anaeróbios). Tobramicina e neomicina têm uso tópico.</dd>
+<dt>No corpo</dt><dd>Muito hidrossolúveis: não são absorvidos por boca e <mark class="apf">são eliminados inalterados na urina, em proporção direta à depuração de creatinina</mark>. Agem melhor em meio alcalino: nada de frutas cítricas ou vinagre na dieta <span class="chip">aula 2026</span>.</dd>
+<dt>Dose</dt><dd>Gentamicina cerca de <b>5 mg/kg/dia</b> (amicacina 15 mg/kg/dia). <b>Dose única diária</b> é mais segura que dividir de 8/8 h. Ajuste pela creatinina: divide-se a dose calculada pela creatinina do paciente (300 mg com creatinina 3 vira 100 mg).</dd>
+<dt>Cuidado</dt><dd><mark class="apf">Nefrotoxicidade e ototoxicidade</mark>, que dependem da dose e do tempo; a perda auditiva é irreversível. Pioram com vancomicina e furosemida, na desidratação e no idoso. É por isso que <mark class="apf">não são a 1ª escolha</mark>.</dd>
+</dl></div>
+<div class="box pg"><span class="lb">Pegadinha: por que evitar o aminoglicosídeo</span>
+<p>A justificativa certa é <b>nefrotoxicidade e ototoxicidade</b>. Já apareceram como falsas: “porque inibem a síntese proteica do hospedeiro” e “porque induzem mutação nas topoisomerases”. E a sentença “amicacina é a 1ª escolha porque a infecção é resistente” é falsa sempre: aminoglicosídeo só entra quando não sobra outra opção.</p>
+</div>
+
+<h2><span class="n">3</span>30S: tetraciclinas e tigeciclina</h2>
+<p>As tetraciclinas se ligam ao 30S e impedem a entrada do RNA transportador que traz o aminoácido. São <b>bacteriostáticas</b>: quando o fármaco se solta, a leitura volta. Têm espectro amplo, com preferência por Gram-positivas, e pegam as <b>atípicas</b>. <b>Não pegam <i>Pseudomonas</i>, <i>Proteus</i>, <i>Enterobacter</i> nem <i>Serratia</i>.</b></p>
+<p>O problema clássico da classe é ser <b>quelante</b>: gruda em cálcio, magnésio, ferro e zinco. No intestino isso reduz a absorção (por isso longe das refeições e de suplementos); no organismo, deposita em osso e dente em formação. Daí a <mark class="apf">contraindicação absoluta em crianças e gestantes</mark>, mesmo para as pouco quelantes.</p>
+<p>Ela pediu para estudar três, todas de longa duração e pouco quelantes: <b>doxiciclina</b> (o foco), <b>limeciclina</b> e <b>minociclina</b>.</p>
+
+<div class="ficha"><div class="fh"><b>Doxiciclina</b><span>tetraciclina de longa duração · via oral</span><span class="tag stat">freia</span></div>
+<dl>
+<dt>Dose</dt><dd><mark class="apf">100 mg de 12/12 h ou 1 vez ao dia</mark>. <span class="pega">“300 mg 1 vez ao dia”</span> é a dose da limeciclina, usada na acne.</dd>
+<dt>Para quê</dt><dd><mark class="apf">Infecção de pele por MRSA no ambulatório (1ª linha)</mark>; <mark class="apf">sífilis em quem tem alergia imediata à penicilina</mark>; clamídia e outras IST (fora da gestação); acne, que ela chama de “carro-chefe” das tetraciclinas; pneumonia atípica; febre maculosa e leptospirose; <i>H. pylori</i> refratária.</dd>
+<dt>Cuidado</dt><dd>Náusea e vômito intensos (muitos precisam de antiemético), diarreia e candidíase, <b>fotossensibilidade</b>. Criança e gestante: não.</dd>
+<dt>No corpo</dt><dd>Excreção biliar: <mark class="apf">não acumula na insuficiência renal</mark>. A sentença “doxiciclina é contraindicada no declínio da função renal” é falsa. A limeciclina, por ser pouco quelante, também é considerada mais segura para o rim.</dd>
+</dl></div>
+<div class="box div"><span class="lb">Divergência: tetraciclina e síntese proteica humana</span>
+<p>Na aula de 2026 ela chamou de “exceção da exceção” a possibilidade de a tetraciclina, em dose alta e por muito tempo, inibir a síntese proteica humana, e disse que não precisa decorar. Mas a frase aparece em três provas como <b>verdadeira</b>. Se vier numa sentença, marque verdadeira.</p>
+</div>
+
+<div class="ficha"><div class="fh"><b>Tigeciclina</b><span>derivada das tetraciclinas · hospitalar · IV</span><span class="tag stat">freia</span></div>
+<dl>
+<dt>Alvo</dt><dd>30S, como as tetraciclinas. Bacteriostática.</dd>
+<dt>Pega</dt><dd>Gram-positivas e Gram-negativas resistentes.</dd>
+<dt>Não pega</dt><dd><mark class="apf"><i>Pseudomonas</i> e <i>Proteus</i></mark>.</dd>
+<dt>Para quê</dt><dd><mark class="apf">1ª escolha no GRSA</mark> (o <i>S. aureus</i> resistente a glicopeptídeos); <mark class="apf"><i>Enterococcus</i> resistente a glicopeptídeos</mark>; <mark class="apf">cultura com MRSA e <i>E. coli</i> ESBL ao mesmo tempo</mark> (cobre as duas); também usada na <i>Klebsiella</i> produtora de carbapenemase.</dd>
+<dt>Dose</dt><dd><mark class="apf">50 mg IV de 12/12 h</mark>, depois de 100 mg de ataque. <span class="pega">“100 mg 2 vezes ao dia”</span> já foi sentença falsa. Em 2026 ela disse que a dose de ataque é “só curiosidade”.</dd>
+<dt>Cuidado</dt><dd>Vômito e diarreia muito intensos: sempre com antiemético. Excreção biliar.</dd>
+</dl></div>
+
+<h2><span class="n">4</span>50S: macrolídeos, clindamicina e linezolida</h2>
+<h3>Macrolídeos</h3>
+<p>No Brasil são dois de uso sistêmico: <b>azitromicina</b> e <b>claritromicina</b>. Ligam-se ao 50S e são bacteriostáticos. O lugar deles no raciocínio dela é muito claro: <b>são a 1ª linha para infecções por Gram-positivas em quem tem alergia imediata à penicilina</b>. Também cobrem as atípicas.</p>
+<div class="tw"><table class="t">
+<tr><th>Fármaco</th><th>Dose</th><th>Para quê</th></tr>
+<tr><td>Azitromicina</td><td><mark class="apf">500 mg 1 vez ao dia por 5 dias</mark>, longe das refeições</td><td><mark class="apf">alergia imediata</mark>: faringite, pele depois de drenar abscesso (atenção básica), pneumonia comunitária pelo protocolo · <mark class="apf">coqueluche</mark> · <mark class="apf">clamídia e gonorreia</mark>, e é a 1ª linha de IST na gestante · pneumonia atípica</td></tr>
+<tr><td>Claritromicina</td><td><mark class="apf">500 mg de 12/12 h</mark></td><td><i>H. pylori</i>, com amoxicilina 1 g de 12/12 h e omeprazol</td></tr>
+<tr><td>Espiramicina</td><td>via oral</td><td>uma única indicação: <mark class="apf">toxoplasmose na gestante até 12 semanas</mark>; depois troca para sulfadiazina + pirimetamina</td></tr>
+</table></div>
+<p>O que o macrolídeo <b>não</b> faz também é cobrado:</p>
+<ul>
+<li><mark class="apf">Não trata infecção urinária</mark> nem intestinal: essas são por Gram-negativas, e ele quase não chega ao rim e à urina (a excreção é biliar).</li>
+<li>Não trata anaeróbio. A sentença <span class="pega">“azitromicina e clindamicina compartilham a indicação contra anaeróbios Gram-positivos”</span> é falsa: o que elas compartilham é o 50S, não a indicação.</li>
+<li>Não é para alergia <b>tardia</b>: aí ainda cabe cefalosporina.</li>
+<li><span class="pega">“Azitromicina 500 mg por 3 dias”</span>: hoje são 5 dias, por causa da resistência alta.</li>
+</ul>
+
+<h3>Clindamicina</h3>
+<div class="ficha"><div class="fh"><b>Clindamicina</b><span>lincosamida · via oral ou IV</span><span class="tag stat">freia</span></div>
+<dl>
+<dt>Alvo</dt><dd>50S, o mesmo sítio dos macrolídeos: <mark class="apf">resistência cruzada com macrolídeos</mark>.</dd>
+<dt>Pega</dt><dd>Gram-positivas e <b>anaeróbios</b>. Penetra muito bem no <b>osso</b>.</dd>
+<dt>Para quê</dt><dd><mark class="apf">Osteomielite em quem tem alergia imediata</mark>; anaeróbios; infecções pélvicas e respiratórias graves no hospital quando a alergia imediata impede a cefoxitina; MRSA no ambulatório, como opção; toxoplasmose em alérgico à sulfa, com pirimetamina.</dd>
+<dt>Dose</dt><dd>Via oral <b>300 mg de 6/6 h</b>; IV 600 a 900 mg de 8/8 h.</dd>
+<dt>Cuidado</dt><dd>Os efeitos gastrointestinais são os mais severos: <b>colite pseudomembranosa</b>. Gosto metálico. <mark class="apf">Não precisa de ajuste renal.</mark></dd>
+</dl></div>
+<div class="box div"><span class="lb">Divergência: clindamicina e Gram-negativas</span>
+<p>Na aula de 2026 ela falou em “igual eficácia para Gram-positivas e Gram-negativas”. O slide dela diz Gram-positivas e anaeróbios. <b>Na prova, use o slide.</b></p>
+</div>
+
+<h3>Linezolida e cloranfenicol</h3>
+<p>A <b>linezolida</b> também se liga ao 50S, mas só a uma subporção, o <b>23S</b>. Por isso <mark class="apf">não tem resistência cruzada</mark> com macrolídeo e clindamicina: se a clindamicina falhou, a linezolida ainda funciona. É <mark class="apf">bacteriostática</mark>, dose de <b>600 mg de 12/12 h</b> por via oral ou IV, usada no GRSA e no enterococo resistente à vancomicina quando o paciente não tolera a tigeciclina. Efeito adverso que se destaca: <b>mielotoxicidade</b> (plaquetas e neutrófilos caem).</p>
+<p>O <b>cloranfenicol</b> liga-se ao 50S e é bacteriostático, mas é muito tóxico para a medula. Hoje o uso é praticamente só em colírio.</p>
+
+<div class="qs" data-t="Questões dela · síntese proteica" data-ids="p08,T9-Q3,T11-Q12,a13-03,T10-Q16,p05,T10-Q2,a13-08,T4-Q8,T10-QD3,T10-Q6,p18,T3-Q11"></div>
+
+<h2><span class="n">5</span>DNA: quinolonas</h2>
+<p>Para caber dentro da célula, o DNA da bactéria fica superenrolado, e para copiá-lo é preciso desenrolar e depois separar as duas cópias. Quem faz isso são a <b>topoisomerase II (DNA-girase)</b> e a <b>topoisomerase IV</b>. As quinolonas inibem as duas: a fita fica aberta e instável, e a bactéria morre. São <mark class="apf">bactericidas</mark>.</p>
+<p>O que diferencia uma quinolona da outra é <b>para onde ela vai</b> no corpo. Esse é o detalhe que decide as questões.</p>
+<div class="tw"><table class="t">
+<tr><th>Quinolona</th><th>Dose</th><th>Vai para</th><th>Serve para</th><th>Não serve para</th></tr>
+<tr><td>Norfloxacino</td><td>400 mg 12/12 h</td><td>urina</td><td>infecção urinária; quase não se usa mais</td><td>se falhou, o cipro também falha (mesma classe)</td></tr>
+<tr><td>Ciprofloxacino</td><td><mark class="apf">500 mg 12/12 h</mark></td><td>urina, próstata, intestino</td><td><mark class="apf">pielonefrite no ambulatório</mark>; <mark class="apf"><i>Pseudomonas</i> no ambulatório</mark>; <mark class="apf"><i>E. coli</i> ESBL no ambulatório, se o antibiograma mostrar sensível</mark>; <b>prostatite</b> (15 a 21 dias); infecção intestinal</td><td>pneumococo: não é a quinolona do pulmão · cistite simples (é potente demais)</td></tr>
+<tr><td>Levofloxacino</td><td><mark class="apf">500 mg 1 vez ao dia</mark></td><td>pulmão e seios da face</td><td><mark class="apf">pneumonia comunitária no adulto com alergia imediata</mark>; rinossinusite complicada com alergia imediata; substituto no esquema da tuberculose</td><td><span class="pega">faringite: nunca</span> (não se acumula nesse tecido) · não é a quinolona da urina</td></tr>
+<tr><td>Moxifloxacino</td><td>—</td><td>pulmão; sai pela bile</td><td>pneumonia (alternativa)</td><td><b>jamais infecção urinária</b>: não passa pelo rim</td></tr>
+</table></div>
+<p>O que vale para todas:</p>
+<ul>
+<li><mark class="apf">Proibidas na gestante e na criança</mark>: formam quelato com cálcio e atrapalham osso e dente em formação.</li>
+<li><b>Quelam cálcio, zinco e magnésio</b>: tomar longe das refeições e de suplementos minerais.</li>
+<li>Efeitos adversos: <mark class="apf">cristalúria, fotossensibilidade e convulsões</mark> (excitam o sistema nervoso, mais no idoso). Uma questão descreveu exatamente esse trio para um antibiótico ambulatorial de amplo espectro, e a resposta era levofloxacino. Os slides de 2026 acrescentam tendinite e ruptura de tendão.</li>
+</ul>
+<div class="box pg"><span class="lb">Pegadinha: quelato e cristalúria não são a mesma coisa</span>
+<p>Sentença falsa que já caiu: “o complexo de tetraciclinas e quinolonas com cátions dos <b>alimentos</b> aumenta a cristalúria”. O complexo que se forma no intestino só <b>reduz a absorção</b>. A cristalúria vem do complexo formado no sangue, quando o paciente usa suplemento mineral.</p>
+</div>
+
+<h2><span class="n">6</span>DNA por radicais: metronidazol e nitrofurantoína</h2>
+<p>Estes dois são <b>pró-fármacos</b>. Entram inativos e é a própria bactéria que os transforma num <b>radical reativo</b>, que então lesa o DNA. A diferença está em quem consegue ativá-los, e isso define o espectro de cada um.</p>
+
+<div class="ficha"><div class="fh"><b>Metronidazol</b><span>nitroimidazol · via oral ou IV</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd><mark class="apf">É reduzido por enzimas que só existem em anaeróbios</mark> (as oxirredutases, PFOR) <mark class="apf">a um radical que lesa o DNA</mark>. <span class="pega">“É oxidado e inibe a produção de proteínas”</span> é falsa nas duas metades.</dd>
+<dt>Pega</dt><dd>Anaeróbios (<i>Bacteroides</i>, <i>Clostridium</i>) e protozoários (ameba, giárdia, tricomonas), além da <i>Gardnerella</i>.</dd>
+<dt>Para quê</dt><dd><mark class="apf">Anaeróbios no ambulatório</mark> (no hospital a 1ª escolha é cefoxitina); <mark class="apf">peritonite por <i>B. fragilis</i> em quem tem alergia imediata</mark>; protozooses; <i>H. pylori</i>.</dd>
+<dt>Dose</dt><dd>Infecção intestinal por anaeróbio: 400 mg de 8/8 h. Tricomoníase: 2 g em dose única.</dd>
+<dt>Cuidado</dt><dd><mark class="apf">O efeito dissulfiram mais forte de todos</mark>: nada de álcool. Gosto metálico e boca muito seca; urina escura.</dd>
+</dl></div>
+
+<div class="ficha"><div class="fh"><b>Nitrofurantoína</b><span>via oral · só para a bexiga</span><span class="tag cida">mata</span></div>
+<dl>
+<dt>Alvo</dt><dd>É reduzida por redutases bacterianas a um radical que lesa DNA, RNA e proteínas. Como o radical se liga a qualquer molécula, quase não há resistência descrita. <span class="pega">Não age na parede.</span></dd>
+<dt>Pega</dt><dd>As bactérias da cistite, como <i>E. coli</i>.</dd>
+<dt>Não pega</dt><dd><mark class="apf"><i>Pseudomonas</i> e <i>Proteus</i></mark>.</dd>
+<dt>Para quê</dt><dd><mark class="apf">1ª linha da cistite não complicada</mark>, inclusive quando há alergia tardia à penicilina; <mark class="apf">profilaxia de infecção urinária</mark> (sonda vesical, recorrência). Pode em criança.</dd>
+<dt>Dose</dt><dd><b>100 mg de 6/6 h por 5 dias</b>. Profilaxia: 100 mg 1 vez ao dia.</dd>
+<dt>Cuidado</dt><dd>Gestante: <mark class="apf">pode antes de 37 semanas; a partir de 37 é proibida</mark> (anemia hemolítica do recém-nascido). <mark class="apf">Uso prolongado: monitorar a função pulmonar</mark> (fibrose). Não serve para pielonefrite nem para infecção complicada ou polimicrobiana de cateter.</dd>
+</dl></div>
+<div class="box pg"><span class="lb">Par mínimo: a semana da gestante</span>
+<p>A mesma sentença sobre nitrofurantoína na gestante foi verdadeira com “a partir de 25 semanas” e falsa com “37” ou “38 semanas”. O número é a questão.</p>
+</div>
+
+<h3>Dois que não são antibióticos</h3>
+<p>Aparecem nas alternativas para confundir. A <b>metenamina</b> (Sepurin, Cystex) é um antisséptico urinário: na urina ácida vira formaldeído. Serve para o desconforto inicial, antes de haver infecção, por no máximo 2 dias. A <b>fenazopiridina</b> (Pyridium) é um corante com efeito analgésico: usa-se junto do antibiótico por 1 a 2 dias; deixa a urina alaranjada e pode mascarar a hematúria.</p>
+
+<div class="qs" data-t="Questões dela · quinolonas, metronidazol e nitrofurantoína" data-ids="T11-Q9,s09,s07,T7-Q7,a13-11,T8-Q14,T3-Q14,T8-Q6"></div>
+
+<h2><span class="n">7</span>Folato: as sulfas</h2>
+<p>A bactéria fabrica o próprio folato numa linha de montagem de dois passos. A <b>sulfa</b> se parece com o PABA, a matéria-prima, e compete com ele na primeira enzima (a folato sintase). A <b>trimetoprima</b> bloqueia a segunda (a folato redutase). Sem folato não há DNA.</p>
+
+<figure class="fig"><div class="pl"><svg viewBox="0 0 680 300" role="img" aria-label="Via do folato. Na bactéria: PABA vira di-hidropteroato pela di-hidropteroato sintase, que a sulfa bloqueia; o di-hidrofolato vira tetra-hidrofolato pela redutase, que a trimetoprima bloqueia. No humano o ácido fólico vem da dieta e a trimetoprima compete com muito folato, por isso afeta pouco." xmlns="http://www.w3.org/2000/svg"><text x="14" y="26" font-size="10" text-anchor="start" class="t3" letter-spacing="0.06em">BACTÉRIA — fabrica o próprio folato</text><rect x="14" y="40" width="136" height="34" rx="8" class="b"/><text x="82" y="62" font-size="11.5" text-anchor="middle" class="t" font-weight="600">PABA</text><rect x="168" y="40" width="136" height="34" rx="8" class="b"/><text x="236" y="62" font-size="11.5" text-anchor="middle" class="t" font-weight="600">di-hidropteroato</text><rect x="330" y="40" width="136" height="34" rx="8" class="b"/><text x="398" y="62" font-size="11.5" text-anchor="middle" class="t" font-weight="600">di-hidrofolato</text><rect x="492" y="40" width="136" height="34" rx="8" class="b"/><text x="560" y="62" font-size="11.5" text-anchor="middle" class="t" font-weight="600">tetra-hidrofolato</text><line x1="150" y1="57" x2="159.0" y2="57.0" class="l"/><polygon points="166.0,57.0 159.0,53.5 159.0,60.5" class="h"/><line x1="304" y1="57" x2="321.0" y2="57.0" class="l"/><polygon points="328.0,57.0 321.0,53.5 321.0,60.5" class="h"/><line x1="466" y1="57" x2="483.0" y2="57.0" class="l"/><polygon points="490.0,57.0 483.0,53.5 483.0,60.5" class="h"/><text x="240" y="100" font-size="10" text-anchor="middle" class="t2">DH-pteroato sintase</text><rect x="178" y="108" width="124" height="26" rx="13" class="bno"/><text x="240" y="126" font-size="11" text-anchor="middle" class="tno" font-weight="700">✗ SULFA</text><text x="402" y="100" font-size="10" text-anchor="middle" class="t2">DHF redutase</text><rect x="340" y="108" width="124" height="26" rx="13" class="bno"/><text x="402" y="126" font-size="11" text-anchor="middle" class="tno" font-weight="700">✗ TRIMETOPRIMA</text><line x1="628" y1="74" x2="628.0" y2="97.0" class="l"/><polygon points="628.0,104.0 631.5,97.0 624.5,97.0" class="h"/><text x="628" y="120" font-size="10.5" text-anchor="middle" class="t2">purinas → DNA</text><text x="14" y="176" font-size="10" text-anchor="start" class="t3" letter-spacing="0.06em">HUMANO — recebe o folato da dieta</text><rect x="14" y="190" width="136" height="34" rx="8" class="bok"/><text x="82" y="212" font-size="11.5" text-anchor="middle" class="tok" font-weight="600">ácido fólico</text><rect x="330" y="190" width="136" height="34" rx="8" class="b"/><text x="398" y="212" font-size="11.5" text-anchor="middle" class="t" font-weight="600">di-hidrofolato</text><rect x="492" y="190" width="136" height="34" rx="8" class="b"/><text x="560" y="212" font-size="11.5" text-anchor="middle" class="t" font-weight="600">tetra-hidrofolato</text><line x1="150" y1="207" x2="321.0" y2="207.0" class="lok"/><polygon points="328.0,207.0 321.0,203.5 321.0,210.5" class="hok"/><text x="240" y="200" font-size="10" text-anchor="middle" class="t2">entra na célula</text><line x1="466" y1="207" x2="483.0" y2="207.0" class="l"/><polygon points="490.0,207.0 483.0,203.5 483.0,210.5" class="h"/><text x="478" y="244" font-size="10.5" text-anchor="middle" class="t2">TMP compete com MUITO folato → efeito pequeno</text><rect x="14" y="258" width="652" height="32" rx="8" class="btrap"/><text x="340" y="279" font-size="11" text-anchor="middle" class="ttrap" font-weight="600">Bloqueio em sequência = sinergismo FARMACODINÂMICO · antifolato → teratogênico e anemia megaloblástica</text></svg></div><figcaption>Dois cortes seguidos na mesma linha de montagem. Por agirem em dois pontos do mesmo caminho, o sinergismo é farmacodinâmico.</figcaption></figure>
+
+<p>Juntas, as duas fazem mais do que a soma. Como cada uma age num ponto do <b>mesmo mecanismo</b>, esse sinergismo é <mark class="apf">farmacodinâmico</mark>. A última prova trocou por <span class="pega">“farmacocinético”</span> numa frase que, no resto, estava certa. O efeito é <mark class="apf">bacteriostático</mark> e alcança Gram-positivas e Gram-negativas.</p>
+
+<div class="ficha"><div class="fh"><b>Sulfametoxazol + trimetoprima</b><span>via oral · atenção básica</span><span class="tag stat">freia</span></div>
+<dl>
+<dt>Dose</dt><dd><mark class="apf">800 + 160 mg de 12/12 h por 3 dias</mark> na cistite; 10 dias na recorrência.</dd>
+<dt>Para quê</dt><dd>Infecção urinária, e é a <mark class="apf">1ª linha na criança</mark>; infecção intestinal; <mark class="apf">faringite em quem tem alergia imediata e não respondeu à azitromicina</mark>. No trato respiratório, só quando a 1ª linha não pode.</dd>
+<dt>Cuidado</dt><dd><b>Gestante: não.</b> Para ela é “absolutamente contraindicado” na infecção urinária da gestante, por ser antifolato. <mark class="apf">Anemia</mark> e leucopenia. <mark class="apf">Síndrome de Stevens-Johnson</mark>, que impede reexposição ao fármaco. Evitar no imunossuprimido (é bacteriostático).</dd>
+<dt>Cristalúria</dt><dd>É causada pelo <mark class="apf">metabólito acetilado</mark> (acetilação, fase 2), menos solúvel: beber muita água. <span class="pega">“Conjugados glicuronídeos”</span> é falsa. Em descendentes de orientais, que acetilam mais rápido, deve ser <mark class="apf">evitada</mark>; <span class="pega">“contraindicada por alteração na CYP450”</span> é falsa.</dd>
+</dl></div>
+
+<h3>Sulfadiazina + pirimetamina: a dupla da toxoplasmose</h3>
+<p>Mesma lógica, com outra dupla: sulfadiazina na primeira enzima e pirimetamina na segunda, mais <b>ácido folínico</b> para proteger a medula do paciente. É o <mark class="apf">tratamento de escolha da toxoplasmose</mark>. A justificativa que ela pede: a sulfadiazina <mark class="apf">fica ionizada no pH do plasma, é mais hidrossolúvel e dá menos cristalúria</mark> num tratamento que é longo. <span class="pega">“Porque o sulfametoxazol dá mais anemia”</span> não é a razão.</p>
+<ul>
+<li><b>Gestante</b>: até 12 semanas, <b>espiramicina</b> (todo antifolato é considerado teratogênico nessa fase); <mark class="apf">a partir de 12 semanas, sulfadiazina + pirimetamina</mark>.</li>
+<li><b>Alergia à sulfa</b>: clindamicina + pirimetamina.</li>
+</ul>
+<div class="box case"><span class="lb">Caso da aula de 2026</span>
+<p>Paciente acabou de tratar toxoplasmose com sulfadiazina + pirimetamina e agora tem cistite. Sulfametoxazol + trimetoprima é boa escolha? <b>Não.</b> Ela acabou de usar fármacos da mesma classe, e a infecção urinária vem da própria microbiota, que foi exposta a eles: a chance de resistência é alta. Tratar com nitrofurantoína ou fosfomicina.</p>
+</div>
+<p>Para não confundir: a <b>sulfassalazina</b> é da doença inflamatória intestinal (UC14), não de “infecção intestinal”. A <b>sulfadiazina de prata</b> é tópica, para queimadura.</p>
+
+<div class="qs" data-t="Questões dela · sulfas e toxoplasmose" data-ids="s01,T4-Q12,T3-Q13,T11-Q1,T11-Q10,T9-Q14,T10-Q15,T1-Q10,T9-QD3,AU06-2"></div>
+
+<h2><span class="n">8</span>Tuberculose: quatro fármacos, quatro alvos</h2>
+<p>A micobactéria cresce devagar e é envolta em cera, então o tratamento é longo e sempre com vários fármacos de alvos diferentes, para que não sobre nenhuma resistente. O que ela disse que vai cobrar <span class="chip">aula 2026</span>: <b>o esquema, o mecanismo e o efeito adverso que se destaca de cada um</b>.</p>
+
+<figure class="fig"><div class="pl"><svg viewBox="0 0 680 352" role="img" aria-label="Tuberculose: fase intensiva de 2 meses com rifampicina, isoniazida, pirazinamida e etambutol e manutenção de 4 meses com rifampicina e isoniazida. Cada fármaco com o alvo e o efeito adverso que cai. Efeitos menores: tratar e manter; maiores: suspender." xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="220" height="40" rx="6" class="bacc"/><text x="120" y="43" font-size="12" text-anchor="middle" class="tinv" font-weight="700">2 meses · RHZE (intensiva)</text><rect x="234" y="18" width="436" height="40" rx="6" class="bsoft"/><text x="452" y="43" font-size="12" text-anchor="middle" class="tacc" font-weight="700">4 meses · RH (manutenção)</text><text x="10" y="76" font-size="10.5" text-anchor="start" class="t2">Dose fixa combinada, todo dia numa tomada só · bactericidas (H, R) ↓ transmissão em 2–3 semanas</text><rect x="10" y="92" width="158" height="160" rx="8" class="b"/><circle cx="34" cy="118" r="14" class="bacc"/><text x="34" y="123" font-size="13" text-anchor="middle" class="tinv" font-weight="800">R</text><text x="56" y="115" font-size="12" text-anchor="start" class="t" font-weight="700">rifampicina</text><text x="56" y="130" font-size="10" text-anchor="start" class="t2">RNA polimerase</text><line x1="20" y1="146" x2="158" y2="146" class="l"/><text x="89" y="168" font-size="10.5" text-anchor="middle" class="t">urina/suor laranja</text><text x="89" y="186" font-size="10.5" text-anchor="middle" class="t">indutor de CYP</text><text x="89" y="204" font-size="10.5" text-anchor="middle" class="t">→ anticoncepcional falha</text><rect x="176" y="92" width="158" height="160" rx="8" class="b"/><circle cx="200" cy="118" r="14" class="bacc"/><text x="200" y="123" font-size="13" text-anchor="middle" class="tinv" font-weight="800">H</text><text x="222" y="115" font-size="12" text-anchor="start" class="t" font-weight="700">isoniazida</text><text x="222" y="130" font-size="10" text-anchor="start" class="t2">ácido micólico</text><line x1="186" y1="146" x2="324" y2="146" class="l"/><text x="255" y="168" font-size="10.5" text-anchor="middle" class="t">neuropatia periférica</text><text x="255" y="186" font-size="10.5" text-anchor="middle" class="t">→ piridoxina 50 mg/dia</text><text x="255" y="204" font-size="10.5" text-anchor="middle" class="t">hepatite</text><rect x="342" y="92" width="158" height="160" rx="8" class="b"/><circle cx="366" cy="118" r="14" class="bacc"/><text x="366" y="123" font-size="13" text-anchor="middle" class="tinv" font-weight="800">Z</text><text x="388" y="115" font-size="12" text-anchor="start" class="t" font-weight="700">pirazinamida</text><text x="388" y="130" font-size="10" text-anchor="start" class="t2">membrana</text><line x1="352" y1="146" x2="490" y2="146" class="l"/><text x="421" y="168" font-size="10.5" text-anchor="middle" class="t">hepatotoxicidade</text><text x="421" y="186" font-size="10.5" text-anchor="middle" class="t">ácido úrico ↑ → gota</text><text x="421" y="204" font-size="10.5" text-anchor="middle" class="t">artralgia</text><rect x="508" y="92" width="158" height="160" rx="8" class="b"/><circle cx="532" cy="118" r="14" class="bacc"/><text x="532" y="123" font-size="13" text-anchor="middle" class="tinv" font-weight="800">E</text><text x="554" y="115" font-size="12" text-anchor="start" class="t" font-weight="700">etambutol</text><text x="554" y="130" font-size="10" text-anchor="start" class="t2">arabinogalactano</text><line x1="518" y1="146" x2="656" y2="146" class="l"/><text x="587" y="168" font-size="10.5" text-anchor="middle" class="t">neurite óptica</text><text x="587" y="186" font-size="10.5" text-anchor="middle" class="t">(visão borrada)</text><text x="587" y="204" font-size="10.5" text-anchor="middle" class="t">ajuste renal</text><rect x="10" y="266" width="326" height="76" rx="8" class="bok"/><text x="173" y="288" font-size="10.5" text-anchor="middle" class="tok">EA MENORES → tratar e manter</text><text x="173" y="305" font-size="10.5" text-anchor="middle" class="t2">intolerância GI, prurido, artralgia</text><text x="173" y="322" font-size="10.5" text-anchor="middle" class="t2">(antiemético, anti-histamínico, AINE)</text><rect x="344" y="266" width="326" height="76" rx="8" class="bno"/><text x="507" y="288" font-size="10.5" text-anchor="middle" class="tno">EA MAIORES → suspender</text><text x="507" y="305" font-size="10.5" text-anchor="middle" class="t2">hepatotoxicidade, neurite óptica, psicose</text><text x="507" y="322" font-size="10.5" text-anchor="middle" class="t2">alternativa: levofloxacino</text></svg></div><figcaption>Tuberculose em uma tela: o esquema, o alvo de cada fármaco e o efeito adverso que se destaca.</figcaption></figure>
+
+<div class="tw"><table class="t">
+<tr><th>Fármaco</th><th>Mecanismo</th><th>Efeito adverso que se destaca</th></tr>
+<tr><td>Rifampicina (R)</td><td><mark class="apf">inibe a RNA-polimerase</mark> (síntese de RNA)</td><td><b>potente indutor da CYP450</b>: derruba o efeito de outros fármacos, como o anticoncepcional · urina, suor e lágrima alaranjados</td></tr>
+<tr><td>Isoniazida (H)</td><td><mark class="apf">inibe a síntese do ácido micólico</mark> (parede)</td><td><mark class="apf">neuropatia periférica, por deficiência de piridoxina</mark> · hepatotoxicidade</td></tr>
+<tr><td>Pirazinamida (Z)</td><td>altera a membrana e o metabolismo da micobactéria</td><td><mark class="apf">hepatotoxicidade e hiperuricemia (gota)</mark></td></tr>
+<tr><td>Etambutol (E)</td><td>inibe a síntese do arabinogalactano (parede)</td><td><mark class="apf">neurite óptica</mark>: visão embaçada</td></tr>
+</table></div>
+
+<h3>O esquema</h3>
+<ul>
+<li><b>Fase intensiva: 2 meses de RHZE. Fase de manutenção: 4 meses de RH.</b></li>
+<li>Comprimido de dose fixa (R 150, H 75, Z 400, E 275 mg), quantidade pelo peso: de 51 a 70 kg são <b>4 comprimidos</b>, uma vez ao dia.</li>
+<li><mark class="apf">Piridoxina (vitamina B6) 50 mg/dia desde o início</mark>, para prevenir a neuropatia da isoniazida.</li>
+<li>Todo diagnosticado trata, com ou sem sintomas. Contactantes fazem a prova tuberculínica.</li>
+</ul>
+
+<h3>Efeitos menores × maiores</h3>
+<p>O Ministério da Saúde divide as reações em dois grupos, e a conduta é o que separa um do outro. Ela grifou esses slides.</p>
+<div class="tw"><table class="t">
+<tr><th>Menores: trata o sintoma e <span class="ok">mantém</span> o esquema</th><th>Maiores: <span class="no">suspende</span> e troca</th></tr>
+<tr><td style="font-weight:400">intolerância digestiva · urina e suor alaranjados · prurido · dor articular · <b>neuropatia periférica</b> (dar B6) · hiperuricemia · cefaleia</td><td style="font-weight:400"><b>hepatotoxicidade</b> (H, Z, R) · <b>neurite óptica</b> (E) · psicose, convulsão (H) · exantema grave · trombocitopenia, nefrite (R) · rabdomiólise (Z)</td></tr>
+</table></div>
+<p>Se não for possível usar o esquema básico, <mark class="apf">o substituto é uma fluoroquinolona: levofloxacino</mark>. A hepatotoxicidade é a principal causa de abandono.</p>
+<div class="box pg"><span class="lb">As trocas que ela já fez na tuberculose</span>
+<ul>
+<li>“O <b>etambutol</b> rompe a membrana” e “hepatotoxicidade e gota pelo <b>etambutol</b>”. <span class="pega">É a pirazinamida.</span></li>
+<li>“Prevenir a neuropatia com <b>pirimetamina</b>” e “neuropatia causada pela <b>rifampicina</b>”. <span class="pega">Piridoxina; isoniazida.</span></li>
+<li>“Efeitos menores como neuropatia periférica <b>e hepatotoxicidade</b>.” <span class="pega">Hepatotoxicidade é efeito maior.</span></li>
+</ul>
+</div>
+<div class="box div"><span class="lb">Divergência: rifampicina e anticoncepcional</span>
+<p>Numa aula antiga ela disse que a mulher em tratamento “deve utilizar progestágeno isolado”. Nas duas últimas provas, a frase “devem fazer uso de progestina isolada” foi tratada como <b>falsa</b>. <b>Na prova:</b> o que é certo é que a rifampicina induz a CYP e reduz o efeito do anticoncepcional; desconfie da frase que manda usar progestina isolada como regra.</p>
+</div>
+
+<div class="qs" data-t="Questões dela · tuberculose" data-ids="T5-Q2,T8-Q15,T9-Q16,T9-Q15,a13-13,a13-16,t06,T11-Q13,T10-Q1,T8-Q9"></div>
+
+<h2><span class="n">9</span>O que atravessa as classes</h2>
+<p>Ela tem um tipo de questão, “sobre as reações adversas e interações dos antimicrobianos”, que mistura fármacos de todas as famílias numa lista de sentenças. Para essas, vale ter os efeitos organizados por tema, e não por fármaco.</p>
+<div class="tw"><table class="t">
+<tr><th>Tema</th><th>Quem</th></tr>
+<tr><td>Longe das refeições</td><td style="font-weight:400">penicilinas e macrolídeos, porque são <b>instáveis em ácido</b> · quinolonas e tetraciclinas, porque <b>quelam</b> cálcio, magnésio, ferro e zinco</td></tr>
+<tr><td>Saem pelo rim sem metabolizar (ajustar a dose)</td><td style="font-weight:400">aminoglicosídeos · vancomicina · penicilina G (secreção tubular) · polimixina</td></tr>
+<tr><td>Saem pela bile (sem ajuste renal)</td><td style="font-weight:400">ceftriaxona · doxiciclina · clindamicina · moxifloxacino · tigeciclina · macrolídeos</td></tr>
+<tr><td>Dissulfiram com álcool</td><td style="font-weight:400">metronidazol (o mais forte) · cefalosporinas. <span class="pega">Não</span> oxacilina nem piperacilina</td></tr>
+<tr><td>Ouvido</td><td style="font-weight:400">aminoglicosídeos · vancomicina</td></tr>
+<tr><td>Rim</td><td style="font-weight:400">aminoglicosídeos · vancomicina · polimixina</td></tr>
+<tr><td>Sistema nervoso</td><td style="font-weight:400">polimixina (fraqueza, parestesia) · imipenem (convulsão) · quinolonas (convulsão, insônia) · isoniazida (neuropatia)</td></tr>
+<tr><td>Medula</td><td style="font-weight:400">linezolida · cloranfenicol · sulfa com trimetoprima (anemia)</td></tr>
+<tr><td>Músculo</td><td style="font-weight:400">daptomicina (CPK)</td></tr>
+<tr><td>Fígado</td><td style="font-weight:400">isoniazida · pirazinamida · rifampicina</td></tr>
+<tr><td>Sol (fotossensibilidade)</td><td style="font-weight:400">tetraciclinas · quinolonas</td></tr>
+<tr><td>Colite pseudomembranosa</td><td style="font-weight:400">clindamicina e amplo espectro em geral; trata-se com vancomicina por via oral</td></tr>
+<tr><td>Proibidos na gestante</td><td style="font-weight:400">quinolonas · tetraciclinas · sulfa na infecção urinária · nitrofurantoína a partir de 37 semanas</td></tr>
+<tr><td>Proibidos na criança</td><td style="font-weight:400">quinolonas · tetraciclinas · fosfomicina (sem dose pediátrica)</td></tr>
+</table></div>
+<div class="box pg"><span class="lb">Par mínimo: antibiótico e anticoncepcional</span>
+<p>Verdadeira: antibióticos de amplo espectro <mark class="apf">matam a microbiota que hidrolisa o conjugado de estrógeno com ácido glicurônico</mark>; sem essa hidrólise o estrógeno não é reabsorvido e o efeito do anticoncepcional cai. Falsas que já caíram: dizer que isso acontece por “indução da CYP” (essa é só a rifampicina) ou porque os antibióticos “reduzem a conjugação das β-glicuronidases”.</p>
+</div>
+
+<div class="qs" data-t="Questões dela · efeitos adversos e interações" data-ids="T3-Q5,T7-Q14,T9-Q7,T5-Q13"></div>
+
+<div class="box apf"><span class="lb">O que levar desta parte</span>
+<ul>
+<li>30S: aminoglicosídeo (mata; só Gram−; rim e ouvido; nunca 1ª escolha), tetraciclina e tigeciclina (freiam).</li>
+<li>50S: macrolídeo e clindamicina dividem o sítio; linezolida (23S) não tem resistência cruzada.</li>
+<li>Azitromicina = Gram+ com alergia imediata, 500 mg por 5 dias; não trata urina nem intestino.</li>
+<li>Quinolona: cipro para urina e próstata; levo para pulmão e seios da face; nenhuma em gestante ou criança.</li>
+<li>Metronidazol = anaeróbio no ambulatório, dissulfiram. Nitrofurantoína = cistite, até 37 semanas.</li>
+<li>Sulfa + trimetoprima: sinergismo farmacodinâmico, bacteriostático, metabólito acetilado, nunca na infecção urinária da gestante.</li>
+<li>Tuberculose: 2 RHZE + 4 RH; R = CYP; H = neuropatia e B6; Z = fígado e gota; E = olho.</li>
+</ul>
+</div>
+
+<div class="pager"><a class="pv" href="uc15-farmaco-alvo-2-parede-e-membrana.html" data-part="1"><small>← Parte 2</small>Antibióticos da parede e da membrana</a><a class="nx" href="uc15-farmaco-alvo-4-resistencia.html" data-part="3"><small>Parte 4 →</small>Resistência: como a bactéria escapa</a></div>
+</main>
+</div>
+<script>window.PART=2;window.PARTS=[{"file": "uc15-farmaco-alvo-1-bacteria-e-alvos.html", "short": "Bactéria e alvos"}, {"file": "uc15-farmaco-alvo-2-parede-e-membrana.html", "short": "Parede e membrana"}, {"file": "uc15-farmaco-alvo-3-ribossomo-dna-folato.html", "short": "Ribossomo, DNA e folato"}, {"file": "uc15-farmaco-alvo-4-resistencia.html", "short": "Resistência"}, {"file": "uc15-farmaco-alvo-5-casos.html", "short": "Casos de uso"}];window.QS={"p08": {"prova": "Treino · já caiu · T8 Q4 · T9 Q3 · T3 Q10", "tipo": "", "selo": "", "enun": "Sobre os aminoglicosídeos, assinale a correta.", "itens": [], "opts": [{"h": "Tratam infecções graves por Gram-negativas, com dose ajustada pela filtração glomerular; são nefro e ototóxicos.", "ok": true, "why": "Dose única diária pela creatinina; paciente bem hidratado."}, {"h": "Tratam infecções graves do trato respiratório por Gram-positivas, com dose ajustada pela filtração glomerular.", "ok": false, "why": "T8 Q4-I: uma palavra — Gram-positivas."}, {"h": "Devem ser evitados porque induzem mutação nas topoisomerases bacterianas.", "ok": false, "why": "Agem no 30S (T3 Q10-III)."}, {"h": "São bacteriostáticos e podem ser dados por via oral no ambulatório.", "ok": false, "why": "Bactericidas; não absorvem VO."}], "gab": "", "com": "", "shuffle": true}, "T9-Q3": {"prova": "T9 (jun/2025) Q3 · também T11 Q8", "tipo": "caso", "selo": "OF", "enun": "Qual dos seguintes antimicrobianos deve ser monitorado de perto em um paciente com disfunção renal devido ao risco de acúmulo e toxicidade do medicamento?", "itens": [], "opts": [{"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Amicacina", "ok": true, "why": ""}, {"h": "Rifampicina", "ok": false, "why": ""}, {"h": "Azitromicina", "ok": false, "why": ""}], "gab": "B", "com": "<b>Amicacina<\/b>: excretada inalterada pelo rim, nefro e ototóxica."}, "T11-Q12": {"prova": "T11 (jun/2026) Q12", "tipo": "uma certa (A–D)", "selo": "OF", "enun": "Sobre parâmetros farmacocinéticos e efeitos adversos de alguns antibióticos, analise as sentenças abaixo e assinale a alternativa correta.", "itens": [], "opts": [{"h": "Oxacilina e piperacilina tem como principais efeitos adversos nefrotoxicidade, hepatotoxicidade, neurotoxicidade e podem desencadear reação tipo dissulfiram.", "ok": false, "why": "dissulfiram é de cefalosporina/metronidazol, não de oxacilina/piperacilina"}, {"h": "A amicacina é eliminada inalterada na urina e sua excreção é diretamente proporcional à depuração da creatinina.", "ok": true, "why": ""}, {"h": "Azitromicina e clindamicina apresentam reação cruzada por inibirem a mesma porção do ribossomo e por compartilharem a mesma indicação contra patógenos anaeróbios G+.", "ok": false, "why": "azitro não tem indicação para anaeróbios"}, {"h": "A doxiciclina é contraindicada para pacientes com declínio de função renal devido a bioacumulação, o que acentua os efeitos adversos gastrintestinais.", "ok": false, "why": "doxiciclina sai pela bile — não é contraindicada no rim"}], "gab": "B", "com": ""}, "a13-03": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "Sobre a doxiciclina, assinale a correta.", "itens": [], "opts": [{"h": "É contraindicada em crianças e gestantes, mesmo sendo pouco quelante", "ok": true, "why": "Contraindicação absoluta: deposita-se em ossos e dentes em formação."}, {"h": "Por ser pouco quelante, pode ser usada na gestante", "ok": false, "why": "A contraindicação vale para todas as tetraciclinas."}, {"h": "Precisa de ajuste de dose na insuficiência renal porque se acumula", "ok": false, "why": "A doxiciclina não se acumula na IR (slide). Pegadinha da T11 Q12-D."}, {"h": "É a 1ª linha da sífilis", "ok": false, "why": "É alternativa para quem não pode usar penicilina G benzatina."}], "gab": "", "com": "", "shuffle": true}, "T10-Q16": {"prova": "T10 (nov/2025) Q16", "tipo": "direta", "selo": "OF", "enun": "Qual o antibiótico de escolha para tratar sífilis em paciente com alergia imediata a penicilina?", "itens": [], "opts": [{"h": "Sulfametoxazol + trimetoprima", "ok": false, "why": ""}, {"h": "Azitromicina", "ok": false, "why": ""}, {"h": "Doxiciclina", "ok": true, "why": ""}, {"h": "Tigeciclina", "ok": false, "why": ""}, {"h": "Ceftriaxona", "ok": false, "why": ""}], "gab": "C", "com": "Sífilis com alergia imediata → <b>doxiciclina<\/b> (≥ 2 semanas)."}, "p05": {"prova": "Treino · já caiu · T4 Q9 · T5 Q14 · aula", "tipo": "", "selo": "", "enun": "Sobre a tigeciclina, assinale a correta.", "itens": [], "opts": [{"h": "100 mg de ataque e depois 50 mg IV 12/12 h; inibe o 30S e é a 1ª escolha no GRSA.", "ok": true, "why": "🎧 A menos tóxica das três de reserva; muita náusea e vômito."}, {"h": "100 mg IV 2×/dia; pode ser substituída por aminoglicosídeo por agir no mesmo ribossomo.", "ok": false, "why": "T4 Q9-II: dose e substituição erradas."}, {"h": "É efetiva contra Pseudomonas carbapenemase por penetrar bem na membrana externa.", "ok": false, "why": "Molécula grande: não pega Pseudomonas."}, {"h": "É bactericida e quase não causa efeitos gastrintestinais.", "ok": false, "why": "Bacteriostática e muito agressiva ao TGI."}], "gab": "", "com": "", "shuffle": true}, "T10-Q2": {"prova": "T10 (nov/2025) Q2", "tipo": "direta", "selo": "OF", "enun": "Qual dos antibióticos abaixo tem indicação para tratar coqueluche, infecção causada pela bactéria <i>Bordetella pertussis<\/i>, e também ISTs causadas por <i>Chlamydia trachomatis<\/i> e <i>Neisseria gonorrhoeae<\/i>?", "itens": [], "opts": [{"h": "Clindamicina", "ok": false, "why": ""}, {"h": "Azitromicina", "ok": true, "why": ""}, {"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Tigeciclina", "ok": false, "why": ""}, {"h": "Ceftriaxona", "ok": false, "why": ""}], "gab": "B", "com": "Coqueluche + clamídia + gonorreia → <b>azitromicina<\/b> (1ª linha na coqueluche)."}, "a13-08": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "Por que os macrolídeos não são usados para tratar ITU?", "itens": [], "opts": [{"h": "A ITU é por Gram− e eles quase não se distribuem no rim e na urina", "ok": true, "why": "Os dois motivos que ela deu. A excreção é sobretudo biliar."}, {"h": "Porque são bactericidas demais para a bexiga", "ok": false, "why": "São bacteriostáticos."}, {"h": "Porque causam cristalúria", "ok": false, "why": "Isso é das sulfas e quinolonas."}, {"h": "Porque não penetram no líquido prostático", "ok": false, "why": "Entram no líquido prostático; não entram no SNC."}], "gab": "", "com": "", "shuffle": true}, "T4-Q8": {"prova": "T4 Q8", "tipo": "direta", "selo": "OF", "enun": "Em casos refratários a azitromicina, qual o antibiótico contraindicado por provável resistência cruzada?", "itens": [], "opts": [{"h": "clindamicina", "ok": true, "why": ""}, {"h": "amicacina", "ok": false, "why": ""}, {"h": "ampicilina", "ok": false, "why": ""}, {"h": "doxiciclina", "ok": false, "why": ""}, {"h": "fosfomicina", "ok": false, "why": ""}], "gab": "A", "com": "Clindamicina e macrolídeos se ligam no 50S → resistência cruzada."}, "T10-QD3": {"prova": "T10 (nov/2025) QD3", "tipo": "discursiva", "selo": "OF", "enun": "J. S., 44 anos, histórico de alergia imediata a penicilina, apresenta quadro de osteomielite não complicado e deve iniciar tratamento ambulatorial. Qual o antibiótico de escolha?", "itens": [], "opts": [], "gab": "<b>Clindamicina<\/b>", "com": "Alergia imediata + osso → clindamicina (ótima penetração óssea)."}, "T10-Q6": {"prova": "T10 (nov/2025) Q6", "tipo": "direta", "selo": "IN", "enun": "Qual dos seguintes antimicrobianos não precisa de monitoramento da função renal ou de ajuste de dose, mesmo que o paciente já apresente algum quadro de disfunção renal?", "itens": [], "opts": [{"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Amicacina", "ok": false, "why": ""}, {"h": "Ampicilina", "ok": false, "why": ""}, {"h": "Penicilina G", "ok": false, "why": ""}, {"h": "Clindamicina", "ok": true, "why": ""}], "gab": "E", "com": "O aluno marcou doxiciclina e errou; amicacina, ampicilina e penicilina G exigem ajuste renal → sobra <b>clindamicina<\/b>."}, "p18": {"prova": "Treino · da aula · aula antiga", "tipo": "", "selo": "", "enun": "Sobre a linezolida, assinale a correta.", "itens": [], "opts": [{"h": "Liga-se à porção 23S do 50S, sem resistência cruzada; é bacteriostática e mielotóxica.", "ok": true, "why": "🎧 Plaquetopenia e neutropenia."}, {"h": "É bactericida e causa miotoxicidade, exigindo dosar CPK.", "ok": false, "why": "Isso é a daptomicina."}, {"h": "Liga-se ao 30S como as tetraciclinas e tem excreção biliar.", "ok": false, "why": "Isso é a tigeciclina."}, {"h": "É de uso exclusivo intravenoso e muito nefrotóxica.", "ok": false, "why": "Tem VO e IV; o problema é a medula."}], "gab": "", "com": "", "shuffle": true}, "T3-Q11": {"prova": "T3 Q11", "tipo": "sentenças I–V", "selo": "IN", "enun": "Sobre os antibióticos que atuam inibindo a síntese proteica, avalie as sentenças abaixo e assinale o que for correto.", "itens": ["I. A azitromicina na dose 500 mg/dia, administrado por 3 dias longe das refeições, é o antibiótico de primeira escolha para tratar infecções de pele, do TR e infecções do TGU em crianças com alergia imediata a penicilina.", "II. A claritromicina é utilizada para tratar infecções por <i>H. pylori<\/i>, associada a amoxicilina, administrada de 12/12h. O principal mecanismo de resistência refere-se a alteração no ribossomo 50S.", "III. A clindamicina é indicada para tratar infecções por bactérias anaeróbias Gram-positivas e Gram-negativas, e para infecções respiratórias e de pele por estreptococos ou estafilococos, sendo uma opção para pacientes alérgicos a penicilina.", "IV. Doxiciclina e outros fármacos da classe, são empregados para tratar predominantemente infeções de pele como acne, mas também são opções terapêuticas para tratar infecções por <i>H. pylori<\/i> refratárias a claritromicina.", "V. Os aminoglicosídeos são empregados para tratar infecções graves por bactérias Gram-negativas do TGU, intra-abdominais, sepse, entre outras, cujas doses devem ser ajustadas de acordo com a taxa de filtração glomerular."], "opts": [{"h": "I, II e IV", "ok": false, "why": ""}, {"h": "I, II e V", "ok": false, "why": ""}, {"h": "II, III, IV e V", "ok": true, "why": ""}, {"h": "III, IV e V", "ok": false, "why": ""}, {"h": "II, III e V", "ok": false, "why": ""}], "gab": "C", "com": "Sentenças: I F · II V · III V · IV V · V V<br><b>I<\/b> — azitro \"3 dias\" e \"ITU em crianças\""}, "T11-Q9": {"prova": "T11 (jun/2026) Q9", "tipo": "direta", "selo": "OF", "enun": "Qual dos antibióticos listados abaixo, de uso ambulatorial, que apresenta amplo espectro de ação, mas tem como efeitos adversos o risco de desencadear cristalúria, fotossensibilidade e convulsões?", "itens": [], "opts": [{"h": "Sulfametoxazol + trimetoprima", "ok": false, "why": ""}, {"h": "Levofloxacino", "ok": true, "why": ""}, {"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Clindamicina", "ok": false, "why": ""}, {"h": "Ceftriaxona", "ok": false, "why": ""}], "gab": "B", "com": "A palavra que decide é <b>convulsões<\/b> → quinolona. Cristalúria e fotossensibilidade também são da sulfa — distrator perfeito."}, "s09": {"prova": "Treino · da aula · aula antiga", "tipo": "", "selo": "", "enun": "Qual quinolona jamais deve ser usada para ITU?", "itens": [], "opts": [{"h": "Moxifloxacino", "ok": true, "why": "🎧 Excreção biliar — \"nem sequer passa pelo tecido urinário\"."}, {"h": "Ciprofloxacino", "ok": false, "why": "É a quinolona da ITU."}, {"h": "Norfloxacino", "ok": false, "why": "Usada em ITU."}, {"h": "Levofloxacino", "ok": false, "why": "Pode, na falta de cipro."}], "gab": "", "com": "", "shuffle": true}, "s07": {"prova": "Treino · da aula · aula · T7 Q12 · T11 QD2", "tipo": "", "selo": "", "enun": "Sobre o levofloxacino, assinale a correta.", "itens": [], "opts": [{"h": "É indicado para TRI e sinusite crônica quando a 1ª linha não pode ser usada; nunca para faringite.", "ok": true, "why": "🎧 \"Nunca usa quinolona para tratar faringite.\""}, {"h": "É a 1ª escolha na ITU por ter maior distribuição no trato urinário.", "ok": false, "why": "Na urina, quem tem melhor distribuição é o cipro."}, {"h": "É a opção após falha da azitromicina na faringite com alergia imediata.", "ok": false, "why": "Depois da azitro, na faringite, vem a sulfa (T11 QD2)."}, {"h": "Pode ser usado em crianças com pneumonia e alergia à penicilina.", "ok": false, "why": "Quinolona em criança: proibido."}], "gab": "", "com": "", "shuffle": true}, "T7-Q7": {"prova": "T7 Q7 · também T5 Q6", "tipo": "direta", "selo": "OF", "enun": "Qual o antibiótico de escolha para tratar infecções urinárias causadas por <i>Pseudomonas sp.<\/i> cujo tratamento será ambulatorial?", "itens": [], "opts": [{"h": "sulfametoxazol + trimetoprima 800mg/160mg 12/12h", "ok": false, "why": ""}, {"h": "nitrofurantoína 100 mg 6/6h", "ok": false, "why": ""}, {"h": "ceftriaxona 1g 1x ao dia", "ok": false, "why": ""}, {"h": "fosfomicina 3g dose única", "ok": false, "why": ""}, {"h": "ciprofloxacino 500mg 12/12h", "ok": true, "why": ""}], "gab": "E", "com": "Sulfa, nitro, fosfo e ceftriaxona não pegam <i>Pseudomonas<\/i> → <b>ciprofloxacino 500 mg 12/12 h<\/b>."}, "a13-11": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "Sobre o mecanismo do metronidazol, assinale a correta.", "itens": [], "opts": [{"h": "É pró-fármaco ativado por enzimas de óxido-redução (PFOR) que só existem em microrganismos de metabolismo anaeróbio", "ok": true, "why": "Gera radicais reativos que lesam DNA e proteínas."}, {"h": "Inibe a subunidade 50S do ribossomo", "ok": false, "why": "Isso é clindamicina, macrolídeos e cloranfenicol."}, {"h": "É ativado por qualquer bactéria aeróbia, como a nitrofurantoína", "ok": false, "why": "Essa é justamente a diferença para a nitrofurantoína."}, {"h": "Inibe a síntese de ácido micólico", "ok": false, "why": "Isso é a isoniazida."}], "gab": "", "com": "", "shuffle": true}, "T8-Q14": {"prova": "T8 (nov/2024) Q14", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os efeitos de diferentes antibióticos analise as afirmativas e assinale o que for correto.", "itens": ["I. Doxiciclina é empregada para tratar predominantemente infeções de pele como acne, mas também, para tratar infecções por <i>H. pylori<\/i> refratárias a claritromicina.", "II. A azitromicina na dose de 500 mg/dia é o antibiótico de primeira escolha para tratar infecções de pele, do TR e ITU em pacientes com alergia tardia a penicilina.", "III. A claritromicina é utilizada para tratar infecções por <i>H. pylori<\/i>, associada com amoxicilina, administrada de 12/12h.", "IV. O metronidazol é convertido pelas bactérias anaeróbias em um radical nitroaniônico altamente reativo que mata organismos suscetíveis por mecanismos mediados por radicais dirigidos ao DNA. É usado para tratar infecções intra-abdominais."], "opts": [{"h": "II, III e IV", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": true, "why": ""}, {"h": "I e IV", "ok": false, "why": ""}, {"h": "III e IV", "ok": false, "why": ""}, {"h": "I, II e III", "ok": false, "why": ""}], "gab": "B", "com": "Sentenças: I V · II F · III V · IV V<br><b>II<\/b> — alergia <b>tardia<\/b> → cefalosporina; azitro é para imediata e não trata ITU"}, "T3-Q14": {"prova": "T3 Q14", "tipo": "discursiva", "selo": "OF", "enun": "Qual o antibiótico de escolha para profilaxia de infecções do trato urinário em pacientes com cateter vesical? O que deve ser monitorado com o uso prolongado desse antibiótico?", "itens": [], "opts": [], "gab": "<b>Nitrofurantoína<\/b> (100 mg 1×/dia na profilaxia); monitorar <b>função pulmonar/oxigenação<\/b> — risco de fibrose pulmonar no uso prolongado", "com": ""}, "T8-Q6": {"prova": "T8 (nov/2024) Q6", "tipo": "direta", "selo": "OF", "enun": "Qual o tratamento de primeira escolha em quadros de infecção urinária baixa não complicada em paciente com história de alergia tardia a penicilina.", "itens": [], "opts": [{"h": "cefalexina", "ok": false, "why": ""}, {"h": "nitrofurantoína", "ok": true, "why": ""}, {"h": "ciprofloxacino", "ok": false, "why": ""}, {"h": "sulfametoxazol + trimetoprima", "ok": false, "why": ""}], "gab": "B", "com": "Cistite não complicada: a 1ª linha (<b>nitrofurantoína<\/b>) não é β-lactâmico, então a alergia não muda nada."}, "s01": {"prova": "Treino · já caiu · T11 Q1 · aula", "tipo": "", "selo": "", "enun": "Sobre sulfametoxazol + trimetoprima, assinale a correta.", "itens": [], "opts": [{"h": "O sulfametoxazol compete com o PABA na folato sintase e a trimetoprima inibe a folato redutase: sinergismo farmacodinâmico, bacteriostático.", "ok": true, "why": "🎧 \"Associação farmacodinâmica sinérgica.\""}, {"h": "O sulfametoxazol compete com o PABA na folato sintase e a trimetoprima inibe a folato redutase: sinergismo farmacocinético, bacteriostático.", "ok": false, "why": "T11 Q1-B: \"farmacocinético\" é a palavra trocada."}, {"h": "O sulfametoxazol inibe a folato redutase e a trimetoprima inibe a folato sintase, respectivamente.", "ok": false, "why": "\"Respectivamente\" invertido."}, {"h": "A associação é bactericida porque a trimetoprima inibe apenas a enzima bacteriana.", "ok": false, "why": "Bacteriostática; a folato redutase também é humana."}], "gab": "", "com": "", "shuffle": true}, "T4-Q12": {"prova": "T4 Q12 · também T8 Q12", "tipo": "asserção-razão", "selo": "OF", "enun": "Sobre as sulfonamidas avalie as asserções e a relação proposta entre elas.", "itens": ["I. A associação de sulfametoxazol + trimetoprima visa uma ação antibacteriana sinérgica ao inibir a biossíntese bacteriana do tetrahidrofolato e consequente multiplicação celular, ao bloquear competitivamente as enzimas folato sintase e folato redutase, respectivamente, nas doses de 800 + 160 mg 2 x ao dia.", "PORQUE", "II. A associação de sulfametoxazol + trimetoprima é bem absorvida e amplamente distribuída no organismo, por isso pode ser empregada para tratar infecções no trato respiratório, geniturinário e gastrintestinal, mas devido ao metabolismo de fase 2, por meio da reação de acetilação, podem ser formados metabólitos pouco solúveis, que precipitam e causam cristalúria."], "opts": [{"h": "… justificativa", "ok": false, "why": ""}, {"h": "I e II verdadeiras, mas a II não é justificativa da I.", "ok": true, "why": ""}, {"h": "I V, II F", "ok": false, "why": ""}, {"h": "I F, II V", "ok": false, "why": ""}, {"h": "ambas F", "ok": false, "why": ""}], "gab": "B", "com": "I (mecanismo e dose) e II (distribuição e cristalúria) são verdadeiras, mas falam de coisas diferentes → não justifica."}, "T3-Q13": {"prova": "T3 Q13", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre as sulfonamidas avalie as sentenças abaixo e assinale o que for correto.", "itens": ["I. Sulfametoxazol + trimetoprima é uma associação de escolha para tratar infecções urinárias e intestinais, mas também pode ser utilizada para infecções do trato respiratório em crianças e adultos.", "II. Sulfametoxazol + trimetoprima é contraindicado para gestantes e descendentes orientais porque apresentam alterações no metabolismo CYP450, formando muitos metabólitos acetilados que podem causar cristalúria.", "III. Sulfametoxazol + trimetoprima deve sempre ser avaliado em culturas de cepas de <i>S. aureus<\/i>, resistentes à meticilina, pois não depende das PBPs para sua ação bactericida, uma vez que atua no metabolismo do folato de bactérias gram-negativas.", "IV. Para o tratamento da toxoplasmose os antimicrobianos de escolha são a sulfadiazina + pirimetamina, que inibem a síntese do diidrofolato e sua redução à tetrahidrofolato, respectivamente, cuja última etapa também afeta o hospedeiro, por isso associa-se ácido fólico.", "V. Sulfametoxazol + trimetoprima pode ser uma opção medicamentosa para tratar toxoplasmose, mas não é de primeira escolha porque há mais riscos de alterações hematológicas, principalmente anemia, leucopenia e granulocitopenia."], "opts": [{"h": "I e IV", "ok": true, "why": ""}, {"h": "III e V", "ok": false, "why": ""}, {"h": "I, II, IV e V", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}, {"h": "II, IV e V", "ok": false, "why": ""}], "gab": "A", "com": "Sentenças: I V · II F · III F · IV V · V F<br><b>II<\/b> — em oriental é <b>evitar<\/b>, não contraindicar; acetilação não é CYP; na gestante o problema é o antifolato<br><b>III<\/b> — é <b>bacteriostática<\/b> e age em Gram− e Gram+<br><b>V<\/b> — a hematotoxicidade vem da trimetoprima/pirimetamina; prefere-se sulfadiazina pela cristalúria"}, "T11-Q1": {"prova": "T11 (jun/2026) Q1", "tipo": "uma certa (A–D)", "selo": "OF", "enun": "Sobre o tratamento de infecções urinárias, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": [], "opts": [{"h": "A nitrofurantoína é indicada para quadros de cistite causadas por <i>E. coli, Enterococcus sp., Klebsiella sp., Serratia sp., Pseudomonas sp.<\/i> e a maioria das cepas de <i>Proteus sp.<\/i> As doses variam de 50 a 100 mg, administradas até 4 vezes ao dia.", "ok": false, "why": "nitrofurantoína <b>não<\/b> pega <i>Pseudomonas<\/i> nem <i>Proteus<\/i>"}, {"h": "A indicação de sulfametoxazol + trimetoprima para tratar quadros de cistite e pielonefrite se deve ao sinergismo farmacocinético desta associação ao inibir as enzimas folato sintase e redutase, e confere significativa ação bacteriostática. O tempo de tratamento varia de 3 a 5 dias.", "ok": false, "why": "o sinergismo é <b>farmacodinâmico<\/b>, não farmacocinético"}, {"h": "A fosfomicina é indicada apenas para tratar quadros de cistite por bactérias Gram-positivas e/ou Gram-negativas, cuja ação bactericida se deve a inibição da enolpiruvato transferase e consequente síntese da parede celular bacteriana.", "ok": true, "why": ""}, {"h": "A nitrofurantoína pode ser indicada para tratar quadros de cistite em gestantes, assim como quadros de bacteriúria assintomática, em doses baixas 2 vezes ao dia por duas semanas. Tem sua eficácia aumentada se administrada com ácido ascórbico.", "ok": false, "why": "posologia e \"ácido ascórbico\" inventados"}], "gab": "C", "com": ""}, "T11-Q10": {"prova": "T11 (jun/2026) Q10", "tipo": "direta", "selo": "OF", "enun": "Qual das seguintes reações adversas exclui o paciente de ser reexposto ao fármaco no futuro?", "itens": [], "opts": [{"h": "Exantema pruriginoso por benzilpenicilina.", "ok": false, "why": ""}, {"h": "Síndrome de Stevens-Johnson devido a trimetoprima/sulfametoxazol.", "ok": true, "why": ""}, {"h": "Colite pseudomembranosa por claritromicina.", "ok": false, "why": ""}, {"h": "Superinfecção por <i>Clostridioides difficile<\/i> por moxifloxacino.", "ok": false, "why": ""}], "gab": "B", "com": "Stevens-Johnson proíbe reexposição. Exantema leve e colite não."}, "T9-Q14": {"prova": "T9 (jun/2025) Q14", "tipo": "direta", "selo": "OF", "enun": "Qual dos seguintes fármacos está corretamente associado com seu efeito adverso?", "itens": [], "opts": [{"h": "Levofloxacino – fibrose pulmonar", "ok": false, "why": ""}, {"h": "Sulfametoxazol + trimetoprima – anemia", "ok": true, "why": ""}, {"h": "Nitrofurantoína – encefalopatia hepática", "ok": false, "why": ""}, {"h": "Metenamina – nistagmo", "ok": false, "why": ""}], "gab": "B", "com": "Fibrose pulmonar é da <b>nitrofurantoína<\/b>; SMX-TMP → anemia (antifolato)."}, "T10-Q15": {"prova": "T10 (nov/2025) Q15", "tipo": "caso", "selo": "OF", "enun": "H. G, masculino, 34 anos, diagnóstico de toxoplasmose. Qual o antibiótico de primeira linha para tratar esse caso?", "itens": [], "opts": [{"h": "Sulfametoxazol + trimetoprima", "ok": false, "why": ""}, {"h": "Clindamicina", "ok": false, "why": ""}, {"h": "Doxiciclina", "ok": false, "why": ""}, {"h": "Sulfadiazina + pirimetamina", "ok": true, "why": ""}, {"h": "Ceftriaxona", "ok": false, "why": ""}], "gab": "D", "com": "Toxoplasmose → <b>sulfadiazina + pirimetamina<\/b>."}, "T1-Q10": {"prova": "T1 Q10 · também T2 Q13 · T5 QD1", "tipo": "discursiva", "selo": "OF", "enun": "Qual o tratamento de escolha para toxoplasmose? Justifique sua escolha.", "itens": [], "opts": [], "gab": "<b>Sulfadiazina + pirimetamina<\/b> — a sulfadiazina fica ionizada no pH plasmático, é mais hidrossolúvel e dá menos cristalúria num tratamento longo (30–60 dias)", "com": "A eficácia é a mesma da sulfametoxazol; o que muda é a <b>segurança<\/b>. Associar ácido fólico (a pirimetamina inibe a folato redutase humana)."}, "T9-QD3": {"prova": "T9 (jun/2025) QD3 · também T11 QD1", "tipo": "discursiva", "selo": "OF", "enun": "Qual o tratamento antimicrobiano de escolha para tratar quadro de toxoplasmose em gestante com 15 semanas?", "itens": [], "opts": [], "gab": "<b>Sulfadiazina + pirimetamina<\/b> (+ ácido folínico)", "com": "Gestante a partir de 12 semanas → sulfadiazina + pirimetamina. Até 12 semanas → <b>espiramicina<\/b>."}, "AU06-2": {"prova": "Aula 06/11 · caso 2", "tipo": "discursiva", "selo": "OF", "enun": "Caso do quadro (aula de 06/11): paciente que acabou de tratar toxoplasmose com sulfadiazina + pirimetamina e agora tem cistite. SMX-TMP é uma boa escolha?", "itens": [], "opts": [], "gab": "<b>Não<\/b>: tratar com <b>nitrofurantoína<\/b> ou <b>fosfomicina<\/b>", "com": "Justificativa dela: fármacos da mesma classe (antifolatos) → a microbiota, de onde vem a ITU, foi exposta → alta chance de resistência."}, "T5-Q2": {"prova": "T5 Q2", "tipo": "direta", "selo": "OF", "enun": "Sobre o tratamento da tuberculose assinale a alternativa que representa o mecanismo de ação correto dos fármacos antituberculosos:", "itens": [], "opts": [{"h": "A rifampicina inibe a síntese do ácido micólico, a isoniazida inibe a síntese proteica, o etambutol inibe a síntese da parede celular e a pirazinamida inibe a síntese de ácidos graxos.", "ok": false, "why": ""}, {"h": "A rifampicina inibe a RNA, a isoniazida inibe a síntese de ácidos graxos, o etambutol inibe a síntese da parede celular e a pirazinamida a inibe a síntese do ácido micólico.", "ok": false, "why": ""}, {"h": "A rifampicina inibe a síntese RNA, a isoniazida inibe a síntese do ácido micólico, o etambutol inibe a síntese de componentes da parede celular e a pirazinamida altera permeabilidade membrana celular.", "ok": true, "why": ""}, {"h": "A rifampicina inibe a síntese proteica, a isoniazida inibe a síntese do ácido micólico, o etambutol inibe a síntese de ácidos graxos e a pirazinamida a síntese de componentes da parede celular.", "ok": false, "why": ""}, {"h": "A rifampicina inibe a síntese do ácido micólico, a isoniazida inibe a síntese de ácidos graxos, o etambutol inibe a síntese da parede celular e a pirazinamida a inibe a síntese proteica.", "ok": false, "why": ""}], "gab": "C", "com": "Rifampicina → RNA polimerase; isoniazida → ácido micólico; etambutol → parede (arabinogalactano); pirazinamida → membrana."}, "T8-Q15": {"prova": "T8 (nov/2024) Q15", "tipo": "direta", "selo": "OF", "enun": "Qual o fármaco empregado no tratamento da tuberculose que pode causar neuropatia periférica e para evitar/reduzir esse risco deve ser prescrito piridoxina?", "itens": [], "opts": [{"h": "rifampicina", "ok": false, "why": ""}, {"h": "pirazinamida", "ok": false, "why": ""}, {"h": "etambutol", "ok": false, "why": ""}, {"h": "isoniazida", "ok": true, "why": ""}], "gab": "D", "com": "Neuropatia periférica → <b>isoniazida<\/b> → piridoxina (B6) desde o início."}, "T9-Q16": {"prova": "T9 (jun/2025) Q16", "tipo": "caso", "selo": "OF", "enun": "Uma mulher de 29 anos em uso de isoniazida, pirazinamida, etambutol e rifampicina para tuberculose chega ao pronto-socorro queixando-se de parestesias nas mãos e nos pés, que foi diagnosticada como um efeito adverso de um dos medicamentos da paciente. Qual das alternativas a seguir é a causa e o medicamento associado às parestesias?", "itens": [], "opts": [{"h": "Deficiência de tiamina; pirazinamida", "ok": false, "why": ""}, {"h": "Deficiência de tiamina; rifampicina", "ok": false, "why": ""}, {"h": "Deficiência de piridoxina; isoniazida", "ok": true, "why": ""}, {"h": "Deficiência de piridoxina; pirazinamida", "ok": false, "why": ""}], "gab": "C", "com": "Parestesia → deficiência de <b>piridoxina<\/b> pela <b>isoniazida<\/b>."}, "T9-Q15": {"prova": "T9 (jun/2025) Q15", "tipo": "caso", "selo": "OF", "enun": "Uma mulher de 32 anos foi internada com histórico de tosse e febre há 4 semanas. As culturas de escarro apresentaram <i>M. tuberculosis<\/i> suscetível a todos os medicamentos antimicobacterianos. Duas semanas após o início da terapia, a paciente está preocupada porque sua visão está embaçada. Qual dos seguintes medicamentos é a causa mais provável?", "itens": [], "opts": [{"h": "Isoniazida", "ok": false, "why": ""}, {"h": "Etambutol", "ok": true, "why": ""}, {"h": "Rifampicina", "ok": false, "why": ""}, {"h": "Pirazinamida", "ok": false, "why": ""}], "gab": "B", "com": "Visão embaçada = neurite óptica → <b>etambutol<\/b>."}, "a13-13": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "Esquema básico da TB no adulto de 60 kg: como fica a prescrição?", "itens": [], "opts": [{"h": "4 comprimidos de RHZE 1×/dia por 2 meses, depois RH por 4 meses; pode tomar já alimentado", "ok": true, "why": "51–70 kg = 4 comprimidos (600 mg de rifampicina). O jejum deixou de ser exigido porque causava abandono."}, {"h": "4 comprimidos de RHZE em jejum por 6 meses", "ok": false, "why": "Z e E só na fase intensiva (2 meses); o jejum não é mais obrigatório."}, {"h": "3 comprimidos de RHZE 1×/dia por 2 meses, depois RHZ por 4 meses", "ok": false, "why": "3 comprimidos é para 36–50 kg; a manutenção é só RH."}, {"h": "2 comprimidos de RH por 2 meses, depois RHZE por 4 meses", "ok": false, "why": "Invertido."}], "gab": "", "com": "", "shuffle": true}, "a13-16": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "Paciente não pode usar o esquema básico da TB. Qual é a 1ª opção de substituição?", "itens": [], "opts": [{"h": "Fluoroquinolona: levofloxacino", "ok": true, "why": "Ex.: sem rifampicina → 2 HZE-Lfx / 10 HE-Lfx."}, {"h": "Claritromicina", "ok": false, "why": "Não faz parte dos esquemas especiais."}, {"h": "Doxiciclina", "ok": false, "why": "O M. tuberculosis é resistente às tetraciclinas."}, {"h": "Estreptomicina sozinha", "ok": false, "why": "Monoterapia seleciona resistência."}], "gab": "", "com": "", "shuffle": true}, "t06": {"prova": "Treino · da aula · aula · T5 Q4 · T8 Q9", "tipo": "", "selo": "", "enun": "Sobre os efeitos adversos do esquema da TB, assinale a correta.", "itens": [], "opts": [{"h": "Efeitos maiores (hepatotoxicidade, neurite óptica, convulsão) pedem suspensão e troca, normalmente por levofloxacino.", "ok": true, "why": "🎧 Menores: trata e mantém."}, {"h": "Efeitos maiores são tratados com sintomáticos para não interromper o esquema.", "ok": false, "why": "Isso é o manejo dos menores."}, {"h": "Na intolerância, rifampicina e etambutol são trocados por moxifloxacino.", "ok": false, "why": "T5 Q4-V: a troca dela é levo."}, {"h": "Gota pela pirazinamida é efeito maior que obriga suspender o esquema.", "ok": false, "why": "🎧 Gota entra nos menores (AINE)."}], "gab": "", "com": "", "shuffle": true}, "T11-Q13": {"prova": "T11 (jun/2026) Q13", "tipo": "uma certa (A–D)", "selo": "OF", "enun": "Sobre o tratamento da tuberculose avalie as sentenças abaixo e assinale a alternativa correta.", "itens": [], "opts": [{"h": "Os antibióticos usados no tratamento de manutenção da tuberculose atuam em diferentes alvos: a rifampicina inibe a síntese de RNA e proteínas e a isoniazida inibe a síntese do ácido micólico.", "ok": true, "why": ""}, {"h": "Mulheres em idade fértil e em tratamento da tuberculose, que usam método hormonal como contraceptivo, independente da formulação, devem fazer uso de progestina isolada, pois a rifampicina é um potente indutor de CYPs, o que reduz a biodisponibilidade do estrogênio.", "ok": false, "why": "\"<b>independente da formulação<\/b>\""}, {"h": "O etambutol rompe o metabolismo e as funções de transporte da membrana celular micobacteriana. Apresenta significativo efeito hepatotóxico e há risco de precipitar crises de gota em pacientes com hiperurecemia.", "ok": false, "why": "é a <b>pirazinamida<\/b>, não o etambutol"}, {"h": "O esquema quádruplo é indicado para pacientes diagnosticados com tuberculose e tratamento pode desencadear efeitos adversos menores como prurido, neuropatia periférica, hepatotoxicidade, exantema, dores mioarticulares, intolerância digestiva, os quais devem ser tratados a fim de manter a antibioticoterapia.", "ok": false, "why": "hepatotoxicidade é efeito <b>maior<\/b> (suspender) — na aula, a neuropatia periférica entra nos menores, prevenida com B6"}], "gab": "A", "com": ""}, "T10-Q1": {"prova": "T10 (nov/2025) Q1", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre o tratamento da tuberculose analise as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I. Levofloxacino é uma opção terapêutica para pacientes intolerantes ao esquema básico disponibilizado pelo SUS. Atua inibindo as topoisomerases e tem ação bactericida, administrado 500 mg 1 x ao dia longe das refeições.", "II. Os fármacos que apresentam ação bactericida, tal como a isoniazida, devem fazer parte do esquema terapêutico inicial, pois essa ação bactericida diminui a capacidade de transmissão de bacilos pelos indivíduos doentes.", "III. A fase intensiva do tratamento com o esquema quádruplo tem o objetivo de reduzir rapidamente a população bacilar e a eliminação dos bacilos resistentes, constituído pelos fármacos: rifampicina, isoniazida, pirazinamida e etambutol.", "IV. O uso de medicamentos como analgésicos e antieméticos são frequentes em pacientes em tratamento do esquema quádruplo da tuberculose a fim de reduzir reações adversas menores, e a pirimetamina na dosagem de 50mg/dia é recomendado desde o início do esquema quádruplo para prevenir neuropatias causadas pela rifampicina.", "V. Os efeitos adversos classificados como maiores consistem predominantemente em danos neurológicos e hepatotoxicidade e a conduta a ser adotada é a suspensão do tratamento que está desencadeando os efeitos adversos."], "opts": [{"h": "II, III e IV", "ok": false, "why": ""}, {"h": "I, II, III, IV e V", "ok": false, "why": ""}, {"h": "I, III e V", "ok": false, "why": ""}, {"h": "I, II, III e V", "ok": true, "why": ""}, {"h": "II e V", "ok": false, "why": ""}], "gab": "D", "com": "Na T8 Q9 a mesma frase estava certa e todas eram verdadeiras.<br>Sentenças: I V · II V · III V · IV F · V V<br><b>IV<\/b> — \"<b>pirimetamina<\/b>\" (é da toxo) no lugar de piridoxina, e neuropatia \"causada pela <b>rifampicina<\/b>\" (é a isoniazida)"}, "T8-Q9": {"prova": "T8 (nov/2024) Q9", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre o tratamento da tuberculose, analise as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I. Levofloxacino é uma opção terapêutica para pacientes intolerantes ao esquema básico disponibilizado pelo SUS. Atua inibindo as topoisomerases e tem ação bactericida, administrado 500 mg 1 x ao dia longe das refeições.", "II. Os fármacos que apresentam ação bactericida, tal como a isoniazida, devem fazer parte do esquema terapêutico inicial, pois essa ação bactericida diminui a capacidade de transmissão de bacilos pelos indivíduos doentes.", "III. A fase intensiva do tratamento com o esquema quádruplo tem o objetivo de reduzir rapidamente a população bacilar e a eliminação dos bacilos resistentes, constituído pelos fármacos: rifampicina, isoniazida, pirazinamida e etambutol.", "IV. O uso de medicamentos como analgésicos e antieméticos são frequentes em pacientes em tratamento do esquema quádruplo da tuberculose a fim de reduzir reações adversas menores, e a piridoxina na dosagem de 50mg/dia é recomendado desde o início do esquema quádruplo para prevenir neuropatias.", "V. Os efeitos adversos classificados como maiores consistem predominantemente em danos neurológicos e hepatotoxicidade e a conduta a ser adotada é a suspensão do tratamento que está desencadeando os efeitos adversos."], "opts": [{"h": "II, III, IV e V", "ok": false, "why": ""}, {"h": "I, II, III, IV e V", "ok": true, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}, {"h": "I, II, III e IV", "ok": false, "why": ""}, {"h": "II e V", "ok": false, "why": ""}], "gab": "B", "com": "Sentenças: I V · II V · III V · IV V · V V"}, "T3-Q5": {"prova": "T3 Q5", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre as reações adversas e interações medicamentosas dos antimicrobianos avalie as afirmativas e assinale o que for correto.", "itens": ["I. Ceftriaxona e outras cefalosporinas de uso parenteral tem como principais efeitos adversos os distúrbios gastrintestinais, dor no local da aplicação e podem desencadear a reação dissulfiram se ingerido álcool.", "II. Demeclociclina e outros fármacos da mesma classe causam distúrbios gastrintestinais, predominantemente náuseas e vômitos, e ainda: fotossensibilidade, risco de cristalúria, e alterações hematológicas por inibir síntese proteica do hospedeiro se uso prolongado.", "III. Penicilinas de primeira e segunda geração são bem toleradas, mas quando associadas a inibidores de beta-lactamases, os distúrbios gastrintestinais como diarreia são mais acentuados. As alergias tardias e imediatas são comuns para esta classe de antibióticos.", "IV. Tetraciclinas e quinolonas podem formar complexos com cátions divalentes presentes nos alimentos, por isso, devem ser administrados seguindo o jejum farmacológico, além de evitar o uso de suplementos vitamínicos contendo minerais para reduzir risco de cristalúria.", "V. Os antibióticos diminuem a eficácia do contraceptivo oral combinado porque reduzem a biodisponibilidade do estrogênio ao impedir a sua recirculação êntero-hepática dependente da microbiota intestinal para hidrolisar o conjugado estrógeno + ácido glicurônico."], "opts": [{"h": "I, II, III e IV", "ok": false, "why": ""}, {"h": "II, III e V", "ok": false, "why": ""}, {"h": "I, II, III, IV e V", "ok": true, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}, {"h": "II, IV e V", "ok": false, "why": ""}], "gab": "C", "com": "Todas verdadeiras. Atenção às versões: na T7 Q14 a V virou \"induzir a CYP\" (falsa) e na T9 Q7 a tetraciclina virou limeciclina.<br>Sentenças: I V · II V · III V · IV V · V V"}, "T7-Q14": {"prova": "T7 Q14", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre as reações adversas e interações medicamentosas dos antimicrobianos avalie as afirmativas e assinale o que for correto.", "itens": ["I. A ceftriaxona tem como principais efeitos adversos os distúrbios gastrintestinais, risco de pseudolitíase biliar, dor no local da aplicação e pode desencadear a reação dissulfiram caso haja consumo de álcool.", "II. Doxiciclina e outras tetraciclinas causam distúrbios gastrintestinais, predominantemente náuseas e vômitos, fotossensibilidade, risco de cristalúria, e alterações hematológicas por inibir síntese proteica do hospedeiro se uso prolongado em doses elevadas.", "III. Penicilinas de segunda geração são bem toleradas, mas quando associadas a inibidores de beta-lactamases, os distúrbios gastrintestinais como diarreia são mais acentuados em decorrência da sensibilidade da microbiota do trato digestivo a esta associação.", "IV. Tetraciclinas e quinolonas podem formar complexos com cátions divalentes presentes nos alimentos, por isso, devem ser administrados seguindo o jejum farmacológico, além de evitar o uso de suplementos vitamínicos contendo minerais para reduzir risco de cristalúria.", "V. Os antibióticos diminuem a eficácia do contraceptivo hormonal combinado porque reduzem a biodisponibilidade do estrogênio ao induzir a CYP e reduzir a sua circulação êntero-hepática."], "opts": [], "gab": "I V · II V · III V · IV V · V F", "com": "Gabarito: I, II, III e IV.<br><b>V<\/b> — o mecanismo é perder a microbiota que hidrolisa o conjugado — <b>não<\/b> indução de CYP"}, "T9-Q7": {"prova": "T9 (jun/2025) Q7", "tipo": "sentenças I–V", "selo": "IN", "enun": "Sobre as reações adversas e interações medicamentosas dos antimicrobianos avalie as afirmativas e assinale o que for correto.", "itens": ["I. Ceftriaxona e outras cefalosporinas de uso parenteral tem como principais efeitos adversos os distúrbios gastrintestinais, dor no local da aplicação e podem desencadear a reação dissulfiram se ingerido álcool.", "II. Limeciclina e outros fármacos da mesma classe causam distúrbios gastrintestinais, predominantemente náuseas e vômitos, e ainda, fotossensibilidade, risco de cristalúria, e alterações hematológicas por inibir síntese proteica do hospedeiro se uso prolongado.", "III. Penicilinas de segunda geração são bem toleradas, mas quando associadas a inibidores de beta-lactamases, os distúrbios gastrintestinais como diarreia são mais acentuados. As alergias tardias e imediatas são comuns para esta classe de antibióticos.", "IV. Os antibióticos diminuem a eficácia do contraceptivo oral combinado porque reduzem a biodisponibilidade do estrogênio ao impedir a sua recirculação êntero-hepática, a qual é dependente da microbiota intestinal para hidrolisar o conjugado estrógeno+ácido glicurônico.", "V. Tetraciclinas e quinolonas devem ser administrados longes das refeições, pois podem formar complexos com cátions divalentes presentes nos alimentos o que aumenta o risco de cristalúria. O jejum farmacológico é indicado para aumentar a biodisponibilidade destes fármacos quando administrados por via oral."], "opts": [{"h": "I, II, III e V", "ok": false, "why": ""}, {"h": "II, III e V", "ok": false, "why": ""}, {"h": "I, II, III, IV e V", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": true, "why": ""}, {"h": "II, IV e V", "ok": false, "why": ""}], "gab": "D", "com": "Sentenças: I V · II F · III V · IV V · V F<br><b>II<\/b> — trocou demeclociclina por <b>limeciclina<\/b> (pouco quelante — a segura para o rim)<br><b>V<\/b> — complexo com cátion do <b>alimento<\/b> reduz absorção; cristalúria é complexo no sangue"}, "T5-Q13": {"prova": "T5 Q13", "tipo": "sentenças I–V", "selo": "IN", "enun": "Sobre o perfil farmacocinético e efeitos adversos de alguns antibióticos avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. Sulfametoxazol + trimetoprima é contraindicado para descendentes orientais porque apresentam alterações no metabolismo CYP450, formando muitos metabólitos acetilados que podem causar cristalúria.", "II. A azitromicina é empregada como tratamento alternativo aos beta-lactâmicos em infecções do trato respiratório superior, e apresenta meia-vida longa. Seus principais efeitos adversos estão relacionados aos distúrbios gastrintestinais.", "III. A clindamicina que não deve ser empregada em casos de refratariedade aos macrolídeos, tem como principais efeitos adversos os distúrbios gastrintestinais como anorexia, náuseas, vômitos, diarreia, gosto metálico, colite pseudomembranosa, discrasias sanguíneas e alterações enzimas hepáticas.", "IV. As tetraciclinas têm ação bacteriostática ao inibirem o ribossomo 30S são contraindicadas para crianças e gestantes porque são quelantes de cátions divalentes e tem como principais efeitos adversos os severos distúrbios gastrintestinais como náuseas, vômitos e diarreia.", "V. Os antibióticos de amplo espectro podem inibir a recirculação êntero-hepática de alguns fármacos, como estrogênio, e causar a inefetividade destes, porque ao alterarem a microbiota intestinal reduzem a ação de conjugação das betaglicuronidases ou induzem as CYPs, como a rifampicina."], "opts": [], "gab": "I F · II V · III V · IV V · V F", "com": "A veterana deu gabarito B.<br><b>I<\/b> — em oriental é <b>evitar<\/b>, não contraindicar; e acetilação não é CYP<br><b>V<\/b> — a microbiota não \"conjuga\": as β-glicuronidases <b>quebram<\/b> o conjugado; e \"induzir CYP\" não é o mecanismo geral"}};</script>
+<script>
+/* Do alvo ao caso — índice lateral, questões uma por vez e progresso (localStorage, com try/catch). */
+(function () {
+  "use strict";
+  var QS = window.QS || {}, PARTS = window.PARTS || [], PART = window.PART || 0;
+  var LET = "ABCDEFGH", KEY = "uc15:farmaco:alvo:v1";
+  var P = {};
+  try { P = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { P = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (e) { /* sem armazenamento: segue em memória */ } }
+  function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- navegação entre partes: dentro do site troca o item da aba; sozinho, abre o arquivo ---------- */
+  var framed = false; try { framed = window.top !== window && !!window.top.location.hash; } catch (e) { framed = false; }
+  function goPart(i, ev) {
+    if (!framed) return true;
+    try { window.top.location.hash = "#uc15/farmaco/alvo/" + i; if (ev) ev.preventDefault(); return false; } catch (e) { return true; }
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest ? ev.target.closest("a[data-part]") : null;
+    if (a) { goPart(+a.getAttribute("data-part"), ev); return; }
+    var h = ev.target.closest ? ev.target.closest("a[data-hash]") : null; // link para outra aba do site
+    if (h && framed) { try { window.top.location.hash = h.getAttribute("data-hash"); ev.preventDefault(); } catch (e) { /* abre o arquivo */ } }
+  });
+
+  /* ---------- índice ---------- */
+  var idx = document.getElementById("idx"), doc = document.getElementById("doc");
+  var heads = [].slice.call(doc.querySelectorAll("h2, .qs"));
+  var links = el("div", "links");
+  idx.appendChild(el("div", "ttl", "Nesta parte"));
+  idx.appendChild(links);
+  idx.querySelector(".ttl").onclick = function () { idx.classList.toggle("open"); };
+  var linkOf = {};
+  heads.forEach(function (h, i) {
+    if (!h.id) h.id = "s" + i;
+    var a = el("a");
+    a.href = "#" + h.id;
+    if (h.classList.contains("qs")) { a.className = "q"; a.innerHTML = "Questões <span class='c'></span>"; }
+    else { var c = h.cloneNode(true), nn = c.querySelector(".n"); if (nn) nn.remove(); a.textContent = c.textContent.trim(); }
+    a.onclick = function () { idx.classList.remove("open"); };
+    links.appendChild(a); linkOf[h.id] = a;
+  });
+  links.appendChild(el("div", "sep"));
+  var pr = el("div", "prog", "<span id='pgt'></span><div class='bar'><i id='pgb'></i></div>");
+  links.appendChild(pr);
+  if (!framed) { // dentro do site a barra de abas já lista as partes: não repetir
+    links.appendChild(el("div", "sep"));
+    var parts = el("div", "parts"); parts.appendChild(el("div", "ttl", "Do alvo ao caso"));
+    PARTS.forEach(function (p, i) {
+      var a = el("a", i === PART ? "cur" : "");
+      a.href = p.file; a.setAttribute("data-part", i); a.textContent = (i + 1) + " · " + p.short;
+      parts.appendChild(a);
+    });
+    links.appendChild(parts);
+  }
+
+  if ("IntersectionObserver" in window) {
+    var cur = null;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (cur) cur.classList.remove("on");
+          cur = linkOf[e.target.id]; if (cur) cur.classList.add("on");
+        }
+      });
+    }, { rootMargin: "0px 0px -72% 0px", threshold: 0 });
+    heads.forEach(function (h) { io.observe(h); });
+  }
+
+  /* ---------- questões ---------- */
+  var blocks = [];
+  function status(id) { return P[id] === 1 ? "ok" : P[id] === 0 ? "no" : ""; }
+  function refreshProgress() {
+    var tot = 0, done = 0, ok = 0;
+    blocks.forEach(function (b) {
+      var d = 0;
+      b.ids.forEach(function (id) { tot++; if (P[id] != null) { d++; done++; if (P[id] === 1) ok++; } });
+      var a = linkOf[b.root.id];
+      if (a) { a.querySelector(".c").textContent = d + "/" + b.ids.length; a.classList.toggle("done", d === b.ids.length); }
+    });
+    var t = document.getElementById("pgt"), bar = document.getElementById("pgb");
+    if (t) t.textContent = tot ? ("Questões: " + done + " de " + tot + (done ? " · " + ok + " certas" : "")) : "";
+    if (bar) bar.style.width = (tot ? Math.round(done / tot * 100) : 0) + "%";
+  }
+  function setResult(id, ok) { P[id] = ok ? 1 : 0; save(); refreshProgress(); }
+
+  function vfKey(q) { // "I V · II F · III V" → {I:"V",...}; null se não for esse formato
+    if ((q.opts && q.opts.length) || !q.itens || !q.itens.length || !q.gab) return null;
+    var m = String(q.gab).replace(/<[^>]+>/g, "").match(/\b([IVX]+)\s+([VF])\b/g);
+    if (!m || m.length < 2) return null;
+    var k = {}; m.forEach(function (s) { var p = s.split(/\s+/); k[p[0]] = p[1]; });
+    return k;
+  }
+  function roman(item) { var m = String(item).replace(/<[^>]+>/g, "").match(/^\s*([IVX]+)\s*[.)–-]/); return m ? m[1] : null; }
+
+  function Block(root) {
+    var ids = (root.getAttribute("data-ids") || "").split(",").map(function (s) { return s.trim(); }).filter(function (s) { return QS[s]; });
+    var self = { root: root, ids: ids, i: 0 };
+    // começa na primeira ainda não respondida
+    for (var k = 0; k < ids.length; k++) { if (P[ids[k]] == null) { self.i = k; break; } }
+    var title = root.getAttribute("data-t") || "Questões dela";
+    root.innerHTML = "";
+    var head = el("div", "qh", "<b>" + title + "</b><span class='cnt'></span>");
+    var dots = el("div", "dots"), body = el("div", "qb");
+    root.appendChild(head); root.appendChild(dots); root.appendChild(body);
+    if (root.getAttribute("data-more")) root.appendChild(el("div", "more", root.getAttribute("data-more")));
+
+    function drawDots() {
+      dots.innerHTML = "";
+      ids.forEach(function (id, n) {
+        var b = el("button", (n === self.i ? "cur " : "") + status(id), String(n + 1));
+        b.type = "button"; b.title = QS[id].prova || "";
+        b.onclick = function () { self.i = n; draw(); };
+        dots.appendChild(b);
+      });
+      head.querySelector(".cnt").textContent = (self.i + 1) + " de " + ids.length;
+    }
+    function nav(row) {
+      var prev = el("button", "btn", "← Anterior"); prev.type = "button"; prev.disabled = self.i === 0;
+      prev.onclick = function () { self.i--; draw(); };
+      var next = el("button", "btn pri", self.i === ids.length - 1 ? "Fim do bloco ✓" : "Próxima →"); next.type = "button";
+      next.disabled = self.i === ids.length - 1;
+      next.onclick = function () { self.i++; draw(); root.scrollIntoView({ block: "nearest" }); };
+      row.appendChild(prev); row.appendChild(next);
+    }
+    function feedback(q, ok, extra) {
+      var f = el("div", "fb " + (ok === true ? "ok" : ok === false ? "no" : ""));
+      f.innerHTML = "<span class='lb'>" + (ok === true ? "Certo" : ok === false ? "Não foi dessa vez" : "Resposta dela") + "</span>" +
+        (extra || "") + (q.com ? "<div>" + q.com + "</div>" : "");
+      return f;
+    }
+    function draw() {
+      drawDots();
+      var id = ids[self.i], q = QS[id];
+      body.innerHTML = "";
+      var tags = el("div", "tags");
+      tags.appendChild(el("span", "pv", q.prova));
+      if (q.tipo) tags.appendChild(el("span", "", q.tipo));
+      if (q.selo === "IN") tags.appendChild(el("span", "warn", "gabarito inferido"));
+      if (q.selo === "AB") tags.appendChild(el("span", "warn", "gabarito em aberto"));
+      body.appendChild(tags);
+      if (q.enun) body.appendChild(el("div", "enun", q.enun));
+      var key = vfKey(q), answered = P[id] != null;
+
+      /* itens (sentenças I–V, asserção-razão) */
+      var itemEls = [];
+      if (q.itens && q.itens.length) {
+        var ol = el("ol", "itens");
+        q.itens.forEach(function (it) {
+          var li = el("li");
+          if (/^\s*PORQUE\s*$/i.test(String(it).replace(/<[^>]+>/g, ""))) { li.className = "pq"; li.textContent = "PORQUE"; }
+          else {
+            li.appendChild(el("span", "tx", it));
+            var r = roman(it);
+            if (key && r && key[r]) {
+              var vf = el("span", "vf");
+              ["V", "F"].forEach(function (c) {
+                var b = el("button", "", c); b.type = "button";
+                b.onclick = function () { [].forEach.call(vf.querySelectorAll("button"), function (x) { x.classList.remove("sel"); }); b.classList.add("sel"); li.setAttribute("data-a", c); };
+                vf.appendChild(b);
+              });
+              li.appendChild(vf); li.setAttribute("data-r", r); itemEls.push(li);
+            }
+          }
+          ol.appendChild(li);
+        });
+        body.appendChild(ol);
+      }
+
+      var row = el("div", "row");
+      if (q.opts && q.opts.length) {
+        /* objetiva */
+        var opts = q.shuffle ? shuffle(q.opts) : q.opts;
+        var box = el("div", "opts"), btns = [];
+        opts.forEach(function (o, n) {
+          var b = el("button", "opt", "<b>" + LET[n] + "</b><span>" + o.h + "</span>"); b.type = "button";
+          b.onclick = function () { reveal(o); };
+          btns.push({ b: b, o: o }); box.appendChild(b);
+        });
+        body.appendChild(box);
+        var reveal = function (chosen) {
+          btns.forEach(function (x) {
+            x.b.disabled = true;
+            if (x.o.ok) x.b.classList.add("ok");
+            if (chosen && x.o === chosen && !x.o.ok) x.b.classList.add("no");
+            if (x.o.why && !x.b.querySelector(".w")) x.b.querySelector("span").appendChild(el("span", "w", x.o.why));
+          });
+          var ok = chosen ? !!chosen.ok : null;
+          if (chosen) setResult(id, ok);
+          var open = q.selo === "AB" ? "<div><b>Gabarito em aberto:</b> as alternativas em verde são as que sobraram como possíveis.</div>" : "";
+          body.insertBefore(feedback(q, ok, open), row);
+          drawDots();
+        };
+        if (answered) reveal(null);
+      } else if (key && itemEls.length) {
+        /* sentenças com gabarito V/F por item */
+        var chk = el("button", "btn pri", "Conferir"); chk.type = "button";
+        var showVF = function (mine) {
+          var all = true;
+          itemEls.forEach(function (li) {
+            var r = li.getAttribute("data-r"), a = li.getAttribute("data-a"), t = key[r];
+            var vf = li.querySelector(".vf");
+            [].forEach.call(vf.querySelectorAll("button"), function (x) { x.disabled = true; });
+            if (mine) { var good = a === t; if (!good) all = false; li.classList.add(good ? "r-ok" : "r-no"); }
+            if (!vf.querySelector(".truth")) vf.appendChild(el("span", "truth", t === "V" ? "<span style='color:#17663c'>é V</span>" : "<span style='color:#a02a22'>é F</span>"));
+          });
+          return all;
+        };
+        chk.onclick = function () {
+          var miss = itemEls.some(function (li) { return !li.getAttribute("data-a"); });
+          if (miss) { hint.textContent = "Marque V ou F em todas as sentenças."; return; }
+          var ok = showVF(true); setResult(id, ok); chk.remove(); hint.textContent = "";
+          body.insertBefore(feedback(q, ok, "<div class='gab'>" + q.gab + "</div>"), row); drawDots();
+        };
+        var hint = el("span", "hint", "Julgue cada sentença e confira.");
+        if (answered) { showVF(false); body.appendChild(feedback(q, null, "<div class='gab'>" + q.gab + "</div>")); }
+        else { row.appendChild(chk); row.appendChild(hint); }
+      } else {
+        /* discursiva: responder de cabeça, revelar, autoavaliar */
+        var show = el("button", "btn pri", "Ver a resposta dela"); show.type = "button";
+        var hint2 = el("span", "hint", "Responda de cabeça (ou no papel) antes de abrir.");
+        var open2 = function (fresh) {
+          show.remove(); hint2.remove();
+          var f = feedback(q, null, "<div class='gab'>" + (q.gab || "") + "</div>");
+          body.insertBefore(f, row);
+          if (fresh) {
+            var g = el("button", "btn g", "Acertei"), r = el("button", "btn r", "Errei"); g.type = r.type = "button";
+            var mk = function (ok) { return function () { setResult(id, ok); g.remove(); r.remove(); drawDots(); }; };
+            g.onclick = mk(true); r.onclick = mk(false);
+            row.insertBefore(r, row.firstChild); row.insertBefore(g, row.firstChild);
+          }
+        };
+        show.onclick = function () { open2(true); };
+        if (answered) { body.appendChild(row); open2(false); }
+        else { row.appendChild(show); row.appendChild(hint2); }
+      }
+      body.appendChild(row);
+      var sp = el("span"); sp.style.flex = "1"; row.appendChild(sp);
+      nav(row);
+      if (answered) {
+        var redo = el("button", "btn", "Refazer"); redo.type = "button";
+        redo.onclick = function () { delete P[id]; save(); refreshProgress(); draw(); };
+        row.insertBefore(redo, sp);
+      }
+    }
+    self.draw = draw;
+    if (ids.length) draw(); else root.style.display = "none";
+    return self;
+  }
+  [].forEach.call(doc.querySelectorAll(".qs"), function (r) { blocks.push(Block(r)); });
+  refreshProgress();
+})();
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do alvo ao caso · 4 · Resistência: como a bactéria escapa — Farmaco UC15</title>
+<style>
+/* Do alvo ao caso — estilo dos resumos de Tutoria (serifa no texto, Inter/sans nos títulos, roxo = caiu em prova),
+   adaptado para tela. Layout: índice estreito à esquerda + coluna de leitura. Página autocontida, sem CDN. */
+:root{
+  --ink:#1d1a26; --ink2:#4b4560; --mut:#6b6480; --h:#1f1640; --h3:#2b1f4a;
+  --pur:#6b2fb3; --pur-soft:#f1eafd; --pur-mark:#e6d8fb; --pur-line:#e3dbf0;
+  --bg:#fbfaff; --card:#ffffff; --line:#ebe6f2;
+  --ok:#23804e; --ok-soft:#eef8f1; --no:#c02d2d; --no-soft:#fde7e7;
+  --warn:#9a6c00; --warn-soft:#fff6da; --blue:#2c5fb8; --blue-soft:#e9f3fb; --teal:#0b7285; --teal-soft:#e3f6f8;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Liberation Serif",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:14px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17.5px;line-height:1.62;-webkit-text-size-adjust:100%}
+.shell{display:grid;grid-template-columns:168px minmax(0,1fr);gap:0;max-width:1080px;margin:0 auto}
+/* índice */
+.idx{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:16px 10px 24px 14px;font-family:var(--sans);font-size:12.5px;line-height:1.3;border-right:1px solid var(--line)}
+.idx .ttl{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pur);margin:0 0 8px}
+.idx a{display:block;color:var(--ink2);text-decoration:none;padding:5px 7px;border-radius:6px;border-left:2px solid transparent;margin:1px 0}
+.idx a:hover{background:var(--pur-soft)}
+.idx a.on{color:var(--h);font-weight:700;border-left-color:var(--pur);background:var(--pur-soft)}
+.idx a.q{color:var(--pur);font-weight:600;padding-left:16px;font-size:12px}
+.idx a.q .c{float:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--mut)}
+.idx a.q.done .c{color:var(--ok)}
+.idx .sep{height:1px;background:var(--line);margin:12px 4px}
+.idx .parts a{font-size:12px}
+.idx .parts a.cur{font-weight:800;color:var(--pur)}
+.idx .prog{margin:10px 6px 0;font-size:11.5px;color:var(--mut)}
+.idx .bar{height:6px;border-radius:99px;background:var(--pur-line);overflow:hidden;margin-top:5px}
+.idx .bar i{display:block;height:100%;background:var(--pur);width:0}
+/* coluna de leitura */
+.doc{padding:22px 30px 90px 34px;min-width:0;max-width:820px}
+.crumb{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pur);margin-bottom:6px}
+h1,h2,h3,h4,.sans,figcaption,.box .lb,.obj,.legend,table.t,.ficha,.qs,.pager,.chip{font-family:var(--sans)}
+h1{font-size:30px;line-height:1.15;margin:0 0 6px;color:var(--h);letter-spacing:-.3px;text-wrap:balance}
+.sub{font-family:var(--sans);font-size:13.5px;color:#7a6a9c;margin:0 0 16px}
+h2{font-size:21px;color:var(--h);margin:40px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--pur);display:flex;align-items:center;gap:10px;line-height:1.2;text-wrap:balance}
+h2 .n{background:var(--pur);color:#fff;font-size:13.5px;min-width:27px;height:27px;padding:0 6px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-size:16.5px;color:var(--h3);margin:24px 0 6px;line-height:1.25}
+h4{font-size:14px;color:var(--h3);margin:16px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+p{margin:0 0 11px}
+ul,ol{margin:4px 0 12px;padding-left:22px}
+li{margin:3px 0 5px}
+b,strong{font-weight:700}
+a{color:var(--pur)}
+mark.apf{background:var(--pur-mark);color:inherit;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pega{background:#fdf0c4;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:99px;background:#fff3c9;color:#7a5600;vertical-align:1.5px;white-space:nowrap}
+.chip.lab{background:var(--teal-soft);color:var(--teal)}
+.obj{background:#f6f3fb;border:1px solid var(--pur-line);border-radius:10px;padding:12px 16px 10px;font-size:14px;margin:8px 0 14px;line-height:1.45}
+.obj b.h{display:block;color:var(--h3);font-size:14px;margin-bottom:4px}
+.obj ol,.obj ul{margin:0;padding-left:20px}
+.legend{display:flex;gap:6px 16px;font-size:12px;color:#555;margin:6px 0 16px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i.sw{width:24px;height:10px;border-radius:2px;display:inline-block}
+.box{border-radius:10px;padding:11px 15px 9px;margin:14px 0 16px;font-size:16px;border-left:4px solid;line-height:1.55}
+.box .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:3px}
+.box.apf{background:var(--pur-soft);border-color:var(--pur)} .box.apf .lb{color:var(--pur)}
+.box.fix{background:var(--no-soft);border-color:#d23b3b} .box.fix .lb{color:var(--no)}
+.box.pg{background:var(--warn-soft);border-color:#e0a800} .box.pg .lb{color:var(--warn)}
+.box.div{background:var(--blue-soft);border-color:#3a72d6} .box.div .lb{color:var(--blue)}
+.box.case{background:var(--ok-soft);border-color:#2f9e63} .box.case .lb{color:var(--ok)}
+.box.lab{background:var(--teal-soft);border-color:#1098ad} .box.lab .lb{color:var(--teal)}
+.box s{color:var(--no)}
+table.t{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 16px;line-height:1.4}
+table.t th{background:#efe8fa;color:var(--h3);font-size:12.5px;text-align:left;padding:7px 9px;border-bottom:1.5px solid var(--pur);vertical-align:bottom}
+table.t td{padding:6px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t tr:nth-child(even) td{background:#fbfafe}
+table.t td:first-child{font-weight:600;color:var(--h3)}
+table.t .ok{color:var(--ok);font-weight:700} table.t .no{color:var(--no);font-weight:700}
+.tw{overflow-x:auto;margin:0 -4px;padding:0 4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.small{font-size:15px}
+/* ficha de fármaco */
+.ficha{border:1px solid var(--pur-line);border-radius:12px;background:var(--card);margin:12px 0 16px;overflow:hidden;font-size:14.5px;line-height:1.45}
+.ficha>.fh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:9px 14px;background:#f6f3fb;border-bottom:1px solid var(--pur-line)}
+.ficha>.fh b{font-size:16px;color:var(--h)}
+.ficha>.fh span{font-size:12.5px;color:var(--mut)}
+.ficha>.fh .tag{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px}
+.tag.cida{background:#dff3e8;color:#17663c}.tag.stat{background:#fff0c9;color:#7a5600}
+.ficha dl{margin:0;display:grid;grid-template-columns:104px minmax(0,1fr)}
+.ficha dt{padding:7px 0 7px 14px;font-weight:700;color:var(--pur);font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-top:1px solid var(--line)}
+.ficha dd{margin:0;padding:7px 14px 7px 8px;border-top:1px solid var(--line)}
+.ficha dt:first-of-type,.ficha dd:first-of-type{border-top:0}
+/* figuras (mesmas classes dos esquemas da Central, recoloridas para o roxo da Tutoria) */
+figure.fig{margin:14px 0 18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 10px 8px;overflow-x:auto}
+figure.fig figcaption{font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4;text-align:center;text-wrap:balance}
+figure.fig svg{width:100%;height:auto;display:block;min-width:440px}
+figure.fig .pl{--x-ink:#1d1a26;--x-ink2:#4b4560;--x-ink3:#6b6480;--x-ok:#17663c;--x-okbg:#eaf7ef;--x-no:#a02a22;--x-nobg:#fdf0ef;--x-acc:#6b2fb3;--x-accsoft:#f1eafd;--x-accink:#fff;--x-trap:#7a5600;--x-line2:#ece7f5;--x-panel:#fff;--x-trapbg:#fff6da}
+.fig svg text{font-family:var(--sans)}
+.fig svg .t{fill:var(--x-ink)}.fig svg .t2{fill:var(--x-ink2)}.fig svg .t3{fill:var(--x-ink3)}.fig svg .tno{fill:var(--x-no)}.fig svg .tok{fill:var(--x-ok)}.fig svg .tinv{fill:var(--x-accink)}
+.fig svg .b{fill:var(--x-panel);stroke:var(--x-ink3);stroke-width:1}.fig svg .bcell{fill:var(--x-accsoft);stroke:var(--x-acc);stroke-width:1.5}
+.fig svg .bno{fill:var(--x-nobg);stroke:var(--x-no);stroke-width:1.3}.fig svg .bok{fill:var(--x-okbg);stroke:var(--x-ok);stroke-width:1.3}
+.fig svg .breg{fill:var(--x-line2);stroke:none}.fig svg .bacc{fill:var(--x-acc);stroke:none}.fig svg .btrapf{fill:var(--x-trap);stroke:none;opacity:.85}.fig svg .bnof{fill:var(--x-no);stroke:none}
+.fig svg .l{stroke:var(--x-ink2);fill:none;stroke-width:1.4}.fig svg .lno{stroke:var(--x-no);fill:none;stroke-width:1.4}.fig svg .lok{stroke:var(--x-ok);fill:none;stroke-width:1.4}.fig svg .lacc{stroke:var(--x-acc);fill:none;stroke-width:1.4}
+.fig svg .lt{stroke-width:1.8}.fig svg .lbar{stroke-width:2.6;stroke-linecap:round}.fig svg .ld{stroke-dasharray:4 3}.fig svg .lthick{stroke-width:2.4}
+.fig svg .h{fill:var(--x-ink2)}.fig svg .hno{fill:var(--x-no)}.fig svg .hok{fill:var(--x-ok)}
+.fig svg .bokf{fill:var(--x-ok);stroke:none}.fig svg .bsoft{fill:var(--x-accsoft);stroke:none}.fig svg .btrap{fill:var(--x-trapbg);stroke:var(--x-trap);stroke-width:1.2}
+.fig svg .hacc,.fig svg .tacc{fill:var(--x-acc)}.fig svg .htrap,.fig svg .ttrap{fill:var(--x-trap)}.fig svg .ltrap{stroke:var(--x-trap);fill:none;stroke-width:1.4}.fig svg .lbug{stroke:var(--x-ink2);fill:none;stroke-width:3.2;stroke-linecap:round}
+.fig svg .w6{font-weight:600}.fig svg .w7{font-weight:700}.fig svg .w8{font-weight:800}
+/* bloco de questões: uma por vez */
+.qs{margin:26px 0 30px;border:1.5px solid var(--pur);border-radius:14px;background:var(--card);overflow:hidden;font-size:15px;line-height:1.5}
+.qs .qh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--pur);color:#fff;padding:9px 14px}
+.qs .qh b{font-size:14px;letter-spacing:.02em}
+.qs .qh .cnt{margin-left:auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;opacity:.95}
+.qs .dots{display:flex;gap:5px;flex-wrap:wrap;padding:9px 14px 0}
+.qs .dots button{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--pur-line);background:#fff;font:700 10.5px var(--sans);color:var(--mut);cursor:pointer;padding:0}
+.qs .dots button.cur{border-color:var(--pur);color:var(--pur);box-shadow:0 0 0 2px var(--pur-soft)}
+.qs .dots button.ok{background:#dff3e8;border-color:#7cc79d;color:#17663c}
+.qs .dots button.no{background:#fde7e7;border-color:#e59a9a;color:#a02a22}
+.qs .qb{padding:10px 16px 14px}
+.qs .tags{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+.qs .tags span{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:#f1eefb;color:var(--ink2)}
+.qs .tags span.pv{background:var(--pur-soft);color:var(--pur)}
+.qs .tags span.warn{background:#fff0c9;color:#7a5600}
+.qs .enun{font-family:var(--serif);font-size:17px;line-height:1.5;margin:0 0 10px}
+.qs ol.itens{list-style:none;margin:0 0 12px;padding:0;font-family:var(--serif);font-size:16px}
+.qs ol.itens li{margin:0 0 7px;padding:7px 10px;background:#faf8fe;border-radius:8px;border-left:3px solid var(--pur-line);display:flex;gap:10px;align-items:flex-start}
+.qs ol.itens li.pq{background:none;border:0;font-family:var(--sans);font-weight:800;font-size:12px;letter-spacing:.1em;color:var(--pur);justify-content:center;padding:0}
+.qs ol.itens li .tx{flex:1;min-width:0}
+.qs ol.itens li.r-ok{border-left-color:#2f9e63;background:var(--ok-soft)}
+.qs ol.itens li.r-no{border-left-color:#d23b3b;background:var(--no-soft)}
+.qs .vf{display:inline-flex;gap:4px;flex:none}
+.qs .vf button{font:800 12px var(--sans);width:30px;height:28px;border-radius:7px;border:1.5px solid var(--pur-line);background:#fff;color:var(--ink2);cursor:pointer}
+.qs .vf button.sel{background:var(--pur);border-color:var(--pur);color:#fff}
+.qs .vf .truth{font:800 11px var(--sans);align-self:center;margin-left:4px}
+.qs .opts{display:grid;gap:7px;margin:0 0 10px}
+.qs .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;font:inherit;font-family:var(--serif);font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--pur-line);border-radius:10px;padding:9px 12px;cursor:pointer;line-height:1.45}
+.qs .opt:hover:not(:disabled){border-color:var(--pur);background:#faf7ff}
+.qs .opt:disabled{cursor:default;color:var(--ink)}
+.qs .opt>b{font-family:var(--sans);font-size:12.5px;width:22px;height:22px;border-radius:50%;background:#f1eefb;color:var(--pur);display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.qs .opt .w{display:block;font-family:var(--sans);font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.4}
+.qs .opt.ok{border-color:#2f9e63;background:var(--ok-soft)} .qs .opt.ok>b{background:#2f9e63;color:#fff}
+.qs .opt.no{border-color:#d23b3b;background:var(--no-soft)} .qs .opt.no>b{background:#d23b3b;color:#fff}
+.qs .fb{border-radius:10px;padding:10px 13px;margin:4px 0 10px;font-size:14.5px;line-height:1.5;background:var(--pur-soft);border-left:4px solid var(--pur)}
+.qs .fb.ok{background:var(--ok-soft);border-color:#2f9e63} .qs .fb.no{background:var(--no-soft);border-color:#d23b3b}
+.qs .fb .lb{display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px;color:var(--pur)}
+.qs .fb.ok .lb{color:var(--ok)} .qs .fb.no .lb{color:var(--no)}
+.qs .fb .gab{font-family:var(--serif);font-size:16.5px}
+.qs .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qs .btn{font:700 13.5px var(--sans);padding:8px 14px;border-radius:9px;border:1.5px solid var(--pur);background:#fff;color:var(--pur);cursor:pointer}
+.qs .btn.pri{background:var(--pur);color:#fff}
+.qs .btn.g{border-color:#2f9e63;color:#17663c}.qs .btn.r{border-color:#d23b3b;color:#a02a22}
+.qs .btn:disabled{opacity:.45;cursor:default}
+.qs .hint{font-size:12.5px;color:var(--mut)}
+.qs .more{font-size:12.5px;color:var(--mut);padding:0 16px 12px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:14px}
+.pager a{text-decoration:none;font-weight:700;padding:10px 14px;border:1.5px solid var(--pur-line);border-radius:10px;background:#fff;max-width:48%}
+.pager a small{display:block;font-weight:600;color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.pager a.nx{margin-left:auto;text-align:right}
+button:focus-visible,a:focus-visible{outline:2px solid var(--pur);outline-offset:2px}
+@media (max-width:860px){
+  body{font-size:16.5px}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .idx{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px 14px}
+  .idx .links{display:none}.idx.open .links{display:block}
+  .idx .ttl{cursor:pointer;margin:0}.idx .ttl::after{content:" ▾"}
+  .doc{padding:16px 16px 70px}
+  h1{font-size:25px}h2{font-size:19px}
+  .two{grid-template-columns:1fr}
+  .ficha dl{grid-template-columns:86px minmax(0,1fr)}
+}
+@media print{.idx,.pager,.qs .dots{display:none}.shell{display:block}.doc{max-width:none;padding:0}.qs{break-inside:avoid}}
+</style></head><body>
+<div class="shell">
+<nav class="idx" id="idx" aria-label="Índice"></nav>
+<main class="doc" id="doc">
+<div class="crumb">Farmaco UC15 · Do alvo ao caso · Parte 4 de 5</div>
+<h1>Resistência: como a bactéria escapa</h1>
+<div class="sub">Intrínseca × adquirida · os quatro jeitos de resistir · a escada das β-lactamases · <i>S. aureus</i>: MSSA, MRSA e GRSA · macrolídeo × clindamicina · ler o antibiograma: manter ou substituir</div>
+
+<div class="obj"><b class="h">Você sai desta parte sabendo</b>
+<ol>
+<li>separar resistência intrínseca de adquirida, com exemplos;</li>
+<li>dizer, para cada β-lactamase, o que ela derruba e o que ainda funciona;</li>
+<li>os três degraus do <i>S. aureus</i> e o antibiótico de cada um;</li>
+<li>quando a clindamicina ainda serve depois de um macrolídeo;</li>
+<li>resolver um “manter ou substituir” a partir do antibiograma.</li>
+</ol>
+<div style="margin-top:6px;color:#6b6480">Aqui as duas matérias se encontram. A Vânia pergunta <b>o que usar</b> contra a bactéria resistente. A Tabata, no Lab, pergunta <b>por que</b> o antibiótico em uso não funciona. A resposta sai do mesmo raciocínio.</div>
+</div>
+
+<h2><span class="n">1</span>Intrínseca × adquirida</h2>
+<p>A resistência <b>intrínseca</b> é da espécie inteira. Está no cromossomo, é previsível e não depende de a bactéria ter “aprendido” nada: ou falta o alvo, ou o antibiótico não consegue entrar, ou a espécie já nasce com a enzima. Você já conhece quase todos os exemplos, porque são o “não pega” das fichas das Partes 1 a 3:</p>
+<div class="tw"><table class="t">
+<tr><th>Antibiótico</th><th>Não funciona em</th><th>Por quê</th></tr>
+<tr><td>Vancomicina</td><td>Gram-negativas</td><td>não atravessa a membrana externa</td></tr>
+<tr><td>Polimixina</td><td>Gram-positivas; <i>Proteus</i> e <i>Serratia</i></td><td>o alvo é o LPS</td></tr>
+<tr><td>β-lactâmicos</td><td>atípicas (<i>Mycoplasma</i>, <i>Chlamydia</i>)</td><td>sem parede, ou escondidas dentro da célula</td></tr>
+<tr><td>Amoxicilina, ampicilina</td><td><i>Pseudomonas</i>; <mark class="apf"><i>Klebsiella</i> e <i>Enterobacter</i>, que produzem β-lactamase intrinsecamente</mark>; estafilococos (penicilinase)</td><td>não entra, ou é destruída</td></tr>
+<tr><td>Cefalosporinas até a 3ª geração</td><td><mark class="apf"><i>Citrobacter</i>, <i>Enterobacter</i>, <i>Morganella</i>, <i>Serratia</i> e <i>Proteus vulgaris</i></mark></td><td>têm a β-lactamase <b>AmpC</b> no cromossomo</td></tr>
+<tr><td>Nitrofurantoína, tigeciclina</td><td><i>Proteus</i> e <i>Pseudomonas</i></td><td>—</td></tr>
+<tr><td>Aminoglicosídeos</td><td>anaeróbios</td><td>—</td></tr>
+</table></div>
+<p>A resistência <b>adquirida</b> aparece em algumas cepas, por mutação ou, mais vezes, por um plasmídeo recebido de outra bactéria. Não dá para prever: <b>só o antibiograma revela</b>. Cresce com a prescrição indevida e no ambiente de UTI. São adquiridas a ESBL, a carbapenemase, a PBP alterada do MRSA, a resistência do GRSA à vancomicina e a dos estafilococos aos macrolídeos.</p>
+<div class="box lab"><span class="lb">Ponte com o Lab</span>
+<p>No laudo, o antibiótico de resistência intrínseca muitas vezes nem aparece. Na aula da Tabata, o laudo de <i>Proteus</i> vinha sem nitrofurantoína e o de <i>Klebsiella</i> sem ampicilina, e a explicação era essa. E na discursiva da última prova de Lab, a coluna “mecanismo adquirido” vinha vazia para o <i>Citrobacter freundii</i> em uso de ceftriaxona. Mesmo assim a resposta era <b>substituir</b>: a AmpC dele é intrínseca e não entra na coluna do adquirido.</p>
+</div>
+
+<h2><span class="n">2</span>Os quatro jeitos de resistir</h2>
+<p>Toda resistência cai em um destes quatro mecanismos. Saber qual é o mecanismo diz o que ainda funciona: se a bactéria destrói o antibiótico, um inibidor ou um fármaco que a enzima não alcança resolve; se ela mudou o alvo, é preciso um fármaco de <b>outro alvo</b>.</p>
+
+<figure class="fig"><div class="pl">
+<svg viewBox="0 0 680 168" role="img" aria-label="Os quatro mecanismos de resistência: enzima que destrói o antibiótico, alvo alterado, menos porinas e bomba de efluxo." xmlns="http://www.w3.org/2000/svg">
+<g class="l ld" opacity=".45"><line x1="170" y1="8" x2="170" y2="160"/><line x1="340" y1="8" x2="340" y2="160"/><line x1="510" y1="8" x2="510" y2="160"/></g>
+<text x="85" y="18" text-anchor="middle" font-size="11.5" class="t w7">1 · A enzima destrói</text>
+<rect x="30" y="51" width="14" height="14" rx="2" class="bacc"/>
+<line x1="48" y1="58" x2="58" y2="58" class="l"/><path d="M57 54 l7 4 l-7 4z" class="h"/>
+<ellipse cx="94" cy="58" rx="28" ry="14" class="btrap"/><text x="94" y="61.5" text-anchor="middle" font-size="9" class="ttrap w7">enzima</text>
+<rect x="131" y="48" width="6" height="13" rx="1" class="bnof"/><rect x="140" y="56" width="6" height="13" rx="1" class="bnof"/>
+<text x="85" y="100" text-anchor="middle" font-size="10" class="t2">o antibiótico é quebrado</text>
+<text x="85" y="114" text-anchor="middle" font-size="10" class="t2">antes de agir</text>
+<text x="85" y="136" text-anchor="middle" font-size="10" class="tno w6">β-lactamases: penicilinase,</text>
+<text x="85" y="150" text-anchor="middle" font-size="10" class="tno w6">AmpC, ESBL, carbapenemase</text>
+<text x="255" y="18" text-anchor="middle" font-size="11.5" class="t w7">2 · O alvo muda</text>
+<circle cx="208" cy="58" r="15" class="bcell"/><rect x="202" y="52" width="12" height="12" rx="2" class="bacc"/>
+<line x1="229" y1="58" x2="239" y2="58" class="l"/><path d="M238 54 l7 4 l-7 4z" class="h"/>
+<path d="M276 42 l16 16 l-16 16 l-16 -16z" class="bno"/>
+<rect x="298" y="36" width="12" height="12" rx="2" class="bacc"/>
+<g class="lno lt"><line x1="294" y1="52" x2="302" y2="60"/><line x1="302" y1="52" x2="294" y2="60"/></g>
+<text x="255" y="100" text-anchor="middle" font-size="10" class="t2">a peça onde o fármaco</text>
+<text x="255" y="114" text-anchor="middle" font-size="10" class="t2">encaixa é trocada</text>
+<text x="255" y="136" text-anchor="middle" font-size="10" class="tno w6">PBP do MRSA · D-Ala-D-Lac</text>
+<text x="255" y="150" text-anchor="middle" font-size="10" class="tno w6">do GRSA · ribossomo 50S</text>
+<text x="425" y="18" text-anchor="middle" font-size="11.5" class="t w7">3 · A porta fecha</text>
+<rect x="360" y="60" width="130" height="12" rx="3" class="btrapf"/>
+<rect x="417" y="57" width="16" height="18" rx="3" class="b"/>
+<g class="lno lthick"><line x1="419" y1="60" x2="431" y2="72"/><line x1="431" y1="60" x2="419" y2="72"/></g>
+<rect x="418" y="30" width="14" height="14" rx="2" class="bacc"/>
+<line x1="425" y1="46" x2="425" y2="53" class="lno lt"/>
+<text x="425" y="100" text-anchor="middle" font-size="10" class="t2">menos porinas na membrana</text>
+<text x="425" y="114" text-anchor="middle" font-size="10" class="t2">externa: o fármaco não entra</text>
+<text x="425" y="143" text-anchor="middle" font-size="10" class="tno w6">Gram-negativas, Pseudomonas</text>
+<text x="595" y="18" text-anchor="middle" font-size="11.5" class="t w7">4 · A bomba expulsa</text>
+<rect x="530" y="60" width="130" height="12" rx="3" class="btrapf"/>
+<rect x="587" y="52" width="16" height="28" rx="4" class="bcell"/>
+<line x1="595" y1="84" x2="595" y2="40" class="lno lt"/><path d="M590.5 42 l4.5 -9 l4.5 9z" class="hno"/>
+<rect x="608" y="28" width="14" height="14" rx="2" class="bacc"/>
+<text x="595" y="100" text-anchor="middle" font-size="10" class="t2">bomba de efluxo devolve</text>
+<text x="595" y="114" text-anchor="middle" font-size="10" class="t2">o fármaco para fora</text>
+<text x="595" y="143" text-anchor="middle" font-size="10" class="tno w6">macrolídeos no estafilococo</text>
+</svg></div><figcaption>Os quatro mecanismos, como a Tabata mostrou. O primeiro é o principal e explica toda a seção seguinte.</figcaption></figure>
+
+<p>O biofilme (em próteses, parafusos, cateteres) não é resistência adquirida, mas dificulta a chegada do antibiótico e pode fazer o tratamento falhar mesmo com antibiograma sensível.</p>
+
+<h2><span class="n">3</span>Gram-negativas: a escada das β-lactamases</h2>
+<p>As β-lactamases das Gram-negativas têm potência crescente. Pense numa escada de quatro degraus: a cada degrau a enzima destrói mais β-lactâmicos, e a escolha dela é sempre <b>o primeiro que sobra</b>. É por esta escada que passa a maior parte das questões de resistência.</p>
+
+<figure class="fig"><div class="pl"><svg viewBox="0 0 680 352" role="img" aria-label="Escada de resistência: cada mecanismo inutiliza uma faixa de beta-lactâmicos e aponta o que usar. Penicilinase derruba penicilina, amoxicilina e 1ª geração; ESBL derruba até a 4ª geração; AmpC até a 3ª; carbapenemase derruba todos, inclusive carbapenêmicos; PBP2a do MRSA derruba todos." xmlns="http://www.w3.org/2000/svg"><text x="175.0" y="24" font-size="9.5" text-anchor="middle" class="t3">penicilina</text><text x="225.0" y="24" font-size="9.5" text-anchor="middle" class="t3">amoxi</text><text x="275.0" y="24" font-size="9.5" text-anchor="middle" class="t3">1ª ger.</text><text x="325.0" y="24" font-size="9.5" text-anchor="middle" class="t3">2ª ger.</text><text x="375.0" y="24" font-size="9.5" text-anchor="middle" class="t3">3ª ger.</text><text x="425.0" y="24" font-size="9.5" text-anchor="middle" class="t3">4ª ger.</text><text x="475.0" y="24" font-size="9.5" text-anchor="middle" class="t3">carbapen.</text><line x1="150" y1="32" x2="500" y2="32" class="l"/><text x="8" y="62" font-size="11.5" text-anchor="start" class="t" font-weight="700">penicilinase</text><text x="8" y="77" font-size="9.5" text-anchor="start" class="t2">S. aureus, saprophyticus</text><rect x="150" y="50" width="150" height="30" rx="6" class="bno"/><text x="225.0" y="69" font-size="10" text-anchor="middle" class="tno" font-weight="600">inativa</text><rect x="304" y="50" width="196" height="30" rx="6" class="bok"/><text x="402.0" y="69" font-size="10" text-anchor="middle" class="tok" font-weight="600">funciona</text><line x1="506" y1="65" x2="515.0" y2="65.0" class="lok"/><polygon points="522.0,65.0 515.0,61.5 515.0,68.5" class="hok"/><text x="526" y="62" font-size="11" text-anchor="start" class="tok" font-weight="700">amoxi + clavulanato</text><text x="526" y="77" font-size="9.5" text-anchor="start" class="t2">2ª ger. também resiste</text><text x="8" y="120" font-size="11.5" text-anchor="start" class="t" font-weight="700">AmpC</text><text x="8" y="135" font-size="9.5" text-anchor="start" class="t2">Enterobacter, Serratia</text><rect x="150" y="108" width="250" height="30" rx="6" class="bno"/><text x="275.0" y="127" font-size="10" text-anchor="middle" class="tno" font-weight="600">inativa</text><rect x="404" y="108" width="96" height="30" rx="6" class="bok"/><text x="452.0" y="127" font-size="10" text-anchor="middle" class="tok" font-weight="600">funciona</text><line x1="506" y1="123" x2="515.0" y2="123.0" class="lok"/><polygon points="522.0,123.0 515.0,119.5 515.0,126.5" class="hok"/><text x="526" y="120" font-size="11" text-anchor="start" class="tok" font-weight="700">cefepima (4ª)</text><text x="526" y="135" font-size="9.5" text-anchor="start" class="t2">ou carbapenêmico</text><text x="8" y="178" font-size="11.5" text-anchor="start" class="t" font-weight="700">ESBL</text><text x="8" y="193" font-size="9.5" text-anchor="start" class="t2">E. coli, Klebsiella</text><rect x="150" y="166" width="300" height="30" rx="6" class="bno"/><text x="300.0" y="185" font-size="10" text-anchor="middle" class="tno" font-weight="600">inativa</text><rect x="454" y="166" width="46" height="30" rx="6" class="bok"/><text x="477.0" y="185" font-size="10" text-anchor="middle" class="tok" font-weight="600">funciona</text><line x1="506" y1="181" x2="515.0" y2="181.0" class="lok"/><polygon points="522.0,181.0 515.0,177.5 515.0,184.5" class="hok"/><text x="526" y="178" font-size="11" text-anchor="start" class="tok" font-weight="700">imipenem + cilastatina</text><text x="526" y="193" font-size="9.5" text-anchor="start" class="t2">ambulatório: cipro</text><text x="8" y="236" font-size="11.5" text-anchor="start" class="t" font-weight="700">carbapenemase</text><text x="8" y="251" font-size="9.5" text-anchor="start" class="t2">KPC, OXA</text><rect x="150" y="224" width="350" height="30" rx="6" class="bno"/><text x="325.0" y="243" font-size="10" text-anchor="middle" class="tno" font-weight="600">inativa</text><line x1="506" y1="239" x2="515.0" y2="239.0" class="lok"/><polygon points="522.0,239.0 515.0,235.5 515.0,242.5" class="hok"/><text x="526" y="236" font-size="11" text-anchor="start" class="tok" font-weight="700">polimixina B</text><text x="526" y="251" font-size="9.5" text-anchor="start" class="t2">rim ruim: caz + avibactam</text><text x="8" y="294" font-size="11.5" text-anchor="start" class="t" font-weight="700">PBP2a = MRSA</text><text x="8" y="309" font-size="9.5" text-anchor="start" class="t2">PBP nova (mecA)</text><rect x="150" y="282" width="350" height="30" rx="6" class="btrap"/><text x="325.0" y="301" font-size="10" text-anchor="middle" class="ttrap" font-weight="600">não liga na PBP</text><line x1="506" y1="297" x2="515.0" y2="297.0" class="lok"/><polygon points="522.0,297.0 515.0,293.5 515.0,300.5" class="hok"/><text x="526" y="294" font-size="11" text-anchor="start" class="tok" font-weight="700">vancomicina</text><text x="526" y="309" font-size="9.5" text-anchor="start" class="t2">GRSA → tigeciclina</text><text x="340" y="342" font-size="10.5" text-anchor="middle" class="t2">Quinolona e aminoglicosídeo não são β-lactâmicos: a ESBL não os destrói (por isso cipro na ESBL ambulatorial).</text></svg></div><figcaption>A escada. Veja até onde vai a barra vermelha de cada enzima e pegue o primeiro antibiótico que sobra.</figcaption></figure>
+
+<div class="tw"><table class="t">
+<tr><th>Degrau</th><th>Quem costuma ter</th><th>O que derruba</th><th>A escolha dela</th></tr>
+<tr><td>Penicilinase</td><td>muito comum; por exemplo, a <i>E. coli</i> de uma urocultura</td><td>penicilinas sem inibidor e cefalosporinas de 1ª geração</td><td><mark class="apf">amoxicilina + clavulanato no ambulatório; no hospital, penicilina com inibidor por via IV</mark>; cefalosporina de 2ª geração se houver alergia tardia</td></tr>
+<tr><td>AmpC</td><td><mark class="apf"><i>Citrobacter</i>, <i>Enterobacter</i>, <i>Morganella</i>, <i>Serratia</i>, <i>Proteus vulgaris</i></mark></td><td>até as cefalosporinas de 3ª geração; clavulanato não resolve</td><td><mark class="apf">cefepima ou imipenem + cilastatina</mark></td></tr>
+<tr><td>ESBL</td><td>adquirida: <i>E. coli</i>, <i>Klebsiella</i>, <i>Proteus</i>, <i>Pseudomonas</i></td><td>todas as penicilinas e cefalosporinas, <b>inclusive a cefepima</b>, e o aztreonam</td><td><mark class="apf">carbapenêmico: imipenem + cilastatina</mark>. No ambulatório, <mark class="apf">quinolona se o antibiograma mostrar sensível</mark></td></tr>
+<tr><td>Carbapenemase</td><td>adquirida: <i>Klebsiella</i> (a KPC), <i>Pseudomonas</i>, <i>Acinetobacter</i> (tipo OXA)</td><td>todos os β-lactâmicos, inclusive os carbapenêmicos</td><td><mark class="apf">polimixina B, empiricamente</mark>. <mark class="apf">Ceftazidima + avibactam quando a polimixina é contraindicada</mark> (disfunção renal, idoso, criança)</td></tr>
+</table></div>
+
+<h3>Como reconhecer o degrau no enunciado</h3>
+<ul>
+<li><mark class="apf">Infecção por <i>Klebsiella</i> que não responde à ceftriaxona</mark>: pense em ESBL e vá para imipenem + cilastatina.</li>
+<li><mark class="apf">Bactéria resistente à cefepima</mark>: não é AmpC (a cefepima resiste à AmpC); é ESBL. Carbapenêmico.</li>
+<li>Antibiograma resistente a aztreonam, amoxicilina + clavulanato, cefepima, cefotaxima e ceftazidima, e sensível a imipenem e meropenem: <mark class="apf">é compatível com ESBL</mark>.</li>
+<li>Nome da enzima no enunciado (KPC, OXA, “carbapenemase”): polimixina. Se o paciente tem <mark class="apf">disfunção renal</mark> e a pergunta pede “maior efetividade e segurança”, ceftazidima + avibactam.</li>
+<li>“Qual antibiótico se relaciona ao <b>aparecimento</b> da ESBL?” <mark class="apf">Ceftriaxona</mark>, pelo uso maciço de 3ª geração.</li>
+</ul>
+
+<h3>E o aminoglicosídeo, a quinolona e a <i>Pseudomonas</i>?</h3>
+<p>No antibiograma de uma ESBL, costumam aparecer sensíveis também a amicacina, a gentamicina e as quinolonas. A regra dela: <mark class="apf">o aminoglicosídeo não é a 1ª escolha, por causa da nefrotoxicidade e da ototoxicidade</mark>; só entra se não houver carbapenêmico disponível. A quinolona é a saída quando o tratamento vai ser <b>ambulatorial</b>.</p>
+<div class="box pg"><span class="lb">Par mínimo: a mesma tabela, duas provas</span>
+<p>O mesmo antibiograma de <i>Klebsiella</i> ESBL de urina apareceu em duas turmas. “No tratamento ambulatorial, <b>norfloxacino</b> é o fármaco de escolha” foi <b>verdadeira</b>. Na outra prova, a frase com <b>levofloxacino</b> foi <b>falsa</b>: levofloxacino não é a quinolona da urina. E a frase “imipenem é efetivo mas não é recomendado pelo risco de induzir carbapenemase” também foi falsa: é a 1ª escolha.</p>
+</div>
+<p>A <b><i>Pseudomonas</i></b> já é intrinsecamente resistente a muita coisa. Sensível, no hospital, trata-se com <mark class="apf">ceftazidima</mark>; no ambulatório, com <mark class="apf">ciprofloxacino</mark>. Com ESBL, <mark class="apf">imipenem + cilastatina</mark>. Com carbapenemase, polimixina.</p>
+<div class="box div"><span class="lb">Divergência: <i>Pseudomonas</i> no hospital</span>
+<p>Em todas as provas antigas a resposta é <b>ceftazidima</b>. Na aula de 2026, corrigindo essa mesma questão, ela disse que se a infecção veio da comunidade seria piperacilina + tazobactam e, se é hospitalar, ceftazidima, e aceitou as duas. <b>Na prova:</b> ceftazidima continua a resposta mais segura.</p>
+</div>
+<div class="box lab"><span class="lb">Ponte com o Lab</span>
+<p>A Tabata ensina a mesma escada com um detalhe a mais: a AmpC <b>adquirida</b> por plasmídeo (em <i>E. coli</i>, <i>Klebsiella</i>, <i>P. mirabilis</i>) pode, como foi ensinado em aula, ser inibida pelo clavulanato; a AmpC <b>intrínseca</b> do grupo CESP (<i>Citrobacter</i>, <i>Enterobacter</i>, <i>Serratia</i>, <i>Providencia</i>) não. Para ela, AmpC derruba até a 3ª geração; ESBL derruba até a 4ª e o monobactâmico; carbapenemase derruba todos. A Vânia disse em aula que esse detalhamento é com a Tabata, e que na prática ESBL e AmpC acabam tratadas do mesmo jeito, com carbapenêmico.</p>
+</div>
+
+<div class="qs" data-t="Questões dela · ESBL, AmpC e carbapenemase" data-ids="T1-Q3,T2-Q12,T7-Q5,T9-Q11,T2-Q9,T8-Q10,PM-QD4,T10-QD5,T7-Q4,T10-Q10,T11-Q5,T3-Q10,T2-Q15,T3-Q4"></div>
+
+<h2><span class="n">4</span><i>S. aureus</i>: três degraus</h2>
+<p>O estafilococo tem a sua própria escada. Aqui o mecanismo muda de tipo no meio do caminho: o primeiro degrau é uma <b>enzima</b>, os dois seguintes são <b>mudança de alvo</b>. Por isso um inibidor resolve o primeiro e não adianta nada nos outros.</p>
+
+<figure class="fig"><div class="pl">
+<svg viewBox="0 0 680 226" role="img" aria-label="Três degraus de resistência do Staphylococcus aureus: MSSA com penicilinase, MRSA com PBP alterada e GRSA com D-Ala-D-Lactato, cada um com o antibiótico de escolha." xmlns="http://www.w3.org/2000/svg">
+<rect x="16" y="136" width="206" height="80" rx="8" class="b"/>
+<text x="28" y="156" font-size="14" class="t w8">MSSA</text>
+<text x="28" y="171" font-size="10.5" class="t2">penicilinase (uma enzima)</text>
+<text x="28" y="189" font-size="10.5" class="tno w6">cai: penicilina G, amoxicilina</text>
+<text x="28" y="205" font-size="10.5" class="tok w6">use: amoxicilina + clavulanato</text>
+<text x="119" y="126" text-anchor="middle" font-size="9.5" class="t3">piorou mesmo com clavulanato ↗</text>
+<rect x="236" y="82" width="206" height="134" rx="8" class="b"/>
+<text x="248" y="102" font-size="14" class="t w8">MRSA</text>
+<text x="248" y="117" font-size="10.5" class="t2">gene mecA: a PBP mudou (alvo)</text>
+<text x="248" y="137" font-size="10.5" class="tno w7">cai: todo β-lactâmico</text>
+<text x="248" y="159" font-size="10.5" class="tok w6">hospital: vancomicina</text>
+<text x="248" y="175" font-size="10.5" class="tok w6">ambulatório: doxiciclina</text>
+<text x="248" y="191" font-size="10" class="t3">opções: clindamicina, azitromicina</text>
+<text x="339" y="72" text-anchor="middle" font-size="9.5" class="t3">falhou a vancomicina ↗</text>
+<rect x="456" y="28" width="208" height="188" rx="8" class="b"/>
+<text x="468" y="48" font-size="14" class="t w8">GRSA</text>
+<text x="468" y="63" font-size="10.5" class="t2">D-Ala-D-Ala virou D-Ala-D-Lactato</text>
+<text x="468" y="83" font-size="10.5" class="tno w7">cai: vancomicina e teicoplanina</text>
+<text x="468" y="105" font-size="10.5" class="tok w7">1ª opção: tigeciclina</text>
+<text x="468" y="121" font-size="10.5" class="tok w6">2ª: linezolida ou daptomicina</text>
+<text x="468" y="139" font-size="10" class="t3">daptomicina nunca em pneumonia</text>
+<text x="468" y="161" font-size="10" class="t3">os três agem fora da parede:</text>
+<text x="468" y="175" font-size="10" class="t3">ribossomo 30S, 23S e membrana</text>
+</svg></div><figcaption>A escada do estafilococo. Um inibidor resolve a penicilinase; quando o alvo muda, é preciso mudar de alvo também.</figcaption></figure>
+
+<h3>MSSA: penicilinase</h3>
+<p>Quase todo estafilococo tem penicilinase; ela manda assumir sempre. Penicilina e amoxicilina sozinhas não funcionam. Funcionam <b>amoxicilina + clavulanato</b>, oxacilina e piperacilina + tazobactam; com alergia tardia, axetilcefuroxima.</p>
+
+<h3>MRSA: a PBP mudou</h3>
+<p>O gene <b>mecA</b> faz a bactéria produzir uma PBP diferente, à qual o anel β-lactâmico não se liga. <mark class="apf">A resistência à meticilina é alteração da PBP</mark>, e por isso nenhum β-lactâmico funciona, com inibidor ou sem. O tratamento precisa agir em outro lugar:</p>
+<ul>
+<li><b>No hospital</b>: <mark class="apf">vancomicina, que tem como alvo a parede e não depende da PBP</mark>.</li>
+<li><b>No ambulatório</b>, em infecção de pele não complicada: <mark class="apf">doxiciclina 100 mg 2 vezes ao dia</mark>. <mark class="apf">Clindamicina e azitromicina, que inibem a síntese proteica no 50S, também são opções</mark>, mas com mais resistência.</li>
+</ul>
+<div class="box pg"><span class="lb">Pegadinhas de MRSA: todas já caíram</span>
+<ul>
+<li>“A resistência à meticilina ocorre por <b>superexpressão das penicilinases</b>” (ou “das PBPs”). <span class="pega">É alteração da PBP.</span></li>
+<li>“Opções hospitalares: tigeciclina e <b>piperacilina + tazobactam</b>”; “<b>ceftriaxona</b> ou linezolida na pneumonia por MRSA”; “<b>amoxicilina + clavulanato</b> é a 1ª opção na pele por MRSA”. <span class="pega">Todas falsas pelo mesmo motivo: há um β-lactâmico na frase.</span></li>
+<li>A clindamicina no MRSA de pele já veio com duas justificativas. “A qual <b>inibe a síntese proteica</b>” era verdadeira. “Porque é <b>resistente às β-lactamases e ao efluxo</b>” era falsa.</li>
+</ul>
+</div>
+
+<h3>GRSA: até a vancomicina cai</h3>
+<p>Com o uso maciço de vancomicina, o <i>S. aureus</i> trocou o ponto onde ela se liga: o final D-Ala-D-Ala do precursor virou D-Ala-D-Lactato. Cai a vancomicina e cai a teicoplanina, e é por isso que ela chama de <b>GRSA</b> (resistente a glicopeptídeos) e não de VRSA. As opções agem todas fora da parede:</p>
+<ul>
+<li><mark class="apf">tigeciclina é a 1ª escolha</mark> (30S; vômito intenso);</li>
+<li><mark class="apf">linezolida</mark> (23S; mielotoxicidade) ou <mark class="apf">daptomicina</mark> (membrana; CPK; nunca em pneumonia).</li>
+</ul>
+<p>O mesmo vale para o <mark class="apf"><i>Enterococcus</i> resistente a glicopeptídeos: tigeciclina</mark>. E quando a cultura traz <mark class="apf">MRSA e <i>E. coli</i> ESBL ao mesmo tempo</mark>, a tigeciclina é o único que cobre os dois.</p>
+<div class="box lab"><span class="lb">Ponte com o Lab</span>
+<p>No antibiograma do estafilococo, a <b>oxacilina prediz todos os β-lactâmicos</b>: oxacilina sensível, servem amoxicilina + clavulanato, cefalosporinas e carbapenêmicos; oxacilina resistente (a prova também trouxe cefoxitina resistente), é MRSA e nenhum serve. A Tabata separa ainda <b>VISA</b> (a parede fica espessa e a vancomicina não alcança todos os sítios: resistência parcial) de <b>VRSA/GRSA</b> (o alvo muda, gene vanA: resistência total). O <i>S. aureus</i> recebe esse gene, por plasmídeo, de um <i>Enterococcus</i> resistente à vancomicina.</p>
+</div>
+
+<h2><span class="n">5</span>Macrolídeo × clindamicina</h2>
+<p>Os dois se ligam ao 50S. A resistência a eles pode acontecer de dois jeitos, e a diferença entre os dois responde a uma pergunta que ela adora: “falhou a azitromicina; posso usar clindamicina?”.</p>
+<div class="tw"><table class="t">
+<tr><th>Mecanismo</th><th>Macrolídeo</th><th>Clindamicina</th></tr>
+<tr><td>Alteração do ribossomo 50S (o mais comum)</td><td class="no">resistente</td><td class="no">resistente</td></tr>
+<tr><td>O macrolídeo é tirado de cena sozinho: enzima que hidrolisa o anel lactona (Vânia) ou bomba de efluxo (Tabata)</td><td class="no">resistente</td><td class="ok">sensível</td></tr>
+</table></div>
+<p>Daí as três regras dela:</p>
+<ul>
+<li><b>Falhou o macrolídeo, sem antibiograma</b>: <mark class="apf">clindamicina não é recomendada</mark>, porque o mais provável é a alteração do 50S, que derruba os dois. Na faringite com alergia imediata, o passo seguinte é <mark class="apf">sulfametoxazol + trimetoprima</mark>.</li>
+<li><b>Falhou o macrolídeo e o antibiograma mostra clindamicina sensível</b>: pode usar; o 50S está livre <span class="chip">aula 2026</span>.</li>
+<li><b>Falhou a clindamicina</b>: macrolídeo “nem adianta”. A resistência só pode estar no 50S.</li>
+</ul>
+<p>A <b>linezolida</b> fica fora dessa conta: liga-se ao 23S e não tem resistência cruzada.</p>
+<div class="box lab"><span class="lb">Ponte com o Lab</span>
+<p>A Tabata chama esse conjunto de <b>MLS</b>. Efluxo (gene msrA): eritromicina resistente, clindamicina sensível. Alteração do ribossomo (gene erm): as duas resistentes. O laudo “oxacilina R + eritromicina R + clindamicina S” é um MRSA que também tem MLS por efluxo. As alternativas “MLS por alteração da PBP” e “msrA produzindo β-lactamase” estão sempre erradas: MLS não tem nada a ver com parede.</p>
+</div>
+
+<h3>Outras resistências cruzadas que já viraram questão</h3>
+<ul>
+<li><b>Quinolonas</b>: são uma classe só. <mark class="apf">Paciente já tratado com norfloxacino</mark>: ciprofloxacino não serve. <mark class="apf">Já tratado com nitrofurantoína</mark>: ciprofloxacino serve. É a mesma frase com um nome trocado.</li>
+<li><b>Antifolatos</b>: acabou de usar sulfadiazina + pirimetamina, não use sulfametoxazol + trimetoprima.</li>
+<li><b>30S</b>: se a tetraciclina ou o aminoglicosídeo falhou, a tigeciclina provavelmente falha.</li>
+<li><b>Polimixina</b>: a resistência vem da dose baixa.</li>
+</ul>
+
+<div class="qs" data-t="Questões dela · MRSA, GRSA e resistência cruzada" data-ids="T8-Q1,T2-Q8,T1-Q7,T7-Q13,T10-Q11,T3-Q17,T9-Q12,T5-Q10,T11-QD2,a13-06,a13-07,T5-Q14,T4-Q9"></div>
+
+<h2><span class="n">6</span>Ler o antibiograma: manter ou substituir</h2>
+<p>O antibiograma diz, para cada antibiótico testado, se a bactéria é <b>S</b> (sensível), <b>I</b> (sensível com exposição aumentada, ou seja, dose maior) ou <b>R</b> (resistente). Mas ele não diz tudo: não lista a resistência intrínseca, e não diz se o fármaco chega ao lugar da infecção. Por isso o raciocínio tem quatro perguntas, sempre na mesma ordem:</p>
+<ol>
+<li><b>Qual é a bactéria?</b> Gram-positiva ou negativa, e de qual grupo.</li>
+<li><b>O antibiótico em uso bate em alguma resistência intrínseca dela?</b></li>
+<li><b>Qual mecanismo adquirido o laudo mostra, e o que ele derruba?</b></li>
+<li><b>O antibiótico em uso está entre os derrubados?</b> Se está, substituir. Se não está, manter.</li>
+</ol>
+<div class="tw"><table class="t">
+<tr><th>Grupo</th><th>Resistência</th><th>O que derruba</th></tr>
+<tr><td>Gram+</td><td>Penicilinase</td><td>penicilina, ampicilina</td></tr>
+<tr><td>Gram+</td><td>MLS</td><td>macrolídeo e/ou clindamicina</td></tr>
+<tr><td>Gram+</td><td>MRSA</td><td>todos os β-lactâmicos</td></tr>
+<tr><td>Gram+</td><td>GRSA</td><td>vancomicina e teicoplanina</td></tr>
+<tr><td>Gram−</td><td>AmpC</td><td>até cefalosporina de 3ª geração</td></tr>
+<tr><td>Gram−</td><td>ESBL</td><td>até a 4ª geração e o monobactâmico</td></tr>
+<tr><td>Gram−</td><td>Carbapenemase</td><td>todos os β-lactâmicos</td></tr>
+</table></div>
+
+<h3>Os seis casos da discursiva de Lab, resolvidos</h3>
+<div class="tw"><table class="t">
+<tr><th>Bactéria e mecanismo</th><th>Em uso</th><th>Conduta</th><th>Por quê</th></tr>
+<tr><td><i>Citrobacter freundii</i>, nenhum mecanismo adquirido</td><td>ceftriaxona</td><td class="no">substituir</td><td>AmpC intrínseca derruba a 3ª geração. Na Farmaco: cefepima ou carbapenêmico</td></tr>
+<tr><td><i>S. aureus</i> GRSA</td><td>vancomicina</td><td class="no">substituir</td><td>o alvo da vancomicina mudou. Na Farmaco: tigeciclina</td></tr>
+<tr><td><i>Pseudomonas</i> sem mecanismo adquirido</td><td>ceftazidima</td><td class="ok">manter</td><td>é a cefalosporina que entra na <i>Pseudomonas</i></td></tr>
+<tr><td><i>E. coli</i> ESBL</td><td>cefepima</td><td class="no">substituir</td><td>ESBL derruba até a 4ª geração. Na Farmaco: imipenem + cilastatina</td></tr>
+<tr><td><i>Klebsiella</i> com carbapenemase</td><td>vancomicina ou cefepima</td><td class="no">substituir</td><td>vancomicina não age em Gram−; cefepima é β-lactâmico. Na Farmaco: polimixina</td></tr>
+<tr><td><i>S. aureus</i> só com MLS</td><td>oxacilina</td><td class="ok">manter</td><td>MLS só derruba macrolídeo e clindamicina; a oxacilina não é afetada</td></tr>
+</table></div>
+<div class="box case"><span class="lb">Como treinar</span>
+<p>Cubra as duas últimas colunas e responda só com as duas primeiras. Depois faça o caminho inverso, que é o da Vânia: para cada bactéria da primeira coluna, diga qual antibiótico você <b>colocaria</b> no lugar. Se as duas respostas saem sem consulta, você tem a parte de resistência das duas provas.</p>
+</div>
+
+<div class="box apf"><span class="lb">O que levar desta parte</span>
+<ul>
+<li>Intrínseca é da espécie e não aparece no laudo; adquirida só o antibiograma mostra.</li>
+<li>Escada das Gram−: penicilinase → clavulanato · AmpC → cefepima ou carbapenêmico · ESBL → carbapenêmico (ambulatório: quinolona se sensível) · carbapenemase → polimixina (rim ruim: ceftazidima + avibactam).</li>
+<li>Escada do estafilococo: penicilinase → clavulanato · MRSA (PBP) → vancomicina no hospital, doxiciclina no ambulatório · GRSA → tigeciclina.</li>
+<li>Falhou macrolídeo → clindamicina só com antibiograma; falhou clindamicina → macrolídeo nunca.</li>
+<li>Manter ou substituir: bactéria → intrínseca → adquirida → o antibiótico em uso caiu?</li>
+</ul>
+</div>
+
+<div class="pager"><a class="pv" href="uc15-farmaco-alvo-3-ribossomo-dna-folato.html" data-part="2"><small>← Parte 3</small>Antibióticos do ribossomo, do DNA e do folato</a><a class="nx" href="uc15-farmaco-alvo-5-casos.html" data-part="4"><small>Parte 5 →</small>Casos de uso: a escolha dela</a></div>
+</main>
+</div>
+<script>window.PART=3;window.PARTS=[{"file": "uc15-farmaco-alvo-1-bacteria-e-alvos.html", "short": "Bactéria e alvos"}, {"file": "uc15-farmaco-alvo-2-parede-e-membrana.html", "short": "Parede e membrana"}, {"file": "uc15-farmaco-alvo-3-ribossomo-dna-folato.html", "short": "Ribossomo, DNA e folato"}, {"file": "uc15-farmaco-alvo-4-resistencia.html", "short": "Resistência"}, {"file": "uc15-farmaco-alvo-5-casos.html", "short": "Casos de uso"}];window.QS={"T1-Q3": {"prova": "T1 Q3 · também T2 Q5", "tipo": "caso", "selo": "OF", "enun": "Um recém-nascido de termo, adequado para a idade gestacional, asfixiado grave, permanece internado na Unidade de Terapia Intensiva em uso de antibiótico e apresenta piora clínica. A hemocultura revelou crescimento de <i>Klebsiella pneumoniae<\/i> \"ESBL\". O uso de qual antimicrobiano citado abaixo pode estar relacionado com o aparecimento deste agente?", "itens": [], "opts": [{"h": "Amoxicilina", "ok": false, "why": ""}, {"h": "Gentamicina", "ok": false, "why": ""}, {"h": "Ceftriaxona", "ok": true, "why": ""}, {"h": "Oxacilina", "ok": false, "why": ""}, {"h": "Meropenem", "ok": false, "why": ""}], "gab": "C", "com": "A pergunta é qual antibiótico <b>gerou<\/b> a resistência, não qual tratar (seria meropenem). Em aula: \"foi o uso maciço das cefalosporinas de 3ª geração que levou ao surgimento das cepas ESBL\" → <b>ceftriaxona<\/b>."}, "T2-Q12": {"prova": "T2 Q12 · também T4 Q2 · T8 Q7 · T9 Q17", "tipo": "direta", "selo": "OF", "enun": "Bactérias pertencentes aos gêneros <i>Citrobacter, Enterobacter, Morganella, Serratia<\/i> e isolados de <i>Proteus vulgaris<\/i> são reconhecidamente produtores de β-lactamases AmpC. Para estes casos, o tratamento pode ser feito pelo uso de quais antibióticos?", "itens": [], "opts": [{"h": "cefepima ou vancomicina", "ok": false, "why": ""}, {"h": "cefepima ou imipenem + cilastatina", "ok": true, "why": ""}, {"h": "ceftazidima ou imipenem + cilastatina", "ok": false, "why": ""}, {"h": "imipenem + cilastatina ou polimixina B", "ok": false, "why": ""}], "gab": "B", "com": "AmpC derruba os β-lactâmicos <b>até a 3ª geração<\/b> → sobra <b>cefepima (4ª)<\/b> ou carbapenêmico. Ceftazidima é 3ª; vancomicina é só Gram+; polimixina é para carbapenemase."}, "T7-Q5": {"prova": "T7 Q5", "tipo": "caso", "selo": "OF", "enun": "Paciente com infecção por <i>Klebsiella pneumoniae<\/i> tratado com ceftriaxona e que não esteja respondendo ao tratamento deve-se iniciar antibioticoterapia com:", "itens": [], "opts": [{"h": "polimixina", "ok": false, "why": ""}, {"h": "tigeciclina", "ok": false, "why": ""}, {"h": "imipenem + cilastatina", "ok": true, "why": ""}, {"h": "vancomicina", "ok": false, "why": ""}], "gab": "C", "com": "Falha da 3ª geração em <i>Klebsiella<\/i> → pensar ESBL/AmpC → <b>imipenem + cilastatina<\/b>."}, "T9-Q11": {"prova": "T9 (jun/2025) Q11", "tipo": "caso", "selo": "OF", "enun": "Um paciente na unidade de terapia intensiva médica está recebendo cefepima para o tratamento de uma infecção do trato urinário. No 4º dia de internação, a urocultura foi positiva para <i>Proteus mirabilis<\/i> e indica resistência a cefepima. Qual a provável resistência e o tratamento indicado?", "itens": [], "opts": [{"h": "ESBL - imipenem + cilastatina", "ok": true, "why": ""}, {"h": "MRSA – vancomicina", "ok": false, "why": ""}, {"h": "AmpC – imipenem + cilastatina", "ok": false, "why": ""}, {"h": "ESBL – polimixina", "ok": false, "why": ""}], "gab": "A", "com": "Resistente à <b>cefepima (4ª)<\/b> → não é AmpC (AmpC poupa a cefepima) → ESBL → <b>imipenem<\/b>."}, "T2-Q9": {"prova": "T2 Q9", "tipo": "direta", "selo": "OF", "enun": "Se diagnóstico de <i>Klebsiella pneumoniae<\/i> (ESBL), qual dos antibióticos listados abaixo seria o mais adequado para tratar o quadro infecioso?", "itens": [], "opts": [{"h": "Amicacina", "ok": false, "why": ""}, {"h": "Polimixina B", "ok": false, "why": ""}, {"h": "Meropenem", "ok": true, "why": ""}, {"h": "Ceftriaxona", "ok": false, "why": ""}, {"h": "Vancomicina", "ok": false, "why": ""}], "gab": "C", "com": "ESBL → <b>carbapenêmico<\/b> (meropenem). Polimixina é para carbapenemase; amicacina não é 1ª escolha."}, "T8-Q10": {"prova": "T8 (nov/2024) Q10", "tipo": "direta", "selo": "OF", "enun": "Qual o antibiótico de primeira escolha para tratar infecções urinárias por <i>P. aeruginosa<\/i> ESBL em ambiente hospitalar?", "itens": [], "opts": [{"h": "imipenem + cilastatina", "ok": true, "why": ""}, {"h": "ceftriaxona", "ok": false, "why": ""}, {"h": "ceftazidima", "ok": false, "why": ""}, {"h": "cefoxitina", "ok": false, "why": ""}], "gab": "A", "com": "Sem ESBL seria ceftazidima; com ESBL → <b>carbapenêmico<\/b>."}, "PM-QD4": {"prova": "Plano de melhoria (gabarito oficial) QD4", "tipo": "discursiva", "selo": "OF", "enun": "Qual o antibiótico de escolha para tratar quadro de infecção urinária grave por <i>P. aeruginosa<\/i> ESBL?", "itens": [], "opts": [], "gab": "Penicilinas e cefalosporinas até 3ª geração são <b>inefetivas contra ESBL<\/b>. Também aceitos: <b>imipenem + cilastatina<\/b> ou <b>ceftazidima + avibactam<\/b>", "com": "Gabarito oficial. A frase que ela escreveu em negrito é a resposta: \"penicilinas e cefalosporinas até terceira geração são inefetivas contra cepas ESBL\"."}, "T10-QD5": {"prova": "T10 (nov/2025) QD5", "tipo": "discursiva", "selo": "OF", "enun": "Qual o antibiótico de escolha para tratar quadro de pielonefrite por <i>E. coli<\/i> ESBL ambulatorialmente?", "itens": [], "opts": [], "gab": "<b>Ciprofloxacino<\/b>", "com": "ESBL não inativa quinolona; ambulatorial → cipro (hospital seria carbapenêmico)."}, "T7-Q4": {"prova": "T7 Q4", "tipo": "direta", "selo": "OF", "enun": "Infecções por <i>Klebsiella pneumoniae<\/i> produtora de carbapenemase são tratadas em ambiente hospitalar empiricamente com:", "itens": [], "opts": [{"h": "tigeciclina", "ok": false, "why": ""}, {"h": "polimixina", "ok": true, "why": ""}, {"h": "vancomicina", "ok": false, "why": ""}, {"h": "imipenem + cilastatina", "ok": false, "why": ""}], "gab": "B", "com": "Carbapenemase (KPC) → <b>polimixina<\/b>."}, "T10-Q10": {"prova": "T10 (nov/2025) Q10", "tipo": "caso", "selo": "OF", "enun": "J. S., 54 anos, feminino, internado em UTI com quadro grave de infecção urinária por <i>K. pneumoniae<\/i> carbapenemase. A paciente é diabética e apresenta quadro de disfunção renal. Qual o antibiótico com maior perfil de efetividade e segurança para o caso?", "itens": [], "opts": [{"h": "polimixina B", "ok": false, "why": ""}, {"h": "tigeciclina", "ok": false, "why": ""}, {"h": "ceftazidima + avibactam", "ok": true, "why": ""}, {"h": "imipenem + cilastatina", "ok": false, "why": ""}], "gab": "C", "com": "KPC → polimixina, mas ela é nefrotóxica; com disfunção renal → <b>ceftazidima + avibactam<\/b>."}, "T11-Q5": {"prova": "T11 (jun/2026) Q5", "tipo": "caso", "selo": "OF", "enun": "M. S., 57 anos, em uso de sonda vesical de demora, evoluiu para quadro de pielonefrite por <i>Acinetobacter baumannii<\/i> carbapenemases do tipo OXA, e deve iniciar antibioticoterapia. Qual o fármaco de primeira escolha para esse caso?", "itens": [], "opts": [{"h": "Polimixina", "ok": true, "why": ""}, {"h": "Ceftazidima + avibactamo", "ok": false, "why": ""}, {"h": "Imipenem + cilastatina", "ok": false, "why": ""}, {"h": "Cefepima", "ok": false, "why": ""}], "gab": "A", "com": "Carbapenemase (OXA) → <b>polimixina<\/b>. Caz-avi só se a polimixina estiver contraindicada."}, "T3-Q10": {"prova": "T3 Q10", "tipo": "sentenças I–V", "selo": "OF", "enun": "Baseado no resultado do antibiograma obtido de uma cultura de urina de um paciente adulto, analise as sentenças abaixo e assinale a alternativa correta. [mesma tabela: R a NAL, ATM, AMC, CPM, CTX, CAZ; S a AMI, NOR, GEN, IMI, LVX, MEM]", "itens": ["I. O antibiograma é compatível com o mecanismo de resistência do tipo ESBL.", "II. Caso esse paciente realize o tratamento ambulatorialmente, norfloxacino é o fármaco de escolha.", "III. Os aminoglicosídeos devem ser evitados por causa do risco de ototoxicidade, além de induzirem a resistência por mutação nas topoisomerases.", "IV. Imipenem + cilastatina é uma opção efetiva para esse caso, mas não é recomendado por causa do risco de induzir a resistência do tipo carbapenemase."], "opts": [{"h": "I, II e IV", "ok": false, "why": ""}, {"h": "I e II", "ok": true, "why": ""}, {"h": "II apenas", "ok": false, "why": ""}, {"h": "I e IV", "ok": false, "why": ""}, {"h": "I, II, III e IV", "ok": false, "why": ""}], "gab": "B", "com": "Mesma tabela da T2 Q15. Lá \"levofloxacino\" ambulatorial era falso; aqui \"<b>norfloxacino<\/b>\" é verdadeiro.<br>Sentenças: I V · II V · III F · IV F<br><b>III<\/b> — aminoglicosídeo age no 30S — nada de topoisomerase<br><b>IV<\/b> — imipenem é opção efetiva e recomendada"}, "T2-Q15": {"prova": "T2 Q15", "tipo": "sentenças I–V", "selo": "OF", "enun": "Baseado no resultado do antibiograma obtido de uma cultura de urina de um paciente adulto, analise as sentenças abaixo e assinale a alternativa correta. Teste de sensibilidade de <i>Klebsiella pneumoniae<\/i> — R: ácido nalidíxico, aztreonam, amoxicilina/ácido clavulânico, cefepima, cefotaxima, ceftazidima. S: amicacina, norfloxacino, gentamicina, imipenem, levofloxacino, meropenem. (disco-difusão manual)", "itens": ["I) O antibiograma é compatível com o mecanismo de resistência do tipo carbapenemase.", "II) Os antibióticos pertencentes às classes dos carbapenêmicos e das quinolonas se encontram entre os fármacos testados, sendo elegíveis para o tratamento desta infecção.", "III) Os aminoglicosídeos não são a primeira escolha para tratar a infecção urinária porque inibem a síntese proteica bacteriana e do hospedeiro causando ototoxicidade.", "IV) O tratamento de primeira escolha, se realizado ambulatorialmente, seria com levofloxacino."], "opts": [{"h": "I, III e IV", "ok": false, "why": ""}, {"h": "I e II", "ok": false, "why": ""}, {"h": "II apenas", "ok": true, "why": ""}, {"h": "I e IV", "ok": false, "why": ""}, {"h": "II, III e IV", "ok": false, "why": ""}], "gab": "C", "com": "Sentenças: I F · II V · III F · IV F<br><b>I<\/b> — imipenem/meropenem <b>sensíveis<\/b> → não é carbapenemase, é ESBL<br><b>III<\/b> — aminoglicosídeo não inibe a síntese proteica <b>do hospedeiro<\/b><br><b>IV<\/b> — ITU ambulatorial → cipro ou norfloxacino, não levofloxacino"}, "T3-Q4": {"prova": "T3 Q4", "tipo": "asserção-razão", "selo": "OF", "enun": "O ambiente hospitalar é considerado um grande reservatório de patógenos virulentos e oportunistas, e o perfil das infecções que ocorrem em ambiente nosocomial se apresenta diferente daquelas adquiridas na comunidade. Sobre o tema avalie as asserções e a relação proposta entre elas.", "itens": ["I. Em ambiente hospitalar as infecções do TR, ITU, corrente sanguínea e ferida operatória são as mais frequentes. Bacilos Gram-negativos fermentadores (ex. <i>K. pneumoniae, E. coli<\/i>) e não fermentadores (<i>Pseudomonas aeruginosa<\/i>) são os agentes etiológicos mais envolvidos nessas infecções e apresentam resistência a vários antimicrobianos, principalmente por expressarem enzimas beta-lactamases de espectro estendido, e por isso, a associação de imipenem + cilastatina é a primeira escolha no ambiente hospitalar para tratar essas infecções.", "PORQUE", "II. Imipenem + cilastatina administrado via IV tem ação bactericida, atua inibindo a síntese da parede celular e ao ligar-se as PBPs inibe a transpeptidação do peptidoglicano. É de amplo espectro, efetivo contra bactérias ESBL e anaeróbios, tem boa penetração em <i>P. aeruginosa<\/i>."], "opts": [{"h": "I e II verdadeiras, e a II é justificativa da I.", "ok": true, "why": ""}, {"h": "I e II verdadeiras, mas a II não justifica a I.", "ok": false, "why": ""}, {"h": "I V, II F.", "ok": false, "why": ""}, {"h": "I F, II V.", "ok": false, "why": ""}, {"h": "ambas falsas.", "ok": false, "why": ""}], "gab": "A", "com": "A II explica exatamente por que o imipenem resolve o cenário da I (bactericida, amplo espectro, ESBL, penetra <i>Pseudomonas<\/i>) → é justificativa."}, "T8-Q1": {"prova": "T8 (nov/2024) Q1", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre o tratamento de infecções por <i>S. aureus<\/i> resistente à meticilina (MRSA) avalie as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I. A vancomicina é o fármaco de escolha em ambiente hospitalar para tratar infecções complicadas por cepas MRSA. Tem como alvo farmacológico a parede celular bacteriana.", "II. Para o tratamento de pneumonia por <i>S. aureus<\/i> resistente à meticilina são opções de antibióticos de uso hospitalar ceftriaxona ou linezolida.", "III. A clindamicina e a azitromicina atuam inibindo a síntese proteica na porção 50S, e são opções de uso ambulatorial para infecções não complicadas por MRSA.", "IV. A associação de amoxicilina + clavulanato é a primeira opção para tratar infecções de pele não complicadas por <i>S. aureus<\/i> resistente à meticilina, disponível na atenção básica.", "V. As tetraciclinas, como doxiciclina 100 mg 2 x ao dia, é uma opção terapêutica para o tratamento de infecções de pele estafilocócicas MRSA em pacientes adultos."], "opts": [{"h": "III e V", "ok": false, "why": ""}, {"h": "I, III e V", "ok": true, "why": ""}, {"h": "II, III e IV", "ok": false, "why": ""}, {"h": "II e IV", "ok": false, "why": ""}, {"h": "I, IV e V", "ok": false, "why": ""}], "gab": "B", "com": "A III (clinda e azitro, 50S, opções ambulatoriais) foi <b>verdadeira<\/b>.<br>Sentenças: I V · II F · III V · IV F · V V<br><b>II<\/b> — ceftriaxona é β-lactâmico — não serve para MRSA<br><b>IV<\/b> — amoxi + clav não resolve MRSA (é PBP, não β-lactamase)"}, "T2-Q8": {"prova": "T2 Q8", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre o diagnóstico e tratamento de infecções por <i>S. aureus<\/i> resistente à meticilina avalie as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I) A resistência à meticilina ocorre pela mutação e superexpressão das penicilinases.", "II) Para o tratamento de infecções de pele por <i>S. aureus<\/i> resistente à meticilina são opções de antibióticos de uso hospitalar a tigeciclina e piperacilina + tazobactamo.", "III) A clindamicina, a qual inibe a síntese proteica, é uma opção para tratamento ambulatorial inicial ou definitivo em infecções de pele não complicadas por <i>S. aureus<\/i> resistente à meticilina.", "IV) O tratamento empírico para <i>S. aureus<\/i> resistente à meticilina em pacientes hospitalizados consiste no uso de vancomicina, um inibidor da síntese da parede celular bacteriana."], "opts": [{"h": "I, III e IV", "ok": false, "why": ""}, {"h": "II e IV", "ok": false, "why": ""}, {"h": "Apenas IV", "ok": false, "why": ""}, {"h": "III e IV", "ok": true, "why": ""}, {"h": "II e IV", "ok": false, "why": ""}], "gab": "D", "com": "Compare com T1 Q7: a frase da clindamicina era a mesma, mas lá a justificativa era falsa e aqui (\"a qual inibe a síntese proteica\") é verdadeira.<br>Sentenças: I F · II F · III V · IV V<br><b>I<\/b> — é alteração da PBP, não \"superexpressão das penicilinases\"<br><b>II<\/b> — pipe-tazo é β-lactâmico (não serve) e tigeciclina é para <b>GRSA<\/b>"}, "T1-Q7": {"prova": "T1 Q7", "tipo": "sentenças I–V", "selo": "OF", "enun": "<i>Staphylococcus aureus<\/i> resistente a meticilina, outrora isolado especificamente em ambientes hospitalares, vem sendo identificado como causador de infecções cutâneas em pacientes da comunidade. Sobre o diagnóstico e tratamento de infecções por <i>S. aureus<\/i> resistente à meticilina (MRSA) avalie as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I) A resistência à meticilina ocorre pela mutação e superexpressão das penicilinases codificada por genes.", "II) Para o tratamento de infecções de pele por MRSA são opções efetivas de antibióticos: clindamicina, doxiciclina, ciprofloxacino e gentamicina.", "III) A clindamicina é uma opção para tratamento ambulatorial em infecções de pele por MRSA porque é resistente as enzimas beta-lactamases e ao efluxo.", "IV) O tratamento empírico em pacientes hospitalizados por MRSA até resultado do antibiograma é feito com vancomicina ou teicoplanina."], "opts": [{"h": "I, III e IV", "ok": false, "why": ""}, {"h": "III e IV", "ok": false, "why": ""}, {"h": "Apenas II", "ok": false, "why": ""}, {"h": "I e II", "ok": false, "why": ""}, {"h": "Apenas IV", "ok": true, "why": ""}], "gab": "E", "com": "Sentenças: I F · II F · III F · IV V<br><b>I<\/b> — MRSA é <b>alteração da PBP<\/b>, não penicilinase<br><b>II<\/b> — cipro e gentamicina não são opção empírica para MRSA<br><b>III<\/b> — a clinda serve, mas a justificativa \"resistente às β-lactamases e ao efluxo\" é falsa — MRSA não é β-lactamase"}, "T7-Q13": {"prova": "T7 Q13", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre o tratamento de infecções por <i>S. aureus<\/i> resistente à meticilina avalie as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I. Os antibióticos doxiciclina e minociclina são opções terapêuticas para tratar infecções de pele causadas por <i>S. aureus<\/i> meticilina resistente, e a posologia pode ser 1 ou 2 x ao dia. São metabolizadas no fígado e excretadas predominantemente via biliar.", "II. O tratamento empírico de infecções por cepas MRSA em pacientes hospitalizados consiste no uso IV de vancomicina, que tem ação bactericida e atua sobre a membrana celular bacteriana contra agentes aeróbios gram-positivos e gram-negativos.", "III. A clindamicina inibe a síntese proteica, tem ação bacteriostática e não é recomenda em infecções MRSA refratárias a macrolídeos devido a resistência cruzada ao ribossomo 50S. Em ambiente hospitalar é empregada via IV/IM em doses de 600 ou 900mg. É metabolizada no fígado e excretada via renal e biliar.", "IV. A daptomicina é um antibiótico bactericida que atua sobre bactérias gram-positivas aeróbias, ao ligar-se a membrana celular e causar a perda de cálcio com consequente despolarização e interrupção da síntese de DNA e RNA levando à morte celular. É indicada para tratar infecções de pele/partes moles, de bacteremia e de endocardite em casos de cepas MRSA.", "V. A vancomicina é administrada IV em infusão lenta em doses fracionadas (2 x ao dia) que variam entre 30 a 60 mg/kg/dia. A depuração da vancomicina é diretamente proporcional à da creatinina, e deve-se reduzir a dose em pacientes com insuficiência renal. As principais indicações consistem no tratamento de sepse e endocardite por cepas MRSA."], "opts": [], "gab": "I V · II F · III V · IV F · V V", "com": "Gabarito: I, III e V.<br><b>II<\/b> — vancomicina age na <b>parede<\/b> (transglicosilase) e só em Gram+<br><b>IV<\/b> — daptomicina causa perda de <b>potássio<\/b> (não cálcio) e é para GRSA"}, "T10-Q11": {"prova": "T10 (nov/2025) Q11", "tipo": "sentenças I–V", "selo": "IN", "enun": "Sobre o tratamento de infecções por <i>S. aureus<\/i> MRSA e GRSA avalie as afirmativas abaixo e assinale a alternativa correta.", "itens": ["I. A vancomicina é o fármaco de primeira escolha em ambiente hospitalar para tratar infecções complicadas por cepas MRSA. Atua inibindo a transglicosilase, impedindo o alongamento do peptidoglicano, danificando a parede celular, por isso ação bactericida. Tem potencial nefrotóxico e ototóxico acentuado caso associada com gentamicina.", "II. A clindamicina e a azitromicina atuam inibindo a síntese proteica na porção 50S, e são opções de uso ambulatorial para infecções não complicadas por MRSA. Na falha da azitromicina pode-se testar a clindamicina, pois a resistência aos macrolídeos pode ser decorrente da degradação do anel lactona e não de alteração no ribossomo.", "III. Para o tratamento de pneumonia por <i>S. aureus<\/i> GRSA são opções de antibióticos de uso hospitalar daptomicina, tigeciclina ou linezolida. A daptomicina liga-se à membrana citoplasmática e altera fluxo de potássio, enquanto a tigeciclina e linezolida inibem a síntese proteica. Todos apresentam ação bacteriostática.", "IV. Doxiciclina 100 mg 2 x ao dia, é uma opção terapêutica para o tratamento de infecções de pele estafilocócicas MRSA em pacientes adultos. Os efeitos adversos mais significativos são: náuseas, vômitos, pirose, diarreia, fotossensibilidade, alteração da microbiota e risco de candidíase e enterocolites."], "opts": [{"h": "I, II, III e IV", "ok": false, "why": ""}, {"h": "I, III e IV", "ok": false, "why": ""}, {"h": "II e III", "ok": false, "why": ""}, {"h": "I, II e IV", "ok": false, "why": ""}, {"h": "I e IV", "ok": true, "why": ""}], "gab": "E", "com": "⚠ Numa parte da aula antiga ela diz \"os 3 são bacteriostáticos\". Se repetir isso, a III vira verdadeira.<br>Sentenças: I V · II F · III F · IV V<br><b>II<\/b> — clindamicina <b>não<\/b> se usa após falha do macrolídeo (os dois no 50S)<br><b>III<\/b> — \"<b>todos<\/b> bacteriostáticos\": a daptomicina é bactericida"}, "T3-Q17": {"prova": "T3 Q17", "tipo": "discursiva", "selo": "OF", "enun": "Cite o fármaco de primeira escolha em ambiente hospitalar para tratar infecções por <i>P. aeruginosa<\/i> e <i>S. aureus<\/i> GRSA.", "itens": [], "opts": [], "gab": "<i>P. aeruginosa<\/i>: <b>ceftazidima<\/b> · <i>S. aureus<\/i> GRSA: <b>tigeciclina<\/b>", "com": ""}, "T9-Q12": {"prova": "T9 (jun/2025) Q12", "tipo": "caso", "selo": "OF", "enun": "Um paciente tem uma infecção cujos resultados de cultura mostram crescimento de MRSA e <i>E. coli<\/i> produtora de β-lactamase de espectro estendido. Qual dos seguintes antibióticos seria eficaz contra essas bactérias?", "itens": [], "opts": [{"h": "Tigeciclina", "ok": true, "why": ""}, {"h": "Linezolida", "ok": false, "why": ""}, {"h": "Imipenem + cilastatina", "ok": false, "why": ""}, {"h": "Vancomicina", "ok": false, "why": ""}], "gab": "A", "com": "Vanco e linezolida só pegam Gram+; imipenem não pega MRSA → <b>tigeciclina<\/b> cobre os dois."}, "T5-Q10": {"prova": "T5 Q10", "tipo": "direta", "selo": "OF", "enun": "Em casos de infecções intra-abdominal nosocomial (hospitalar) por <i>Enterococcus faecium<\/i> resistentes a glicopeptídeos o tratamento de primeira linha é:", "itens": [], "opts": [{"h": "clindamicina", "ok": false, "why": ""}, {"h": "tigeciclina", "ok": true, "why": ""}, {"h": "ceftriaxona", "ok": false, "why": ""}, {"h": "polimixina", "ok": false, "why": ""}, {"h": "imipenem + cilastatina", "ok": false, "why": ""}], "gab": "B", "com": "Resistente a glicopeptídeo → <b>tigeciclina<\/b>."}, "T11-QD2": {"prova": "T11 (jun/2026) QD2", "tipo": "discursiva", "selo": "OF", "enun": "C. S. X., 24 anos, história de alergia imediata a penicilina, tratou uma faringite com azitromicina 500 mg por cinco dias a duas semanas, e retornou ao médico com as mesmas queixas. Cite um fármaco não recomendado por provável falha terapêutica (não pode ser macrolídeo e justifique) (0,5) e um fármaco indicado para o caso. (0,3)", "itens": [], "opts": [], "gab": "Não recomendado: <b>clindamicina<\/b> — inibe o 50S como os macrolídeos (resistência cruzada). Indicado: <b>sulfametoxazol + trimetoprima<\/b>", "com": "Quem respondeu levofloxacino perdeu o item: levo é só para TRI."}, "a13-06": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "O paciente usou azitromicina e falhou. O antibiograma mostra resistência ao macrolídeo e sensibilidade à clindamicina. Qual a explicação?", "itens": [], "opts": [{"h": "A resistência é por enzima que hidrolisa o anel lactona; o ribossomo 50S continua livre para a clindamicina", "ok": true, "why": "São os dois mecanismos de resistência aos macrolídeos que ela pediu para saber."}, {"h": "A resistência é por alteração no ribossomo 50S", "ok": false, "why": "Nesse caso a clindamicina também falharia (mesmo alvo)."}, {"h": "A clindamicina age no 30S, por isso não há resistência cruzada", "ok": false, "why": "A clindamicina age no 50S."}, {"h": "É erro do laboratório: macrolídeo e clindamicina sempre têm resistência cruzada", "ok": false, "why": "Nem sempre: quando a resistência é a hidrólise do anel, a clinda funciona."}], "gab": "", "com": "", "shuffle": true}, "a13-07": {"prova": "Treino · da aula · aula 13/11", "tipo": "", "selo": "", "enun": "O paciente iniciou com clindamicina e não respondeu. Vale trocar por um macrolídeo?", "itens": [], "opts": [{"h": "Não: a resistência só pode estar no ribossomo 50S, que é o alvo dos dois", "ok": true, "why": "\"Se primeiro usei clindamicina e não respondeu, macrolídeo nem adianta tentar.\""}, {"h": "Sim, porque o macrolídeo tem anel lactona", "ok": false, "why": "O anel lactona é o que a bactéria pode hidrolisar; não ajuda aqui."}, {"h": "Sim, a azitromicina é mais potente que a clindamicina", "ok": false, "why": "O alvo é o mesmo (50S)."}, {"h": "Só se associar claritromicina", "ok": false, "why": "Mesmo alvo, mesma falha."}], "gab": "", "com": "", "shuffle": true}, "T5-Q14": {"prova": "T5 Q14", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os antibióticos de uso hospitalar, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. A vancomicina inibe a transglicosilase, impedindo o alongamento do peptidoglicano e a ligação cruzada destes, alterando a parede celular e causando a morte bacteriana, empregada somente para tratar infecções por bactérias gram-positivas, sendo a primeira linha para cepas MRSA.", "II. A tigeciclina na dose de 50mg 2 x ao dia IV é utilizada para tratar infecções por bactérias gram-negativas e gram-positivas principalmente cepas GRSA mas é inefetiva contra <i>Proteus sp.<\/i> e <i>P. aeruginosa<\/i>. Atua inibindo a síntese proteica no ribossomo 30S.", "III. Os aminoglicosídeos são indicados para tratar infecções graves do TGU, intra-abdominais, sepse, e outras quando o agente etiológico provável são bactérias aeróbias gram-negativos. Exerce ação bactericida porque promove a leitura errônea do RNAm, resultando em síntese de proteínas afuncionais ou tóxicas.", "IV. A polimixina exerce ação bactericida ao interagir e desorganizar as estruturas das membranas celulares e a permeabilidade causando a lise de bactérias gram-positivas. Os principais efeitos adversos consistem em nefrotoxididade e ototoxicidade.", "V. Os fármacos daptomicina e linezolida são opções terapêuticas bactericidas contra cepas GRSA, e atuam inibindo a síntese proteica e alterando a condutância de canais de potássio, respectivamente. Estes fármacos causam miotoxicidade e mielotoxicidade, respectivamente."], "opts": [], "gab": "I V · II V · III V · IV F · V F", "com": "Gabarito E (I, II e III). Tigeciclina <b>50 mg 2×/dia<\/b> foi aceita aqui.<br><b>IV<\/b> — polimixina é para Gram−, e o par é <b>nefro + neurotoxicidade<\/b> (ototoxicidade é de aminoglicosídeo)<br><b>V<\/b> — \"respectivamente\" invertido; linezolida é bacteriostática"}, "T4-Q9": {"prova": "T4 Q9", "tipo": "sentenças I–V", "selo": "OF", "enun": "Sobre os antibióticos de uso hospitalar, avalie as sentenças abaixo e assinale a alternativa correta.", "itens": ["I. A vancomicina inibe a transglicosilase, impedindo o alongamento do peptidoglicano e a ligação cruzada destes, alterando a parede celular e causando a morte bacteriana, empregada apenas para tratar infecções por bactérias gram-positivas, sendo a primeira linha para cepas MRSA.", "II. A tigeciclina na dose de 100mg 2 x ao dia IV é utilizada para tratar infecções por bactérias gram-positivas, principalmente cepas GRSA, e atua inibindo a síntese proteica no ribossomo 30S, por isso a associação ou substituição da terapêutica com aminoglicosídeos pode ser efetiva.", "III. Os aminoglicosídeos são indicados para tratar infecções graves do TGU, intra-abdominais, sepse, e outras quando o agente etiológico provável são bactérias aeróbias gram-negativos. Exerce ação bactericida porque promove a leitura errônea do RNAm, resultando em síntese de proteínas afuncionais ou tóxicas.", "IV. A polimixina é a primeira linha na terapia empírica para tratar infecções por carbapenemases, pois exerce ação bactericida ao interagir e desorganizar as estruturas das membranas celulares e a permeabilidade causando a lise bacteriana.", "V. Os fármacos daptomicina e linezolida são opções terapêuticas bactericidas contra cepas GRSA, e atuam inibindo a síntese proteica e alterando a condutância de canais de potássio, respectivamente. Estes fármacos causam miotoxicidade e mielotoxicidade, respectivamente."], "opts": [], "gab": "I V · II F · III V · IV V · V F", "com": "Gabarito D (I, III e IV).<br><b>II<\/b> — dose da tigeciclina: <b>100 mg de ataque + 50 mg 12/12 h<\/b>; e aminoglicosídeo não substitui (só Gram−)<br><b>V<\/b> — \"respectivamente\" invertido: linezolida inibe síntese proteica, daptomicina mexe no K⁺; e linezolida é bacteriostática"}};</script>
+<script>
+/* Do alvo ao caso — índice lateral, questões uma por vez e progresso (localStorage, com try/catch). */
+(function () {
+  "use strict";
+  var QS = window.QS || {}, PARTS = window.PARTS || [], PART = window.PART || 0;
+  var LET = "ABCDEFGH", KEY = "uc15:farmaco:alvo:v1";
+  var P = {};
+  try { P = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { P = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (e) { /* sem armazenamento: segue em memória */ } }
+  function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- navegação entre partes: dentro do site troca o item da aba; sozinho, abre o arquivo ---------- */
+  var framed = false; try { framed = window.top !== window && !!window.top.location.hash; } catch (e) { framed = false; }
+  function goPart(i, ev) {
+    if (!framed) return true;
+    try { window.top.location.hash = "#uc15/farmaco/alvo/" + i; if (ev) ev.preventDefault(); return false; } catch (e) { return true; }
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest ? ev.target.closest("a[data-part]") : null;
+    if (a) { goPart(+a.getAttribute("data-part"), ev); return; }
+    var h = ev.target.closest ? ev.target.closest("a[data-hash]") : null; // link para outra aba do site
+    if (h && framed) { try { window.top.location.hash = h.getAttribute("data-hash"); ev.preventDefault(); } catch (e) { /* abre o arquivo */ } }
+  });
+
+  /* ---------- índice ---------- */
+  var idx = document.getElementById("idx"), doc = document.getElementById("doc");
+  var heads = [].slice.call(doc.querySelectorAll("h2, .qs"));
+  var links = el("div", "links");
+  idx.appendChild(el("div", "ttl", "Nesta parte"));
+  idx.appendChild(links);
+  idx.querySelector(".ttl").onclick = function () { idx.classList.toggle("open"); };
+  var linkOf = {};
+  heads.forEach(function (h, i) {
+    if (!h.id) h.id = "s" + i;
+    var a = el("a");
+    a.href = "#" + h.id;
+    if (h.classList.contains("qs")) { a.className = "q"; a.innerHTML = "Questões <span class='c'></span>"; }
+    else { var c = h.cloneNode(true), nn = c.querySelector(".n"); if (nn) nn.remove(); a.textContent = c.textContent.trim(); }
+    a.onclick = function () { idx.classList.remove("open"); };
+    links.appendChild(a); linkOf[h.id] = a;
+  });
+  links.appendChild(el("div", "sep"));
+  var pr = el("div", "prog", "<span id='pgt'></span><div class='bar'><i id='pgb'></i></div>");
+  links.appendChild(pr);
+  if (!framed) { // dentro do site a barra de abas já lista as partes: não repetir
+    links.appendChild(el("div", "sep"));
+    var parts = el("div", "parts"); parts.appendChild(el("div", "ttl", "Do alvo ao caso"));
+    PARTS.forEach(function (p, i) {
+      var a = el("a", i === PART ? "cur" : "");
+      a.href = p.file; a.setAttribute("data-part", i); a.textContent = (i + 1) + " · " + p.short;
+      parts.appendChild(a);
+    });
+    links.appendChild(parts);
+  }
+
+  if ("IntersectionObserver" in window) {
+    var cur = null;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (cur) cur.classList.remove("on");
+          cur = linkOf[e.target.id]; if (cur) cur.classList.add("on");
+        }
+      });
+    }, { rootMargin: "0px 0px -72% 0px", threshold: 0 });
+    heads.forEach(function (h) { io.observe(h); });
+  }
+
+  /* ---------- questões ---------- */
+  var blocks = [];
+  function status(id) { return P[id] === 1 ? "ok" : P[id] === 0 ? "no" : ""; }
+  function refreshProgress() {
+    var tot = 0, done = 0, ok = 0;
+    blocks.forEach(function (b) {
+      var d = 0;
+      b.ids.forEach(function (id) { tot++; if (P[id] != null) { d++; done++; if (P[id] === 1) ok++; } });
+      var a = linkOf[b.root.id];
+      if (a) { a.querySelector(".c").textContent = d + "/" + b.ids.length; a.classList.toggle("done", d === b.ids.length); }
+    });
+    var t = document.getElementById("pgt"), bar = document.getElementById("pgb");
+    if (t) t.textContent = tot ? ("Questões: " + done + " de " + tot + (done ? " · " + ok + " certas" : "")) : "";
+    if (bar) bar.style.width = (tot ? Math.round(done / tot * 100) : 0) + "%";
+  }
+  function setResult(id, ok) { P[id] = ok ? 1 : 0; save(); refreshProgress(); }
+
+  function vfKey(q) { // "I V · II F · III V" → {I:"V",...}; null se não for esse formato
+    if ((q.opts && q.opts.length) || !q.itens || !q.itens.length || !q.gab) return null;
+    var m = String(q.gab).replace(/<[^>]+>/g, "").match(/\b([IVX]+)\s+([VF])\b/g);
+    if (!m || m.length < 2) return null;
+    var k = {}; m.forEach(function (s) { var p = s.split(/\s+/); k[p[0]] = p[1]; });
+    return k;
+  }
+  function roman(item) { var m = String(item).replace(/<[^>]+>/g, "").match(/^\s*([IVX]+)\s*[.)–-]/); return m ? m[1] : null; }
+
+  function Block(root) {
+    var ids = (root.getAttribute("data-ids") || "").split(",").map(function (s) { return s.trim(); }).filter(function (s) { return QS[s]; });
+    var self = { root: root, ids: ids, i: 0 };
+    // começa na primeira ainda não respondida
+    for (var k = 0; k < ids.length; k++) { if (P[ids[k]] == null) { self.i = k; break; } }
+    var title = root.getAttribute("data-t") || "Questões dela";
+    root.innerHTML = "";
+    var head = el("div", "qh", "<b>" + title + "</b><span class='cnt'></span>");
+    var dots = el("div", "dots"), body = el("div", "qb");
+    root.appendChild(head); root.appendChild(dots); root.appendChild(body);
+    if (root.getAttribute("data-more")) root.appendChild(el("div", "more", root.getAttribute("data-more")));
+
+    function drawDots() {
+      dots.innerHTML = "";
+      ids.forEach(function (id, n) {
+        var b = el("button", (n === self.i ? "cur " : "") + status(id), String(n + 1));
+        b.type = "button"; b.title = QS[id].prova || "";
+        b.onclick = function () { self.i = n; draw(); };
+        dots.appendChild(b);
+      });
+      head.querySelector(".cnt").textContent = (self.i + 1) + " de " + ids.length;
+    }
+    function nav(row) {
+      var prev = el("button", "btn", "← Anterior"); prev.type = "button"; prev.disabled = self.i === 0;
+      prev.onclick = function () { self.i--; draw(); };
+      var next = el("button", "btn pri", self.i === ids.length - 1 ? "Fim do bloco ✓" : "Próxima →"); next.type = "button";
+      next.disabled = self.i === ids.length - 1;
+      next.onclick = function () { self.i++; draw(); root.scrollIntoView({ block: "nearest" }); };
+      row.appendChild(prev); row.appendChild(next);
+    }
+    function feedback(q, ok, extra) {
+      var f = el("div", "fb " + (ok === true ? "ok" : ok === false ? "no" : ""));
+      f.innerHTML = "<span class='lb'>" + (ok === true ? "Certo" : ok === false ? "Não foi dessa vez" : "Resposta dela") + "</span>" +
+        (extra || "") + (q.com ? "<div>" + q.com + "</div>" : "");
+      return f;
+    }
+    function draw() {
+      drawDots();
+      var id = ids[self.i], q = QS[id];
+      body.innerHTML = "";
+      var tags = el("div", "tags");
+      tags.appendChild(el("span", "pv", q.prova));
+      if (q.tipo) tags.appendChild(el("span", "", q.tipo));
+      if (q.selo === "IN") tags.appendChild(el("span", "warn", "gabarito inferido"));
+      if (q.selo === "AB") tags.appendChild(el("span", "warn", "gabarito em aberto"));
+      body.appendChild(tags);
+      if (q.enun) body.appendChild(el("div", "enun", q.enun));
+      var key = vfKey(q), answered = P[id] != null;
+
+      /* itens (sentenças I–V, asserção-razão) */
+      var itemEls = [];
+      if (q.itens && q.itens.length) {
+        var ol = el("ol", "itens");
+        q.itens.forEach(function (it) {
+          var li = el("li");
+          if (/^\s*PORQUE\s*$/i.test(String(it).replace(/<[^>]+>/g, ""))) { li.className = "pq"; li.textContent = "PORQUE"; }
+          else {
+            li.appendChild(el("span", "tx", it));
+            var r = roman(it);
+            if (key && r && key[r]) {
+              var vf = el("span", "vf");
+              ["V", "F"].forEach(function (c) {
+                var b = el("button", "", c); b.type = "button";
+                b.onclick = function () { [].forEach.call(vf.querySelectorAll("button"), function (x) { x.classList.remove("sel"); }); b.classList.add("sel"); li.setAttribute("data-a", c); };
+                vf.appendChild(b);
+              });
+              li.appendChild(vf); li.setAttribute("data-r", r); itemEls.push(li);
+            }
+          }
+          ol.appendChild(li);
+        });
+        body.appendChild(ol);
+      }
+
+      var row = el("div", "row");
+      if (q.opts && q.opts.length) {
+        /* objetiva */
+        var opts = q.shuffle ? shuffle(q.opts) : q.opts;
+        var box = el("div", "opts"), btns = [];
+        opts.forEach(function (o, n) {
+          var b = el("button", "opt", "<b>" + LET[n] + "</b><span>" + o.h + "</span>"); b.type = "button";
+          b.onclick = function () { reveal(o); };
+          btns.push({ b: b, o: o }); box.appendChild(b);
+        });
+        body.appendChild(box);
+        var reveal = function (chosen) {
+          btns.forEach(function (x) {
+            x.b.disabled = true;
+            if (x.o.ok) x.b.classList.add("ok");
+            if (chosen && x.o === chosen && !x.o.ok) x.b.classList.add("no");
+            if (x.o.why && !x.b.querySelector(".w")) x.b.querySelector("span").appendChild(el("span", "w", x.o.why));
+          });
+          var ok = chosen ? !!chosen.ok : null;
+          if (chosen) setResult(id, ok);
+          var open = q.selo === "AB" ? "<div><b>Gabarito em aberto:</b> as alternativas em verde são as que sobraram como possíveis.</div>" : "";
+          body.insertBefore(feedback(q, ok, open), row);
+          drawDots();
+        };
+        if (answered) reveal(null);
+      } else if (key && itemEls.length) {
+        /* sentenças com gabarito V/F por item */
+        var chk = el("button", "btn pri", "Conferir"); chk.type = "button";
+        var showVF = function (mine) {
+          var all = true;
+          itemEls.forEach(function (li) {
+            var r = li.getAttribute("data-r"), a = li.getAttribute("data-a"), t = key[r];
+            var vf = li.querySelector(".vf");
+            [].forEach.call(vf.querySelectorAll("button"), function (x) { x.disabled = true; });
+            if (mine) { var good = a === t; if (!good) all = false; li.classList.add(good ? "r-ok" : "r-no"); }
+            if (!vf.querySelector(".truth")) vf.appendChild(el("span", "truth", t === "V" ? "<span style='color:#17663c'>é V</span>" : "<span style='color:#a02a22'>é F</span>"));
+          });
+          return all;
+        };
+        chk.onclick = function () {
+          var miss = itemEls.some(function (li) { return !li.getAttribute("data-a"); });
+          if (miss) { hint.textContent = "Marque V ou F em todas as sentenças."; return; }
+          var ok = showVF(true); setResult(id, ok); chk.remove(); hint.textContent = "";
+          body.insertBefore(feedback(q, ok, "<div class='gab'>" + q.gab + "</div>"), row); drawDots();
+        };
+        var hint = el("span", "hint", "Julgue cada sentença e confira.");
+        if (answered) { showVF(false); body.appendChild(feedback(q, null, "<div class='gab'>" + q.gab + "</div>")); }
+        else { row.appendChild(chk); row.appendChild(hint); }
+      } else {
+        /* discursiva: responder de cabeça, revelar, autoavaliar */
+        var show = el("button", "btn pri", "Ver a resposta dela"); show.type = "button";
+        var hint2 = el("span", "hint", "Responda de cabeça (ou no papel) antes de abrir.");
+        var open2 = function (fresh) {
+          show.remove(); hint2.remove();
+          var f = feedback(q, null, "<div class='gab'>" + (q.gab || "") + "</div>");
+          body.insertBefore(f, row);
+          if (fresh) {
+            var g = el("button", "btn g", "Acertei"), r = el("button", "btn r", "Errei"); g.type = r.type = "button";
+            var mk = function (ok) { return function () { setResult(id, ok); g.remove(); r.remove(); drawDots(); }; };
+            g.onclick = mk(true); r.onclick = mk(false);
+            row.insertBefore(r, row.firstChild); row.insertBefore(g, row.firstChild);
+          }
+        };
+        show.onclick = function () { open2(true); };
+        if (answered) { body.appendChild(row); open2(false); }
+        else { row.appendChild(show); row.appendChild(hint2); }
+      }
+      body.appendChild(row);
+      var sp = el("span"); sp.style.flex = "1"; row.appendChild(sp);
+      nav(row);
+      if (answered) {
+        var redo = el("button", "btn", "Refazer"); redo.type = "button";
+        redo.onclick = function () { delete P[id]; save(); refreshProgress(); draw(); };
+        row.insertBefore(redo, sp);
+      }
+    }
+    self.draw = draw;
+    if (ids.length) draw(); else root.style.display = "none";
+    return self;
+  }
+  [].forEach.call(doc.querySelectorAll(".qs"), function (r) { blocks.push(Block(r)); });
+  refreshProgress();
+})();
+</script>
+<!-- medicina-nav --><script defer src="../../../nav.js"></script>
+</body></html>
