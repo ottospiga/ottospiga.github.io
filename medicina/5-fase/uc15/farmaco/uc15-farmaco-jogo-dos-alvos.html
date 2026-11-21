@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jogo dos alvos — Farmaco UC15</title>
+<script>(function(){var t=null;try{if(window.top!==window)t=window.top.document.documentElement.dataset.theme||null}catch(e){}
+if(!t){try{t=localStorage.getItem("uc15:farmaco:tema")}catch(e){}}
+if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";
+document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")})();</script>
 <style>
 /* Jogo dos alvos (Farmaco UC15) — mesma mecânica do jogo do "Antibióticos em 14 dias", com os fármacos da UC15.
    Layout: coluna única; fármaco da vez numa barra fixa em cima, bactéria com os alvos clicáveis embaixo. Autocontido, sem CDN. */
-:root{--ink:#1d1a26;--ink2:#4b4560;--mut:#6b6480;--h:#1f1640;--pur:#6b2fb3;--pur-soft:#f1eafd;--pur-line:#e3dbf0;--bg:#fbfaff;--card:#fff;--line:#ebe6f2;
---ok:#17663c;--ok-soft:#e4f5ea;--no:#a02a22;--no-soft:#fde7e7;--amb:#7a5600;--amb-soft:#fff3c9;
+:root{--ink:#1d1a26;--ink2:#4b4560;--mut:#6b6480;--h:#1f1640;--pur:#6b2fb3;--acc:#6b2fb3;--pur-soft:#f1eafd;--pur-line:#e3dbf0;--bg:#fbfaff;--card:#fff;--line:#ebe6f2;
+--ok:#17663c;--ok-soft:#e4f5ea;--no:#a02a22;--no-soft:#fde7e7;--amb:#7a5600;--amb-soft:#fff3c9;--amb-b:#e0a800;--cell:#ffffff;color-scheme:light;
 --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+/* tema escuro: segue o botão do site quando embutido; sozinho, segue o sistema */
+:root[data-theme="dark"]{--ink:#e6e3ee;--ink2:#c0bad0;--mut:#9c96ad;--h:#f3f0fb;--pur:#bda2f2;--acc:#6f44c2;--pur-soft:#251d3a;--pur-line:#3a3152;--bg:#10171b;--card:#172126;--line:#2a3940;
+--ok:#86dba9;--ok-soft:#13301f;--no:#f4a097;--no-soft:#3a1b1b;--amb:#f2d27a;--amb-soft:#33290f;--amb-b:#c99a1a;--cell:#1b2730;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.5}
 .wrap{max-width:900px;margin:0 auto;padding:18px 18px 60px}
@@ -18,13 +25,13 @@ h1{font-size:28px;line-height:1.15;margin:4px 0 4px;color:var(--h);letter-spacin
 .card .eb{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pur)}
 .card b.big{display:block;font-size:20px;color:var(--h);margin:2px 0}
 .card p{margin:2px 0 10px;color:var(--mut);font-size:14px}
-.btn{font:700 14px var(--sans);padding:9px 15px;border-radius:10px;border:1.5px solid var(--pur);background:#fff;color:var(--pur);cursor:pointer}
-.btn.pri{background:var(--pur);color:#fff}
+.btn{font:700 14px var(--sans);padding:9px 15px;border-radius:10px;border:1.5px solid var(--pur);background:var(--card);color:var(--pur);cursor:pointer}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
 .btn:focus-visible,.zone:focus-visible{outline:2px solid var(--pur);outline-offset:2px}
 label.tg{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--ink2);margin:0 0 14px;cursor:pointer}
 label.tg input{width:17px;height:17px;accent-color:var(--pur)}
 .gbar{position:sticky;top:0;z-index:3;display:flex;gap:12px;align-items:stretch;background:var(--bg);padding:8px 0 10px}
-.drug{flex:1;min-width:0;background:var(--pur);color:#fff;border-radius:14px;padding:10px 16px}
+.drug{flex:1;min-width:0;background:var(--acc);color:#fff;border-radius:14px;padding:10px 16px}
 .drug small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;min-height:16px}
 .drug b{display:block;font-size:25px;line-height:1.15;letter-spacing:-.2px}
 .gstat{background:var(--card);border:1px solid var(--pur-line);border-radius:14px;padding:8px 14px;min-width:86px;text-align:center}
@@ -34,8 +41,11 @@ label.tg input{width:17px;height:17px;accent-color:var(--pur)}
 .board svg{display:block;width:100%;height:auto;min-width:560px}
 .board svg text{font-family:var(--sans);fill:var(--ink)}
 .board svg .lbl{fill:var(--mut)}
+.board svg .w1{fill:var(--pur-soft);stroke:var(--pur);stroke-width:5}.board svg .w2{fill:none;stroke:var(--pur);stroke-opacity:.45;stroke-width:7;stroke-dasharray:3 5}
+.board svg .w3{fill:var(--cell);fill-opacity:.8;stroke:var(--mut);stroke-opacity:.6;stroke-width:3}.board svg .chr{fill:none;stroke:var(--pur);stroke-opacity:.5;stroke-width:3;stroke-dasharray:10 4 2 4}
+.board svg .rb1{fill:var(--pur);fill-opacity:.10;stroke:var(--pur);stroke-opacity:.6;stroke-width:2}.board svg .rb2{fill:var(--pur);fill-opacity:.16;stroke:var(--pur);stroke-opacity:.6;stroke-width:2}
 .zone{cursor:pointer;outline:none}
-.zone .pill{fill:#fff;stroke:var(--pur);stroke-width:2;transition:fill .12s}
+.zone .pill{fill:var(--card);stroke:var(--pur);stroke-width:2;transition:fill .12s}
 .zone:hover .pill{fill:var(--pur-soft)}
 .zone.ok .pill{fill:var(--ok-soft);stroke:var(--ok);stroke-width:3}
 .zone.bad .pill{fill:var(--no-soft);stroke:var(--no);stroke-width:3}
@@ -44,8 +54,8 @@ label.tg input{width:17px;height:17px;accent-color:var(--pur)}
 .board.idle .zone{cursor:default}
 .fb{margin:10px 0;border-radius:12px;padding:11px 14px;font-size:15px;background:var(--pur-soft);border-left:4px solid var(--pur);min-height:48px}
 .fb.ok{background:var(--ok-soft);border-color:var(--ok)}.fb.bad{background:var(--no-soft);border-color:var(--no)}
-.kb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;padding:11px 14px;border-radius:12px;background:var(--amb-soft);border-left:4px solid #e0a800;font-size:15px}
-.kb .btn{border-color:#b98600;color:#7a5600}
+.kb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;padding:11px 14px;border-radius:12px;background:var(--amb-soft);border-left:4px solid var(--amb-b);font-size:15px}
+.kb .btn{border-color:var(--amb-b);color:var(--amb)}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 ul.miss{margin:6px 0 0;padding-left:20px;font-size:14.5px}
 ul.miss li{margin:3px 0}
@@ -120,6 +130,8 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 var app=document.getElementById("app"),G=null,timer=null;
+(function(){var top=null;try{if(window.top!==window)top=window.top.document.documentElement}catch(e){top=null}
+ if(top&&"MutationObserver" in window){var f=function(){if(top.dataset.theme)document.documentElement.setAttribute("data-theme",top.dataset.theme==="dark"?"dark":"light")};f();new MutationObserver(f).observe(top,{attributes:true,attributeFilter:["data-theme"]})}})();
 
 function pill(id,x,y,w,h,label,sub){
  return '<g class="zone" data-z="'+id+'" tabindex="0" role="button" aria-label="'+esc(ZONES[id].name)+'">'+
@@ -130,12 +142,12 @@ function pill(id,x,y,w,h,label,sub){
 }
 function board(){
  return '<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Bactéria com os alvos dos antibióticos">'+
- '<rect x="40" y="72" width="740" height="356" rx="178" fill="#f1eafd" stroke="#6b2fb3" stroke-width="5"/>'+
- '<rect x="54" y="86" width="712" height="328" rx="164" fill="none" stroke="#6b2fb3" stroke-opacity=".45" stroke-width="7" stroke-dasharray="3 5"/>'+
- '<rect x="68" y="100" width="684" height="300" rx="150" fill="#fff" fill-opacity=".75" stroke="#6b6480" stroke-opacity=".6" stroke-width="3"/>'+
- '<circle cx="405" cy="246" r="118" fill="none" stroke="#6b2fb3" stroke-opacity=".5" stroke-width="3" stroke-dasharray="10 4 2 4"/>'+
- '<ellipse cx="182" cy="206" rx="70" ry="34" fill="#6b2fb3" fill-opacity=".10" stroke="#6b2fb3" stroke-opacity=".6" stroke-width="2"/>'+
- '<ellipse cx="182" cy="286" rx="90" ry="44" fill="#6b2fb3" fill-opacity=".16" stroke="#6b2fb3" stroke-opacity=".6" stroke-width="2"/>'+
+ '<rect class="w1" x="40" y="72" width="740" height="356" rx="178"/>'+
+ '<rect class="w2" x="54" y="86" width="712" height="328" rx="164"/>'+
+ '<rect class="w3" x="68" y="100" width="684" height="300" rx="150"/>'+
+ '<circle class="chr" cx="405" cy="246" r="118"/>'+
+ '<ellipse class="rb1" cx="182" cy="206" rx="70" ry="34"/>'+
+ '<ellipse class="rb2" cx="182" cy="286" rx="90" ry="44"/>'+
  '<text class="lbl" x="182" y="352" text-anchor="middle" style="font-size:11.5px">ribossomo 70S</text>'+
  '<text class="lbl" x="405" y="146" text-anchor="middle" style="font-size:11.5px">cromossomo</text>'+
  '<text class="lbl" x="40" y="62" style="font-size:11.5px">parede ↓</text>'+
