@@ -38,6 +38,8 @@ BANCOS = {
     "UC18_Tutoria.json": ("uc18", "tutoria"),
     "HP_Hemato.json": ("hp6", "hemato"),
     "HP_EndoRodrigo.json": ("hp6", "endo-rodrigo"),
+    # 5º período (fonte em MED/5_fase/UC15/Fisio/_questoes)
+    "UC15_Fisio.json": ("uc15", "fisio"),
 }
 
 # nome do filtro de turma, quando o banco não é dividido por turma
@@ -48,9 +50,10 @@ SELOS = {
     "OF": {"l": "gabarito do professor", "c": "ok"},
     "VE": {"l": "resolução de veterano", "c": "warn"},
     "IN": {"l": "resposta inferida", "c": "warn"},
+    "TR": {"l": "inédita · gabarito pelos slides", "c": "ok"},
     "": {"l": "sem gabarito", "c": "err"},
 }
-PRIORIDADE = {"OF": 0, "VE": 1, "IN": 2, "": 3}
+PRIORIDADE = {"OF": 0, "VE": 1, "IN": 2, "TR": 2, "": 3}
 BASTIDOR = re.compile(r"F\d{4}|metadado|cat[áa]logo|nome do arquivo|c[óo]pia", re.I)
 LETRAS = "ABCDEFGH"
 
@@ -75,6 +78,8 @@ def rotulo_turma(q):
     p = re.sub(r"\s*\([^)]*\)", "", q["prova"])
     p = re.sub(r"\s+Q[D]?\d*\w*$", "", p).strip(" ,")
     t = q["turma"]
+    if q["aval"] == "treino":
+        return "Inéditas"
     if q["aval"] == "PM":
         return "PM " + (t or "s/ turma")
     if q["aval"] == "APF":
@@ -167,6 +172,8 @@ def gera(src, uc, mat):
 
     turmas = sorted({t for e in banco for t in e["tus"]}, key=ordem_turma)
     temas = [t for t, _ in collections.Counter(e["tema"] for e in banco).most_common()]
+    if all(re.match(r"SP\d", t) for t in temas):  # temas já prefixados pela SP: ordem das SPs
+        temas.sort()
     uc_obj = {"banco": banco, "turmas": turmas, "temas": temas, "selos": SELOS}
     if (uc, mat) in ROTULO_FILTRO:
         uc_obj["tuLabel"] = ROTULO_FILTRO[(uc, mat)]
