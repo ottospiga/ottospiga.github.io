@@ -327,14 +327,16 @@
     el.innerHTML = `<div class="nv-wrap wide"><div class="nv-figs">${U.expl.map(f => `<figure class="fig"><div class="pl">${f.svg}</div><figcaption><span class="tag">${/^\d+$/.test(String(f.sp)) ? "SP" + f.sp : esc(f.sp)}</span> ${esc(f.cap || "")}</figcaption></figure>`).join("")}</div></div>`;
   };
 
-  V.aulas = (el, U, ctx) => {
+  V.aulas = (el, U, ctx, item) => {
     let q = "";
+    const fil = item && item.filtro, base = fil ? U.aulas.filter(a => a.g.includes(fil)) : U.aulas;   /* filtro: só os grupos que contêm o texto (ex.: "aula antiga") */
+    const nome = g => fil ? g.replace(" · " + fil, "") : g;
     function draw() {
-      const list = U.aulas.filter(a => !q || norm(a.x + " " + a.g).includes(norm(q)));
+      const list = base.filter(a => !q || norm(a.x + " " + a.g).includes(norm(q)));
       const groups = [...new Set(list.map(a => a.g))];
       el.innerHTML = `<div class="nv-wrap">
-        <section class="nv-card nv-filters"><div class="nv-frow"><input type="search" id="aq" placeholder="Buscar nas frases das aulas" value="${esc(q)}" aria-label="Buscar"><span class="nv-count" style="margin:0">${list.length} frases</span></div></section>
-        ${groups.map(g => `<section class="nv-card"><h3>${esc(g)}</h3><ul class="nv-aulas">${list.filter(a => a.g === g).map(a => `<li>${a.x}</li>`).join("")}</ul></section>`).join("")}
+        <section class="nv-card nv-filters"><div class="nv-frow"><input type="search" id="aq" placeholder="Buscar nas frases ${fil ? "das " + esc(fil) + "s" : "das aulas"}" value="${esc(q)}" aria-label="Buscar"><span class="nv-count" style="margin:0">${list.length} frases</span></div></section>
+        ${groups.map(g => `<section class="nv-card"><h3>${esc(nome(g))}</h3><ul class="nv-aulas">${list.filter(a => a.g === g).map(a => `<li>${a.x}</li>`).join("")}</ul></section>`).join("")}
       </div>`;
       const i = el.querySelector("#aq"); i.oninput = () => { q = i.value; const p = i.selectionStart; draw(); const n = el.querySelector("#aq"); n.focus(); n.setSelectionRange(p, p); };
     }

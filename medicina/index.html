@@ -124,6 +124,8 @@ a{color:var(--acc)}
 .pn-itens{display:flex;flex-direction:column;gap:1px;margin:2px 0 6px 13px;padding-left:8px;border-left:1px solid var(--line)}
 .pn-item{text-align:left;border:0;background:none;border-radius:7px;padding:6px 9px;color:var(--muted);font-size:13px;line-height:1.3}
 .pn-item[aria-current="true"]{color:var(--acc);font-weight:700}
+.pn-grp{display:block;padding:9px 9px 3px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);opacity:.8}
+.pn-grp:first-child{padding-top:3px}
 .pn-foot{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
 .pn-foot .tool{text-align:center}
 .pn-lado{display:none}
@@ -444,9 +446,18 @@ const LEGADO = {
   "m-hp-manifestacoes-abdominais-clinica":"hp/abdome-clinica", "m-hp-manifestacoes-abdominais-procedimentos":"hp/abdome-procedimentos",
   "m-hp-otorrinolaringologia-otorrinolaringologia":"hp/otorrino", "m-hp-infeccoes-infectologia":"hp/infeccoes"
 };
+/* abas juntadas: S.redir leva "uc/mat/aba" ao endereço novo ("…/N" = item fixo; "…/+N" = mesmo item + N) */
+function redir(){
+  const h = decodeURIComponent(location.hash.slice(1)).split("/"), r = (S.redir || {})[h.slice(0, 3).join("/")];
+  if (!r) return;
+  const p = r.split("/"), last = p.pop();
+  p.push(last[0] === "+" ? (+h[3] || 0) + (+last.slice(1)) : +last);
+  history.replaceState(null, "", "#" + p.join("/"));
+}
 function parseHash(){
   const novo = LEGADO[location.hash.slice(1)];
   if (novo) history.replaceState(null, "", "#" + novo);
+  redir();
   const h = decodeURIComponent(location.hash.slice(1)).split("/");
   const u = ucOf(h[0]);
   if (!u || !u.materias.length) return { uc:null };
@@ -550,7 +561,7 @@ function renderPainel(u, m){
     <span class="pn-lado">${esc(m.nome)} · ${esc(a.titulo)}</span>
     <div class="pn-abas" role="tablist" aria-orientation="vertical" aria-label="Abas de ${esc(m.nome)}">${m.abas.map((ab, i) => {
       const on = i === st.aba;
-      return `<button class="pn-aba ${seenAba(ab) ? "seen" : ""}" role="tab" data-aba="${i}" aria-selected="${on}"><span>${esc(ab.titulo)}</span><i class="dot" aria-hidden="true"></i></button>${on && ab.itens.length > 1 ? `<div class="pn-itens">${ab.itens.map((x, j) => `<button class="pn-item" data-item="${j}" aria-current="${j===st.item}">${esc(x.label)}</button>`).join("")}</div>` : ""}`;
+      return `<button class="pn-aba ${seenAba(ab) ? "seen" : ""}" role="tab" data-aba="${i}" aria-selected="${on}"><span>${esc(ab.titulo)}</span><i class="dot" aria-hidden="true"></i></button>${on && ab.itens.length > 1 ? `<div class="pn-itens">${ab.itens.map((x, j) => `${x.grupo && x.grupo !== (ab.itens[j-1] || {}).grupo ? `<span class="pn-grp">${esc(x.grupo)}</span>` : ""}<button class="pn-item" data-item="${j}" aria-current="${j===st.item}">${esc(x.label)}</button>`).join("")}</div>` : ""}`;
     }).join("")}</div>
     ${it.src ? `<div class="pn-foot">
       <a class="tool" href="${href(it.src)}" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
